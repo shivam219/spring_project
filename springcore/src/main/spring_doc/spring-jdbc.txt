@@ -1,0 +1,8 @@
+spring-jdbc
+---normal - jdbc 
+1)we need more code
+2)handle try catch all time
+
+---spring - jdbc 
+1)solution of jdbc problems
+2)spring jdbc provide jdbcTamplate class

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+
+
+	<bean class="com.springcore.auto.wire.Teacher" name="teacher"
+		c:name="pradyna" c:course="java">
+	</bean>
+
+	<bean class="com.springcore.auto.wire.College" name="college"
+		c:name="sahyog">
+		<constructor-arg>
+			<ref bean="teacher" />
+		</constructor-arg>
+
+		<!-- <constructor-arg value="thane"> </constructor-arg> -->
+	</bean>
+
+	<!-- it usage setter method to set reference by type -->
+	
+	<bean class="com.springcore.auto.wire.University"
+		name="university" autowire="byName"></bean>
+	
+	<bean class="com.springcore.auto.wire.University"
+		name="university2" autowire="byType"></bean>
+
+<!-- constructor search by type object and inject constructor to create object -->
+	<bean class="com.springcore.auto.wire.University"  name="university" autowire="constructor"></bean>
+</beans>

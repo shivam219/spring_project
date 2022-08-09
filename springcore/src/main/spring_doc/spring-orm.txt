@@ -1,0 +1,29 @@
+Spring orm 
+Orm- Object relation mapping
+---feature 
+--1)less code
+--2)easy to test
+--3)better exception handling
+--4)intregrated transation management
+--5)working with database
+
+Spring with orm tool like hibernate, toplinks, ibatis
+---working
+-- object -> map -> row of table in database
+---hibernateTemplate 
+--1)save
+--2)update
+--3)insert
+--4)get
+--5)loadAll
+
+Connnectivity overview
+--ProductDao  --> HibernateTemplate --> SessionFactory  --> LocalSessionFactoryBean
+--->LocalSessionFactoryBean -- need object to this
+--1)DataSource 
+--2)HibernateProperties
+--3)AnnotatedClass	
+
+
+
+

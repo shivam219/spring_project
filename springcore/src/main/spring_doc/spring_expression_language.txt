@@ -1,0 +1,41 @@
+spring expression language
+#{myArrlist} - search myArrlist id in xml file
+
+1)addition
+--#{10+20}
+2)if else 
+--#{10>20?50:50}
+3)--expression
+--static methods, object methods, variable
+
+-int 
+--@Value("#{45+45}")
+--String int x;
+
+-double
+--@Value("#{45/7}")
+--String int x;
+
+-String 
+--@Value("#{45/7}")
+--String int x;
+
+-Object static field
+--@Value("#{T(java.lang.Math).PI}")
+--String int x;
+
+-Object static methods
+--@Value("# {T(java.lang.Math).hii()} ")
+--String int x;
+
+
+-Object new 
+--@Value("# { new java.lang.String('durage	')}")
+--String int x;
+
+
+-boolean
+--@Value("#{45/52}")
+
+
+

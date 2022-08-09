@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- this work with inner spefication -->
+	<!-- <bean class="com.springcore.ci.Course" name="course"> <constructor-arg 
+		value="Java"></constructor-arg> </bean> -->
+
+	<bean class="com.springcore.ci.Course" name="course"
+		c:course="java">
+
+	</bean>
+
+	<bean class="com.springcore.ci.Teacher" name="teacher">
+		<constructor-arg type="int" value="100" />
+		<constructor-arg type="String" value="pradyan" />
+		<constructor-arg >
+			<ref bean="course" />
+		</constructor-arg>
+		<constructor-arg>
+		<list>
+		<value>shivam</value>
+		<value>deepak</value>
+		<value>suraj</value>
+		<value>somwati</value>
+		<value>ramesh</value>
+		</list>
+		</constructor-arg>
+	
+		
+	</bean>
+</beans>

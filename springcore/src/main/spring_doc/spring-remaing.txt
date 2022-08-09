@@ -1,0 +1,3 @@
+spring remaing
+---1)remaing xml problem with create bean factory associated with 
+https://www.youtube.com/watch?v=qMJw2Nsmsd4&list=PL0zysOflRCekeiERASkpi-crREVensZGS&index=45

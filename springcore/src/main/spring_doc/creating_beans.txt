@@ -1,0 +1,12 @@
+Create maven project:
+create maven
+choose 
+arc type quick start
+then 
+group id -- name of main project
+artificat id - project inside that main project
+
+install dependency inject
+use
+spring framework core
+spring framework context
