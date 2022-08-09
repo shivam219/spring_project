@@ -13,6 +13,7 @@
 	<name>timesheet</name>
 	<description>Manage Employee Record and company data </description>
 
+
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -66,8 +67,6 @@
 			<version>6.1.0.Final</version>
 			<type>pom</type>
 		</dependency>
-
-
 	</dependencies>
 
 	<build>

@@ -26,4 +26,9 @@ spring annotation
 
 ---@Bean (name= {"shivam" ,"fortuner" ,"danger"})
 
+
+---@Repository 
+--
+
+---@Respotiti
   

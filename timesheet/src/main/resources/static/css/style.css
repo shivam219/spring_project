@@ -1,0 +1,23 @@
+/* Ess Menu */
+		.bg-nav-foot {
+			background-color: #333;
+		}
+		
+		.dropdown:hover .dropdown-menu {
+			display: block;
+			margin-top: 2px;
+		}
+		
+		.navbar-nav li ,.navbar-nav li a  ,.navbar-nav li a:hover {
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+				sans-serif;
+			color: #e9e7e7;
+		}
+
+		.dropdown-menu li a {
+			font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+			color: #444141;
+		}
+/* End Ess Menu */
+
+

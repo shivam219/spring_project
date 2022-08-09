@@ -33,3 +33,10 @@ Exception in thread "main" org.springframework.dao.EmptyResultDataAccessExceptio
 6) wrong data specify in property of 
 Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
 
+
+
+7)Pom.xml error 
+Cannot access defaults field of Properties
+
+8)/WEB-INF/jsp/home.jsp (line: [12], column: [19]) quote symbol expected
+--<%@ include file=footer.jsp" %>  -- missing "- left quote

@@ -17,77 +17,68 @@
 		.bg-nav-foot {
 			background-color: #333;
 		}
-
-		.card-registration .select-input.form-control[readonly]:not([disabled]) {
-			font-size: 1rem;
-			line-height: 2.15;
-			padding-left: .75em;
-			padding-right: .75em;
-		}
-
-		.card-registration .select-arrow {
-			top: 13px;
-		}
 	</style>
 </head>
 
 <body>
-	<div class="fixed-top  m-0 p-0">
-		<div class="container-fluid">
-			<!-- Nav -->
-			<div class="row bg-nav-foot ">
-				<span class="text-center text-white py-3 h3  "> Timesheet &
-					Leave Application</span>
-			</div>
-			<!-- End Nav -->
-			<!-- Body -->
-
-			<div class="m-4">
-				<form action="" method="post">
-					<div class="mb-3">
-						<label class="form-label" for="inputEmail">Email</label>
-						<input type="email" class="form-control" id="inputEmail" placeholder="Email" required>
-					</div>
-					<div class="mb-3">
-						<label class="form-label" for="inputPassword">Password</label>
-						<input type="password" class="form-control" id="inputPassword" placeholder="Password" required>
-					</div>
-					<div class="mb-3">
-						<label class="form-label" for="inputPassword">Password</label>
-						<input type="password" class="form-control" id="inputPassword" placeholder="Password" required>
-					</div>
-					<div class="mb-3">
-						<label class="form-label" for="inputPassword">Password</label>
-						<input type="password" class="form-control" id="inputPassword" placeholder="Password" required>
-					</div>
-					<div class="mb-3">
-						<label class="form-label" for="inputPassword">Password</label>
-						<input type="password" class="form-control" id="inputPassword" placeholder="Password" required>
-					</div>
-					<div class="mb-3">
-						<div class="form-check">
-							<input class="form-check-input" type="checkbox" id="checkRemember">
-							<label class="form-check-label" for="checkRemember">Remember me</label>
+	<div class="container-fluid">
+		<!-- Nav -->
+		<div class="row bg-nav-foot ">
+			<span class="text-center text-white py-3 h3  "> Timesheet &
+				Leave Application</span>
+		</div>
+		<!-- End Nav -->
+		<!-- Body -->
+		<div class="row ">
+			<form method="post" action="home">
+				<div class="justify-content-between">
+					<div class="col">
+						<div class="col-sm-3 m-auto  ">
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control" id="floatingInput" name="empId"
+									placeholder="name@example.com"> <label for="floatingInput">Your Name</label>
+							</div>
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control" id="floatingInput" name="empId"
+									placeholder="name@example.com"> <label for="floatingInput">Your Email</label>
+							</div>
+							<div class="form-floating">
+								<input type="password" class="form-control" id="floatingPassword" name="empPwd"
+									placeholder="Password"> <label for="floatingPassword">Password</label>
+							</div>
 						</div>
 					</div>
-					<button type="submit" class="btn btn-primary">Sign in</button>
-				</form>
-			</div>
 
-
-
-
-			<!-- Footer -->
-			<footer class=" p-0">
-				<div class="row">
-					<div class="col m-0 p-0">
-						<div class="text-center p-3 bg-nav-foot " style="color: #efe8e8;">
-							&#169 2022 Copyright Enhanced Software Solution Pvt Ltd.</a>
+					<div class="row">
+						<div class="col-sm-3 m-auto  ">
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control" id="floatingInput" name="empId"
+									placeholder="name@example.com"> <label for="floatingInput">Mobile</label>
+							</div>
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control" id="floatingInput" name="empId"
+									placeholder="name@example.com"> <label for="floatingInput">Address</label>
+							</div>
+							<div class="form-floating">
+								<input type="password" class="form-control" id="floatingPassword" name="empPwd"
+									placeholder="Password"> <label for="floatingPassword">City</label>
+							</div>
 						</div>
 					</div>
+
+
 				</div>
-			</footer>
-			<!-- End Footer -->
+
+				<div class="text-center mt-3">
+					<input class="btn-primary px-4 rounded  " type="submit" value="Register" />
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<%@ include file="footer-fixed-bottom.jsp" %>
+		<!-- End Footer -->
 </body>
 
 </html>
