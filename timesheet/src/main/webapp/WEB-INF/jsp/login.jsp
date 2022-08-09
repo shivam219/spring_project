@@ -48,7 +48,7 @@
 						</div>
 
 						<div class="text-center mt-3">
-							<input class="btn-primary px-4 rounded  " type="submit" value="login" />
+							<input class="btn btn-primary px-4   " type="submit" value="login" />
 						</div>
 
 					</form>
@@ -56,7 +56,7 @@
 					<hr>
 					<form method="get" action="register">
 						<div class="text-center mt-3">
-							<input class="btn-primary px-4 rounded  " type="submit" value="Register" />
+							<input class=" btn-primary px-4 rounded  " type="submit" value="Register" />
 						</div>
 					</form>
 					
