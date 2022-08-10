@@ -39,7 +39,7 @@
 				<div class="col-sm-4 m-auto  ">
 					<form method="post" action="home">
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control" id="floatingInput" name="empId"
+							<input type="number" class="form-control" id="floatingInput" name="empId"
 								placeholder="name@example.com"> <label for="floatingInput">User ID</label>
 						</div>
 						<div class="form-floating">
