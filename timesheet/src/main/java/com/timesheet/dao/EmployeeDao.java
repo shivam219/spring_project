@@ -1,7 +1,10 @@
 package com.timesheet.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate5.HibernateTemplate;
+import java.io.File;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
 
 import com.timesheet.model.Employee;
@@ -9,13 +12,19 @@ import com.timesheet.model.Employee;
 //this will handle curd operation
 @Repository
 public class EmployeeDao {
-	
-//	@Autowired
-	public HibernateTemplate hibernateTemplate;
+
+
+/* //-- not using now
+ * 	public HibernateTemplate hibernateTemplate;
+ */
 
 	public int saveEmployee(Employee employee) {
-
-		int id = (Integer) this.hibernateTemplate.save(employee);
+		Configuration cfg = new Configuration();
+		cfg.configure(new File("hibernate.cfg.xml"));
+		SessionFactory sf = cfg.buildSessionFactory();
+		Session ss = sf.openSession();
+		ss.save(employee);
+		int id = (Integer) ss.save(employee);
 		return 1;
 	}
 

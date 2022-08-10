@@ -11,12 +11,12 @@
     http://www.springframework.org/schema/tx
     http://www.springframework.org/schema/tx/spring-tx.xsd">
 	
-	<bean class="com.springcore.Employee" 
+	<bean class="com.springcore.Employee"  scope="prototype"
 			name="e1" 
 			p:empId="908210400" 
 			p:empName="shivam"
 			p:empAdd="mumbai"
-			>
+			> 
 	</bean>
 	
 

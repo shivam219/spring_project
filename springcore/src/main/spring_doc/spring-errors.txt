@@ -40,3 +40,14 @@ Cannot access defaults field of Properties
 
 8)/WEB-INF/jsp/home.jsp (line: [12], column: [19]) quote symbol expected
 --<%@ include file=footer.jsp" %>  -- missing "- left quote
+
+9) unkonow entity  hibernate file
+Unknown entity: com.timesheet.model.Employee
+org.hibernate.MappingException: Unknown entity: com.timesheet.model.Employee_
+
+10) now given @id in  bean
+No identifier specified for entity: com.timesheet.model.Employee
+org.hibernate.AnnotationException: No identifier specified for entity: com.timesheet.model.Employee
+
+
+

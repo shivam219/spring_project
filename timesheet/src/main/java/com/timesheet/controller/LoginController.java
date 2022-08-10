@@ -16,22 +16,27 @@ import com.timesheet.service.EmployeeService;
 @Controller
 public class LoginController {
 
-	
 //	@Autowired
-//	private EmployeeService employeeService;
-	
+	private EmployeeService employeeService = new EmployeeService();
 
-	@RequestMapping(value = "/register")
-	public String registerPage(  Model model, @ModelAttribute Employee emp) {
-		
-	return "register";
-	}
-	
 	@ModelAttribute
 	public void commonDataModel(Model m) {
-		//put data and object this model will access it all page 
+		// put data and object this model will access it all page
 	}
-	
+
+	@RequestMapping(value = "/register")
+	public String registerPage(Model model, @ModelAttribute Employee emp) {
+		return "register";
+	}
+
+	@RequestMapping(value = "/registerprocess", method = RequestMethod.POST)
+	public String registerProcess(Model model, @ModelAttribute Employee emp) {
+		System.out.println(emp);
+		int saveEmployee = employeeService.saveEmployee(emp);
+		System.out.println(saveEmployee);
+		return "login";
+	}
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String blank(HttpServletRequest request) {
 		if (request.getSession().getAttribute("empId") == null) {
@@ -48,8 +53,6 @@ public class LoginController {
 		return "home";
 	}
 
-
-
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String homePageGet(HttpServletRequest request) {
 		if (request.getSession().getAttribute("empId") == null) {
@@ -60,13 +63,12 @@ public class LoginController {
 
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
 	public String homePage(HttpServletRequest request, Model model, @ModelAttribute Employee emp) {
-		if (emp.getEmpId().equals("admin") && emp.getEmpPwd().equals("root")) {
+		if (emp.getEmpId()==123 && emp.getEmpPassword().equals("root")) {
 			HttpSession session = request.getSession();
 			session.setAttribute("empId", emp.getEmpId());
 			System.out.println(emp);
 			return "home";
 		}
-
 		model.addAttribute("errorMsg", "please provide correct userid and passowrd ");
 		return "login";
 	}
