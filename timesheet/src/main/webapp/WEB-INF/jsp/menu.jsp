@@ -6,6 +6,7 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 	<script src="js/bootstrap.bundle.min.js"></script>
+	<script src="https://kit.fontawesome.com/70c55b67fa.js" crossorigin="anonymous"></script>
 	<link rel='icon' type='image/ico' href='images/esslogo.png' />
 </head>
 
@@ -20,7 +21,8 @@
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
 				aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
+				<i class="fas fa-sliders-h"></i>
+				<!-- <span class="navbar-toggler-icon">	</span> -->
 			</button>
 			<div class="collapse navbar-collapse  " id="navbarNavDropdown">
 				<ul class="navbar-nav ">

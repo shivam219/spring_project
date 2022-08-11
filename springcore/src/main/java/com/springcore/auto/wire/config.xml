@@ -6,12 +6,13 @@
     http://www.springframework.org/schema/tx
     http://www.springframework.org/schema/tx/spring-tx.xsd">
     
-    
+    <context:component-scan base-package="t.jdbc"/>
     
 	<bean class="com.springcore.auto.wire.Address" name="address">
 		<property name="street" value="nandivali"></property>
 		<property name="city" value="mumbai"></property>
 	</bean>
+	
 
 	<!--<bean class="com.springcore.auto.wire.Emp" autowire="byName" name="emp1"  />-->
 	<bean class="com.springcore.auto.wire.Emp" autowire="byType" name="emp1"  />

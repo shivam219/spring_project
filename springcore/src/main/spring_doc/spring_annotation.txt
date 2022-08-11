@@ -4,6 +4,11 @@ spring annotation
 2)in this way you need to use xml <bean class="" name c:nam="" p:nam="">
 2)just put line <context:component-scan base-package="com.springcore.stereotype"/> in xml top
 
+---@Autowired
+---@Qualifier
+1)define bean name for object reference 
+--@Qualifier("emp2")
+
 ---@Value
 1)@Value("shviam")
 --String name; //  use to set value
@@ -17,6 +22,9 @@ spring annotation
 ---@component
 --define bean name, ioc container create object, don't required <bean class="" name="" p:name="" c:="d" /> 
 --xml <context:component-scan base-package ="com.springcore"> __ this line should be in xml file
+--ex:
+--@Component
+--class student{}
 
 ---@ComponentScan
 --define that from where will scan all this beans 

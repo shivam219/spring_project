@@ -19,9 +19,7 @@ public class Student {
 
 	public Student() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
 	public Student(int studentId, String studentName, String studentCity) {
 		super();
 		this.studentId = studentId;

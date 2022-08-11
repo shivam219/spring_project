@@ -1,6 +1,7 @@
 package com.springcore.auto.wire;
 
 public class Emp {
+	
 	private Address address;
 
 	public Emp(Address address) {

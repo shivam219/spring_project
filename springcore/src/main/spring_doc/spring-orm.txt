@@ -17,12 +17,16 @@ Spring with orm tool like hibernate, toplinks, ibatis
 --4)get
 --5)loadAll
 
+
+
 Connnectivity overview
---ProductDao  --> HibernateTemplate --> SessionFactory  --> LocalSessionFactoryBean
+-------------------------------------------
+---class curd  -- Object inside class -- required session factory -- 
+--ProductDao  --> HibernateTemplate --> SessionFactory  			--> LocalSessionFactoryBean
 --->LocalSessionFactoryBean -- need object to this
---1)DataSource 
---2)HibernateProperties
---3)AnnotatedClass	
+--1)DataSource  -- url, user , password ,class name 
+--2)HibernateProperties -- show_format , show_ddl, dialect
+--3)AnnotatedClass	-- class that create save in database
 
 
 

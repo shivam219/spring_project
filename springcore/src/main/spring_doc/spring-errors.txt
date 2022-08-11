@@ -36,7 +36,7 @@ Invocation of init method failed; nested exception is org.hibernate.service.spi.
 
 
 7)Pom.xml error 
-Cannot access defaults field of Properties
+Cannot access defaults field of Propertiesss
 
 8)/WEB-INF/jsp/home.jsp (line: [12], column: [19]) quote symbol expected
 --<%@ include file=footer.jsp" %>  -- missing "- left quote
@@ -49,5 +49,15 @@ org.hibernate.MappingException: Unknown entity: com.timesheet.model.Employee_
 No identifier specified for entity: com.timesheet.model.Employee
 org.hibernate.AnnotationException: No identifier specified for entity: com.timesheet.model.Employee
 
+11)--@Bean annotation not for reference variable 
+@Bean(name= {"e1" ,"e2"})
+	details d;
+---The annotation @Bean is disallowed for this location
 
 
+12) emp = null
+--- if you are using autowire="byType" in xml 
+-- address address; location location ; but location bean not declare in xml then it show error 
+
+13) auto wiring
+--byname - 
