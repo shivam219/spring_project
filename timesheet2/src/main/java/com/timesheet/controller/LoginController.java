@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.timesheet.dao.EmployeeDao;
 import com.timesheet.model.Employee;
+import com.timesheet.service.EmployeeSerivce;
+import com.timesheet.service.Imp.EmployeeServiceImp;
 
 @Controller
 public class LoginController {
 
-	EmployeeDao employeedao = new EmployeeDao();
-
+	EmployeeSerivce employeeSerivce = new EmployeeServiceImp();
+	
 	@ModelAttribute
 	public void commonDataModel(Model m) {
 		// put data and object this model will access it all page
@@ -30,7 +31,7 @@ public class LoginController {
 	@RequestMapping(value = "/registerprocess", method = RequestMethod.POST)
 	public String registerProcess(Model model, @ModelAttribute Employee emp) {
 		System.out.println(emp);
-		employeedao.save(emp);
+		employeeSerivce.save(emp);
 		return "login";
 	}
 
@@ -60,7 +61,7 @@ public class LoginController {
 
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
 	public String homePage(HttpServletRequest request, Model model, @ModelAttribute Employee emp) {
-		if (emp.getEmpId() == 111 && emp.getEmpPassword().equals("111")) {
+		if (emp.getEmpId()==123 && emp.getEmpPassword().equals("root")) {
 			HttpSession session = request.getSession();
 			session.setAttribute("empId", emp.getEmpId());
 			System.out.println(emp);

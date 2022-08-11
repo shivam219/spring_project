@@ -1,45 +1,35 @@
 package com.timesheet.dao;
 
-import java.io.File;
+import javax.transaction.Transactional;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.springframework.stereotype.Repository;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 
 import com.timesheet.model.Employee;
 
-import com.timesheet.model.Student;
-
-//this will handle curd operation
-@Repository
 public class EmployeeDao {
 
+	HibernateTemplate hibernateTemplate;
 
-/* //-- not using now
- * 	public HibernateTemplate hibernateTemplate;
- */
+	public EmployeeDao() {
+		super();
+	}
 
-	public int saveEmployee(Employee employee) {
-		System.err.println("--------");
-		System.out.println(employee);
-		
-		Configuration cfg = new Configuration();
-		cfg.configure(new File("hibernate.cfg.xml"));
-		SessionFactory sf = cfg.buildSessionFactory();
-		Session ss = sf.openSession();
-		
-		Student st = new Student();
-		st.setRoll(11);
-		st.setCity("mum");
-		st.setName("adming");
-		ss.save(st);
-		ss.getTransaction().commit();
-				
-//		ss.save(employee);
-//		ss.getTransaction().commit();
+	public HibernateTemplate getHibernateTemplate() {
+		return hibernateTemplate;
+	}
 
-		return 1;
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	}
+
+	@Transactional
+	public int save(Employee employee) {
+		Integer i = (Integer) this.hibernateTemplate.save(employee);
+//		ApplicationContext context = new ClassPathXmlApplicationContext("com/timesheet/dao/imp/config.xmL");
+//		EmployeeDao empDao = context.getBean("employeeDao", EmployeeDao.class);
+		return i;
 	}
 
 }

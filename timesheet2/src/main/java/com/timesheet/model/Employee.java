@@ -5,14 +5,13 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "ess_employee")
 public class Employee {
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@EmbeddedId
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "emp_id")
 	public int empId;
  
