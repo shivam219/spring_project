@@ -1,0 +1,44 @@
+1)Creating table in hibernate will depends upon
+
+2)Give name to reference column
+	--1)
+	@ManyToOne
+	@JoinColumn(name = "link")
+	Question question
+	--2)
+	@OneToMany// three table will create have mapping of question table
+	@JoinColumn(name="jio")
+	private List<Answer> questionAnswerField;
+--- if both case them 2 column will add extra in Answer table
+--- 2)
+-if you usega mappedby then 2 table will be create 
+-if not then three table by default wil there say smiles
+
+3)will name of column is answer table
+@ManyToOne
+@JoinColumn(name="jio")
+private Question question
+
+Answer table
+answer_id answer_details jio
+
+
+question table
+question_id question_details
+	
+
+
+Transient state
+object is create and values is assings
+
+persistents state 						
+object save in database and session both sync
+
+detached state
+session is close object no assosiated with session
+
+removed state
+session is close or cleaer
+
+
+if id not founded in html still no error will occurs

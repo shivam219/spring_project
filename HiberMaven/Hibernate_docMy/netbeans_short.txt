@@ -1,0 +1,7 @@
+short_cute netbeans
+
+ctrl + shirt + enter  === full screen
+
+alt + insert  ======== get source cpde
+
+ctrl + shift + arrow up/down == duplicate lines up/down

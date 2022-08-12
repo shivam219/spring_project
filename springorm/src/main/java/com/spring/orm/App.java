@@ -13,8 +13,9 @@ import com.spring.orm.entities.Student;
 public class App {
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("com/spring/orm/config.xmL");
+		//ApplicationContext context = new ClassPathXmlApplicationContext("main/resources/app-context.xml");
+	
 		StudentDao studentDao = context.getBean("studentDao", StudentDao.class);
-
 		Student st = new Student();
 		st.setStudentId(10);
 		st.setStudentName("Shivam");

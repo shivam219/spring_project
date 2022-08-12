@@ -1,0 +1,94 @@
+@Entity
+--should create table of class
+@Table(name="shivam")
+--use to change the table details
+@Id
+--use to mark column as id(primary key).
+@GeneratedValue
+--hibernate will automatically generate values for that using as intrenal sequence associated with database
+@Column
+--@Column(nullable=true) == not allow null values
+@Transient
+--This tells hibernate not to save this field data
+--first time column will not be create in table
+javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not execute statement
+-- second time remove @Transient them add three column then it will add one more column auto-matically
+
+@Temporal
+--formate date for in database
+@Lob
+--lob tells hibernate that this is a large object, not a simple object
+
+
+@OneToOne
+@OneToMany
+@ManyToOne
+@ManyToMany
+@JoinColumn
+
+class certificate {
+int cid ;
+String sname;
+}
+@JoinColumn
+--
+
+@Embeddable 
+private certificate cf;
+
+@OneToOne - uni- directional
+--mapping one column table to another column of table called 
+if not working properly then drop all table from database then again start from scratch
+@OneToMany
+--One product supplied by any supplier
+class product{
+	@OneToMany 
+	List<supplier> supplier;
+}
+class supplier{
+	@ManyToOne 
+	product product
+}
+name of third table
+product_supplier
+
+@JoinTable	
+	@ManyToMany
+	@JoinTable(name="emp_project_details")
+	private List<Projects> projects;
+-- name table as emp_project_details
+
+
+only work with collections
+@OneToMany @ManyToMany  e
+
+
+table == entity
+fields == column
+trainsient field == not select as column
+@Entity javax.persistence.Entity
+  persistence api
+ --defualt table name will same as Entity
+@Table(name ="mytable")
+--use in database table name will be mytable
+--but Entity will define as class name
+
+@Id
+--primary key
+Mapping in hibernate.cfg.xml
+Mapping of class required in all class
+<mapping class="com.hiber.Student"/>
+
+
+Shivam@219@
+
+--h2-database coonnction backup
+spring.jpa.show-sql=true
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=password
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.h2.console.enabled=true
+
+

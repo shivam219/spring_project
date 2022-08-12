@@ -1,0 +1,30 @@
+ Catalog : internal
+ quick
+ Group id    : package name
+ artifact id : ProjectWithMaven
+ 
+ Search hibernate maven choose
+ 5.4.5 final
+ <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-core</artifactId>
+    <version>5.6.9.Final</version>
+</dependency>
+ paste me pom.xml
+ 2) downlaod hibernate-configuration-30.dtd
+ paste xml link into your pom.xml
+
+	
+ 1)If not using maven then 
+ download jar and add to project
+ downlaod hibernate orm zip file
+ extract 
+ goto hibernate5.4.5/lib/require == copy all jar
+ Past add external jar in eclipse add to jar from location
+ 
+ 3) not woriking then
+file not found 
+past file to root project 
+use  Configuration.configure(new file("hie.cfg.xml))
+4
