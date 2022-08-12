@@ -3,20 +3,22 @@ package com.timesheet.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.timesheet.dao.EmployeeDao;
 import com.timesheet.model.Employee;
+import com.timesheet.service.EmployeeService;
 
 @Controller
 public class LoginController {
 
-	EmployeeDao employeedao = new EmployeeDao();
-
+	@Autowired
+	EmployeeService employeeService;
+	
 	@ModelAttribute
 	public void commonDataModel(Model m) {
 		// put data and object this model will access it all page
@@ -28,9 +30,8 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/registerprocess", method = RequestMethod.POST)
-	public String registerProcess(Model model, @ModelAttribute Employee emp) {
-		System.out.println(emp);
-		employeedao.save(emp);
+	public String registerProcess(Model model, @ModelAttribute Employee emp) { 
+	System.out.println(employeeService.save(emp));
 		return "login";
 	}
 
@@ -63,7 +64,6 @@ public class LoginController {
 		if (emp.getEmpId() == 111 && emp.getEmpPassword().equals("111")) {
 			HttpSession session = request.getSession();
 			session.setAttribute("empId", emp.getEmpId());
-			System.out.println(emp);
 			return "home";
 		}
 		model.addAttribute("errorMsg", "please provide correct userid and passowrd ");
