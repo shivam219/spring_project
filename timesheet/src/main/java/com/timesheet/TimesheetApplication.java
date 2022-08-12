@@ -4,12 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-@SpringBootApplication
-//@ComponentScan( ) 
-//Automatic searching bean from base package and sub-package
+@SpringBootApplication 
 public class TimesheetApplication {
 	public static void main(String[] args) {
 		ApplicationContext ac = SpringApplication.run(TimesheetApplication.class, args);
+		
 		
 		
 		
@@ -21,6 +20,6 @@ public class TimesheetApplication {
 		 * emp.setEmpCity("dombivali"); emp.setEmpAddress("nandivali");
 		 * emp.setEmpPhone("87797"); emp.setEmpPincode("421201"); empRepo.save(emp);
 		 * 
-		 */	}
-
+		 */
+	}
 }

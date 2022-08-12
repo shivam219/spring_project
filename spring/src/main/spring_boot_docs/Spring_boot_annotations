@@ -1,0 +1,14 @@
+
+@SpringBootApplication
+--combination of 
+1)configuration
+2)EnableAutoConfiguration
+3)Componentscan
+
+
+@Controller
+--define class handle all requirest
+@ResponseBody -- for returning text to ;
+@RequestMapping
+
+

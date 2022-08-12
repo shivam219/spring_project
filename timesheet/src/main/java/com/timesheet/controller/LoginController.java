@@ -44,11 +44,11 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginPage(HttpServletRequest request) {
-		if (request.getSession().getAttribute("empId") == null) {
-			return "login";
-		}
-		return "home";
+	public String loginPage(HttpServletRequest request , @ModelAttribute Employee employee) {
+		
+//		employeeService.
+		
+		return "login";
 	}
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
