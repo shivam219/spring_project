@@ -9,17 +9,6 @@ public class TimesheetApplication {
 	public static void main(String[] args) {
 		ApplicationContext ac = SpringApplication.run(TimesheetApplication.class, args);
 		
-		
-		
-		
-//		EmployeeRepository12 empRepo = ac.getBean(EmployeeRepository12.class);
-		/*  //working here explicitly
-		 * Employee emp = new Employee(); emp.setEmpId(1); emp.setEmpName("shivam");
-		 * emp.setEmpEmail("shivam219"); emp.setEmpPassword("root");
-		 * 
-		 * emp.setEmpCity("dombivali"); emp.setEmpAddress("nandivali");
-		 * emp.setEmpPhone("87797"); emp.setEmpPincode("421201"); empRepo.save(emp);
-		 * 
-		 */
+	 
 	}
 }

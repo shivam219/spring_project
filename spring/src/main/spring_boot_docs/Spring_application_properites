@@ -1,9 +1,0 @@
-Spring application properties.
---application.properties
-1)Can edit core properties
-2)Cache properties
-3)Mail properties
-4)JSON properties
-5)Data properties
-6)Transation properties
-7)Data migration properties

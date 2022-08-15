@@ -1,0 +1,6 @@
+json
+ {
+        "id": 1,
+        "title": "python",
+        "author": "deepak"
+}

@@ -18,24 +18,13 @@ public class LoginController {
 
 	@Autowired
 	EmployeeService employeeService;
-	
+
 	@ModelAttribute
 	public void commonDataModel(Model m) {
 		// put data and object this model will access it all page
 	}
 
-	@RequestMapping(value = "/register")
-	public String registerPage(Model model, @ModelAttribute Employee emp) {
-		return "register";
-	}
-
-	@RequestMapping(value = "/registerprocess", method = RequestMethod.POST)
-	public String registerProcess(Model model, @ModelAttribute Employee emp) { 
-	System.out.println(employeeService.save(emp));
-		return "login";
-	}
-
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/")
 	public String blank(HttpServletRequest request) {
 		if (request.getSession().getAttribute("empId") == null) {
 			return "login";
@@ -44,24 +33,13 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginPage(HttpServletRequest request , @ModelAttribute Employee employee) {
-		
-//		employeeService.
-		
+	public String login() {
 		return "login";
 	}
 
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String homePageGet(HttpServletRequest request) {
-		if (request.getSession().getAttribute("empId") == null) {
-			return "login";
-		}
-		return "home";
-	}
-
-	@RequestMapping(value = "/home", method = RequestMethod.POST)
-	public String homePage(HttpServletRequest request, Model model, @ModelAttribute Employee emp) {
-		if (emp.getEmpId() == 111 && emp.getEmpPassword().equals("111")) {
+	@RequestMapping(value = "/loginprocess", method = RequestMethod.POST)
+	public String loginPost(HttpServletRequest request, Model model, @ModelAttribute Employee emp) {
+		if (employeeService.isExits(emp)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("empId", emp.getEmpId());
 			return "home";
@@ -69,6 +47,26 @@ public class LoginController {
 		model.addAttribute("errorMsg", "please provide correct userid and passowrd ");
 		return "login";
 	}
+
+	@RequestMapping(value = "/register")
+	public String registerPage(Model model, @ModelAttribute Employee emp) {
+		return "register";
+	}
+
+	@RequestMapping(value = "/registerprocess", method = RequestMethod.POST)
+	public String registerProcess(Model model, @ModelAttribute Employee emp) {
+		System.out.println(employeeService.save(emp));
+		return "login";
+	}
+
+	@RequestMapping(value = "/home")
+	public String homePageGet(HttpServletRequest request) {
+		if (request.getSession().getAttribute("empId") == null) {
+			return "login";
+		}
+		return "home";
+	}
+
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logoutPage(HttpServletRequest request) {

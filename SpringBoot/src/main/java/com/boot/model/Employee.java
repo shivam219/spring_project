@@ -1,4 +1,4 @@
-package com.timesheet.model;
+package com.boot.model;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -14,7 +14,7 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "emp_id")
-	public long empId;
+	public int empId;
  
 	@Column(name = "emp_name")
 	public String empName;
@@ -41,7 +41,7 @@ public class Employee {
 		super();
 	}
 
-	public Employee(long empId, String empName, String empPassword, String empEmail, String empPhone, String empCity,
+	public Employee(int empId, String empName, String empPassword, String empEmail, String empPhone, String empCity,
 			String empPincode, String empAddress) {
 		super();
 		this.empId = empId;
@@ -54,11 +54,11 @@ public class Employee {
 		this.empAddress = empAddress;
 	}
 
-	public long getEmpId() {
+	public int getEmpId() {
 		return empId;
 	}
 
-	public void setEmpId(long empId) {
+	public void setEmpId(int empId) {
 		this.empId = empId;
 	}
 

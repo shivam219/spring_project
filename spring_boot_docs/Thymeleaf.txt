@@ -1,0 +1,20 @@
+Thymeleaf template engine
+Thymeleaf is a mordern server-side java template engine for both web and 
+standalone enviroment, capable of processing HTML, XML, javaScript, CSS and even plain text.
+
+The main goal of Thymeleaf is to provide an elegan and highly maintainable way of creating templates
+
+Mostly used to generate html views for web applications
+
+--Jsp
+is converted into servlet the serve as page
+
+--Thymeleaf 
+is get all expression value and directly serve as html
+is it faster as compare to jsp
+
+
+Add pugling to thymeleaf in eclipse
+https://www.thymeleaf.org/eclipse-plugin-update-site/
+
+

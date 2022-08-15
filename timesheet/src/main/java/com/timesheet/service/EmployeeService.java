@@ -1,6 +1,5 @@
 package com.timesheet.service;
 
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +16,8 @@ public class EmployeeService {
 		return employeeRepository.save(employee);
 	}
 
-	public boolean get(Employee employee) {
-		Optional<Employee> optional = employeeRepository.findById(employee.getEmpId());
-		if(optional.get()!=null) {			
-			return true;
-		}
-		return false;
+	public boolean isExits(Employee employee) {
+		return employeeRepository.existsByEmpIdAndEmpPassword(employee.getEmpId(),employee.getEmpPassword());
 	}
 
 }

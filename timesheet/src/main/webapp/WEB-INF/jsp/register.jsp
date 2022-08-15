@@ -1,30 +1,9 @@
-<!DOCTYPE html>
-<html>
-	
+<%@ include file="menu-login-register.jsp" %>
 <head>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="https://kit.fontawesome.com/70c55b67fa.js" crossorigin="anonymous"></script>
-
 	<title>ESS Register</title>
-	<link rel='icon' type='image/ico' href='ESSLogo.png' />
-	<style>
-		.bg-nav-foot {
-			background-color: #333;
-		}
-	</style>
 </head>
-
 <body>
-	<div class="container-fluid">
-		<!-- Nav -->
-		<div class="row bg-nav-foot ">
-			<span class="text-center text-white py-3 h3  "> Timesheet &
-				Leave Application</span>
-		</div>
-		<!-- End Nav -->
-		<!-- Body -->
-		<div class="row  mt-5">
+		<div class="row mt-5 ">
 			<h2 class="text-center text-secondary ">Sign up</h2>
 		</div>
 		<form method="post" action="registerprocess">
@@ -91,17 +70,16 @@
 					  </div>
 				</div>
 			</div>
-			<form method="get" action="register">
-				<div class="text-center mt-3">
+		 		<div class="text-center mt-3">
 					<input class=" btn btn-primary px-4  " type="submit" value="Register" />
 				</div>
-			</form>
+			 
 		</form>
 
-	</div>
-		<!-- Footer -->
+	 
+ 
 	<%@ include file="footer-fixed-bottom.jsp" %>
-		<!-- End Footer -->
+	 
 </body>
 
 </html>

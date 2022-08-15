@@ -5,13 +5,19 @@
 	<!-- CSS-5.0.2  | JS-5.0.2 | -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
+
+	<!--Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500;600;700&family=Tai+Heritage+Pro:wght@700&display=swap" rel="stylesheet">
 	<script src="js/bootstrap.bundle.min.js"></script>
+	<!--Font awesome icon -->
 	<script src="https://kit.fontawesome.com/70c55b67fa.js" crossorigin="anonymous"></script>
 	<link rel='icon' type='image/ico' href='images/esslogo.png' />
 </head>
 
 <body>
-	<div class="fixed-top bg-nav-foot m-0 py-2" >
+	<div class="  bg-nav-foot m-0 py-2" >
 	<!--  Nav -->
 	<nav class="navbar navbar-expand-lg bg-nav-foot">
 		<div class="container-fluid">
