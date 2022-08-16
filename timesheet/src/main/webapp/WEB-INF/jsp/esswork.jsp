@@ -13,7 +13,7 @@
             </div>
             <table class="table table-striped table-hover rounded mb-0" id="tbtable">
                     <tr class="table-dark ">
-                        <td scope="col" >Menus</td>
+                        <td scope="col" >Menu</td>
                         <td scope="col">Date </td>
                         <td scope="col">Project Name</td>
                         <td scope="col">Start Time</td>
@@ -21,11 +21,11 @@
                     </tr> 
                     <!-- <c:forEach items="${list}" var="u"> -->
                     <tr>
-                        <td>Shivam</td>
-                        <td>Shivam</td>
-                        <td>Shivam</td>
-                        <td>Shivam</td>
-                        <td>Shivam</td>
+                        <td></td>
+                        <td>10/10/2002</td>
+                        <td>Timesheet</td>
+                        <td>9:30 am</td>
+                        <td>6:30 pm</td>
                     </tr>
                     <!-- </c:forEach> -->
             </table>
