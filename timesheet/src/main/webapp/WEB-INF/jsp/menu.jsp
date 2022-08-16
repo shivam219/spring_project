@@ -11,9 +11,11 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500;600;700&family=Tai+Heritage+Pro:wght@700&display=swap" rel="stylesheet">
 	<script src="js/bootstrap.bundle.min.js"></script>
+	<script src="js/jquery-3.6.0.min.js"></script>
+	<script src="js/select2.min.js"></script>
 	<!--Font awesome icon -->
 	<script src="https://kit.fontawesome.com/70c55b67fa.js" crossorigin="anonymous"></script>
-	<link rel='icon' type='image/ico' href='images/esslogo.png' />
+	<link rel='icon' type='image/ico' href='images/esslogo.jpg' />
 </head>
 
 <body>
@@ -22,7 +24,7 @@
 	<nav class="navbar navbar-expand-lg bg-nav-foot">
 		<div class="container-fluid">
 			<a class="navbar-brand  d-lg-none d-block" href="#"> <img
-					src="images/esslogo.png" alt="" width="100" height="40"
+					src="images/esslogo.jpg" alt="" width="100" height="40"
 					class="d-inline-block align-text-top">
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -33,7 +35,7 @@
 			<div class="collapse navbar-collapse  " id="navbarNavDropdown">
 				<ul class="navbar-nav ">
 					<li class="nav-item d-none d-lg-block "><a class="navbar-brand" href="#"> <img
-								src="images/esslogo.png" alt="" width="70" height="40"
+								src="images/esslogo.jpg" alt="" width="70" height="40"
 								class="d-inline-block align-text-top">
 
 						</a></li>
@@ -54,7 +56,7 @@
 							data-bs-toggle="dropdown" aria-expanded="false">
 							Create Timesheet </a>
 						<ul class="dropdown-menu" id="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Create Timesheet</a></li>
+							<li><a class="dropdown-item" href="esswork">Create Timesheet</a></li>
 							<li><a class="dropdown-item" href="#">Approve Timesheet</a></li>
 							<li><a class="dropdown-item" href="#">Change Status</a></li>
 						</ul>

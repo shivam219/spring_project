@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +25,7 @@ public class LoginController {
 		// put data and object this model will access it all page
 	}
 
+	
 	@RequestMapping(value = "/")
 	public String blank(HttpServletRequest request) {
 		if (request.getSession().getAttribute("empId") == null) {
@@ -72,6 +74,14 @@ public class LoginController {
 	public String logoutPage(HttpServletRequest request) {
 		request.getSession().removeAttribute("empId");
 		return "login";
+	}
+	@GetMapping("/esswork")
+	public String esswork() {
+		return "esswork";
+	}
+	@GetMapping("/esswork2")
+	public String esswork2() {
+		return "esswork2";
 	}
 
 }

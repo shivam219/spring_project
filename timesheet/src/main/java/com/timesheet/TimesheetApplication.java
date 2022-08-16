@@ -9,6 +9,5 @@ public class TimesheetApplication {
 	public static void main(String[] args) {
 		ApplicationContext ac = SpringApplication.run(TimesheetApplication.class, args);
 		
-	 
 	}
 }
