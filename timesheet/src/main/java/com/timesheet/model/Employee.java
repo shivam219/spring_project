@@ -14,28 +14,28 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "emp_id")
-	public long empId;
+	private long empId;
  
 	@Column(name = "emp_name")
-	public String empName;
+	private String empName;
 
 	@Column(name = "emp_password")
-	public String empPassword;
+	private String empPassword;
 
 	@Column(name = "emp_email")
-	public String empEmail;
+	private String empEmail;
 
 	@Column(name = "emp_phone")
-	public String empPhone;
+	private String empPhone;
 
 	@Column(name = "emp_city")
-	public String empCity;
+	private String empCity;
 
 	@Column(name = "emp_pincode")
-	public String empPincode;
+	private String empPincode;
 
 	@Column(name = "emp_address")
-	public String empAddress;
+	private String empAddress;
 
 	public Employee() {
 		super();

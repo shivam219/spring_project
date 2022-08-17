@@ -13,7 +13,7 @@ import com.timesheet.model.Work;
 import com.timesheet.service.WorkService;
 
 @RestController
-public class WorkController {
+public class WeeklyReportController {
 
 	@Autowired
 	WorkService workService;
@@ -30,4 +30,5 @@ public class WorkController {
 		}
 	}
 
+	
 }

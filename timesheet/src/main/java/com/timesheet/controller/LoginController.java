@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -25,7 +26,6 @@ public class LoginController {
 		// put data and object this model will access it all page
 	}
 
-	
 	@RequestMapping(value = "/")
 	public String blank(HttpServletRequest request) {
 		if (request.getSession().getAttribute("empId") == null) {
@@ -34,14 +34,14 @@ public class LoginController {
 		return "home";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@GetMapping("/login")
 	public String login() {
 		return "login";
 	}
 
-	@RequestMapping(value = "/loginprocess", method = RequestMethod.POST)
+	@PostMapping("/loginprocess")
 	public String loginPost(HttpServletRequest request, Model model, @ModelAttribute Employee emp) {
-		if (employeeService.isExits(emp)) {
+		if (employeeService.isValidEmployee(emp) != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("empId", emp.getEmpId());
 			return "home";
@@ -50,38 +50,17 @@ public class LoginController {
 		return "login";
 	}
 
-	@RequestMapping(value = "/register")
-	public String registerPage(Model model, @ModelAttribute Employee emp) {
-		return "register";
-	}
-
-	@RequestMapping(value = "/registerprocess", method = RequestMethod.POST)
-	public String registerProcess(Model model, @ModelAttribute Employee emp) {
-		System.out.println(employeeService.save(emp));
+	@GetMapping(value = "/logout")
+	public String logoutPage(HttpServletRequest request) {
+		request.getSession().removeAttribute("empId");
 		return "login";
 	}
 
-	@RequestMapping(value = "/home")
+	@GetMapping(value = "/home")
 	public String homePageGet(HttpServletRequest request) {
 		if (request.getSession().getAttribute("empId") == null) {
 			return "login";
 		}
 		return "home";
 	}
-
-
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logoutPage(HttpServletRequest request) {
-		request.getSession().removeAttribute("empId");
-		return "login";
-	}
-	@GetMapping("/esswork")
-	public String esswork() {
-		return "esswork";
-	}
-	@GetMapping("/esswork2")
-	public String esswork2() {
-		return "esswork2";
-	}
-
 }

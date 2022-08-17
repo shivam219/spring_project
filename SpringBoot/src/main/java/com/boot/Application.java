@@ -1,8 +1,12 @@
 package com.boot;
 
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.boot.model.Employee;
 import com.boot.respository.EmployeeRepository;
@@ -43,14 +47,18 @@ public class Application {
 		
 		
 //		r.existsById(10);
-		Employee e = new Employee();
-		e.setEmpId(10);
-		e.setEmpPassword("root");
-		
+//		Employee e = new Employee();
+//		e.setEmpId(10);
+//		e.setEmpPassword("root");
+//		
 		EmployeeRepository er = ap.getBean(EmployeeRepository.class);
-		Boolean findByEmpIdAndEmpPassword = er.existsByEmpIdAndEmpPassword(e.getEmpId(), e.getEmpPassword());
-		System.out.println(findByEmpIdAndEmpPassword );
+//		Boolean findByEmpIdAndEmpPassword = er.existsByEmpIdAndEmpPassword(e.getEmpId(), e.getEmpPassword());
+//		System.out.println(findByEmpIdAndEmpPassword );
 	 
-		
+//		er.sett();
+		System.out.println(er.isValidEmployee1(14,"root"));
+		System.out.println(er.existsByEmployee(14, "root"));
+		System.out.println(er.existsByEmployee(14, "root"));
+	
 	}
 }
