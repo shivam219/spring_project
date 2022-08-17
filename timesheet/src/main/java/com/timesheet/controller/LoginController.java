@@ -38,7 +38,7 @@ public class LoginController {
 	public String login() {
 		return "login";
 	}
-
+ 
 	@PostMapping("/loginprocess")
 	public String loginPost(HttpServletRequest request, Model model, @ModelAttribute Employee emp) {
 		if (employeeService.isValidEmployee(emp) != null) {
