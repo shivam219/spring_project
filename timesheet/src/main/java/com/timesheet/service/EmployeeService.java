@@ -1,8 +1,9 @@
 package com.timesheet.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import com.timesheet.model.Employee;
 import com.timesheet.repository.EmployeeRepository;
@@ -13,18 +14,24 @@ public class EmployeeService {
 	private EmployeeRepository employeeRepository;
 
 	public Employee save(Employee e) {
-		employeeRepository.saveEmployee(e.getEmpId(), e.getEmpName() , e.getEmpEmail(),e.getEmpPassword() , e.getEmpCity(), e.getEmpAddress(), e.getEmpPhone(), e.getEmpPincode());
+//		employeeRepository.save(e);
+	System.out.println(	employeeRepository.saveEmployee(e.getEmpId(), e.getEmpName(), e.getEmpEmail(), e.getEmpPassword(),
+				e.getEmpCity(), e.getEmpAddress(), e.getEmpPhone(), e.getEmpPincode()));
 		return e;
 	}
 
-	public Employee isValidEmployee(Employee employee) {
+	public Employee isValidEmployee(Employee empu) {
 		Employee emp = null;
-		try { 
-			emp = employeeRepository.isValidEmployee(14,"root");
+		try {
+			emp = employeeRepository.isValidEmployee(empu.getEmpId(), empu.getEmpPassword());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return emp;
+	}
+
+	public List<Employee> getAllEmployee() {
+		return (List<Employee>) employeeRepository.findAll();
 	}
 
 }

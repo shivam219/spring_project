@@ -40,13 +40,15 @@ public class LoginController {
 	}
  
 	@PostMapping("/loginprocess")
-	public String loginPost(HttpServletRequest request, Model model, @ModelAttribute Employee emp) {
+	public String loginPost(HttpServletRequest request, Model m, @ModelAttribute Employee emp) {
+		
 		if (employeeService.isValidEmployee(emp) != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("empId", emp.getEmpId());
+			m.addAttribute("emp",emp);
 			return "home";
 		}
-		model.addAttribute("errorMsg", "please provide correct userid and passowrd ");
+		m.addAttribute("errorMsg", "please provide correct userid and passowrd ");
 		return "login";
 	}
 
@@ -63,4 +65,5 @@ public class LoginController {
 		}
 		return "home";
 	}
+	
 }

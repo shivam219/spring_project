@@ -26,7 +26,5 @@ public interface EmployeeRepository  extends CrudRepository<Employee, Integer> {
  
 	@Query(value = " SELECT * FROM ess_employee WHERE CAST(AES_DECRYPT(emp_password_encrypt, 'pass') AS CHAR) =:pass  AND emp_id =:id ", nativeQuery = true )
 	public Employee isValidEmployee(@Param("id") long empId, @Param("pass") String empPassword );
-
-	
 	
 }
