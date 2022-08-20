@@ -3,6 +3,11 @@
 
     <head>
         <title>Ess work</title>
+        <style>
+            table {
+  table-layout: fixed;
+}
+        </style>
     </head>
 
     <body>
@@ -11,25 +16,67 @@
             <div class="row rounded  ">
                 <h5 class="text-center text-secondary h4 ">Ess Work</h5>
             </div>
+            <div class="row">
+                <div class="col">
+                    <p>Time Period</p>
+                </div>
+                <div class="col">
+                    <input type="date" name="weekst" id="weekst">
+                </div>
+                <div class="col">
+                    <input type="date" name="weeked" id="weeked">
+                </div>
+                <div class="col">
+                    <input type="button" class="btn btn-primary btn-sm" value="Save">
+                </div>
+                <div class="col">
+                    <input type="button" class="btn btn-primary btn-sm" value="Submit">
+                </div>
+            </div>
             <table class="table table-striped table-hover rounded mb-0" id="tbtable">
                     <tr class="table-dark ">
-                        <td scope="col" >Menu</td>
-                        <td scope="col">Date </td>
-                        <td scope="col">Project Name</td>
-                        <td scope="col">Start Time</td>
-                        <td scope="col">End Time</td>
+                        <td >Work Items</td>
+                        <td >Status</td>
+                        <td >Mon</td>
+                        <td >Tue</td>
+                        <td >wed</td>
+                        <td >thu</td>
+                        <td >Fri</td>
+                        <td >Sat</td>
+                        <td >Sun</td>
+                        <td >Total</td>
                     </tr> 
                     <!-- <c:forEach items="${list}" var="u"> -->
                     <tr>
-                        <td></td>
-                        <td>10/10/2002</td>
-                        <td>Timesheet</td>
-                        <td>9:30 am</td>
-                        <td>6:30 pm</td>
+                        <td>
+                            <div class="dropdown"><button class="btn btn-primary btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Dropdown </button>
+                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                            </div>
+                        </td>
+                        <td>  <p>Approved</p></td>
+                        <td><input type="number" class="form-control w-75"   placeholder="HH"></td>
+                        <td><input type="number" class="form-control w-75"   placeholder="HH"></td>
+                        <td><input type="number" class="form-control w-75"   placeholder="HH"></td>
+                        <td><input type="number" class="form-control w-75"   placeholder="HH"></td>
+                        <td><input type="number" class="form-control w-75"   placeholder="HH"></td>
+                        <td><input type="number" class="form-control w-75"   placeholder="HH"></td>
+                        <td><input type="number" class="form-control w-75"   placeholder="HH"></td>
+                        <td><label class="form-label">10</label></td>
                     </tr>
                     <!-- </c:forEach> -->
+                    <tfoot>
+                        <td colspan="2">  <input type="button" value="Duplicate" class="btn"></td>
+                        <td >10</td>
+                        <td >10</td>
+                        <td >10</td>
+                        <td >10</td>
+                        <td >10</td>
+                        <td >10</td>
+                        <td >10</td>
+                        <td >70</td>
+                    </tfoot>
             </table>
-            <input type="button" value="Duplicate" class="btn">
+        
         </div>
 
         <script>

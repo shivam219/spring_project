@@ -1,5 +1,6 @@
 package com.timesheet.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,12 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ess_projects")
+@Table(name = "ess_project")
 public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "project_id")
 	private int projectid;
+	
+	@Column(name = "project_name")
 	private String projectname;
+	
+	@Column(name = "project_status")
 	private String projectstatus;
 
 	public Project() {
