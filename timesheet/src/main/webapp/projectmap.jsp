@@ -32,7 +32,7 @@
                         <div class="form-group mb-3">
                             <label for="">Select Project</label>
                             <select name="brandlist2[]" multiple id="brandlist2[]" class="form-control">
-                            <c:forEach items="${projectList}" var="projectName"
+                                <c:forEach items="${projectList}" var="projectName"
                                     varStatus="loop">
                                     <option value="${projectName.getProjectid()}">${projectName.getProjectname()}</option>
                                 </c:forEach>

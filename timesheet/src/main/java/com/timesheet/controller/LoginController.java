@@ -23,7 +23,7 @@ public class LoginController {
 
 	@ModelAttribute
 	public void commonDataModel(Model m) {
-		// put data and object this model will access it all page
+	 
 	}
 
 	@RequestMapping(value = "/")

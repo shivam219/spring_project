@@ -11,12 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.timesheet.model.Employee;
 import com.timesheet.service.EmployeeService;
+import com.timesheet.service.ProjectService;
 
 @Controller
 public class RegisterController {
 	@Autowired
 	EmployeeService employeeService;
-
+	
 	@GetMapping(value = "/register")
 	public String register(Model model, @ModelAttribute Employee emp) {
 		return "register";
@@ -24,12 +25,7 @@ public class RegisterController {
 
 	@PostMapping(value = "/registerprocess")
 	public String registerProcess(Model model, @ModelAttribute Employee emp) {
-		 employeeService.save(emp);
+		employeeService.save(emp);
 		return "login";
-	}
-	
-	@GetMapping("/esswork")
-	public String esswork() {
-		return "esswork";
 	}
 }

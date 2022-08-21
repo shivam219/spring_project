@@ -20,7 +20,7 @@ public class Projectcontroller {
 	ProjectService projectservice;
 	@Autowired
 	EmployeeService employeeService;
-
+ 
 	@Autowired  
 	EmployeeProjectService EmployeeProjectService;
 	
@@ -41,12 +41,6 @@ public class Projectcontroller {
 	public String assignprojectsave(Model m, @RequestParam("brandlist[]") long[] list,
 			@RequestParam("brandlist2[]") int[] list2) {
 
-		for (long l : list) {
-			System.out.println(l);
-			for (int l2 : list2) {
-				System.out.println(l2);
-			}
-		}
 		for (long l : list) {
 			for (int l2 : list2) {
 				EmployeeProject ep = new EmployeeProject();

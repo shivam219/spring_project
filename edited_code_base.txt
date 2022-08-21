@@ -1,0 +1,132 @@
+table - code 
+ // var row = $("#tbtable tr ").eq(1).cel
+                // console.log($("#tbtable tr td").length);
+
+            // $('tbtable tr:nth-child(1) td:nth-child' + '( ' +  1+' )')
+            // console.log($('tbtable tr:nth-child(1) td:nth-child(2) input:text').val());
+			    <!-- <td colspan="3">  <input type="button" value="+" id="duplicateRow"   style="height: 35px; width: 35px; border-radius: 50%; font-family: calibri; background-color: rgb(136, 255, 0); border: none; color: rgb(56, 56, 56); " ></td> -->
+                    
+					
+					
+					
+					let rowCount = $('#tbtable tr').length-2;
+                    // console.log($('#tbtable tr:nth-child( ' + rowCount+ ' ) '));
+                    $('#tbtable tr:nth-child('+ rowCount+ ') td:input').each(
+                        console.log($(this).val())
+                    );
+                    // if((rowCount)>=3 ){
+                    // $('#tbtable tr').eq(parseInt(rowCount)-2).remove();
+                    // $("#removeRow").blur()
+                    // }
+                    // $('.mon_v:input').each(function() {
+                    // if($(this).val() !=""){
+                    //     mov_v_t = mov_v_t + parseInt($(this).val());
+                    //     }
+                    // });
+				}
+			}
+		}
+	}
+	
+	
+// removeing values from table                   
+				  
+				    function tblRefresh(){
+                let rowCount = $('#tbtable tr').length;
+                $('#tbtable tr:nth-child('+ rowCount+ ')').each(function() {
+                    $('td').each(function (i, cell) {
+                         cell.innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",");    
+                      });
+                });
+            }
+            function tblRefresh2(){
+                let rowCount = $('#tbtable tr').length;
+                    // console.log($('#tbtable tr:nth-child( ' + rowCount+ ' ) '));
+                    $('#tbtable tr:nth-child('+ rowCount+ ') td:input[type=number] ').each(
+                        // console.log($(this).val())
+                        // $(this).val()
+                        // console.log($(this.target).val())
+                    );
+                    // if((rowCount)>=3 ){
+                    // $('#tbtable tr').eq(parseInt(rowCount)-2).remove();
+                    // $("#removeRow").blur()
+                    // }
+                    // $('.mon_v:input').each(function() {
+                    // if($(this).val() !=""){
+                    //     mov_v_t = mov_v_t + parseInt($(this).val());
+                    //     }
+                    // });
+                   
+            }// console.log( $(".mon_v:last-child:input").val());
+
+
+	//find last td
+			https://youtu.be/v22AyizvItI
+			
+			
+			
+			
+			
+			
+			
+$(document).ready(function(){
+	// code to read selected table row cell data (values).
+	$(".btnSelect").on('click',function(){
+		 var currentRow=$(this).closest("tr");
+		 var col1=currentRow.find("td:eq(0) input").val();
+		 var col2=currentRow.find("td:eq(1)").html();
+		 var col3=currentRow.find("td:eq(2)").html();
+		 var data=col1+"\n"+col2+"\n"+col3;
+		 alert(data);
+	});
+});
+
+
+
+
+
+
+
+ $table1=jQuery('#tbtable');
+                $table1.find('tbody tr').each(function(){
+                    let sum=0;   
+                    jQuery(this).find('td').each(function(){
+                        if(!isNaN(Number(jQuery(this).find("input").val()))){
+                        sum=sum+Number(jQuery(this).find("input").val());
+                    }
+                    // console.log(sum);
+                    let rowLen = $('#tbtable tr').length-1;
+                    let str ='#tbtable tr:nth-child('+ rowLen+ ')';
+                    // console.log(str);
+                    $(str).find("td:eq(9)").html(sum);
+                });
+            });
+			
+			
+			
+			<script>
+$(document).ready(function(){
+	// code to read selected table row cell data (values).
+	$(".btnSelect").on('click',function(){
+		 var currentRow=$(this).closest("tr");
+		 var col1=currentRow.find("td:eq(0)").html();
+		 var col2=currentRow.find("td:eq(1)").html();
+		 var col3=currentRow.find("td:eq(2)").html();
+		 var data=col1+"\n"+col2+"\n"+col3;
+		 alert(data);
+	});
+});
+
+
+
+
+  $(".cal").on('input' ,function () {
+                // console.log(this);
+               let sum=0;   
+                $(this).closest("tr").find('td').each(function(){
+                    if(!isNaN(Number(jQuery(this).find("input").val()))){
+                    sum=sum+Number(jQuery(this).find("input").val());
+                }});
+                $(this).closest("tr").find("td:eq(9) ").html(sum==0?"00":sum);
+                calculate();
+            });

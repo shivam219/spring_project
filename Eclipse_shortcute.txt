@@ -1,2 +1,13 @@
 ctrl+shift+w = open file option
 ctrl+shift+d = build option
+
+
+		//session need to check later by spring security need to learn it
+//		if (request.getSession().getAttribute("empId") == null) {
+//			return "login";
+//		}
+//		System.out.println("error here");
+//		long empId = (Integer) request.getSession().getAttribute("empId");
+//		Long empId =1L;
+//		System.out.println(empId);
+//		commonDataModel(m,empId);

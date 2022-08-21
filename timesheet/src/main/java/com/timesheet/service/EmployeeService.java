@@ -13,8 +13,7 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
-	public Employee save(Employee e) {
-//		employeeRepository.save(e);
+	public Employee save(Employee e) { 
 	System.out.println(	employeeRepository.saveEmployee(e.getEmpId(), e.getEmpName(), e.getEmpEmail(), e.getEmpPassword(),
 				e.getEmpCity(), e.getEmpAddress(), e.getEmpPhone(), e.getEmpPincode()));
 		return e;

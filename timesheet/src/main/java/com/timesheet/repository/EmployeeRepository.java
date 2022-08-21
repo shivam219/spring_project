@@ -15,12 +15,11 @@ public interface EmployeeRepository  extends CrudRepository<Employee, Integer> {
 	
 	@Modifying
 	@Query(value = "insert into ess_employee (emp_id , emp_name, emp_email, emp_password,emp_password_encrypt, emp_city ,emp_address,emp_phone,emp_pincode) "
-			+ "values (:id, :name ,  :email , :pass ,  AES_ENCRYPT('root', :pass ) , :city , :address , :phone , :pincode );", nativeQuery = true)
+			+ "values (:id, :name ,  :email , :pass ,  AES_ENCRYPT( :pass , 'pass' ) , :city , :address , :phone , :pincode );", nativeQuery = true)
 	@Transactional
 	public int saveEmployee(@Param("id") long id, @Param("name") String name , @Param("email") String email,	
 							@Param("pass") String pass , @Param("city") String city,@Param("address") String address,
 							@Param("phone") String phone, @Param("pincode") String pincode
-			
 			);
 	
  
