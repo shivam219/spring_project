@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+	<h1>HTML DOM Events</h1>
+	<h2>The onclick Event</h2>
+
+	<p>The onclick event triggers a function when an element is clicked on.</p>
+	<p>Click to trigger a function that will output "Hello World":</p>
+
+	<button onclick="myFunction()">Click me</button>
+
+
+
+
+	<br>
+	<input type="date" id="mydate" onchange="myFunction()">
+	<p id="demo"></p>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script>
+		function myFunction() {
+			document.getElementById("demo").innerHTML = "Hello World"; console.log("shiam");
+			// const today = new Date();
+			// const first = today.getDate() - today.getDay() + 1;
+			// const monday = new Date(today.setDate(first));
+			// console.log(monday);
+			// const  s1 =  today.getDate();
+			// const  s2 =  today.getDay()-1;
+			// console.log(today.getDate()-(today.getDate()-1));
+			// const first =s1-s2;
+			// const monday = new Date(today.setDate(first));
+			// console.log(monday);
+
+
+			const d1 = new Date($("#mydate").val());
+			console.log(d1); // 👉️ Mon Sep 19 2022
+			console.log(d1.getDay()); // 👉️ 1
+
+			console.log(isMonday(d1));
+		}
+		function isMonday(date = new Date()) {
+			return date.getDay() === 1;
+		}
+	</script>
+
+</body>
+
+</html>

@@ -25,7 +25,7 @@
                     <p>Time Period</p>
                 </div>
                 <div class="col">
-                    <input  placeholder="Select date"  type="date"   class="form-control datepicker w-75   ">
+                    <input  placeholder="Select date"  type="date"  id="mydate" oninput="validateDate()"  class="form-control datepicker w-75   ">
                 </div>
                 <div class="col">
                     <input  placeholder="Select date"  type="date"  class="form-control datepicker w-75   ">
@@ -203,7 +203,12 @@
                 $("#total").val(sum+t);
                 console.log(sum+t);
             }
-       
+            
+            function validateDate() {
+                
+                console.log($("#mydate").val());
+            }
+        </script>
          
         </script>
     </body>
