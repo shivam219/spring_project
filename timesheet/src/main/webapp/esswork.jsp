@@ -24,12 +24,21 @@
                 <div class="col h6 text-center">
                     <p>Time Period</p>
                 </div>
-                <div class="col">  
-				 <input  placeholder="Select date"  type="date"  id="mydate" oninput="validateDate()"  class="form-control datepicker w-75 d-flex   ">    
-                </div>
-                <div class="col">
-                    <input  placeholder="Select date"  type="hidden"  class="form-control datepicker w-75   ">
-                </div>
+                <form action="fetchwork" method="get">
+                    <div class="row">
+
+                        <div class="col">  
+                            <input  placeholder="Select date"  type="date"  id="startDate"   name="startDate"  class="form-control datepicker w-75 d-flex   ">    
+                        </div>
+                        <div class="col">
+                            <input  placeholder="Select date"  type="date" id="endDate"   name="endDate" class="form-control datepicker w-75   ">
+                        </div>
+                        <div class="col">
+                            <input type="submit" class="btn btn-primary btn-sm" value="fetch"  >
+                        </div>
+                        
+                    </div>
+                </form>
                 <div class="col">
                     <input type="button" class="btn btn-primary btn-sm" value="Save">
                 </div>
@@ -205,11 +214,21 @@
             }
             
             function validateDate() {
+                let today = new Date($("#startDate").val());
+                today.setDate((today.getDate() + 6));
+                today.setMonth(today.getMonth()+1);
+                let day =   today.getDate().toString().length==1?   "0"+(today.getDate().toString())  : today.getDate().toString();
+                let month = today.getMonth().toString().length==1?  "0"+(today.getMonth().toString()) : today.getMonth().toString();
+                let year = today.getYear();
                 
-                console.log($("#mydate").val());
+                console.log(year+"-"+month+"-"+day);
+                // $("#endDate").val(year+month+day);
             }
-        </script>
-         
+
+            function fetchwork(){
+                $("#startDate").val();
+                $("#endDate").val();
+            }
         </script>
     </body>
 
