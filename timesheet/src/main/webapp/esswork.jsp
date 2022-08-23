@@ -24,11 +24,11 @@
                 <div class="col h6 text-center">
                     <p>Time Period</p>
                 </div>
-                <div class="col">
-                    <input  placeholder="Select date"  type="date"  id="mydate" oninput="validateDate()"  class="form-control datepicker w-75   ">
+                <div class="col">  
+				 <input  placeholder="Select date"  type="date"  id="mydate" oninput="validateDate()"  class="form-control datepicker w-75 d-flex   ">    
                 </div>
                 <div class="col">
-                    <input  placeholder="Select date"  type="date"  class="form-control datepicker w-75   ">
+                    <input  placeholder="Select date"  type="hidden"  class="form-control datepicker w-75   ">
                 </div>
                 <div class="col">
                     <input type="button" class="btn btn-primary btn-sm" value="Save">
@@ -44,8 +44,8 @@
                         <td class="text-center" >Status</td>
                         <td class="text-center" >Mon</td>
                         <td class="text-center" >Tue</td>
-                        <td class="text-center" >wed</td>
-                        <td class="text-center" >thu</td>
+                        <td class="text-center" >Wed</td>
+                        <td class="text-center" >Thu</td>
                         <td class="text-center" >Fri</td>
                         <td class="text-center" >Sat</td>
                         <td class="text-center" >Sun</td>
@@ -63,13 +63,13 @@
                         </td>
 
                         <td>  <p>Approved</p></td>
-                        <td><input type="number" value="" class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" class="form-control input-sm w-100 web_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 web_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
                         <td class="text-center">00 </td>
                     </tr>
                     <tfoot>
