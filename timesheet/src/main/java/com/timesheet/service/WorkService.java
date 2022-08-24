@@ -28,30 +28,28 @@ public class WorkService {
 		return isSave;
 	}
 
-	public List<Work> getWorByStartDateEndDate(String startDate, String endDate, long empId) {
+	public LinkedHashMap<String, List<Work>> getWorByStartDateEndDate(String startDate, String endDate, long empId) {
 		List<Work> l = repository.getWorByStartDateEndDate(startDate, endDate, empId);
-		LinkedHashMap<Integer, List<Work>> map = new LinkedHashMap<Integer, List<Work>>();
+		LinkedHashMap<String, List<Work>> map = new LinkedHashMap<String, List<Work>>();
 		for (Work w : l) {
-			if (map.containsKey(w.getProject())) {
+			if (map.containsKey(w.getProjectName())) {
 				ArrayList<Work> al = new ArrayList<Work>();
-				al.addAll(map.get(w.getProject()));
+				al.addAll(map.get(w.getProjectName()));
 				al.add(w);
-				map.put(w.getId(), al);
-
+				map.put(w.getProjectName(), al);
 			} else {
 				ArrayList<Work> al = new ArrayList<Work>();
 				al.add(w);
-				map.put(w.getId(), al);
+				map.put(w.getProjectName(), al);
 			}
+
 		}
-		
-		for (Map.Entry<Integer, List<Work>> entry : map.entrySet()) {
-			Integer key = entry.getKey();
+		for (Map.Entry<String, List<Work>> entry : map.entrySet()) {
+			String key = entry.getKey();
 			List<Work> val = entry.getValue();
 			System.out.println(key);
 			System.out.println(val);
 		}
-		return l;
+		return map;
 	}
-
 }

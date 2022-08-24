@@ -17,39 +17,6 @@
 
     <body>
 
-        <table class="table table-striped table-hover rounded mb-0 d-none " id="dptable" >        
-            <tr class="table-dark ">
-                <td class="text-center" colspan="2">Work Items</td>
-                <td class="text-center" >Status</td>
-                <td class="text-center" >Mon</td>
-                <td class="text-center" >Tue</td>
-                <td class="text-center" >Wed</td>
-                <td class="text-center" >Thu</td>
-                <td class="text-center" >Fri</td>
-                <td class="text-center" >Sat</td>
-                <td class="text-center" >Sun</td>
-                <td class="text-center" >Total</td>
-            </tr> 
-            <tr>
-                <td colspan="2">
-                    <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1">
-                        <option value=""></option>
-                        <c:forEach items="${projectList}" var="project" varStatus="loop">
-                            <option value="${project.getProjectid()}">${project.getProjectname()}</option>
-                        </c:forEach>
-                    </select>
-                </td>
-                <td>  <p>Approved</p></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 web_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td class="text-center">00 </td>
-            </tr>
-        </table>
         <div class="container">
             <div class="row rounded  ">
                 <h5 class="text-center text-secondary h4 ">Ess Work</h5>
@@ -106,7 +73,7 @@
 	                        <td>  <p>Approved</p> </td>
 	                        <c:forEach items="${entry.getValue()}" var="work" varStatus="loop">
 	                        	<c:choose>
-	                        		<c:when test='${ work.getDay()=="mon" && i==1 ||  work.getDay()=="tue" && i==2 || work.getDay()=="wed" && i==3  ||  work.getDay()=="thu" && i==4 ||  work.getDay()=="fri" && i==5 ||  work.getDay()=="sat" && i==6 ||  work.getDay()=="sat" && i==7}'>
+	                        		<c:when test='${ work.getDay()=="mon" && i==1  }'>
                                         <c:choose>
                                             <c:when test = '${work.getDay()=="mon"}'>
                                                 <td><input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"   placeholder="HH"></td>
@@ -135,8 +102,8 @@
                                             <c:when test = '${work.getDay()=="sun"}'>
                                                 <td><input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
                                             </c:when>
+                                            <c:set var="count" value="${i + 1}" scope="page"/>
                                         </c:choose> 
-                                        <c:set var="i" value="${i + 1}" scope="page"/>
 							      	</c:when>   
 							      	
 							      	<c:otherwise>
@@ -162,15 +129,12 @@
                                             <c:when test = '${i==7}'>
                                                 <td><input type="number" value="" min="0" class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
                                             </c:when>
+                                            <c:set var="count" value="${i + 1}" scope="page"/>
                                         </c:choose>
-                                        <c:set var="i" value="${i + 1}" scope="page"/>
 							      	</c:otherwise>
+
 	                        	</c:choose>
-
-
                             </c:forEach>
-                            <c:set var="i" value="${1}" scope="page"/>
-
 	                        <td class="text-center">00 </td>
 	                    </tr>
 					</c:forEach> 
@@ -224,7 +188,7 @@
                 $("#addRow").on('click', function () {
                     event.preventDefault()
                     $(".selectProject.select2-hidden-accessible").select2('destroy');
-                    var row = $("#dptable tr").eq(1);
+                    var row = $("#tbtable tr").eq(1);
                     var newrow = row.clone();
                     $("#tbtable").append(newrow);
                     $('.selectProject').select2();

@@ -13,10 +13,13 @@ public class ProjectService {
 
 	@Autowired
 	ProjectRepository projectRepository;
+
 	public List<Project> getAllProject() {
 		return (List<Project>) projectRepository.findAll();
 	}
-	public  List<Project> getProjectByEmpId(long empId ) {
+
+	public List<Project> getProjectByEmpId(long empId) {
 		return (List<Project>) projectRepository.getProjectByEmpId(empId);
 	}
+
 }

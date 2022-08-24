@@ -32,7 +32,7 @@ public class WokController {
 		// session need to check later by spring security need to learn it
 		if (request.getSession().getAttribute("empId") == null) {
 			return "login";
-		}
+		} 
 		long empId = (Long) request.getSession().getAttribute("empId");
 		m.addAttribute("projectList", projectservice.getProjectByEmpId(empId));
 		return "esswork";
@@ -42,8 +42,7 @@ public class WokController {
 	public String fetchByDate(Model m ,HttpServletRequest request ,@RequestParam("startDate") String startDate,@RequestParam("endDate") String endDate) {
 		
 		long empId = (Long) request.getSession().getAttribute("empId");
-		m.addAttribute("workList", workService.getWorByStartDateEndDate(startDate, endDate,empId));
-		System.out.println(m.getAttribute("workList").toString());
+		m.addAttribute("workMap", workService.getWorByStartDateEndDate(startDate, endDate,empId));
 		m.addAttribute("projectList", projectservice.getProjectByEmpId(empId));
 		
 		
