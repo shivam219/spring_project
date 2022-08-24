@@ -39,7 +39,7 @@ public class Work {
 	@Column(name = "project_id")
 	private int project;
 
-	@Transient
+//	@Transient
 	@Column(name = "project_name")
 	private String projectName;
 	

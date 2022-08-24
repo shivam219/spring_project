@@ -38,13 +38,16 @@ public class WokController {
 		return "esswork";
 	}
 
-	@GetMapping("/fetchwork")
+	@PostMapping("/fetchwork")
 	public String fetchByDate(Model m ,HttpServletRequest request ,@RequestParam("startDate") String startDate,@RequestParam("endDate") String endDate) {
 		
-		m.addAttribute("workList", workService.getWorByStartDateEndDate(startDate, endDate));
-		System.out.println(m.getAttribute("workList").toString());
 		long empId = (Long) request.getSession().getAttribute("empId");
+		m.addAttribute("workList", workService.getWorByStartDateEndDate(startDate, endDate,empId));
+		System.out.println(m.getAttribute("workList").toString());
 		m.addAttribute("projectList", projectservice.getProjectByEmpId(empId));
+		
+		
+	
 		return "esswork";
 	}
 

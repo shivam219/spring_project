@@ -4,9 +4,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"   "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
-<head>
+<head> 
     <title>Week Work Report</title>
-    <style>
+    <style> 
         table {
             table-layout: fixed;
         }
@@ -24,7 +24,7 @@
                 <div class="col h6 text-center">
                     <p>Time Period</p>
                 </div>
-                <form action="fetchwork" method="get">
+                <form action="fetchwork" method="post">
                     <div class="row">
 
                         <div class="col">  
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <table class="table table-striped table-hover rounded mb-0" id="tbtable" >
-                <!-- <thead> -->
+               
                     <tr class="table-dark ">
                         <td class="text-center" colspan="2">Work Items</td>
                         <td class="text-center" >Status</td>
@@ -60,7 +60,8 @@
                         <td class="text-center" >Sun</td>
                         <td class="text-center" >Total</td>
                     </tr> 
-                <!-- </thead> -->
+                
+                 <c:if test = "${workList.size()>0}">			         
                     <tr>
                         <td colspan="2">
                             <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1">
@@ -70,7 +71,6 @@
                                 </c:forEach>
                               </select>
                         </td>
-
                         <td>  <p>Approved</p></td>
                         <td><input type="number" value="" min="0" class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"   placeholder="HH"></td>
                         <td><input type="number" value="" min="0" class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"   placeholder="HH"></td>
@@ -81,6 +81,29 @@
                         <td><input type="number" value="" min="0" class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
                         <td class="text-center">00 </td>
                     </tr>
+			     </c:if>
+			      <c:if test = "${workList==null || workList.size()==0}">			         
+                    <tr>
+                        <td colspan="2">
+                            <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1">
+                                <option value=""></option>
+                                <c:forEach items="${projectList}" var="project" varStatus="loop">
+                                    <option value="${project.getProjectid()}">${project.getProjectname()}</option>
+                                </c:forEach>
+                              </select>
+                        </td>
+                        <td>  <p>Approved</p></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 web_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                        <td class="text-center">00 </td>
+                    </tr>
+			     </c:if>
+                    
                     <tfoot>
                         <td colspan="3" class="text-center ">  
                             <input type="button" value="+" id="addRow"   class="btn btn-success btn-sm rounded-circle me-4 " style="height: 40px; width: 40px; " >
