@@ -57,6 +57,7 @@
 							data-bs-toggle="dropdown" aria-expanded="false">
 							Create Timesheet </a>
 						<ul class="dropdown-menu" id="dropdown-menu">
+							<li><a class="dropdown-item" href="esswork2">Create Timesheet</a></li>
 							<li><a class="dropdown-item" href="esswork">Create Timesheet</a></li>
 							<li><a class="dropdown-item" href="#">Approve Timesheet</a></li>
 							<li><a class="dropdown-item" href="#">Change Status</a></li>

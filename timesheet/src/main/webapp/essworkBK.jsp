@@ -17,49 +17,17 @@
 
     <body>
 
-        <table class="table table-striped table-hover rounded mb-0 d-none " id="dptable" >        
-            <tr class="table-dark ">
-                <td class="text-center" colspan="2">Work Items</td>
-                <td class="text-center" >Status</td>
-                <td class="text-center" >Mon</td>
-                <td class="text-center" >Tue</td>
-                <td class="text-center" >Wed</td>
-                <td class="text-center" >Thu</td>
-                <td class="text-center" >Fri</td>
-                <td class="text-center" >Sat</td>
-                <td class="text-center" >Sun</td>
-                <td class="text-center" >Total</td>
-            </tr> 
-            <tr>
-                <td colspan="2">
-                    <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1">
-                        <option value=""></option>
-                        <c:forEach items="${projectList}" var="project" varStatus="loop">
-                            <option value="${project.getProjectid()}">${project.getProjectname()}</option>
-                        </c:forEach>
-                    </select>
-                </td>
-                <td>  <p>Approved</p></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 web_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td class="text-center">00 </td>
-            </tr>
-        </table>
         <div class="container">
             <div class="row rounded  ">
-                <h5 class="text-center text-secondary h4 ">Ess Workwww</h5>
+                <h5 class="text-center text-secondary h4 ">Ess Work</h5>
             </div>
             <div class="row">
                 <div class="col h6 text-center">
                     <p>Time Period</p>
                 </div>
-                <form action="fetchwork2" method="post">
+                <form action="fetchwork" method="post">
                     <div class="row">
+
                         <div class="col">  
                             <input  placeholder="Select date"  type="date"  id="startDate"   name="startDate"  class="form-control datepicker w-75 d-flex   ">    
                         </div>
@@ -69,6 +37,7 @@
                         <div class="col">
                             <input type="submit" class="btn btn-primary btn-sm" value="fetch"  >
                         </div>
+                        
                     </div>
                 </form>
                 <div class="col">
@@ -79,7 +48,8 @@
                 </div>
             </div>
             <table class="table table-striped table-hover rounded mb-0" id="tbtable" >
-                    <tr class="table-dark "> 
+               
+                    <tr class="table-dark ">
                         <td class="text-center" colspan="2">Work Items</td>
                         <td class="text-center" >Status</td>
                         <td class="text-center" >Mon</td>
@@ -92,27 +62,84 @@
                         <td class="text-center" >Total</td>
                     </tr> 
                  <c:set var="i" value="1" scope="page" />
-                 <c:if test = "${workList.size()>0}">			                         
-	             	<c:forEach var="work" items="${workList}"  varStatus="idx"> 
+                 <c:if test = "${workMap.size()>0}">			                         
+	             	<c:forEach var="entry" items="${workMap}"> 
 	                    <tr>
 	                        <td colspan="2">
-	                            <select data-placeholder='<c:out value="${work.getProjectName()}"/>'  disabled="disabled" class="form-control selectProject" tabindex="1">
-	                                <option value='<c:out value="${work.getProjectId()}"/>'> <c:out value="${work.getProjectName()}"/></option>
+	                            <select data-placeholder='<c:out value="${entry.key}"/>'  disabled="disabled" class="form-control selectProject" tabindex="1">
+	                                <option value='<c:out value="${entry.getValue().get(0).getProject()}"/>'> <c:out value="${entry.key}"/></option>
 	                              </select>
 	                        </td>
-	                        <td> <p> <c:out value="${work.getStatus()}"/><p> </td>
-                             <td><input type="number" value='<c:out value="${work.getMon()}"/>' min='0' class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                             <td><input type="number" value='<c:out value="${work.getTue()}"/>' min='0' class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                             <td><input type="number" value='<c:out value="${work.getWed()}"/>' min='0' class="form-control input-sm w-100 wed_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                             <td><input type="number" value='<c:out value="${work.getThu()}"/>' min='0' class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                             <td><input type="number" value='<c:out value="${work.getFri()}"/>' min='0' class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                             <td><input type="number" value='<c:out value="${work.getSat()}"/>' min='0' class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                             <td><input type="number" value='<c:out value="${work.getSun()}"/>' min='0' class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+	                        <td>  <p>Approved</p> </td>
+	                        <c:forEach items="${entry.getValue()}" var="work" varStatus="loop">
+	                        	<c:choose>
+	                        		<c:when test='${ work.getDay()=="mon" && i==1  }'>
+                                        <c:choose>
+                                            <c:when test = '${work.getDay()=="mon"}'>
+                                                <td><input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            
+                                            <c:when test = '${work.getDay()=="tue"}'>
+                                                <td><input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            
+                                            <c:when test = '${work.getDay()=="wed"}'>
+                                                <td><input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 wed_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            
+                                            <c:when test = '${work.getDay()=="thu"}'>
+                                                <td><input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            
+                                            <c:when test = '${work.getDay()=="fri"}'>
+                                                <td><input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            
+                                            <c:when test = '${work.getDay()=="sat"}'>
+                                                <td><input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            
+                                            <c:when test = '${work.getDay()=="sun"}'>
+                                                <td><input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            <c:set var="count" value="${i + 1}" scope="page"/>
+                                        </c:choose> 
+							      	</c:when>   
+							      	
+							      	<c:otherwise>
+                                        <c:choose>
+                                            <c:when test = '${i==1}'>
+                                                <td><input type="number" value="" min="0" class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            <c:when test = '${i==2}'>
+                                                <td><input type="number" value="" min="0" class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            <c:when test = '${i==3}'>
+                                                <td><input type="number" value="" min="0" class="form-control input-sm w-100 web_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            <c:when test = '${i==4}'>
+                                                <td><input type="number" value="" min="0" class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            <c:when test = '${i==5}'>
+                                                <td><input type="number" value="" min="0" class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            <c:when test = '${i==6}'>
+                                                <td><input type="number" value="" min="0" class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            <c:when test = '${i==7}'>
+                                                <td><input type="number" value="" min="0" class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            <c:set var="count" value="${i + 1}" scope="page"/>
+                                        </c:choose>
+							      	</c:otherwise>
+
+	                        	</c:choose>
+                            </c:forEach>
 	                        <td class="text-center">00 </td>
 	                    </tr>
 					</c:forEach> 
 			     </c:if>
-			      <c:if test = "${workList==null || workList.size()==0}">			         
+			      <c:if test = "${workMap==null || workMap.size()==0}">			         
                     <tr>
                         <td colspan="2">
                             <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1">
@@ -161,7 +188,7 @@
                 $("#addRow").on('click', function () {
                     event.preventDefault()
                     $(".selectProject.select2-hidden-accessible").select2('destroy');
-                    var row = $("#dptable tr").eq(1);
+                    var row = $("#tbtable tr").eq(1);
                     var newrow = row.clone();
                     $("#tbtable").append(newrow);
                     $('.selectProject').select2();

@@ -130,3 +130,5 @@ $(document).ready(function(){
                 $(this).closest("tr").find("td:eq(9) ").html(sum==0?"00":sum);
                 calculate();
             });
+			
+			
