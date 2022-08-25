@@ -328,7 +328,7 @@
               
             console.log(html2json());
             // console.log(JSON.stringify(html2json()));
-            console.log(JSON.stringify(html2json()));
+            // console.log(JSON.stringify(html2json()));
             
                 $.ajax({
                 type: 'post',
