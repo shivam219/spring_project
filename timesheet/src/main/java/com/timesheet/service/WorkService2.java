@@ -1,6 +1,5 @@
 package com.timesheet.service;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class WorkService2 {
 	}
 
 	public  List<Work2> getWorkByStartDateEndDate(String startDate, String endDate, long empId) {
-		List<Work2> l = repository.getWorkByStartDateEndDate(startDate, endDate, empId);
+		List<Work2> l = repository.getWorkByStartDateEndDate2(startDate, endDate, empId);
 		System.out.println(l);
 		 
 		return l;

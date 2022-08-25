@@ -131,4 +131,52 @@ $(document).ready(function(){
                 calculate();
             });
 			
+
+
+$("#weekWorkFrom").on("submit", function(){
+                $("#tbtable tr").each(function(){
+                    x = $(this).children();
+                    $(this).each(function(){
+                        
+                    });
+                });
+            });
+            
+            
+            function save(){
+                let js = '[' ;
+                $("#tbtable tbody tr").each(function(){
+                    js = js + '{';
+                    $(this).find("td  input ").each(function(){
+                        // $(this).find("input").each(function(){
+                           js = js + '"'+$(this).prop("name")+'":' + '"'+ $(this).val() +'"';
+                            // console.log($(this).prop("name"));
+                            // console.log($(this).val());
+                        });
+                    // });
+                    js = js + '},';
+                });
+                js = js +']';
+                console.log(js);
+               console.log(JSON.stringify(js));
+            }
+            
+            
+            // old code for json covert 
+            
+              let js = '[' ;
+                $("#tbtable tbody tr").each(function(){
+                    js = js + '{';
+                    $(this).find("td  input ").each(function(){
+                           js = js + '"' +$(this).prop("name")+ '" :' + '"'+ $(this).val() +'",';
+                        //    console.log(js);
+                            // console.log($(this).prop("name"));
+                            // console.log($(this).val());
+                        });
+                    js = js + '},';
+                });
+                js = js +']';
+                // console.log(js);
+                // console.log(JSON.stringify({x:5}));
+
 			

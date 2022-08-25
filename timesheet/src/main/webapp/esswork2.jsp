@@ -18,36 +18,50 @@
     <body>
 
         <table class="table table-striped table-hover rounded mb-0 d-none " id="dptable" >        
-            <tr class="table-dark ">
-                <td class="text-center" colspan="2">Work Items</td>
-                <td class="text-center" >Status</td>
-                <td class="text-center" >Mon</td>
-                <td class="text-center" >Tue</td>
-                <td class="text-center" >Wed</td>
-                <td class="text-center" >Thu</td>
-                <td class="text-center" >Fri</td>
-                <td class="text-center" >Sat</td>
-                <td class="text-center" >Sun</td>
-                <td class="text-center" >Total</td>
-            </tr> 
             <tr>
                 <td colspan="2">
-                    <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1">
-                        <option value=""></option>
+                    <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1" >
+                        <option value=""> </option>
                         <c:forEach items="${projectList}" var="project" varStatus="loop">
                             <option value="${project.getProjectid()}">${project.getProjectname()}</option>
                         </c:forEach>
                     </select>
+                    <input type="text" name="id"          class="d-none" value=''/>
+                    <input type="text" name="empId"       class="d-none" value=''/>
+                    <input type="text" name="projectId"   class="d-none" value=''/>
+                    <input type="text" name="projectName" class="d-none" value=''/>            
                 </td>
-                <td>  <p>Approved</p></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 web_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                <td class="text-center">00 </td>
+                <td> <p> Approved</p></td>
+                <td>
+                    <input type="number" value="" min="1" name="mon" class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
+                    <input type="text"  name="monDes"class="d-none" value=''/>
+                </td>
+                <td>
+                    <input type="number" value="" min="1" name="tue" class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
+                    <input type="text"  name="tueDes"class="d-none" value=''/>
+                </td>
+                
+                <td>
+                    <input type="number" value="" min="1" name="wed" class="form-control input-sm w-100 web_v  cal" oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
+                    <input type="text"  name="wedDes"class="d-none" value=''/>
+                </td>
+                <td>
+                    <input type="number" value="" min="1" name="thu" class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
+                    <input type="text"  name="thuDes"class="d-none" value=''/>
+                </td>
+                <td>
+                    <input type="number" value="" min="1" name="fri" class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
+                    <input type="text"  name="friDes"class="d-none" value=''/>
+                </td>
+                <td>
+                    <input type="number" value="" min="1" name="sat" class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
+                    <input type="text"  name="satDes"class="d-none" value=''/>
+                </td>
+                <td>
+                    <input type="number" value="" min="1" name="sun" class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
+                    <input type="text"  name="sunDes"class="d-none" value=''/>
+                </td>
+                <td class="text-center" id="htotol">00 </td>
             </tr>
         </table>
         <div class="container">
@@ -79,6 +93,7 @@
                 </div>
             </div>
             <table class="table table-striped table-hover rounded mb-0" id="tbtable" >
+                <thead>
                     <tr class="table-dark "> 
                         <td class="text-center" colspan="2">Work Items</td>
                         <td class="text-center" >Status</td>
@@ -91,23 +106,49 @@
                         <td class="text-center" >Sun</td>
                         <td class="text-center" >Total</td>
                     </tr> 
+                </thead>
                  <c:set var="i" value="1" scope="page" />
                  <c:if test = "${workList.size()>0}">			                         
 	             	<c:forEach var="work" items="${workList}"  varStatus="idx"> 
 	                    <tr>
 	                        <td colspan="2">
-	                            <select data-placeholder='<c:out value="${work.getProjectName()}"/>'  disabled="disabled" class="form-control selectProject" tabindex="1">
-	                                <option value='<c:out value="${work.getProjectId()}"/>'> <c:out value="${work.getProjectName()}"/></option>
+	                            <select data-placeholder='<c:out value="${work.getProjectName()}"/>'   disabled class="form-control selectProject" tabindex="1">
+	                                <option value='<c:out value="${work.getProjectId()}"/>'> <c:out value="${work.getProjectName()}" /></option>
 	                              </select>
+                                  <input type="text" name="id" class="d-none" value='<c:out value="${work.getId()}"/>'/>
+                                  <input type="text" name="empId" class="d-none" value='<c:out value="${work.getEmpId()}"/>'/>
+                                  <input type="text" name="projectId" class="d-none" value='<c:out value="${work.getProjectId()}"/>'/>
+                                  <input type="text" name="projectName" class="d-none" value='<c:out value="${work.getProjectName()}"/>'/>
 	                        </td>
 	                        <td> <p> <c:out value="${work.getStatus()}"/><p> </td>
-                             <td><input type="number" value='<c:out value="${work.getMon()}"/>' min='0' class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                             <td><input type="number" value='<c:out value="${work.getTue()}"/>' min='0' class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                             <td><input type="number" value='<c:out value="${work.getWed()}"/>' min='0' class="form-control input-sm w-100 wed_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                             <td><input type="number" value='<c:out value="${work.getThu()}"/>' min='0' class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                             <td><input type="number" value='<c:out value="${work.getFri()}"/>' min='0' class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                             <td><input type="number" value='<c:out value="${work.getSat()}"/>' min='0' class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                             <td><input type="number" value='<c:out value="${work.getSun()}"/>' min='0' class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                            <td>
+                                <input type="number" name="mon" value='<c:out value="${work.getMon()}"/>' min='1' class="form-control input-sm w-100 mon_v " oninput="cal(this)"     onchange="cal(this)"  placeholder="HH">
+                                <input type="text"  name="monDes"class="d-none" value='<c:out value="${work.getMonDes()}"/>'/>
+                            </td>
+                            <td>
+                                <input type="number" name="tue"  value='<c:out value="${work.getTue()}"/>' min='1' class="form-control input-sm w-100 tue_v " oninput="cal(this)"     onchange="cal(this)"  placeholder="HH">
+                                <input type="text"   name="tueDes"class="d-none" value='<c:out value="${work.getTueDes()}"/>'/>
+                            </td>
+                            <td>
+                                <input type="number" name="wed" value='<c:out value="${work.getWed()}"/>' min='1' class="form-control input-sm w-100 web_v " oninput="cal(this)"     onchange="cal(this)"  placeholder="HH">
+                                <input type="text" name="wedDes" class="d-none" value='<c:out value="${work.getWedDes()}"/>'/>
+                            </td>
+                            <td>
+                                <input type="number" name="thu" value='<c:out value="${work.getThu()}"/>' min='1' class="form-control input-sm w-100 thu_v " oninput="cal(this)"     onchange="cal(this)"  placeholder="HH">
+                                <input type="text"  name="thuDes"class="d-none" value='<c:out value="${work.getThuDes()}"/>'/>
+                            </td>
+                            <td>
+                                <input type="number" name="fri" value='<c:out value="${work.getFri()}"/>' min='1' class="form-control input-sm w-100 fri_v " oninput="cal(this)"     onchange="cal(this)"  placeholder="HH">
+                                <input type="text" name="friDes" class="d-none" value='<c:out value="${work.getFriDes()}"/>'/>
+                            </td>
+                            <td>
+                                <input type="number" name="sat"value='<c:out value="${work.getSat()}"/>' min='1' class="form-control input-sm w-100 sat_v " oninput="cal(this)"     onchange="cal(this)"  placeholder="HH">
+                                <input type="text" name="satDes"class="d-none" value='<c:out value="${work.getSatDes()}"/>'/>
+                            </td>
+                            <td>
+                                <input type="number" name="sun" value='<c:out value="${work.getSun()}"/>' min='1' class="form-control input-sm w-100 sun_v " oninput="cal(this)"     onchange="cal(this)"  placeholder="HH">
+                                <input type="text" name="sunDes" class="d-none" value='<c:out value="${work.getSunDes()}"/>'/>
+                            </td>
 	                        <td class="text-center">00 </td>
 	                    </tr>
 					</c:forEach> 
@@ -122,14 +163,14 @@
                                 </c:forEach>
                               </select>
                         </td>
-                        <td>  <p>Approved</p></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 web_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                        <td>  <input type="text" name="status" value="Approved" class="d-none">    <p>Approved</p></td>
+                        <td><input type="number" value="" min="1" class="form-control input-sm w-100 mon_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH"></td>
+                        <td><input type="number" value="" min="1" class="form-control input-sm w-100 tue_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH"></td>
+                        <td><input type="number" value="" min="1" class="form-control input-sm w-100 web_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH"></td>
+                        <td><input type="number" value="" min="1" class="form-control input-sm w-100 thu_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH"></td>
+                        <td><input type="number" value="" min="1" class="form-control input-sm w-100 fri_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH"></td>
+                        <td><input type="number" value="" min="1" class="form-control input-sm w-100 sat_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH"></td>
+                        <td><input type="number" value="" min="1" class="form-control input-sm w-100 sun_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH"></td>
                         <td class="text-center">00 </td>
                     </tr>
 			     </c:if>
@@ -146,10 +187,10 @@
                         <td class="text-center" id="fri_v_t">00</td>
                         <td class="text-center" id="sat_v_t">00</td>
                         <td class="text-center" id="sun_v_t">00</td>
-                        <td class="text-center" id="total"  >00</td>
+                        <td class="text-center" id="htotal"  >00</td>
                     </tfoot>
             </table>
-        
+            <input type="button" id="btnSave" class="btn btn-primary btn-sm" value="Convert" onclick="save()">
         </div>
         <!-- <script src="js/esswork.js"></script> -->
         <script src="js/select2@4.1.0.min.js"></script>
@@ -161,7 +202,7 @@
                 $("#addRow").on('click', function () {
                     event.preventDefault()
                     $(".selectProject.select2-hidden-accessible").select2('destroy');
-                    var row = $("#dptable tr").eq(1);
+                    var row = $("#dptable tr").eq(0);
                     var newrow = row.clone();
                     $("#tbtable").append(newrow);
                     $('.selectProject').select2();
@@ -196,10 +237,10 @@
                     };
                     $(this).closest("tr").find("td:eq(9) ").html(sum==0?"00":sum);
                 });
-                calculate(sum);
+                calculate();
             }
 
-           function calculate(t){
+           function calculate(){
                 let sum=0;   
                 let mov_v_t = 0; 
                 $('.mon_v:input').each(function() {
@@ -262,8 +303,7 @@
                 });
                 sum = sum+sun_v_t;
                 $("#sun_v_t").html(sun_v_t==0?"00":sun_v_t);
-                $("#total").val(sum+t);
-                console.log(sum+t);
+                $("#htotal").html(parseInt(sum));
             }
             
             function validateDate() {
@@ -275,13 +315,53 @@
                 let year = today.getYear();
                 
                 console.log(year+"-"+month+"-"+day);
-                // $("#endDate").val(year+month+day);
+              
             }
 
-            function fetchwork(){
-                $("#startDate").val();
-                $("#endDate").val();
+            function calRowOnLoad( ) {
+                $(".mon_v:input").each(function(){
+                    $(this).change();
+                });
             }
+            calRowOnLoad();
+            function save(){
+              
+            console.log(html2json());
+            // console.log(JSON.stringify(html2json()));
+            console.log(JSON.stringify(html2json()));
+            
+                $.ajax({
+                type: 'post',
+                url: 'savework2',
+                data:  html2json(),
+                contentType: "application/json; charset=utf-8",
+                traditional: true,
+                success: function (data) {
+                  
+                    }
+                })
+            }
+            function html2json() {
+                var json = '[';
+                var otArr = [];
+                var tbl2 = $('#tbtable tbody tr').each(function(i) {        
+                    var itArr = []; 
+                    $(this).find("td  ").each(function(){
+                        $(this).find("input").each(function(){
+                            if(!isNaN(Number(jQuery(this).val()))){
+                                itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                            }
+                            else{
+                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                            }
+                        });
+                    });
+                    otArr.push('{' + itArr.join(',') + '}');
+                })
+                json += otArr.join(",") + ']'
+                return json;
+            }
+
         </script>
     </body>
 

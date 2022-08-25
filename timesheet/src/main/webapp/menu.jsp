@@ -1,7 +1,8 @@
-
+<%if(session.getAttribute("empId")==null){
+	response.sendRedirect("login");
+} %>
 <!DOCTYPE html>
 <html>
-
 <head>
 	<!-- CSS-5.0.2  | JS-5.0.2 | -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -58,6 +59,7 @@
 							Create Timesheet </a>
 						<ul class="dropdown-menu" id="dropdown-menu">
 							<li><a class="dropdown-item" href="esswork2">Create Timesheet</a></li>
+							<li><a class="dropdown-item" href="esswork3tnlModel">esswork3tnlModel</a></li>
 							<li><a class="dropdown-item" href="esswork">Create Timesheet</a></li>
 							<li><a class="dropdown-item" href="#">Approve Timesheet</a></li>
 							<li><a class="dropdown-item" href="#">Change Status</a></li>

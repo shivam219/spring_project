@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +30,6 @@ public class WokController2 {
 
 	@GetMapping("/esswork2")
 	public String esswork2(Model m, HttpServletRequest request) {
-		// session need to check later by spring security need to learn it
 		if (request.getSession().getAttribute("empId") == null) {
 			return "login";
 		}
@@ -37,7 +37,7 @@ public class WokController2 {
 		m.addAttribute("projectList", projectservice.getProjectByEmpId(empId));
 		return "esswork2";
 	}
- 
+
 	@PostMapping("/fetchwork2")
 	public String fetchByDate2(Model m, HttpServletRequest request, @RequestParam("startDate") String startDate,
 			@RequestParam("endDate") String endDate) {
@@ -56,4 +56,16 @@ public class WokController2 {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Not save error");
 		}
 	}
+
+	@GetMapping("/esswork3tnlModel")
+	public String esswork3tnlModel() {
+		return "esswork3tnlModel";
+	}
+
+	@PostMapping("/esswork3tnlModels")
+	public String showData(@RequestBody List<Work2> wl) {
+
+		return "esswork3tnlModel";
+	}
+
 }
