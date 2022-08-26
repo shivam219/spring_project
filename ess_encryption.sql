@@ -8,7 +8,7 @@ SET SQL_SAFE_UPDATES = 0;
 update   ess.ess_employee set emp_password_encrypt2 = sha1('root') ;
 alter table ess.ess_employee   drop  column emp_password_encrypt;
 alter table ess.ess_employee    rename column emp_password_encrypt2 to emp_password_encrypt;
-SELECT * FROM ess_employee WHERE CAST(AES_DECRYPT(emp_password_encrypt, 'pass') AS CHAR) = sha1('root');
+SELECT * FROM ess_employee WHERE emp_password_encrypt = sha1('root');
 INSERT INTO `ess`.`ess_employee`
 (`emp_id`,
 `emp_name`,
