@@ -47,6 +47,7 @@ public class WorkService {
 		for (Map.Entry<String, List<Work>> entry : map.entrySet()) {
 			String key = entry.getKey();
 			List<Work> val = entry.getValue();
+			entry.getValue().get(0).getDay();
 			System.out.println(key);
 			System.out.println(val);
 		}

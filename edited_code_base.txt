@@ -179,4 +179,187 @@ $("#weekWorkFrom").on("submit", function(){
                 // console.log(js);
                 // console.log(JSON.stringify({x:5}));
 
+
+
+
+
+
+
+<c:set var="i" value="1" scope="page" />
+                 <c:if test = "${workMap.size()>0}">			                         
+	             	<c:forEach var="entry" items="${workMap}"> 
+	                    <tr>
+	                        <td colspan="2">
+	                            <select data-placeholder='<c:out value="${entry.key}"/>'  disabled="disabled" class="form-control selectProject" tabindex="1">
+	                                <option value='<c:out value="${entry.getValue().get(0).getProject()}"/>'> <c:out value="${entry.key}"/></option>
+	                              </select>
+	                        </td>
+	                        <td>  <p>Approved</p> </td>
+	                        <c:forEach items="${entry.getValue()}" var="work" varStatus="loop">
+	                        	<c:choose>
+	                        		<c:when test='${ work.getDay()=="mon" && i==1 ||  work.getDay()=="tue" && i==2 || work.getDay()=="wed" && i==3  ||  work.getDay()=="thu" && i==4 ||  work.getDay()=="fri" && i==5 ||  work.getDay()=="sat" && i==6 ||  work.getDay()=="sat" && i==7}'>
+                                        <c:choose>
+                                            <c:when test = '${work.getDay()=="mon"}'>
+                                                <td><input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            
+                                            <c:when test = '${work.getDay()=="tue"}'>
+                                                <td><input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            
+                                            <c:when test = '${work.getDay()=="wed"}'>
+                                                <td><input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 wed_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            
+                                            <c:when test = '${work.getDay()=="thu"}'>
+                                                <td><input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            
+                                            <c:when test = '${work.getDay()=="fri"}'>
+                                                <td><input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            
+                                            <c:when test = '${work.getDay()=="sat"}'>
+                                                <td><input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            
+                                            <c:when test = '${work.getDay()=="sun"}'>
+                                                <td><input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                        </c:choose> 
+                                        <c:s
+                                        et var="i" value="${i + 1}" scope="page"/>
+							      	</c:when>   
+							      	
+							      	<c:otherwise>
+                                        <c:choose>
+                                            <c:when test = '${i==1}'>
+                                                <td><input type="number" value="" min="0" class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            <c:when test = '${i==2}'>
+                                                <td><input type="number" value="" min="0" class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            <c:when test = '${i==3}'>
+                                                <td><input type="number" value="" min="0" class="form-control input-sm w-100 web_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            <c:when test = '${i==4}'>
+                                                <td><input type="number" value="" min="0" class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            <c:when test = '${i==5}'>
+                                                <td><input type="number" value="" min="0" class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            <c:when test = '${i==6}'>
+                                                <td><input type="number" value="" min="0" class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                            <c:when test = '${i==7}'>
+                                                <td><input type="number" value="" min="0" class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                                            </c:when>
+                                        </c:choose>
+                                        <c:set var="i" value="${i + 1}" scope="page"/>
+							      	</c:otherwise>
+	                        	</c:choose>
+
+
+                            </c:forEach>
+                            <c:set var="i" value="${1}" scope="page"/>
+
+	                        <td class="text-center">00 </td>
+	                    </tr>
+					</c:forEach> 
+			     </c:if>
+
+
+
+
+--- new change week work save
+
+
+<c:forEach begin="0" end="6" varStatus="i">
+	<c:choose>
+		<c:if when = '${entry.getValue().get(i).getDay()=="mon" && i==0 }'>		
+    <td>
+      <input type="number" value='${workMap.get(i).getHours()}' min='0' class="form-control input-sm w-100 "+ ws[${i}] oninput="cal(this)"  placeholder="HH">
+      
+    </td>
+	   </c:when>	
+	   <c:if when = '${entry.getValue().get(i).getDay()=="mon" && i==0 }'>		
+    <td>
+      <input type="number" value='${workMap.get(i).getHours()}' min='0' class="form-control input-sm w-100 "+ ws[${i}] oninput="cal(this)"  placeholder="HH">
+      
+    </td>
+	   </c:when>	
+	   <c:if when = '${entry.getValue().get(i).getDay()=="mon" && i==0 }'>		
+    <td>
+      <input type="number" value='${workMap.get(i).getHours()}' min='0' class="form-control input-sm w-100 "+ ws[${i}] oninput="cal(this)"  placeholder="HH">
+      
+    </td>
+	   </c:when>	
+	   <c:if when = '${entry.getValue().get(i).getDay()=="mon" && i==0 }'>		
+    <td>
+      <input type="number" value='${workMap.get(i).getHours()}' min='0' class="form-control input-sm w-100 "+ ws[${i}] oninput="cal(this)"  placeholder="HH">
+      
+    </td>
+	   </c:when>	
+</c:forEach>
+			
+			
+			
+			/// new backup 
+			 <c:choose>
+                                    <c:when test = '${entry.getValue().get(i).getDay()=="mon" && i==0 }'>		
+                                    <td>
+                                        <input type="number" value='${entry.getValue().get(i).getHours()}' min='0' class="form-control input-sm w-100 "+ ws[${i}] oninput="cal(this)"  placeholder="HH">
+                                    </td>
+                                    </c:when>	
+                                    <c:when test = '${entry.getValue().get(i).getDay()=="tue" && i==1 }'>		
+                                        <td>
+                                            <input type="number" value='${entry.getValue().get(i).getHours()}' min='0' class="form-control input-sm w-100 "+ ws[${i}] oninput="cal(this)"  placeholder="HH">
+                                        
+                                        </td>
+                                    </c:when>	
+                                    <c:when test = '${entry.getValue().get(i).getDay()=="wed" && i==2 }'>		
+                                        <td>
+                                            <input type="number" value='${entry.getValue().get(i).getHours()}' min='0' class="form-control input-sm w-100 "+ ws[${i}] oninput="cal(this)"  placeholder="HH">
+                                        </td>
+                                    </c:when>	
+                                    <c:when test = '${entry.getValue().get(i).getDay()=="thu" && i==3 }'>		
+                                        <td>
+                                            <input type="number" value='${entry.getValue().get(i).getHours()}' min='0' class="form-control input-sm w-100 "+ ws[${i}] oninput="cal(this)"  placeholder="HH"> 
+                                        </td>
+                                    </c:when>	
+                                    <c:when test = '${entry.getValue().get(i).getDay()=="fri" && i==4 }'>		
+                                        <td>
+                                            <input type="number" value='${entry.getValue().get(i).getHours()}' min='0' class="form-control input-sm w-100 "+ ws[${i}] oninput="cal(this)"  placeholder="HH"> 
+                                        </td>
+                                    </c:when>	
+                                    <c:when test = '${entry.getValue().get(i).getDay()=="sat" && i==5 }'>		
+                                        <td>
+                                            <input type="number" value='${entry.getValue().get(i).getHours()}' min='0' class="form-control input-sm w-100 "+ ws[${i}] oninput="cal(this)"  placeholder="HH"> 
+                                        </td>
+                                    </c:when>	
+                                    <c:when test = '${entry.getValue().get(i).getDay()=="sun" && i==6 }'>		
+                                        <td>
+                                            <input type="number" value='${entry.getValue().get(i).getHours()}' min='0' class="form-control input-sm w-100 "+ ws[${i}] oninput="cal(this)"  placeholder="HH"> 
+                                        </td>
+                                    </c:when>	
+                                    
+                                    <c:otherwise>
+                                        <input type="number" value='' min='0' class="form-control input-sm w-100 "+ ws[${i}] oninput="cal(this)"  placeholder="HH">                                     
+                                    </c:otherwise>
+                                </c:choose>
+                                
+                                
+                                // End new backup
+                                
+			
+			
+			
+			
+			
+			mon mon mon mon mon mon mon 
+			mon mon mon mon mon mon mon 
+			tue tue tue tue tue tue tue
+			
+			
+			
 			

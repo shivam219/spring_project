@@ -115,9 +115,9 @@
 	                            <select data-placeholder='<c:out value="${work.getProjectName()}"/>'   disabled class="form-control selectProject" tabindex="1">
 	                                <option value='<c:out value="${work.getProjectId()}"/>'> <c:out value="${work.getProjectName()}" /></option>
 	                              </select>
+                                  <input type="text" name="projectId" class="d-none" value='<c:out value="${work.getProjectId()}"/>'/>
                                   <input type="text" name="id" class="d-none" value='<c:out value="${work.getId()}"/>'/>
                                   <input type="text" name="empId" class="d-none" value='<c:out value="${work.getEmpId()}"/>'/>
-                                  <input type="text" name="projectId" class="d-none" value='<c:out value="${work.getProjectId()}"/>'/>
                                   <input type="text" name="projectName" class="d-none" value='<c:out value="${work.getProjectName()}"/>'/>
 	                        </td>
 	                        <td> <p> <c:out value="${work.getStatus()}"/><p> </td>
@@ -349,6 +349,7 @@
                     $(this).find("td  ").each(function(){
                         $(this).find("input").each(function(){
                             if(!isNaN(Number(jQuery(this).val()))){
+                                
                                 itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
                             }
                             else{

@@ -1,0 +1,21 @@
+false"/> false"/> false"/> false"/> false"/> false"/> false"/>
+false"/> false"/> false"/> false"/> false"/> false"/> false"/> 
+false"/> false"/> false"/> false"/> false"/> false"/> false"/>
+
+
+
+
+
+  <td>  <p>Approved</p> </td>            
+                            <!-- My tr -->
+                            <c:set var="count" value="0" scope="page" />	
+                            <c:forEach begin="0" end="6" varStatus="i">
+                                <c:out value='${entry.getValue().get(count).getDay()=="mon"   }"/>'/>
+                                    <c:if test = '${entry.getValue().get(count).getDay()=="mon" && count ==0 }'>		
+                                        <td>
+                                            <input type="number" value='${entry.getValue().get(count).getHours()}' min='0' class="form-control input-sm w-100  "+ wc[${i.count}] oninput="cal(this)"  placeholder="HH">
+                                        </td>
+                                        <c:set var="i" value="${count + 1}" scope="page"/>
+                                    </c:if>                             
+                           	</c:forEach> 
+                            <!-- End My tr -->
