@@ -22,18 +22,6 @@
         </script>
 
         <table class="table table-striped table-hover rounded mb-0 d-none " id="dptable" >        
-            <tr class="table-dark ">
-                <td class="text-center" colspan="2">Work Items</td>
-                <td class="text-center" >Status</td>
-                <td class="text-center" >Mon</td>
-                <td class="text-center" >Tue</td>
-                <td class="text-center" >Wed</td>
-                <td class="text-center" >Thu</td>
-                <td class="text-center" >Fri</td>
-                <td class="text-center" >Sat</td>
-                <td class="text-center" >Sun</td>
-                <td class="text-center" >Total</td>
-            </tr> 
             <tr>
                 <td colspan="2">
                     <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1">
@@ -44,13 +32,13 @@
                     </select>
                 </td>
                 <td>  <p>Approved</p></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 web_v  cal" oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
                 <td class="text-center">00 </td>
             </tr>
         </table>
@@ -85,38 +73,36 @@
                 </div>
             </div>
             <table class="table table-striped table-hover rounded mb-0" id="tbtable" >
-               
-                    <tr class="table-dark ">
-                        <td class="text-center" colspan="2">Work Items</td>
-                        <td class="text-center" >Status</td>
-                        <td class="text-center" >Mon</td>
-                        <td class="text-center" >Tue</td>
-                        <td class="text-center" >Wed</td>
-                        <td class="text-center" >Thu</td>
-                        <td class="text-center" >Fri</td>
-                        <td class="text-center" >Sat</td>
-                        <td class="text-center" >Sun</td>
-                        <td class="text-center" >Total</td>
-                    </tr> 
-                 <c:if test = "${workMap.size()>0}">		                         
-                    <c:set var="idx" value="0" scope="page" />
-	             	<c:forEach var="entry" items="${workMap}"> 
-	                    <tr>
-	                        <td colspan="2">
-	                            <select data-placeholder='<c:out value="${entry.key}"/>'  disabled="disabled" class="form-control selectProject" tabindex="1">
-	                                <option value='<c:out value="${entry.getValue().get(0).getProjectId()}"/>'> <c:out value="${entry.key}"/></option>
-	                            </select>
-	                        </td>
-                            <td>  <p>Approved</p></td>
+                <tr class="table-dark ">
+                    <td class="text-center" colspan="2">Work Items</td>
+                    <td class="text-center" >Status</td>
+                    <td class="text-center" >Mon</td>
+                    <td class="text-center" >Tue</td>
+                    <td class="text-center" >Wed</td>
+                    <td class="text-center" >Thu</td>
+                    <td class="text-center" >Fri</td>
+                    <td class="text-center" >Sat</td>
+                    <td class="text-center" >Sun</td>
+                    <td class="text-center" >Total</td>
+                </tr> 
+                <c:if test = "${workMap.size()>0}">		                         
+                    <c:forEach var="entry" items="${workMap}"> 
+                        <tr>
+                            <td colspan="2">
+                                <select data-placeholder='<c:out value="${entry.key}"/>'  disabled="disabled" class="form-control selectProject" tabindex="1">
+                                    <option value='<c:out value="${entry.getValue().get(0).getProjectId()}"/>'> <c:out value="${entry.key}"/></option>
+                                </select>
+                            </td>
+                            <td> <p>Approved</p></td>
                             <c:forEach items="${entry.getValue()}" var="work" varStatus="loop">
                                 <td>
-                                    <input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"    onchange="cal(this)"  placeholder="HH">
+                                    <input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 " oninput="cal(this)"    onchange="cal(this)"  placeholder="HH">
                                 </td>
                             </c:forEach>
-	                        <td class="text-center">00 </td>
-	                    </tr>
-					</c:forEach> 
-			    </c:if>
+                            <td class="text-center">00</td>
+                        </tr>
+                    </c:forEach> 
+                </c:if>
 
 			    <c:if test = "${workMap==null || workMap.size()==0}">			         
                     <tr>
@@ -129,13 +115,13 @@
                               </select>
                         </td>
                         <td>  <p>Approved</p></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 web_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)"   placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)"   placeholder="HH"></td>
                         <td class="text-center">00 </td>
                     </tr>
 			    </c:if>
@@ -167,7 +153,7 @@
                 $("#addRow").on('click', function () {
                     event.preventDefault()
                     $(".selectProject.select2-hidden-accessible").select2('destroy');
-                    var row = $("#dptable tr").eq(1);
+                    var row = $("#dptable tr").eq(0);
                     var newrow = row.clone();
                     $("#tbtable").append(newrow);
                     $('.selectProject').select2();
@@ -206,78 +192,93 @@
             }
 
            function calculate(){
-                let sum=0;   
-                let mov_v_t = 0; 
-                $('.mon_v:input').each(function() {
-                    if($(this).val() !=""){
-                        mov_v_t = mov_v_t + parseInt($(this).val());
-                    }
+                let mon = 0;             
+                $('#tbtable tr' ).each( function () {
+                    jQuery(this).find('td').eq(2).each(function(){
+                        if(!isNaN(Number(jQuery(this).find("input").val()))){
+                            mon=mon+Number(jQuery(this).find("input").val());
+                        };
+                    }) 
                 });
-           
-                $("#mov_v_t").html(mov_v_t==0?"00":mov_v_t);
-                sum = sum+mov_v_t;
-                let tue_v_t = 0; 
-                $('.tue_v:input').each(function() {
-                    if($(this).val() !=""){
-                        tue_v_t = tue_v_t + parseInt($(this).val());
-                    }
+                $("#mov_v_t").html(mon==0?"00":mon);
+                let tue = 0;
+                $('#tbtable tr' ).each( function () {
+                    jQuery(this).find('td').eq(3).each(function(){
+                        if(!isNaN(Number(jQuery(this).find("input").val()))){
+                            tue=tue+Number(jQuery(this).find("input").val());
+                        };
+                    }) 
                 });
-                sum = sum+tue_v_t;
-                $("#tue_v_t").html(tue_v_t==0?"00":tue_v_t);
+                $("#tue_v_t").html(tue==0?"00":tue);
+                let wed = 0; 
+                $('#tbtable tr' ).each( function () {
+                    jQuery(this).find('td').eq(4).each(function(){
+                        if(!isNaN(Number(jQuery(this).find("input").val()))){
+                            wed=wed+Number(jQuery(this).find("input").val());
+                        };
+                    }) 
+                });
+                $("#web_v_t").html(wed==0?"00":wed);
+                let thu = 0; 
+                $('#tbtable tr' ).each( function () {
+                    jQuery(this).find('td').eq(5).each(function(){
+                        if(!isNaN(Number(jQuery(this).find("input").val()))){
+                            thu=thu+Number(jQuery(this).find("input").val());
+                        };
+                    }) 
+                }); 
+                $("#thu_v_t").html(thu==0?"00":thu);
 
-                let web_v_t = 0; 
-                $('.web_v:input').each(function() {     
-                    if($(this).val() !=""){
-                        web_v_t = web_v_t + parseInt($(this).val());
-                    }
-                });
-                sum = sum+web_v_t;
-                $("#web_v_t").html(web_v_t==0?"00":web_v_t);
-                
-                let thu_v_t = 0; 
-                $('.thu_v:input').each(function() {     
-                    if($(this).val() !=""){
-                        thu_v_t = thu_v_t + parseInt($(this).val());
-                    }
-                });
-                sum = sum+thu_v_t;
-                $("#thu_v_t").html(thu_v_t==0?"00":thu_v_t);
-
-                let fri_v_t = 00; 
-                $('.fri_v:input').each(function() {     
-                    if($(this).val() !=""){
-                        fri_v_t = fri_v_t + parseInt($(this).val());
-                    }
-                });
-                sum = sum+fri_v_t;
-                $("#fri_v_t").html(fri_v_t==0?"00":fri_v_t);
+                let fri = 0; 
+                $('#tbtable tr' ).each( function () {
+                    jQuery(this).find('td').eq(6).each(function(){
+                        if(!isNaN(Number(jQuery(this).find("input").val()))){
+                            fri=fri+Number(jQuery(this).find("input").val());
+                        };
+                    }) 
+                }); 
+                $("#fri_v_t").html(fri==0?"00":fri);
  
-                let sat_v_t = 0; 
-                $('.sat_v:input').each(function() {     
-                    if($(this).val() !=""){
-                        sat_v_t = sat_v_t + parseInt($(this).val());
-                    }
-                });
-                sum = sum+sat_v_t;
-                $("#sat_v_t").html(sat_v_t==0?"00":sat_v_t);
+                let sat = 0; 
+                $('#tbtable tr' ).each( function () {
+                    jQuery(this).find('td').eq(7).each(function(){
+                        if(!isNaN(Number(jQuery(this).find("input").val()))){
+                            sat=sat+Number(jQuery(this).find("input").val());
+                        };
+                    }) 
+                });  
+                $("#sat_v_t").html(sat==0?"00":sat);
 
-                let sun_v_t = 0; 
-                $('.sun_v:input').each(function() {     
-                    if($(this).val() !=""){
-                        sun_v_t = sun_v_t + parseInt($(this).val());
-                    }
-                });
-                sum = sum+sun_v_t;
-                $("#sun_v_t").html(sun_v_t==0?"00":sun_v_t); 
-                $("#htotal").html(parseInt(sum));   
+                let sun_v_t = 0;  
+                $('#tbtable tr' ).each( function () {
+                    jQuery(this).find('td').eq(8).each(function(){
+                        if(!isNaN(Number(jQuery(this).find("input").val()))){
+                            sun_v_t=sun_v_t+Number(jQuery(this).find("input").val());
+                        };
+                    }) 
+                });  
+
+                let total = 0;  
+                $('#tbtable tr' ).each( function () {
+                    jQuery(this).find('td').eq(9).each(function(){
+                        if(!isNaN(Number(jQuery(this).html()))){
+                            total=total+Number(jQuery(this).html());
+                        };
+                    }) 
+                });  
+                console.log(total);
+                $("#htotal").html(parseInt(total));   
             }
+
             function calRowOnLoad( ) {
-                $(".mon_v:input").each(function(){
-                    $(this).change();
+                $('#tbtable tr' ).each( function () {
+                    jQuery(this).find('td input').eq(2).each(function(){
+                        $(this).change(); 
+                    })
                 });
+                calculate();
             }
             calRowOnLoad();
-
 
 
             function fetchwork(){
