@@ -34,6 +34,7 @@ public class WorkService {
 
 	public LinkedHashMap<String, List<Work>> getWorByStartDateEndDate(String startDate, String endDate, long empId) {
 		List<Work> l = repository.getWorByStartDateEndDate(startDate, endDate, empId);
+		System.out.println(l);
 		Collections.sort(l, (e1, e2) -> e1.getDay().compareTo(e2.getDay()));
 
 		LinkedHashMap<String, List<Work>> map = new LinkedHashMap<String, List<Work>>();
