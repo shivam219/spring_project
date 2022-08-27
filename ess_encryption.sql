@@ -1,13 +1,9 @@
 SELECT * FROM ess.ess_employee;
 
-alter table ess.ess_employee add column emp_password_encrypt2 varchar(30) after emp_password_encrypt;
-
-alter table  ess.ess_employee modify column  emp_password_encrypt2 varchar(40);
 SET SQL_SAFE_UPDATES = 0;
-
-update   ess.ess_employee set emp_password_encrypt2 = sha1('root') ;
-alter table ess.ess_employee   drop  column emp_password_encrypt;
-alter table ess.ess_employee    rename column emp_password_encrypt2 to emp_password_encrypt;
+alter table ess.ess_employee drop column emp_password_encrypt;
+alter table ess.ess_employee add  column emp_password_encrypt varchar(40) after emp_password;
+update   ess.ess_employee set emp_password_encrypt = sha1('root') ;
 SELECT * FROM ess_employee WHERE emp_password_encrypt = sha1('root');
 INSERT INTO `ess`.`ess_employee`
 (`emp_id`,

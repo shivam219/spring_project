@@ -37,14 +37,11 @@ public class Work {
 	private long empId;
 
 	@Column(name = "project_id")
-	private int project;
+	private int projectId;
 
 //	@Transient
 	@Column(name = "project_name")
 	private String projectName;
-	
-	@Column(name = "start_date")
-	private String start_date;
 
 	@Column(name = "hours")
 	private String hours;
@@ -57,28 +54,24 @@ public class Work {
 
 	@Column(name = "status")
 	private String status;
-	
-	
 
 	public Work() {
 		super();
-	 }
- 
+		// TODO Auto-generated constructor stub
+	}
 
-	public Work(int id, long empId, int project, String projectName, String start_date, String hours, String descr,
-			String day, String status) {
+	public Work(int id, long empId, int projectId, String projectName, String hours, String descr, String day,
+			String status) {
 		super();
 		this.id = id;
 		this.empId = empId;
-		this.project = project;
+		this.projectId = projectId;
 		this.projectName = projectName;
-		this.start_date = start_date;
 		this.hours = hours;
 		this.descr = descr;
 		this.day = day;
 		this.status = status;
 	}
-
 
 	public int getId() {
 		return id;
@@ -92,35 +85,24 @@ public class Work {
 		return empId;
 	}
 
-	
-	public String getProjectName() {
-		return projectName;
-	}
-
-
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
-
-
 	public void setEmpId(long empId) {
 		this.empId = empId;
 	}
 
-	public int getProject() {
-		return project;
+	public int getProjectId() {
+		return projectId;
 	}
 
-	public void setProject(int project) {
-		this.project = project;
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
 	}
 
-	public String getStart_date() {
-		return start_date;
+	public String getProjectName() {
+		return projectName;
 	}
 
-	public void setStart_date(String start_date) {
-		this.start_date = start_date;
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 
 	public String getHours() {
@@ -155,12 +137,10 @@ public class Work {
 		this.status = status;
 	}
 
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(day, descr, empId, hours, id, project, projectName, start_date, status);
+		return Objects.hash(day, descr, empId, hours, id, projectId, projectName, status);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -172,19 +152,14 @@ public class Work {
 			return false;
 		Work other = (Work) obj;
 		return Objects.equals(day, other.day) && Objects.equals(descr, other.descr) && empId == other.empId
-				&& Objects.equals(hours, other.hours) && id == other.id && project == other.project
-				&& Objects.equals(projectName, other.projectName) && Objects.equals(start_date, other.start_date)
-				&& Objects.equals(status, other.status);
+				&& Objects.equals(hours, other.hours) && id == other.id && projectId == other.projectId
+				&& Objects.equals(projectName, other.projectName) && Objects.equals(status, other.status);
 	}
-
 
 	@Override
 	public String toString() {
-		return "Work [id=" + id + ", empId=" + empId + ", project=" + project + ", projectName=" + projectName
-				+ ", start_date=" + start_date + ", hours=" + hours + ", descr=" + descr + ", day=" + day + ", status="
-				+ status + "]";
+		return "Work [id=" + id + ", empId=" + empId + ", projectId=" + projectId + ", projectName=" + projectName
+				+ ", hours=" + hours + ", descr=" + descr + ", day=" + day + ", status=" + status + "]";
 	}
 
-	
-	
 }

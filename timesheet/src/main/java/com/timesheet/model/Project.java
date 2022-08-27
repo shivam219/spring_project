@@ -13,39 +13,39 @@ public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "project_id")
-	private int projectid;
+	private int projectId;
 	
 	@Column(name = "project_name")
-	private String projectname;
+	private String projectName;
 	
 	@Column(name = "project_status")
 	private String projectstatus;
 
 	public Project() {
 		super();
-	}
+	 }
 
-	public Project(int projectid, String projectname, String projectstatus) {
+	public Project(int projectId, String projectName, String projectstatus) {
 		super();
-		this.projectid = projectid;
-		this.projectname = projectname;
+		this.projectId = projectId;
+		this.projectName = projectName;
 		this.projectstatus = projectstatus;
 	}
 
-	public int getProjectid() {
-		return projectid;
+	public int getProjectId() {
+		return projectId;
 	}
 
-	public void setProjectid(int projectid) {
-		this.projectid = projectid;
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
 	}
 
-	public String getProjectname() {
-		return projectname;
+	public String getProjectName() {
+		return projectName;
 	}
 
-	public void setProjectname(String projectname) {
-		this.projectname = projectname;
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 
 	public String getProjectstatus() {
@@ -58,7 +58,9 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return "Project [projectid=" + projectid + ", projectname=" + projectname + ", projectstatus=" + projectstatus
+		return "Project [projectId=" + projectId + ", projectName=" + projectName + ", projectstatus=" + projectstatus
 				+ "]";
 	}
+
+ 
 }

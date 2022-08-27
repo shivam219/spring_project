@@ -34,7 +34,7 @@
 								multiple id="brandlist2[]" class="form-control">
 								<c:forEach items="${projectList}" var="projectName"
 									varStatus="loop">
-									<option value="${projectName.getProjectid()}">${projectName.getProjectname()}</option>
+									<option value="${projectName.getProjectId()}">${projectName.getProjectName()}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -65,7 +65,7 @@
 				<div class="col-xs-5">
 					<select name="from" id="undo_redo" class="form-control" size="13" multiple="multiple">
 						<c:forEach items="${projectList}" var="projectName"	varStatus="loop">
-							<option value="${projectName.getProjectid()}">${projectName.getProjectname()}</option>
+							<option value="${projectName.getProjectId()}">${projectName.getProjectName()}</option>
 						</c:forEach>
 					</select>
 				</div>

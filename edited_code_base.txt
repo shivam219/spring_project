@@ -363,3 +363,28 @@ $("#weekWorkFrom").on("submit", function(){
 			
 			
 			
+///start date end date code base
+
+            
+            function validateDate() {
+                let today = new Date($("#startDate").val());
+                today.setDate((today.getDate() + 6));
+                today.setMonth(today.getMonth()+1);
+                let day =   today.getDate().toString().length==1?   "0"+(today.getDate().toString())  : today.getDate().toString();
+                let month = today.getMonth().toString().length==1?  "0"+(today.getMonth().toString()) : today.getMonth().toString();
+                let year = today.getYear();
+                console.log(year+"-"+month+"-"+day);
+                // $("#endDate").val(year+month+day);
+            }
+			
+			--2
+			     console.log( $('#tbtable tr td' ).eq(3).find("input").val());
+                //  $('#tbtable tr td' ).eq(3).each(function(){
+                //      console.log(jQuery(this).find("input").val());
+                //     if(!isNaN(Number(jQuery(this).find("input").val()))){
+                //         mov_v_t=mov_v_t+Number(jQuery(this).find("input").val());
+                //     };
+                // });
+///End start date end date code base
+
+            
