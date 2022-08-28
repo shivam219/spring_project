@@ -54,10 +54,10 @@
                     <div class="row">
 
                         <div class="col">  
-                            <input  placeholder="Select date"  type="date"  id="startDate"   name="startDate"  class="form-control datepicker w-75 d-flex   ">    
+                            <input  placeholder="Select date"  type="date"  id="startDate"  value="2022-08-22" name="startDate"  class="form-control datepicker w-75 d-flex   ">    
                         </div>
                         <div class="col">
-                            <input  placeholder="Select date"  type="date" id="endDate"   name="endDate" class="form-control datepicker w-75   ">
+                            <input  placeholder="Select date"  type="date" id="endDate"     value="2022-08-27" name="endDate" class="form-control datepicker w-75   ">
                         </div>
                         <div class="col">
                             <input type="submit" class="btn btn-primary btn-sm" value="fetch"  >
@@ -66,7 +66,7 @@
                     </div>
                 </form>
                 <div class="col">
-                    <input type="button" class="btn btn-primary btn-sm" value="Save">
+                    <input type="button" class="btn btn-primary btn-sm"  onclick="fetchwork()" value="Save">
                 </div>
                 <div class="col">
                     <input type="button" class="btn btn-primary btn-sm" value="Submit">
@@ -266,7 +266,6 @@
                         };
                     }) 
                 });  
-                console.log(total);
                 $("#htotal").html(parseInt(total));   
             }
 
@@ -276,15 +275,40 @@
                         $(this).change(); 
                     })
                 });
-                calculate();
             }
             calRowOnLoad();
 
 
             function fetchwork(){
-                $("#startDate").val();
-                $("#endDate").val();
+            let atsd = $("#startDate").attr("name");
+            let sd = $("#startDate").val();
+            let ated = $("#endDate").attr("name");
+            let ed = $("#endDate").val();
+            let uri = '/fetchworkjson?'+atsd+'='+sd+'&'+ated+'='+ed;
+            console.log(uri);
+                $.ajax({
+                    url: uri,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(obj, success,event){
+                        // console.log(typeof obj); //object
+                        console.log(obj);
+                        // console.log(obj[2]); // this work when list of object will return to from controller
+                        // console.log(jqX.get("TCS")[0]);
+                        // console.log(success);
+                        // console.log(event); // states = 4 status code 400 and other
+                        var result = Object.entries(obj);
+                        // console.log(typeof result);//array date type 
+                        // console.log( obj); //object
+                        console.log( typeof (result[0][1][0]) );
+                        console.log(result[0][1][0]['id'] );
+                        // console.log(result[1]);
+                    }
+                });
             }
+            // $.get( "/tester.mvc", function( data ) {
+            //    alert( "Load was performed. Data : " + data );
+            // });
         </script>
     </body>
 

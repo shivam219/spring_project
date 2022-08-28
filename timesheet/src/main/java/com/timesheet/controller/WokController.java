@@ -44,9 +44,6 @@ public class WokController {
 		long empId = (Long) request.getSession().getAttribute("empId");
 		m.addAttribute("workMap", workService.getWorByStartDateEndDate(startDate, endDate,empId));
 		m.addAttribute("projectList", projectservice.getProjectByEmpId(empId));
-		
-		
-	
 		return "esswork";
 	}
 
