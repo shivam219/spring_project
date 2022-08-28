@@ -115,13 +115,13 @@
                               </select>
                         </td>
                         <td>  <p>Approved</p></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)"   placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)"   placeholder="HH"></td>
                         <td class="text-center">00 </td>
                     </tr>
 			    </c:if>
@@ -292,70 +292,23 @@
                     dataType: 'json',
                     success: function(obj, success,event){
                         // console.log(typeof obj); //object
-                        // console.log(obj);
-                        var d = Object.entries(obj);
+                        console.log(obj);
                         // console.log(obj[2]); // this work when list of object will return to from controller
                         // console.log(jqX.get("TCS")[0]);
                         // console.log(success);
                         // console.log(event); // states = 4 status code 400 and other
+                        var d = Object.entries(obj);
                         // console.log(typeof result);//array date type 
                         // console.log( obj); //object
-                        // console.log( typeof (d[0][1][0]) );
-                        console.log( (d[0][0]) );
-                        console.log( (d[1][0]) );
-                        // console.log(d.length);
+                        console.log( typeof (d[0][1][0]) );
+                        console.log(d.length);
+                        console.log(d[0].length);
+                        console.log(d[0][0]);
+                        console.log(d[0][1][0]['id'] );
                         for (let i = 0; i < d.length; i++) {
-                            let row = document.createElement("tr");
-                            let spn = d[i][0];
-                            console.log(spn);
-                                let sl = '<td  colspan="2"> <select data-placeholder="'+ spn+'" disabled="disabled"  class="form-control selectProject" tabindex="1">' 
-                                + '<option value="'+ spn+'" >'+ spn +'</option> '
-                                + '</select> </td> '
-                                + '<td><p>Approved</p></td>';
-
-                            for (let j = 0; j <d[i][1].length; j++) {
-                                if( d[i][1][j]["id"] == 0){
-                                    let t = '';
-                                    let eId = d[i][1][j]["empId"];
-                                    let pId = d[i][1][j]["projectId"];
-                                    let pName = d[i][1][j]["projectName"];
-                                    let hours = d[i][1][j]["hours"];
-                                    let descr = d[i][1][j]["descr"];   
-                                    let day = d[i][1][j]["day"];   
-                                    let status = d[i][1][j]["status"];   
- 
-                                    t =  '<td> <input type="number"  value='+eId+'    name="empId"       class="d-none"  >' 
-                                        +' <input type="number"  value='+pId+'    name="projectId"   class="d-none"  >' 
-                                        +' <input type="text"    value='+pName+'  name="projectName" class="d-none"  >' 
-                                        +' <input type="number"  value='+hours+'  name="hours"          min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
-                                        +' <input type="text"    value='+descr+'  name="descr"       class="d-none"  >' 
-                                        +' <input type="date"    value='+day+'    name="day"         class="d-none"  >' 
-                                        +' <input type="number"  value='+status+' name="status"      class="d-none"  ></td>';
-                                } else{
-                                    let id = d[i][1][j]["id"];
-                                    let eId = d[i][1][j]["empId"];
-                                    let pId = d[i][1][j]["projectId"];
-                                    let pName = d[i][1][j]["projectName"];
-                                    let hours = d[i][1][j]["hours"];
-                                    let descr = d[i][1][j]["descr"];   
-                                    let day = d[i][1][j]["day"];   
-                                    let status = d[i][1][j]["status"];   
-                                    t = ' <td> <input type="number"  value='+id+'    name="id"        class="d-none"  >' 
-                                        +' <input type="number"  value='+eId+'    name="empId"        class="d-none"  >' 
-                                        +' <input type="number"  value='+pId+'    name="projectId"    class="d-none"  >' 
-                                        +' <input type="text"    value='+pName+'  name="projectName"  class="d-none"  >' 
-                                        +' <input type="number"  value='+hours+'  name="hours"         min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
-                                        +' <input type="text"    value='+descr+'  name="descr"        class="d-none"  >' 
-                                        +' <input type="date"  value='+day+'    name="day"            class="d-none"  >' 
-                                        +' <input type="number"  value='+status+' name="status"       class="d-none"  ></td>';
-                                }
-                             
-                              row.innerHTML = (( row.innerHTML.toString()) + t);
-                            }   
-                            row.innerHTML =  ( sl +( row.innerHTML.toString()) );
-                            $("#tbtable").append(row);
-                            $(".selectProject.select2-hidden-accessible").select2('destroy');
-                            $('.selectProject').select2();
+                            let row = d[i];
+                            console.log(d[i][0]);
+                            console.log(row);
                         }
                     }
                 });

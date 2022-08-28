@@ -23,7 +23,7 @@
                     <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1" >
                         <option value=""> </option>
                         <c:forEach items="${projectList}" var="project" varStatus="loop">
-                            <option value="${project.getProjectid()}">${project.getProjectname()}</option>
+                            <option value="${project.getProjectId()}">${project.getProjectName()}</option>
                         </c:forEach>
                     </select>
                     <input type="text" name="id"          class="d-none" value=''/>
@@ -159,8 +159,8 @@
                             <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1">
                                 <option value=""></option>
                                 <c:forEach items="${projectList}" var="project" varStatus="loop">
-                                    <option value="${project.getProjectid()}">${project.getProjectname()}</option>
-                                </c:forEach>
+                                    <option value="${project.getProjectId()}">${project.getProjectName()}</option>
+                                </c:forEach> 
                               </select>
                         </td>
                         <td>  <input type="text" name="status" value="Approved" class="d-none">    <p>Approved</p></td>

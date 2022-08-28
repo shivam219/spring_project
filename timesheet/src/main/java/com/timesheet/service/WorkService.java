@@ -34,7 +34,6 @@ public class WorkService {
 
 	public LinkedHashMap<String, List<Work>> getWorByStartDateEndDate(String startDate, String endDate, long empId) {
 		List<Work> l = repository.getWorByStartDateEndDate(startDate, endDate, empId);
-		System.out.println(l);
 		Collections.sort(l, (e1, e2) -> e1.getDay().compareTo(e2.getDay()));
 
 		LinkedHashMap<String, List<Work>> map = new LinkedHashMap<String, List<Work>>();
@@ -51,7 +50,7 @@ public class WorkService {
 				al.addAll(map.get(w.getProjectName()));
 				for (int i = df; i > 0; i--) {
 					Work w2 = new Work();
-					w2.setId(w.getId());
+					w2.setId(0);
 					w2.setEmpId(w.getEmpId());
 					w2.setProjectId(w.getProjectId());
 					w2.setProjectName(w.getProjectName());
@@ -71,7 +70,7 @@ public class WorkService {
 					map.put(w.getProjectName(), al);
 				} else if (t.getDayOfWeek().toString().equals("TUESDAY")) {
 					Work w2 = new Work();
-					w2.setId(w.getId());
+					w2.setId(0);
 					w2.setEmpId(w.getEmpId());
 					w2.setProjectId(w.getProjectId());
 					w2.setProjectName(w.getProjectName());
@@ -87,7 +86,7 @@ public class WorkService {
 					ArrayList<Work> al = new ArrayList<Work>();
 					for (int i = 2; i > 0; i--) {
 						Work w2 = new Work();
-						w2.setId(w.getId());
+						w2.setId(0);
 						w2.setEmpId(w.getEmpId());
 						w2.setProjectId(w.getProjectId());
 						w2.setProjectName(w.getProjectName());
@@ -102,7 +101,7 @@ public class WorkService {
 					ArrayList<Work> al = new ArrayList<Work>();
 					for (int i = 3; i > 0; i--) {
 						Work w2 = new Work();
-						w2.setId(w.getId());
+						w2.setId(0);
 						w2.setEmpId(w.getEmpId());
 						w2.setProjectId(w.getProjectId());
 						w2.setProjectName(w.getProjectName());
@@ -117,7 +116,7 @@ public class WorkService {
 					ArrayList<Work> al = new ArrayList<Work>();
 					for (int i = 4; i > 0; i--) {
 						Work w2 = new Work();
-						w2.setId(w.getId());
+						w2.setId(0);
 						w2.setEmpId(w.getEmpId());
 						w2.setProjectId(w.getProjectId());
 						w2.setProjectName(w.getProjectName());
@@ -132,7 +131,7 @@ public class WorkService {
 					ArrayList<Work> al = new ArrayList<Work>();
 					for (int i = 5; i > 0; i--) {
 						Work w2 = new Work();
-						w2.setId(w.getId());
+						w2.setId(0);
 						w2.setEmpId(w.getEmpId());
 						w2.setProjectId(w.getProjectId());
 						w2.setProjectName(w.getProjectName());
@@ -147,7 +146,7 @@ public class WorkService {
 					ArrayList<Work> al = new ArrayList<Work>();
 					for (int i = 6; i > 0; i--) {
 						Work w2 = new Work();
-						w2.setId(w.getId());
+						w2.setId(0);
 						w2.setEmpId(w.getEmpId());
 						w2.setProjectId(w.getProjectId());
 						w2.setProjectName(w.getProjectName());
@@ -172,7 +171,7 @@ public class WorkService {
 			al.addAll(entry.getValue());
 			for (int i = 1 ; i <= (7- len); i++) {
 				Work w2 = new Work();
-				w2.setId(wl.getId());
+				w2.setId(0);
 				w2.setEmpId(wl.getEmpId());
 				w2.setProjectId(wl.getProjectId());
 				w2.setProjectName(wl.getProjectName());
