@@ -416,6 +416,14 @@ $("#weekWorkFrom").on("submit", function(){
 							///end ajax
 
 
+  let v = 0; 
+                    $('#tbtable tfoot' ).find('td').each(function(){
+                        console.log($(this).html());
+                            if(!isNaN(Number($(this).html()))){
+                                v=  parseInt($(this).html()) + v;
+                            }
+                    }); 
+                    $(this).find("td:eq(9) ").html(v==0?"00":v);
 
 
             

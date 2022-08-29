@@ -44,26 +44,28 @@
         </table>
         <div class="container">
             <div class="row rounded  ">
-                <h5 class="text-center text-secondary h4 ">Ess Work</h5>
+                <h5 class="text-center text-secondary h4 mt-2">Ess Work</h5>
             </div>
             <div class="row">
-                <div class="col h6 text-center">
-                    <p>Time Period</p>
+                <div class="col fw-bold text-center align-middle">
+                    <span class="align-middle"> Time Period</span>
                 </div>
-                <div class="col">  
-                    <input  placeholder="Select date"  type="date"  id="startDate"  value="2022-08-22" name="startDate"  class="form-control datepicker w-75 d-flex   ">    
+                <div class="col d-flex justify-content-between ">  
+                     <button class="rounded btn-secondary h-75"><i class="fa-solid fa-caret-left"></i> </button>
+                    <input  placeholder="Select date"  type="date"  id="startDate"  value="2022-08-22" name="startDate"  class="form-control   w-75  h-75    ">    
+                    <span class="   align-self-start  "> To </span>
                 </div>
-                <div class="col">
-                    <input  placeholder="Select date"  type="date" id="endDate"     value="2022-08-27" name="endDate" class="form-control datepicker w-75   ">
+                <div class="col d-flex justify-content-between ">
+                    <input  placeholder="Select date"  type="date" id="endDate"     value="2022-08-28" name="endDate" class="form-control   w-75  h-75 ">
+                    <button class="rounded btn-secondary h-75"><i class="fa-solid fa-caret-right rounded"></i> 
                 </div>
-                <div class="col">
-                    <input type="button" class="btn btn-primary btn-sm"  onclick="fetchwork()" value="save">
+                <div class="col  d-flex justify-content-center">
+                    <input type="button" class="btn btn-primary btn-sm pe-3 ps-3 me-2 h-75 rounded"  onclick="show()" value="save" >
+                    <input type="button" class="btn btn-primary btn-sm h-75 rounded" value="Submit">
                 </div>
-                <div class="col">
-                    <input type="button" class="btn btn-primary btn-sm" value="Submit">
-                </div>
+                
             </div>
-            <table class="table table-striped table-hover rounded mb-0" id="tbtable" >
+            <table class="table table-striped table-hover rounded mb-0 mt-1" id="tbtable" >
                 <tr class="table-dark ">
                     <td class="text-center" colspan="2">Work Items</td>
                     <td class="text-center" >Status</td>
@@ -251,6 +253,8 @@
                         type: 'GET',
                         dataType: 'json',
                         success: function(obj, success,event){
+                           
+                            console.log(obj);
                             for (let i = $('#tbtable tr').length -2 ; i > 0; i--) {
                                 $('#tbtable tr').eq(i).remove();
                             }
@@ -258,42 +262,44 @@
                             for (let i = 0; i < d.length; i++) {
                                 let row = document.createElement("tr");
                                 let spn = d[i][0];
-                                console.log(spn);
+                               
                                     let sl = '<td  colspan="2"> <select data-placeholder="'+ spn+'" disabled="disabled"  class="form-control selectProject" tabindex="1">' 
                                     + '<option value="'+ spn+'" >'+ spn +'</option> '
                                     + '</select> </td> '
                                     + '<td><p>Approved</p></td>';
 
                                 for (let j = 0; j <d[i][1].length; j++) {
-                                    console.log( d[i][1][j]["hours"]);
+                                     
                                     if( d[i][1][j]["id"] == 0){
-                                        let t = '';
                                         let eId = d[i][1][j]["empId"];
                                         let pId = d[i][1][j]["projectId"];
                                         let pName = d[i][1][j]["projectName"];
-                                        let hours = d[i][1][j]["hours"];
+                                        let hours = d[i][1][j]["hours"]; 
                                         let descr = d[i][1][j]["descr"];   
                                         let day = d[i][1][j]["day"];   
                                         let status = d[i][1][j]["status"];   
     
-                                        t =  '<td>'
+                                        let t =  '<td>'
                                             +' <input type="number"  value='+hours+'    name="hours"          min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
                                             +' <input type="number"  value='+eId+'  name="empId"       class="d-none"  >' 
                                             +' <input type="number"  value='+pId+'      name="projectId"   class="d-none"  >' 
                                             +' <input type="text"    value='+pName+'    name="projectName" class="d-none"  >' 
                                             +' <input type="text"    value='+descr+'    name="descr"       class="d-none"  >' 
                                             +' <input type="date"    value='+day+'      name="day"         class="d-none"  >' 
-                                            +' <input type="number"  value='+status+'   name="status"      class="d-none"  ></td>';
+                                            +' <input type="text"  value='+status+'   name="status"      class="d-none"  ></td>';
+                                            row.innerHTML = (( row.innerHTML.toString()) + t);
+                                          
                                     } else{
                                         let id = d[i][1][j]["id"];
                                         let eId = d[i][1][j]["empId"];
                                         let pId = d[i][1][j]["projectId"];
                                         let pName = d[i][1][j]["projectName"];
-                                        let hours = d[i][1][j]["hours"];
+                                        let hours = d[i][1][j]["hours"]; 
+                                        
                                         let descr = d[i][1][j]["descr"];   
                                         let day = d[i][1][j]["day"];   
                                         let status = d[i][1][j]["status"];   
-                                        t = ' <td> ' 
+                                        let   t = ' <td> ' 
                                             +' <input type="number"  value='+hours+'    name="hours"        min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
                                             + '<input type="number"  value='+id+'   name="id"        class="d-none"  >' 
                                             +' <input type="number"  value='+eId+'      name="empId"        class="d-none"  >' 
@@ -301,29 +307,55 @@
                                             +' <input type="text"    value='+pName+'    name="projectName"  class="d-none"  >' 
                                             +' <input type="text"    value='+descr+'    name="descr"        class="d-none"  >' 
                                             +' <input type="date"  value='+day+'        name="day"            class="d-none"  >' 
-                                            +' <input type="number"  value='+status+'   name="status"       class="d-none"  ></td>'
-                                    }
-                                
-                                row.innerHTML = (( row.innerHTML.toString()) + t);
+                                            +' <input type="text"  value='+status+'   name="status"       class="d-none"  ></td>'
+                                            row.innerHTML = (( row.innerHTML.toString()) + t);
+                                          
+                                    }  
                                 }   
                                 row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">00</td>' );
                                 $("#tbtable").append(row);
                                 $(".selectProject.select2-hidden-accessible").select2('destroy');
                                 $('.selectProject').select2();
+                                calculate();
+                                calRowOnLoad();
                             }
                         }
                     });
                 }
-                fetchwork();
                 function calRowOnLoad( ) {
                     $('#tbtable tr' ).each( function () {
-                        jQuery(this).find('td input').eq(0).each(function(){
-                            // $(this).change(); 
-                            console.log(  $(this).val());
-                        })
+                        $(this).find('td').each(function(){
+                            $(this).find('input').eq(0).each(function(){
+                                $(this).change();
+                            })
+                        })  
                     });
+                };
+                fetchwork();
+                function  show(){
+                    console.log( html2json());
                 }
-                calRowOnLoad();
+                function html2json() {
+                var json = '[';
+                var otArr = [];
+                var tbl2 = $('#tbtable tbody tr').each(function(i) {        
+                    var itArr = []; 
+                    $(this).find("td  ").each(function(){
+                        $(this).find("input").each(function(){
+                            if(!isNaN(Number(jQuery(this).val()))){
+                                
+                                itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                            }
+                            else{
+                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                            }
+                        });
+                        otArr.push('{' + itArr.join(',') + '}');
+                    });
+                })
+                json += otArr.join(",") + ']'
+                return json;
+            }
         </script>
     </body>
 

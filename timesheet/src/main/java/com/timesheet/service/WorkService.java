@@ -55,7 +55,7 @@ public class WorkService {
 					w2.setProjectId(w.getProjectId());
 					w2.setProjectName(w.getProjectName());
 					w2.setDay(t.minusDays(i).toString());
-					w2.setHours("");
+					w2.setHours("0");
 					w2.setDescr("");
 					al.add(w2);
 				}
@@ -75,7 +75,7 @@ public class WorkService {
 					w2.setProjectId(w.getProjectId());
 					w2.setProjectName(w.getProjectName());
 					w2.setDay(t.minusDays(1).toString());
-					w2.setHours("");
+					w2.setHours("0");
 					w2.setDescr("");
 					ArrayList<Work> al = new ArrayList<Work>();
 					al.add(w2);
@@ -91,7 +91,7 @@ public class WorkService {
 						w2.setProjectId(w.getProjectId());
 						w2.setProjectName(w.getProjectName());
 						w2.setDay(t.minusDays(i).toString());
-						w2.setHours("");
+						w2.setHours("0");
 						w2.setDescr("");
 						al.add(w2);
 					}
@@ -106,7 +106,7 @@ public class WorkService {
 						w2.setProjectId(w.getProjectId());
 						w2.setProjectName(w.getProjectName());
 						w2.setDay(t.minusDays(i).toString());
-						w2.setHours("");
+						w2.setHours("0");
 						w2.setDescr("");
 						al.add(w2);
 					}
@@ -121,7 +121,7 @@ public class WorkService {
 						w2.setProjectId(w.getProjectId());
 						w2.setProjectName(w.getProjectName());
 						w2.setDay(t.minusDays(i).toString());
-						w2.setHours("");
+						w2.setHours("0");
 						w2.setDescr("");
 						al.add(w2);
 					}
@@ -136,7 +136,7 @@ public class WorkService {
 						w2.setProjectId(w.getProjectId());
 						w2.setProjectName(w.getProjectName());
 						w2.setDay(t.minusDays(i).toString());
-						w2.setHours("");
+						w2.setHours("0");
 						w2.setDescr("");
 						al.add(w2);
 					}
@@ -151,7 +151,7 @@ public class WorkService {
 						w2.setProjectId(w.getProjectId());
 						w2.setProjectName(w.getProjectName());
 						w2.setDay(t.minusDays(i).toString());
-						w2.setHours("");
+						w2.setHours("0");
 						w2.setDescr("");
 						al.add(w2);
 					}
@@ -176,7 +176,7 @@ public class WorkService {
 				w2.setProjectId(wl.getProjectId());
 				w2.setProjectName(wl.getProjectName());
 				w2.setDay(d1.plusDays(i).toString());
-				w2.setHours("");
+				w2.setHours("0");
 				w2.setDescr("");
 				al.add(w2);
 			}
