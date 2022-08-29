@@ -387,4 +387,35 @@ $("#weekWorkFrom").on("submit", function(){
                 // });
 ///End start date end date code base
 
+
+// ajax 
+   $.ajax({
+                        url: uri,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(obj, success,event){
+                            for (let i = $('#tbtable tr').length -2 ; i > 0; i--) {
+                                $('#tbtable tr').eq(i).remove();
+                            }
+                            // console.log(typeof obj); //object
+                            // console.log(obj);
+                            var d = Object.entries(obj);
+                            // console.log(obj[2]); // this work when list of object will return to from controller
+                            // console.log(jqX.get("TCS")[0]);
+                            // console.log(success);
+                            // console.log(event); // states = 4 status code 400 and other
+                            // console.log(typeof result);//array date type 
+                            // console.log( obj); //object
+                            // console.log( typeof (d[0][1][0]) );
+							
+							
+							
+            // $.get( "/tester.mvc", function( data ) {
+            //    alert( "Load was performed. Data : " + data );
+            // });
+							///end ajax
+
+
+
+
             

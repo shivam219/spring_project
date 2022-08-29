@@ -50,23 +50,14 @@
                 <div class="col h6 text-center">
                     <p>Time Period</p>
                 </div>
-                <form action="fetchwork" method="post">
-                    <div class="row">
-
-                        <div class="col">  
-                            <input  placeholder="Select date"  type="date"  id="startDate"  value="2022-08-22" name="startDate"  class="form-control datepicker w-75 d-flex   ">    
-                        </div>
-                        <div class="col">
-                            <input  placeholder="Select date"  type="date" id="endDate"     value="2022-08-27" name="endDate" class="form-control datepicker w-75   ">
-                        </div>
-                        <div class="col">
-                            <input type="submit" class="btn btn-primary btn-sm" value="fetch"  >
-                        </div>
-                        
-                    </div>
-                </form>
+                <div class="col">  
+                    <input  placeholder="Select date"  type="date"  id="startDate"  value="2022-08-22" name="startDate"  class="form-control datepicker w-75 d-flex   ">    
+                </div>
                 <div class="col">
-                    <input type="button" class="btn btn-primary btn-sm"  onclick="fetchwork()" value="Save">
+                    <input  placeholder="Select date"  type="date" id="endDate"     value="2022-08-27" name="endDate" class="form-control datepicker w-75   ">
+                </div>
+                <div class="col">
+                    <input type="button" class="btn btn-primary btn-sm"  onclick="fetchwork()" value="save">
                 </div>
                 <div class="col">
                     <input type="button" class="btn btn-primary btn-sm" value="Submit">
@@ -85,61 +76,39 @@
                     <td class="text-center" >Sun</td>
                     <td class="text-center" >Total</td>
                 </tr> 
-                <c:if test = "${workMap.size()>0}">		                         
-                    <c:forEach var="entry" items="${workMap}"> 
-                        <tr>
-                            <td colspan="2">
-                                <select data-placeholder='<c:out value="${entry.key}"/>'  disabled="disabled" class="form-control selectProject" tabindex="1">
-                                    <option value='<c:out value="${entry.getValue().get(0).getProjectId()}"/>'> <c:out value="${entry.key}"/></option>
-                                </select>
-                            </td>
-                            <td> <p>Approved</p></td>
-                            <c:forEach items="${entry.getValue()}" var="work" varStatus="loop">
-                                <td>
-                                    <input type="number" value='<c:out value="${work.getHours()}"/>' min='0' class="form-control input-sm w-100 " oninput="cal(this)"    onchange="cal(this)"  placeholder="HH">
-                                </td>
+                <tr>
+                    <td colspan="2">
+                        <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1">
+                            <option value=""></option>
+                            <c:forEach items="${projectList}" var="project" varStatus="loop">
+                                <option value="${project.getProjectId()}">${project.getProjectName()}</option>
                             </c:forEach>
-                            <td class="text-center">00</td>
-                        </tr>
-                    </c:forEach> 
-                </c:if>
-
-			    <c:if test = "${workMap==null || workMap.size()==0}">			         
-                    <tr>
-                        <td colspan="2">
-                            <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1">
-                                <option value=""></option>
-                                <c:forEach items="${projectList}" var="project" varStatus="loop">
-                                    <option value="${project.getProjectId()}">${project.getProjectName()}</option>
-                                </c:forEach>
-                              </select>
-                        </td>
-                        <td>  <p>Approved</p></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                        <td class="text-center">00 </td>
-                    </tr>
-			    </c:if>
-                    
-                    <tfoot>
-                        <td colspan="3" class="text-center ">  
-                            <input type="button" value="+" id="addRow"   class="btn btn-success btn-sm rounded-circle me-4 " style="height: 40px; width: 40px; " >
-                            <input type="button" value="-" id="removeRow"   class="btn btn-success btn-sm rounded-circle  " style="height: 40px; width: 40px; " >
-                        </td>
-                        <td class="text-center" id="mov_v_t">00</td>
-                        <td class="text-center" id="tue_v_t">00</td>
-                        <td class="text-center" id="web_v_t">00</td>
-                        <td class="text-center" id="thu_v_t">00</td>
-                        <td class="text-center" id="fri_v_t">00</td>
-                        <td class="text-center" id="sat_v_t">00</td>
-                        <td class="text-center" id="sun_v_t">00</td>
-                        <td class="text-center" id="htotal"  >00</td>
-                    </tfoot>
+                            </select>
+                    </td>
+                    <td>  <p>Approved</p></td>
+                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                    <td class="text-center">00 </td>
+                </tr>
+                <tfoot>
+                    <td colspan="3" class="text-center ">  
+                        <input type="button" value="+" id="addRow"   class="btn btn-success btn-sm rounded-circle me-4 " style="height: 40px; width: 40px; " >
+                        <input type="button" value="-" id="removeRow"   class="btn btn-success btn-sm rounded-circle  " style="height: 40px; width: 40px; " >
+                    </td>
+                    <td class="text-center" id="mov_v_t">00</td>
+                    <td class="text-center" id="tue_v_t">00</td>
+                    <td class="text-center" id="web_v_t">00</td>
+                    <td class="text-center" id="thu_v_t">00</td>
+                    <td class="text-center" id="fri_v_t">00</td>
+                    <td class="text-center" id="sat_v_t">00</td>
+                    <td class="text-center" id="sun_v_t">00</td>
+                    <td class="text-center" id="htotal"  >00</td>
+                </tfoot>
             </table>
         
         </div>
@@ -195,7 +164,7 @@
                 let mon = 0;             
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(2).each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").val()))){
+                        if(!isNaN(Number(jQuery(this).find("input").eq(0).val()))){
                             mon=mon+Number(jQuery(this).find("input").val());
                         };
                     }) 
@@ -204,7 +173,7 @@
                 let tue = 0;
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(3).each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").val()))){
+                        if(!isNaN(Number(jQuery(this).find("input").eq(0).val()))){
                             tue=tue+Number(jQuery(this).find("input").val());
                         };
                     }) 
@@ -213,7 +182,7 @@
                 let wed = 0; 
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(4).each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").val()))){
+                        if(!isNaN(Number(jQuery(this).find("input").eq(0).val()))){
                             wed=wed+Number(jQuery(this).find("input").val());
                         };
                     }) 
@@ -222,7 +191,7 @@
                 let thu = 0; 
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(5).each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").val()))){
+                        if(!isNaN(Number(jQuery(this).find("input").eq(0).val()))){
                             thu=thu+Number(jQuery(this).find("input").val());
                         };
                     }) 
@@ -232,7 +201,7 @@
                 let fri = 0; 
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(6).each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").val()))){
+                        if(!isNaN(Number(jQuery(this).find("input").eq(0).val()))){
                             fri=fri+Number(jQuery(this).find("input").val());
                         };
                     }) 
@@ -242,7 +211,7 @@
                 let sat = 0; 
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(7).each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").val()))){
+                        if(!isNaN(Number(jQuery(this).find("input").eq(0).val()))){
                             sat=sat+Number(jQuery(this).find("input").val());
                         };
                     }) 
@@ -252,12 +221,12 @@
                 let sun_v_t = 0;  
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(8).each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").val()))){
+                        if(!isNaN(Number(jQuery(this).find("input").eq(0).val()))){
                             sun_v_t=sun_v_t+Number(jQuery(this).find("input").val());
                         };
                     }) 
                 });  
-
+                $("#sun_v_t").html(sat==0?"00":sat);
                 let total = 0;  
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(9).each(function(){
@@ -266,103 +235,95 @@
                         };
                     }) 
                 });  
-                $("#htotal").html(parseInt(total));   
+                $("#htotal").html(total==0?"00":total); 
             }
 
-            function calRowOnLoad( ) {
-                $('#tbtable tr' ).each( function () {
-                    jQuery(this).find('td input').eq(2).each(function(){
-                        $(this).change(); 
-                    })
-                });
-            }
-            calRowOnLoad();
+      
+            function fetchwork(){   
+                let atsd = $("#startDate").attr("name");
+                let sd = $("#startDate").val();
+                let ated = $("#endDate").attr("name");
+                let ed = $("#endDate").val();
+                let uri = '/fetchworkjson?'+atsd+'='+sd+'&'+ated+'='+ed;
+                console.log(uri);
+                    $.ajax({
+                        url: uri,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(obj, success,event){
+                            for (let i = $('#tbtable tr').length -2 ; i > 0; i--) {
+                                $('#tbtable tr').eq(i).remove();
+                            }
+                            var d = Object.entries(obj); 
+                            for (let i = 0; i < d.length; i++) {
+                                let row = document.createElement("tr");
+                                let spn = d[i][0];
+                                console.log(spn);
+                                    let sl = '<td  colspan="2"> <select data-placeholder="'+ spn+'" disabled="disabled"  class="form-control selectProject" tabindex="1">' 
+                                    + '<option value="'+ spn+'" >'+ spn +'</option> '
+                                    + '</select> </td> '
+                                    + '<td><p>Approved</p></td>';
 
-
-            function fetchwork(){
-            let atsd = $("#startDate").attr("name");
-            let sd = $("#startDate").val();
-            let ated = $("#endDate").attr("name");
-            let ed = $("#endDate").val();
-            let uri = '/fetchworkjson?'+atsd+'='+sd+'&'+ated+'='+ed;
-            console.log(uri);
-                $.ajax({
-                    url: uri,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(obj, success,event){
-                        // console.log(typeof obj); //object
-                        // console.log(obj);
-                        var d = Object.entries(obj);
-                        // console.log(obj[2]); // this work when list of object will return to from controller
-                        // console.log(jqX.get("TCS")[0]);
-                        // console.log(success);
-                        // console.log(event); // states = 4 status code 400 and other
-                        // console.log(typeof result);//array date type 
-                        // console.log( obj); //object
-                        // console.log( typeof (d[0][1][0]) );
-                        console.log( (d[0][0]) );
-                        console.log( (d[1][0]) );
-                        // console.log(d.length);
-                        for (let i = 0; i < d.length; i++) {
-                            let row = document.createElement("tr");
-                            let spn = d[i][0];
-                            console.log(spn);
-                                let sl = '<td  colspan="2"> <select data-placeholder="'+ spn+'" disabled="disabled"  class="form-control selectProject" tabindex="1">' 
-                                + '<option value="'+ spn+'" >'+ spn +'</option> '
-                                + '</select> </td> '
-                                + '<td><p>Approved</p></td>';
-
-                            for (let j = 0; j <d[i][1].length; j++) {
-                                if( d[i][1][j]["id"] == 0){
-                                    let t = '';
-                                    let eId = d[i][1][j]["empId"];
-                                    let pId = d[i][1][j]["projectId"];
-                                    let pName = d[i][1][j]["projectName"];
-                                    let hours = d[i][1][j]["hours"];
-                                    let descr = d[i][1][j]["descr"];   
-                                    let day = d[i][1][j]["day"];   
-                                    let status = d[i][1][j]["status"];   
- 
-                                    t =  '<td> <input type="number"  value='+eId+'    name="empId"       class="d-none"  >' 
-                                        +' <input type="number"  value='+pId+'    name="projectId"   class="d-none"  >' 
-                                        +' <input type="text"    value='+pName+'  name="projectName" class="d-none"  >' 
-                                        +' <input type="number"  value='+hours+'  name="hours"          min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
-                                        +' <input type="text"    value='+descr+'  name="descr"       class="d-none"  >' 
-                                        +' <input type="date"    value='+day+'    name="day"         class="d-none"  >' 
-                                        +' <input type="number"  value='+status+' name="status"      class="d-none"  ></td>';
-                                } else{
-                                    let id = d[i][1][j]["id"];
-                                    let eId = d[i][1][j]["empId"];
-                                    let pId = d[i][1][j]["projectId"];
-                                    let pName = d[i][1][j]["projectName"];
-                                    let hours = d[i][1][j]["hours"];
-                                    let descr = d[i][1][j]["descr"];   
-                                    let day = d[i][1][j]["day"];   
-                                    let status = d[i][1][j]["status"];   
-                                    t = ' <td> <input type="number"  value='+id+'    name="id"        class="d-none"  >' 
-                                        +' <input type="number"  value='+eId+'    name="empId"        class="d-none"  >' 
-                                        +' <input type="number"  value='+pId+'    name="projectId"    class="d-none"  >' 
-                                        +' <input type="text"    value='+pName+'  name="projectName"  class="d-none"  >' 
-                                        +' <input type="number"  value='+hours+'  name="hours"         min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
-                                        +' <input type="text"    value='+descr+'  name="descr"        class="d-none"  >' 
-                                        +' <input type="date"  value='+day+'    name="day"            class="d-none"  >' 
-                                        +' <input type="number"  value='+status+' name="status"       class="d-none"  ></td>';
-                                }
-                             
-                              row.innerHTML = (( row.innerHTML.toString()) + t);
-                            }   
-                            row.innerHTML =  ( sl +( row.innerHTML.toString()) );
-                            $("#tbtable").append(row);
-                            $(".selectProject.select2-hidden-accessible").select2('destroy');
-                            $('.selectProject').select2();
+                                for (let j = 0; j <d[i][1].length; j++) {
+                                    console.log( d[i][1][j]["hours"]);
+                                    if( d[i][1][j]["id"] == 0){
+                                        let t = '';
+                                        let eId = d[i][1][j]["empId"];
+                                        let pId = d[i][1][j]["projectId"];
+                                        let pName = d[i][1][j]["projectName"];
+                                        let hours = d[i][1][j]["hours"];
+                                        let descr = d[i][1][j]["descr"];   
+                                        let day = d[i][1][j]["day"];   
+                                        let status = d[i][1][j]["status"];   
+    
+                                        t =  '<td>'
+                                            +' <input type="number"  value='+hours+'    name="hours"          min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
+                                            +' <input type="number"  value='+eId+'  name="empId"       class="d-none"  >' 
+                                            +' <input type="number"  value='+pId+'      name="projectId"   class="d-none"  >' 
+                                            +' <input type="text"    value='+pName+'    name="projectName" class="d-none"  >' 
+                                            +' <input type="text"    value='+descr+'    name="descr"       class="d-none"  >' 
+                                            +' <input type="date"    value='+day+'      name="day"         class="d-none"  >' 
+                                            +' <input type="number"  value='+status+'   name="status"      class="d-none"  ></td>';
+                                    } else{
+                                        let id = d[i][1][j]["id"];
+                                        let eId = d[i][1][j]["empId"];
+                                        let pId = d[i][1][j]["projectId"];
+                                        let pName = d[i][1][j]["projectName"];
+                                        let hours = d[i][1][j]["hours"];
+                                        let descr = d[i][1][j]["descr"];   
+                                        let day = d[i][1][j]["day"];   
+                                        let status = d[i][1][j]["status"];   
+                                        t = ' <td> ' 
+                                            +' <input type="number"  value='+hours+'    name="hours"        min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
+                                            + '<input type="number"  value='+id+'   name="id"        class="d-none"  >' 
+                                            +' <input type="number"  value='+eId+'      name="empId"        class="d-none"  >' 
+                                            +' <input type="number"  value='+pId+'      name="projectId"    class="d-none"  >' 
+                                            +' <input type="text"    value='+pName+'    name="projectName"  class="d-none"  >' 
+                                            +' <input type="text"    value='+descr+'    name="descr"        class="d-none"  >' 
+                                            +' <input type="date"  value='+day+'        name="day"            class="d-none"  >' 
+                                            +' <input type="number"  value='+status+'   name="status"       class="d-none"  ></td>'
+                                    }
+                                
+                                row.innerHTML = (( row.innerHTML.toString()) + t);
+                                }   
+                                row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">00</td>' );
+                                $("#tbtable").append(row);
+                                $(".selectProject.select2-hidden-accessible").select2('destroy');
+                                $('.selectProject').select2();
+                            }
                         }
-                    }
-                });
-            }
-            // $.get( "/tester.mvc", function( data ) {
-            //    alert( "Load was performed. Data : " + data );
-            // });
+                    });
+                }
+                fetchwork();
+                function calRowOnLoad( ) {
+                    $('#tbtable tr' ).each( function () {
+                        jQuery(this).find('td input').eq(0).each(function(){
+                            // $(this).change(); 
+                            console.log(  $(this).val());
+                        })
+                    });
+                }
+                calRowOnLoad();
         </script>
     </body>
 
