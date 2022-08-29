@@ -66,37 +66,41 @@
                 
             </div>
             <table class="table table-striped table-hover rounded mb-0 mt-1" id="tbtable" >
-                <tr class="table-dark ">
-                    <td class="text-center" colspan="2">Work Items</td>
-                    <td class="text-center" >Status</td>
-                    <td class="text-center" >Mon</td>
-                    <td class="text-center" >Tue</td>
-                    <td class="text-center" >Wed</td>
-                    <td class="text-center" >Thu</td>
-                    <td class="text-center" >Fri</td>
-                    <td class="text-center" >Sat</td>
-                    <td class="text-center" >Sun</td>
-                    <td class="text-center" >Total</td>
-                </tr> 
-                <tr>
-                    <td colspan="2">
-                        <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1">
-                            <option value=""></option>
-                            <c:forEach items="${projectList}" var="project" varStatus="loop">
-                                <option value="${project.getProjectId()}">${project.getProjectName()}</option>
-                            </c:forEach>
-                            </select>
-                    </td>
-                    <td>  <p>Approved</p></td>
-                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                    <td class="text-center">00 </td>
-                </tr>
+                <thead>
+                    <tr class="table-dark ">
+                        <td class="text-center" colspan="2">Work Items</td>
+                        <td class="text-center" >Status</td>
+                        <td class="text-center" >Mon</td>
+                        <td class="text-center" >Tue</td>
+                        <td class="text-center" >Wed</td>
+                        <td class="text-center" >Thu</td>
+                        <td class="text-center" >Fri</td>
+                        <td class="text-center" >Sat</td>
+                        <td class="text-center" >Sun</td>
+                        <td class="text-center" >Total</td>
+                    </tr> 
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1">
+                                <option value=""></option>
+                                <c:forEach items="${projectList}" var="project" varStatus="loop">
+                                    <option value="${project.getProjectId()}">${project.getProjectName()}</option>
+                                </c:forEach>
+                                </select>
+                        </td>
+                        <td>  <p>Approved</p></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                        <td class="text-center">00 </td>
+                    </tr>
+                </tbody>
                 <tfoot>
                     <td colspan="3" class="text-center ">  
                         <input type="button" value="+" id="addRow"   class="btn btn-success btn-sm rounded-circle me-4 " style="height: 40px; width: 40px; " >
@@ -253,8 +257,6 @@
                         type: 'GET',
                         dataType: 'json',
                         success: function(obj, success,event){
-                           
-                            console.log(obj);
                             for (let i = $('#tbtable tr').length -2 ; i > 0; i--) {
                                 $('#tbtable tr').eq(i).remove();
                             }
@@ -280,22 +282,21 @@
                                         let status = d[i][1][j]["status"];   
     
                                         let t =  '<td>'
-                                            +' <input type="number"  value='+hours+'    name="hours"          min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
+                                            +' <input type="number"    name="hours"          min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
                                             +' <input type="number"  value='+eId+'  name="empId"       class="d-none"  >' 
                                             +' <input type="number"  value='+pId+'      name="projectId"   class="d-none"  >' 
                                             +' <input type="text"    value='+pName+'    name="projectName" class="d-none"  >' 
-                                            +' <input type="text"    value='+descr+'    name="descr"       class="d-none"  >' 
-                                            +' <input type="date"    value='+day+'      name="day"         class="d-none"  >' 
+                                             +' <input type="date"    value='+day+'      name="day"         class="d-none"  >' 
                                             +' <input type="text"  value='+status+'   name="status"      class="d-none"  ></td>';
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
-                                          
+                                                // +' <input type="text"    value='+descr+'    name="descr"       class="d-none"  >' 
+                                            //add later on
                                     } else{
                                         let id = d[i][1][j]["id"];
                                         let eId = d[i][1][j]["empId"];
                                         let pId = d[i][1][j]["projectId"];
                                         let pName = d[i][1][j]["projectName"];
                                         let hours = d[i][1][j]["hours"]; 
-                                        
                                         let descr = d[i][1][j]["descr"];   
                                         let day = d[i][1][j]["day"];   
                                         let status = d[i][1][j]["status"];   
@@ -305,10 +306,11 @@
                                             +' <input type="number"  value='+eId+'      name="empId"        class="d-none"  >' 
                                             +' <input type="number"  value='+pId+'      name="projectId"    class="d-none"  >' 
                                             +' <input type="text"    value='+pName+'    name="projectName"  class="d-none"  >' 
-                                            +' <input type="text"    value='+descr+'    name="descr"        class="d-none"  >' 
-                                            +' <input type="date"  value='+day+'        name="day"            class="d-none"  >' 
+                                             +' <input type="date"  value='+day+'        name="day"            class="d-none"  >' 
                                             +' <input type="text"  value='+status+'   name="status"       class="d-none"  ></td>'
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
+                                                // +' <input type="text"    value='+descr+'    name="descr"       class="d-none"  >' 
+                                            //add later on
                                           
                                     }  
                                 }   
@@ -333,28 +335,129 @@
                 };
                 fetchwork();
                 function  show(){
-                    console.log( html2json());
+                     html2json() ; // put it on log then return undefined
                 }
                 function html2json() {
-                var json = '[';
-                var otArr = [];
-                var tbl2 = $('#tbtable tbody tr').each(function(i) {        
-                    var itArr = []; 
-                    $(this).find("td  ").each(function(){
-                        $(this).find("input").each(function(){
-                            if(!isNaN(Number(jQuery(this).val()))){
-                                
-                                itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
-                            }
-                            else{
-                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
-                            }
+                    var json = '[';
+                    var otArr = [];
+                    $('#tbtable tbody tr').each(function(i) {  
+                        var itArr = []; 
+                        $(this).find("td:eq(2)").each(function () { 
+                            if(! isNaN($(this).find("input:first").val())){
+                               $(this).find("input").each(function () {
+                                   if(!isNaN(Number(jQuery(this).val()))){
+                                       itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                                   }
+                                   else{
+                                       itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                                   }
+                               });
+                               otArr.push('{' + itArr.join(',') + '}');
+                           };
                         });
-                        otArr.push('{' + itArr.join(',') + '}');
+                    }); 
+                    $('#tbtable tbody tr').each(function(i) {  
+                        var itArr = []; 
+                        $(this).find("td:eq(3)").each(function () {
+                            if(!($(this).find("input:first").attr("name")=="hours")){
+                               $(this).find("input").each(function () {
+                                   if(!isNaN(Number(jQuery(this).val()))){
+                                       itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                                   }
+                                   else{
+                                       itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                                   }
+                               });
+                               otArr.push('{' + itArr.join(',') + '}');
+                           };
+                        });
                     });
-                })
-                json += otArr.join(",") + ']'
-                return json;
+                    $('#tbtable tbody tr').each(function(i) {  
+                        var itArr = []; 
+                        $(this).find("td:eq(4)").each(function () {
+                            if(!($(this).find("input:first").attr("name")=="hours")){
+                               $(this).find("input").each(function () {
+                                   if(!isNaN(Number(jQuery(this).val()))){
+                                       itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                                   }
+                                   else{
+                                       itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                                   }
+                               });
+                               otArr.push('{' + itArr.join(',') + '}');
+                           };
+                        });
+                    }); 
+                    $('#tbtable tbody tr').each(function(i) {  
+                        var itArr = []; 
+                        $(this).find("td:eq(5)").each(function () {
+                            if(!($(this).find("input:first").attr("name")=="hours")){
+                               $(this).find("input").each(function () {
+                                   if(!isNaN(Number(jQuery(this).val()))){
+                                       itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                                   }
+                                   else{
+                                       itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                                   }
+                               });
+                               otArr.push('{' + itArr.join(',') + '}');
+                           };
+                        });
+                    }); 
+                    $('#tbtable tbody tr').each(function(i) {  
+                        var itArr = []; 
+                        $(this).find("td:eq(6)").each(function () {
+                            if(!($(this).find("input:first").attr("name")=="hours")){
+                               $(this).find("input").each(function () {
+                                   if(!isNaN(Number(jQuery(this).val()))){
+                                       itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                                   }
+                                   else{
+                                       itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                                   }
+                               });
+                               otArr.push('{' + itArr.join(',') + '}');
+                           };
+                        });
+                    }); 
+                    $('#tbtable tbody tr').each(function(i) {  
+                        var itArr = []; 
+                        $(this).find("td:eq(7)").each(function () {
+                            if(!($(this).find("input:first").attr("name")=="hours")){
+                               $(this).find("input").each(function () {
+                                   if(!isNaN(Number(jQuery(this).val()))){
+                                       itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                                   }
+                                   else{
+                                       itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                                   }
+                               });
+                               otArr.push('{' + itArr.join(',') + '}');
+                           };
+                        });
+                    }); 
+                    $('#tbtable tbody tr').each(function(i) {  
+                        var itArr = []; 
+                        $(this).find("td:eq(8)").each(function () {
+                            console.log( isNaN($(this).find("input:first").val()));
+                            // console.log(!isNaN(10));
+                            console.log($(this).find("input:first").val());
+                            if(!($(this).find("input:first").attr("name")=="hours")){
+                               $(this).find("input").each(function () {
+                                   if(!isNaN(Number(jQuery(this).val()))){
+                                       itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                                   }
+                                   else{
+                                       itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                                   }
+                               });
+                               otArr.push('{' + itArr.join(',') + '}');
+                           };
+                        });
+                    }); 
+                    json += otArr.join(",") + ']';
+                    console.log(json);
+          
             }
         </script>
     </body>
