@@ -46,20 +46,22 @@
             <div class="row rounded  ">
                 <h5 class="text-center text-secondary h4 mt-2">Ess Work</h5>
             </div>
-            <div class="row">
+            <div class="row align-middle  pt-2 mx-0 " style="background-color: rgb(168, 174, 193);">
                 <div class="col fw-bold text-center align-middle">
                     <span class="align-middle"> Time Period</span>
                 </div>
-                <div class="col d-flex justify-content-between ">  
-                     <button class="rounded btn-secondary h-75"><i class="fa-solid fa-caret-left"></i> </button>
+                <div class="col d-flex justify-content-between  align-middle">  
+                     <button class="rounded btn-secondary h-75">
+                        <i class="fa-solid fa-caret-left"></i> 
+                    </button>
                     <input  placeholder="Select date"  type="date"  id="startDate"  value="2022-08-22" name="startDate"  class="form-control   w-75  h-75    ">    
                     <span class="   align-self-start  "> To </span>
                 </div>
-                <div class="col d-flex justify-content-between ">
+                <div class="col d-flex justify-content-between align-middle">
                     <input  placeholder="Select date"  type="date" id="endDate"     value="2022-08-28" name="endDate" class="form-control   w-75  h-75 ">
                     <button class="rounded btn-secondary h-75"><i class="fa-solid fa-caret-right rounded"></i> 
                 </div>
-                <div class="col  d-flex justify-content-center">
+                <div class="col  d-flex justify-content-center align-middle">
                     <input type="button" class="btn btn-primary btn-sm pe-3 ps-3 me-2 h-75 rounded"  onclick="show()" value="save" >
                     <input type="button" class="btn btn-primary btn-sm h-75 rounded" value="Submit">
                 </div>
@@ -224,15 +226,15 @@
                 });  
                 $("#sat_v_t").html(sat==0?"00":sat);
 
-                let sun_v_t = 0;  
+                let sun = 0;  
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(8).each(function(){
                         if(!isNaN(Number(jQuery(this).find("input").eq(0).val()))){
-                            sun_v_t=sun_v_t+Number(jQuery(this).find("input").val());
+                            sun=sun+Number(jQuery(this).find("input").val());
                         };
                     }) 
                 });  
-                $("#sun_v_t").html(sat==0?"00":sat);
+                $("#sun_v_t").html(sun==0?"00":sun);
                 let total = 0;  
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(9).each(function(){
@@ -282,36 +284,38 @@
                                         let status = d[i][1][j]["status"];   
     
                                         let t =  '<td>'
-                                            +' <input type="number"    name="hours"          min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
-                                            +' <input type="number"  value='+eId+'  name="empId"       class="d-none"  >' 
-                                            +' <input type="number"  value='+pId+'      name="projectId"   class="d-none"  >' 
-                                            +' <input type="text"    value='+pName+'    name="projectName" class="d-none"  >' 
-                                             +' <input type="date"    value='+day+'      name="day"         class="d-none"  >' 
-                                            +' <input type="text"  value='+status+'   name="status"      class="d-none"  ></td>';
+                                            +' <input type="number"    name="hours"          min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
+                                            +' <input type="number"  value='+eId+'      name="empId"       class="d-none"  > ' 
+                                            +' <input type="number"  value='+pId+'      name="projectId"   class="d-none"  > ' 
+                                            +' <input type="text"    value='+pName+'    name="projectName" class="d-none"  > ' 
+                                            +' <input type="date"    value='+day+'     name="day"         class="d-none"  >'  
+                                            +' <input type="text"    value='+status+'     name="status"       class="d-none"  > '
+                                            +' </td>';
+                                            
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
-                                                // +' <input type="text"    value='+descr+'    name="descr"       class="d-none"  >' 
-                                            //add later on
+                                            // +' <input type="text"      name="descr"       class="d-none"  >'
+                                            // description now saving now
+                                              
                                     } else{
                                         let id = d[i][1][j]["id"];
                                         let eId = d[i][1][j]["empId"];
                                         let pId = d[i][1][j]["projectId"];
                                         let pName = d[i][1][j]["projectName"];
                                         let hours = d[i][1][j]["hours"]; 
-                                        let descr = d[i][1][j]["descr"];   
+                                        let descr = d[i][1][j]["descr"];    
                                         let day = d[i][1][j]["day"];   
                                         let status = d[i][1][j]["status"];   
                                         let   t = ' <td> ' 
                                             +' <input type="number"  value='+hours+'    name="hours"        min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
-                                            + '<input type="number"  value='+id+'   name="id"        class="d-none"  >' 
-                                            +' <input type="number"  value='+eId+'      name="empId"        class="d-none"  >' 
-                                            +' <input type="number"  value='+pId+'      name="projectId"    class="d-none"  >' 
-                                            +' <input type="text"    value='+pName+'    name="projectName"  class="d-none"  >' 
-                                             +' <input type="date"  value='+day+'        name="day"            class="d-none"  >' 
-                                            +' <input type="text"  value='+status+'   name="status"       class="d-none"  ></td>'
+                                            +' <input type="number"  value='+id+'       name="id"        class="d-none"  > ' 
+                                            +' <input type="number"  value='+eId+'      name="empId"        class="d-none"  > ' 
+                                            +' <input type="number"  value='+pId+'      name="projectId"    class="d-none"  > ' 
+                                            +' <input type="text"    value='+pName+'    name="projectName"  class="d-none"  > ' 
+                                            +' <input type="date"  value='+day+'        name="day"            class="d-none" > ' 
+                                            +' <input type="text"  value='+status+'     name="status"       class="d-none"  > '
+                                            +' <input type="text"  value='+descr+'      name="descr"       class="d-none"  > '
+                                            +'</td>';
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
-                                                // +' <input type="text"    value='+descr+'    name="descr"       class="d-none"  >' 
-                                            //add later on
-                                          
                                     }  
                                 }   
                                 row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">00</td>' );
@@ -335,7 +339,18 @@
                 };
                 fetchwork();
                 function  show(){
-                     html2json() ; // put it on log then return undefined
+
+                    $.ajax({
+                    type: 'post',
+                    url: 'savework',
+                    data:  html2json(),
+                    contentType: "application/json; charset=utf-8",
+                    traditional: true,
+                    success: function (data) {
+                        console.log("update data");
+                        }
+                    });
+                        
                 }
                 function html2json() {
                     var json = '[';
@@ -343,7 +358,7 @@
                     $('#tbtable tbody tr').each(function(i) {  
                         var itArr = []; 
                         $(this).find("td:eq(2)").each(function () { 
-                            if(! isNaN($(this).find("input:first").val())){
+                            if($(this).find("input:first").val() > 0 ){
                                $(this).find("input").each(function () {
                                    if(!isNaN(Number(jQuery(this).val()))){
                                        itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
@@ -359,7 +374,7 @@
                     $('#tbtable tbody tr').each(function(i) {  
                         var itArr = []; 
                         $(this).find("td:eq(3)").each(function () {
-                            if(!($(this).find("input:first").attr("name")=="hours")){
+                            if($(this).find("input:first").val() > 0 ){
                                $(this).find("input").each(function () {
                                    if(!isNaN(Number(jQuery(this).val()))){
                                        itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
@@ -375,8 +390,8 @@
                     $('#tbtable tbody tr').each(function(i) {  
                         var itArr = []; 
                         $(this).find("td:eq(4)").each(function () {
-                            if(!($(this).find("input:first").attr("name")=="hours")){
-                               $(this).find("input").each(function () {
+                            if($(this).find("input:first").val() > 0 ){
+                                $(this).find("input").each(function () {
                                    if(!isNaN(Number(jQuery(this).val()))){
                                        itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
                                    }
@@ -391,7 +406,7 @@
                     $('#tbtable tbody tr').each(function(i) {  
                         var itArr = []; 
                         $(this).find("td:eq(5)").each(function () {
-                            if(!($(this).find("input:first").attr("name")=="hours")){
+                            if($(this).find("input:first").val() > 0 ){
                                $(this).find("input").each(function () {
                                    if(!isNaN(Number(jQuery(this).val()))){
                                        itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
@@ -407,7 +422,7 @@
                     $('#tbtable tbody tr').each(function(i) {  
                         var itArr = []; 
                         $(this).find("td:eq(6)").each(function () {
-                            if(!($(this).find("input:first").attr("name")=="hours")){
+                            if($(this).find("input:first").val() > 0 ){
                                $(this).find("input").each(function () {
                                    if(!isNaN(Number(jQuery(this).val()))){
                                        itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
@@ -423,7 +438,7 @@
                     $('#tbtable tbody tr').each(function(i) {  
                         var itArr = []; 
                         $(this).find("td:eq(7)").each(function () {
-                            if(!($(this).find("input:first").attr("name")=="hours")){
+                            if($(this).find("input:first").val() > 0 ){
                                $(this).find("input").each(function () {
                                    if(!isNaN(Number(jQuery(this).val()))){
                                        itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
@@ -439,10 +454,7 @@
                     $('#tbtable tbody tr').each(function(i) {  
                         var itArr = []; 
                         $(this).find("td:eq(8)").each(function () {
-                            console.log( isNaN($(this).find("input:first").val()));
-                            // console.log(!isNaN(10));
-                            console.log($(this).find("input:first").val());
-                            if(!($(this).find("input:first").attr("name")=="hours")){
+                            if($(this).find("input:first").val() > 0 ){
                                $(this).find("input").each(function () {
                                    if(!isNaN(Number(jQuery(this).val()))){
                                        itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
@@ -457,6 +469,7 @@
                     }); 
                     json += otArr.join(",") + ']';
                     console.log(json);
+                    return json;
           
             }
         </script>
