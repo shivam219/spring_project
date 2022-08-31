@@ -8,34 +8,49 @@
 <head> 
     <title>Week Work Report</title>
     <style> 
+    /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+        /* Firefox */
+        input[type=number] {
+        -moz-appearance: textfield;
+        }
+
+        .inner{display:none; float: right}
+        .hoverArea:hover > .inner{display: block;}
+ 
         table {
             table-layout: fixed;
         }
+        
+        td:hover > .h-n {
+            width: 129px;
+            height: 60px;
+        }
+        .h-n{  
+        color: rgba(0, 0, 0, 1);  
+        width: 0px;
+        height: 0px;
+        position: absolute;  /* fixed that to contain*/
+        overflow: hidden;
+        font-family: Verdana;
+        text-align: center;
+        font-size: 12px;
+        letter-spacing: 0;
+        box-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
+        background-color: rgba(217.0000022649765, 236.00000113248825, 233.00000131130219, 1);
+        
+          
+       }
     </style>
     <link href="css/select@2.4.1.0.min.css" rel="stylesheet" />
     </head>
 
     <body>
-
-        <table class="table table-striped table-hover rounded mb-0 d-none " id="dptable" >        
-            <tr>
-                <td colspan="2">
-                    <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1">
-                        <option value="102">Abbott</option>
-                        <option value="105">Tech Mahindra</option>
-                    </select>
-                </td>
-                <td>  <p>Approved</p></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)" onchange="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)" onchange="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 web_v  cal" oninput="cal(this)" onchange="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)" onchange="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)" onchange="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)" onchange="cal(this)"   placeholder="HH"></td>
-                <td><input type="number" value="" min="0" class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)" onchange="cal(this)"   placeholder="HH"></td>
-                <td class="text-center">00 </td>
-            </tr>
-        </table>
+ 
 
         <div class="container">
             <form method="post" id="weekWorkFrom"action="esswork3tnlModels" >
@@ -74,8 +89,12 @@
                             <option value="105">Tech Mahindra</option>
                         </select>
                     </td>
+                    
                     <td> <input type="text" name="status" value="Approved" class="d-none">   <p>Approved</p></td>
-                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 mon_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                    <td>
+                        <input type="number" value="" min="0" class="form-control input-sm w-100 mon_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
+                        <span class="h-n ">   Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
+                    </td>
                     <td><input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
                     <td><input type="number" value="" min="0" class="form-control input-sm w-100 web_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
                     <td><input type="number" value="" min="0" class="form-control input-sm w-100 thu_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
@@ -101,6 +120,20 @@
                 </tfoot>
             </table>
         </form>
+        
+        </div> 
+            <div class="hoverArea">
+              lorem ipsum
+              <div class="inner">
+                <a href="">hidden...</a>
+              </div>
+            </div>
+              <div class="a_class hoverArea">
+                <div class="inner">
+                  <a href="">hidden...</a>
+                </div>
+                lorem ipsum
+              </div> 
         </div>
             <input type="button" id="btnSave" class="btn btn-primary btn-sm" value="Convert" onclick="save()">
         <!-- <script src="js/esswork.js"></script> -->
@@ -113,7 +146,7 @@
                 $("#addRow").on('click', function () {
                     event.preventDefault()
                     $(".selectProject.select2-hidden-accessible").select2('destroy');
-                    var row = $("#dptable tr").eq(0);
+                    var row = $("#tbtable tr").eq(1);
                     var newrow = row.clone();
                     $("#tbtable").append(newrow);
                     $('.selectProject').select2();

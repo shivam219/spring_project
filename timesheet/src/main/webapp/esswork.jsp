@@ -11,6 +11,39 @@
         table {
             table-layout: fixed;
         }
+         /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+        /* Firefox */
+        input[type=number] {
+        -moz-appearance: textfield;
+        }
+
+        .inner{display:none; float: right}
+        .hoverArea:hover > .inner{display: block;}
+        
+        td:hover > .h-n {
+            width: 129px;
+            height: 60px;
+        }
+        .h-n{  
+        color: rgba(0, 0, 0, 1);  
+        width: 0px;
+        height: 0px;
+        position: absolute;  /* fixed that to contain*/
+        overflow: hidden;
+        font-family: Verdana;
+        text-align: center;
+        font-size: 12px;
+        letter-spacing: 0;
+        box-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
+        background-color: rgba(217.0000022649765, 236.00000113248825, 233.00000131130219, 1);
+        
+          
+       }
     </style>
     <link href="css/select@2.4.1.0.min.css" rel="stylesheet" />
     
@@ -93,7 +126,10 @@
                                 </select>
                         </td>
                         <td>  <p>Approved</p></td>
-                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                        <td>
+                            <input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
+                            <span class="h-n ">  Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
+                        </td>
                         <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
                         <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
                         <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
@@ -348,6 +384,7 @@
                     traditional: true,
                     success: function (data) {
                         console.log("update data");
+                        fetchwork();
                         }
                     });
                         
