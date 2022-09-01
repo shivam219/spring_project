@@ -12,7 +12,7 @@
 	<button onclick="myFunction()">Click me</button>
 
 
-
+	<textarea id="txtArea" onclick="data()"  >asdfadsasdfad</textarea>
 
 	<br>
 	<input type="date" id="mydate" onchange="myFunction()">
@@ -20,6 +20,9 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script>
+		function data() {
+			console.log($("#txtArea").html());
+		}
 		function myFunction() {
 			document.getElementById("demo").innerHTML = "Hello World"; console.log("shiam");
 			// const today = new Date();

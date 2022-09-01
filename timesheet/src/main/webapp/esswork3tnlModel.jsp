@@ -20,29 +20,39 @@
         }
 
         .inner{display:none; float: right}
+
         .hoverArea:hover > .inner{display: block;}
  
         table {
             table-layout: fixed;
         }
-        
+        /* alt + shift  + arrow */
         td:hover > .h-n {
+            visibility: visible;
             width: 129px;
             height: 60px;
+            transition: all 0.2s ease-in-out;
+            /* display: block; */
         }
         .h-n{  
-        color: rgba(0, 0, 0, 1);  
+            /* display: none; */
+        color: rgb(52, 52, 52);  
         width: 0px;
+        resize: none;
         height: 0px;
+        visibility: hidden;
         position: absolute;  /* fixed that to contain*/
         overflow: hidden;
         font-family: Verdana;
         text-align: center;
         font-size: 12px;
         letter-spacing: 0;
+        transition: all 0.2s ease-in-out;
         box-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
+        border-radius:3px ;
+        border: none;
+        outline: none;
         background-color: rgba(217.0000022649765, 236.00000113248825, 233.00000131130219, 1);
-        
           
        }
     </style>
@@ -93,14 +103,38 @@
                     <td> <input type="text" name="status" value="Approved" class="d-none">   <p>Approved</p></td>
                     <td>
                         <input type="number" value="" min="0" class="form-control input-sm w-100 mon_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
-                        <span class="h-n ">   Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
+                        <span class="h-n  form-floating ">   Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
                     </td>
-                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 web_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 thu_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 fri_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 sat_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
-                    <td><input type="number" value="" min="0" class="form-control input-sm w-100 sun_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                    <td>
+                        <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
+                        <span class="h-n  form-floating ">   Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
+            
+                    </td>
+                    <td>
+                        <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
+                        <span class="h-n  form-floating ">   Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
+            
+                    </td>  
+                    <td>
+                        <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
+                        <span class="h-n  form-floating ">   Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
+            
+                    </td>
+                    <td>
+                        <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
+                        <span class="h-n  form-floating ">   Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
+            
+                    </td>
+                    <td>
+                        <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
+                        <textarea class="h-n  " >   Lorem Ipsum is simply dummy text of the printing and typesetting industry </textarea>
+            
+                    </td>
+                    <td>
+                        <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
+                        <span class="h-n   ">   Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
+            
+                    </td>
                     <td class="text-center">00 </td>
                 </tr>
                     

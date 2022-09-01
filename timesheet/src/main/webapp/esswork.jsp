@@ -23,26 +23,37 @@
         }
 
         .inner{display:none; float: right}
-        .hoverArea:hover > .inner{display: block;}
         
-        td:hover > .h-n {
+         /* alt + shift  + arrow */
+         td:hover > .h-n {
+            visibility: visible;
             width: 129px;
             height: 60px;
+            font-weight: 600;
+            padding-left: 7px;
+            padding-right: 7px;
+            font-size: 15px;  
+            /* display: block; */
         }
         .h-n{  
-        color: rgba(0, 0, 0, 1);  
+            /* display: none; */
+        color: rgb(52, 52, 52);
         width: 0px;
+        resize: none;
         height: 0px;
+        visibility: hidden;
         position: absolute;  /* fixed that to contain*/
         overflow: hidden;
         font-family: Verdana;
         text-align: center;
         font-size: 12px;
         letter-spacing: 0;
+        transition: all 0.2s ease-in-out;
         box-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
-        background-color: rgba(217.0000022649765, 236.00000113248825, 233.00000131130219, 1);
-        
-          
+        border-radius:3px ;
+        border: none;
+        outline: none;
+        background-color: rgba(217.0000022649765, 236.00000113248825, 233.00000131130219, 1);  
        }
     </style>
     <link href="css/select@2.4.1.0.min.css" rel="stylesheet" />
@@ -95,7 +106,7 @@
                     <button class="rounded btn-secondary h-75"><i class="fa-solid fa-caret-right rounded"></i> 
                 </div>
                 <div class="col  d-flex justify-content-center align-middle">
-                    <input type="button" class="btn btn-primary btn-sm pe-3 ps-3 me-2 h-75 rounded"  onclick="show()" value="save" >
+                    <input type="button" class="btn btn-primary btn-sm pe-3 ps-3 me-2 h-75 rounded"  onclick="tblDataSave()" value="save" id="btnSave" >
                     <input type="button" class="btn btn-primary btn-sm h-75 rounded" value="Submit">
                 </div>
                 
@@ -326,12 +337,9 @@
                                             +' <input type="text"    value='+pName+'    name="projectName" class="d-none"  > ' 
                                             +' <input type="date"    value='+day+'     name="day"         class="d-none"  >'  
                                             +' <input type="text"    value='+status+'     name="status"       class="d-none"  > '
+                                            +' <textarea class="h-n "  name="descr"  >  '+descr+'     </textarea>' 
                                             +' </td>';
-                                            
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
-                                            // +' <input type="text"      name="descr"       class="d-none"  >'
-                                            // description now saving now
-                                              
                                     } else{
                                         let id = d[i][1][j]["id"];
                                         let eId = d[i][1][j]["empId"];
@@ -349,7 +357,7 @@
                                             +' <input type="text"    value='+pName+'    name="projectName"  class="d-none"  > ' 
                                             +' <input type="date"  value='+day+'        name="day"            class="d-none" > ' 
                                             +' <input type="text"  value='+status+'     name="status"       class="d-none"  > '
-                                            +' <input type="text"  value='+descr+'      name="descr"       class="d-none"  > '
+                                            +' <textarea class="h-n "  name="descr"  >'+descr+'</textarea>' 
                                             +'</td>';
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
                                     }  
@@ -374,8 +382,8 @@
                     });
                 };
                 fetchwork();
-                function  show(){
-
+                function  tblDataSave(){
+                    $("#btnSave").blur();
                     $.ajax({
                     type: 'post',
                     url: 'savework',
@@ -404,6 +412,9 @@
                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
                                    }
                                });
+                               $(this).find("textarea").each(function () {
+                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
+                               });
                                otArr.push('{' + itArr.join(',') + '}');
                            };
                         });
@@ -419,6 +430,9 @@
                                    else{
                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
                                    }
+                               });
+                               $(this).find("textarea").each(function () {
+                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
                                });
                                otArr.push('{' + itArr.join(',') + '}');
                            };
@@ -436,6 +450,9 @@
                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
                                    }
                                });
+                               $(this).find("textarea").each(function () {
+                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
+                               });
                                otArr.push('{' + itArr.join(',') + '}');
                            };
                         });
@@ -452,6 +469,9 @@
                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
                                    }
                                });
+                               $(this).find("textarea").each(function () {
+                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
+                              });
                                otArr.push('{' + itArr.join(',') + '}');
                            };
                         });
@@ -468,6 +488,9 @@
                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
                                    }
                                });
+                               $(this).find("textarea").each(function () {
+                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
+                                 });
                                otArr.push('{' + itArr.join(',') + '}');
                            };
                         });
@@ -484,6 +507,9 @@
                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
                                    }
                                });
+                               $(this).find("textarea").each(function () {
+                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
+                              });
                                otArr.push('{' + itArr.join(',') + '}');
                            };
                         });
@@ -499,6 +525,9 @@
                                    else{
                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
                                    }
+                               });
+                               $(this).find("textarea").each(function () {
+                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
                                });
                                otArr.push('{' + itArr.join(',') + '}');
                            };
