@@ -60,7 +60,7 @@ public class WorkService {
 					w2.setProjectName(w.getProjectName());
 					w2.setDay(t.minusDays(i).toString());
 					w2.setHours("0");
-					w2.setDescr(" ");
+					w2.setDescr("");
 					w2.setStatus("Pending");
 					al.add(w2);
 				}
@@ -81,7 +81,7 @@ public class WorkService {
 					w2.setProjectName(w.getProjectName());
 					w2.setDay(t.minusDays(1).toString());
 					w2.setHours("0");
-					w2.setDescr(" ");
+					w2.setDescr("");
 					w2.setStatus("Pending");
 					ArrayList<Work> al = new ArrayList<Work>();
 					al.add(w2);
@@ -98,7 +98,7 @@ public class WorkService {
 						w2.setProjectName(w.getProjectName());
 						w2.setDay(t.minusDays(i).toString());
 						w2.setHours("0");
-						w2.setDescr(" ");
+						w2.setDescr("");
 						w2.setStatus("Pending");
 						al.add(w2);
 					}
@@ -114,7 +114,7 @@ public class WorkService {
 						w2.setProjectName(w.getProjectName());
 						w2.setDay(t.minusDays(i).toString());
 						w2.setHours("0");
-						w2.setDescr(" ");
+						w2.setDescr("");
 						w2.setStatus("Pending");
 						al.add(w2);
 					}
@@ -130,7 +130,7 @@ public class WorkService {
 						w2.setProjectName(w.getProjectName());
 						w2.setDay(t.minusDays(i).toString());
 						w2.setHours("0");
-						w2.setDescr(" ");
+						w2.setDescr("");
 						w2.setStatus("Pending");
 						al.add(w2);
 					}
@@ -146,7 +146,7 @@ public class WorkService {
 						w2.setProjectName(w.getProjectName());
 						w2.setDay(t.minusDays(i).toString());
 						w2.setHours("0");
-						w2.setDescr(" ");
+						w2.setDescr("");
 						w2.setStatus("Pending");
 						al.add(w2);
 					}
@@ -162,7 +162,7 @@ public class WorkService {
 						w2.setProjectName(w.getProjectName());
 						w2.setDay(t.minusDays(i).toString());
 						w2.setHours("0");
-						w2.setDescr(" ");
+						w2.setDescr("");
 						w2.setStatus("Pending");
 						al.add(w2);
 					}
@@ -170,7 +170,7 @@ public class WorkService {
 					map.put(w.getProjectName(), al);
 				}
 
-			}
+			} 
 
 		}
 		for (Map.Entry<String, List<Work>> entry : map.entrySet()) {
@@ -188,7 +188,7 @@ public class WorkService {
 				w2.setProjectName(wl.getProjectName());
 				w2.setDay(d1.plusDays(i).toString());
 				w2.setHours("0");
-				w2.setDescr(" ");
+				w2.setDescr("");
 				w2.setStatus("Pending");
 				al.add(w2);
 			}

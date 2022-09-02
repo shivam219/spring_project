@@ -55,6 +55,24 @@
         background-color: rgba(217.0000022649765, 236.00000113248825, 233.00000131130219, 1);
           
        }
+       .incomplete {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            vertical-align: -.125em;
+            background-color: currentColor;
+            border-radius: 50%;
+            color: #dc3545 !important;
+        }
+        .complete {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            vertical-align: -.125em;
+            background-color: currentColor;
+            border-radius: 50%;
+            color: #00ff4c !important;
+        }
     </style>
     <link href="css/select@2.4.1.0.min.css" rel="stylesheet" />
     </head>
@@ -102,27 +120,24 @@
                     
                     <td> <input type="text" name="status" value="Approved" class="d-none">   <p>Approved</p></td>
                     <td>
-                        <input type="number" value="" min="0" class="form-control input-sm w-100 mon_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
-                        <span class="h-n  form-floating ">   Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
+                        <input type="number" value="" min="0" class="form-control input-sm w-75 mon_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
+                        <textarea class="h-n  " > Shivam</textarea>
+                        <div class="incomplete text-danger"></div>
+                        <div class="complete text-danger"></div>
                     </td>
                     <td>
                         <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
-                        <span class="h-n  form-floating ">   Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
+                        <textarea class="h-n  " >   Lorem Ipsum is simply dummy text of the printing and typesetting industry </textarea>
             
                     </td>
                     <td>
                         <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
-                        <span class="h-n  form-floating ">   Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
+                        <textarea class="h-n  " >   Lorem Ipsum is simply dummy text of the printing and typesetting industry </textarea>
             
                     </td>  
                     <td>
                         <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
-                        <span class="h-n  form-floating ">   Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
-            
-                    </td>
-                    <td>
-                        <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
-                        <span class="h-n  form-floating ">   Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
+                        <textarea class="h-n  " >   Lorem Ipsum is simply dummy text of the printing and typesetting industry </textarea>
             
                     </td>
                     <td>
@@ -132,7 +147,12 @@
                     </td>
                     <td>
                         <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
-                        <span class="h-n   ">   Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
+                        <textarea class="h-n  " >   Lorem Ipsum is simply dummy text of the printing and typesetting industry </textarea>
+            
+                    </td>
+                    <td>
+                        <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
+                        <textarea class="h-n  " >   Lorem Ipsum is simply dummy text of the printing and typesetting industry </textarea>
             
                     </td>
                     <td class="text-center">00 </td>

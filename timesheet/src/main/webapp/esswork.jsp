@@ -25,18 +25,19 @@
         .inner{display:none; float: right}
         
          /* alt + shift  + arrow */
-         td:hover > .h-n {
+         td:focus-within > .h-n {
             visibility: visible;
-            width: 129px;
-            height: 60px;
-            font-weight: 600;
+            width: 140px;
+            height: 65px; 
             padding-left: 7px;
             padding-right: 7px;
             font-size: 15px;  
-            /* display: block; */
+             
+        }
+        .h-n:focus-visible {
+            visibility: visible;
         }
         .h-n{  
-            /* display: none; */
         color: rgb(52, 52, 52);
         width: 0px;
         resize: none;
@@ -320,7 +321,7 @@
                                     + '<td><p>Approved</p></td>';
 
                                 for (let j = 0; j <d[i][1].length; j++) {
-                                     
+                                     console.log(( new String( d[i][1][j]["descr"]).replace(/[\r\n\s]/gm, '').length > 1) && d[i][1][j]["hour"] == 0  ); 
                                     if( d[i][1][j]["id"] == 0){
                                         let eId = d[i][1][j]["empId"];
                                         let pId = d[i][1][j]["projectId"];
@@ -340,7 +341,28 @@
                                             +' <textarea class="h-n "  name="descr"  >  '+descr+'     </textarea>' 
                                             +' </td>';
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
-                                    } else{
+                                    } else if (d[i][1][j]["id"] == -1) {
+                                        let id = d[i][1][j]["id"];
+                                        let eId = d[i][1][j]["empId"];
+                                        let pId = d[i][1][j]["projectId"];
+                                        let pName = d[i][1][j]["projectName"];
+                                        let hours = d[i][1][j]["hours"]; 
+                                        let descr = d[i][1][j]["descr"];    
+                                        let day = d[i][1][j]["day"];   
+                                        let status = d[i][1][j]["status"];   
+                                        let   t = ' <td> ' 
+                                            +' <input type="number"  value='+hours+'    name="hours"        min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
+                                            +' <input type="number"  value='+id+'       name="id"        class="d-none"  > ' 
+                                            +' <input type="number"  value='+eId+'      name="empId"        class="d-none"  > ' 
+                                            +' <input type="number"  value='+pId+'      name="projectId"    class="d-none"  > ' 
+                                            +' <input type="text"    value='+pName+'    name="projectName"  class="d-none"  > ' 
+                                            +' <input type="date"  value='+day+'        name="day"            class="d-none" > ' 
+                                            +' <input type="text"  value='+status+'     name="status"       class="d-none"  > '
+                                            +' <textarea class="h-n "  name="descr"  >'+descr+'</textarea>' 
+                                            +'</td>';
+                                            row.innerHTML = (( row.innerHTML.toString()) + t);
+                                    } 
+                                    else{
                                         let id = d[i][1][j]["id"];
                                         let eId = d[i][1][j]["empId"];
                                         let pId = d[i][1][j]["projectId"];
@@ -395,7 +417,6 @@
                         fetchwork();
                         }
                     });
-                        
                 }
                 function html2json() {
                     var json = '[';
@@ -404,7 +425,7 @@
                         var itArr = []; 
                         $(this).find("td:eq(2)").each(function () { 
                             if($(this).find("input:first").val() > 0 ){
-                               $(this).find("input").each(function () {
+                                $(this).find("input").each(function () {
                                    if(!isNaN(Number(jQuery(this).val()))){
                                        itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
                                    }
@@ -416,6 +437,24 @@
                                 itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
                                });
                                otArr.push('{' + itArr.join(',') + '}');
+                           }else if(new String( $(this).find("textarea:first").val()).replace(/[\r\n\s]/gm, '').length > 1){
+                                $(this).find("input").each(function () {
+                                    if (!isNaN(Number(jQuery(this).val()))){
+                                        if($(this).attr("name")=="hours"){
+                                            itArr.push('"' + $(this).attr("name") + '" ' + ': 0 ');
+                                        }
+                                        else if(!isNaN(Number(jQuery(this).val()))){
+                                            itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                                        }
+                                    }
+                                    else{
+                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                                    }
+                                });
+                                $(this).find("textarea").each(function () {
+                                    itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
+                                });
+                                otArr.push('{' + itArr.join(',') + '}');
                            };
                         });
                     }); 
@@ -435,6 +474,24 @@
                                 itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
                                });
                                otArr.push('{' + itArr.join(',') + '}');
+                           }else if(new String( $(this).find("textarea:first").val()).replace(/[\r\n\s]/gm, '').length > 1){
+                                $(this).find("input").each(function () {
+                                    if (!isNaN(Number(jQuery(this).val()))){
+                                        if($(this).attr("name")=="hours"){
+                                            itArr.push('"' + $(this).attr("name") + '" ' + ': 0 ');
+                                        }
+                                        else if(!isNaN(Number(jQuery(this).val()))){
+                                            itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                                        }
+                                    }
+                                    else{
+                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                                    }
+                                });
+                                $(this).find("textarea").each(function () {
+                                    itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
+                                });
+                                otArr.push('{' + itArr.join(',') + '}');
                            };
                         });
                     });
@@ -454,6 +511,24 @@
                                 itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
                                });
                                otArr.push('{' + itArr.join(',') + '}');
+                           }else if(new String( $(this).find("textarea:first").val()).replace(/[\r\n\s]/gm, '').length > 1){
+                                $(this).find("input").each(function () {
+                                    if (!isNaN(Number(jQuery(this).val()))){
+                                        if($(this).attr("name")=="hours"){
+                                            itArr.push('"' + $(this).attr("name") + '" ' + ': 0 ');
+                                        }
+                                        else if(!isNaN(Number(jQuery(this).val()))){
+                                            itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                                        }
+                                    }
+                                    else{
+                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                                    }
+                                });
+                                $(this).find("textarea").each(function () {
+                                    itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
+                                });
+                                otArr.push('{' + itArr.join(',') + '}');
                            };
                         });
                     }); 
@@ -473,6 +548,24 @@
                                 itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
                               });
                                otArr.push('{' + itArr.join(',') + '}');
+                           }else if(new String( $(this).find("textarea:first").val()).replace(/[\r\n\s]/gm, '').length > 1){
+                                $(this).find("input").each(function () {
+                                    if (!isNaN(Number(jQuery(this).val()))){
+                                        if($(this).attr("name")=="hours"){
+                                            itArr.push('"' + $(this).attr("name") + '" ' + ': 0 ');
+                                        }
+                                        else if(!isNaN(Number(jQuery(this).val()))){
+                                            itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                                        }
+                                    }
+                                    else{
+                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                                    }
+                                });
+                                $(this).find("textarea").each(function () {
+                                    itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
+                                });
+                                otArr.push('{' + itArr.join(',') + '}');
                            };
                         });
                     }); 
@@ -492,6 +585,24 @@
                                 itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
                                  });
                                otArr.push('{' + itArr.join(',') + '}');
+                           }else if(new String( $(this).find("textarea:first").val()).replace(/[\r\n\s]/gm, '').length > 1){
+                                $(this).find("input").each(function () {
+                                    if (!isNaN(Number(jQuery(this).val()))){
+                                        if($(this).attr("name")=="hours"){
+                                            itArr.push('"' + $(this).attr("name") + '" ' + ': 0 ');
+                                        }
+                                        else if(!isNaN(Number(jQuery(this).val()))){
+                                            itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                                        }
+                                    }
+                                    else{
+                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                                    }
+                                });
+                                $(this).find("textarea").each(function () {
+                                    itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
+                                });
+                                otArr.push('{' + itArr.join(',') + '}');
                            };
                         });
                     }); 
@@ -511,6 +622,25 @@
                                 itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
                               });
                                otArr.push('{' + itArr.join(',') + '}');
+                           }
+                           else if(new String( $(this).find("textarea:first").val()).replace(/[\r\n\s]/gm, '').length > 1){
+                                $(this).find("input").each(function () {
+                                    if (!isNaN(Number(jQuery(this).val()))){
+                                        if($(this).attr("name")=="hours"){
+                                            itArr.push('"' + $(this).attr("name") + '" ' + ': 0 ');
+                                        }
+                                        else if(!isNaN(Number(jQuery(this).val()))){
+                                            itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                                        }
+                                    }
+                                    else{
+                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                                    }
+                                });
+                                $(this).find("textarea").each(function () {
+                                    itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
+                                });
+                                otArr.push('{' + itArr.join(',') + '}');
                            };
                         });
                     }); 
@@ -530,6 +660,24 @@
                                 itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
                                });
                                otArr.push('{' + itArr.join(',') + '}');
+                           }else if(new String( $(this).find("textarea:first").val()).replace(/[\r\n\s]/gm, '').length > 1){
+                                $(this).find("input").each(function () {
+                                    if (!isNaN(Number(jQuery(this).val()))){
+                                        if($(this).attr("name")=="hours"){
+                                            itArr.push('"' + $(this).attr("name") + '" ' + ': 0 ');
+                                        }
+                                        else if(!isNaN(Number(jQuery(this).val()))){
+                                            itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                                        }
+                                    }
+                                    else{
+                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                                    }
+                                });
+                                $(this).find("textarea").each(function () {
+                                    itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
+                                });
+                                otArr.push('{' + itArr.join(',') + '}');
                            };
                         });
                     }); 
