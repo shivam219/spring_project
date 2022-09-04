@@ -14,7 +14,7 @@ import com.timesheet.service.EmployeeService;
 import com.timesheet.service.ProjectService;
 
 @Controller
-public class Projectcontroller {
+public class ProjectController {
 
 	@Autowired
 	ProjectService projectService;
@@ -37,8 +37,7 @@ public class Projectcontroller {
 	}
 
 	@PostMapping("/projectassign")
-	public String assignprojectsave(Model m, @RequestParam("empList") long emp,
-			@RequestParam("projectList") int[] projectList) {
+	public String assignprojectsave(Model m, @RequestParam("empList") long emp, @RequestParam("projectList") int[] projectList) {
 		projectService.deleteByEmpId(emp);
 		for (int l2 : projectList) {
 			EmployeeProject ep = new EmployeeProject();
@@ -46,7 +45,7 @@ public class Projectcontroller {
 			ep.setProjectId(l2);
 			EmployeeProjectService.assignProject2(ep);
 		}
-
+		
 		commonDataModel(m);
 		return "projectmap";
 	}

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.timesheet.model.Employee;
 import com.timesheet.model.Project;
 import com.timesheet.repository.ProjectRepository;
 

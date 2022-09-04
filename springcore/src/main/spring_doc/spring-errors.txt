@@ -61,3 +61,9 @@ org.hibernate.AnnotationException: No identifier specified for entity: com.times
 
 13) auto wiring
 --byname - 
+
+14)	org.hibernate.exception.SQLGrammarException: could not execute statement
+	org.springframework.dao.InvalidDataAccessResourceUsageException: could not execute statement; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not execute statement
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:259)
+-- table drop hai
+	

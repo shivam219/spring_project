@@ -1,3 +1,6 @@
 1)Need spring security
 2)Need pop-up while delete row from weekly report table in esswork.jsp
 3)https://www.codegrepper.com/code-examples/javascript/jquery+clone+table+row cloing each row
+
+4) need global database to connect and use directly
+--discussion

@@ -13,8 +13,11 @@ import javax.persistence.Table;
 public class EmployeeProject {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "emp_pro_seq")
-	@SequenceGenerator(name = "emp_pro_seq" ,sequenceName = "emp_pro_seq" ,schema = "ess" )
+	@GeneratedValue(strategy = GenerationType.AUTO)
+//	--don't need different column to map
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "emp_pro_seq")
+//	@SequenceGenerator(name = "emp_pro_seq" ,sequenceName = "emp_pro_seq" ,schema = "ess" )
+//	--end
 //	@TableGenerator(name = "emp_pro_seq", table = "emp_pro_seq", schema = "ess")
 	@Column(name = "id")
 	private int id;
