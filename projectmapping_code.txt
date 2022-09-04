@@ -1,0 +1,35 @@
+<div class="form-group mb-3  d-none">
+							<label for="">Select Project</label> 
+							<select name="projectListOld" multiple id="projectList" class="form-control">
+								<c:forEach items="${projectList}" var="projectName" varStatus="loop">
+									<option value="${projectName.getProjectId()}">
+										${projectName.getProjectName()}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="form-group  d-none">
+							<button type="submit" onclick="show()" name="save_multi_select"
+								class="btn btn-primary">Assign Project</button>
+						</div>
+	//remove duplicate option in select tag
+						// $("#projectList").each(function() {
+						// 	$(this).siblings('[value="'+ this.value +'"]').remove();
+						// 	console.log("remove");
+						// });
+	// $('#projectList').append("<option value='" + obj[i]['projectId'] + "' selected > " + obj[i]['projectName'] + " </option>");
+
+
+	$(".js-example-basic-multiple-limit").select2({
+			maximumSelectionLength: 2
+		});
+
+
+
+btn-block -css
+    margin-top: 5px;
+    width: 100%;
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+    display: block;
+    cursor: pointer;

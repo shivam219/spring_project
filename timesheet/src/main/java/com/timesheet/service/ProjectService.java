@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.timesheet.model.Employee;
 import com.timesheet.model.Project;
 import com.timesheet.repository.ProjectRepository;
 
@@ -12,14 +13,20 @@ import com.timesheet.repository.ProjectRepository;
 public class ProjectService {
 
 	@Autowired
-	ProjectRepository projectRepository;
+	ProjectRepository repository;
 
 	public List<Project> getAllProject() {
-		return (List<Project>) projectRepository.findAll();
+		return (List<Project>) repository.findAll();
 	}
 
 	public List<Project> getProjectByEmpId(long empId) {
-		return (List<Project>) projectRepository.getProjectByEmpId(empId);
+		return (List<Project>) repository.getProjectByEmpId(empId);
 	}
-
+	public List<Project> getNonAssignProjectByEmpId(long empId) {
+		return (List<Project>) repository.getNonAssignProjectByEmpId(empId);
+	}
+	
+	public int deleteByEmpId(long empId) {
+		return repository.deleteByEmpId(empId);
+	}
 }

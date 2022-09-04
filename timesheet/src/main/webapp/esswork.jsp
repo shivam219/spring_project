@@ -22,32 +22,60 @@
         -moz-appearance: textfield;
         }
 
+        /* width */
+            ::-webkit-scrollbar {
+            width: 0px;
+            }
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey; 
+            border-radius: 10px;
+            }
+            
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+            background: rgb(241, 216, 216); 
+            border-radius: 10px;
+            }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+            background: #00ff40; 
+        }
         .inner{display:none; float: right}
         
          /* alt + shift  + arrow */
          td:focus-within > .h-n {
-            visibility: visible;
+             width: 140px;
+             height: 65px; 
+             padding-left: 7px;
+             padding-right: 7px;
+             font-size: 11px;  
+             visibility: visible;
+             overflow-y: auto;
+        }
+        td:hover > .h-n {
             width: 140px;
             height: 65px; 
-            padding-left: 7px;
+            padding-left: 7px; 
+            overflow-y: auto;
             padding-right: 7px;
-            font-size: 15px;  
-             
-        }
-        .h-n:focus-visible {
+            font-size: 11px;  
             visibility: visible;
         }
+      
         .h-n{  
         color: rgb(52, 52, 52);
         width: 0px;
         resize: none;
         height: 0px;
+        overflow-y: auto;
         visibility: hidden;
         position: absolute;  /* fixed that to contain*/
         overflow: hidden;
         font-family: Verdana;
         text-align: center;
-        font-size: 12px;
         letter-spacing: 0;
         transition: all 0.2s ease-in-out;
         box-shadow: 4px 4px 4px rgb(0 0 0 / 25%);

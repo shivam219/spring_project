@@ -17,38 +17,36 @@ import com.timesheet.service.ProjectService;
 public class Projectcontroller {
 
 	@Autowired
-	ProjectService projectservice;
+	ProjectService projectService;
 	@Autowired
 	EmployeeService employeeService;
- 
-	@Autowired  
+
+	@Autowired
 	EmployeeProjectService EmployeeProjectService;
-	
+
 	@ModelAttribute
 	public void commonDataModel(Model m) {
-		m.addAttribute("projectList", projectservice.getAllProject());
+		m.addAttribute("projectList", projectService.getAllProject());
 		m.addAttribute("empList", employeeService.getAllEmployee());
 	}
-	
-	 
+
 	@GetMapping("/projectmap")
 	public String assignproject(Model m) {
 		commonDataModel(m);
 		return "projectmap";
 	}
 
-	@PostMapping("/assignprojectsave")
-	public String assignprojectsave(Model m, @RequestParam("brandlist[]") long[] list,
-			@RequestParam("brandlist2[]") int[] list2) {
-
-		for (long l : list) {
-			for (int l2 : list2) {
-				EmployeeProject ep = new EmployeeProject();
-				ep.setEmpId(l);
-				ep.setProjectId(l2);			
-				EmployeeProjectService.assignProject2(ep);
-			}
+	@PostMapping("/projectassign")
+	public String assignprojectsave(Model m, @RequestParam("empList") long emp,
+			@RequestParam("projectList") int[] projectList) {
+		projectService.deleteByEmpId(emp);
+		for (int l2 : projectList) {
+			EmployeeProject ep = new EmployeeProject();
+			ep.setEmpId(emp);
+			ep.setProjectId(l2);
+			EmployeeProjectService.assignProject2(ep);
 		}
+
 		commonDataModel(m);
 		return "projectmap";
 	}

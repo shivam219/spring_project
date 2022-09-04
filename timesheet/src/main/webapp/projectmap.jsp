@@ -1,112 +1,127 @@
-<%@ include file="menu.jsp"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.Arrays"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"   "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="menu.jsp" %>
+<%@page import="java.util.List" %>
+<%@page import="java.util.Arrays" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 
 <head>
-<title>Project Mapping</title>
-<link href="css/select@2.4.1.0.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<title>Project Mapping</title>
+
+	<link href="css/select@2.4.1.0.min.css" rel="stylesheet" />
+	<!-- <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
+	<style>
+		.btn-util{
+			margin-top: 3px;
+			width: 100%;
+			background-color: #fff;
+			border-color: #ccc;
+			display: block;
+			cursor: pointer;
+		}
+	</style>
 </head>
 
 <body>
-
-
 	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-6 offest-3">
-
-				<div class="card-body">
-					<form action="assignprojectsave" method="POST">
-						<div class="form-group mb-3">
-							<label for="">Select Employee</label> <select name="brandlist[]"
-								multiple id="brandlist1[]" class="form-control">
-								<c:forEach items="${empList}" var="empName" varStatus="loop">
-									<option value="${empName.getEmpId()}">${empName.getEmpName()}</option>
-								</c:forEach>
-							</select>
-						</div>
-
-						<div class="form-group mb-3">
-							<label for="">Select Project</label> <select name="brandlist2[]"
-								multiple id="brandlist2[]" class="form-control">
-								<c:forEach items="${projectList}" var="projectName"
-									varStatus="loop">
-									<option value="${projectName.getProjectId()}">${projectName.getProjectName()}</option>
-								</c:forEach>
-							</select>
-						</div>
-						<div class="form-group">
-							<button type="submit" onclick="show()" name="save_multi_select"
-								class="btn btn-primary">Assign Project</button>
-						</div>
-					</form>
+		<form action="projectassign" method="POST">
+			<div class="row justify-content-center">
+				<div class="col-md-6 offest-3">
+					<div class="card-body">
+							<div class="form-group mb-3">
+								<label for="">Select Employee</label>
+								<select name="empList" id="empList" class="form-control sl-emp" oninput="myFunction()"  style="outline: none;"> 
+									<option value=""></option>
+									<c:forEach items="${empList}" var="empName" varStatus="loop">
+										<option value="${empName.getEmpId()}">${empName.getEmpName()}
+										</option>
+									</c:forEach>
+								</select>
+							</div>	
+					
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-
-	<script src="js/select2@4.1.0.min.js"></script>
-	<script>
-		$(".js-example-basic-multiple-limit").select2({
-			maximumSelectionLength : 2
-		});
-		$('select').select2({
-			placeholder : 'This is my placeholder',
-			allowClear : true
-		});
-		function show() {
-			console.log($("#brandlist").val());
-		}
-	</script>
-	<div class="row">
-				<div class="col-xs-5">
-					<select name="from" id="undo_redo" class="form-control" size="13" multiple="multiple">
-						<c:forEach items="${projectList}" var="projectName"	varStatus="loop">
-							<option value="${projectName.getProjectId()}">${projectName.getProjectName()}</option>
+			<div class="row justify-content-center">
+				<div class="col-md-3">
+					<select name="from" id="undo_redo" class="form-control" size="11" multiple="multiple">
+						<c:forEach items="${projectList}" var="projectName" varStatus="loop">
+							<option value="${projectName.getProjectId()}">${projectName.getProjectName()}
+							</option>
 						</c:forEach>
 					</select>
 				</div>
-				
-				<div class="col-xs-2">
-					<button type="button" id="undo_redo_undo" class="btn btn-primary btn-block">undo</button>
-					<button type="button" id="undo_redo_rightAll" class="btn btn-default btn-block"><i class="glyphicon glyphicon-forward"></i></button>
-					<button type="button" id="undo_redo_rightSelected" class="btn btn-default btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
-					<button type="button" id="undo_redo_leftSelected" class="btn btn-default btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
-					<button type="button" id="undo_redo_leftAll" class="btn btn-default btn-block"><i class="glyphicon glyphicon-backward"></i></button>
-					<button type="button" id="undo_redo_redo" class="btn btn-warning btn-block">redo</button>
+				<div class="col-md-2">
+					<button type="button" id="undo_redo_undo" 			class="btn btn-primary btn-util  " style="background-color: #0d6efd;border-color:#0d6efd; " >undo</button>
+					<button type="button" id="undo_redo_rightAll" 		class="btn btn-default btn-util  "><i class="fa-sharp fa-solid fa-forward"></i></button>
+					<button type="button" id="undo_redo_rightSelected"	class="btn btn-default btn-util  "><i class="fa-solid fa-caret-right"></i></button>
+					<button type="button" id="undo_redo_leftSelected" 	class="btn btn-default btn-util  "><i class="fa-solid fa-caret-left"></i></button>
+					<button type="button" id="undo_redo_leftAll" 		class="btn btn-default btn-util  "><i class="fa-sharp fa-solid fa-backward"></i></button>
+					<button type="button" id="undo_redo_redo" 			class="btn btn-warning btn-util  " style="background-color: #ffca2c; border-color:#ffca2c; " >redo</button>
 				</div>
 				
-				<div class="col-xs-5">
-					<select name="to" id="undo_redo_to" class="form-control" size="13" multiple="multiple"></select>
+				<div class="col-md-3">
+					<select name="projectList" id="undo_redo_to" class="form-control" size="11" multiple="multiple"></select>
 				</div>
 			</div>
-</div>
-<script src="js/multiselect.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-
-
-		$('#undo_redo').multiselect();
-	});
-	
+			<div class="row m-0 p-0 justify-content-center"> 
+				<div class="col-3 text-center ">
+					<button type="submit"  class="btn btn-primary ">Assign Project</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script src="js/select2@4.1.0.min.js"></script>
+	<script>
+		$('#empList,  #projectList').select2({
+			placeholder: "Search employee's",
+			allowClear: true
+		});
 	</script>
-<script type="text/javascript">
+	<script src="js/multiselect.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#undo_redo').multiselect();
+		});
+	</script>
+	
+	<script type="text/javascript">
+		function myFunction() { 
+			if ($('.sl-emp').val() == "") {
+				$('#undo_redo_to').find('option').remove().end();
+				$('#undo_redo').find('option').remove().end();
+			} else {
+				let uri = "fetchprojectemp?empId=" + $(".sl-emp").val();
+				$.ajax({
+					url: uri,
+					type: 'GET',
+					dataType: 'json',
+					success: function (obj, successMSG, event) { 
+						$('#undo_redo_to').find('option').remove().end();
+						for (let i = 0; i < obj.length; i++) {
+							$('#undo_redo_to').append("<option value='" + obj[i]['projectId'] + "' > " + obj[i]['projectName'] + " </option>");
+						}
+					}
+				});
+				let uri2 = "fetchnonprojectemp?empId=" + $(".sl-emp").val();
+				$.ajax({
+					url: uri2,
+					type: 'GET',
+					dataType: 'json',
+					success: function (obj, successMSG, event) { 
+						$('#undo_redo').find('option').remove().end();
+						for (let i = 0; i < obj.length; i++) { 
+							$('#undo_redo').append("<option value='" + obj[i]['projectId'] + "' > " + obj[i]['projectName'] + " </option>");
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36251023-1']);
-  _gaq.push(['_setDomainName', 'jqueryscript.net']);
-  _gaq.push(['_trackPageview']);
+						}
+					}
+				});
+			}
+		}
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+	</script>
 
-</script>
+
 
 </body>
 

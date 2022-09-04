@@ -10,7 +10,7 @@ import com.timesheet.repository.EmployeeProjectRepository;
 public class EmployeeProjectService {
 
 	public EmployeeProjectService() {
-	}
+		}
 
 	@Autowired
 	private EmployeeProjectRepository EmployeeProjectRepository;
@@ -27,7 +27,6 @@ public class EmployeeProjectService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
 		return employeeProject2;
 	}
 
