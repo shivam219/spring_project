@@ -46,7 +46,7 @@
         .inner{display:none; float: right}
         
          /* alt + shift  + arrow */
-         td:focus-within > .h-n {
+         td:focus-within .h-n {
              width: 140px;
              height: 65px; 
              padding-left: 7px;

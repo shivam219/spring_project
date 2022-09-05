@@ -24,12 +24,12 @@
 
 <body>
 	<div class="container">
-		<form action="projectassign" method="POST">
+		<form action="projectassign" method="POST" id="projectMappingForm">
 			<div class="row justify-content-center">
 				<div class="col-md-6 offest-3">
 					<div class="card-body">
 							<div class="form-group mb-3">
-								<label for="">Select Employee</label>
+								<label class="ms-1 fw-bold" >Select Employee</label>
 								<select name="empList" id="empList" class="form-control sl-emp" oninput="myFunction()"  style="outline: none;"> 
 									<option value=""></option>
 									<c:forEach items="${empList}" var="empName" varStatus="loop">
@@ -44,36 +44,35 @@
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-md-3">
-					<select name="from" id="undo_redo" class="form-control" size="11" multiple="multiple">
-						<c:forEach items="${projectList}" var="projectName" varStatus="loop">
-							<option value="${projectName.getProjectId()}">${projectName.getProjectName()}
-							</option>
-						</c:forEach>
+					<label class="ms-1 fw-bold" >Non Assign Project </label>
+					<select name="from" id="undo_redo" class="form-control" size="11" multiple="multiple"  >
+						 
 					</select>
 				</div>
-				<div class="col-md-2">
-					<button type="button" id="undo_redo_undo" 			class="btn btn-primary btn-util  " style="background-color: #0d6efd;border-color:#0d6efd; " >undo</button>
-					<button type="button" id="undo_redo_rightAll" 		class="btn btn-default btn-util  "><i class="fa-sharp fa-solid fa-forward"></i></button>
-					<button type="button" id="undo_redo_rightSelected"	class="btn btn-default btn-util  "><i class="fa-solid fa-caret-right"></i></button>
-					<button type="button" id="undo_redo_leftSelected" 	class="btn btn-default btn-util  "><i class="fa-solid fa-caret-left"></i></button>
-					<button type="button" id="undo_redo_leftAll" 		class="btn btn-default btn-util  "><i class="fa-sharp fa-solid fa-backward"></i></button>
-					<button type="button" id="undo_redo_redo" 			class="btn btn-warning btn-util  " style="background-color: #ffca2c; border-color:#ffca2c; " >redo</button>
+				<div class="col-md-2 mt-2">
+					<button type="button" id="undo_redo_undo" 			class="btn btn-sm btn-primary btn-util mt-4 " style="background-color: #0d6efd;border-color:#0d6efd; " >undo</button>
+					<button type="button" id="undo_redo_rightAll" 		class="btn btn-sm btn-default btn-util  "><i class="fa-sharp fa-solid fa-forward"></i></button>
+					<button type="button" id="undo_redo_rightSelected"	class="btn btn-sm btn-default btn-util  "><i class="fa-solid fa-caret-right"></i></button>
+					<button type="button" id="undo_redo_leftSelected" 	class="btn btn-sm btn-default btn-util  "><i class="fa-solid fa-caret-left"></i></button>
+					<button type="button" id="undo_redo_leftAll" 		class="btn btn-sm btn-default btn-util  "><i class="fa-sharp fa-solid fa-backward"></i></button>
+					<button type="button" id="undo_redo_redo" 			class="btn btn-sm btn-warning btn-util  " style="background-color: #ffca2c; border-color:#ffca2c; " >redo</button>
 				</div>
 				
 				<div class="col-md-3">
+					<label class="ms-1 fw-bold" > Assign Project</label>
 					<select name="projectList" id="undo_redo_to" class="form-control" size="11" multiple="multiple"></select>
 				</div>
 			</div>
 			<div class="row m-0 p-0 justify-content-center"> 
 				<div class="col-3 text-center ">
-					<button type="submit"  class="btn btn-primary ">Assign Project</button>
+					<button type="button"  class="btn btn-success my-2 px-3 "  id="btnSubmit">Assign Project</button>
 				</div>
 			</div>
 		</form>
 	</div>
 	<script src="js/select2@4.1.0.min.js"></script>
 	<script>
-		$('#empList,  #projectList').select2({
+		$('#empList').select2({
 			placeholder: "Search employee's",
 			allowClear: true
 		});
@@ -86,6 +85,19 @@
 	</script>
 	
 	<script type="text/javascript">
+		$("#btnSubmit").on("click", function (event) {
+
+			// console.log($("#empList").val()=="");
+			// automatic check value should present 
+			if($("#empList").val()){ 
+				if($("#undo_redo_to").children("option").val() == undefined){
+					$("#projectMappingForm").attr("action","projectdelete").submit();
+				}else{
+					$("#projectMappingForm").attr("action","projectassign").submit();
+				}
+			}
+				
+		});
 		function myFunction() { 
 			if ($('.sl-emp').val() == "") {
 				$('#undo_redo_to').find('option').remove().end();

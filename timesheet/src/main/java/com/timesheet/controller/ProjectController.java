@@ -37,16 +37,22 @@ public class ProjectController {
 	}
 
 	@PostMapping("/projectassign")
-	public String assignprojectsave(Model m, @RequestParam("empList") long emp, @RequestParam("projectList") int[] projectList) {
+	public String projectassign(Model m, @RequestParam("empList") long emp, @RequestParam("projectList") int[] projectList) {
 		projectService.deleteByEmpId(emp);
 		for (int l2 : projectList) {
 			EmployeeProject ep = new EmployeeProject();
 			ep.setEmpId(emp);
 			ep.setProjectId(l2);
 			EmployeeProjectService.assignProject2(ep);
-		}
-		
+		}	
 		commonDataModel(m);
 		return "projectmap";
 	}
+	@PostMapping("/projectdelete")
+	public String deleteByEmpId(Model m, @RequestParam("empList") long emp) {
+		projectService.deleteByEmpId(emp);
+		commonDataModel(m);
+		return "projectmap";
+	}
+	
 }
