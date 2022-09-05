@@ -408,61 +408,58 @@
                     });
                 };
                 fetchwork();
+              
                 function tblDataSave(){
                     $("#btnSave").blur();
                     $.ajax({
-                    type: 'post',
-                    url: 'savework',
-                    data:  html2json(),
-                    contentType: "application/json; charset=utf-8",
-                    traditional: true,
-                    success: function () {
-                        fetchwork();
+                        type: 'post',
+                        url: 'deletework',
+                        data:  html2jsonForDelete(),
+                        contentType: "application/json; charset=utf-8",
+                        traditional: true,
+                        success: function () {
                         }
-                    });
-                    html2jsonForDelete();
-                    // $("#btnSave").blur();
-                    // $.ajax({
-                    // type: 'post',
-                    // url: 'deletework',
-                    // data:  html2jsonForDelete(),
-                    // contentType: "application/json; charset=utf-8",
-                    // traditional: true,
-                    // success: function () {
-                    //     fetchwork();
+                    });     
+
+                    // let xhr = new XMLHttpRequest();
+                    // xhr.open("POST", 'deletework', true);
+                    // xhr.setRequestHeader("Content-Type", "application/json");
+                    // xhr.onreadystatechange = function () {
+                    //     if (xhr.readyState === 4 && xhr.status === 200) {
+                    //         result.innerHTML = this.responseText;
                     //     }
-                    // });
+                    // };
+                    // xhr.send(data2);
+                    $.ajax({
+                        type: 'post',
+                        url: 'savework',
+                        data:  html2json(),
+                        contentType: "application/json; charset=utf-8",
+                        traditional: true,
+                        success: function () {
+                            fetchwork();
+                        }
+                    });     
                 }
+                
                 function html2jsonForDelete(){
                     var json = '[';
                     var otArr = [];
                     $('#tbtable tbody tr').each(function(i) {  
                         var itArr = []; 
                         $(this).find("td").each(function () { 
-
-                            if($(this).find("input[name='id']").val() == undefined){
-                                $(this).find("input[name='id']").each(function () {
-                                    console.log( $(this).val());
-                                })
-                            }
-
-                            /*
-                            if($(this).find("input[name='id']").val() == undefined){
-                                $(this).find("input").each(function () {
-                                   if(!isNaN(Number(jQuery(this).val()))){
-                                       itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
-                                   }
-                                   else{
-                                       itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
-                                   }
-                               });
-                               otArr.push('{' + itArr.join(',') + '}');
-                            } */
-
+                            if($(this).find("input[name='id']").val()){
+                                if($(this).find("input[name='hours']").val()==""){
+                                    itArr.push('"id" ' + ': ' + $(this).find("input[name='id']").val() + ' ');
+                                    otArr.push('{' + itArr.join(',') + '}');
+                                    itArr.shift();
+                                }
+                            }                        
                         });
                     }); 
                     json += otArr.join(",") + ']';
                     console.log(json);
+                    return json;
                 }
 
                 function html2json() {
