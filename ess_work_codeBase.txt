@@ -1,0 +1,48 @@
+// for else part when save use description without putting hours
+else if(new String( $(this).find("textarea:first").val()).replace(/[\r\n\s]/gm, '').length > 1){
+                                $(this).find("input").each(function () {
+                                    if (!isNaN(Number(jQuery(this).val()))){
+                                        if($(this).attr("name")=="hours"){
+                                            itArr.push('"' + $(this).attr("name") + '" ' + ': 0 ');
+                                        }
+                                        else if(!isNaN(Number(jQuery(this).val()))){
+                                            itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                                        }
+                                    }
+                                    else{
+                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                                    }
+                                });
+                                $(this).find("textarea").each(function () {
+                                    itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
+                                });
+                                otArr.push('{' + itArr.join(',') + '}');
+                           };
+                           
+                           
+                           // add td when -1
+                           
+                            else if (d[i][1][j]["id"] == -1) {
+                                        let id = d[i][1][j]["id"];
+                                        let eId = d[i][1][j]["empId"];
+                                        let pId = d[i][1][j]["projectId"];
+                                        let pName = d[i][1][j]["projectName"];
+                                        let hours = d[i][1][j]["hours"]; 
+                                        let descr = d[i][1][j]["descr"];    
+                                        let day = d[i][1][j]["day"];   
+                                        let status = d[i][1][j]["status"];   
+                                        let   t = ' <td> ' 
+                                            +' <input type="number"  value='+hours+'    name="hours"        min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
+                                            +' <input type="number"  value='+id+'       name="id"        class="d-none"  > ' 
+                                            +' <input type="number"  value='+eId+'      name="empId"        class="d-none"  > ' 
+                                            +' <input type="number"  value='+pId+'      name="projectId"    class="d-none"  > ' 
+                                            +' <input type="text"    value='+pName+'    name="projectName"  class="d-none"  > ' 
+                                            +' <input type="date"  value='+day+'        name="day"            class="d-none" > ' 
+                                            +' <input type="text"  value='+status+'     name="status"       class="d-none"  > '
+                                            +' <textarea class="h-n "  name="descr"  >'+descr+'</textarea>' 
+                                            +'</td>';
+                                            row.innerHTML = (( row.innerHTML.toString()) + t);
+                                    } 
+                                    
+                                     console.log(( new String( d[i][1][j]["descr"]).replace(/[\r\n\s]/gm, '').length > 1) && d[i][1][j]["hour"] == 0  ); 
+                                    

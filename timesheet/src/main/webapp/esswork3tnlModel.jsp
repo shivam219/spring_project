@@ -18,24 +18,36 @@
         input[type=number] {
         -moz-appearance: textfield;
         }
-
-        .inner{display:none; float: right}
-
-        .hoverArea:hover > .inner{display: block;}
- 
         table {
             table-layout: fixed;
         }
         /* alt + shift  + arrow */
-        td:hover > .h-n {
+        /* td:hover > .h-n {
             visibility: visible;
             width: 129px;
             height: 60px;
-            transition: all 0.2s ease-in-out;
-            /* display: block; */
+            transition: all 0.2s ease-in-out; 
+        } */
+        /* old code esswork */
+        /* td:focus-within .h-n {
+             width: 140px;
+             height: 65px; 
+             padding-left: 7px;
+             padding-right: 7px;
+             font-size: 11px;  
+             visibility: visible;
+             overflow-y: auto;
         }
-        .h-n{  
-            /* display: none; */
+        td:hover > .h-n {
+            width: 140px;
+            height: 65px; 
+            padding-left: 7px; 
+            overflow-y: auto;
+            padding-right: 7px;
+            font-size: 11px;  
+            visibility: visible;
+        } */
+        .h-n{   
         color: rgb(52, 52, 52);  
         width: 0px;
         resize: none;
@@ -120,79 +132,41 @@
                     
                     <td> <input type="text" name="status" value="Approved" class="d-none">   <p>Approved</p></td>
                     <td>
-                        <input type="number" value="" min="0" class="form-control input-sm w-75 mon_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
+                        <input type="number" value="7" min="0" name="hour" class="form-control input-sm w-75 mon_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
                         <textarea class="h-n  " > Shivam</textarea>
-                        <div class="incomplete text-danger"></div>
-                        <div class="complete text-danger"></div>
                     </td>
+                   
                     <td>
-                        <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
-                        <textarea class="h-n  " >   Lorem Ipsum is simply dummy text of the printing and typesetting industry </textarea>
-            
-                    </td>
-                    <td>
-                        <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
-                        <textarea class="h-n  " >   Lorem Ipsum is simply dummy text of the printing and typesetting industry </textarea>
-            
-                    </td>  
-                    <td>
-                        <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
-                        <textarea class="h-n  " >   Lorem Ipsum is simply dummy text of the printing and typesetting industry </textarea>
-            
-                    </td>
-                    <td>
-                        <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
-                        <textarea class="h-n  " >   Lorem Ipsum is simply dummy text of the printing and typesetting industry </textarea>
-            
-                    </td>
-                    <td>
-                        <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
-                        <textarea class="h-n  " >   Lorem Ipsum is simply dummy text of the printing and typesetting industry </textarea>
-            
-                    </td>
-                    <td>
-                        <input type="number" value="" min="0" class="form-control input-sm w-100 tue_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
-                        <textarea class="h-n  " >   Lorem Ipsum is simply dummy text of the printing and typesetting industry </textarea>
-            
+                        <input type="number" value="" min="0" name="hour" class="form-control input-sm w-75 mon_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
+                        <textarea class="h-n  " > Shivam</textarea>
                     </td>
                     <td class="text-center">00 </td>
                 </tr>
-                    
-                <tfoot>
-                    <td colspan="3" class="text-center ">  
-                        <input type="button" value="+" id="addRow"   class="btn btn-success btn-sm rounded-circle me-4 " style="height: 40px; width: 40px; " >
-                        <input type="button" value="-" id="removeRow"   class="btn btn-success btn-sm rounded-circle  " style="height: 40px; width: 40px; " >
-                    </td>
-                    <td class="text-center" id="mov_v_t">00</td>
-                    <td class="text-center" id="tue_v_t">00</td>
-                    <td class="text-center" id="web_v_t">00</td>
-                    <td class="text-center" id="thu_v_t">00</td>
-                    <td class="text-center" id="fri_v_t">00</td>
-                    <td class="text-center" id="sat_v_t">00</td>
-                    <td class="text-center" id="sun_v_t">00</td>
-                    <td class="text-center" id="htotal"  >00</td>
-                </tfoot>
             </table>
         </form>
         
-        </div> 
-            <div class="hoverArea">
-              lorem ipsum
-              <div class="inner">
-                <a href="">hidden...</a>
-              </div>
-            </div>
-              <div class="a_class hoverArea">
-                <div class="inner">
-                  <a href="">hidden...</a>
-                </div>
-                lorem ipsum
-              </div> 
-        </div>
-            <input type="button" id="btnSave" class="btn btn-primary btn-sm" value="Convert" onclick="save()">
-        <!-- <script src="js/esswork.js"></script> -->
+         
+        <input type="button" id="btnSave" class="btn btn-primary btn-sm" value="Convert" onclick="save()">
         <script src="js/select2@4.1.0.min.js"></script>
-        <script>
+        <script> 
+            $("td").hover(
+                function(){ 
+                    if($(this).find("input:first").val()!="" && $(this).find("input:first").val()!=0  ){
+                        $(this).children(" .h-n").css({"visibility":"visible" ,"width": "129px" ,"height" :"60px", "transition": "all 0.2s ease-in-out;" });
+                    }
+                },
+                function(){
+                    $(this).children(" .h-n").css({"visibility":"hidden" ,"width": "0px" ,"height" :"0px", "transition": "all 0.2s ease-in-out;" });
+                }
+            );
+            $("td input").on("input" , function () {
+                if($(this).val()!="" && $(this).val()!=0  ){
+                    $(this).siblings(".h-n").css({"visibility":"visible" ,"width": "129px" ,"height" :"60px", "transition": "all 0.2s ease-in-out;" });
+                }else{
+                    $(this).siblings(".h-n").css({"visibility":"hidden" ,"width": "0px" ,"height" :"0px", "transition": "all 0.2s ease-in-out;" });
+                }      
+            })
+           
             $(function () {
                 $('select').select2();
             });

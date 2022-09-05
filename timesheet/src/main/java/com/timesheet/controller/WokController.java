@@ -50,7 +50,15 @@ public class WokController {
 	@PostMapping("/savework")
 	public ResponseEntity<Object> saveWork(Model m, @RequestBody List<Work> work) {
 		if (workService.saveAllWork(work)) {
-			return ResponseEntity.status(HttpStatus.CREATED).body("Save data");
+			return ResponseEntity.status(HttpStatus.CREATED).body("Shivam prahsnat");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Not save error");
+		}
+	}
+	@PostMapping("/deletework")
+	public ResponseEntity<Object> deleteWork(Model m, @RequestBody List<Work> work) {
+		if (workService.deleteAllWork(work)) {
+			return ResponseEntity.status(HttpStatus.RESET_CONTENT).body("delete data");
 		} else {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Not save error");
 		}

@@ -42,29 +42,7 @@
             /* Handle on hover */
             ::-webkit-scrollbar-thumb:hover {
             background: #00ff40; 
-        }
-        .inner{display:none; float: right}
-        
-         /* alt + shift  + arrow */
-         td:focus-within .h-n {
-             width: 140px;
-             height: 65px; 
-             padding-left: 7px;
-             padding-right: 7px;
-             font-size: 11px;  
-             visibility: visible;
-             overflow-y: auto;
-        }
-        td:hover > .h-n {
-            width: 140px;
-            height: 65px; 
-            padding-left: 7px; 
-            overflow-y: auto;
-            padding-right: 7px;
-            font-size: 11px;  
-            visibility: visible;
-        }
-      
+        }    
         .h-n{  
         color: rgb(52, 52, 52);
         width: 0px;
@@ -89,12 +67,9 @@
     
     </head>
 
-    <body>
-        <script>
-          
-        </script>
+    <body> 
 
-        <table class="table table-striped table-hover rounded mb-0 d-none " id="dptable" >        
+         <table class="table table-striped table-hover rounded mb-0 d-none " id="dptable" >        
             <tr>
                 <td colspan="2">
                     <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1">
@@ -196,9 +171,30 @@
             </table>
         
         </div>
-        <!-- <script src="js/esswork.js"></script> -->
+     
         <script src="js/select2@4.1.0.min.js"></script>
         <script>
+            function applyJavaScritp(){    
+                $("td").hover(
+                    function(){ 
+                        if($(this).find("input:first").val()!="" && $(this).find("input:first").val()!=0  ){
+                            $(this).children(" .h-n").css({"visibility":"visible" ,"width": "129px" ,"height" :"60px", "transition": "all 0.2s ease-in-out;" });
+                        }
+                    },
+                    function(){
+                        $(this).children(" .h-n").css({"visibility":"hidden" ,"width": "0px" ,"height" :"0px", "transition": "all 0.2s ease-in-out;" });
+                    }
+                );
+                $("td input").on("input" , function () {
+                    if($(this).val()!="" && $(this).val()!=0  ){
+                        $(this).siblings(".h-n").css({"visibility":"visible" ,"width": "129px" ,"height" :"60px", "transition": "all 0.2s ease-in-out;" });
+                    }else{
+                        $(this).siblings(".h-n").css({"visibility":"hidden" ,"width": "0px" ,"height" :"0px", "transition": "all 0.2s ease-in-out;" });
+                    }      
+                });
+            };
+            applyJavaScritp();
+
             $(function () {
                 $('select').select2();
             });
@@ -211,6 +207,7 @@
                     $("#tbtable").append(newrow);
                     $('.selectProject').select2();
                     $("#addRow").blur();
+                    applyJavaScritp();
                     tblRefresh();
                 });
             });
@@ -244,7 +241,7 @@
                 calculate();
             }
 
-           function calculate(){
+            function calculate(){
                 let mon = 0;             
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(2).each(function(){
@@ -320,7 +317,7 @@
                     }) 
                 });  
                 $("#htotal").html(total==0?"00":total); 
-            }
+            };
 
       
             function fetchwork(){   
@@ -349,7 +346,6 @@
                                     + '<td><p>Approved</p></td>';
 
                                 for (let j = 0; j <d[i][1].length; j++) {
-                                     console.log(( new String( d[i][1][j]["descr"]).replace(/[\r\n\s]/gm, '').length > 1) && d[i][1][j]["hour"] == 0  ); 
                                     if( d[i][1][j]["id"] == 0){
                                         let eId = d[i][1][j]["empId"];
                                         let pId = d[i][1][j]["projectId"];
@@ -358,7 +354,6 @@
                                         let descr = d[i][1][j]["descr"];   
                                         let day = d[i][1][j]["day"];   
                                         let status = d[i][1][j]["status"];   
-    
                                         let t =  '<td>'
                                             +' <input type="number"    name="hours"          min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
                                             +' <input type="number"  value='+eId+'      name="empId"       class="d-none"  > ' 
@@ -368,28 +363,8 @@
                                             +' <input type="text"    value='+status+'     name="status"       class="d-none"  > '
                                             +' <textarea class="h-n "  name="descr"  >  '+descr+'     </textarea>' 
                                             +' </td>';
-                                            row.innerHTML = (( row.innerHTML.toString()) + t);
-                                    } else if (d[i][1][j]["id"] == -1) {
-                                        let id = d[i][1][j]["id"];
-                                        let eId = d[i][1][j]["empId"];
-                                        let pId = d[i][1][j]["projectId"];
-                                        let pName = d[i][1][j]["projectName"];
-                                        let hours = d[i][1][j]["hours"]; 
-                                        let descr = d[i][1][j]["descr"];    
-                                        let day = d[i][1][j]["day"];   
-                                        let status = d[i][1][j]["status"];   
-                                        let   t = ' <td> ' 
-                                            +' <input type="number"  value='+hours+'    name="hours"        min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
-                                            +' <input type="number"  value='+id+'       name="id"        class="d-none"  > ' 
-                                            +' <input type="number"  value='+eId+'      name="empId"        class="d-none"  > ' 
-                                            +' <input type="number"  value='+pId+'      name="projectId"    class="d-none"  > ' 
-                                            +' <input type="text"    value='+pName+'    name="projectName"  class="d-none"  > ' 
-                                            +' <input type="date"  value='+day+'        name="day"            class="d-none" > ' 
-                                            +' <input type="text"  value='+status+'     name="status"       class="d-none"  > '
-                                            +' <textarea class="h-n "  name="descr"  >'+descr+'</textarea>' 
-                                            +'</td>';
-                                            row.innerHTML = (( row.innerHTML.toString()) + t);
-                                    } 
+                                        row.innerHTML = (( row.innerHTML.toString()) + t);
+                                    }
                                     else{
                                         let id = d[i][1][j]["id"];
                                         let eId = d[i][1][j]["empId"];
@@ -409,7 +384,7 @@
                                             +' <input type="text"  value='+status+'     name="status"       class="d-none"  > '
                                             +' <textarea class="h-n "  name="descr"  >'+descr+'</textarea>' 
                                             +'</td>';
-                                            row.innerHTML = (( row.innerHTML.toString()) + t);
+                                        row.innerHTML = (( row.innerHTML.toString()) + t);
                                     }  
                                 }   
                                 row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">00</td>' );
@@ -418,6 +393,7 @@
                                 $('.selectProject').select2();
                                 calculate();
                                 calRowOnLoad();
+                                applyJavaScritp();
                             }
                         }
                     });
@@ -432,7 +408,7 @@
                     });
                 };
                 fetchwork();
-                function  tblDataSave(){
+                function tblDataSave(){
                     $("#btnSave").blur();
                     $.ajax({
                     type: 'post',
@@ -440,12 +416,55 @@
                     data:  html2json(),
                     contentType: "application/json; charset=utf-8",
                     traditional: true,
-                    success: function (data) {
-                        console.log("update data");
+                    success: function () {
                         fetchwork();
                         }
                     });
+                    html2jsonForDelete();
+                    // $("#btnSave").blur();
+                    // $.ajax({
+                    // type: 'post',
+                    // url: 'deletework',
+                    // data:  html2jsonForDelete(),
+                    // contentType: "application/json; charset=utf-8",
+                    // traditional: true,
+                    // success: function () {
+                    //     fetchwork();
+                    //     }
+                    // });
                 }
+                function html2jsonForDelete(){
+                    var json = '[';
+                    var otArr = [];
+                    $('#tbtable tbody tr').each(function(i) {  
+                        var itArr = []; 
+                        $(this).find("td").each(function () { 
+
+                            if($(this).find("input[name='id']").val() == undefined){
+                                $(this).find("input[name='id']").each(function () {
+                                    console.log( $(this).val());
+                                })
+                            }
+
+                            /*
+                            if($(this).find("input[name='id']").val() == undefined){
+                                $(this).find("input").each(function () {
+                                   if(!isNaN(Number(jQuery(this).val()))){
+                                       itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
+                                   }
+                                   else{
+                                       itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
+                                   }
+                               });
+                               otArr.push('{' + itArr.join(',') + '}');
+                            } */
+
+                        });
+                    }); 
+                    json += otArr.join(",") + ']';
+                    console.log(json);
+                }
+
                 function html2json() {
                     var json = '[';
                     var otArr = [];
@@ -465,25 +484,7 @@
                                 itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
                                });
                                otArr.push('{' + itArr.join(',') + '}');
-                           }else if(new String( $(this).find("textarea:first").val()).replace(/[\r\n\s]/gm, '').length > 1){
-                                $(this).find("input").each(function () {
-                                    if (!isNaN(Number(jQuery(this).val()))){
-                                        if($(this).attr("name")=="hours"){
-                                            itArr.push('"' + $(this).attr("name") + '" ' + ': 0 ');
-                                        }
-                                        else if(!isNaN(Number(jQuery(this).val()))){
-                                            itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
-                                        }
-                                    }
-                                    else{
-                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
-                                    }
-                                });
-                                $(this).find("textarea").each(function () {
-                                    itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
-                                });
-                                otArr.push('{' + itArr.join(',') + '}');
-                           };
+                           }
                         });
                     }); 
                     $('#tbtable tbody tr').each(function(i) {  
@@ -502,25 +503,7 @@
                                 itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
                                });
                                otArr.push('{' + itArr.join(',') + '}');
-                           }else if(new String( $(this).find("textarea:first").val()).replace(/[\r\n\s]/gm, '').length > 1){
-                                $(this).find("input").each(function () {
-                                    if (!isNaN(Number(jQuery(this).val()))){
-                                        if($(this).attr("name")=="hours"){
-                                            itArr.push('"' + $(this).attr("name") + '" ' + ': 0 ');
-                                        }
-                                        else if(!isNaN(Number(jQuery(this).val()))){
-                                            itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
-                                        }
-                                    }
-                                    else{
-                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
-                                    }
-                                });
-                                $(this).find("textarea").each(function () {
-                                    itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
-                                });
-                                otArr.push('{' + itArr.join(',') + '}');
-                           };
+                           }
                         });
                     });
                     $('#tbtable tbody tr').each(function(i) {  
@@ -539,25 +522,7 @@
                                 itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
                                });
                                otArr.push('{' + itArr.join(',') + '}');
-                           }else if(new String( $(this).find("textarea:first").val()).replace(/[\r\n\s]/gm, '').length > 1){
-                                $(this).find("input").each(function () {
-                                    if (!isNaN(Number(jQuery(this).val()))){
-                                        if($(this).attr("name")=="hours"){
-                                            itArr.push('"' + $(this).attr("name") + '" ' + ': 0 ');
-                                        }
-                                        else if(!isNaN(Number(jQuery(this).val()))){
-                                            itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
-                                        }
-                                    }
-                                    else{
-                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
-                                    }
-                                });
-                                $(this).find("textarea").each(function () {
-                                    itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
-                                });
-                                otArr.push('{' + itArr.join(',') + '}');
-                           };
+                           } 
                         });
                     }); 
                     $('#tbtable tbody tr').each(function(i) {  
@@ -576,25 +541,7 @@
                                 itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
                               });
                                otArr.push('{' + itArr.join(',') + '}');
-                           }else if(new String( $(this).find("textarea:first").val()).replace(/[\r\n\s]/gm, '').length > 1){
-                                $(this).find("input").each(function () {
-                                    if (!isNaN(Number(jQuery(this).val()))){
-                                        if($(this).attr("name")=="hours"){
-                                            itArr.push('"' + $(this).attr("name") + '" ' + ': 0 ');
-                                        }
-                                        else if(!isNaN(Number(jQuery(this).val()))){
-                                            itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
-                                        }
-                                    }
-                                    else{
-                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
-                                    }
-                                });
-                                $(this).find("textarea").each(function () {
-                                    itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
-                                });
-                                otArr.push('{' + itArr.join(',') + '}');
-                           };
+                           } 
                         });
                     }); 
                     $('#tbtable tbody tr').each(function(i) {  
@@ -613,25 +560,7 @@
                                 itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
                                  });
                                otArr.push('{' + itArr.join(',') + '}');
-                           }else if(new String( $(this).find("textarea:first").val()).replace(/[\r\n\s]/gm, '').length > 1){
-                                $(this).find("input").each(function () {
-                                    if (!isNaN(Number(jQuery(this).val()))){
-                                        if($(this).attr("name")=="hours"){
-                                            itArr.push('"' + $(this).attr("name") + '" ' + ': 0 ');
-                                        }
-                                        else if(!isNaN(Number(jQuery(this).val()))){
-                                            itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
-                                        }
-                                    }
-                                    else{
-                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
-                                    }
-                                });
-                                $(this).find("textarea").each(function () {
-                                    itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
-                                });
-                                otArr.push('{' + itArr.join(',') + '}');
-                           };
+                           } 
                         });
                     }); 
                     $('#tbtable tbody tr').each(function(i) {  
@@ -650,26 +579,7 @@
                                 itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
                               });
                                otArr.push('{' + itArr.join(',') + '}');
-                           }
-                           else if(new String( $(this).find("textarea:first").val()).replace(/[\r\n\s]/gm, '').length > 1){
-                                $(this).find("input").each(function () {
-                                    if (!isNaN(Number(jQuery(this).val()))){
-                                        if($(this).attr("name")=="hours"){
-                                            itArr.push('"' + $(this).attr("name") + '" ' + ': 0 ');
-                                        }
-                                        else if(!isNaN(Number(jQuery(this).val()))){
-                                            itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
-                                        }
-                                    }
-                                    else{
-                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
-                                    }
-                                });
-                                $(this).find("textarea").each(function () {
-                                    itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
-                                });
-                                otArr.push('{' + itArr.join(',') + '}');
-                           };
+                            }
                         });
                     }); 
                     $('#tbtable tbody tr').each(function(i) {  
@@ -688,34 +598,15 @@
                                 itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
                                });
                                otArr.push('{' + itArr.join(',') + '}');
-                           }else if(new String( $(this).find("textarea:first").val()).replace(/[\r\n\s]/gm, '').length > 1){
-                                $(this).find("input").each(function () {
-                                    if (!isNaN(Number(jQuery(this).val()))){
-                                        if($(this).attr("name")=="hours"){
-                                            itArr.push('"' + $(this).attr("name") + '" ' + ': 0 ');
-                                        }
-                                        else if(!isNaN(Number(jQuery(this).val()))){
-                                            itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
-                                        }
-                                    }
-                                    else{
-                                        itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
-                                    }
-                                });
-                                $(this).find("textarea").each(function () {
-                                    itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
-                                });
-                                otArr.push('{' + itArr.join(',') + '}');
-                           };
+                           }
                         });
                     }); 
-                    json += otArr.join(",") + ']';
-                    console.log(json);
-                    return json;
-          
+                json += otArr.join(",") + ']';
+                console.log(json);
+                return json;
             }
         </script>
     </body>
 
-    </html>
-    <%@ include file="footer-fixed-bottom.jsp" %>
+</html>
+<%@ include file="footer-fixed-bottom.jsp" %>

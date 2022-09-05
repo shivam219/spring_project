@@ -11,6 +11,25 @@
         table {
             table-layout: fixed;
         }
+        .h-n{   
+        color: rgb(52, 52, 52);  
+        width: 160px;
+        resize: none;
+        height: 34px;
+        visibility: hidden;
+        position: absolute;  /* fixed that to contain*/
+        overflow: hidden;
+        font-family: Verdana;
+        text-align: center;
+        font-size: 12px;
+        letter-spacing: 0;
+        transition: all 0.2s ease-in-out;
+        box-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
+        border-radius:3px ;
+        border: none;
+        outline: none;
+        background-color: rgba(217.0000022649765, 236.00000113248825, 233.00000131130219, 1);
+       }
     </style>
     <link href="css/select@2.4.1.0.min.css" rel="stylesheet" />
     </head>
@@ -35,31 +54,38 @@
                 <td>
                     <input type="number" value="" min="1" name="mon" class="form-control input-sm w-100 mon_v  cal" oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
                     <input type="text"  name="monDes"class="d-none" value=''/>
+                      <textarea class="h-n  " > Shivam</textarea>
                 </td>
                 <td>
                     <input type="number" value="" min="1" name="tue" class="form-control input-sm w-100 tue_v  cal" oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
                     <input type="text"  name="tueDes"class="d-none" value=''/>
+                      <textarea class="h-n  " > Shivam</textarea>
                 </td>
                 
                 <td>
                     <input type="number" value="" min="1" name="wed" class="form-control input-sm w-100 web_v  cal" oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
                     <input type="text"  name="wedDes"class="d-none" value=''/>
+                      <textarea class="h-n  " > Shivam</textarea>
                 </td>
                 <td>
                     <input type="number" value="" min="1" name="thu" class="form-control input-sm w-100 thu_v  cal" oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
                     <input type="text"  name="thuDes"class="d-none" value=''/>
+                      <textarea class="h-n  " > Shivam</textarea>
                 </td>
                 <td>
                     <input type="number" value="" min="1" name="fri" class="form-control input-sm w-100 fri_v  cal" oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
                     <input type="text"  name="friDes"class="d-none" value=''/>
+                      <textarea class="h-n  " > Shivam</textarea>
                 </td>
                 <td>
                     <input type="number" value="" min="1" name="sat" class="form-control input-sm w-100 sat_v  cal" oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
                     <input type="text"  name="satDes"class="d-none" value=''/>
+                      <textarea class="h-n  " > Shivam</textarea>
                 </td>
                 <td>
                     <input type="number" value="" min="1" name="sun" class="form-control input-sm w-100 sun_v  cal" oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
                     <input type="text"  name="sunDes"class="d-none" value=''/>
+                      <textarea class="h-n  " > Shivam</textarea>
                 </td>
                 <td class="text-center" id="htotol">00 </td>
             </tr>
@@ -164,13 +190,34 @@
                               </select>
                         </td>
                         <td>  <input type="text" name="status" value="Approved" class="d-none">    <p>Approved</p></td>
-                        <td><input type="number" value="" min="1" class="form-control input-sm w-100 mon_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH"></td>
-                        <td><input type="number" value="" min="1" class="form-control input-sm w-100 tue_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH"></td>
-                        <td><input type="number" value="" min="1" class="form-control input-sm w-100 web_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH"></td>
-                        <td><input type="number" value="" min="1" class="form-control input-sm w-100 thu_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH"></td>
-                        <td><input type="number" value="" min="1" class="form-control input-sm w-100 fri_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH"></td>
-                        <td><input type="number" value="" min="1" class="form-control input-sm w-100 sat_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH"></td>
-                        <td><input type="number" value="" min="1" class="form-control input-sm w-100 sun_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH"></td>
+                        <td>
+                            <input type="number" value="" min="1" class="form-control input-sm w-100 mon_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
+                            <textarea class="h-n  " > Shivam</textarea>
+                        </td>
+                        <td>
+                            <input type="number" value="" min="1" class="form-control input-sm w-100 tue_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
+                              <textarea class="h-n  " > Shivam</textarea>
+                        </td>
+                        <td>
+                            <input type="number" value="" min="1" class="form-control input-sm w-100 web_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
+                              <textarea class="h-n  " > Shivam</textarea>
+                        </td>
+                        <td>
+                            <input type="number" value="" min="1" class="form-control input-sm w-100 thu_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
+                              <textarea class="h-n  " > Shivam</textarea>
+                        </td>
+                        <td>
+                            <input type="number" value="" min="1" class="form-control input-sm w-100 fri_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
+                              <textarea class="h-n  " > Shivam</textarea>
+                        </td>
+                        <td>
+                            <input type="number" value="" min="1" class="form-control input-sm w-100 sat_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
+                              <textarea class="h-n  " > Shivam</textarea>
+                        </td>
+                        <td>
+                            <input type="number" value="" min="1" class="form-control input-sm w-100 sun_v " oninput="cal(this)"  onchange="cal(this)" placeholder="HH">
+                              <textarea class="h-n  " > Shivam</textarea>
+                        </td>
                         <td class="text-center">00 </td>
                     </tr>
 			     </c:if>
@@ -195,6 +242,46 @@
         <!-- <script src="js/esswork.js"></script> -->
         <script src="js/select2@4.1.0.min.js"></script>
         <script>
+
+            
+            $("td").hover(
+                function(){ 
+                    if($(this).find("input:first").val()!="" && $(this).find("input:first").val()!=0  ){
+                        $(this).children(" .h-n").css({"visibility":"visible" ,"width": "129px" ,"height" :"60px", "transition": "all 0.2s ease-in-out;" });
+                    }
+                },
+                function(){
+                    $(this).children(" .h-n").css({"visibility":"hidden" ,"width": "0px" ,"height" :"0px", "transition": "all 0.2s ease-in-out;" });
+                }
+            );
+            $("td input").on("input" , function () {
+                if($(this).val()!="" && $(this).val()!=0  ){
+                    $(this).siblings(".h-n").css({"visibility":"visible" ,"width": "129px" ,"height" :"60px", "transition": "all 0.2s ease-in-out;" });
+                }else{
+                    $(this).siblings(".h-n").css({"visibility":"hidden" ,"width": "0px" ,"height" :"0px", "transition": "all 0.2s ease-in-out;" });
+                }      
+            });
+            function applyJavaScritp(){
+                console.log("add");
+                $("td").hover(
+                    function(){ 
+                        if($(this).find("input:first").val()!="" && $(this).find("input:first").val()!=0  ){
+                            $(this).children(" .h-n").css({"visibility":"visible" ,"width": "129px" ,"height" :"60px", "transition": "all 0.2s ease-in-out;" });
+                        }
+                    },
+                    function(){
+                        $(this).children(" .h-n").css({"visibility":"hidden" ,"width": "0px" ,"height" :"0px", "transition": "all 0.2s ease-in-out;" });
+                    }
+                );
+                $("td input").on("input" , function () {
+                    if($(this).val()!="" && $(this).val()!=0  ){
+                        $(this).siblings(".h-n").css({"visibility":"visible" ,"width": "129px" ,"height" :"60px", "transition": "all 0.2s ease-in-out;" });
+                    }else{
+                        $(this).siblings(".h-n").css({"visibility":"hidden" ,"width": "0px" ,"height" :"0px", "transition": "all 0.2s ease-in-out;" });
+                    }      
+                });
+            }
+            
             $(function () {
                 $('select').select2();
             });
@@ -207,6 +294,7 @@
                     $("#tbtable").append(newrow);
                     $('.selectProject').select2();
                     $("#addRow").blur();
+                    applyJavaScritp();
                     tblRefresh();
                 });
             });

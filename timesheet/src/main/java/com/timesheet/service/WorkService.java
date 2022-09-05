@@ -31,6 +31,16 @@ public class WorkService {
 		}
 		return isSave;
 	}
+	public boolean deleteAllWork(List<Work> work) {
+		boolean isDelete = false;
+		try {
+			 repository.deleteAll(work);
+			isDelete = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return isDelete;
+	}
 	// @formatter:off
  
 // @formatter:on
