@@ -138,7 +138,7 @@
                    
                     <td>
                         <input type="number" value="" min="0" name="hour" class="form-control input-sm w-75 mon_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
-                        <textarea class="h-n  " > Shivam</textarea>
+                        <textarea class="h-n  " > </textarea>
                     </td>
                     <td class="text-center">00 </td>
                 </tr>
@@ -159,13 +159,13 @@
                     $(this).children(" .h-n").css({"visibility":"hidden" ,"width": "0px" ,"height" :"0px", "transition": "all 0.2s ease-in-out;" });
                 }
             );
-            $("td input").on("input" , function () {
-                if($(this).val()!="" && $(this).val()!=0  ){
-                    $(this).siblings(".h-n").css({"visibility":"visible" ,"width": "129px" ,"height" :"60px", "transition": "all 0.2s ease-in-out;" });
-                }else{
-                    $(this).siblings(".h-n").css({"visibility":"hidden" ,"width": "0px" ,"height" :"0px", "transition": "all 0.2s ease-in-out;" });
-                }      
-            })
+            // $("td input").on("input" , function () {
+            //     if($(this).val()!="" && $(this).val()!=0  ){
+            //         $(this).siblings(".h-n").css({"visibility":"visible" ,"width": "129px" ,"height" :"60px", "transition": "all 0.2s ease-in-out;" });
+            //     }else{
+            //         $(this).siblings(".h-n").css({"visibility":"hidden" ,"width": "0px" ,"height" :"0px", "transition": "all 0.2s ease-in-out;" });
+            //     }      
+            // })
            
             $(function () {
                 $('select').select2();

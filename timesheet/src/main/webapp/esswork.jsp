@@ -99,15 +99,17 @@
                     <span class="align-middle"> Time Period</span>
                 </div>
                 <div class="col d-flex justify-content-between  align-middle">  
-                     <button class="rounded btn-secondary h-75">
+                     <button class="rounded btn-secondary h-75 "  onclick="PrevWeekReport()" id="btnPrevWeekReport" >
                         <i class="fa-solid fa-caret-left"></i> 
                     </button>
-                    <input  placeholder="Select date"  type="date"  id="startDate"  value="2022-08-22" name="startDate"  class="form-control   w-75  h-75    ">    
+                    <input  placeholder="Select date"  type="date" disabled id="startDate"  value="" name="startDate"  class="form-control   w-75  h-75    ">    
                     <span class="   align-self-start  "> To </span>
                 </div>
                 <div class="col d-flex justify-content-between align-middle">
-                    <input  placeholder="Select date"  type="date" id="endDate"     value="2022-08-28" name="endDate" class="form-control   w-75  h-75 ">
-                    <button class="rounded btn-secondary h-75"><i class="fa-solid fa-caret-right rounded"></i> 
+                    <input  placeholder="Select date"  type="date" id="endDate" disabled     value="" name="endDate" class="form-control   w-75  h-75 ">
+                    <button class="rounded btn-secondary h-75" onclick="nextWeekReport()" id="btnNextWeekReport" >
+                        <i class="fa-solid fa-caret-right rounded"></i>
+                    </button> 
                 </div>
                 <div class="col  d-flex justify-content-center align-middle">
                     <input type="button" class="btn btn-primary btn-sm pe-3 ps-3 me-2 h-75 rounded"  onclick="tblDataSave()" value="save" id="btnSave" >
@@ -156,8 +158,8 @@
                 </tbody>
                 <tfoot>
                     <td colspan="3" class="text-center ">  
-                        <input type="button" value="+" id="addRow"   class="btn btn-success btn-sm rounded-circle me-4 " style="height: 40px; width: 40px; " >
-                        <input type="button" value="-" id="removeRow"   class="btn btn-success btn-sm rounded-circle  " style="height: 40px; width: 40px; " >
+                        <input type="button" value="+" id="addRow"   class="btn btn-success btn-sm rounded-circle me-4 d-none " style="height: 40px; width: 40px; " >
+                        <input type="button" value="-" id="removeRow"   class="btn btn-success btn-sm rounded-circle   d-none " style="height: 40px; width: 40px; " >
                     </td>
                     <td class="text-center" id="mov_v_t">00</td>
                     <td class="text-center" id="tue_v_t">00</td>
@@ -193,7 +195,36 @@
                     }      
                 });
             };
-            applyJavaScritp();
+            function padTo2Digits(num) {
+                return num.toString().padStart(2, '0');
+            }
+            function formatDate(date) {
+                return [
+                    date.getFullYear(),
+                    padTo2Digits(date.getMonth() + 1),
+                    padTo2Digits(date.getDate()),
+                ].join('-');
+            }
+            function PrevWeekReport(){
+                let sd = new Date($("#startDate").val());
+                let ed = new Date($("#endDate").val());
+                sd.setDate(sd.getDate() - 7);
+                ed.setDate(ed.getDate() - 7);
+                $("#startDate").val(formatDate(sd));
+                $("#endDate").val(formatDate(ed));
+                $("#btnPrevWeekReport").blur();
+                fetchwork();
+            }   
+            function nextWeekReport(){
+                let sd = new Date($("#startDate").val());
+                let ed = new Date($("#endDate").val());
+                sd.setDate(sd.getDate() + 7);
+                ed.setDate(ed.getDate() + 7);
+                $("#startDate").val(formatDate(sd));
+                $("#endDate").val(formatDate(ed));
+                $("#btnNextWeekReport").blur();
+                fetchwork();
+            }
 
             $(function () {
                 $('select').select2();
@@ -361,7 +392,7 @@
                                             +' <input type="text"    value='+pName+'    name="projectName" class="d-none"  > ' 
                                             +' <input type="date"    value='+day+'     name="day"         class="d-none"  >'  
                                             +' <input type="text"    value='+status+'     name="status"       class="d-none"  > '
-                                            +' <textarea class="h-n "  name="descr"  >  '+descr+'     </textarea>' 
+                                            +' <textarea class="h-n "  name="descr"  ></textarea>' 
                                             +' </td>';
                                         row.innerHTML = (( row.innerHTML.toString()) + t);
                                     }
@@ -407,8 +438,6 @@
                         })  
                     });
                 };
-                fetchwork();
-              
                 function tblDataSave(){
                     $("#btnSave").blur();
                     $.ajax({
@@ -461,7 +490,6 @@
                     console.log(json);
                     return json;
                 }
-
                 function html2json() {
                     var json = '[';
                     var otArr = [];
@@ -602,6 +630,23 @@
                 console.log(json);
                 return json;
             }
+
+            function getMonday(d = new Date()) {
+                d = new Date(d);
+                var day = d.getDay(),
+                diff = d.getDate() - day + (day == 0 ? -6:1); 
+                return new Date(d.setDate(diff));
+            }
+
+            function fetchworkCurrentReport(){
+                let sd = getMonday();
+                let ed = getMonday();
+                ed.setDate(sd.getDate()+6)
+                $("#startDate").val(formatDate(sd));
+                $("#endDate").val(formatDate(ed));
+                fetchwork();
+            }
+            fetchworkCurrentReport();
         </script>
     </body>
 

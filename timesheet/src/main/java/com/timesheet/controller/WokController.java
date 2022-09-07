@@ -40,7 +40,6 @@ public class WokController {
 
 	@PostMapping("/fetchwork")
 	public String fetchByDate(Model m ,HttpServletRequest request ,@RequestParam("startDate") String startDate,@RequestParam("endDate") String endDate) {
-		
 		long empId = (Long) request.getSession().getAttribute("empId");
 		m.addAttribute("workMap", workService.getWorByStartDateEndDate(startDate, endDate,empId));
 		m.addAttribute("projectList", projectservice.getProjectByEmpId(empId));

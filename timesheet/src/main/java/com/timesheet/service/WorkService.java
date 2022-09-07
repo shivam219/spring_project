@@ -12,7 +12,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.timesheet.model.Project;
 import com.timesheet.model.Work;
+import com.timesheet.repository.ProjectRepository;
 import com.timesheet.repository.WorkRepository;
 
 @Component
@@ -20,6 +22,8 @@ public class WorkService {
 
 	@Autowired
 	WorkRepository repository;
+	@Autowired
+	ProjectRepository prepository;
 
 	public boolean saveAllWork(List<Work> work) {
 		boolean isSave = false;
@@ -31,10 +35,11 @@ public class WorkService {
 		}
 		return isSave;
 	}
+
 	public boolean deleteAllWork(List<Work> work) {
 		boolean isDelete = false;
 		try {
-			 repository.deleteAll(work);
+			repository.deleteAll(work);
 			isDelete = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -45,9 +50,9 @@ public class WorkService {
  
 // @formatter:on
 
-
 	public LinkedHashMap<String, List<Work>> getWorByStartDateEndDate(String startDate, String endDate, long empId) {
 		List<Work> l = repository.getWorByStartDateEndDate(startDate, endDate, empId);
+		List<Project> plist = (List<Project>) prepository.getProjectByEmpId(empId);
 		Collections.sort(l, (e1, e2) -> e1.getDay().compareTo(e2.getDay()));
 
 		LinkedHashMap<String, List<Work>> map = new LinkedHashMap<String, List<Work>>();
@@ -180,17 +185,17 @@ public class WorkService {
 					map.put(w.getProjectName(), al);
 				}
 
-			} 
+			}
 
 		}
 		for (Map.Entry<String, List<Work>> entry : map.entrySet()) {
-			String key = entry.getKey(); 
-			int len = entry.getValue().size(); //  7 - 4 = 3
-			Work wl =  entry.getValue().get(entry.getValue().size()-1); // give last object
-			LocalDate d1 = LocalDate.parse(wl.getDay(), DateTimeFormatter.ofPattern("yyyy-MM-dd")); /// 25 
+			String key = entry.getKey();
+			int len = entry.getValue().size(); // 7 - 4 = 3
+			Work wl = entry.getValue().get(entry.getValue().size() - 1); // give last object
+			LocalDate d1 = LocalDate.parse(wl.getDay(), DateTimeFormatter.ofPattern("yyyy-MM-dd")); /// 25
 			ArrayList<Work> al = new ArrayList<Work>();
 			al.addAll(entry.getValue());
-			for (int i = 1 ; i <= (7- len); i++) {
+			for (int i = 1; i <= (7 - len); i++) {
 				Work w2 = new Work();
 				w2.setId(0);
 				w2.setEmpId(wl.getEmpId());
@@ -204,12 +209,35 @@ public class WorkService {
 			}
 			map.put(key, al);
 		}
+		for (Project p : plist) {
+			if (map.containsKey(p.getProjectName())) {
+				
+			} else {
+				LocalDate  sd= LocalDate.parse(startDate , DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+				ArrayList<Work> al = new ArrayList<Work>();
+				for (int i = 0; i < 7; i++) {
+					Work w2 = new Work();
+					w2.setId(0);
+					w2.setEmpId(empId);
+					w2.setProjectId(p.getProjectId());
+					w2.setProjectName(p.getProjectName());
+					w2.setDay(sd.plusDays(i).toString());
+					w2.setHours("0");
+					w2.setDescr("");
+					w2.setStatus("Pending");
+					al.add(w2);
+				}
+				map.put(p.getProjectName(), al);
+
+			}
+		}
 		for (Map.Entry<String, List<Work>> entry : map.entrySet()) {
 			String key = entry.getKey();
 			List<Work> val = entry.getValue();
-			System.out.println(key);
-			System.out.println(val);
+//			System.out.println(key);
+//			System.out.println(val);
 		}
+
 		return map;
 	}
 }
