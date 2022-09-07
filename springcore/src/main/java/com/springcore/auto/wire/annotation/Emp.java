@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 public class Emp {
 //	even thus we are using private it is able access this property
 	@Autowired
-	@Qualifier("address2")
-	private Address address;
+//	@Qualifier("address2")
+	private Address a;
 
 	public Emp() {
 		super();
@@ -16,22 +16,22 @@ public class Emp {
 	
 	public Emp(Address address) {
 		super();
-		this.address = address;
+		this.a = address;
 		System.out.println("Employee parameterized constructor called");
 	}
 
 	public Address getAddress() {
-		return address;
+		return a;
 	}
 
 	public void setAddress(Address address) {
-		this.address = address;
+		this.a = address;
 		System.out.println("setter method called");
 	}
 
 	@Override
 	public String toString() {
-		return "Emp [address=" + address + "]";
+		return "Emp [address=" + a + "]";
 	}
 
 }

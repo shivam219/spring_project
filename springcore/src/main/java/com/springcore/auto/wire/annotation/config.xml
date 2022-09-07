@@ -14,16 +14,16 @@
 
 	<!-- tell xml that we are using autowired -->
 	<context:annotation-config />
-
-	<bean class="com.springcore.auto.wire.annotation.Address"
-		name="address">
-		<property name="street" value="nandivali"></property>
-		<property name="city" value="mumbai"></property>
-	</bean>
 	<bean class="com.springcore.auto.wire.annotation.Address"
 		name="address2">
 		<property name="street" value="rewa"></property>
 		<property name="city" value="madhya pradesh"></property>
+	</bean>
+
+	<bean class="com.springcore.auto.wire.annotation.Address"
+		name="a">
+		<property name="street" value="nandivali"></property>
+		<property name="city" value="mumbai"></property>
 	</bean>
 
 	<bean class="com.springcore.auto.wire.annotation.Emp" name="emp" />

@@ -1,6 +1,7 @@
 package t.auto;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -15,7 +16,8 @@ public class auto {
 		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Config.class);
 		System.out.println(applicationContext.getBean("d1"));
 		System.out.println(applicationContext.getBean("co"));
-	}
+		System.out.println(applicationContext.getBean("e1"));
+	} 
 }
 
 @Component("s1")
@@ -90,9 +92,9 @@ class details {
 		System.out.println("setter us");
 	}
 
-	@Override
+	@Override 
 	public String toString() {
-		return "details [org=" + org + ", s1=" + s12 + "]";
+		return "details [org=" + org + ", s12=" + s12 + "]";
 	}
 
 }
@@ -102,11 +104,13 @@ class details {
 @ComponentScan("t.auto")
 class Config{
 	
-	@Autowired
+	@Autowired   
 	details d ;
-
+ 
 	@Bean(name="e1")
-	public details getd() {
+	public details getd() { 
+		System.out.println("method callied");
+		
 		return new details();
 	}
 
@@ -114,7 +118,7 @@ class Config{
 		return d;
 	}
 
-	public void setD(details d) {
+	public void setD(details d) { 
 		this.d = d;
 	}
 
