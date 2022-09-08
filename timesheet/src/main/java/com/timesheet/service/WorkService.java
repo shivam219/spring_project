@@ -234,8 +234,8 @@ public class WorkService {
 		for (Map.Entry<String, List<Work>> entry : map.entrySet()) {
 			String key = entry.getKey();
 			List<Work> val = entry.getValue();
-//			System.out.println(key);
-//			System.out.println(val);
+			System.out.println(key);
+			System.out.println(val);
 		}
 
 		return map;

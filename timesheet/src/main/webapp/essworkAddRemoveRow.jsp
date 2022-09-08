@@ -62,24 +62,39 @@
         outline: none;
         background-color: rgba(217.0000022649765, 236.00000113248825, 233.00000131130219, 1);  
        }
-       .tblcolor{
-         background-color: rgb(168, 174, 193);
-       }
-       table tr td p {
-        overflow: hidden;
-       }
-        
     </style>
     <link href="css/select@2.4.1.0.min.css" rel="stylesheet" />
     
     </head>
 
-    <body > 
+    <body> 
+
+         <table class="table table-striped table-hover rounded mb-0 d-none " id="dptable" >        
+            <tr>
+                <td colspan="2">
+                    <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1">
+                        <option value=""></option>
+                        <c:forEach items="${projectList}" var="project" varStatus="loop">
+                            <option value="${project.getProjectId()}">${project.getProjectName()}</option>
+                        </c:forEach>
+                    </select>
+                </td>
+                <td>  <p>Approved</p></td>
+                <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                <td class="text-center">00 </td>
+            </tr>
+        </table>
         <div class="container">
             <div class="row rounded  ">
                 <h5 class="text-center text-secondary h4 mt-2">Ess Work</h5>
             </div>
-            <div class="row align-middle  pt-2 mx-0 tblcolor rounded-top"  >
+            <div class="row align-middle  pt-2 mx-0 " style="background-color: rgb(168, 174, 193);">
                 <div class="col fw-bold text-center align-middle">
                     <span class="align-middle"> Time Period</span>
                 </div>
@@ -102,9 +117,9 @@
                 </div>
                 
             </div>
-            <table class="table table-striped table-hover  mb-0 mt-0 rounded " id="tbtable"  >
+            <table class="table table-striped table-hover rounded mb-0 mt-1" id="tbtable" >
                 <thead>
-                    <tr class=" tblcolor  "  >
+                    <tr class="table-dark ">
                         <td class="text-center" colspan="2">Work Items</td>
                         <td class="text-center" >Status</td>
                         <td class="text-center" >Mon</td>
@@ -118,10 +133,34 @@
                     </tr> 
                 </thead>
                 <tbody>
-                    
+                    <tr>
+                        <td colspan="2">
+                            <select data-placeholder="Choose Project" class="form-control selectProject" tabindex="1">
+                                <option value=""></option>
+                                <c:forEach items="${projectList}" var="project" varStatus="loop">
+                                    <option value="${project.getProjectId()}">${project.getProjectName()}</option>
+                                </c:forEach>
+                                </select>
+                        </td>
+                        <td>  <p>Approved</p></td>
+                        <td>
+                            <input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
+                            <span class="h-n ">  Lorem Ipsum is simply dummy text of the printing and typesetting industry </span>
+                        </td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                        <td><input type="number" value="" min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"></td>
+                        <td class="text-center">00 </td>
+                    </tr>
                 </tbody>
-                <tfoot >
-                    <td colspan="3" class="text-center"> </td>
+                <tfoot>
+                    <td colspan="3" class="text-center ">  
+                        <input type="button" value="+" id="addRow"   class="btn btn-success btn-sm rounded-circle me-4 d-none " style="height: 40px; width: 40px; " >
+                        <input type="button" value="-" id="removeRow"   class="btn btn-success btn-sm rounded-circle   d-none " style="height: 40px; width: 40px; " >
+                    </td>
                     <td class="text-center" id="mov_v_t">00</td>
                     <td class="text-center" id="tue_v_t">00</td>
                     <td class="text-center" id="web_v_t">00</td>
@@ -137,11 +176,11 @@
      
         <script src="js/select2@4.1.0.min.js"></script>
         <script>
-            function AddHoverToHourIn(){    
+            function applyJavaScritp(){    
                 $("td").hover(
                     function(){ 
                         if($(this).find("input:first").val()!="" && $(this).find("input:first").val()!=0  ){
-                            $(this).children(" .h-n").css({"visibility":"visible" ,"width": "160px" ,"height" :"75px", "outline":"1px solid blue", "transition": "all 0.2s ease-in-out;" });
+                            $(this).children(" .h-n").css({"visibility":"visible" ,"width": "129px" ,"height" :"60px", "transition": "all 0.2s ease-in-out;" });
                         }
                     },
                     function(){
@@ -150,13 +189,11 @@
                 );
                 $("td input").on("input" , function () {
                     if($(this).val()!="" && $(this).val()!=0  ){
-                        $(this).siblings(".h-n").css({"visibility":"visible" ,"width": "160px" ,"height" :"75px", "outline":"1px solid blue", "transition": "all 0.2s ease-in-out;" });
+                        $(this).siblings(".h-n").css({"visibility":"visible" ,"width": "129px" ,"height" :"60px", "transition": "all 0.2s ease-in-out;" });
                     }else{
                         $(this).siblings(".h-n").css({"visibility":"hidden" ,"width": "0px" ,"height" :"0px", "transition": "all 0.2s ease-in-out;" });
                     }      
                 });
-
-                $('#tbtable tr').addClass("tblcolor");
             };
             function padTo2Digits(num) {
                 return num.toString().padStart(2, '0');
@@ -188,24 +225,51 @@
                 $("#btnNextWeekReport").blur();
                 fetchwork();
             }
+
+            $(function () {
+                $('select').select2();
+            });
+            $(document).ready(function () {
+                $("#addRow").on('click', function () {
+                    event.preventDefault()
+                    $(".selectProject.select2-hidden-accessible").select2('destroy');
+                    var row = $("#dptable tr").eq(0);
+                    var newrow = row.clone();
+                    $("#tbtable").append(newrow);
+                    $('.selectProject').select2();
+                    $("#addRow").blur();
+                    applyJavaScritp();
+                    tblRefresh();
+                });
+            });
+            $('#removeRow').click(function(){
+                let rowCount = $('#tbtable tr').length;
+                if((rowCount)>=4 ){
+                $('#tbtable tr').eq(parseInt(rowCount)-2).remove();
+                $("#removeRow").blur();
+                calculate();
+                }
+            });
+            function tblRefresh(){
+                $(".mon_v:last").val('');
+                $(".tue_v:last").val('');
+                $(".web_v:last").val('');
+                $(".thu_v:last").val('');
+                $(".fri_v:last").val('');
+                $(".sat_v:last").val('');
+                $(".sun_v:last").val('');
+                let rowCount = $('#tbtable tr').length-1;
+                $('#tbtable tr:nth-child('+ rowCount+ ')').find("td:eq(9)").html("00");
+            }  
             function cal(ob){
-                if($(ob).val()>12){
-                    $(ob).val('');
-                    console.log("more then 12");
-                }
-                else if($(ob).val()=="" || $(ob).val()>0){
-                    let rsum=0;   
-                    $(ob).closest('tr').find('td').each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").val()))){
-                            rsum=rsum+Number(jQuery(this).find("input").val());
-                        };
-                        $(this).closest("tr").find("td:eq(9) ").html(rsum==0?"00":rsum);
-                    });
-                    calculate();
-                }
-                // else if((Number.isInteger($(ob).val())) || isNaN($(ob).val())) {
-                //     $(ob).val('');
-                // }
+                let rsum=0;   
+                $(ob).closest('tr').find('td').each(function(){
+                    if(!isNaN(Number(jQuery(this).find("input").val()))){
+                        rsum=rsum+Number(jQuery(this).find("input").val());
+                    };
+                    $(this).closest("tr").find("td:eq(9) ").html(rsum==0?"00":rsum);
+                });
+                calculate();
             }
 
             function calculate(){
@@ -322,7 +386,7 @@
                                         let day = d[i][1][j]["day"];   
                                         let status = d[i][1][j]["status"];   
                                         let t =  '<td>'
-                                            +' <input type="number"    name="hours"          min="1" max="12" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
+                                            +' <input type="number"    name="hours"          min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
                                             +' <input type="number"  value='+eId+'      name="empId"       class="d-none"  > ' 
                                             +' <input type="number"  value='+pId+'      name="projectId"   class="d-none"  > ' 
                                             +' <input type="text"    value='+pName+'    name="projectName" class="d-none"  > ' 
@@ -342,7 +406,7 @@
                                         let day = d[i][1][j]["day"];   
                                         let status = d[i][1][j]["status"];   
                                         let   t = ' <td> ' 
-                                            +' <input type="number"  value='+hours+'    name="hours"        min="1"  max="12"  class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
+                                            +' <input type="number"  value='+hours+'    name="hours"        min="0" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
                                             +' <input type="number"  value='+id+'       name="id"        class="d-none"  > ' 
                                             +' <input type="number"  value='+eId+'      name="empId"        class="d-none"  > ' 
                                             +' <input type="number"  value='+pId+'      name="projectId"    class="d-none"  > ' 
@@ -356,21 +420,11 @@
                                 }   
                                 row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">00</td>' );
                                 $("#tbtable").append(row);
+                                $(".selectProject.select2-hidden-accessible").select2('destroy');
+                                $('.selectProject').select2();
+                                calculate();
                                 calRowOnLoad();
-                                AddHoverToHourIn();
-                            }
-                            /*reset horizontal total when now row found*/
-                            let rowCount = $('#tbtable tr').length;
-                            if(rowCount == 2) {
-                                console.log("no rows founded");
-                                $("#mov_v_t").html('00');
-                                $("#tue_v_t").html('00');
-                                $("#web_v_t").html('00');
-                                $("#thu_v_t").html('00');
-                                $("#fri_v_t").html('00');
-                                $("#sat_v_t").html('00');
-                                $("#sun_v_t").html('00');
-                                $("#htotal").html('00');
+                                applyJavaScritp();
                             }
                         }
                     });
@@ -583,6 +637,7 @@
                 diff = d.getDate() - day + (day == 0 ? -6:1); 
                 return new Date(d.setDate(diff));
             }
+
             function fetchworkCurrentReport(){
                 let sd = getMonday();
                 let ed = getMonday();
@@ -594,5 +649,6 @@
             fetchworkCurrentReport();
         </script>
     </body>
+
 </html>
 <%@ include file="footer-fixed-bottom.jsp" %>
