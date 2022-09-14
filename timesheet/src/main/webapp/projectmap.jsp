@@ -86,13 +86,39 @@
 	
 	<script type="text/javascript">
 		$("#btnSubmit").on("click", function (event) {
-
-			// console.log($("#empList").val()=="");
-			// automatic check value should present 
-			if($("#empList").val()){ 
+			event.preventDefault();
+			// let empId = $("#empList").val();
+		 	if($("#empList").val()){ 
 				if($("#undo_redo_to").children("option").val() == undefined){
+					// $.ajax({
+					// 	    url: 'projectdelete?empId='+empId+'',
+					// 	    type: 'post',
+					// 	    success: function(obj, success,event){ 
+					// 		},
+					// 	error: function(er){
+					// 		console.log(er);
+					// 	}
+					// 	});
+
 					$("#projectMappingForm").attr("action","projectdelete").submit();
 				}else{
+					// let data = new FormData( $("#projectMappingForm"));
+					// let data = new FormData(document.forms[0]);
+					//  $.ajax({
+                    //     url: 'projectassign?empId='+empId+'',
+                    //     type: 'post',
+                   	// 	data :data,
+					// 	processData: false,
+					// 	contentType: false,
+					// 	cache: false,
+					// 	enctype: 'multipart/form-data',
+                    //     success: function(obj, success,event){
+
+					// 	 },
+					// 	error: function(er){
+					// 		console.log(er);
+					// 	}
+					// });
 					$("#projectMappingForm").attr("action","projectassign").submit();
 				}
 			}
@@ -109,6 +135,7 @@
 					type: 'GET',
 					dataType: 'json',
 					success: function (obj, successMSG, event) { 
+						console.log(obj);
 						$('#undo_redo_to').find('option').remove().end();
 						for (let i = 0; i < obj.length; i++) {
 							$('#undo_redo_to').append("<option value='" + obj[i]['projectId'] + "' > " + obj[i]['projectName'] + " </option>");

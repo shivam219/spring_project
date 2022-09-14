@@ -14,22 +14,23 @@ public class Project {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "project_id")
 	private int projectId;
-	
+
 	@Column(name = "project_name")
 	private String projectName;
-	
+
 	@Column(name = "project_status")
-	private String projectstatus;
+	private String projectStatus;
 
 	public Project() {
 		super();
-	 }
+		// TODO Auto-generated constructor stub
+	}
 
-	public Project(int projectId, String projectName, String projectstatus) {
+	public Project(int projectId, String projectName, String projectStatus) {
 		super();
 		this.projectId = projectId;
 		this.projectName = projectName;
-		this.projectstatus = projectstatus;
+		this.projectStatus = projectStatus;
 	}
 
 	public int getProjectId() {
@@ -48,19 +49,18 @@ public class Project {
 		this.projectName = projectName;
 	}
 
-	public String getProjectstatus() {
-		return projectstatus;
+	public String getProjectStatus() {
+		return projectStatus;
 	}
 
-	public void setProjectstatus(String projectstatus) {
-		this.projectstatus = projectstatus;
+	public void setProjectStatus(String projectStatus) {
+		this.projectStatus = projectStatus;
 	}
 
 	@Override
 	public String toString() {
-		return "Project [projectId=" + projectId + ", projectName=" + projectName + ", projectstatus=" + projectstatus
+		return "Project [projectId=" + projectId + ", projectName=" + projectName + ", projectStatus=" + projectStatus
 				+ "]";
 	}
 
- 
 }

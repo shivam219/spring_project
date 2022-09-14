@@ -45,30 +45,52 @@
         }    
         .h-n{  
         color: rgb(52, 52, 52);
-        width: 0px;
+        width: 8px;
+        height: 8px;
         resize: none;
-        height: 0px;
         overflow-y: auto;
-        visibility: hidden;
+        visibility: visible;
         position: absolute;  /* fixed that to contain*/
         overflow: hidden;
         font-family: Verdana;
         text-align: center;
         letter-spacing: 0;
         transition: all 0.2s ease-in-out;
-        box-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
+        /* box-shadow: 4px 4px 4px rgb(0 0 0 / 25%); */
         border-radius:3px ;
         border: none;
         outline: none;
-        background-color: rgba(217.0000022649765, 236.00000113248825, 233.00000131130219, 1);  
+        cursor: pointer;
+        background-color: rgb(203, 238, 233);  
+        margin-left: 2px;
        }
+       
+        /* .h-n:: */
        .tblcolor{
-         background-color: rgb(168, 174, 193);
+        background-color: rgb(168, 174, 193);
        }
        table tr td p {
         overflow: hidden;
        }
-        
+        /* h-n-blank  */
+        .h-n-blank{
+            background-color: rgb(233, 233, 73);
+        }
+        .h-n-empty{
+            background-color: rgb(250, 162, 104);
+        }
+        .h-n-fill{
+            background-color: rgb(203, 238, 233); 
+        }
+        td ::-moz-selection { /* Code for Firefox */
+            color: red;
+            background: yellow;
+        }
+
+        td ::selection {
+            color: red;
+            background: yellow;
+        }
     </style>
     <link href="css/select@2.4.1.0.min.css" rel="stylesheet" />
     
@@ -107,14 +129,14 @@
                     <tr class=" tblcolor  "  >
                         <td class="text-center" colspan="2">Work Items</td>
                         <td class="text-center" >Status</td>
-                        <td class="text-center" >Mon</td>
-                        <td class="text-center" >Tue</td>
-                        <td class="text-center" >Wed</td>
-                        <td class="text-center" >Thu</td>
-                        <td class="text-center" >Fri</td>
-                        <td class="text-center" >Sat</td>
-                        <td class="text-center" >Sun</td>
-                        <td class="text-center" >Total</td>
+                        <td class="text-center" id="monDate">Mon</td>
+                        <td class="text-center" id="tueDate">Tue</td>
+                        <td class="text-center" id="wedDate">Wed</td>
+                        <td class="text-center" id="thuDate">Thu</td>
+                        <td class="text-center" id="friDate">Fri</td>
+                        <td class="text-center" id="satDate">Sat</td>
+                        <td class="text-center" id="sunDate">Sun</td>
+                        <td class="text-center" id="Date">Total</td>
                     </tr> 
                 </thead>
                 <tbody>
@@ -132,30 +154,79 @@
                     <td class="text-center" id="htotal"  >00</td>
                 </tfoot>
             </table>
-        
         </div>
      
         <script src="js/select2@4.1.0.min.js"></script>
         <script>
-            function AddHoverToHourIn(){    
-                $("td").hover(
-                    function(){ 
-                        if($(this).find("input:first").val()!="" && $(this).find("input:first").val()!=0  ){
-                            $(this).children(" .h-n").css({"visibility":"visible" ,"width": "160px" ,"height" :"75px", "outline":"1px solid blue", "transition": "all 0.2s ease-in-out;" });
-                        }
-                    },
-                    function(){
-                        $(this).children(" .h-n").css({"visibility":"hidden" ,"width": "0px" ,"height" :"0px", "transition": "all 0.2s ease-in-out;" });
+            function AddHoverToHourIn(){   
+                let vh = "75px" 
+                let vw = "160px";
+                let vo ="1px solid blue";
+                let vt = "all 0.2s ease-in-out;";
+                let vi = "100000";
+                let vc = "pointer";
+                let nh = "8px" 
+                let nw = "8px";
+                let no ="none";
+                let nt = "all 0.2s ease-in-out;";
+                let ni = "100";
+                let nc = "pointer";
+                $(".h-n").click( function () {
+                    if($(this).siblings("input:first").val()!="" && $(this).find("input:first").val()!=0  ){
+                        $(this).css({"width": vw ,"height" :vh, "outline":vo, "transition": vt, "z-index" : vi });
+                    }else{
+                        $(this).blur();
                     }
-                );
+
+                });
                 $("td input").on("input" , function () {
                     if($(this).val()!="" && $(this).val()!=0  ){
-                        $(this).siblings(".h-n").css({"visibility":"visible" ,"width": "160px" ,"height" :"75px", "outline":"1px solid blue", "transition": "all 0.2s ease-in-out;" });
+                        $(this).siblings(".h-n").css({"width": vw ,"height" :vh, "outline":vo, "transition": vt, "z-index" : vi });
                     }else{
-                        $(this).siblings(".h-n").css({"visibility":"hidden" ,"width": "0px" ,"height" :"0px", "transition": "all 0.2s ease-in-out;" });
+                        $(this).siblings(".h-n").css({"width": nw ,"height" :nh, "outline":no, "transition": nt, "z-index" : ni  });
+                        $(this).blur();
                     }      
                 });
+                $(".h-n").blur(function() {
+                    $(this).css({"width": nw ,"height" :nh, "outline":no, "transition": nt, "z-index" : ni });
+                });
+                $(".h-n ").on('keyup', function(e) {
+                    if (e.key == "Escape"){
+                        $(this).css({"width": nw ,"height" :nh, "outline":no, "transition": nt, "z-index" : ni });  
+                        $(this).blur();
+                    }
+                });
+                $("td input ").on('keyup', function(e) {
+                    if (e.key == "Escape"){
+                        $(this).siblings(".h-n").blur();
+                    }
+                });
 
+                /*call on hover,not used now*/
+                $(".h-n").hover(function(){}, function(){
+                    // $(this).css({"z-index":"1000;","width": "8px" ,"height" :"8px", "outline":"none", "transition": "all 0.2s ease-in-out;" ,"z-index":"100000;"  });
+                    // $(this).blur();
+                });
+                $("td input").hover(function(){}, function(){
+                    // $(this).siblings(".h-n").css({"width": "8px" ,"height" :"8px", "outline":"none", "transition": "all 0.2s ease-in-out;" ,"z-index":"100000;" });
+                });
+                // $(this).siblings(".h-n").removeClass("h-n-empty");     
+                // if($(this).siblings(".h-n").hasClass("h-n-fill")){
+                // $(this).siblings(".h-n").addClass("h-n-empty");
+                // }
+                // $(".h-n").on("input" , function () {
+                //     // console.log("asdfdsa");
+                //     if($(this).val()!=""){
+                //         $(this).siblings(".h-n").css({"width": vw ,"height" :vh, "outline":vo, "transition": vt, "z-index" : vi });
+                //         $(this).siblings(".h-n").addClass("h-n-fill");
+                //     }else{
+                //         $(this).siblings(".h-n").css({"width": nw ,"height" :nh, "outline":no, "transition": nt, "z-index" : ni  });
+                //         $(this).siblings(".h-n").removeClass("h-n-fill");
+                //         $(this).blur();
+                //     }      
+                // });
+                 /*call on hover,not used now*/
+        
                 $('#tbtable tr').addClass("tblcolor");
             };
             function padTo2Digits(num) {
@@ -168,6 +239,28 @@
                     padTo2Digits(date.getDate()),
                 ].join('-');
             }
+            function setWeekDates() {  
+                $("#monDate").html('mon  &nbsp; '+ new Date($("#startDate").val()).getDate());
+                var sd = new Date($("#startDate").val());
+                sd.setDate(sd.getDate() + 1);
+                $("#tueDate").html('tue  &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
+                var sd = new Date($("#startDate").val());
+                sd.setDate(sd.getDate() + 2);
+                $("#wedDate").html('wed   &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
+                var sd = new Date($("#startDate").val());
+                sd.setDate(sd.getDate() + 3);
+                $("#thuDate").html('thu   &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
+                var sd = new Date($("#startDate").val());
+                sd.setDate(sd.getDate() + 4);
+                $("#friDate").html('fri  &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
+                var sd = new Date($("#startDate").val());
+                sd.setDate(sd.getDate() + 5);
+                $("#satDate").html('sat   &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
+                var sd = new Date($("#startDate").val());
+                sd.setDate(sd.getDate() + 6);
+                $("#sunDate").html('sun  &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
+                console.log(new Date($("#startDate").val()).getDate());
+            }
             function PrevWeekReport(){
                 let sd = new Date($("#startDate").val());
                 let ed = new Date($("#endDate").val());
@@ -176,6 +269,7 @@
                 $("#startDate").val(formatDate(sd));
                 $("#endDate").val(formatDate(ed));
                 $("#btnPrevWeekReport").blur();
+                setWeekDates();
                 fetchwork();
             }   
             function nextWeekReport(){
@@ -186,6 +280,7 @@
                 $("#startDate").val(formatDate(sd));
                 $("#endDate").val(formatDate(ed));
                 $("#btnNextWeekReport").blur();
+                setWeekDates();
                 fetchwork();
             }
             function cal(ob){
@@ -203,9 +298,6 @@
                     });
                     calculate();
                 }
-                // else if((Number.isInteger($(ob).val())) || isNaN($(ob).val())) {
-                //     $(ob).val('');
-                // }
             }
 
             function calculate(){
@@ -321,15 +413,16 @@
                                         let descr = d[i][1][j]["descr"];   
                                         let day = d[i][1][j]["day"];   
                                         let status = d[i][1][j]["status"];   
-                                        let t =  '<td>'
-                                            +' <input type="number"    name="hours"          min="1" max="12" class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
-                                            +' <input type="number"  value='+eId+'      name="empId"       class="d-none"  > ' 
-                                            +' <input type="number"  value='+pId+'      name="projectId"   class="d-none"  > ' 
-                                            +' <input type="text"    value='+pName+'    name="projectName" class="d-none"  > ' 
-                                            +' <input type="date"    value='+day+'     name="day"         class="d-none"  >'  
-                                            +' <input type="text"    value='+status+'     name="status"       class="d-none"  > '
-                                            +' <textarea class="h-n "  name="descr"  ></textarea>' 
+                                        let t =  ' <td>'
+                                            +' <input type="number"    name="hours"          min="1" max="12" class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
+                                            +' <input type="number"  value='+eId+'      name="empId"          class="d-inline d-none"  > ' 
+                                            +' <input type="number"  value='+pId+'      name="projectId"      class="d-inline d-none"  > ' 
+                                            +' <input type="text"    value='+pName+'    name="projectName"    class="d-inline d-none"  > ' 
+                                            +' <input type="date"    value='+day+'     name="day"             class="d-inline d-none"  >'  
+                                            +' <input type="text"    value='+status+'     name="status"       class="d-inline d-none"  > '
+                                            +' <textarea class="h-n h-n-blank"  name="descr"     ></textarea>' 
                                             +' </td>';
+                                            // +' <textarea class="h-n "  name="descr"  style="background-color:yellow" ></textarea>'  // color
                                         row.innerHTML = (( row.innerHTML.toString()) + t);
                                     }
                                     else{
@@ -342,15 +435,17 @@
                                         let day = d[i][1][j]["day"];   
                                         let status = d[i][1][j]["status"];   
                                         let   t = ' <td> ' 
-                                            +' <input type="number"  value='+hours+'    name="hours"        min="1"  max="12"  class="form-control input-sm w-100 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
-                                            +' <input type="number"  value='+id+'       name="id"        class="d-none"  > ' 
-                                            +' <input type="number"  value='+eId+'      name="empId"        class="d-none"  > ' 
-                                            +' <input type="number"  value='+pId+'      name="projectId"    class="d-none"  > ' 
-                                            +' <input type="text"    value='+pName+'    name="projectName"  class="d-none"  > ' 
-                                            +' <input type="date"  value='+day+'        name="day"            class="d-none" > ' 
-                                            +' <input type="text"  value='+status+'     name="status"       class="d-none"  > '
-                                            +' <textarea class="h-n "  name="descr"  >'+descr+'</textarea>' 
+                                            +' <input type="number"  value='+hours+'    name="hours" min="1"  max="12"  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
+                                            +' <input type="number"  value='+id+'       name="id"                       class=" d-inline d-none"  > ' 
+                                            +' <input type="number"  value='+eId+'      name="empId"                    class=" d-inline d-none"  > ' 
+                                            +' <input type="number"  value='+pId+'      name="projectId"                class=" d-inline d-none"  > ' 
+                                            +' <input type="text"    value='+pName+'    name="projectName "             class=" d-inline d-none"  > ' 
+                                            +' <input type="date"  value='+day+'        name="day"                      class=" d-inline d-none" > ' 
+                                            +' <input type="text"  value='+status+'     name="status"                   class=" d-inline d-none"  > '
+                                            +' <textarea class="h-n  '+ (descr==""?" h-n-empty":"")+'"  name="descr"   >'+descr +'</textarea>'  
                                             +'</td>';
+                                            
+                                            // +' <textarea class="h-n"  name="descr"  >'+descr +'</textarea>' 
                                         row.innerHTML = (( row.innerHTML.toString()) + t);
                                     }  
                                 }   
@@ -358,6 +453,7 @@
                                 $("#tbtable").append(row);
                                 calRowOnLoad();
                                 AddHoverToHourIn();
+                                setWeekDates();
                             }
                             /*reset horizontal total when now row found*/
                             let rowCount = $('#tbtable tr').length;
@@ -396,15 +492,17 @@
                         }
                     });     
 
-                    // let xhr = new XMLHttpRequest();
-                    // xhr.open("POST", 'deletework', true);
-                    // xhr.setRequestHeader("Content-Type", "application/json");
-                    // xhr.onreadystatechange = function () {
-                    //     if (xhr.readyState === 4 && xhr.status === 200) {
-                    //         result.innerHTML = this.responseText;
-                    //     }
-                    // };
-                    // xhr.send(data2);
+                    /** 
+                    let xhr = new XMLHttpRequest();
+                    xhr.open("POST", 'deletework', true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            result.innerHTML = this.responseText;
+                        }
+                    }; 
+                    xhr.send(data2);
+                    */
                     $.ajax({
                         type: 'post',
                         url: 'savework',

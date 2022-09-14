@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.timesheet.model.Employee;
 import com.timesheet.service.EmployeeService;
@@ -65,5 +66,14 @@ public class LoginController {
 		}
 		return "home";
 	}
+	@GetMapping(value = "/error")
+	public String error() {
+		return "login";
+	}
+	@PostMapping(value = "/error")
+	public String error1() {
+		return "login";
+	}
+
 	
 }

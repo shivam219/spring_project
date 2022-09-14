@@ -25,7 +25,7 @@
 	<!--  Nav -->
 	<nav class="navbar navbar-expand-lg bg-nav-foot">
 		<div class="container-fluid">
-			<a class="navbar-brand  d-lg-none d-block" href="#"> <img
+			<a class="navbar-brand  d-lg-none d-block " href="#"> <img
 					src="images/esslogo.jpg" alt="" width="100" height="40"
 					class="d-inline-block align-text-top">
 			</a>

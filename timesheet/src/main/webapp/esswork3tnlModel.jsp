@@ -47,45 +47,44 @@
             font-size: 11px;  
             visibility: visible;
         } */
+        /* .incomplete {
+             display: inline-block;
+             width: 1rem;
+             height: 1rem;
+             vertical-align: -.125em;
+             background-color: currentColor;
+             border-radius: 50%;
+             color: #dc3545 !important;
+         }
+         .complete {
+             display: inline-block;
+             width: 1rem;
+             height: 1rem;
+             vertical-align: -.125em;
+             background-color: currentColor;
+             border-radius: 50%;
+             color: #00ff4c !important;
+         } */
         .h-n{   
         color: rgb(52, 52, 52);  
-        width: 0px;
+        width: 8px;
+        height: 8px; 
         resize: none;
-        height: 0px;
-        visibility: hidden;
         position: absolute;  /* fixed that to contain*/
         overflow: hidden;
         font-family: Verdana;
         text-align: center;
         font-size: 12px;
         letter-spacing: 0;
-        transition: all 0.2s ease-in-out;
-        box-shadow: 4px 4px 4px rgb(0 0 0 / 25%);
-        border-radius:3px ;
+        transition: all 0.2s ease-in-out; 
+        border-radius:3px;
         border: none;
-        outline: none;
-        background-color: rgba(217.0000022649765, 236.00000113248825, 233.00000131130219, 1);
-          
-       }
-       .incomplete {
-            display: inline-block;
-            width: 1rem;
-            height: 1rem;
-            vertical-align: -.125em;
-            background-color: currentColor;
-            border-radius: 50%;
-            color: #dc3545 !important;
-        }
-        .complete {
-            display: inline-block;
-            width: 1rem;
-            height: 1rem;
-            vertical-align: -.125em;
-            background-color: currentColor;
-            border-radius: 50%;
-            color: #00ff4c !important;
-        }
-    </style>
+        outline: none; 
+        cursor: pointer;
+        background-color: rgb(104, 247, 225);
+        margin-left:2px;
+       } 
+       </style>
     <link href="css/select@2.4.1.0.min.css" rel="stylesheet" />
     </head>
 
@@ -132,15 +131,13 @@
                     
                     <td> <input type="text" name="status" value="Approved" class="d-none">   <p>Approved</p></td>
                     <td>
-                        <input type="number" value="7" min="0" name="hour" class="form-control input-sm w-75 mon_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
-                        <textarea class="h-n   " > Shivam</textarea>
-                        <div class="incomplete"></div>
-                        <div class="complete"></div>
+                        <input type="number" value="7" min="0" name="hour" class="form-control d-inline input-sm w-75 mon_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
+                        <textarea class="h-n  d-inline " > Shivam</textarea>
+ 
                     </td>
-                   
-                    <td>
-                        <input type="number" value="" min="0" name="hour" class="form-control input-sm w-75 mon_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
-                        <textarea class="h-n  " > </textarea>
+                    <td class="justify-content-between">
+                        <input type="number" value="" min="0" name="hour" class="d-inline form-control input-sm w-75 mon_v " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">
+                        <textarea class="h-n d-inline" > </textarea>
                     </td>
                     <td class="text-center">00 </td>
                 </tr>
@@ -151,24 +148,42 @@
         <input type="button" id="btnSave" class="btn btn-primary btn-sm" value="Convert" onclick="save()">
         <script src="js/select2@4.1.0.min.js"></script>
         <script> 
-            $("td").hover(
-                function(){ 
-                    if($(this).find("input:first").val()!="" && $(this).find("input:first").val()!=0  ){
-                        $(this).children(" .h-n").css({"visibility":"visible" ,"width": "129px" ,"height" :"60px", "transition": "all 0.2s ease-in-out;" });
+               // $("td").addClass("d-flex");
+                $(".h-n").hover(
+                    function(){ 
+                        // if($(this).find("input:first").val()!="" && $(this).find("input:first").val()!=0  ){
+                        //     // $(this).children(" .h-n").css({"visibility":"visible" ,"width": "160px" ,"height" :"75px", "outline":"1px solid blue", "transition": "all 0.2s ease-in-out;" });
+                        //     // $(this).children(" .h-n").css({"visibility":"visible" ,"width": "160px" ,"height" :"75px", "outline":"1px solid blue", "transition": "all 0.2s ease-in-out;" });
+                        //     // having border
+                        // } 
+                        // $(this).css({"width": "160px" ,"height" :"75px", "outline":"1px solid blue", "transition": "all 0.2s ease-in-out;" });
+                         
+                        
+                    },
+                    function(){
+                        // $(this).children(" .h-n").css({"visibility":"visible " ,"width": "6px" ,"height" :"6px", "outline":"none", "transition": "all 0.2s ease-in-out;" });
+                        // $(this).css({"width": "8px" ,"height" :"8px", "outline":"none", "transition": "all 0.2s ease-in-out;" });
                     }
-                },
-                function(){
-                    $(this).children(" .h-n").css({"visibility":"hidden" ,"width": "0px" ,"height" :"0px", "transition": "all 0.2s ease-in-out;" });
-                }
-            );
-            $("td input").on("input" , function () {
-                if($(this).val()!="" && $(this).val()!=0  ){
-                    $(this).siblings(".h-n").css({"visibility":"visible" ,"width": "129px" ,"height" :"60px", "transition": "all 0.2s ease-in-out;" });
-                }else{
-                    $(this).siblings(".h-n").css({"visibility":"hidden" ,"width": "0px" ,"height" :"0px", "transition": "all 0.2s ease-in-out;" });
-                }      
-            })
-           
+                );
+    
+                $(".h-n").click( function () {
+                    $(this).css({"width": "160px" ,"height" :"75px", "outline":"1px solid blue", "transition": "all 0.2s ease-in-out;" });
+                });
+                $("td input").on("input" , function () {
+                    if($(this).val()!="" && $(this).val()!=0  ){
+                        $(this).siblings(".h-n").css({"width": "160px" ,"height" :"75px", "outline":"1px solid blue", "transition": "all 0.2s ease-in-out;" });
+                    }else{
+                        $(this).siblings(".h-n").css({"width": "8px" ,"height" :"8px", "outline":"none", "transition": "all 0.2s ease-in-out;" });
+                    }      
+                });
+                $("td input").hover(function(){}, function(){
+                    $(this).siblings(".h-n").css({"width": "8px" ,"height" :"8px", "outline":"none", "transition": "all 0.2s ease-in-out;" });
+                });
+                $(".h-n").hover(function(){}, function(){
+                    $(this).css({"width": "8px" ,"height" :"8px", "outline":"none", "transition": "all 0.2s ease-in-out;" });
+                    $(this).blur();
+                });
+
             $(function () {
                 $('select').select2();
             });

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,17 @@ public class WorkRestConctroller {
 //	}
 	
 	@GetMapping("/fetchworkjson")
-	public  ResponseEntity<LinkedHashMap<String, List<Work>>> fetchByDate(Model m ,HttpServletRequest request ,@RequestParam("startDate") String startDate,@RequestParam("endDate") String endDate) {
+	public  ResponseEntity<LinkedHashMap<String, List<Work>>> fetchByDate(Model m ,HttpServletRequest request ,HttpServletResponse response ,@RequestParam("startDate") String startDate,@RequestParam("endDate") String endDate) {
+	
+		if(request.getSession().getAttribute("empId")==null) {
+			try {
+				response.sendRedirect("login.jsp");								
+				System.out.println(request.getSession().getAttribute("empId")==null);
+			} catch (Exception e) {
+			
+			}
+			
+		}
 		long empId = (Long) request.getSession().getAttribute("empId");
 		LinkedHashMap<String, List<Work>> mm = workService.getWorByStartDateEndDate(startDate, endDate,empId);
 		
