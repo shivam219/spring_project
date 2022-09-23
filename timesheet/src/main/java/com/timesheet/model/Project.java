@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name = "ess_project")
 public class Project {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "project_id")
 	private int projectId;
 
@@ -20,10 +20,12 @@ public class Project {
 
 	@Column(name = "project_status")
 	private String projectStatus;
+	
+	private String customername;
 
+	
 	public Project() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Project(int projectId, String projectName, String projectStatus) {
@@ -33,8 +35,22 @@ public class Project {
 		this.projectStatus = projectStatus;
 	}
 
+	public Project(String customername) {
+		super();
+		this.customername = customername;
+	}
+
 	public int getProjectId() {
 		return projectId;
+		
+	}
+
+	public String getCustomername() {
+		return customername;
+	}
+
+	public void setCustomername(String customername) {
+		this.customername = customername;
 	}
 
 	public void setProjectId(int projectId) {
@@ -59,8 +75,7 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return "Project [projectId=" + projectId + ", projectName=" + projectName + ", projectStatus=" + projectStatus
-				+ "]";
+		return "Project [customername=" + customername + "]";
 	}
 
 }

@@ -25,7 +25,7 @@
 	<!--  Nav -->
 	<nav class="navbar navbar-expand-lg bg-nav-foot">
 		<div class="container-fluid">
-			<a class="navbar-brand  d-lg-none d-block " href="#"> <img
+			<a class="navbar-brand  d-lg-none d-block" href="#"> <img
 					src="images/esslogo.jpg" alt="" width="100" height="40"
 					class="d-inline-block align-text-top">
 			</a>
@@ -107,6 +107,8 @@
 							<li><a class="dropdown-item" href="projectmap">Project Mapping</a></li>
 							<li><a class="dropdown-item" href="#">Program Wise
 									Master</a></li>
+							<li><a class="dropdown-item" href="projectmasterdashboard">Project Master</a></li>
+							<li><a class="dropdown-item" href="CustomerMasterDashboard">Customer Master</a></li>		
 							<li><a class="dropdown-item" href="#">Change Password </a></li>
 							<li><a class="dropdown-item" href="#">User Details
 									Master</a></li>
