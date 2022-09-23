@@ -391,6 +391,7 @@
                         type: 'GET',
                         dataType: 'json',
                         success: function(obj, success,event){
+                            console.log(obj);
                             for (let i = $('#tbtable tr').length -2 ; i > 0; i--) {
                                 $('#tbtable tr').eq(i).remove();
                             }
