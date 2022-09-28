@@ -12,8 +12,8 @@ import com.timesheet.model.Work;
 
 @Component
 public interface WorkRepository extends CrudRepository<Work, Integer> {
-	
-	@Query(value = "SELECT e.id,  e.emp_id , e.project_id, p.project_name, e.day , e.descr , e.hours,  e.day,  e.status FROM ess_work e inner join ess_project p on  e.project_id = p.project_id   where  e.emp_id = :empId  and day between :startDate  and  :endDate ", nativeQuery = true)
-	public List<Work> getWorByStartDateEndDate(@Param("startDate") String startDate,
-		@Param("endDate") String endDate, @Param("empId") long empId);
+
+	@Query(value = "SELECT e.id,  e.emp_id , e.project_id, p.project_name, e.day , e.descr , e.hours,  e.day  FROM ess_work e inner join ess_project p on  e.project_id = p.project_id   where  e.emp_id = :empId  and day between :startDate  and  :endDate ", nativeQuery = true)
+	public List<Work> getWorByStartDateEndDate(@Param("startDate") String startDate, @Param("endDate") String endDate,
+			@Param("empId") long empId);
 }

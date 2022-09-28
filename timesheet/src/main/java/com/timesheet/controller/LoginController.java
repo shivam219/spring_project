@@ -32,10 +32,10 @@ public class LoginController {
 		if (request.getSession().getAttribute("empId") == null) {
 			return "login";
 		}
-		return "home";
+		return "redirect:/home";
 	}
 
-	@GetMapping("/login")
+	@GetMapping("login")
 	public String login() {
 		return "login";
 	}
@@ -47,16 +47,16 @@ public class LoginController {
 			HttpSession session = request.getSession();
 			session.setAttribute("empId", emp.getEmpId());
 			m.addAttribute("emp",emp);
-			return "home";
+			return "redirect:/home";
 		}
 		m.addAttribute("errorMsg", "please provide correct userid and passowrd ");
-		return "login";
+		return "redirect:login";
 	}
 
 	@GetMapping(value = "/logout")
 	public String logoutPage(HttpServletRequest request) {
 		request.getSession().removeAttribute("empId");
-		return "login";
+		return "redirect:/login";
 	}
 
 	@GetMapping(value = "/home")

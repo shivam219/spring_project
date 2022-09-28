@@ -1,98 +1,87 @@
 package com.timesheet.model;
 
-import javax.annotation.Generated;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-
 @Entity
 @Table
-
 public class Customer {
-	
-	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int customerid;
-	private String customertype;
-	private String customername;
-	private String projectid;
-	private String projectname;
-	private String onboarddate;
-	private String offboarddate;
-	
-	
-	
-	public int getCustomerid() {
-		return customerid;
-	}
-	public void setCustomerid(int customerid) {
-		this.customerid = customerid;
-	}
-	public String getCustomertype() {
-		return customertype;
-	}
-	public void setCustomertype(String customertype) {
-		this.customertype = customertype;
-	}
-	public String getCustomername() {
-		return customername;
-	}
-	public void setCustomername(String customername) {
-		this.customername = customername;
-	}
-	public String getProjectid() {
-		return projectid;
-	}
-	public void setProjectid(String projectid) {
-		this.projectid = projectid;
-	}
-	public String getProjectname() {
-		return projectname;
-	}
-	public void setProjectname(String projectname) {
-		this.projectname = projectname;
-	}
-	
-	public String getOnboarddate() {
-		return onboarddate;
-	}
-	public void setOnboarddate(String onboarddate) {
-		this.onboarddate = onboarddate;
-	}
-	public String getOffboarddate() {
-		return offboarddate;
-	}
-	public void setOffboarddate(String offboarddate) {
-		this.offboarddate = offboarddate;
-	}
-	public Customer(int customerid, String customertype, String customername, String projectid, String projectname) {
-		super();
-		this.customerid = customerid;
-		this.customertype = customertype;
-		this.customername = customername;
-		this.projectid = projectid;
-		this.projectname = projectname;
-		
-	}
-	public Customer(String onboarddate, String offboarddate) {
-		super();
-		this.onboarddate = onboarddate;
-		this.offboarddate = offboarddate;
-	}
-	@Override
-	public String toString() {
-		return "Customer [customerid=" + customerid + ", customertype=" + customertype + ", customername="
-				+ customername + ", projectid=" + projectid + ", projectname=" + projectname + "]";
-	}
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "customer_id")
+	private int customerId;
+	@Column(name = "customer_type")
+	private String customerType;
+
+	@Column(name = "customer_name")
+	private String customerName;
+
+	@Column(name = "on_board_date")
+	private String onBoardDate;
+	@Column(name = "off_board_date")
+	private String offBoardDate;
+
 	public Customer() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	
+
+	public Customer(int customerId, String customerType, String customerName, String onBoardDate, String offBoardDate) {
+		super();
+		this.customerId = customerId;
+		this.customerType = customerType;
+		this.customerName = customerName;
+		this.onBoardDate = onBoardDate;
+		this.offBoardDate = offBoardDate;
+	}
+
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getCustomerType() {
+		return customerType;
+	}
+
+	public void setCustomerType(String customerType) {
+		this.customerType = customerType;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getOnBoardDate() {
+		return onBoardDate;
+	}
+
+	public void setOnBoardDate(String onBoardDate) {
+		this.onBoardDate = onBoardDate;
+	}
+
+	public String getOffBoardDate() {
+		return offBoardDate;
+	}
+
+	public void setOffBoardDate(String offBoardDate) {
+		this.offBoardDate = offBoardDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [customerId=" + customerId + ", customerType=" + customerType + ", customerName="
+				+ customerName + ", onBoardDate=" + onBoardDate + ", offBoardDate=" + offBoardDate + "]";
+	}
 
 }

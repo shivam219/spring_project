@@ -2,6 +2,7 @@
 	response.sendRedirect("login");
 } %>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 	<!-- CSS-5.0.2  | JS-5.0.2 | -->
@@ -58,8 +59,6 @@
 							data-bs-toggle="dropdown" aria-expanded="false">
 							Create Timesheet </a>
 						<ul class="dropdown-menu" id="dropdown-menu">
-							<li><a class="dropdown-item" href="esswork2">Create Timesheet</a></li>
-							<li><a class="dropdown-item" href="esswork3tnlModel">esswork3tnlModel</a></li>
 							<li><a class="dropdown-item" href="esswork">Create Timesheet</a></li>
 							<li><a class="dropdown-item" href="#">Approve Timesheet</a></li>
 							<li><a class="dropdown-item" href="#">Change Status</a></li>
@@ -107,8 +106,8 @@
 							<li><a class="dropdown-item" href="projectmap">Project Mapping</a></li>
 							<li><a class="dropdown-item" href="#">Program Wise
 									Master</a></li>
-							<li><a class="dropdown-item" href="projectmasterdashboard">Project Master</a></li>
-							<li><a class="dropdown-item" href="CustomerMasterDashboard">Customer Master</a></li>		
+							<li><a class="dropdown-item" href="project-dashboard">Project Dashboard</a></li>
+							<li><a class="dropdown-item" href="customer-dashboard">Customer Dashboard</a></li>		
 							<li><a class="dropdown-item" href="#">Change Password </a></li>
 							<li><a class="dropdown-item" href="#">User Details
 									Master</a></li>

@@ -37,7 +37,6 @@ public class ProjectService {
 	}
 
 	public int deleteProjectByProjectId(long ProjectId) {
-		// TODO Auto-generated method stub
 		return repository.deleteProjectByProjectId(ProjectId);
 	}
 }

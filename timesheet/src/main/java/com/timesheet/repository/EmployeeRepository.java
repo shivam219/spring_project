@@ -19,10 +19,8 @@ public interface EmployeeRepository  extends CrudRepository<Employee, Integer> {
 	@Transactional
 	public int saveEmployee(@Param("id") long id, @Param("name") String name , @Param("email") String email,	
 							@Param("pass") String pass , @Param("city") String city,@Param("address") String address,
-							@Param("phone") String phone, @Param("pincode") String pincode
-			);
+							@Param("phone") String phone, @Param("pincode") String pincode);
 	
- 
 	@Query(value = "SELECT * FROM ess_employee WHERE emp_password_encrypt = sha1(:pass)  AND emp_id =:id ", nativeQuery = true )
 	public Employee isValidEmployee(@Param("id") long empId, @Param("pass") String empPassword );
 	

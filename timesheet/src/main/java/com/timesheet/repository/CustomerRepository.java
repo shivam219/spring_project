@@ -10,7 +10,7 @@ import com.timesheet.model.Customer;
 
 public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 	@Modifying
-	@Query(value = "delete from customer where customerid = :CustId", nativeQuery = true)
+	@Query(value = "delete from customer where customer_id = :CustId", nativeQuery = true)
 	@Transactional
 	public int deleteCustomnerByCustomerId(long CustId);
 

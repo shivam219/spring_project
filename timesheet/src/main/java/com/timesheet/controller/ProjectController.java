@@ -1,6 +1,8 @@
 package com.timesheet.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,34 +64,28 @@ public class ProjectController {
 		return "projectmap";
 	}
 
+	@GetMapping(value = "add-project")
+	public String getAddProject(Model m) {
+		m.addAttribute("customerList", customerService.getAllcustomer());
+		return "add-project";
+	}
 
-
-	@PostMapping("/projectmasterprocess")
+	@PostMapping("/project-process")
 	public String projectmasterProcess(Model model, @ModelAttribute Project project) {
 		projectService.save(project);
-		return "projectmasterdashboard";
+		return "redirect:/project-dashboard";
 	}
 
-	@GetMapping("/projectmasterdashboard")
+	@GetMapping("/project-dashboard")
 	public String dashboard(Model m) {
 		m.addAttribute("projectList", projectService.getAllProject());
-		return "projectmasterdashboard";
+		return "project-dashboard";
 	}
-	
-	
-	@GetMapping(value = "/customermaster1")
-	public String getcustomermaster() {
-		return "customermaster1";
 
-	}
-	
-	@GetMapping("/deleteprojectbyid")
-	public String deleteProjectByProjectId(Model m, @RequestParam("project_id") long ProjectId) {
+	@GetMapping("delete-project-by-id")
+	public ResponseEntity<Object> deleteProjectByProjectId(Model m, @RequestParam("projectId") long ProjectId) {
 		projectService.deleteProjectByProjectId(ProjectId);
-		commonDataModel(m);
-		return "projectmasterdashboard";
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Deleted");
 	}
-	
-	
-	
+
 }

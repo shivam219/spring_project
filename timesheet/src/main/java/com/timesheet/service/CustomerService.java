@@ -19,7 +19,7 @@ public class CustomerService {
 		repo.save(c);
 		return c;
 	}
-	
+
 	public List<Customer> getAllcustomer() {
 		return (List<Customer>) repo.findAll();
 	}
@@ -27,7 +27,5 @@ public class CustomerService {
 	public int deleteCustomnerByCustomerId(long CustId) {
 		return repo.deleteCustomnerByCustomerId(CustId);
 	}
-	
-	
-	
+
 }

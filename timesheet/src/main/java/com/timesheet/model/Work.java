@@ -1,14 +1,11 @@
 package com.timesheet.model;
 
-import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "ess_work")
@@ -52,16 +49,11 @@ public class Work {
 	@Column(name = "day")
 	private String day;
 
-	@Column(name = "status")
-	private String status;
-
 	public Work() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Work(int id, long empId, int projectId, String projectName, String hours, String descr, String day,
-			String status) {
+	public Work(int id, long empId, int projectId, String projectName, String hours, String descr, String day) {
 		super();
 		this.id = id;
 		this.empId = empId;
@@ -70,7 +62,6 @@ public class Work {
 		this.hours = hours;
 		this.descr = descr;
 		this.day = day;
-		this.status = status;
 	}
 
 	public int getId() {
@@ -129,37 +120,10 @@ public class Work {
 		this.day = day;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(day, descr, empId, hours, id, projectId, projectName, status);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Work other = (Work) obj;
-		return Objects.equals(day, other.day) && Objects.equals(descr, other.descr) && empId == other.empId
-				&& Objects.equals(hours, other.hours) && id == other.id && projectId == other.projectId
-				&& Objects.equals(projectName, other.projectName) && Objects.equals(status, other.status);
-	}
-
 	@Override
 	public String toString() {
 		return "Work [id=" + id + ", empId=" + empId + ", projectId=" + projectId + ", projectName=" + projectName
-				+ ", hours=" + hours + ", descr=" + descr + ", day=" + day + ", status=" + status + "]";
+				+ ", hours=" + hours + ", descr=" + descr + ", day=" + day + "]";
 	}
 
 }

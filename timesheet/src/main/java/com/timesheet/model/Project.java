@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name = "ess_project")
 public class Project {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "project_id")
 	private int projectId;
 
@@ -20,8 +20,9 @@ public class Project {
 
 	@Column(name = "project_status")
 	private String projectStatus;
-	
-	private String customername;
+
+	@Column(name = "customer_id")
+	private String customerId;
 
 	
 	public Project() {
@@ -35,9 +36,9 @@ public class Project {
 		this.projectStatus = projectStatus;
 	}
 
-	public Project(String customername) {
+	public Project(String customerId) {
 		super();
-		this.customername = customername;
+		this.customerId = customerId;
 	}
 
 	public int getProjectId() {
@@ -45,12 +46,12 @@ public class Project {
 		
 	}
 
-	public String getCustomername() {
-		return customername;
+	public String getcustomerId() {
+		return customerId;
 	}
 
-	public void setCustomername(String customername) {
-		this.customername = customername;
+	public void setcustomerId(String customerId) {
+		this.customerId = customerId;
 	}
 
 	public void setProjectId(int projectId) {
@@ -75,7 +76,8 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return "Project [customername=" + customername + "]";
+		return "Project [projectId=" + projectId + ", projectName=" + projectName + ", projectStatus=" + projectStatus
+				+ ", customerId=" + customerId + "]";
 	}
-
+ 
 }

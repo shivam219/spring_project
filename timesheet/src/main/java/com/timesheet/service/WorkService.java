@@ -76,7 +76,7 @@ public class WorkService {
 					w2.setDay(t.minusDays(i).toString());
 					w2.setHours("0");
 					w2.setDescr("");
-					w2.setStatus("Pending");
+					 
 					al.add(w2);
 				}
 				al.add(w);
@@ -97,7 +97,7 @@ public class WorkService {
 					w2.setDay(t.minusDays(1).toString());
 					w2.setHours("0");
 					w2.setDescr("");
-					w2.setStatus("Pending");
+					 
 					ArrayList<Work> al = new ArrayList<Work>();
 					al.add(w2);
 					al.add(w);
@@ -114,7 +114,7 @@ public class WorkService {
 						w2.setDay(t.minusDays(i).toString());
 						w2.setHours("0");
 						w2.setDescr("");
-						w2.setStatus("Pending");
+						 
 						al.add(w2);
 					}
 					al.add(w);
@@ -130,7 +130,6 @@ public class WorkService {
 						w2.setDay(t.minusDays(i).toString());
 						w2.setHours("0");
 						w2.setDescr("");
-						w2.setStatus("Pending");
 						al.add(w2);
 					}
 					al.add(w);
@@ -146,7 +145,6 @@ public class WorkService {
 						w2.setDay(t.minusDays(i).toString());
 						w2.setHours("0");
 						w2.setDescr("");
-						w2.setStatus("Pending");
 						al.add(w2);
 					}
 					al.add(w);
@@ -162,7 +160,7 @@ public class WorkService {
 						w2.setDay(t.minusDays(i).toString());
 						w2.setHours("0");
 						w2.setDescr("");
-						w2.setStatus("Pending");
+						 
 						al.add(w2);
 					}
 					al.add(w);
@@ -178,7 +176,7 @@ public class WorkService {
 						w2.setDay(t.minusDays(i).toString());
 						w2.setHours("0");
 						w2.setDescr("");
-						w2.setStatus("Pending");
+						 
 						al.add(w2);
 					}
 					al.add(w);
@@ -204,7 +202,7 @@ public class WorkService {
 				w2.setDay(d1.plusDays(i).toString());
 				w2.setHours("0");
 				w2.setDescr("");
-				w2.setStatus("Pending");
+				 
 				al.add(w2);
 			}
 			map.put(key, al);
@@ -224,7 +222,7 @@ public class WorkService {
 					w2.setDay(sd.plusDays(i).toString());
 					w2.setHours("0");
 					w2.setDescr("");
-					w2.setStatus("Pending");
+					 
 					al.add(w2);
 				}
 				map.put(p.getProjectName(), al);

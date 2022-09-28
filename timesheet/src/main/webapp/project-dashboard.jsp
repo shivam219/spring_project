@@ -8,20 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Project Master Dashboard</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
 
 </head>
 <body>
@@ -62,7 +48,6 @@ h1 {
 	border-color:crimson;
 }
 
-}
 
 button{
 
@@ -92,9 +77,8 @@ table, th, td {
 
 </style>
 	<div class="container">
-		<h1><span class="glyphicon glyphicon-th"></span>  Project Master </h1>
-		<button type="button" class="btn btn-primary" onclick="openPage('addproject.jsp')"/> <span class="glyphicon glyphicon-tasks"></span> Add New Project</button>
-	
+		<h1><span class="glyphicon glyphicon-th"></span>  Project Dashboard </h1>
+		<a type="button" class="btn btn-primary" href="add-project"> <span class="glyphicon glyphicon-tasks"></span> Add New Project</a>
 	
 		<table class="table table-striped" >
 			<thead class="thead-dark">
@@ -102,13 +86,12 @@ table, th, td {
 				<th scope="row">Project Id</th>
 				<th scope="row">Project Name</th>
 				<th scope="row">Project Status</th>
-				<th scope="row">
 			</thead>
 			<tbody>
 				<c:forEach items="${projectList}" var="p" varStatus="loop">
 					<tr>
 					<td><button type="button" class="btn btn-danger"  onclick="deleteprojectbyid('${p.getProjectId()}')"/> <span class="glyphicon glyphicon-remove"></span> Delete</button></td>
-						<td onclick="showId(this)" >${p.getProjectId()} </td>	
+						<td>${p.getProjectId()} </td>	
 			            <td>${p.getProjectName()}</td>
 						<td>${p.getProjectStatus()}</td>
 					</tr>
@@ -116,44 +99,21 @@ table, th, td {
 			</tbody>
 		</table>
 	</div>
-	<script type="text/javascript">
-	
-		function showId(t){
-			console.log($(t).html());
-		}
-		
-		
-	</script>
 	<script>
 		function deleteprojectbyid(ProjectId) {
+			console.log(ProjectId);
+			let uri =  'delete-project-by-id?projectId='+ProjectId;
 			$.ajax({
-				url : 'http://localhost:8080/deleteprojectbyid?project_id=' + ProjectId,
-				method : 'GET',
-				success : function() {
-					alert('record has been deleted');
+				type: 'GET',
+				url: uri,
+				contentType: false,
+				success: function () {
 					location.reload();
-				},
-				error : function(error) {
-					
 				}
-
-			})
-
+			});     
 		}
 	</script>
 	
-	<script type="text/javascript">
- function openPage(pageURL)
- {
- window.location.href = pageURL;
- }
-</script>
-	
-	<script> 
-            function Geeks() {
-                document.getElementById("row1").remove();
-            }
-        </script>
 </body>
 
 </html>

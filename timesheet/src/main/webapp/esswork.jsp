@@ -54,7 +54,8 @@
         overflow: hidden;
         font-family: Verdana;
         text-align: center;
-        letter-spacing: 0;
+        letter-spacing: 0; 
+        
         transition: all 0.2s ease-in-out;
         /* box-shadow: 4px 4px 4px rgb(0 0 0 / 25%); */
         border-radius:3px ;
@@ -87,17 +88,66 @@
             background: yellow;
         }
 
-        td ::selection {
-            color: red;
-            background: yellow;
+      
+        .acti_desc {
+            right: 0px;
+            height: 100vh;
+            width: 350px;
+            text-align: center;
+            background-color: #e8eae6;
+            box-sizing: border-box;
+            padding: 20px;
+            z-index: 1000;
+            display: none; 
+            position: absolute;
+            border-radius: 8px 0px; 
+            top: 75px;
+            transition: all 0.4s ease-in-out;
+            font-weight: bold;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+
+        .close-btn {
+            position: absolute;
+            background-color: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            border-radius: 30%;
+            padding: 4px 16px; 
+            cursor: pointer;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .close-btn:hover {
+            background-color: rgb(255, 246, 246);
+        }
+         .container{
+            z-index: 100;
+         }
+        table tfoot tr:last-child td:first-child {
+            border-bottom-left-radius: 5px;
+        }
+    
+        table tfoot tr:last-child td:last-child {
+            border-bottom-right-radius: 5px;
         }
     </style>
-    <link href="css/select@2.4.1.0.min.css" rel="stylesheet" />
     
     </head>
 
     <body > 
-        <div class="container">
+      
+        <div class="container" >
             <div class="row rounded  ">
                 <h5 class="text-center text-secondary h4 mt-2">Ess Work</h5>
             </div>
@@ -106,16 +156,15 @@
                     <span class="align-middle"> Time Period</span>
                 </div>
                 <div class="col d-flex justify-content-between  align-middle">  
-                     <button class="rounded btn-secondary h-75 "  onclick="PrevWeekReport()" id="btnPrevWeekReport" >
-                        <i class="fa-solid fa-caret-left"></i> 
+                    <button class="rounded btn btn-secondary h-75 px-2 me-2"  onclick="PrevWeekReport()" id="btnPrevWeekReport" >
+                        <i class="fa-solid fa-caret-left  d-flex"></i> 
                     </button>
-                    <input  placeholder="Select date"  type="date" disabled id="startDate"  value="" name="startDate"  class="form-control   w-75  h-75    ">    
-                    <span class="   align-self-start  "> To </span>
-                </div>
-                <div class="col d-flex justify-content-between align-middle">
-                    <input  placeholder="Select date"  type="date" id="endDate" disabled     value="" name="endDate" class="form-control   w-75  h-75 ">
-                    <button class="rounded btn-secondary h-75" onclick="nextWeekReport()" id="btnNextWeekReport" >
-                        <i class="fa-solid fa-caret-right rounded"></i>
+                    <input  placeholder="Select date"  type="date" disabled id="startDate"   name="startDate"  class="form-control   w-75  h-75 me-2    ">    
+                    <span class=" align-self-start me-2 "> To </span>
+                
+                    <input  placeholder="Select date"  type="date" id="endDate" disabled  name="endDate" class="form-control   w-75  h-75 me-2 ">
+                    <button class="rounded btn btn-secondary h-75 px-2 " onclick="nextWeekReport()" id="btnNextWeekReport" >
+                        <i class="fa-solid fa-caret-right rounded  d-flex "></i>
                     </button> 
                 </div>
                 <div class="col  d-flex justify-content-center align-middle">
@@ -127,8 +176,8 @@
             <table class="table table-striped table-hover  mb-0 mt-0 rounded " id="tbtable"  >
                 <thead>
                     <tr class=" tblcolor  "  >
+                        <td class="text-center" >Customer</td>
                         <td class="text-center" colspan="2">Work Items</td>
-                        <td class="text-center" >Status</td>
                         <td class="text-center" id="monDate">Mon</td>
                         <td class="text-center" id="tueDate">Tue</td>
                         <td class="text-center" id="wedDate">Wed</td>
@@ -155,78 +204,41 @@
                 </tfoot>
             </table>
         </div>
-     
-        <script src="js/select2@4.1.0.min.js"></script>
+       
+        <div class="acti_desc" class="rounded-start"  style="  border: 2px solid rgb(206, 204, 204);   float: right;">
+            <div class="mt-3 ">
+                <p onclick="actiDescPopHide()" class="close-btn  ">X</p>
+                <span style="font-size: 16px;">Activity Description </span>
+            </div>
+            <hr>
+            <div class="form-group mt-4 ">
+                <textarea class="form-control" id="acti_desc"  rows="5"  style="resize: none;"
+                    placeholder="Enter description here....."></textarea>
+            </div>
+             <input type="button" value="save" class="btn btn-primary px-3 py-1 mt-3"  onclick="newActiDescPopSave()" >
+        </div> 
         <script>
-            function AddHoverToHourIn(){   
-                let vh = "75px" 
-                let vw = "160px";
-                let vo ="1px solid blue";
-                let vt = "all 0.2s ease-in-out;";
-                let vi = "100000";
-                let vc = "pointer";
-                let nh = "8px" 
-                let nw = "8px";
-                let no ="none";
-                let nt = "all 0.2s ease-in-out;";
-                let ni = "100";
-                let nc = "pointer";
-                $(".h-n").click( function () {
-                    if($(this).siblings("input:first").val()!="" && $(this).find("input:first").val()!=0  ){
-                        $(this).css({"width": vw ,"height" :vh, "outline":vo, "transition": vt, "z-index" : vi });
-                    }else{
+            var prevActivityDesc = null ;
+            function newActiDescPopSave(){
+                $(prevActivityDesc).val($("#acti_desc").val());
+                actiDescPopHide();
+            }
+            function actiDescPopShow (){
+                $(".acti_desc").show();
+            }
+            function actiDescPopHide (){
+                $(".acti_desc").hide();
+            }
+            
+            function AddHoverToHourIn(){           
+                $(".h-n").click( function (event) {
+                    if($(this).siblings("input:first").val()){
+                        prevActivityDesc = $(this);
                         $(this).blur();
-                    }
-
-                });
-                $("td input").on("input" , function () {
-                    if($(this).val()!="" && $(this).val()!=0  ){
-                        $(this).siblings(".h-n").css({"width": vw ,"height" :vh, "outline":vo, "transition": vt, "z-index" : vi });
-                    }else{
-                        $(this).siblings(".h-n").css({"width": nw ,"height" :nh, "outline":no, "transition": nt, "z-index" : ni  });
-                        $(this).blur();
-                    }      
-                });
-                $(".h-n").blur(function() {
-                    $(this).css({"width": nw ,"height" :nh, "outline":no, "transition": nt, "z-index" : ni });
-                });
-                $(".h-n ").on('keyup', function(e) {
-                    if (e.key == "Escape"){
-                        $(this).css({"width": nw ,"height" :nh, "outline":no, "transition": nt, "z-index" : ni });  
-                        $(this).blur();
+                        $("#acti_desc").val($(this).val());
+                        actiDescPopShow();
                     }
                 });
-                $("td input ").on('keyup', function(e) {
-                    if (e.key == "Escape"){
-                        $(this).siblings(".h-n").blur();
-                    }
-                });
-
-                /*call on hover,not used now*/
-                $(".h-n").hover(function(){}, function(){
-                    // $(this).css({"z-index":"1000;","width": "8px" ,"height" :"8px", "outline":"none", "transition": "all 0.2s ease-in-out;" ,"z-index":"100000;"  });
-                    // $(this).blur();
-                });
-                $("td input").hover(function(){}, function(){
-                    // $(this).siblings(".h-n").css({"width": "8px" ,"height" :"8px", "outline":"none", "transition": "all 0.2s ease-in-out;" ,"z-index":"100000;" });
-                });
-                // $(this).siblings(".h-n").removeClass("h-n-empty");     
-                // if($(this).siblings(".h-n").hasClass("h-n-fill")){
-                // $(this).siblings(".h-n").addClass("h-n-empty");
-                // }
-                // $(".h-n").on("input" , function () {
-                //     // console.log("asdfdsa");
-                //     if($(this).val()!=""){
-                //         $(this).siblings(".h-n").css({"width": vw ,"height" :vh, "outline":vo, "transition": vt, "z-index" : vi });
-                //         $(this).siblings(".h-n").addClass("h-n-fill");
-                //     }else{
-                //         $(this).siblings(".h-n").css({"width": nw ,"height" :nh, "outline":no, "transition": nt, "z-index" : ni  });
-                //         $(this).siblings(".h-n").removeClass("h-n-fill");
-                //         $(this).blur();
-                //     }      
-                // });
-                 /*call on hover,not used now*/
-        
                 $('#tbtable tr').addClass("tblcolor");
             };
             function padTo2Digits(num) {
@@ -259,7 +271,6 @@
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 6);
                 $("#sunDate").html('sun  &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
-                console.log(new Date($("#startDate").val()).getDate());
             }
             function PrevWeekReport(){
                 let sd = new Date($("#startDate").val());
@@ -284,9 +295,8 @@
                 fetchwork();
             }
             function cal(ob){
-                if($(ob).val()>12){
+                if($(ob).val()>24){
                     $(ob).val('');
-                    console.log("more then 12");
                 }
                 else if($(ob).val()=="" || $(ob).val()>0){
                     let rsum=0;   
@@ -384,8 +394,7 @@
                 let sd = $("#startDate").val();
                 let ated = $("#endDate").attr("name");
                 let ed = $("#endDate").val();
-                let uri = '/fetchworkjson?'+atsd+'='+sd+'&'+ated+'='+ed;
-                console.log(uri);
+                let uri = '/fetchworkjson?'+atsd+'='+sd+'&'+ated+'='+ed; 
                     $.ajax({
                         url: uri,
                         type: 'GET',
@@ -400,11 +409,9 @@
                                 let row = document.createElement("tr");
                                 let spn = d[i][0];
                                
-                                    let sl = '<td  colspan="2"> <select data-placeholder="'+ spn+'" disabled="disabled"  class="form-control selectProject" tabindex="1">' 
-                                    + '<option value="'+ spn+'" >'+ spn +'</option> '
-                                    + '</select> </td> '
-                                    + '<td><p>Approved</p></td>';
-
+                                    let sl = '<td><p class="text-center border rounded p-1 mt-1 bg-white" >TCS </p></td>' 
+                                           + '<td  colspan="2"> <p class="text-center border rounded bg-white p-1 mt-1" > '+spn +' </p> </td> ' ;
+                                    
                                 for (let j = 0; j <d[i][1].length; j++) {
                                     if( d[i][1][j]["id"] == 0){
                                         let eId = d[i][1][j]["empId"];
@@ -415,15 +422,13 @@
                                         let day = d[i][1][j]["day"];   
                                         let status = d[i][1][j]["status"];   
                                         let t =  ' <td>'
-                                            +' <input type="number"    name="hours"          min="1" max="12" class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
+                                            +' <input type="number"    name="hours"          min="1" max="24" class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
                                             +' <input type="number"  value='+eId+'      name="empId"          class="d-inline d-none"  > ' 
                                             +' <input type="number"  value='+pId+'      name="projectId"      class="d-inline d-none"  > ' 
                                             +' <input type="text"    value='+pName+'    name="projectName"    class="d-inline d-none"  > ' 
                                             +' <input type="date"    value='+day+'     name="day"             class="d-inline d-none"  >'  
-                                            +' <input type="text"    value='+status+'     name="status"       class="d-inline d-none"  > '
-                                            +' <textarea class="h-n h-n-blank"  name="descr"     ></textarea>' 
+                                            +' <textarea class="h-n h-n-blank"   name="descr"       ></textarea>' 
                                             +' </td>';
-                                            // +' <textarea class="h-n "  name="descr"  style="background-color:yellow" ></textarea>'  // color
                                         row.innerHTML = (( row.innerHTML.toString()) + t);
                                     }
                                     else{
@@ -436,30 +441,26 @@
                                         let day = d[i][1][j]["day"];   
                                         let status = d[i][1][j]["status"];   
                                         let   t = ' <td> ' 
-                                            +' <input type="number"  value='+hours+'    name="hours" min="1"  max="12"  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
+                                            +' <input type="number"  value='+hours+'    name="hours" min="1"  max="24"  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
                                             +' <input type="number"  value='+id+'       name="id"                       class=" d-inline d-none"  > ' 
                                             +' <input type="number"  value='+eId+'      name="empId"                    class=" d-inline d-none"  > ' 
                                             +' <input type="number"  value='+pId+'      name="projectId"                class=" d-inline d-none"  > ' 
                                             +' <input type="text"    value='+pName+'    name="projectName "             class=" d-inline d-none"  > ' 
                                             +' <input type="date"  value='+day+'        name="day"                      class=" d-inline d-none" > ' 
-                                            +' <input type="text"  value='+status+'     name="status"                   class=" d-inline d-none"  > '
-                                            +' <textarea class="h-n  '+ (descr==""?" h-n-empty":"")+'"  name="descr"   >'+descr +'</textarea>'  
+                                            +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"     >'+descr +'</textarea>'  
                                             +'</td>';
-                                            
-                                            // +' <textarea class="h-n"  name="descr"  >'+descr +'</textarea>' 
                                         row.innerHTML = (( row.innerHTML.toString()) + t);
                                     }  
                                 }   
                                 row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">00</td>' );
                                 $("#tbtable").append(row);
-                                calRowOnLoad();
-                                AddHoverToHourIn();
-                                setWeekDates();
                             }
+                            calRowOnLoad();
+                            AddHoverToHourIn();
+                            setWeekDates();
                             /*reset horizontal total when now row found*/
                             let rowCount = $('#tbtable tr').length;
                             if(rowCount == 2) {
-                                console.log("no rows founded");
                                 $("#mov_v_t").html('00');
                                 $("#tue_v_t").html('00');
                                 $("#web_v_t").html('00');
@@ -492,18 +493,6 @@
                         success: function () {
                         }
                     });     
-
-                    /** 
-                    let xhr = new XMLHttpRequest();
-                    xhr.open("POST", 'deletework', true);
-                    xhr.setRequestHeader("Content-Type", "application/json");
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            result.innerHTML = this.responseText;
-                        }
-                    }; 
-                    xhr.send(data2);
-                    */
                     $.ajax({
                         type: 'post',
                         url: 'savework',
@@ -532,7 +521,6 @@
                         });
                     }); 
                     json += otArr.join(",") + ']';
-                    console.log(json);
                     return json;
                 }
                 function html2json() {

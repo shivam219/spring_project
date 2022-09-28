@@ -1,6 +1,8 @@
 package com.timesheet.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,39 +15,37 @@ import com.timesheet.model.Customer;
 import com.timesheet.service.CustomerService;
 
 @Controller
-public class CustomerMasterController {
+public class CustomerController {
 
 	@Autowired
 	CustomerService customerService;
 
 	@ModelAttribute
 	public void commonDataModel(Model m) {
-		m.addAttribute("customerdata", customerService.getAllcustomer());
+		m.addAttribute("customerList", customerService.getAllcustomer());
 	}
 
-	@GetMapping("CustomerMasterDashboard")
+	@GetMapping("/add-customer")
+	public String getCustomerMaster() {
+		return "add-customer";
+	}
+	
+	@GetMapping("customer-dashboard")
 	public String CustomerMasterDashboard(Model m) {
 		m.addAttribute("customerdata", customerService.getAllcustomer());
-		return "CustomerMasterDashboard";
+		return "customer-dashboard";
 	}
 
-	@PostMapping("/customermasterprocess")
+	@PostMapping("/customer-process")
 	public String customermasterprocess(Model model, @ModelAttribute Customer customer) {
 		customerService.save(customer);
-		return "CustomerMasterDashboard";
+		return "redirect:/customer-dashboard";
 	}
-	@GetMapping(value = "/addproject")
-	public String getprojectmaster(Model m) {
-		m.addAttribute("customerdata", customerService.getAllcustomer());
-		System.out.println(" called add prkject");
-		return "addproject";
 
-	}
-	@GetMapping("/customerdelete")
-	public String deleteCustomnerByCustomerId(Model m, @RequestParam("customerId") long CustId) {
-		customerService.deleteCustomnerByCustomerId(CustId);
-		commonDataModel(m);
-		return "CustomerMasterDashboard";
+	@GetMapping("/customer-delete")
+	public ResponseEntity<Object> deleteCustomnerByCustomerId(Model m, @RequestParam("customerId") long CustId) {
+			customerService.deleteCustomnerByCustomerId(CustId);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Deleted");
 	}
 
 }
