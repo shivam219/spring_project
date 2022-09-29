@@ -117,6 +117,9 @@
 		.form_item input[type="date"]:focus {
 			border-color: #6271f0;
 		}
+		label{
+			user-select: none;
+		}
 	</style>
 	<div class="wrapper">
 		<div class="form_container">
@@ -127,42 +130,46 @@
 
 				<div class="form_wrap">
 					<div class="form_item">
-						<span class="glyphicon glyphicon-asterisk"></span> <label for="projectId"
-							class="form-label">Project Id : </label> <input type="text" name="projectId">
+						<span class="glyphicon glyphicon-asterisk"></span>
+						<label for="projectId" class="form-label">Project Id  </label> 
+						<input type="text" name="projectId" id="projectId">
 					</div>
 				</div>
 
 
 				<div class="form_wrap">
 					<div class="form_item">
-						<span class="glyphicon glyphicon-briefcase fa-lg"> </span> <label for="projectName"
-							class="form-label">Project Name : </label> <input type="text"
-							name="projectName">
+						<span class="glyphicon glyphicon-briefcase fa-lg"> </span>
+						<label for="projectName" class="form-label">Project Name  </label> 
+						<input type="text" name="projectName" id="projectName">
 					</div>
 				</div>
 
 
 					<div class="form_item">
-						<span class="glyphicon glyphicon-dashboard"></span> <label for="projectStatus"
-							class="form-label">Project Status : </label>
-						<select name="projectStatus">
+						<span class="glyphicon glyphicon-dashboard"></span> 
+						<label for="projectStatus" class="form-label">Project Status  </label>
+						<select name="projectStatus" id="projectStatus">
 							<option value="1">Active</option>
-							<option value="0">Inactive</option>
+							<option value="0">In-Active</option>
 						</select>
 					</div>
 				
 
 					<div class="form_item">
 						<span class="glyphicon glyphicon-user"></span>
-						<label for="customername" class="form-label">Customer name : </label>
+						<label for="customername" class="form-label">Customer Name  </label>
 						<select name="customerId" id="customerId">
+							<c:if test = "${customerList.size() ==  0}">
+								<option value="-1">No Customer Availble</option>
+							 </c:if>
 							<c:forEach items="${customerList}" var="c" varStatus="loop">
 								<option value="${c.getCustomerId()}">${c.getCustomerName()}</option>
 							</c:forEach>
 						</select>
 					</div>
 					<div class="form_item text-center ">
-					<button class="btn btn-success btn text-center py-2 px-4" type="submit" value="Submit">Submit</button>
+						<button class="btn btn-success btn text-center py-2 px-4" type="submit" value="Submit">Submit</button>
 					</div>
 			</form>
 		</div>

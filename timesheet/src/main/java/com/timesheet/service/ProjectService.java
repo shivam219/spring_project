@@ -16,7 +16,7 @@ public class ProjectService {
 	ProjectRepository repository;
 
 	public List<Project> getAllProject() {
-		return (List<Project>) repository.findAll();
+		return (List<Project>) repository.getAllProject();
 	}
 
 	public List<Project> getProjectByEmpId(long empId) {

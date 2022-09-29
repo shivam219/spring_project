@@ -107,45 +107,46 @@ body {
 .form_item input[type="date"]:focus {
 	border-color: #6271f0;
 }
+ label{
+	user-select: none;
+}
 </style>
 	<div class="wrapper">
 		<div class="form_container">
 			<form name="form" action="customer-process" method="post">
-				<div class="heading">
-					<h2>Add Customer</h2>
-				</div>
+				<div class="heading"> <h2>Add Customer</h2> </div>
 
 				<div class="form_wrap fullname">
 					<div class="form_item">
-						<label>Customer Id</label> <input type="text" name="customerId"
+						<label for="customerId">Customer Id</label> <input type="text" name="customerId" id="customerId"
 							value="">
 					</div>
 
 
 					<div class="form_item">
-						<label>Customer Type</label> <input type="text"
+						<label for="customerType">Customer Type</label> <input type="text" id="customerType"
 							name="customerType">
 					</div>
 
 				</div>
 				<div class="form_wrap">
 					<div class="form_item">
-						<label>Customer name</label> <input type="text"
-							name="customerName">
+						<label for="customerName">Customer name</label>
+						<input type="text" name="customerName" id="customerName">
 					</div>
 				</div>
 
 				<div class="form_wrap">
 					<div class="form_item">
-						<label>On Board Date: </label> <input type="date"
-							name="onBoardDate">
+						<label for="onBoardDate">On Board Date: </label> 
+						<input type="date" name="onBoardDate" id="onBoardDate">
 					</div>
 				</div>
 
 				<div class="form_wrap">
 					<div class="form_item">
-						<label>Off Board Date: </label> <input type="date"
-							name="offBoardDate">
+						<label for="offBoardDate">Off Board Date: </label> 
+						<input type="date" name="offBoardDate" id="offBoardDate">
 					</div>
 				</div>
 

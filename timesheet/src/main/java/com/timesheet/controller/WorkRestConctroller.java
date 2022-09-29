@@ -1,5 +1,6 @@
 package com.timesheet.controller;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.timesheet.model.Work;
+import com.timesheet.repository.CustomerRepository;
 import com.timesheet.service.ProjectService;
 import com.timesheet.service.WorkService;
 
@@ -28,15 +30,11 @@ public class WorkRestConctroller {
 	@Autowired
 	ProjectService projectservice;
 
-//	returning list it converted into array so jqx[0]
-//	@GetMapping("/fetchworkjson")
-//	public  ResponseEntity<List<Work>> fetchByDate(Model m ,HttpServletRequest request ,@RequestParam("startDate") String startDate,@RequestParam("endDate") String endDate) {
-//		LinkedHashMap<String, List<Work>> mm = workService.getWorByStartDateEndDate(startDate, endDate,1);
-//		return  ResponseEntity.of(Optional.of(mm.get("TCS")));
-//	}
-
+	@Autowired
+	CustomerRepository customerRepository;
+	
 	@GetMapping("/fetchworkjson")
-	public ResponseEntity<LinkedHashMap<String, List<Work>>> fetchByDate(Model m, HttpServletRequest request,
+	public ResponseEntity<LinkedHashMap<List<String>, List<Work>>> fetchByDate(Model m, HttpServletRequest request,
 			HttpServletResponse response, @RequestParam("startDate") String startDate,
 			@RequestParam("endDate") String endDate) {
 
@@ -51,14 +49,15 @@ public class WorkRestConctroller {
 		}
 		long empId = (Long) request.getSession().getAttribute("empId");
 		LinkedHashMap<String, List<Work>> mm = workService.getWorByStartDateEndDate(startDate, endDate, empId);
-		LinkedHashMap<String[], List<Work>> mm2 = new LinkedHashMap<>();
+		LinkedHashMap<List<String>, List<Work>> mm2 = new LinkedHashMap<>();
 		for (Map.Entry<String, List<Work>> entry : mm.entrySet()) {
 			System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
-			
+			ArrayList<String> al = new ArrayList<>();
+			al.add(customerRepository.findProjectNameById(entry.getValue().get(0).getProjectId()));
+			al.add(entry.getKey());
+			mm2.put(al, entry.getValue());
 		}
-
-
-		return ResponseEntity.of(Optional.of(mm));
+		return ResponseEntity.of(Optional.of(mm2));
 	}
 
 }

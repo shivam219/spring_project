@@ -1,77 +1,81 @@
 <%@ include file="menu.jsp" %>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map.*"%>
-<%@page import="java.util.Arrays"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"   "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.util.Arrays"%> 
 <html lang="en">
 <head> 
     <title>Week Work Report</title>
     <style> 
+        body{
+            height: 100vh;
+            background: #e1edf9;
+            width: 100%;
+            margin-right: 800px;
+        }
         table {
             table-layout: fixed;
         }
          /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
+            -webkit-appearance: none;
+            margin: 0;
         }
         /* Firefox */
         input[type=number] {
-        -moz-appearance: textfield;
+            -moz-appearance: textfield;
         }
 
         /* width */
-            ::-webkit-scrollbar {
-            width: 0px;
-            }
+        ::-webkit-scrollbar {
+           width: 0px;
+        }
 
-            /* Track */
-            ::-webkit-scrollbar-track {
+        /* Track */
+        ::-webkit-scrollbar-track {
             box-shadow: inset 0 0 5px grey; 
             border-radius: 10px;
-            }
-            
-            /* Handle */
-            ::-webkit-scrollbar-thumb {
+        }
+        
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
             background: rgb(241, 216, 216); 
             border-radius: 10px;
-            }
+        }
 
-            /* Handle on hover */
-            ::-webkit-scrollbar-thumb:hover {
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
             background: #00ff40; 
         }    
         .h-n{  
-        color: rgb(52, 52, 52);
-        width: 8px;
-        height: 8px;
-        resize: none;
-        overflow-y: auto;
-        visibility: visible;
-        position: absolute;  /* fixed that to contain*/
-        overflow: hidden;
-        font-family: Verdana;
-        text-align: center;
-        letter-spacing: 0; 
-        
-        transition: all 0.2s ease-in-out;
-        /* box-shadow: 4px 4px 4px rgb(0 0 0 / 25%); */
-        border-radius:3px ;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        background-color: rgb(203, 238, 233);  
-        margin-left: 2px;
-       }
+            color: rgb(52, 52, 52);
+            width: 8px;
+            height: 8px;
+            resize: none;
+            overflow-y: auto;
+            visibility: visible;
+            position: absolute;  /* fixed that to contain*/
+            overflow: hidden;
+            font-family: Verdana;
+            text-align: center;
+            letter-spacing: 0; 
+            
+            transition: all 0.2s ease-in-out;
+            /* box-shadow: 4px 4px 4px rgb(0 0 0 / 25%); */
+            border-radius:3px ;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            background-color: rgb(203, 238, 233);  
+            margin-left: 2px;
+        }
        
         /* .h-n:: */
        .tblcolor{
-        background-color: rgb(168, 174, 193);
+            background-color: rgb(168, 174, 193);
        }
        table tr td p {
-        overflow: hidden;
+            overflow: hidden;
        }
         /* h-n-blank  */
         .h-n-blank{
@@ -140,6 +144,9 @@
     
         table tfoot tr:last-child td:last-child {
             border-bottom-right-radius: 5px;
+        }
+        table , .row{
+            user-select: none;
         }
     </style>
     
@@ -212,10 +219,10 @@
             </div>
             <hr>
             <div class="form-group mt-4 ">
-                <textarea class="form-control" id="acti_desc"  rows="5"  style="resize: none;"
+                <textarea class="form-control" id="acti_desc"  rows="6"  style="resize: none;"
                     placeholder="Enter description here....."></textarea>
             </div>
-             <input type="button" value="save" class="btn btn-primary px-3 py-1 mt-3"  onclick="newActiDescPopSave()" >
+             <input type="button" value="save" class="btn btn-success px-4 py-1 mt-3 fw-bold"  onclick="newActiDescPopSave()" >
         </div> 
         <script>
             var prevActivityDesc = null ;
@@ -408,9 +415,10 @@
                             for (let i = 0; i < d.length; i++) {
                                 let row = document.createElement("tr");
                                 let spn = d[i][0];
-                               
-                                    let sl = '<td><p class="text-center border rounded p-1 mt-1 bg-white" >TCS </p></td>' 
-                                           + '<td  colspan="2"> <p class="text-center border rounded bg-white p-1 mt-1" > '+spn +' </p> </td> ' ;
+                                let cstr = spn.replace("[",'').replace("]",'').replace(",",'');
+                                let arr = cstr.split(' ');
+                                let sl = '<td><p class="text-center border rounded p-1 mt-1 bg-white" >'+arr[0] +' </p></td>' 
+                                        + '<td  colspan="2"> <p class="text-center border rounded bg-white p-1 mt-1" > '+arr[1] +' </p> </td> ' ;
                                     
                                 for (let j = 0; j <d[i][1].length; j++) {
                                     if( d[i][1][j]["id"] == 0){

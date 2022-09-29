@@ -24,34 +24,24 @@ public class Project {
 	@Column(name = "customer_id")
 	private String customerId;
 
-	
+	@Column(name = "customer_name")
+	private String customerName;
+
 	public Project() {
 		super();
 	}
 
-	public Project(int projectId, String projectName, String projectStatus) {
+	public Project(int projectId, String projectName, String projectStatus, String customerId, String customerName) {
 		super();
 		this.projectId = projectId;
 		this.projectName = projectName;
 		this.projectStatus = projectStatus;
-	}
-
-	public Project(String customerId) {
-		super();
 		this.customerId = customerId;
+		this.customerName = customerName;
 	}
 
 	public int getProjectId() {
 		return projectId;
-		
-	}
-
-	public String getcustomerId() {
-		return customerId;
-	}
-
-	public void setcustomerId(String customerId) {
-		this.customerId = customerId;
 	}
 
 	public void setProjectId(int projectId) {
@@ -74,10 +64,26 @@ public class Project {
 		this.projectStatus = projectStatus;
 	}
 
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
 	@Override
 	public String toString() {
 		return "Project [projectId=" + projectId + ", projectName=" + projectName + ", projectStatus=" + projectStatus
-				+ ", customerId=" + customerId + "]";
+				+ ", customerId=" + customerId + ", customerName=" + customerName + "]";
 	}
- 
+
 }

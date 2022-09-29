@@ -27,5 +27,8 @@ public class CustomerService {
 	public int deleteCustomnerByCustomerId(long CustId) {
 		return repo.deleteCustomnerByCustomerId(CustId);
 	}
+	public static final String FIND_PROJECTS = "SELECT projectId, projectName FROM projects";
+
+	
 
 }

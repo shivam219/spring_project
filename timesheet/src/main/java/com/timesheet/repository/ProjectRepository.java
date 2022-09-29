@@ -32,9 +32,8 @@ public interface ProjectRepository extends CrudRepository<Project, Integer> {
 	@Query(value="delete from ess_project where project_id = :ProjectId",	nativeQuery = true)
 	@Transactional
     public int deleteProjectByProjectId(long ProjectId);
+
+	@Query(value = " select project_id, project_name , project_status  ,   c.customer_id , c.customer_name as customer_name from ess_project p inner join customer c where p.customer_id = c.customer_id" , nativeQuery = true)
+	public List<Project> getAllProject();
 	
-//	@Modifying
-//	@Query(value = "insert into ess_project (project_id,project_name,project_status) VALUES (:projectid,:projectname,:projectstatus)", nativeQuery = true)
-//	@Transactional
-//	public int saveProject(@Param("projectid") long id, @Param("projectname") String projectname , @Param("projectstatus") String projectstatus	);
 }
