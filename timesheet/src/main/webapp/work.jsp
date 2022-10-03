@@ -7,10 +7,8 @@
     <title>Week Work Report</title>
     <style> 
         body{
-            height: 100vh;
             background: #e1edf9;
-            width: 100%;
-            margin-right: 800px;
+            scroll-behavior: smooth;
         }
         table {
             table-layout: fixed;
@@ -148,6 +146,12 @@
         table , .row{
             user-select: none;
         }
+        h5{
+            background-image: linear-gradient(108.1deg, rgba(167, 220, 225, 1) 11.2%,rgb(174, 221, 228) 88.9%);
+			 
+             border-radius:20px ;
+        }
+         
     </style>
     
     </head>
@@ -156,7 +160,7 @@
       
         <div class="container" >
             <div class="row rounded  ">
-                <h5 class="text-center text-secondary h4 mt-2">Ess Work</h5>
+                <h5 class="text-center text-secondary h3 my-3 py-2 ">Work Report</h5>
             </div>
             <div class="row align-middle  pt-2 mx-0 tblcolor rounded-top"  >
                 <div class="col fw-bold text-center align-middle">
@@ -176,7 +180,7 @@
                 </div>
                 <div class="col  d-flex justify-content-center align-middle">
                     <input type="button" class="btn btn-primary btn-sm pe-3 ps-3 me-2 h-75 rounded"  onclick="tblDataSave()" value="save" id="btnSave" >
-                    <input type="button" class="btn btn-primary btn-sm h-75 rounded" value="Submit">
+                    <input type="button" class="btn btn-primary btn-sm h-75 rounded" value="Submit" onclick="btnSubmitWorkReport(this)">
                 </div>
                 
             </div>
@@ -200,14 +204,14 @@
                 </tbody>
                 <tfoot >
                     <td colspan="3" class="text-center"> </td>
-                    <td class="text-center" id="mov_v_t">00</td>
-                    <td class="text-center" id="tue_v_t">00</td>
-                    <td class="text-center" id="web_v_t">00</td>
-                    <td class="text-center" id="thu_v_t">00</td>
-                    <td class="text-center" id="fri_v_t">00</td>
-                    <td class="text-center" id="sat_v_t">00</td>
-                    <td class="text-center" id="sun_v_t">00</td>
-                    <td class="text-center" id="htotal"  >00</td>
+                    <td id="mov_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
+                    <td id="tue_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
+                    <td id="web_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
+                    <td id="thu_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
+                    <td id="fri_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
+                    <td id="sat_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
+                    <td id="sun_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
+                    <td id="htotal" > <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
                 </tfoot>
             </table>
         </div>
@@ -311,7 +315,7 @@
                         if(!isNaN(Number(jQuery(this).find("input").val()))){
                             rsum=rsum+Number(jQuery(this).find("input").val());
                         };
-                        $(this).closest("tr").find("td:eq(9) ").html(rsum==0?"00":rsum);
+                        $(this).closest("tr").find("td:eq(9) p ").html(rsum==0?"00":rsum);
                     });
                     calculate();
                 }
@@ -326,7 +330,7 @@
                         };
                     }) 
                 });
-                $("#mov_v_t").html(mon==0?"00":mon);
+                $("#mov_v_t p").html(mon==0?"00":mon);
                 let tue = 0;
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(3).each(function(){
@@ -335,7 +339,7 @@
                         };
                     }) 
                 });
-                $("#tue_v_t").html(tue==0?"00":tue);
+                $("#tue_v_t   p").html(tue==0?"00":tue);
                 let wed = 0; 
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(4).each(function(){
@@ -344,7 +348,7 @@
                         };
                     }) 
                 });
-                $("#web_v_t").html(wed==0?"00":wed);
+                $("#web_v_t p").html(wed==0?"00":wed);
                 let thu = 0; 
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(5).each(function(){
@@ -353,7 +357,7 @@
                         };
                     }) 
                 }); 
-                $("#thu_v_t").html(thu==0?"00":thu);
+                $("#thu_v_t p").html(thu==0?"00":thu);
 
                 let fri = 0; 
                 $('#tbtable tr' ).each( function () {
@@ -363,7 +367,7 @@
                         };
                     }) 
                 }); 
-                $("#fri_v_t").html(fri==0?"00":fri);
+                $("#fri_v_t p").html(fri==0?"00":fri);
  
                 let sat = 0; 
                 $('#tbtable tr' ).each( function () {
@@ -373,7 +377,7 @@
                         };
                     }) 
                 });  
-                $("#sat_v_t").html(sat==0?"00":sat);
+                $("#sat_v_t p ").html(sat==0?"00":sat);
 
                 let sun = 0;  
                 $('#tbtable tr' ).each( function () {
@@ -383,7 +387,7 @@
                         };
                     }) 
                 });  
-                $("#sun_v_t").html(sun==0?"00":sun);
+                $("#sun_v_t p").html(sun==0?"00":sun);
                 let total = 0;  
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(9).each(function(){
@@ -392,7 +396,7 @@
                         };
                     }) 
                 });  
-                $("#htotal").html(total==0?"00":total); 
+                $("#htotal p").html(total==0?"00":total); 
             };
 
       
@@ -407,7 +411,7 @@
                         type: 'GET',
                         dataType: 'json',
                         success: function(obj, success,event){
-                            console.log(obj);
+                         console.log(obj);
                             for (let i = $('#tbtable tr').length -2 ; i > 0; i--) {
                                 $('#tbtable tr').eq(i).remove();
                             }
@@ -460,7 +464,7 @@
                                         row.innerHTML = (( row.innerHTML.toString()) + t);
                                     }  
                                 }   
-                                row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">00</td>' );
+                                row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">  <p class="text-center border rounded bg-white w-75 py-1 "> 00</p> </td>' );
                                 $("#tbtable").append(row);
                             }
                             calRowOnLoad();
@@ -469,13 +473,13 @@
                             /*reset horizontal total when now row found*/
                             let rowCount = $('#tbtable tr').length;
                             if(rowCount == 2) {
-                                $("#mov_v_t").html('00');
-                                $("#tue_v_t").html('00');
-                                $("#web_v_t").html('00');
-                                $("#thu_v_t").html('00');
-                                $("#fri_v_t").html('00');
-                                $("#sat_v_t").html('00');
-                                $("#sun_v_t").html('00');
+                                $("#mov_v_t p ").html('00');
+                                $("#tue_v_t p ").html('00');
+                                $("#web_v_t p ").html('00');
+                                $("#thu_v_t p ").html('00');
+                                $("#fri_v_t p ").html('00');
+                                $("#sat_v_t p ").html('00');
+                                $("#sun_v_t p ").html('00');
                                 $("#htotal").html('00');
                             }
                         }
@@ -685,6 +689,23 @@
                 $("#startDate").val(formatDate(sd));
                 $("#endDate").val(formatDate(ed));
                 fetchwork();
+            }
+
+            function btnSubmitWorkReport(ref){
+                if(confirm("Do you want to Submit !!!")){
+                var sd = new Date($("#startDate").val());
+                var ed = new Date($("#startDate").val());
+				let uri =  'submit-work'
+				$.ajax({
+					type: 'GET',
+					url: uri,
+					contentType: false,
+					success: function () {
+						// location.reload();
+					}
+				}); 
+			}
+            $(ref).blur();
             }
             fetchworkCurrentReport();
         </script>

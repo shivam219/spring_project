@@ -9,9 +9,9 @@ import org.springframework.data.repository.query.Param;
 
 import com.timesheet.model.Employee;
 
-public interface EmployeeRepository  extends CrudRepository<Employee, Integer> {
-	public Employee findByEmpIdAndEmpPassword(int empId ,String empPassword);
-	public Boolean existsByEmpIdAndEmpPassword(int empId ,String empPassword);
+public interface EmployeeRepository  extends CrudRepository<Employee, Long> {
+	public Employee findByEmpIdAndEmpPassword(Long empId ,String empPassword);
+	public Boolean existsByEmpIdAndEmpPassword(Long empId ,String empPassword);
 	
 	@Modifying
 	@Query(value = "insert into ess_employee (emp_id , emp_name, emp_email, emp_password,emp_password_encrypt, emp_city ,emp_address,emp_phone,emp_pincode) "
@@ -23,5 +23,10 @@ public interface EmployeeRepository  extends CrudRepository<Employee, Integer> {
 	
 	@Query(value = "SELECT * FROM ess_employee WHERE emp_password_encrypt = sha1(:pass)  AND emp_id =:id ", nativeQuery = true )
 	public Employee isValidEmployee(@Param("id") long empId, @Param("pass") String empPassword );
+
+	@Modifying
+	@Transactional
+	@Query(value = "  update  ess_employee set emp_password_encrypt = sha1(:empPass)  , emp_password = :empPass where emp_id= :empId",nativeQuery = true)
+	int updateEmployeePassword(@Param(value = "empId") long empId , @Param(value = "empPass") String empPass);
 	
 }

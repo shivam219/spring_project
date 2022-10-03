@@ -19,6 +19,7 @@
 	<!--Font awesome icon -->
 	<script src="https://kit.fontawesome.com/70c55b67fa.js" crossorigin="anonymous"></script>
 	<link rel='icon' type='image/ico' href='images/esslogo.jpg' />
+	
 </head>
 
 <body>
@@ -59,15 +60,15 @@
 							data-bs-toggle="dropdown" aria-expanded="false">
 							Create Timesheet </a>
 						<ul class="dropdown-menu" id="dropdown-menu">
-							<li><a class="dropdown-item" href="esswork">Create Timesheet</a></li>
-							<li><a class="dropdown-item" href="#">Approve Timesheet</a></li>
+							<li><a class="dropdown-item" href="work">Create Timesheet</a></li>
+							<li><a class="dropdown-item" href="work-approve">Approve Timesheet</a></li>
 							<li><a class="dropdown-item" href="#">Change Status</a></li>
 						</ul>
 					</li>
 
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="dropdown-menu" role="button"
 							data-bs-toggle="dropdown" aria-expanded="false">
-							Leave Applicatin </a>
+							Leave Application </a>
 						<ul class="dropdown-menu" id="dropdown-menu">
 							<li><a class="dropdown-item" href="#">Apply Leave</a></li>
 							<li><a class="dropdown-item" href="#">Approve Leave</a></li>
@@ -108,7 +109,7 @@
 									Master</a></li>
 							<li><a class="dropdown-item" href="project-dashboard">Project Dashboard</a></li>
 							<li><a class="dropdown-item" href="customer-dashboard">Customer Dashboard</a></li>		
-							<li><a class="dropdown-item" href="#">Change Password </a></li>
+							<li><a class="dropdown-item" href="change-password">Change Password </a></li>
 							<li><a class="dropdown-item" href="#">User Details
 									Master</a></li>
 						</ul>

@@ -1,28 +1,3 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<title>jQuer Datepicker Demo</title>
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	</head>
-	<body>
- 
-		<p>Select Date: <input type="text" id="datepicker"></p>
-		
-		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		<script>
-			$(document).ready(function(){
-				$( "#datepicker" ).datepicker({
-                autoclose: true,
-                startDate: new Date(),
-                daysOfWeekDisabled: "0,2,3,4,5,6"
-            });
-			});
-		</script>
-	</body>
-</html>
-
-<!-- contains code with delete project on by one -->
 <%@ include file="menu.jsp" %>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map.*"%>
@@ -32,10 +7,8 @@
     <title>Week Work Report</title>
     <style> 
         body{
-            height: 100vh;
             background: #e1edf9;
-            width: 100%;
-            margin-right: 800px;
+            scroll-behavior: smooth;
         }
         table {
             table-layout: fixed;
@@ -173,19 +146,32 @@
         table , .row{
             user-select: none;
         }
+         
+        h5{
+            background-image: linear-gradient(108.1deg, rgba(167, 220, 225, 1) 11.2%,rgb(174, 221, 228) 88.9%);
+			 
+             border-radius:20px ;
+        }
     </style>
     
+    <link href="css/select@2.4.1.0.min.css" rel="stylesheet" />
     </head>
 
     <body > 
       
         <div class="container" >
-            <div class="row rounded  ">
-                <h5 class="text-center text-secondary h4 mt-2">Ess Work</h5>
+            <div class="row rounded m-0 p-0 ">
+                <h5 class="text-center text-secondary h3 my-3 py-2 ">Approve Work Report</h5>
             </div>
             <div class="row align-middle  pt-2 mx-0 tblcolor rounded-top"  >
                 <div class="col fw-bold text-center align-middle">
-                    <span class="align-middle"> Time Period</span>
+                    <select name="empList" id="empList" class="form-control sl-emp h-100" onchange="fetchEmpWork()" style="outline: none;"> 
+                        <option ></option>
+                        <c:forEach items="${empList}" var="empName" varStatus="loop">
+                            <option value="${empName.getEmpId()}">${empName.getEmpName()}
+                            </option>
+                        </c:forEach>
+                    </select>
                 </div>
                 <div class="col d-flex justify-content-between  align-middle">  
                     <button class="rounded btn btn-secondary h-75 px-2 me-2"  onclick="PrevWeekReport()" id="btnPrevWeekReport" >
@@ -200,8 +186,8 @@
                     </button> 
                 </div>
                 <div class="col  d-flex justify-content-center align-middle">
-                    <input type="button" class="btn btn-primary btn-sm pe-3 ps-3 me-2 h-75 rounded"  onclick="tblDataSave()" value="save" id="btnSave" >
-                    <input type="button" class="btn btn-primary btn-sm h-75 rounded" value="Submit">
+                    <input type="button" class="btn btn-danger btn-sm pe-3 ps-3 me-2 h-75 rounded"  onclick="rejectWorkReport(this)" value="Reject" id="btnReject" >
+                    <input type="button" class="btn btn-success btn-sm h-75 rounded" value="Approve" onclick="submitWorkReport(this)">
                 </div>
                 
             </div>
@@ -223,16 +209,16 @@
                 <tbody>
                     
                 </tbody>
-                <tfoot >
+                <tfoot class="tblcolor" >
                     <td colspan="3" class="text-center"> </td>
-                    <td id="mov_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
-                    <td id="tue_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
-                    <td id="web_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
-                    <td id="thu_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
-                    <td id="fri_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
-                    <td id="sat_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
-                    <td id="sun_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
-                    <td id="htotal" > <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
+                    <td id="mov_v_t"> <p class="text-center border rounded bg-white w-75 py-1" > 00</p> </td>
+                    <td id="tue_v_t"> <p class="text-center border rounded bg-white w-75 py-1" > 00</p> </td>
+                    <td id="web_v_t"> <p class="text-center border rounded bg-white w-75 py-1" > 00</p> </td>
+                    <td id="thu_v_t"> <p class="text-center border rounded bg-white w-75 py-1" > 00</p> </td>
+                    <td id="fri_v_t"> <p class="text-center border rounded bg-white w-75 py-1" > 00</p> </td>
+                    <td id="sat_v_t"> <p class="text-center border rounded bg-white w-75 py-1" > 00</p> </td>
+                    <td id="sun_v_t"> <p class="text-center border rounded bg-white w-75 py-1" > 00</p> </td>
+                    <td id="htotal" > <p class="text-center border rounded bg-white w-75 py-1" > 00</p> </td>
                 </tfoot>
             </table>
         </div>
@@ -244,17 +230,19 @@
             </div>
             <hr>
             <div class="form-group mt-4 ">
-                <textarea class="form-control" id="acti_desc"  rows="6"  style="resize: none;"
+                <textarea class="form-control" id="acti_desc"  rows="6"  style="resize: none;" readonly
                     placeholder="Enter description here....."></textarea>
             </div>
-             <input type="button" value="save" class="btn btn-success px-4 py-1 mt-3 fw-bold"  onclick="newActiDescPopSave()" >
         </div> 
+            <script src="js/select2@4.1.0.min.js"></script>
         <script>
-            var prevActivityDesc = null ;
-            function newActiDescPopSave(){
-                $(prevActivityDesc).val($("#acti_desc").val());
-                actiDescPopHide();
-            }
+            $('#empList').select2({
+                placeholder: "Search employee's",
+                allowClear: true
+            });
+    	</script>
+        <script>
+            
             function actiDescPopShow (){
                 $(".acti_desc").show();
             }
@@ -351,7 +339,6 @@
                         };
                     }) 
                 });
-                console.log(mon);
                 $("#mov_v_t p").html(mon==0?"00":mon);
                 let tue = 0;
                 $('#tbtable tr' ).each( function () {
@@ -423,11 +410,11 @@
 
       
             function fetchwork(){   
-                let atsd = $("#startDate").attr("name");
                 let sd = $("#startDate").val();
-                let ated = $("#endDate").attr("name");
                 let ed = $("#endDate").val();
-                let uri = '/fetchworkjson?'+atsd+'='+sd+'&'+ated+'='+ed; 
+                let empId = $("#empList").val(); 
+                let uri =  '/fetch-work-by-id?startDate='+sd+'&endDate='+ed+'&empId='+empId;
+                console.log(uri);
                     $.ajax({
                         url: uri,
                         type: 'GET',
@@ -448,40 +435,20 @@
                                     
                                 for (let j = 0; j <d[i][1].length; j++) {
                                     if( d[i][1][j]["id"] == 0){
-                                        let eId = d[i][1][j]["empId"];
-                                        let pId = d[i][1][j]["projectId"];
-                                        let pName = d[i][1][j]["projectName"];
                                         let hours = d[i][1][j]["hours"]; 
                                         let descr = d[i][1][j]["descr"];   
-                                        let day = d[i][1][j]["day"];   
-                                        let status = d[i][1][j]["status"];   
                                         let t =  ' <td>'
-                                            +' <input type="number"    name="hours"          min="1" max="24" class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
-                                            +' <input type="number"  value='+eId+'      name="empId"          class="d-inline d-none"  > ' 
-                                            +' <input type="number"  value='+pId+'      name="projectId"      class="d-inline d-none"  > ' 
-                                            +' <input type="text"    value='+pName+'    name="projectName"    class="d-inline d-none"  > ' 
-                                            +' <input type="date"    value='+day+'     name="day"             class="d-inline d-none"  >'  
-                                            +' <textarea class="h-n h-n-blank"   name="descr"       ></textarea>' 
+                                            +' <input type="number"    name="hours"     readonly    class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
+                                            +' <textarea class="h-n h-n-blank"   name="descr"   readonly    ></textarea>' 
                                             +' </td>';
                                         row.innerHTML = (( row.innerHTML.toString()) + t);
                                     }
                                     else{
-                                        let id = d[i][1][j]["id"];
-                                        let eId = d[i][1][j]["empId"];
-                                        let pId = d[i][1][j]["projectId"];
-                                        let pName = d[i][1][j]["projectName"];
                                         let hours = d[i][1][j]["hours"]; 
                                         let descr = d[i][1][j]["descr"];    
-                                        let day = d[i][1][j]["day"];   
-                                        let status = d[i][1][j]["status"];   
                                         let   t = ' <td> ' 
-                                            +' <input type="number"  value='+hours+'    name="hours" min="1"  max="24"  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
-                                            +' <input type="number"  value='+id+'       name="id"                       class=" d-inline d-none"  > ' 
-                                            +' <input type="number"  value='+eId+'      name="empId"                    class=" d-inline d-none"  > ' 
-                                            +' <input type="number"  value='+pId+'      name="projectId"                class=" d-inline d-none"  > ' 
-                                            +' <input type="text"    value='+pName+'    name="projectName "             class=" d-inline d-none"  > ' 
-                                            +' <input type="date"  value='+day+'        name="day"                      class=" d-inline d-none" > ' 
-                                            +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"     >'+descr +'</textarea>'  
+                                            +' <input type="number"  value='+hours+'    name="hours"  readonly  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
+                                            +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"   readonly  >'+descr +'</textarea>'  
                                             +'</td>';
                                         row.innerHTML = (( row.innerHTML.toString()) + t);
                                     }  
@@ -492,7 +459,6 @@
                             calRowOnLoad();
                             AddHoverToHourIn();
                             setWeekDates();
-                            /*reset horizontal total when now row found*/
                             let rowCount = $('#tbtable tr').length;
                             if(rowCount == 2) {
                                 $("#mov_v_t p ").html('00');
@@ -516,187 +482,8 @@
                         })  
                     });
                 };
-                function tblDataSave(){
-                    $("#btnSave").blur();
-                    $.ajax({
-                        type: 'post',
-                        url: 'deletework',
-                        data:  html2jsonForDelete(),
-                        contentType: "application/json; charset=utf-8",
-                        traditional: true,
-                        success: function () {
-                        }
-                    });     
-                    $.ajax({
-                        type: 'post',
-                        url: 'savework',
-                        data:  html2json(),
-                        contentType: "application/json; charset=utf-8",
-                        traditional: true,
-                        success: function () {
-                            fetchwork();
-                        }
-                    });     
-                }
-                
-                function html2jsonForDelete(){
-                    var json = '[';
-                    var otArr = [];
-                    $('#tbtable tbody tr').each(function(i) {  
-                        var itArr = []; 
-                        $(this).find("td").each(function () { 
-                            if($(this).find("input[name='id']").val()){
-                                if($(this).find("input[name='hours']").val()==""){
-                                    itArr.push('"id" ' + ': ' + $(this).find("input[name='id']").val() + ' ');
-                                    otArr.push('{' + itArr.join(',') + '}');
-                                    itArr.shift();
-                                }
-                            }                        
-                        });
-                    }); 
-                    json += otArr.join(",") + ']';
-                    return json;
-                }
-                function html2json() {
-                    var json = '[';
-                    var otArr = [];
-                    $('#tbtable tbody tr').each(function(i) {  
-                        var itArr = []; 
-                        $(this).find("td:eq(2)").each(function () { 
-                            if($(this).find("input:first").val() > 0 ){
-                                $(this).find("input").each(function () {
-                                   if(!isNaN(Number(jQuery(this).val()))){
-                                       itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
-                                   }
-                                   else{
-                                       itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
-                                   }
-                               });
-                               $(this).find("textarea").each(function () {
-                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
-                               });
-                               otArr.push('{' + itArr.join(',') + '}');
-                           }
-                        });
-                    }); 
-                    $('#tbtable tbody tr').each(function(i) {  
-                        var itArr = []; 
-                        $(this).find("td:eq(3)").each(function () {
-                            if($(this).find("input:first").val() > 0 ){
-                               $(this).find("input").each(function () {
-                                   if(!isNaN(Number(jQuery(this).val()))){
-                                       itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
-                                   }
-                                   else{
-                                       itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
-                                   }
-                               });
-                               $(this).find("textarea").each(function () {
-                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
-                               });
-                               otArr.push('{' + itArr.join(',') + '}');
-                           }
-                        });
-                    });
-                    $('#tbtable tbody tr').each(function(i) {  
-                        var itArr = []; 
-                        $(this).find("td:eq(4)").each(function () {
-                            if($(this).find("input:first").val() > 0 ){
-                                $(this).find("input").each(function () {
-                                   if(!isNaN(Number(jQuery(this).val()))){
-                                       itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
-                                   }
-                                   else{
-                                       itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
-                                   }
-                               });
-                               $(this).find("textarea").each(function () {
-                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
-                               });
-                               otArr.push('{' + itArr.join(',') + '}');
-                           } 
-                        });
-                    }); 
-                    $('#tbtable tbody tr').each(function(i) {  
-                        var itArr = []; 
-                        $(this).find("td:eq(5)").each(function () {
-                            if($(this).find("input:first").val() > 0 ){
-                               $(this).find("input").each(function () {
-                                   if(!isNaN(Number(jQuery(this).val()))){
-                                       itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
-                                   }
-                                   else{
-                                       itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
-                                   }
-                               });
-                               $(this).find("textarea").each(function () {
-                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
-                              });
-                               otArr.push('{' + itArr.join(',') + '}');
-                           } 
-                        });
-                    }); 
-                    $('#tbtable tbody tr').each(function(i) {  
-                        var itArr = []; 
-                        $(this).find("td:eq(6)").each(function () {
-                            if($(this).find("input:first").val() > 0 ){
-                               $(this).find("input").each(function () {
-                                   if(!isNaN(Number(jQuery(this).val()))){
-                                       itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
-                                   }
-                                   else{
-                                       itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
-                                   }
-                               });
-                               $(this).find("textarea").each(function () {
-                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
-                                 });
-                               otArr.push('{' + itArr.join(',') + '}');
-                           } 
-                        });
-                    }); 
-                    $('#tbtable tbody tr').each(function(i) {  
-                        var itArr = []; 
-                        $(this).find("td:eq(7)").each(function () {
-                            if($(this).find("input:first").val() > 0 ){
-                               $(this).find("input").each(function () {
-                                   if(!isNaN(Number(jQuery(this).val()))){
-                                       itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
-                                   }
-                                   else{
-                                       itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
-                                   }
-                               });
-                               $(this).find("textarea").each(function () {
-                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
-                              });
-                               otArr.push('{' + itArr.join(',') + '}');
-                            }
-                        });
-                    }); 
-                    $('#tbtable tbody tr').each(function(i) {  
-                        var itArr = []; 
-                        $(this).find("td:eq(8)").each(function () {
-                            if($(this).find("input:first").val() > 0 ){
-                               $(this).find("input").each(function () {
-                                   if(!isNaN(Number(jQuery(this).val()))){
-                                       itArr.push('"' + $(this).attr("name") + '" ' + ': ' + $(this).val() + ' ');
-                                   }
-                                   else{
-                                       itArr.push('"' + $(this).attr("name") + '" ' + ': "' + $(this).val() + '" ');
-                                   }
-                               });
-                               $(this).find("textarea").each(function () {
-                                itArr.push('"' + $(this).attr("name") + '" ' + ': "' +  new String( $(this).val()).replace(/[\r\n]/gm, ' ') + '" '); 
-                               });
-                               otArr.push('{' + itArr.join(',') + '}');
-                           }
-                        });
-                    }); 
-                json += otArr.join(",") + ']';
-                console.log(json);
-                return json;
-            }
+             
+              
 
             function getMonday(d = new Date()) {
                 d = new Date(d);
@@ -704,15 +491,63 @@
                 diff = d.getDate() - day + (day == 0 ? -6:1); 
                 return new Date(d.setDate(diff));
             }
-            function fetchworkCurrentReport(){
+
+            function settingLoadDate(){
                 let sd = getMonday();
                 let ed = getMonday();
                 ed.setDate(sd.getDate()+6)
                 $("#startDate").val(formatDate(sd));
                 $("#endDate").val(formatDate(ed));
-                fetchwork();
             }
-            fetchworkCurrentReport();
+            settingLoadDate();
+
+            function rejectWorkReport(ref){
+                var sd = $("#startDate").val();
+                var ed = $("#endDate").val();
+                var empId = $("#empList").val(); 
+                if(empId){
+                    let uri =  '/reject-work?startDate='+sd+'&endDate='+ed+'&empId='+empId;
+                    console.log(uri);
+                    $.ajax({
+                        type: 'GET',
+                        url: uri,
+                        contentType: false,
+                        success: function () {
+                        }
+                    }); 
+                }else{
+                    alert("No Employee Selected")
+                }
+                $(ref).blur();   
+            }
+            function submitWorkReport(ref){
+                var sd = $("#startDate").val();
+                var ed = $("#endDate").val();
+                var empId = $("#empList").val(); 
+                if(empId){
+                    let uri =  '/reject-work?startDate='+sd+'&endDate='+ed+'&empId='+empId;
+                    console.log(uri);
+                    $.ajax({
+                        type: 'GET',
+                        url: uri,
+                        contentType: false,
+                        success: function () {
+                        }
+                    }); 
+                }else{
+                    alert("No Employee Selected")
+                }
+                $(ref).blur();
+			}
+            function fetchEmpWork(){
+                var empId = $("#empList").val(); 
+                if(empId){
+                    fetchwork();
+                }else{
+                    alert("No Employee Selected")
+                }
+            }
+
         </script>
     </body>
 </html>

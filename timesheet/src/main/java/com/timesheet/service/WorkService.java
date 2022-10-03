@@ -14,8 +14,32 @@ import org.springframework.stereotype.Component;
 
 import com.timesheet.model.Project;
 import com.timesheet.model.Work;
+import com.timesheet.model.WorkMaster;
 import com.timesheet.repository.ProjectRepository;
+import com.timesheet.repository.WorkMasterRepository;
 import com.timesheet.repository.WorkRepository;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.time.Month;
+import java.util.Properties;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.mail.util.ByteArrayDataSource;
 
 @Component
 public class WorkService {
@@ -25,6 +49,9 @@ public class WorkService {
 	@Autowired
 	ProjectRepository prepository;
 
+	@Autowired
+	WorkMasterRepository wmrepository; 
+ 	
 	public boolean saveAllWork(List<Work> work) {
 		boolean isSave = false;
 		try {
@@ -48,7 +75,6 @@ public class WorkService {
 	}
 	// @formatter:off
  
-// @formatter:on
 
 	public LinkedHashMap<String, List<Work>> getWorByStartDateEndDate(String startDate, String endDate, long empId) {
 		List<Work> l = repository.getWorByStartDateEndDate(startDate, endDate, empId);
@@ -238,4 +264,55 @@ public class WorkService {
 
 		return map;
 	}
+	
+
+	public void submitWork(long empId, String StatDate, String endDate) {
+		WorkMaster wm = new WorkMaster();
+		wm.setEmpId(empId);
+		wm.setStartDate(StatDate);
+		wm.setEndDate(endDate);
+		wm.setStatus("Pending");
+		wmrepository.save(wm);
+		String msg = "Hii " 
+		+ "<br>Employee No  : " + empId
+		+ " has submitted work report.<br><br>" 
+		+ "<b>Work Report</b> <br> "
+		+ "<br>From Date: " + StatDate
+		+ "<br> To Date: " + endDate 
+		+ "<br><br><b>Note</b>: "
+		+ "<br><br>Regards,<br>Human Resources";
+		sendEmail("shivam.choudhary@ess.net.in", msg, null);
+	}
+	// @formatter:on
+
+	public void sendEmail(String to, String msg, String empName) {
+
+		String from = "noreply@ess.net.in";
+		String pwd = "P@ssw0rd";
+		String host = "121.240.21.7";
+		Properties properties = new Properties();
+		properties.put("mail.smtp.host", host);
+		properties.put("mail.smtp.port", "587");
+		properties.put("mail.smtp.tls.enable", "true");
+		properties.put("mail.smtp.auth", "true");
+
+		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(from, pwd);
+			}
+		});
+
+		try {
+			MimeMessage m = new MimeMessage(session);
+			m.setFrom(new InternetAddress(from));
+			m.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			m.setSubject("Work Report Submitted");
+			m.setContent(msg, "text/html");
+			Transport.send(m);
+			System.out.println("Mail successfully sent");
+		} catch (MessagingException mex) {
+			mex.printStackTrace();
+		}
+	}
+
 }

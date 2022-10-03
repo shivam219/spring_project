@@ -4,11 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,9 +25,17 @@ public class LoginController {
 	@Autowired
 	EmployeeService employeeService;
 
-	@ModelAttribute
-	public void commonDataModel(Model m) {
-	 
+	@PostMapping("/loginprocess")
+	public ResponseEntity<Object> loginPost(HttpServletRequest request, Model m, @RequestBody Employee emp) {
+
+		if (employeeService.isValidEmployee(emp) != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("empId", emp.getEmpId());
+			m.addAttribute("emp", emp);
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body("Login Successfull");
+		}
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User id and password invalid");
+
 	}
 
 	@RequestMapping(value = "/")
@@ -39,19 +50,6 @@ public class LoginController {
 	public String login() {
 		return "login";
 	}
- 
-	@PostMapping("/loginprocess")
-	public String loginPost(HttpServletRequest request, Model m, @ModelAttribute Employee emp) {
-		
-		if (employeeService.isValidEmployee(emp) != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("empId", emp.getEmpId());
-			m.addAttribute("emp",emp);
-			return "redirect:/home";
-		}
-		m.addAttribute("errorMsg", "please provide correct userid and passowrd ");
-		return "redirect:login";
-	}
 
 	@GetMapping(value = "/logout")
 	public String logoutPage(HttpServletRequest request) {
@@ -62,18 +60,19 @@ public class LoginController {
 	@GetMapping(value = "/home")
 	public String homePageGet(HttpServletRequest request) {
 		if (request.getSession().getAttribute("empId") == null) {
-			return "login";
+			return "redirect:login";
 		}
 		return "home";
 	}
+
 	@GetMapping(value = "/error")
 	public String error() {
 		return "login";
 	}
+
 	@PostMapping(value = "/error")
 	public String error1() {
 		return "login";
 	}
 
-	
 }

@@ -32,7 +32,7 @@ public class WorkRestConctroller {
 
 	@Autowired
 	CustomerRepository customerRepository;
-	
+
 	@GetMapping("/fetchworkjson")
 	public ResponseEntity<LinkedHashMap<List<String>, List<Work>>> fetchByDate(Model m, HttpServletRequest request,
 			HttpServletResponse response, @RequestParam("startDate") String startDate,
@@ -43,11 +43,27 @@ public class WorkRestConctroller {
 				response.sendRedirect("login.jsp");
 				System.out.println(request.getSession().getAttribute("empId") == null);
 			} catch (Exception e) {
-
 			}
 
 		}
 		long empId = (Long) request.getSession().getAttribute("empId");
+		LinkedHashMap<String, List<Work>> mm = workService.getWorByStartDateEndDate(startDate, endDate, empId);
+		LinkedHashMap<List<String>, List<Work>> mm2 = new LinkedHashMap<>();
+		for (Map.Entry<String, List<Work>> entry : mm.entrySet()) {
+			System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+			ArrayList<String> al = new ArrayList<>();
+			al.add(customerRepository.findProjectNameById(entry.getValue().get(0).getProjectId()));
+			al.add(entry.getKey());
+			mm2.put(al, entry.getValue());
+		}
+		return ResponseEntity.of(Optional.of(mm2));
+	}
+
+	@GetMapping("/fetch-work-by-id")
+	public ResponseEntity<LinkedHashMap<List<String>, List<Work>>> fetchById(
+			@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
+			@RequestParam("empId") Long empId) {
+		System.out.println(empId);
 		LinkedHashMap<String, List<Work>> mm = workService.getWorByStartDateEndDate(startDate, endDate, empId);
 		LinkedHashMap<List<String>, List<Work>> mm2 = new LinkedHashMap<>();
 		for (Map.Entry<String, List<Work>> entry : mm.entrySet()) {
