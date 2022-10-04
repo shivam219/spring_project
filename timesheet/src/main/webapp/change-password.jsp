@@ -101,7 +101,7 @@
                 }
             }
             if(flag){
-
+                $("#btnSubmit").removeClass("is-valid");
                 $("#loadingBtn").addClass("spinner-border spinner-border-sm");
                 let oldPass = new String(this.empPasswordOld.value);
                 let newPass = new String(this.empPassword.value);

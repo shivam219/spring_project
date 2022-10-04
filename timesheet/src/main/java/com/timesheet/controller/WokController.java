@@ -3,7 +3,6 @@ package com.timesheet.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.timesheet.model.Work;
+import com.timesheet.model.WorkMaster;
 import com.timesheet.service.EmployeeService;
 import com.timesheet.service.ProjectService;
 import com.timesheet.service.WorkService;
@@ -53,7 +53,7 @@ public class WokController {
 	@PostMapping("/savework")
 	public ResponseEntity<Object> saveWork(Model m, @RequestBody List<Work> work) {
 		if (workService.saveAllWork(work)) {
-			return ResponseEntity.status(HttpStatus.CREATED).body("Shivam prahsnat");
+			return ResponseEntity.status(HttpStatus.CREATED).body("Shivam prasant");
 		} else {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Not save error");
 		}
@@ -68,26 +68,34 @@ public class WokController {
 		}
 	}
 
-	@GetMapping(value = "/submit-work")
-	public ResponseEntity<Object> submitWorkReport(HttpServletRequest request) {
-		long empId = (Long) request.getSession().getAttribute("empId");
-
-		workService.submitWork(empId, "2022-08-11", "2022-08-18");
-		return ResponseEntity.status(HttpStatus.RESET_CONTENT).body("Data submitted");
+	@PostMapping(value = "/submit-work")
+	public ResponseEntity<Object> submitWorkReport(HttpServletRequest request, @RequestBody WorkMaster wm) {
+		wm.setEmpId((Long) request.getSession().getAttribute("empId"));
+		workService.submitWork(wm);
+		return ResponseEntity.status(HttpStatus.OK).body("Data submitted");
 	}
 
-	@GetMapping(value = "/approve-work")
-	public ResponseEntity<Object> approveWorkReport(@RequestParam("startDate") String startDate,
-			@RequestParam("endDate") String endDate, @RequestParam("empId") Long empId) {
-		System.out.println("Approvework");
-		return ResponseEntity.status(HttpStatus.OK).body("Approve");
+	@PostMapping(value = "/approve-work")
+	public ResponseEntity<Object> approveWorkReport( @RequestBody WorkMaster wm) {
+		workService.updateStatusApproved(wm);
+		return ResponseEntity.status(HttpStatus.OK).body("Status update to Approved");
 	}
 
-	@GetMapping(value = "/reject-work")
-	public ResponseEntity<Object> rejectWorkReport(@RequestParam("startDate") String startDate,
-			@RequestParam("endDate") String endDate, @RequestParam("empId") Long empId) {
-		System.out.println("Reject ework");
-		return ResponseEntity.status(HttpStatus.OK).body("reject");
+	@PostMapping(value = "/reject-work")
+	public ResponseEntity<Object> rejectWorkReport( @RequestBody WorkMaster wm) {
+		workService.updateStatusRejected(wm);
+		return ResponseEntity.status(HttpStatus.OK).body("Status update to Rejected");
+	}
+
+	@PostMapping(value = "/work-status")
+	public ResponseEntity<Object> workStatus(HttpServletRequest request, @RequestBody WorkMaster wm) {
+		wm.setEmpId((Long) request.getSession().getAttribute("empId"));
+		wm = workService.getWorkMaster(wm);
+		System.out.println(wm);
+		if (wm == null) {
+			return ResponseEntity.status(HttpStatus.OK).body(0);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(wm.getStatus());
 	}
 
 //	

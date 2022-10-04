@@ -180,7 +180,7 @@
                 </div>
                 <div class="col  d-flex justify-content-center align-middle">
                     <input type="button" class="btn btn-primary btn-sm pe-3 ps-3 me-2 h-75 rounded"  onclick="tblDataSave()" value="save" id="btnSave" >
-                    <input type="button" class="btn btn-primary btn-sm h-75 rounded" value="Submit" onclick="btnSubmitWorkReport(this)">
+                    <input type="button" class="btn  btn-sm h-75 rounded btn-success" value="Submit" onclick="btnSubmitWorkReport(this)" id="btnSubmit" >
                 </div>
                 
             </div>
@@ -226,7 +226,7 @@
                 <textarea class="form-control" id="acti_desc"  rows="6"  style="resize: none;"
                     placeholder="Enter description here....."></textarea>
             </div>
-             <input type="button" value="save" class="btn btn-success px-4 py-1 mt-3 fw-bold"  onclick="newActiDescPopSave()" >
+             <input type="button" value="Save" class="btn btn-success px-4 py-1 mt-3 fw-bold"  onclick="newActiDescPopSave()" >
         </div> 
         <script>
             var prevActivityDesc = null ;
@@ -263,25 +263,25 @@
                 ].join('-');
             }
             function setWeekDates() {  
-                $("#monDate").html('mon  &nbsp; '+ new Date($("#startDate").val()).getDate());
+                $("#monDate").html('Mon  &nbsp; '+ new Date($("#startDate").val()).getDate());
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 1);
-                $("#tueDate").html('tue  &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
+                $("#tueDate").html('Tue  &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 2);
-                $("#wedDate").html('wed   &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
+                $("#wedDate").html('Wed   &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 3);
-                $("#thuDate").html('thu   &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
+                $("#thuDate").html('Thu   &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 4);
-                $("#friDate").html('fri  &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
+                $("#friDate").html('Fri  &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 5);
-                $("#satDate").html('sat   &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
+                $("#satDate").html('Sat   &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 6);
-                $("#sunDate").html('sun  &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
+                $("#sunDate").html('Sun  &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
             }
             function PrevWeekReport(){
                 let sd = new Date($("#startDate").val());
@@ -391,8 +391,8 @@
                 let total = 0;  
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(9).each(function(){
-                        if(!isNaN(Number(jQuery(this).html()))){
-                            total=total+Number(jQuery(this).html());
+                        if(!isNaN(Number(jQuery(this).find('p').html()))){
+                            total=total+Number(jQuery(this).find('p').html());
                         };
                     }) 
                 });  
@@ -415,57 +415,115 @@
                             for (let i = $('#tbtable tr').length -2 ; i > 0; i--) {
                                 $('#tbtable tr').eq(i).remove();
                             }
+                            let workStatus=0;
+                            let data = {
+                                    startDate:$("#startDate").val(),
+                                    endDate:$("#endDate").val(),
+                                }
+                            $.ajax({
+                                async : false,
+                                type: 'POST',
+                                url: 'work-status',
+                                data:JSON.stringify(data),
+                                contentType :'application/json',
+                                success: function (da) {
+                                    workStatus=da; 
+                                }
+                            }); 
                             var d = Object.entries(obj); 
-                            for (let i = 0; i < d.length; i++) {
-                                let row = document.createElement("tr");
-                                let spn = d[i][0];
-                                let cstr = spn.replace("[",'').replace("]",'').replace(",",'');
-                                let arr = cstr.split(' ');
-                                let sl = '<td><p class="text-center border rounded p-1 mt-1 bg-white" >'+arr[0] +' </p></td>' 
-                                        + '<td  colspan="2"> <p class="text-center border rounded bg-white p-1 mt-1" > '+arr[1] +' </p> </td> ' ;
-                                    
-                                for (let j = 0; j <d[i][1].length; j++) {
-                                    if( d[i][1][j]["id"] == 0){
-                                        let eId = d[i][1][j]["empId"];
-                                        let pId = d[i][1][j]["projectId"];
-                                        let pName = d[i][1][j]["projectName"];
-                                        let hours = d[i][1][j]["hours"]; 
-                                        let descr = d[i][1][j]["descr"];   
-                                        let day = d[i][1][j]["day"];   
-                                        let status = d[i][1][j]["status"];   
-                                        let t =  ' <td>'
-                                            +' <input type="number"    name="hours"          min="1" max="24" class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
-                                            +' <input type="number"  value='+eId+'      name="empId"          class="d-inline d-none"  > ' 
-                                            +' <input type="number"  value='+pId+'      name="projectId"      class="d-inline d-none"  > ' 
-                                            +' <input type="text"    value='+pName+'    name="projectName"    class="d-inline d-none"  > ' 
-                                            +' <input type="date"    value='+day+'     name="day"             class="d-inline d-none"  >'  
-                                            +' <textarea class="h-n h-n-blank"   name="descr"       ></textarea>' 
-                                            +' </td>';
-                                        row.innerHTML = (( row.innerHTML.toString()) + t);
-                                    }
-                                    else{
-                                        let id = d[i][1][j]["id"];
-                                        let eId = d[i][1][j]["empId"];
-                                        let pId = d[i][1][j]["projectId"];
-                                        let pName = d[i][1][j]["projectName"];
-                                        let hours = d[i][1][j]["hours"]; 
-                                        let descr = d[i][1][j]["descr"];    
-                                        let day = d[i][1][j]["day"];   
-                                        let status = d[i][1][j]["status"];   
-                                        let   t = ' <td> ' 
-                                            +' <input type="number"  value='+hours+'    name="hours" min="1"  max="24"  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
-                                            +' <input type="number"  value='+id+'       name="id"                       class=" d-inline d-none"  > ' 
-                                            +' <input type="number"  value='+eId+'      name="empId"                    class=" d-inline d-none"  > ' 
-                                            +' <input type="number"  value='+pId+'      name="projectId"                class=" d-inline d-none"  > ' 
-                                            +' <input type="text"    value='+pName+'    name="projectName "             class=" d-inline d-none"  > ' 
-                                            +' <input type="date"  value='+day+'        name="day"                      class=" d-inline d-none" > ' 
-                                            +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"     >'+descr +'</textarea>'  
-                                            +'</td>';
-                                        row.innerHTML = (( row.innerHTML.toString()) + t);
-                                    }  
-                                }   
-                                row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">  <p class="text-center border rounded bg-white w-75 py-1 "> 00</p> </td>' );
-                                $("#tbtable").append(row);
+                            if(workStatus == 'Pending' ||  workStatus == 'Approved' ){
+                                    for (let i = 0; i < d.length; i++) {
+                                    let row = document.createElement("tr");
+                                    let spn = d[i][0];
+                                    let cstr = spn.replace("[",'').replace("]",'').replace(",",'');
+                                    let arr = cstr.split(' ');
+                                    let sl = '<td><p class="text-center border rounded p-1 mt-1 bg-white" >'+arr[0] +' </p></td>' 
+                                            + '<td  colspan="2"> <p class="text-center border rounded bg-white p-1 mt-1" > '+arr[1] +' </p> </td> ' ;
+                                        
+                                    for (let j = 0; j <d[i][1].length; j++) {
+                                        if( d[i][1][j]["id"] == 0){
+                                            let hours = d[i][1][j]["hours"]; 
+                                            let descr = d[i][1][j]["descr"];   
+                                            let t =  ' <td>'
+                                                +' <input type="number"    name="hours"     readonly    class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
+                                                +' <textarea class="h-n h-n-blank"   name="descr"   readonly    ></textarea>' 
+                                                +' </td>';
+                                            row.innerHTML = (( row.innerHTML.toString()) + t);
+                                        }
+                                        else{
+                                            let hours = d[i][1][j]["hours"]; 
+                                            let descr = d[i][1][j]["descr"];    
+                                            let   t = ' <td> ' 
+                                                +' <input type="number"  value='+hours+'    name="hours"  readonly  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
+                                                +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"   readonly  >'+descr +'</textarea>'  
+                                                +'</td>';
+                                            row.innerHTML = (( row.innerHTML.toString()) + t);
+                                        }  
+                                    }   
+                                    row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">  <p class="text-center border rounded bg-white w-75 py-1 "> 00</p> </td>' );
+                                    $("#tbtable").append(row);
+                                }
+                                if( workStatus == 'Approved' ){
+                                    $("#btnSubmit").val("Approved").attr('disabled',true).addClass("btn");
+                                    $("#btnSave").val("Saved").attr('disabled',true);
+                                }else{
+                                    $("#btnSubmit").val("Submitted").attr('disabled',true);
+                                    $("#btnSave").val("Saved").attr('disabled',true);
+                                }
+                            }else{
+                                for (let i = 0; i < d.length; i++) {
+                                    let row = document.createElement("tr");
+                                    let spn = d[i][0];
+                                    let cstr = spn.replace("[",'').replace("]",'').replace(",",'');
+                                    let arr = cstr.split(' ');
+                                    let sl = '<td><p class="text-center border rounded p-1 mt-1 bg-white" >'+arr[0] +' </p></td>' 
+                                            + '<td  colspan="2"> <p class="text-center border rounded bg-white p-1 mt-1" > '+arr[1] +' </p> </td> ' ;
+                                        
+                                    for (let j = 0; j <d[i][1].length; j++) {
+                                        if( d[i][1][j]["id"] == 0){
+                                            let eId = d[i][1][j]["empId"];
+                                            let pId = d[i][1][j]["projectId"];
+                                            let pName = d[i][1][j]["projectName"];
+                                            let hours = d[i][1][j]["hours"]; 
+                                            let descr = d[i][1][j]["descr"];   
+                                            let day = d[i][1][j]["day"];   
+                                            let status = d[i][1][j]["status"];   
+                                            let t =  ' <td>'
+                                                +' <input type="number"    name="hours"          min="1" max="24" class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
+                                                +' <input type="number"  value='+eId+'      name="empId"          class="d-inline d-none"  > ' 
+                                                +' <input type="number"  value='+pId+'      name="projectId"      class="d-inline d-none"  > ' 
+                                                +' <input type="text"    value='+pName+'    name="projectName"    class="d-inline d-none"  > ' 
+                                                +' <input type="date"    value='+day+'     name="day"             class="d-inline d-none"  >'  
+                                                +' <textarea class="h-n h-n-blank"   name="descr"       ></textarea>' 
+                                                +' </td>';
+                                            row.innerHTML = (( row.innerHTML.toString()) + t);
+                                        }
+                                        else{
+                                            let id = d[i][1][j]["id"];
+                                            let eId = d[i][1][j]["empId"];
+                                            let pId = d[i][1][j]["projectId"];
+                                            let pName = d[i][1][j]["projectName"];
+                                            let hours = d[i][1][j]["hours"]; 
+                                            let descr = d[i][1][j]["descr"];    
+                                            let day = d[i][1][j]["day"];   
+                                            let status = d[i][1][j]["status"];   
+                                            let   t = ' <td> ' 
+                                                +' <input type="number"  value='+hours+'    name="hours" min="1"  max="24"  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
+                                                +' <input type="number"  value='+id+'       name="id"                       class=" d-inline d-none"  > ' 
+                                                +' <input type="number"  value='+eId+'      name="empId"                    class=" d-inline d-none"  > ' 
+                                                +' <input type="number"  value='+pId+'      name="projectId"                class=" d-inline d-none"  > ' 
+                                                +' <input type="text"    value='+pName+'    name="projectName "             class=" d-inline d-none"  > ' 
+                                                +' <input type="date"  value='+day+'        name="day"                      class=" d-inline d-none" > ' 
+                                                +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"     >'+descr +'</textarea>'  
+                                                +'</td>';
+                                            row.innerHTML = (( row.innerHTML.toString()) + t);
+                                        }  
+                                    }   
+                                    row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">  <p class="text-center border rounded bg-white w-75 py-1 "> 00</p> </td>' );
+                                    $("#tbtable").append(row);
+                                }
+                                $("#btnSubmit").val("Submit").attr('disabled',false);
+                                $("#btnSave").val("Save").attr('disabled',false);
                             }
                             calRowOnLoad();
                             AddHoverToHourIn();
@@ -480,7 +538,7 @@
                                 $("#fri_v_t p ").html('00');
                                 $("#sat_v_t p ").html('00');
                                 $("#sun_v_t p ").html('00');
-                                $("#htotal").html('00');
+                                $("#htotal p  ").html('00');
                             }
                         }
                     });
@@ -693,16 +751,21 @@
 
             function btnSubmitWorkReport(ref){
                 if(confirm("Do you want to Submit !!!")){
-                var sd = new Date($("#startDate").val());
-                var ed = new Date($("#startDate").val());
-				let uri =  'submit-work'
+                tblDataSave();
+                let data = {
+                    startDate:$("#startDate").val(),
+                    endDate:$("#endDate").val(),
+                    status:'Pending'
+                }
+               let uri =  'submit-work';
 				$.ajax({
-					type: 'GET',
+					type: 'POST',
 					url: uri,
-					contentType: false,
+					data:JSON.stringify(data),
+				    contentType :'application/json',
 					success: function () {
-						// location.reload();
-					}
+                        fetchwork();
+                    }
 				}); 
 			}
             $(ref).blur();

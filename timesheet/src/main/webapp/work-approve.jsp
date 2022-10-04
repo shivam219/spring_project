@@ -186,8 +186,8 @@
                     </button> 
                 </div>
                 <div class="col  d-flex justify-content-center align-middle">
-                    <input type="button" class="btn btn-danger btn-sm pe-3 ps-3 me-2 h-75 rounded"  onclick="rejectWorkReport(this)" value="Reject" id="btnReject" >
-                    <input type="button" class="btn btn-success btn-sm h-75 rounded" value="Approve" onclick="submitWorkReport(this)">
+                    <input type="button" class="btn btn-danger btn-sm pe-3 ps-3 me-2 h-75 rounded"  onclick="rejectWorkReport(this)" value="Reject" id="btnReject" disabled="disabled" >
+                    <input type="button" class="btn btn-success btn-sm h-75 rounded" value="Approve" onclick="submitWorkReport(this)" id="btnApprove" disabled="disabled">
                 </div>
                 
             </div>
@@ -410,68 +410,98 @@
 
       
             function fetchwork(){   
+                for (let i = $('#tbtable tr').length -2 ; i > 0; i--) {
+                    $('#tbtable tr').eq(i).remove();
+                }
                 let sd = $("#startDate").val();
                 let ed = $("#endDate").val();
                 let empId = $("#empList").val(); 
-                let uri =  '/fetch-work-by-id?startDate='+sd+'&endDate='+ed+'&empId='+empId;
-                console.log(uri);
-                    $.ajax({
-                        url: uri,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(obj, success,event){
-                            console.log(obj);
-                            for (let i = $('#tbtable tr').length -2 ; i > 0; i--) {
-                                $('#tbtable tr').eq(i).remove();
+
+                let workStatus=0;
+                let data = {
+                        startDate:$("#startDate").val(),
+                        endDate:$("#endDate").val(),
+                        empId: $("#empList").val(),
+                    }
+                $.ajax({
+                    async : false,
+                    type: 'POST',
+                    url: 'work-status',
+                    data:JSON.stringify(data),
+                    contentType :'application/json',
+                    success: function (data) {
+                        workStatus=data; 
+                    }
+                }); 
+                if(workStatus == 'Pending' || workStatus == 'Approved' || workStatus == 'Rejected'){
+                    let uri =  '/fetch-work-by-id?startDate='+sd+'&endDate='+ed+'&empId='+empId;
+                        $.ajax({
+                            url: uri,
+                            type: 'GET',
+                            dataType: 'json',
+                            success: function(obj, success,event){ 
+                                if( workStatus == 'Approved' ){
+                                    $("#btnApprove").val("Approved").attr('disabled',true);
+                                    $("#btnReject").val("Reject").attr('disabled',false);
+                                } else if (workStatus == 'Rejected'){
+                                    $("#btnApprove").val("Approve").attr('disabled',false);
+                                    $("#btnReject").val("Rejected").attr('disabled',true);
+                                } else{
+                                    $("#btnApprove").val("Approve").attr('disabled',false);
+                                    $("#btnReject").val("Reject").attr('disabled',false);
+                                }
+                                var d = Object.entries(obj); 
+                                for (let i = 0; i < d.length; i++) {
+                                    let row = document.createElement("tr");
+                                    let spn = d[i][0];
+                                    let cstr = spn.replace("[",'').replace("]",'').replace(",",'');
+                                    let arr = cstr.split(' ');
+                                    let sl = '<td><p class="text-center border rounded p-1 mt-1 bg-white" >'+arr[0] +' </p></td>' 
+                                            + '<td  colspan="2"> <p class="text-center border rounded bg-white p-1 mt-1" > '+arr[1] +' </p> </td> ' ;
+                                        
+                                    for (let j = 0; j <d[i][1].length; j++) {
+                                        if( d[i][1][j]["id"] == 0){
+                                            let hours = d[i][1][j]["hours"]; 
+                                            let descr = d[i][1][j]["descr"];   
+                                            let t =  ' <td>'
+                                                +' <input type="number"    name="hours"     readonly    class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
+                                                +' <textarea class="h-n h-n-blank"   name="descr"   readonly    ></textarea>' 
+                                                +' </td>';
+                                            row.innerHTML = (( row.innerHTML.toString()) + t);
+                                        }
+                                        else{
+                                            let hours = d[i][1][j]["hours"]; 
+                                            let descr = d[i][1][j]["descr"];    
+                                            let   t = ' <td> ' 
+                                                +' <input type="number"  value='+hours+'    name="hours"  readonly  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
+                                                +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"   readonly  >'+descr +'</textarea>'  
+                                                +'</td>';
+                                            row.innerHTML = (( row.innerHTML.toString()) + t);
+                                        }  
+                                    }   
+                                    row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">  <p class="text-center border rounded bg-white w-75 py-1 "> 00</p> </td>' );
+                                    $("#tbtable").append(row);
+                                }
+                                    calRowOnLoad();
+                                    AddHoverToHourIn();
+                                    setWeekDates();
                             }
-                            var d = Object.entries(obj); 
-                            for (let i = 0; i < d.length; i++) {
-                                let row = document.createElement("tr");
-                                let spn = d[i][0];
-                                let cstr = spn.replace("[",'').replace("]",'').replace(",",'');
-                                let arr = cstr.split(' ');
-                                let sl = '<td><p class="text-center border rounded p-1 mt-1 bg-white" >'+arr[0] +' </p></td>' 
-                                        + '<td  colspan="2"> <p class="text-center border rounded bg-white p-1 mt-1" > '+arr[1] +' </p> </td> ' ;
-                                    
-                                for (let j = 0; j <d[i][1].length; j++) {
-                                    if( d[i][1][j]["id"] == 0){
-                                        let hours = d[i][1][j]["hours"]; 
-                                        let descr = d[i][1][j]["descr"];   
-                                        let t =  ' <td>'
-                                            +' <input type="number"    name="hours"     readonly    class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
-                                            +' <textarea class="h-n h-n-blank"   name="descr"   readonly    ></textarea>' 
-                                            +' </td>';
-                                        row.innerHTML = (( row.innerHTML.toString()) + t);
-                                    }
-                                    else{
-                                        let hours = d[i][1][j]["hours"]; 
-                                        let descr = d[i][1][j]["descr"];    
-                                        let   t = ' <td> ' 
-                                            +' <input type="number"  value='+hours+'    name="hours"  readonly  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
-                                            +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"   readonly  >'+descr +'</textarea>'  
-                                            +'</td>';
-                                        row.innerHTML = (( row.innerHTML.toString()) + t);
-                                    }  
-                                }   
-                                row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">  <p class="text-center border rounded bg-white w-75 py-1 "> 00</p> </td>' );
-                                $("#tbtable").append(row);
-                            }
-                            calRowOnLoad();
-                            AddHoverToHourIn();
-                            setWeekDates();
-                            let rowCount = $('#tbtable tr').length;
-                            if(rowCount == 2) {
-                                $("#mov_v_t p ").html('00');
-                                $("#tue_v_t p ").html('00');
-                                $("#web_v_t p ").html('00');
-                                $("#thu_v_t p ").html('00');
-                                $("#fri_v_t p ").html('00');
-                                $("#sat_v_t p ").html('00');
-                                $("#sun_v_t p ").html('00');
-                                $("#htotal").html('00');
-                            }
-                        }
-                    });
+                        });
+                    }
+                    let rowCount = $('#tbtable tr').length;
+                    if(rowCount == 2) {
+                        $("#mov_v_t p ").html('00');
+                        $("#tue_v_t p ").html('00');
+                        $("#web_v_t p ").html('00');
+                        $("#thu_v_t p ").html('00');
+                        $("#fri_v_t p ").html('00');
+                        $("#sat_v_t p ").html('00');
+                        $("#sun_v_t p ").html('00');
+                        $("#htotal  p ").html('00');
+                        $("#btnApprove").val("Approve").attr('disabled',true);
+                        $("#btnReject").val("Reject").attr('disabled',true);
+                    }
+                            
                 }
                 function calRowOnLoad( ) {
                     $('#tbtable tr' ).each( function () {
@@ -502,36 +532,42 @@
             settingLoadDate();
 
             function rejectWorkReport(ref){
-                var sd = $("#startDate").val();
-                var ed = $("#endDate").val();
-                var empId = $("#empList").val(); 
-                if(empId){
-                    let uri =  '/reject-work?startDate='+sd+'&endDate='+ed+'&empId='+empId;
-                    console.log(uri);
+                if( $("#empList").val()){
+                    let data = {
+                            startDate:$("#startDate").val(),
+                            endDate:$("#endDate").val(),
+                            empId: $("#empList").val(),
+                        }
                     $.ajax({
-                        type: 'GET',
-                        url: uri,
-                        contentType: false,
+                        async : false,
+                        type: 'POST',
+                        url: 'reject-work',
+                        data:JSON.stringify(data),
+                        contentType :'application/json',
                         success: function () {
+                          fetchwork();
                         }
                     }); 
                 }else{
                     alert("No Employee Selected")
                 }
-                $(ref).blur();   
+                $(ref).blur();
             }
             function submitWorkReport(ref){
-                var sd = $("#startDate").val();
-                var ed = $("#endDate").val();
-                var empId = $("#empList").val(); 
-                if(empId){
-                    let uri =  '/reject-work?startDate='+sd+'&endDate='+ed+'&empId='+empId;
-                    console.log(uri);
+                if( $("#empList").val()){
+                    let data = {
+                            startDate:$("#startDate").val(),
+                            endDate:$("#endDate").val(),
+                            empId: $("#empList").val(),
+                        }
                     $.ajax({
-                        type: 'GET',
-                        url: uri,
-                        contentType: false,
+                        async : false,
+                        type: 'POST',
+                        url: 'approve-work',
+                        data:JSON.stringify(data),
+                        contentType :'application/json',
                         success: function () {
+                          fetchwork();
                         }
                     }); 
                 }else{

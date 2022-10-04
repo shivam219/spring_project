@@ -265,26 +265,33 @@ public class WorkService {
 		return map;
 	}
 	
-
-	public void submitWork(long empId, String StatDate, String endDate) {
-		WorkMaster wm = new WorkMaster();
-		wm.setEmpId(empId);
-		wm.setStartDate(StatDate);
-		wm.setEndDate(endDate);
-		wm.setStatus("Pending");
+	
+	
+	public void submitWork(WorkMaster wm) {
 		wmrepository.save(wm);
 		String msg = "Hii " 
-		+ "<br>Employee No  : " + empId
+		+ "<br>Employee No  : " + wm.getEmpId()
 		+ " has submitted work report.<br><br>" 
 		+ "<b>Work Report</b> <br> "
-		+ "<br>From Date: " + StatDate
-		+ "<br> To Date: " + endDate 
+		+ "<br>From Date: " + wm.getStartDate()
+		+ "<br> To Date: " + wm.getEndDate() 
 		+ "<br><br><b>Note</b>: "
 		+ "<br><br>Regards,<br>Human Resources";
 		sendEmail("shivam.choudhary@ess.net.in", msg, null);
 	}
 	// @formatter:on
 
+	
+	public WorkMaster getWorkMaster(WorkMaster wm) {
+		return	wmrepository.getWorkMaster(wm.getEmpId(), wm.getStartDate(), wm.getEndDate());
+	}
+	
+	public int updateStatusApproved(WorkMaster wm) {
+		return	wmrepository.updateStatusApproved(wm.getEmpId(), wm.getStartDate(), wm.getEndDate());
+	}
+	public int updateStatusRejected(WorkMaster wm) {
+		return	wmrepository.updateStatusRejected(wm.getEmpId(), wm.getStartDate(), wm.getEndDate());
+	}
 	public void sendEmail(String to, String msg, String empName) {
 
 		String from = "noreply@ess.net.in";
