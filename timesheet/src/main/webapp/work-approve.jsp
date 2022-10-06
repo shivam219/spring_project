@@ -4,7 +4,7 @@
 <%@page import="java.util.Arrays"%> 
 <html lang="en">
 <head> 
-    <title>Week Work Report</title>
+    <title>Approve Work Report</title>
     <style> 
         body{
             background: #e1edf9;
@@ -211,14 +211,14 @@
                 </tbody>
                 <tfoot class="tblcolor" >
                     <td colspan="3" class="text-center"> </td>
-                    <td id="mov_v_t"> <p class="text-center border rounded bg-white w-75 py-1" > 00</p> </td>
-                    <td id="tue_v_t"> <p class="text-center border rounded bg-white w-75 py-1" > 00</p> </td>
-                    <td id="web_v_t"> <p class="text-center border rounded bg-white w-75 py-1" > 00</p> </td>
-                    <td id="thu_v_t"> <p class="text-center border rounded bg-white w-75 py-1" > 00</p> </td>
-                    <td id="fri_v_t"> <p class="text-center border rounded bg-white w-75 py-1" > 00</p> </td>
-                    <td id="sat_v_t"> <p class="text-center border rounded bg-white w-75 py-1" > 00</p> </td>
-                    <td id="sun_v_t"> <p class="text-center border rounded bg-white w-75 py-1" > 00</p> </td>
-                    <td id="htotal" > <p class="text-center border rounded bg-white w-75 py-1" > 00</p> </td>
+                    <td id="mov_v_t"> <input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
+                    <td id="tue_v_t"> <input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
+                    <td id="web_v_t"> <input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
+                    <td id="thu_v_t"> <input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
+                    <td id="fri_v_t"> <input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
+                    <td id="sat_v_t"> <input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
+                    <td id="sun_v_t"> <input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
+                    <td id="htotal" > <input  type="number"   readonly    class="d-inline form-control  w-75 ms-2"      placeholder="HH"  > </input> </td>
                 </tfoot>
             </table>
         </div>
@@ -272,25 +272,25 @@
                 ].join('-');
             }
             function setWeekDates() {  
-                $("#monDate").html('mon  &nbsp; '+ new Date($("#startDate").val()).getDate());
+                $("#monDate").html('Mon &nbsp; '+ new Date($("#startDate").val()).getDate());
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 1);
-                $("#tueDate").html('tue  &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
+                $("#tueDate").html('Tue &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 2);
-                $("#wedDate").html('wed   &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
+                $("#wedDate").html('Wed &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 3);
-                $("#thuDate").html('thu   &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
+                $("#thuDate").html('Thu &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 4);
-                $("#friDate").html('fri  &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
+                $("#friDate").html('Fri &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 5);
-                $("#satDate").html('sat   &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
+                $("#satDate").html('Sat &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 6);
-                $("#sunDate").html('sun  &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
+                $("#sunDate").html('Sun &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
             }
             function PrevWeekReport(){
                 let sd = new Date($("#startDate").val());
@@ -308,29 +308,37 @@
                 let ed = new Date($("#endDate").val());
                 sd.setDate(sd.getDate() + 7);
                 ed.setDate(ed.getDate() + 7);
-                $("#startDate").val(formatDate(sd));
-                $("#endDate").val(formatDate(ed));
+                let now = getMonday();
+                if(now>sd){
+                    $("#startDate").val(formatDate(sd));
+                    $("#endDate").val(formatDate(ed));
+                    setWeekDates();
+                    fetchwork();
+                }else{
+                    alert("Unable to fetch next week data");
+                }
                 $("#btnNextWeekReport").blur();
-                setWeekDates();
-                fetchwork();
             }
+            /*horizontal total*/
             function cal(ob){
                 if($(ob).val()>24){
                     $(ob).val('');
                 }
                 else if($(ob).val()=="" || $(ob).val()>0){
-                    let rsum=0;   
+                    let rsum=0;    
                     $(ob).closest('tr').find('td').each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").val()))){
-                            rsum=rsum+Number(jQuery(this).find("input").val());
+                        if(!isNaN(Number(jQuery(this).find("input:first").val()))){
+                            rsum=rsum+Number(jQuery(this).find("input:first").val());
                         };
-                        $(this).closest("tr").find("td:eq(9) p ").html(rsum==0?"00":rsum);
+                        rsum;
                     });
+                    $(ob).closest("tr").find("td:eq(9) input:first ").val(rsum==0?"00":rsum);
                     calculate();
                 }
             }
-
-            function calculate(){
+            /*vertical total*/
+            function calculate(){      
+                tblRefresh();
                 let mon = 0;             
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(2).each(function(){
@@ -339,7 +347,8 @@
                         };
                     }) 
                 });
-                $("#mov_v_t p").html(mon==0?"00":mon);
+              
+                $("#mov_v_t input:first").val(mon==0?"00":mon);
                 let tue = 0;
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(3).each(function(){
@@ -348,7 +357,7 @@
                         };
                     }) 
                 });
-                $("#tue_v_t   p").html(tue==0?"00":tue);
+                $("#tue_v_t   input:first").val(tue==0?"00":tue);
                 let wed = 0; 
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(4).each(function(){
@@ -357,7 +366,7 @@
                         };
                     }) 
                 });
-                $("#web_v_t p").html(wed==0?"00":wed);
+                $("#web_v_t input:first").val(wed==0?"00":wed);
                 let thu = 0; 
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(5).each(function(){
@@ -366,7 +375,7 @@
                         };
                     }) 
                 }); 
-                $("#thu_v_t p").html(thu==0?"00":thu);
+                $("#thu_v_t input:first").val(thu==0?"00":thu);
 
                 let fri = 0; 
                 $('#tbtable tr' ).each( function () {
@@ -376,7 +385,7 @@
                         };
                     }) 
                 }); 
-                $("#fri_v_t p").html(fri==0?"00":fri);
+                $("#fri_v_t input:first").val(fri==0?"00":fri);
  
                 let sat = 0; 
                 $('#tbtable tr' ).each( function () {
@@ -386,7 +395,7 @@
                         };
                     }) 
                 });  
-                $("#sat_v_t p ").html(sat==0?"00":sat);
+                $("#sat_v_t input:first ").val(sat==0?"00":sat);
 
                 let sun = 0;  
                 $('#tbtable tr' ).each( function () {
@@ -396,16 +405,16 @@
                         };
                     }) 
                 });  
-                $("#sun_v_t p").html(sun==0?"00":sun);
+                $("#sun_v_t input:first").val(sun==0?"00":sun);
                 let total = 0;  
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(9).each(function(){
-                        if(!isNaN(Number(jQuery(this).html()))){
-                            total=total+Number(jQuery(this).html());
+                        if(!isNaN(Number(jQuery(this).find("input:first").val()))){
+                            total=total+Number(jQuery(this).find("input:first").val());
                         };
-                    }) 
+                    }); 
                 });  
-                $("#htotal p").html(total==0?"00":total); 
+                $("#htotal input:first").val(total==0?"00":total); 
             };
 
       
@@ -434,8 +443,9 @@
                     }
                 }); 
                 if(workStatus == 'Pending' || workStatus == 'Approved' || workStatus == 'Rejected'){
-                    let uri =  '/fetch-work-by-id?startDate='+sd+'&endDate='+ed+'&empId='+empId;
+                    let uri =  '/fetch-work-submitted?startDate='+sd+'&endDate='+ed+'&empId='+empId;
                         $.ajax({
+                            async : false,
                             url: uri,
                             type: 'GET',
                             dataType: 'json',
@@ -456,15 +466,15 @@
                                     let spn = d[i][0];
                                     let cstr = spn.replace("[",'').replace("]",'').replace(",",'');
                                     let arr = cstr.split(' ');
-                                    let sl = '<td><p class="text-center border rounded p-1 mt-1 bg-white" >'+arr[0] +' </p></td>' 
-                                            + '<td  colspan="2"> <p class="text-center border rounded bg-white p-1 mt-1" > '+arr[1] +' </p> </td> ' ;
+                                    let sl = '<td><p class="text-center border rounded p-1 mt-1 bg-white" style="opacity: 0.8;" >'+arr[0] +' </p></td>' 
+                                            + '<td  colspan="2"> <p class="text-center border rounded bg-white p-1 mt-1" style="opacity: 0.8;"  > '+arr[1] +' </p> </td> ' ;
                                         
                                     for (let j = 0; j <d[i][1].length; j++) {
                                         if( d[i][1][j]["id"] == 0){
                                             let hours = d[i][1][j]["hours"]; 
                                             let descr = d[i][1][j]["descr"];   
                                             let t =  ' <td>'
-                                                +' <input type="number"    name="hours"     readonly    class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
+                                                +' <input type="number"    name="hours"     readonly    class="d-inline form-control input-sm w-75 "  onchange="cal(this)"  placeholder="HH"> ' 
                                                 +' <textarea class="h-n h-n-blank"   name="descr"   readonly    ></textarea>' 
                                                 +' </td>';
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
@@ -473,48 +483,49 @@
                                             let hours = d[i][1][j]["hours"]; 
                                             let descr = d[i][1][j]["descr"];    
                                             let   t = ' <td> ' 
-                                                +' <input type="number"  value='+hours+'    name="hours"  readonly  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
-                                                +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"   readonly  >'+descr +'</textarea>'  
+                                                +' <input type="number"  value='+hours+'    name="hours"  readonly  class=" d-inline form-control input-sm w-75 " onchange="cal(this)"  placeholder="HH">' 
+                                                +' <textarea class="h-n '+ (descr==""?" h-n-empty":"")+'"  name="descr"   readonly  >'+descr +'</textarea>'  
                                                 +'</td>';
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
                                         }  
                                     }   
-                                    row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">  <p class="text-center border rounded bg-white w-75 py-1 "> 00</p> </td>' );
+                                    row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">  <input input type="number"  readonly  class="d-inline form-control input-sm w-75 " /> </td>' );
                                     $("#tbtable").append(row);
                                 }
-                                    calRowOnLoad();
-                                    AddHoverToHourIn();
-                                    setWeekDates();
+                                calRowOnLoad();
+                                AddHoverToHourIn();
+                                setWeekDates();
                             }
                         });
                     }
                     let rowCount = $('#tbtable tr').length;
-                    if(rowCount == 2) {
-                        $("#mov_v_t p ").html('00');
-                        $("#tue_v_t p ").html('00');
-                        $("#web_v_t p ").html('00');
-                        $("#thu_v_t p ").html('00');
-                        $("#fri_v_t p ").html('00');
-                        $("#sat_v_t p ").html('00');
-                        $("#sun_v_t p ").html('00');
-                        $("#htotal  p ").html('00');
+                    if(rowCount == 2) { 
+                        let row = document.createElement("tr");
+                        row.innerHTML= "<td colspan='11' style=' background-color: rgb(168, 174, 193);'> <p class='text-center text-dark p-0 m-0'>No Data available</p></td>";
+                        $("#tbtable").append(row);
+                        tblRefresh();
                         $("#btnApprove").val("Approve").attr('disabled',true);
                         $("#btnReject").val("Reject").attr('disabled',true);
                     }
                             
                 }
-                function calRowOnLoad( ) {
-                    $('#tbtable tr' ).each( function () {
-                        $(this).find('td').each(function(){
-                            $(this).find('input').eq(0).each(function(){
-                                $(this).change();
-                            })
-                        })  
-                    });
+                function tblRefresh(){
+                    $("#tue_v_t input:first ").val('00');
+                    $("#mov_v_t input:first ").val('00');
+                    $("#web_v_t input:first ").val('00');
+                    $("#thu_v_t input:first ").val('00');
+                    $("#fri_v_t input:first ").val('00');
+                    $("#sat_v_t input:first ").val('00');
+                    $("#sun_v_t input:first ").val('00');
+                    $("#htotal  input:first ").val('00'); 
+                }
+                function calRowOnLoad() { 
+                    let rowCount = $('#tbtable tr').length;
+                    for (let i = 1; i < rowCount; i++) {
+                        $('#tbtable tr:eq('+i+') td:eq(2) input:first').change();
+                    }
                 };
              
-              
-
             function getMonday(d = new Date()) {
                 d = new Date(d);
                 var day = d.getDay(),

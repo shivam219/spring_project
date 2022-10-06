@@ -91,7 +91,6 @@ public class WokController {
 	public ResponseEntity<Object> workStatus(HttpServletRequest request, @RequestBody WorkMaster wm) {
 		wm.setEmpId((Long) request.getSession().getAttribute("empId"));
 		wm = workService.getWorkMaster(wm);
-		System.out.println(wm);
 		if (wm == null) {
 			return ResponseEntity.status(HttpStatus.OK).body(0);
 		}

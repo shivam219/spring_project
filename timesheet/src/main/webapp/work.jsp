@@ -4,7 +4,7 @@
 <%@page import="java.util.Arrays"%> 
 <html lang="en">
 <head> 
-    <title>Week Work Report</title>
+    <title> Work Report</title>
     <style> 
         body{
             background: #e1edf9;
@@ -204,14 +204,14 @@
                 </tbody>
                 <tfoot >
                     <td colspan="3" class="text-center"> </td>
-                    <td id="mov_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
-                    <td id="tue_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
-                    <td id="web_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
-                    <td id="thu_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
-                    <td id="fri_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
-                    <td id="sat_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
-                    <td id="sun_v_t"> <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
-                    <td id="htotal" > <p class="text-center border rounded bg-white w-75 py-1"> 00</p> </td>
+                    <td id="mov_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
+                    <td id="tue_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
+                    <td id="web_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
+                    <td id="thu_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
+                    <td id="fri_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
+                    <td id="sat_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
+                    <td id="sun_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
+                    <td id="htotal" ><input  type="number"   readonly    class="d-inline form-control  w-75 ms-2"      placeholder="HH"  > </input> </td>
                 </tfoot>
             </table>
         </div>
@@ -299,11 +299,16 @@
                 let ed = new Date($("#endDate").val());
                 sd.setDate(sd.getDate() + 7);
                 ed.setDate(ed.getDate() + 7);
-                $("#startDate").val(formatDate(sd));
-                $("#endDate").val(formatDate(ed));
+                let now = getMonday();
+                if(now>sd){
+                    $("#startDate").val(formatDate(sd));
+                    $("#endDate").val(formatDate(ed));
+                    setWeekDates();
+                    fetchwork();
+                }else{
+                    alert("Unable to fetch next week data");
+                }
                 $("#btnNextWeekReport").blur();
-                setWeekDates();
-                fetchwork();
             }
             function cal(ob){
                 if($(ob).val()>24){
@@ -312,16 +317,18 @@
                 else if($(ob).val()=="" || $(ob).val()>0){
                     let rsum=0;   
                     $(ob).closest('tr').find('td').each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").val()))){
-                            rsum=rsum+Number(jQuery(this).find("input").val());
+                        if(!isNaN(Number(jQuery(this).find("input:first").val()))){
+                            rsum=rsum+Number(jQuery(this).find("input:first").val());
                         };
-                        $(this).closest("tr").find("td:eq(9) p ").html(rsum==0?"00":rsum);
+                        rsum;
                     });
+                    $(ob).closest("tr").find("td:eq(9) input:first ").val(rsum==0?"00":rsum);
                     calculate();
                 }
             }
 
             function calculate(){
+                tblRefresh();
                 let mon = 0;             
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(2).each(function(){
@@ -330,7 +337,8 @@
                         };
                     }) 
                 });
-                $("#mov_v_t p").html(mon==0?"00":mon);
+              
+                $("#mov_v_t input:first").val(mon==0?"00":mon);
                 let tue = 0;
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(3).each(function(){
@@ -339,7 +347,7 @@
                         };
                     }) 
                 });
-                $("#tue_v_t   p").html(tue==0?"00":tue);
+                $("#tue_v_t   input:first").val(tue==0?"00":tue);
                 let wed = 0; 
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(4).each(function(){
@@ -348,7 +356,7 @@
                         };
                     }) 
                 });
-                $("#web_v_t p").html(wed==0?"00":wed);
+                $("#web_v_t input:first").val(wed==0?"00":wed);
                 let thu = 0; 
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(5).each(function(){
@@ -357,7 +365,7 @@
                         };
                     }) 
                 }); 
-                $("#thu_v_t p").html(thu==0?"00":thu);
+                $("#thu_v_t input:first").val(thu==0?"00":thu);
 
                 let fri = 0; 
                 $('#tbtable tr' ).each( function () {
@@ -367,7 +375,7 @@
                         };
                     }) 
                 }); 
-                $("#fri_v_t p").html(fri==0?"00":fri);
+                $("#fri_v_t input:first").val(fri==0?"00":fri);
  
                 let sat = 0; 
                 $('#tbtable tr' ).each( function () {
@@ -377,7 +385,7 @@
                         };
                     }) 
                 });  
-                $("#sat_v_t p ").html(sat==0?"00":sat);
+                $("#sat_v_t input:first ").val(sat==0?"00":sat);
 
                 let sun = 0;  
                 $('#tbtable tr' ).each( function () {
@@ -387,58 +395,61 @@
                         };
                     }) 
                 });  
-                $("#sun_v_t p").html(sun==0?"00":sun);
+                $("#sun_v_t input:first").val(sun==0?"00":sun);
                 let total = 0;  
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(9).each(function(){
-                        if(!isNaN(Number(jQuery(this).find('p').html()))){
-                            total=total+Number(jQuery(this).find('p').html());
+                        if(!isNaN(Number(jQuery(this).find("input:first").val()))){
+                            total=total+Number(jQuery(this).find("input:first").val());
                         };
-                    }) 
+                    }); 
                 });  
-                $("#htotal p").html(total==0?"00":total); 
+                $("#htotal input:first").val(total==0?"00":total); 
             };
 
       
             function fetchwork(){   
-                let atsd = $("#startDate").attr("name");
                 let sd = $("#startDate").val();
-                let ated = $("#endDate").attr("name");
                 let ed = $("#endDate").val();
-                let uri = '/fetchworkjson?'+atsd+'='+sd+'&'+ated+'='+ed; 
+                let workStatus=0;
+                let data = {
+                        startDate:$("#startDate").val(),
+                        endDate:$("#endDate").val(),
+                    }
+                $.ajax({
+                    async : false,
+                    type: 'POST',
+                    url: 'work-status',
+                    data:JSON.stringify(data),
+                    contentType :'application/json',
+                    success: function (da) {
+                        workStatus=da; 
+                    }
+                });
+                let uri = ''; 
+                if(workStatus == 'Pending' ||  workStatus == 'Approved' || workStatus == 'Rejected'){
+                    uri = '/fetch-work-by-id?startDate='+sd+'&endDate='+ed; 
+                }else{
+                    uri = '/fetchworkjson?startDate='+sd+'&endDate='+ed; 
+                }
                     $.ajax({
                         url: uri,
                         type: 'GET',
                         dataType: 'json',
                         success: function(obj, success,event){
-                         console.log(obj);
                             for (let i = $('#tbtable tr').length -2 ; i > 0; i--) {
                                 $('#tbtable tr').eq(i).remove();
                             }
-                            let workStatus=0;
-                            let data = {
-                                    startDate:$("#startDate").val(),
-                                    endDate:$("#endDate").val(),
-                                }
-                            $.ajax({
-                                async : false,
-                                type: 'POST',
-                                url: 'work-status',
-                                data:JSON.stringify(data),
-                                contentType :'application/json',
-                                success: function (da) {
-                                    workStatus=da; 
-                                }
-                            }); 
+                           
                             var d = Object.entries(obj); 
-                            if(workStatus == 'Pending' ||  workStatus == 'Approved' ){
+                            if(workStatus == 'Pending' ||  workStatus == 'Approved' || workStatus == 'Rejected' ){
                                     for (let i = 0; i < d.length; i++) {
                                     let row = document.createElement("tr");
                                     let spn = d[i][0];
                                     let cstr = spn.replace("[",'').replace("]",'').replace(",",'');
                                     let arr = cstr.split(' ');
-                                    let sl = '<td><p class="text-center border rounded p-1 mt-1 bg-white" >'+arr[0] +' </p></td>' 
-                                            + '<td  colspan="2"> <p class="text-center border rounded bg-white p-1 mt-1" > '+arr[1] +' </p> </td> ' ;
+                                    let sl = '<td><p class="text-center border rounded p-1 mt-1 bg-white"  style="opacity: 0.8;" >'+arr[0] +' </p></td>' 
+                                            + '<td  colspan="2"> <p class="text-center border rounded bg-white p-1 mt-1"  style="opacity: 0.8;" > '+arr[1] +' </p> </td> ' ;
                                         
                                     for (let j = 0; j <d[i][1].length; j++) {
                                         if( d[i][1][j]["id"] == 0){
@@ -460,13 +471,18 @@
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
                                         }  
                                     }   
-                                    row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">  <p class="text-center border rounded bg-white w-75 py-1 "> 00</p> </td>' );
+                                    row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">   <input input type="number"  readonly  class="d-inline form-control input-sm w-75 " />  </td>' );
                                     $("#tbtable").append(row);
                                 }
                                 if( workStatus == 'Approved' ){
-                                    $("#btnSubmit").val("Approved").attr('disabled',true).addClass("btn");
+                                    $("#btnSubmit").val("Approved").attr('disabled',true).addClass("");
                                     $("#btnSave").val("Saved").attr('disabled',true);
-                                }else{
+                                }
+                                else if (workStatus == 'Rejected' ){
+                                    $("#btnSubmit").val("Rejected").attr('disabled',true).addClass("btn-danger");
+                                    $("#btnSave").val("Saved").attr('disabled',true);
+                                }
+                                else{
                                     $("#btnSubmit").val("Submitted").attr('disabled',true);
                                     $("#btnSave").val("Saved").attr('disabled',true);
                                 }
@@ -519,7 +535,7 @@
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
                                         }  
                                     }   
-                                    row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">  <p class="text-center border rounded bg-white w-75 py-1 "> 00</p> </td>' );
+                                    row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">   <input input type="number"  readonly  class="d-inline form-control input-sm w-75 " /> </td>' );
                                     $("#tbtable").append(row);
                                 }
                                 $("#btnSubmit").val("Submit").attr('disabled',false);
@@ -531,26 +547,26 @@
                             /*reset horizontal total when now row found*/
                             let rowCount = $('#tbtable tr').length;
                             if(rowCount == 2) {
-                                $("#mov_v_t p ").html('00');
-                                $("#tue_v_t p ").html('00');
-                                $("#web_v_t p ").html('00');
-                                $("#thu_v_t p ").html('00');
-                                $("#fri_v_t p ").html('00');
-                                $("#sat_v_t p ").html('00');
-                                $("#sun_v_t p ").html('00');
-                                $("#htotal p  ").html('00');
+                                tblRefresh();
                             }
                         }
                     });
                 }
-                function calRowOnLoad( ) {
-                    $('#tbtable tr' ).each( function () {
-                        $(this).find('td').each(function(){
-                            $(this).find('input').eq(0).each(function(){
-                                $(this).change();
-                            })
-                        })  
-                    });
+                function tblRefresh(){
+                    $("#tue_v_t input:first ").val('00');
+                    $("#mov_v_t input:first ").val('00');
+                    $("#web_v_t input:first ").val('00');
+                    $("#thu_v_t input:first ").val('00');
+                    $("#fri_v_t input:first ").val('00');
+                    $("#sat_v_t input:first ").val('00');
+                    $("#sun_v_t input:first ").val('00');
+                    $("#htotal  input:first ").val('00'); 
+                }
+                function calRowOnLoad() { 
+                    let rowCount = $('#tbtable tr').length;
+                    for (let i = 1; i < rowCount; i++) {
+                        $('#tbtable tr:eq('+i+') td:eq(2) input:first').change();
+                    }
                 };
                 function tblDataSave(){
                     $("#btnSave").blur();
@@ -730,7 +746,6 @@
                         });
                     }); 
                 json += otArr.join(",") + ']';
-                console.log(json);
                 return json;
             }
 

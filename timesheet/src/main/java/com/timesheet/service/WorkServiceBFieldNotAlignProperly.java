@@ -31,7 +31,6 @@ public class WorkServiceBFieldNotAlignProperly {
 
 	public LinkedHashMap<String, List<Work>> getWorByStartDateEndDate(String startDate, String endDate, long empId) {
 		List<Work> l = repository.getWorByStartDateEndDate(startDate, endDate, empId);
-		System.out.println(l);
 		LinkedHashMap<String, List<Work>> map = new LinkedHashMap<String, List<Work>>();
 		for (Work w : l) {
 			if (map.containsKey(w.getProjectName())) {
@@ -172,10 +171,7 @@ public class WorkServiceBFieldNotAlignProperly {
 		for (Map.Entry<String, List<Work>> entry : map.entrySet()) {
 			String key = entry.getKey();
 			List<Work> val = entry.getValue();
-			System.out.println(key);
-			System.out.println(val);
 		}
-		System.out.println(map);
 		return map;
 	}
 }
