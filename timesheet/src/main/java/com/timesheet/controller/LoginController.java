@@ -69,10 +69,4 @@ public class LoginController {
 	public String error() {
 		return "login";
 	}
-
-	@PostMapping(value = "/error")
-	public String error1() {
-		return "login";
-	}
-
 }

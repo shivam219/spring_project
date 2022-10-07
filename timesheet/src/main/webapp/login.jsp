@@ -25,7 +25,7 @@
 					</div>
 
 					<div class="text-center mt-3">
-						<button class="btn btn-primary px-4  " type="submit" id="btnSubmit" value="login" >
+						<button class="btn btn-primary px-4  " type="submit" id="btnSubmit"   >
 							<span id="loadingBtn"> </span> &nbsp; Login &nbsp;
 						</button>
 					</div>
@@ -42,12 +42,10 @@
 
 		</div>
 	</div>
-	<h2 class="text-center text-danger py-3 h3">${errorMsg}</h2>
-
 	<script>
 		$("#loginForm").on("submit",function (event) {
             event.preventDefault();
-			$("#loadingBtn").addClass("spinner-border spinner-border-sm");
+			$("#loadingBtn").addClass("spinner-border spinner-border-sm"); 
 			let data = {
 				empId:'',
 				empPassword:''

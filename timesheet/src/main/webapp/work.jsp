@@ -316,12 +316,15 @@
                 }
                 else if($(ob).val()=="" || $(ob).val()>0){
                     let rsum=0;   
+                    $(ob).closest("tr").find("td:eq(9) input:first ").val('00');
                     $(ob).closest('tr').find('td').each(function(){
                         if(!isNaN(Number(jQuery(this).find("input:first").val()))){
+                            console.log(jQuery(this).find("input:first").val());
                             rsum=rsum+Number(jQuery(this).find("input:first").val());
                         };
                         rsum;
                     });
+                    console.log(rsum);
                     $(ob).closest("tr").find("td:eq(9) input:first ").val(rsum==0?"00":rsum);
                     calculate();
                 }
@@ -474,17 +477,16 @@
                                     row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">   <input input type="number"  readonly  class="d-inline form-control input-sm w-75 " />  </td>' );
                                     $("#tbtable").append(row);
                                 }
+                                $("#btnSubmit").val("Approved").attr('disabled',true).removeClass("btn-success btn-danger  btn-primary ");
+                                $("#btnSave").val("Saved").attr('disabled',true);
                                 if( workStatus == 'Approved' ){
-                                    $("#btnSubmit").val("Approved").attr('disabled',true).addClass("");
-                                    $("#btnSave").val("Saved").attr('disabled',true);
+                                    $("#btnSubmit").val("Approved").addClass("btn-success");
                                 }
                                 else if (workStatus == 'Rejected' ){
-                                    $("#btnSubmit").val("Rejected").attr('disabled',true).addClass("btn-danger");
-                                    $("#btnSave").val("Saved").attr('disabled',true);
+                                    $("#btnSubmit").val("Rejected").addClass("btn-danger");
                                 }
                                 else{
-                                    $("#btnSubmit").val("Submitted").attr('disabled',true);
-                                    $("#btnSave").val("Saved").attr('disabled',true);
+                                    $("#btnSubmit").val("Submitted").addClass("btn-primary");
                                 }
                             }else{
                                 for (let i = 0; i < d.length; i++) {
@@ -538,7 +540,7 @@
                                     row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">   <input input type="number"  readonly  class="d-inline form-control input-sm w-75 " /> </td>' );
                                     $("#tbtable").append(row);
                                 }
-                                $("#btnSubmit").val("Submit").attr('disabled',false);
+                                $("#btnSubmit").val("Submit").attr('disabled',false).removeClass("btn-success btn-danger  btn-primary ").addClass("btn-success");
                                 $("#btnSave").val("Save").attr('disabled',false);
                             }
                             calRowOnLoad();
@@ -571,6 +573,7 @@
                 function tblDataSave(){
                     $("#btnSave").blur();
                     $.ajax({
+                        async:false,
                         type: 'post',
                         url: 'deletework',
                         data:  html2jsonForDelete(),
@@ -578,17 +581,24 @@
                         traditional: true,
                         success: function () {
                         }
-                    });     
-                    $.ajax({
-                        type: 'post',
-                        url: 'savework',
-                        data:  html2json(),
-                        contentType: "application/json; charset=utf-8",
-                        traditional: true,
-                        success: function () {
-                            fetchwork();
-                        }
-                    });     
+                    }); 
+                    let data = html2json();    
+                    if(data.length>2){
+                        $.ajax({
+                            async:false,
+                            type: 'post',
+                            url: 'savework',
+                            data:  data,
+                            contentType: "application/json; charset=utf-8",
+                            traditional: true,
+                            success: function () {
+                                fetchwork();
+                            }
+                        });     
+                    }else{
+                        alert("Please Enter work report data");
+                        return 0;
+                    }
                 }
                 
                 function html2jsonForDelete(){
@@ -765,8 +775,8 @@
             }
 
             function btnSubmitWorkReport(ref){
-                if(confirm("Do you want to Submit !!!")){
-                tblDataSave();
+                if(confirm("Do you want to Submit !!!") &&  tblDataSave()!=0){
+               
                 let data = {
                     startDate:$("#startDate").val(),
                     endDate:$("#endDate").val(),
@@ -779,7 +789,7 @@
 					data:JSON.stringify(data),
 				    contentType :'application/json',
 					success: function () {
-                        fetchwork();
+                        // fetchwork();
                     }
 				}); 
 			}
