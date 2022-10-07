@@ -47,15 +47,14 @@
             event.preventDefault();
 			$("#loadingBtn").addClass("spinner-border spinner-border-sm"); 
 			let data = {
-				empId:'',
-				empPassword:''
+				empId:$("#empId").val(),
+				empPassword:$("#empPassword").val()
 			}
-			data.empId= $("#empId").val();
-			data.empPassword = $("#empPassword").val();
-			let uri =  'loginprocess'
+			console.log(data);
+			console.log(JSON.stringify(data));
 			$.ajax({
 				type: 'POST',
-				url: uri,
+				url: 'loginprocess',
 				data:JSON.stringify(data),
 				contentType :'application/json',
 				success: function (data,msg,xh) {

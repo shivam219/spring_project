@@ -121,7 +121,10 @@
 					// });
 					$("#projectMappingForm").attr("action","projectassign").submit();
 				}
+			}else{
+				alert("please choose employee");
 			}
+			$("#empList").blur();
 				
 		});
 		function myFunction() { 

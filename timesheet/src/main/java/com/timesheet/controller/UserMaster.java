@@ -1,5 +1,7 @@
 package com.timesheet.controller;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -43,6 +45,24 @@ public class UserMaster {
 	@GetMapping(value = "user_gui")
 	public String getMethoame() {
 		return "user_gui";
+	}
+
+	@GetMapping(value = "/user-master")
+	public String userMaster() {
+		return "user-master";
+	}
+
+	@GetMapping(value = "/user-master-edit")
+	public String userMmasterEdit(Model m) {
+		Optional<Employee> em = er.findById(1L);
+		Employee emp = em.get();
+		m.addAttribute("emp", emp);
+		return "user-master-edit";
+	}
+
+	@PostMapping(value = "edit-user-process")
+	public ResponseEntity<Object> loginPost(Model m, @RequestBody Employee emp) {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(er.save(emp));
 	}
 
 }

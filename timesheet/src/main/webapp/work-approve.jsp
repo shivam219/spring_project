@@ -207,7 +207,7 @@
                     </tr> 
                 </thead>
                 <tbody>
-                    
+                    <td colspan='11' style=' background-color: rgb(168, 174, 193);'> <p class='text-center text-dark p-0 m-0'>No Data available</p></td>
                 </tbody>
                 <tfoot class="tblcolor" >
                     <td colspan="3" class="text-center"> </td>
@@ -484,7 +484,7 @@
                                             let descr = d[i][1][j]["descr"];    
                                             let   t = ' <td> ' 
                                                 +' <input type="number"  value='+hours+'    name="hours"  readonly  class=" d-inline form-control input-sm w-75 " onchange="cal(this)"  placeholder="HH">' 
-                                                +' <textarea class="h-n '+ (descr==""?" h-n-empty":"")+'"  name="descr"   readonly  >'+descr +'</textarea>'  
+                                                +' <textarea class="h-n '+ (descr==""?" h-n-empty":"")+'"  name="descr"   readonly  >'+ ' '+descr +'</textarea>'  
                                                 +'</td>';
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
                                         }  

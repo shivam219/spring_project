@@ -110,8 +110,8 @@
 							<li><a class="dropdown-item" href="project-dashboard">Project Dashboard</a></li>
 							<li><a class="dropdown-item" href="customer-dashboard">Customer Dashboard</a></li>		
 							<li><a class="dropdown-item" href="change-password">Change Password </a></li>
-							<li><a class="dropdown-item" href="#">User Details
-									Master</a></li>
+							<li><a class="dropdown-item" href="user-master">User Details Master</a></li>
+							<li><a class="dropdown-item" href="user-master-edit">User Details Edits</a></li>
 						</ul>
 					</li>
 					<li class="nav-item  me-2"><a class="nav-link active" aria-current="page" href="logout">Logout</a>

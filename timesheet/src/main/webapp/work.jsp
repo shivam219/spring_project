@@ -469,7 +469,7 @@
                                             let descr = d[i][1][j]["descr"];    
                                             let   t = ' <td> ' 
                                                 +' <input type="number"  value='+hours+'    name="hours"  readonly  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
-                                                +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"   readonly  >'+descr +'</textarea>'  
+                                                +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"   readonly  >' + ' '+descr +'</textarea>'  
                                                 +'</td>';
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
                                         }  
@@ -532,7 +532,7 @@
                                                 +' <input type="number"  value='+pId+'      name="projectId"                class=" d-inline d-none"  > ' 
                                                 +' <input type="text"    value='+pName+'    name="projectName "             class=" d-inline d-none"  > ' 
                                                 +' <input type="date"  value='+day+'        name="day"                      class=" d-inline d-none" > ' 
-                                                +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"     >'+descr +'</textarea>'  
+                                                +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"     >' + ' '+descr +'</textarea>'  
                                                 +'</td>';
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
                                         }  
@@ -789,7 +789,7 @@
 					data:JSON.stringify(data),
 				    contentType :'application/json',
 					success: function () {
-                        // fetchwork();
+                        fetchwork();
                     }
 				}); 
 			}
