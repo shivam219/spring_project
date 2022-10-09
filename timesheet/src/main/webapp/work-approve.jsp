@@ -167,8 +167,8 @@
                 <div class="col fw-bold text-center align-middle">
                     <select name="empList" id="empList" class="form-control sl-emp h-100" onchange="fetchEmpWork()" style="outline: none;"> 
                         <option ></option>
-                        <c:forEach items="${empList}" var="empName" varStatus="loop">
-                            <option value="${empName.getEmpId()}">${empName.getEmpName()}
+                        <c:forEach items="${empList}" var="emp" varStatus="loop">
+                            <option value="${emp.getEmpId()}">${emp.getFirstName()} &nbsp; ${emp.getLastName()}
                             </option>
                         </c:forEach>
                     </select>

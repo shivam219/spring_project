@@ -62,6 +62,11 @@ public class UserMaster {
 
 	@PostMapping(value = "edit-user-process")
 	public ResponseEntity<Object> loginPost(Model m, @RequestBody Employee emp) {
+		try {
+			Thread.sleep(2000);
+		} catch (Exception e) {
+
+		}
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(er.save(emp));
 	}
 

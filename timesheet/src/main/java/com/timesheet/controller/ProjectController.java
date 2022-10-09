@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.timesheet.model.EmployeeProject;
 import com.timesheet.model.Project;
+import com.timesheet.repository.EmployeeProjectRepository;
 import com.timesheet.service.CustomerService;
 import com.timesheet.service.EmployeeProjectService;
 import com.timesheet.service.EmployeeService;
@@ -30,6 +31,9 @@ public class ProjectController {
 
 	@Autowired
 	EmployeeProjectService EmployeeProjectService;
+
+	@Autowired
+	EmployeeProjectRepository EmployeeProjectRepository;
 
 	@ModelAttribute
 	public void commonDataModel(Model m) {
@@ -53,6 +57,7 @@ public class ProjectController {
 			ep.setProjectId(l2);
 			EmployeeProjectService.assignProject2(ep);
 		}
+
 		commonDataModel(m);
 		return "projectmap";
 	}
@@ -87,5 +92,4 @@ public class ProjectController {
 		projectService.deleteProjectByProjectId(ProjectId);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Deleted");
 	}
-
 }

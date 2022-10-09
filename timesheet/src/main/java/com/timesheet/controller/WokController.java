@@ -45,6 +45,7 @@ public class WokController {
 		if (request.getSession().getAttribute("empId") == null) {
 			return "redirect:/login";
 		}
+		System.out.println(employeeService.getAllEmployee());
 		m.addAttribute("empList", employeeService.getAllEmployee());
 
 		return "work-approve";

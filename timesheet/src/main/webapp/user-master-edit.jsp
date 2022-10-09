@@ -71,7 +71,7 @@ body{
             <div class="col col-xl-12">
                 <!-- Edit User Details card-->
                 <div class="card mb-4">
-                    <div class="card-header">Edit User Details</div>
+                    <div class="card-header text-center">Edit User Details</div>
                     <div class="card-body">
                         <form method="post" action="EditUser" id="EditUserForm"  >
                             <div class="row gx-3 mb-3">
@@ -269,6 +269,7 @@ body{
                 contentType :'application/json',
                 success: function (data,msg,xh) {
                     // location.replace('/home');
+                    $("#btnSave").blur();
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                     console.log(data);
                 },error : function(data,msg,xh){
