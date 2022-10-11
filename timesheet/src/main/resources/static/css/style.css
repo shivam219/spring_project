@@ -14,9 +14,8 @@
 }
 
 .dropdown-menu li a {
-	 
 	color: #444141;
-}
+} 
 
 .dropdown-item:focus, .dropdown-item:hover {
 	background-color: #595959;

@@ -120,8 +120,14 @@ body{
                                 <div class="col-md-6">
                                     <label class="small mb-1" for="active">Status</label>
                                     <select name="active" id="active" class="form-control form-select">
-                                        <option value="1">Active</option>
-                                        <option value="0">In-Active</option>
+                                        <c:if test='${emp.getActive().equals("1")}'>
+                                            <option value="1" selected>Active</option>
+                                            <option value="0">In-Active</option>
+                                        </c:if>
+                                        <c:if test='${!emp.getActive().equals("1")}'>
+                                            <option value="1">Active</option>
+                                            <option value="0" selected>In-Active</option>
+                                        </c:if>   
                                     </select>
                                 </div>
                             </div>
@@ -268,7 +274,7 @@ body{
                 data:JSON.stringify(data),
                 contentType :'application/json',
                 success: function (data,msg,xh) {
-                    // location.replace('/home');
+                    location.replace('/user-master');
                     $("#btnSave").blur();
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                     console.log(data);

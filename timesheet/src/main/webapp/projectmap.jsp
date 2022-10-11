@@ -38,7 +38,6 @@
 									</c:forEach>
 								</select>
 							</div>	
-					
 					</div>
 				</div>
 			</div>
@@ -168,3 +167,4 @@
 </body>
 
 </html>
+

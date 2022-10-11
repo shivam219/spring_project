@@ -7,7 +7,7 @@
 
 	<div class="container-fluid  mt-5">
 		<!-- Body -->
-		<div class="row   ">
+		<div class="row ">
 			<h2 class="text-center text-secondary ">Login</h2>
 		</div>
 		<div class="row ">

@@ -11,19 +11,15 @@ import javax.persistence.Table;
 @Table(name = "ess_employee")
 public class Employee {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "emp_id")
 	private long empId;
-
-	@Column(name = "emp_name")
-	private String empName;
 
 	@Column(name = "emp_password")
 	private String empPassword;
 
 	@Column(name = "first_name")
 	private String firstName;
-	
+
 	@Column(name = "middle_name")
 	private String middleName;
 
@@ -32,13 +28,13 @@ public class Employee {
 
 	@Column(name = "emp_email")
 	private String empEmail;
-	
+
 	@Column(name = "emp_phone")
 	private String empPhone;
-	
+
 	@Column(name = "emp_city")
 	private String empCity;
-	
+
 	@Column(name = "emp_pincode")
 	private String empPincode;
 
@@ -54,28 +50,45 @@ public class Employee {
 	@Column(name = "manger_Id")
 	private String mangerId;
 
+	@Column(name = "gender")
+	private String gender;
+
+	@Column(name = "state")
+	private String state;
+
+	@Column(name = "date_of_join")
+	private String dateOfJoin;
+
+	@Column(name = "date_of_resign")
+	private String dateOfResign;
+
 	public Employee() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public Employee(long empId, String empName, String empPassword, String empEmail, String empPhone, String empCity,
-			String empPincode, String empAddress, String firstName, String lastName, String middleName,
-			String birthDate, String active, String mangerId) {
+	public Employee(long empId, String empPassword, String firstName, String middleName,
+			String lastName, String empEmail, String empPhone, String empCity, String empPincode, String empAddress,
+			String birthDate, String active, String mangerId, String gender, String state, String dateOfJoin,
+			String dateOfResign) {
 		super();
 		this.empId = empId;
-		this.empName = empName;
 		this.empPassword = empPassword;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
 		this.empEmail = empEmail;
 		this.empPhone = empPhone;
 		this.empCity = empCity;
 		this.empPincode = empPincode;
 		this.empAddress = empAddress;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.middleName = middleName;
 		this.birthDate = birthDate;
 		this.active = active;
 		this.mangerId = mangerId;
+		this.gender = gender;
+		this.state = state;
+		this.dateOfJoin = dateOfJoin;
+		this.dateOfResign = dateOfResign;
 	}
 
 	public long getEmpId() {
@@ -86,20 +99,36 @@ public class Employee {
 		this.empId = empId;
 	}
 
-	public String getEmpName() {
-		return empName;
-	}
-
-	public void setEmpName(String empName) {
-		this.empName = empName;
-	}
-
 	public String getEmpPassword() {
 		return empPassword;
 	}
 
 	public void setEmpPassword(String empPassword) {
 		this.empPassword = empPassword;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getEmpEmail() {
@@ -142,30 +171,6 @@ public class Employee {
 		this.empAddress = empAddress;
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
-
 	public String getBirthDate() {
 		return birthDate;
 	}
@@ -174,7 +179,7 @@ public class Employee {
 		this.birthDate = birthDate;
 	}
 
-	public String isActive() {
+	public String getActive() {
 		return active;
 	}
 
@@ -182,7 +187,7 @@ public class Employee {
 		this.active = active;
 	}
 
-	public String isMangerId() {
+	public String getMangerId() {
 		return mangerId;
 	}
 
@@ -190,11 +195,46 @@ public class Employee {
 		this.mangerId = mangerId;
 	}
 
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getDateOfJoin() {
+		return dateOfJoin;
+	}
+
+	public void setDateOfJoin(String dateOfJoin) {
+		this.dateOfJoin = dateOfJoin;
+	}
+
+	public String getDateOfResign() {
+		return dateOfResign;
+	}
+
+	public void setDateOfResign(String dateOfResign) {
+		this.dateOfResign = dateOfResign;
+	}
+
 	@Override
 	public String toString() {
-		return "Employee [empId=" + empId + ", empName=" + empName + ", empPassword=" + empPassword + ", empEmail="
-				+ empEmail + ", empPhone=" + empPhone + ", empCity=" + empCity + ", empPincode=" + empPincode
-				+ ", empAddress=" + empAddress + ", firstName=" + firstName + ", lastName=" + lastName + ", middleName="
-				+ middleName + ", birthDate=" + birthDate + ", active=" + active + ", mangerId=" + mangerId + "]";
+		return "Employee [empId=" + empId + ", empPassword=" + empPassword + ", firstName="
+				+ firstName + ", middleName=" + middleName + ", lastName=" + lastName + ", empEmail=" + empEmail
+				+ ", empPhone=" + empPhone + ", empCity=" + empCity + ", empPincode=" + empPincode + ", empAddress="
+				+ empAddress + ", birthDate=" + birthDate + ", active=" + active + ", mangerId=" + mangerId
+				+ ", gender=" + gender + ", state=" + state + ", dateOfJoin=" + dateOfJoin + ", dateOfResign="
+				+ dateOfResign + "]";
 	}
+
 }

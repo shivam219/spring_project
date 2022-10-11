@@ -1,10 +1,14 @@
 <%if(session.getAttribute("empId")==null){
 	response.sendRedirect("login");
 } %>
+
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- CSS-5.0.2  | JS-5.0.2 | -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
@@ -111,7 +115,6 @@
 							<li><a class="dropdown-item" href="customer-dashboard">Customer Dashboard</a></li>		
 							<li><a class="dropdown-item" href="change-password">Change Password </a></li>
 							<li><a class="dropdown-item" href="user-master">User Details Master</a></li>
-							<li><a class="dropdown-item" href="user-master-edit">User Details Edits</a></li>
 						</ul>
 					</li>
 					<li class="nav-item  me-2"><a class="nav-link active" aria-current="page" href="logout">Logout</a>

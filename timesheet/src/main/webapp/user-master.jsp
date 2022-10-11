@@ -6,885 +6,179 @@
     <title>User Master </title>
 </head>
 <style>
-    body {
-        background: #dcdcdc; 
-    }
-
-    .widget-26 {
-        color: #3c4142;
-        font-weight: 400;
-    }
-
-    .widget-26 tr:first-child td {
-        border: 0;
-    }
-
-    .widget-26 .widget-26-job-emp-img img {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-    }
-
-    .widget-26 .widget-26-job-title {
-        min-width: 200px;
-    }
-
-    .widget-26 .widget-26-job-title a {
-        font-weight: 400;
-        font-size: 0.875rem;
-        color: #3c4142;
-        line-height: 1.5;
-    }
-
-    .widget-26 .widget-26-job-title a:hover {
-        color: #68CBD7;
-        text-decoration: none;
-    }
-
-    .widget-26 .widget-26-job-title .employer-name {
-        margin: 0;
-        line-height: 1.5;
-        font-weight: 400;
-        color: #3c4142;
-        font-size: 0.8125rem;
-        color: #3c4142;
-    }
-
-    .widget-26 .widget-26-job-title .employer-name:hover {
-        color: #68CBD7;
-        text-decoration: none;
-    }
-
-    .widget-26 .widget-26-job-title .time {
-        font-size: 12px;
-        font-weight: 400;
-    }
-
-    .widget-26 .widget-26-job-info {
-        min-width: 100px;
-        font-weight: 400;
-    }
-
-    .widget-26 .widget-26-job-info p {
-        line-height: 1.5;
-        color: #3c4142;
-        font-size: 0.8125rem;
-    }
-
-    .widget-26 .widget-26-job-info .location {
-        color: #3c4142;
-    }
-
-    .widget-26 .widget-26-job-salary {
-        min-width: 70px;
-        font-weight: 400;
-        color: #3c4142;
-        font-size: 0.8125rem;
-    }
-
-    .widget-26 .widget-26-job-category {
-        padding: .5rem;
-        display: inline-flex;
-        white-space: nowrap;
-        border-radius: 15px;
-    }
-
-    .widget-26 .widget-26-job-category .indicator {
-        width: 13px;
-        height: 13px;
-        margin-right: .5rem;
-        float: left;
-        border-radius: 50%;
-    }
-
-    .widget-26 .widget-26-job-category span {
-        font-size: 0.8125rem;
-        color: #3c4142;
-        font-weight: 600;
-    }
-
-    .widget-26 .widget-26-job-starred svg {
-        width: 20px;
-        height: 20px;
-        color: #fd8b2c;
-    }
-
-    .widget-26 .widget-26-job-starred svg.starred {
-        fill: #fd8b2c;
-    }
-
-    .bg-soft-base {
-        background-color: #e1f5f7;
-    }
-
-    .bg-soft-warning {
-        background-color: #fff4e1;
-    }
-
-    .bg-soft-success {
-        background-color: #d1f6f2;
-    }
-
-    .bg-soft-danger {
-        background-color: #fedce0;
-    }
-
-    .bg-soft-info {
-        background-color: #d7efff;
-    }
-
-
-    .search-form {
-        width: 80%;
-        margin: 0 auto;
-        margin-top: 1rem;
-    }
-
-    .search-form input {
-        height: 100%;
-        background: transparent;
-        border: 0;
-        display: block;
-        width: 100%;
-        padding: 1rem;
-        height: 100%;
-        font-size: 1rem;
-    }
-
-    .search-form select {
-        background: transparent;
-        border: 0;
-        padding: 1rem;
-        height: 100%;
-        font-size: 1rem;
-    }
-
-    .search-form select:focus {
-        border: 0;
-    }
-
-    .search-form button {
-        height: 100%;
-        width: 100%;
-        font-size: 1rem;
-    }
-
-    .search-form button svg {
-        width: 24px;
-        height: 24px;
-    }
-
-    .search-body {
-        margin-bottom: 1.5rem;
-    }
-
-    .search-body .search-filters .filter-list {
-        margin-bottom: 1.3rem;
-    }
-
-    .search-body .search-filters .filter-list .title {
-        color: #3c4142;
-        margin-bottom: 1rem;
-    }
-
-    .search-body .search-filters .filter-list .filter-text {
-        color: #727686;
-    }
-
-    .search-body .search-result .result-header {
-        margin-bottom: 2rem;
-    }
-
-    .search-body .search-result .result-header .records {
-        color: #3c4142;
-    }
-
-    .search-body .search-result .result-header .result-actions {
-        text-align: right;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .search-body .search-result .result-header .result-actions .result-sorting {
-        display: flex;
-        align-items: center;
-    }
-
-    .search-body .search-result .result-header .result-actions .result-sorting span {
-        flex-shrink: 0;
-        font-size: 0.8125rem;
-    }
-
-    .search-body .search-result .result-header .result-actions .result-sorting select {
-        color: #68CBD7;
-    }
-
-    .search-body .search-result .result-header .result-actions .result-sorting select option {
-        color: #3c4142;
-    }
-
-    @media (min-width: 768px) and (max-width: 991.98px) {
-        .search-body .search-filters {
-            display: flex;
+     table {
+            table-layout: fixed;
         }
+  body{
+background-color:#eee;
+/* background-color:#f2f6fc; */
+}
+.project-list-table {
+    border-collapse: separate;
+    border-spacing: 0 12px
+}
 
-        .search-body .search-filters .filter-list {
-            margin-right: 1rem;
-        }
-    }
+.project-list-table tr {
+    background-color: #fff
+}
 
-    .card-margin {
-        margin-bottom: 1.875rem;
-    }
+.table-nowrap td, .table-nowrap th {
+    white-space: nowrap;
+}
+.table-borderless>:not(caption)>*>* {
+    border-bottom-width: 0;
+}
+.table>:not(caption)>*>* {
+    padding: 0.75rem 0.75rem;
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 1px;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
 
-    @media (min-width: 992px) {
-        .col-lg-2 {
-            flex: 0 0 16.66667%;
-            max-width: 16.66667%;
-        }
-    }
+.avatar-sm {
+    height: 2rem;
+    width: 2rem;
+}
+.rounded-circle {
+    border-radius: 50%!important;
+}
+.me-2 {
+    margin-right: 0.5rem!important;
+}
+img, svg {
+    vertical-align: middle;
+}
 
-    .card-margin {
-        margin-bottom: 1.875rem;
-    }
+a {
+    color: #3b76e1;
+    text-decoration: none;
+}
 
-    .card {
-        border: 0;
-        box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-        -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-        -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-        -ms-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-    }
+.badge-soft-danger {
+    color: #f56e6e !important;
+    background-color: rgba(245,110,110,.1);
+}
+.badge-soft-success {
+    color: #63ad6f !important;
+    background-color: rgba(99,173,111,.1);
+}
 
-    .card {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-        word-wrap: break-word;
-        background-color: #ffffff;
-        background-clip: border-box;
-        border: 1px solid #e6e4e9;
-        border-radius: 8px;
-    }
+.badge-soft-primary {
+    color: #3b76e1 !important;
+    background-color: rgba(59,118,225,.1);
+}
+
+.badge-soft-info {
+    color: #57c9eb !important;
+    background-color: rgba(87,201,235,.1);
+}
+
+.avatar-title {
+    align-items: center;
+    background-color: #3b76e1;
+    color: #fff;
+    display: flex;
+    font-weight: 500;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+.bg-soft-primary {
+    background-color: rgba(59,118,225,.25)!important;
+}
 </style>
 
 <body>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css" integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+    
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12 card-margin">
-                <div class="card search-form">
-                    <div class="card-body p-0">
-                        <form id="search-form">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="row no-gutters">
-                                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                                <option>Location</option>
-                                                <option>London</option>
-                                                <option>Boston</option>
-                                                <option>Mumbai</option>
-                                                <option>New York</option>
-                                                <option>Toronto</option>
-                                                <option>Paris</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-8 col-md-6 col-sm-12 p-0">
-                                            <input type="text" placeholder="Search..." class="form-control" id="search"
-                                                name="search">
-                                        </div>
-                                        <div class="col-lg-1 col-md-3 col-sm-12 p-0">
-                                            <button type="submit" class="btn btn-base">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-search">
-                                                    <circle cx="11" cy="11" r="8"></circle>
-                                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+        <div class="row align-items-center mt-3">
+            <div class="col-md-6">
+                <div>
+                    <h5 class="card-title ms-2">Employee List <span class="text-muted fw-normal ms-3">(${empList.size()})</span></h5>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 ">    
+                    <div>
+                        <a href="user-master-add" data-bs-target=".add-new" onclick="this.blur()" class="btn btn-primary"><i class="bx bx-plus me-1"></i> Add New</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
-                <div class="card card-margin">
-                    <div class="card-body">
-                        <div class="row search-body">
-                            <div class="col-lg-12">
-                                <div class="search-result">
-                                    <div class="result-header">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="records">Showing: <b>1-20</b> of <b>200</b> result</div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="result-actions">
-                                                    <div class="result-sorting">
-                                                        <span>Sort By:</span>
-                                                        <select class="form-control border-0" id="exampleOption">
-                                                            <option value="1">Relevance</option>
-                                                            <option value="2">Names (A-Z)</option>
-                                                            <option value="3">Names (Z-A)</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="result-views">
-                                                        <button type="button" class="btn btn-soft-base btn-icon">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewBox="0 0 24 24" fill="none"
-                                                                stroke="currentColor" stroke-width="2"
-                                                                stroke-linecap="round" stroke-linejoin="round"
-                                                                class="feather feather-list">
-                                                                <line x1="8" y1="6" x2="21" y2="6"></line>
-                                                                <line x1="8" y1="12" x2="21" y2="12"></line>
-                                                                <line x1="8" y1="18" x2="21" y2="18"></line>
-                                                                <line x1="3" y1="6" x2="3" y2="6"></line>
-                                                                <line x1="3" y1="12" x2="3" y2="12"></line>
-                                                                <line x1="3" y1="18" x2="3" y2="18"></line>
-                                                            </svg>
-                                                        </button>
-                                                        <button type="button" class="btn btn-soft-base btn-icon">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewBox="0 0 24 24" fill="none"
-                                                                stroke="currentColor" stroke-width="2"
-                                                                stroke-linecap="round" stroke-linejoin="round"
-                                                                class="feather feather-grid">
-                                                                <rect x="3" y="3" width="7" height="7"></rect>
-                                                                <rect x="14" y="3" width="7" height="7"></rect>
-                                                                <rect x="14" y="14" width="7" height="7"></rect>
-                                                                <rect x="3" y="14" width="7" height="7"></rect>
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="result-body">
-                                        <div class="table-responsive">
-                                            <table class="table widget-26">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="widget-26-job-emp-img">
-                                                                <img src="https://bootdey.com/img/Content/avatar/avatar5.png"
-                                                                    alt="Company" />
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-title">
-                                                                <a href="#">Senior Software Engineer / Developer</a>
-                                                                <p class="m-0"><a href="user-master-edit?1" class="employer-name">Axiom
-                                                                        Corp.</a> <span class="text-muted time">1 days
-                                                                        ago</span>
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-info">
-                                                                <p class="type m-0">Full-Time</p>
-                                                                <p class="text-muted m-0">in <span
-                                                                        class="location">London, UK</span></p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-salary">$ 50/hr</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-category bg-soft-base">
-                                                                <i class="indicator bg-base"></i>
-                                                                <span>Software Development</span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-starred">
-                                                                <a href="#">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-star">
-                                                                        <polygon
-                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                                                                        </polygon>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="widget-26-job-emp-img">
-                                                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                                                                    alt="Company" />
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-title">
-                                                                <a href="#">Marketing &amp; Communication
-                                                                    Supervisor</a>
-                                                                <p class="m-0"><a href="#" class="employer-name">AxiomUI
-                                                                        Llc.</a> <span class="text-muted time">2 days
-                                                                        ago</span>
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-info">
-                                                                <p class="type m-0">Part-Time</p>
-                                                                <p class="text-muted m-0">in <span class="location">New
-                                                                        York, US</span></p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-salary">$ 60/hr</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-category bg-soft-warning">
-                                                                <i class="indicator bg-warning"></i>
-                                                                <span>Marketing</span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-starred">
-                                                                <a href="#">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-star">
-                                                                        <polygon
-                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                                                                        </polygon>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="widget-26-job-emp-img">
-                                                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                                                    alt="Company" />
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-title">
-                                                                <a href="#">Senior Data Analyst / Scientist</a>
-                                                                <p class="m-0"><a href="#" class="employer-name">AxiomUI
-                                                                        Inc.</a> <span class="text-muted time">4 days
-                                                                        ago</span>
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-info">
-                                                                <p class="type m-0">Part-Time</p>
-                                                                <p class="text-muted m-0">in <span class="location">New
-                                                                        York, US</span></p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-salary">$ 60/hr</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-category bg-soft-success">
-                                                                <i class="indicator bg-success"></i>
-                                                                <span>Artificial Intelligence</span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-starred">
-                                                                <a href="#">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-star">
-                                                                        <polygon
-                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                                                                        </polygon>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="widget-26-job-emp-img">
-                                                                <img src="https://bootdey.com/img/Content/avatar/avatar4.png"
-                                                                    alt="Company" />
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-title">
-                                                                <a href="#">UX Designer &amp; UI Developer</a>
-                                                                <p class="m-0"><a href="#" class="employer-name">AxiomUI
-                                                                        Inc.</a> <span class="text-muted time">5 days
-                                                                        ago</span>
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-info">
-                                                                <p class="type m-0">Part-Time</p>
-                                                                <p class="text-muted m-0">in <span
-                                                                        class="location">Toronto, CAN</span></p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-salary">$ 35/hr</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-category bg-soft-danger">
-                                                                <i class="indicator bg-danger"></i>
-                                                                <span>Design</span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-starred">
-                                                                <a href="#">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-star">
-                                                                        <polygon
-                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                                                                        </polygon>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="widget-26-job-emp-img">
-                                                                <img src="https://bootdey.com/img/Content/avatar/avatar5.png"
-                                                                    alt="Company" />
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-title">
-                                                                <a href="#">Information Security Analyst /
-                                                                    Expert</a>
-                                                                <p class="m-0"><a href="#" class="employer-name">Axiom
-                                                                        Corp.</a> <span class="text-muted time">6 days
-                                                                        ago</span>
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-info">
-                                                                <p class="type m-0">Part-Time</p>
-                                                                <p class="text-muted m-0">in <span
-                                                                        class="location">Mumbai, IN</span></p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-salary">$ 70/hr</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-category bg-soft-info">
-                                                                <i class="indicator bg-info"></i>
-                                                                <span>Infra Supervision</span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-starred">
-                                                                <a href="#">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-star starred">
-                                                                        <polygon
-                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                                                                        </polygon>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="widget-26-job-emp-img">
-                                                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png"
-                                                                    alt="Company" />
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-title">
-                                                                <a href="#">Senior Software Engineer / Developer</a>
-                                                                <p class="m-0"><a href="#" class="employer-name">Axiom
-                                                                        Corp.</a> <span class="text-muted time">1 days
-                                                                        ago</span>
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-info">
-                                                                <p class="type m-0">Full-Time</p>
-                                                                <p class="text-muted m-0">in <span
-                                                                        class="location">London, UK</span></p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-salary">$ 50/hr</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-category bg-soft-base">
-                                                                <i class="indicator bg-base"></i>
-                                                                <span>Software Development</span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-starred">
-                                                                <a href="#">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-star">
-                                                                        <polygon
-                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                                                                        </polygon>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="widget-26-job-emp-img">
-                                                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                                                                    alt="Company" />
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-title">
-                                                                <a href="#">Marketing &amp; Communication
-                                                                    Supervisor</a>
-                                                                <p class="m-0"><a href="#" class="employer-name">AxiomUI
-                                                                        Llc.</a> <span class="text-muted time">2 days
-                                                                        ago</span>
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-info">
-                                                                <p class="type m-0">Part-Time</p>
-                                                                <p class="text-muted m-0">in <span class="location">New
-                                                                        York, US</span></p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-salary">$ 60/hr</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-category bg-soft-warning">
-                                                                <i class="indicator bg-warning"></i>
-                                                                <span>Marketing</span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-starred">
-                                                                <a href="#">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-star">
-                                                                        <polygon
-                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                                                                        </polygon>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="widget-26-job-emp-img">
-                                                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-                                                                    alt="Company" />
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-title">
-                                                                <a href="#">Senior Data Analyst / Scientist</a>
-                                                                <p class="m-0"><a href="#" class="employer-name">AxiomUI
-                                                                        Inc.</a> <span class="text-muted time">4 days
-                                                                        ago</span>
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-info">
-                                                                <p class="type m-0">Part-Time</p>
-                                                                <p class="text-muted m-0">in <span class="location">New
-                                                                        York, US</span></p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-salary">$ 60/hr</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-category bg-soft-success">
-                                                                <i class="indicator bg-success"></i>
-                                                                <span>Artificial Intelligence</span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-starred">
-                                                                <a href="#">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-star">
-                                                                        <polygon
-                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                                                                        </polygon>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="widget-26-job-emp-img">
-                                                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                                                                    alt="Company" />
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-title">
-                                                                <a href="#">UX Designer &amp; UI Developer</a>
-                                                                <p class="m-0"><a href="#" class="employer-name">AxiomUI
-                                                                        Inc.</a> <span class="text-muted time">5 days
-                                                                        ago</span>
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-info">
-                                                                <p class="type m-0">Part-Time</p>
-                                                                <p class="text-muted m-0">in <span
-                                                                        class="location">Toronto, CAN</span></p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-salary">$ 35/hr</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-category bg-soft-danger">
-                                                                <i class="indicator bg-danger"></i>
-                                                                <span>Design</span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-starred">
-                                                                <a href="#">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-star">
-                                                                        <polygon
-                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                                                                        </polygon>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="widget-26-job-emp-img">
-                                                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png"
-                                                                    alt="Company" />
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-title">
-                                                                <a href="#">Information Security Analyst /
-                                                                    Expert</a>
-                                                                <p class="m-0"><a href="#" class="employer-name">Axiom
-                                                                        Corp.</a> <span class="text-muted time">6 days
-                                                                        ago</span>
-                                                                </p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-info">
-                                                                <p class="type m-0">Part-Time</p>
-                                                                <p class="text-muted m-0">in <span
-                                                                        class="location">Mumbai, IN</span></p>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-salary">$ 70/hr</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-category bg-soft-info">
-                                                                <i class="indicator bg-info"></i>
-                                                                <span>Infra Supervision</span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="widget-26-job-starred">
-                                                                <a href="#">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-star starred">
-                                                                        <polygon
-                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                                                                        </polygon>
-                                                                    </svg>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <nav class="d-flex justify-content-center">
-                            <ul class="pagination pagination-base pagination-boxed pagination-square mb-0">
-                                <li class="page-item">
-                                    <a class="page-link no-border" href="#">
-                                        <span aria-hidden="true">«</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active"><a class="page-link no-border" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link no-border" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link no-border" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link no-border" href="#">4</a></li>
-                                <li class="page-item">
-                                    <a class="page-link no-border" href="#">
-                                        <span aria-hidden="true">»</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+            <div class="col-lg-12">
+                <div class="">
+                    <div class="table-responsive">
+                        <table class="table project-list-table table-nowrap align-middle table-borderless">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Position</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Manager</th>
+                                    <th scope="col" style="width: 200px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${empList}" var="emp" varStatus="loop">
+                                    <tr>
+                                        <td><a href="/user-master-edit?empId=${emp.getEmpId()}" class="text-body">${emp.getFirstName()} &nbsp; ${emp.getLastName()}</a></td>
+                                        <td><span class="badge badge-soft-success mb-0">Full Stack Developer</span></td>
+                                        <td>${emp.getEmpEmail()}</td>
+                                        <td>Vigneswari Mam</td>
+                                        <td>
+                                            <ul class="list-inline mb-0">
+                                                <li class="list-inline-item">
+                                                    <a href="/user-master-edit?empId=${emp.getEmpId()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
+                                                </li>  
+                                                <c:if test='${emp.getActive().equals("1")}'>
+                                                    <li class="list-inline-item">
+                                                        <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Active" class="px-2 text-success">  <i class="fa-solid fa-circle"> </i>  </a>
+                                                    </li>
+                                                </c:if>
+                                                <c:if test='${!emp.getActive().equals("1")}'>
+                                                    <li class="list-inline-item">
+                                                        <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="In-Active" class="px-2 text-danger">  <i class="fa-solid fa-circle"> </i>  </a>
+                                                    </li>
+                                                </c:if>                                           
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                   </c:forEach>
+                                   <!-- <td><span class="badge badge-soft-primary mb-0">Backend Developer</span></td> -->
+
+                            </tbody>
+                        </table>
                     </div>
+                </div>
+            </div>
+        </div>
+        <!-- hide need add from backend -->
+        <div class="row g-0 align-items-center pb-4 d-none">
+            <div class="col-sm-6">
+                <div><p class="mb-sm-0">Showing 1 to 10 of 57 entries</p></div>
+            </div>
+            <div class="col-sm-6">
+                <div class="float-sm-end">
+                    <ul class="pagination mb-sm-0">
+                        <li class="page-item disabled">
+                            <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+                        </li>
+                        <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                        <li class="page-item"><a href="#" class="page-link">2</a></li>
+                        <li class="page-item"><a href="#" class="page-link">3</a></li>
+                        <li class="page-item"><a href="#" class="page-link">4</a></li>
+                        <li class="page-item"><a href="#" class="page-link">5</a></li>
+                        <li class="page-item">
+                            <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

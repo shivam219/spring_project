@@ -1,4 +1,4 @@
-<%@ include file="menu.jsp" %>
+<%@ include file="menu2.jsp" %>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map.*"%>
 <%@page import="java.util.Arrays"%> 
@@ -34,7 +34,7 @@
             box-shadow: inset 0 0 5px grey; 
             border-radius: 10px;
         }
-        
+         
         /* Handle */
         ::-webkit-scrollbar-thumb {
             background: rgb(241, 216, 216); 
