@@ -470,7 +470,7 @@ public class WorkService {
 		+ "<br> To Date: " + wm.getEndDate() 
 		+ "<br><br><b>Note</b>: "
 		+ "<br><br>Regards,<br>Human Resources";
-		sendEmail("shivam.choudhary@ess.net.in", msg, null);
+		sendEmail("shivam.choudhary@ess.net.in", msg, "work report submited");
 	}
 	// @formatter:on
 
@@ -486,7 +486,7 @@ public class WorkService {
 		return wmrepository.updateStatusRejected(wm.getEmpId(), wm.getStartDate(), wm.getEndDate());
 	}
 
-	public void sendEmail(String to, String msg, String empName) {
+	public void sendEmail(String to, String msg, String subject) {
 
 		String from = "noreply@ess.net.in";
 		String pwd = "P@ssw0rd";
@@ -507,7 +507,7 @@ public class WorkService {
 			MimeMessage m = new MimeMessage(session);
 			m.setFrom(new InternetAddress(from));
 			m.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-			m.setSubject("Work Report Submitted");
+			m.setSubject(subject);
 			m.setContent(msg, "text/html");
 			Transport.send(m);
 		} catch (MessagingException mex) {

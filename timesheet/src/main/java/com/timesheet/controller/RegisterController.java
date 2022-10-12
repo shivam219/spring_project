@@ -17,7 +17,7 @@ import com.timesheet.service.ProjectService;
 public class RegisterController {
 	@Autowired
 	EmployeeService employeeService;
-	
+
 	@GetMapping(value = "/register")
 	public String register(Model model, @ModelAttribute Employee emp) {
 		return "register";
@@ -25,7 +25,8 @@ public class RegisterController {
 
 	@PostMapping(value = "/registerprocess")
 	public String registerProcess(Model model, @ModelAttribute Employee emp) {
-		employeeService.save(emp);
+		System.out.println(emp);
+//		employeeService.save(emp);
 		return "login";
 	}
 }

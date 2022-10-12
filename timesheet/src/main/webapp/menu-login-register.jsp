@@ -11,7 +11,7 @@
 <!--Font awesome icon -->
 <script src="https://kit.fontawesome.com/70c55b67fa.js" crossorigin="anonymous"></script>
 <link rel='icon' type='image/ico' href='images/esslogo.jpg' />
-<title>Timesheet Login</title>
+<!-- <title>Timesheet Login</title> -->
 <link rel='icon' type='image/ico' href='ESSLogo.png' />
 <style>
 .bg-nav-foot {

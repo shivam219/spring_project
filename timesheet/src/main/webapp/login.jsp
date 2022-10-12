@@ -8,35 +8,32 @@
 	<div class="container-fluid  mt-5">
 		<!-- Body -->
 		<div class="row ">
-			<h2 class="text-center text-secondary ">Login</h2>
+			<!-- <h2 class="text-center text-secondary ">Ess Login</h2> -->
 		</div>
 		<div class="row ">
 			<div class="col-sm-4 m-auto ">
 				<form method="post" action="loginprocess" id="loginForm">
-					<div class="form-floating mb-3">
-						<input type="text" class="form-control" id="empId" name="empId" placeholder="Emp Id"> 
-						<label for="floatingInput">User ID</label>
-						<span class="form-text  small text-muted  d-none text-danger " id="empIdWar">Specified Employee Id doesn't meet </span>
-					</div>
-					<div class="form-floating">
-						<input type="password" class="form-control" id="empPassword" name="empPassword" placeholder="Password"> 
-						<label for="empPassword">Password</label>
-						<span class="form-text  small text-muted d-none text-danger " id="empPassWar">Specified Employee Password doesn't meet </span>
-					</div>
-
-					<div class="text-center mt-3">
-						<button class="btn btn-primary px-4  " type="submit" id="btnSubmit"   >
-							<span id="loadingBtn"> </span> &nbsp; Login &nbsp;
-						</button>
-					</div>
-
-				</form>
-
-				<hr>
-				<form method="get" action="register">
-					<div class="text-center mt-3">
-						<input class="btn btn-primary px-5 rounded h-75" type="submit"  value="Register" />
-					</div>
+					<div class="card p-3">
+						<div class="card-header"> 	<h2 class="text-center text-secondary">Login</h2></div>
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control input-sm" id="empId" name="empId" placeholder="Emp Id"> 
+							<label for="floatingInput">User ID</label>
+							<span class="form-text  small text-muted  d-none text-danger " id="empIdWar">Specified Employee Id doesn't meet </span>
+						</div>
+						<div class="form-floating">
+							<input type="password" class="form-control input-sm" id="empPassword" name="empPassword" placeholder="Password"> 
+							<label for="empPassword">Password</label>
+							<span class="form-text  small text-muted d-none text-danger " id="empPassWar">Specified Employee Password doesn't meet </span>
+						</div>
+						
+						<div class="text-center mt-3">
+							<button class="btn btn-primary px-4  " type="submit" id="btnSubmit"   >
+								<span id="loadingBtn"> </span> &nbsp; Login &nbsp;
+							</button>
+						</div>
+						<a href="forget-password"  class="card-link m-auto mt-2">Forget Password</a> <br>
+						<!-- <a href="#" class="card-link">Another link</a> -->
+					</div> 
 				</form>
 			</div>
 

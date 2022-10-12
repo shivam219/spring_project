@@ -13,11 +13,11 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
-	public Employee save(Employee e) { 
-	 	employeeRepository.saveEmployee(e.getEmpId(), e.getEmpName(), e.getEmpEmail(), e.getEmpPassword(),
-				e.getEmpCity(), e.getEmpAddress(), e.getEmpPhone(), e.getEmpPincode());
-		return e;
-	}
+//	public Employee save(Employee e) { 
+//	 	employeeRepository.saveEmployee(e.getEmpId(),  e.getEmpEmail(), e.getEmpPassword(),
+//				e.getEmpCity(), e.getEmpAddress(), e.getEmpPhone(), e.getEmpPincode());
+//		return e;
+//	}
 
 	public Employee isValidEmployee(Employee empu) {
 		Employee emp = null;
@@ -31,6 +31,10 @@ public class EmployeeService {
 
 	public List<Employee> getAllEmployee() {
 		return (List<Employee>) employeeRepository.findAll();
+	}
+
+	public String getEmailById(Long empId) {
+		return employeeRepository.getEmailById(empId);
 	}
 
 }
