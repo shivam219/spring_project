@@ -33,7 +33,7 @@
 								<select name="empList" id="empList" class="form-control sl-emp" oninput="myFunction()"  style="outline: none;"> 
 									<option value=""></option>
 									<c:forEach items="${empList}" var="empName" varStatus="loop">
-										<option value="${empName.getEmpId()}">${empName.getEmpName()}
+										<option value="${empName.getEmpId()}">${empName.getFirstName()}
 										</option>
 									</c:forEach>
 								</select>

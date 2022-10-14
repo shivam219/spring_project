@@ -99,11 +99,19 @@
 				data:JSON.stringify(data),
 				contentType :'application/json',
 				success: function (data,msg,xh) {
-					// location.replace('/home');
 					$("#btnResetPassword").text("Password Updated");
 					$("#btnResetPassword").addClass("is-valid").attr("disabled",true);
 					$("#loadingBtnResetPwd").removeClass("spinner-border spinner-border-sm");
-		
+					swal({
+                        title:"Success",
+                        text: "Password is Updated Successfully",
+                        icon: "success",
+                    }).
+                    then(function (isOkay) {
+                        if (isOkay) {
+							location.replace('/login');
+                        }
+                    });
 				},error : function(data,msg,xh){
 				}
 			});

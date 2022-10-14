@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Create User  </title>
+    <title>User Group Create  </title>
 </head>
 <style>
 body{
@@ -71,53 +71,23 @@ body{
             <div class="col col-xl-12">
                 <!-- Edit User Details card-->
                 <div class="card mb-4">
-                    <div class="card-header text-center">Create User</div>
+                    <div class="card-header text-center"> User Group Create</div>
                     <div class="card-body">
                         <form method="post" action="EditUser" id="EditUserForm"  >
                             <div class="row gx-3 mb-3 justify-content-center">
                                 <div class="col-md-4">
                                 <table>
                                     <tr>
-                                        <label class="small mb-1" for="empName">Employee Name</label>
-                                        <select id="empName" class="form-control form-select" onchange="setEmployeeId()" >
-                                            <option value=""> <-- Select Employee -- ></option>
-                                            <c:forEach items="${empList}" var="emp" varStatus="loop">
-                                                <option value="${emp.getEmpId()}">${emp.getFirstName()} ${emp.getLastName()} </option>
-                                            </c:forEach>
-                                        </select>
-                                    </tr>
-                                    <tr>
-                                        <label class="small mb-1" for="empId">Employee Id</label>
-                                        <input class="form-control" id="empId" type="text" placeholder="Choose Name" value="${emp.getMiddleName()}" readonly>
-                                    </tr>
-                                    <tr>
-                                        <label class="small mb-1" for="middleName"> User Password</label>
-                                        <input class="form-control" id="middleName" type="text" placeholder="Enter User Password" value="${emp.getMiddleName()}">
-                                        <span class="form-text small text-danger ms-2  d-none"  >Specify User Password</span>     
-                                    </tr>
-                                    <tr>
-                                        <label class="small mb-1" for="active">Status</label>
-                                        <select name="active" id="active" class="form-control form-select">
-                                                <option value="" ><-- Select Status --></option>
-                                                <option value="1" >Active</option>
-                                                <option value="0">In-Active</option>
-                                        </select>
-                                    </tr>
-                                    <tr>
-                                        <label class="small mb-1" for="active">Reporting Manger</label>
-                                        <select name="active" id="active" class="form-control form-select">
-                                            <option value="" ><-- Select Manger --></option>
-                                                <c:forEach items="${empList}" var="emp" varStatus="loop">
-                                                    <option value="${emp.getEmpId()}">${emp.getFirstName()} ${emp.getLastName()} </option>
-                                                </c:forEach>         
-                                        </select>
+                                        <label class="small mb-1" for="groupDesc"> Group Description</label>
+                                        <input class="form-control" id="groupDesc" type="text" placeholder="Enter Group Description" value="">
+                                        <span class="form-text small text-danger ms-2  d-none"  >Specify Group Description</span>     
                                     </tr>
                                 </table>
                             </div>
                             <!-- Save changes button-->
                             <div class="row justify-content-center mt-3 ">
                                 <button class="btn btn-primary px-3 w-auto" type="submit" id="btnSave"  >
-                                    <span id="loadingBtn"> </span> &nbsp; Save Changes &nbsp;
+                                    <span id="loadingBtn"> </span> &nbsp; Create Group&nbsp;
                                 </button>
                             </div>
                         </form>

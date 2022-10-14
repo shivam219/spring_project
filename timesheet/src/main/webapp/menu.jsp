@@ -23,13 +23,14 @@
 	<!--Font awesome icon -->
 	<script src="https://kit.fontawesome.com/70c55b67fa.js" crossorigin="anonymous"></script>
 	<link rel='icon' type='image/ico' href='images/esslogo.jpg' />
-	
+	<script src="css/sweetalert.min.js"></script>
+
 </head>
 
 <body>
 	<div class="  bg-nav-foot m-0 py-2" >
 	<!--  Nav -->
-	<nav class="navbar navbar-expand-lg bg-nav-foot">
+	<nav class="navbar navbar-expand-lg bg-nav-foot " >
 		<div class="container-fluid">
 			<a class="navbar-brand  d-lg-none d-block" href="#"> <img
 					src="images/esslogo.jpg" alt="" width="100" height="40"
@@ -53,7 +54,7 @@
 							Master </a>
 						<ul class="dropdown-menu" id="dropdown-menu">
 							<li><a class="dropdown-item" href="#">Project</a></li>
-							<li><a class="dropdown-item" href="#">Employee</a></li>
+							<li><a class="dropdown-item" href="employee-master">Employee</a></li>
 							<li><a class="dropdown-item" href="#">Year Master</a></li>
 							<li><a class="dropdown-item" href="#">Holiday Master</a></li>
 						</ul>
@@ -106,15 +107,15 @@
 							data-bs-toggle="dropdown" aria-expanded="false">
 							Admin </a>
 						<ul class="dropdown-menu" id="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Group Master</a></li>
 							<li><a class="dropdown-item" href="#">Program Master</a></li>
 							<li><a class="dropdown-item" href="projectmap">Project Mapping</a></li>
 							<li><a class="dropdown-item" href="#">Program Wise
-									Master</a></li>
-							<li><a class="dropdown-item" href="project-dashboard">Project Dashboard</a></li>
-							<li><a class="dropdown-item" href="customer-dashboard">Customer Dashboard</a></li>		
-							<li><a class="dropdown-item" href="change-password">Change Password </a></li>
-							<li><a class="dropdown-item" href="user-master">User Details Master</a></li>
+								Master</a></li>
+								<li><a class="dropdown-item" href="project-dashboard">Project Dashboard</a></li>
+								<li><a class="dropdown-item" href="customer-dashboard">Customer Dashboard</a></li>		
+								<li><a class="dropdown-item" href="change-password">Change Password </a></li>
+								<li><a class="dropdown-item" href="user-master">User Details Master</a></li>
+								<li><a class="dropdown-item" href="user-group-master">User Group Master</a></li>
 						</ul>
 					</li>
 					<li class="nav-item  me-2"><a class="nav-link active" aria-current="page" href="logout">Logout</a>

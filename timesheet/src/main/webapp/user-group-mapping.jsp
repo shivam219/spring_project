@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Create User  </title>
+    <title>User Group Mapping  </title>
 </head>
 <style>
 body{
@@ -71,7 +71,7 @@ body{
             <div class="col col-xl-12">
                 <!-- Edit User Details card-->
                 <div class="card mb-4">
-                    <div class="card-header text-center">Create User</div>
+                    <div class="card-header text-center"> User Group Mapping</div>
                     <div class="card-body">
                         <form method="post" action="EditUser" id="EditUserForm"  >
                             <div class="row gx-3 mb-3 justify-content-center">
@@ -88,27 +88,14 @@ body{
                                     </tr>
                                     <tr>
                                         <label class="small mb-1" for="empId">Employee Id</label>
-                                        <input class="form-control" id="empId" type="text" placeholder="Choose Name" value="${emp.getMiddleName()}" readonly>
+                                        <input class="form-control" id="empId" type="text" placeholder="Choose Employee Name" value="${emp.getMiddleName()}" readonly>
                                     </tr>
                                     <tr>
-                                        <label class="small mb-1" for="middleName"> User Password</label>
-                                        <input class="form-control" id="middleName" type="text" placeholder="Enter User Password" value="${emp.getMiddleName()}">
-                                        <span class="form-text small text-danger ms-2  d-none"  >Specify User Password</span>     
-                                    </tr>
-                                    <tr>
-                                        <label class="small mb-1" for="active">Status</label>
+                                        <label class="small mb-1" for="active"> User Designation</label>
                                         <select name="active" id="active" class="form-control form-select">
-                                                <option value="" ><-- Select Status --></option>
-                                                <option value="1" >Active</option>
-                                                <option value="0">In-Active</option>
-                                        </select>
-                                    </tr>
-                                    <tr>
-                                        <label class="small mb-1" for="active">Reporting Manger</label>
-                                        <select name="active" id="active" class="form-control form-select">
-                                            <option value="" ><-- Select Manger --></option>
-                                                <c:forEach items="${empList}" var="emp" varStatus="loop">
-                                                    <option value="${emp.getEmpId()}">${emp.getFirstName()} ${emp.getLastName()} </option>
+                                            <option value="" ><-- Select Designation --></option>
+                                                <c:forEach items="${userGroupList}" var="group" varStatus="loop">
+                                                    <option value="${group.getUgrpCode()}">${group.getUgrpDesc()}</option>
                                                 </c:forEach>         
                                         </select>
                                     </tr>
@@ -117,7 +104,7 @@ body{
                             <!-- Save changes button-->
                             <div class="row justify-content-center mt-3 ">
                                 <button class="btn btn-primary px-3 w-auto" type="submit" id="btnSave"  >
-                                    <span id="loadingBtn"> </span> &nbsp; Save Changes &nbsp;
+                                    <span id="loadingBtn"> </span> &nbsp; Assign Designation &nbsp;
                                 </button>
                             </div>
                         </form>

@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +16,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.timesheet.model.Employee;
+import com.timesheet.model.User;
+import com.timesheet.model.UserGroup;
 import com.timesheet.repository.EmployeeRepository;
+import com.timesheet.repository.UserGroupRepository;
+import com.timesheet.repository.UserRepository;
 
 @Controller
 public class UserMaster {
 
 	@Autowired
 	EmployeeRepository er;
+	@Autowired
+	UserGroupRepository uGR;
+	@Autowired
+	UserRepository uR;
 
+	
 	@GetMapping(value = "/change-password")
 	public String getMethodName() {
 		return "change-password";
@@ -49,10 +57,9 @@ public class UserMaster {
 
 	@GetMapping(value = "/user-master")
 	public String userMaster(Model m) {
-		List<Employee> empList = (List<Employee>) er.findAll();
-//		Collections.sort(empList
-		empList.sort((o1, o2) -> o1.getFirstName().compareTo(o2.getFirstName()));
-		m.addAttribute("empList", empList);
+		List<User> userList = (List<User>) uR.findAll(); 
+		userList.sort((o1, o2) -> o1.getEmpId().compareTo(o2.getEmpId()));
+		m.addAttribute("userList", userList);
 		return "user-master";
 	}
 
@@ -71,16 +78,18 @@ public class UserMaster {
 	}
 
 	@GetMapping(value = "/user-master-add")
-	public String userMasterAdd() {
+	public String userMasterAdd(Model m) {
+		m.addAttribute("userGroupList", ((List<UserGroup>) uGR.findAll()));
+		m.addAttribute("empList", (List<Employee>) er.findAll());
 		return "user-master-add";
 	}
 
-	@PostMapping(value = "/add-user")
-	public String addUser(@RequestBody Employee emp) {
-		System.out.println(emp);
-		  System.out.println(emp = er.save(emp));
-		er.updateEmployeePassword(emp.getEmpId(), emp.getEmpPassword());
-		return "user-master-add";
-	}
+//	@PostMapping(value = "/add-user")
+//	public String addUser(@RequestBody Employee emp) {
+//		System.out.println(emp);
+//		  System.out.println(emp = er.save(emp));
+//		er.updateEmployeePassword(emp.getEmpId(), emp.getEmpPassword());
+//		return "user-master-add";
+//	}
 
 }

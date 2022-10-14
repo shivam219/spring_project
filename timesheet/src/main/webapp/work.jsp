@@ -1,4 +1,4 @@
-<%@ include file="menu2.jsp" %>
+<%@ include file="menu.jsp" %>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map.*"%>
 <%@page import="java.util.Arrays"%> 

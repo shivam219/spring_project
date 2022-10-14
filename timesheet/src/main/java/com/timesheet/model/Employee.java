@@ -61,16 +61,27 @@ public class Employee {
 
 	@Column(name = "date_of_resign")
 	private String dateOfResign;
+	
+	@Column(name = "created_by")
+	private String createdBy;
+	
+	@Column(name = "created_time")
+	private String createdTime;
+	
+	@Column(name = "modified_by")
+	private String modifiedBy;
+	
+	@Column(name = "modified_time")
+	private String modifiedTime;
 
 	public Employee() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Employee(long empId, String empPassword, String firstName, String middleName,
-			String lastName, String empEmail, String empPhone, String empCity, String empPincode, String empAddress,
-			String birthDate, String active, String mangerId, String gender, String state, String dateOfJoin,
-			String dateOfResign) {
+	public Employee(long empId, String empPassword, String firstName, String middleName, String lastName,
+			String empEmail, String empPhone, String empCity, String empPincode, String empAddress, String birthDate,
+			String active, String mangerId, String gender, String state, String dateOfJoin, String dateOfResign,
+			String createdBy, String createdTime, String modifiedBy, String modifiedTime) {
 		super();
 		this.empId = empId;
 		this.empPassword = empPassword;
@@ -89,6 +100,10 @@ public class Employee {
 		this.state = state;
 		this.dateOfJoin = dateOfJoin;
 		this.dateOfResign = dateOfResign;
+		this.createdBy = createdBy;
+		this.createdTime = createdTime;
+		this.modifiedBy = modifiedBy;
+		this.modifiedTime = modifiedTime;
 	}
 
 	public long getEmpId() {
@@ -227,14 +242,47 @@ public class Employee {
 		this.dateOfResign = dateOfResign;
 	}
 
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getCreatedTime() {
+		return createdTime;
+	}
+
+	public void setCreatedTime(String createdTime) {
+		this.createdTime = createdTime;
+	}
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	public String getModifiedTime() {
+		return modifiedTime;
+	}
+
+	public void setModifiedTime(String modifiedTime) {
+		this.modifiedTime = modifiedTime;
+	}
+
 	@Override
 	public String toString() {
-		return "Employee [empId=" + empId + ", empPassword=" + empPassword + ", firstName="
-				+ firstName + ", middleName=" + middleName + ", lastName=" + lastName + ", empEmail=" + empEmail
-				+ ", empPhone=" + empPhone + ", empCity=" + empCity + ", empPincode=" + empPincode + ", empAddress="
-				+ empAddress + ", birthDate=" + birthDate + ", active=" + active + ", mangerId=" + mangerId
-				+ ", gender=" + gender + ", state=" + state + ", dateOfJoin=" + dateOfJoin + ", dateOfResign="
-				+ dateOfResign + "]";
+		return "Employee [empId=" + empId + ", empPassword=" + empPassword + ", firstName=" + firstName
+				+ ", middleName=" + middleName + ", lastName=" + lastName + ", empEmail=" + empEmail + ", empPhone="
+				+ empPhone + ", empCity=" + empCity + ", empPincode=" + empPincode + ", empAddress=" + empAddress
+				+ ", birthDate=" + birthDate + ", active=" + active + ", mangerId=" + mangerId + ", gender=" + gender
+				+ ", state=" + state + ", dateOfJoin=" + dateOfJoin + ", dateOfResign=" + dateOfResign + ", createdBy="
+				+ createdBy + ", createdTime=" + createdTime + ", modifiedBy=" + modifiedBy + ", modifiedTime="
+				+ modifiedTime + "]";
 	}
 
 }

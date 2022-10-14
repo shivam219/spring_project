@@ -9,13 +9,14 @@
 table {
     table-layout: fixed;
 }
-  body{
+table tr td p {
+            overflow: hidden;
+       }
+body{
 background-color:#eee;
-/* background-color:#f2f6fc; */
 }
 .project-list-table {
     border-collapse: separate;
-    /* border-spacing: 0 12px */
 }
 
 .project-list-table tr {
@@ -86,7 +87,16 @@ a {
 .bg-soft-primary {
     background-color: rgba(59,118,225,.25)!important;
 }
+
 @media only screen and (max-width: 600px) {
+    td {
+        font-size:  x-small;
+    }
+}
+ 
+
+
+@media only screen and (max-width: 900px) {
     td {
         font-size:  x-small;
     }
@@ -103,53 +113,46 @@ a {
         <div class="row align-items-center mt-3">
             <div class="col-md-6">
                 <div>
-                    <h5 class="card-title ms-2">No of User <span class="text-muted fw-normal ms-1">(${userList.size()})</span></h5>
+                    <h5 class="card-title ms-2">Employee List <span class="text-muted fw-normal ms-3">(${empList.size()})</span></h5>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 me-2 mb-1 ">    
+                <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 ">    
                     <div>
-                        <a href="user-master-add" data-bs-target=".add-new" onclick="this.blur()" class="btn btn-primary"><i class="bx bx-plus me-1"></i> Create User</a>
+                        <a href="employee-add" data-bs-target=".add-new" onclick="this.blur()" class="btn btn-primary me-1 mb-1"><i class="bx bx-plus me-1"></i> Add New</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <div class="">
+                <!-- <div class=""> -->
                     <div class="table-responsive">
                         <table class="table project-list-table table-nowrap align-middle table-borderless">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="overflow-auto">Name</th>
-                                    <th scope="col" class="overflow-auto">Position</th>
-                                    <th scope="col" class="overflow-auto">Manager</th>
-                                    <th scope="col" class="overflow-auto">Action</th>
+                                    <th scope="col" class="overflow-auto" >Employee ID</th>
+                                    <th scope="col" class="overflow-auto" >Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col" class="overflow-auto" >Position</th>
+                                    <th scope="col" class="overflow-auto" >Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${userList}" var="emp" varStatus="loop">
+                                <c:forEach items="${empList}" var="emp" varStatus="loop">
                                     <tr>
-                                        <td class="overflow-auto"><a href="/user-master-edit?empId=${emp.getEmpId()}" class="text-body overflow-auto">${emp.getEmpId()} </a></td>
-                                        <td class="overflow-auto"><span class="badge badge-soft-success mb-0">Full Stack Developer</span></td>
-                                        <td class="overflow-auto">Vigneswari Mam</td>
-                                        <td class="overflow-auto">
+                                        <td  class="overflow-auto">${emp.getEmpId()}</td>
+                                        <td  class="overflow-auto" ><a href="/employee-edit?empId=${emp.getEmpId()}" class="text-body">${emp.getFirstName()} ${emp.getLastName()}</a></td>
+                                        <td>${emp.getEmpEmail()}</td>
+                                        <td  class="overflow-auto" ><span class="badge badge-soft-success mb-0">Full Stack Developer</span></td>
+                                        <td  class="overflow-auto" >
                                             <ul class="list-inline mb-0">
-                                                <li class="list-inline-item">
-                                                    <a href="/user-master-edit?empId=${emp.getEmpId()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
-                                                </li>  
+                                                    <a href="/employee-edit?empId=${emp.getEmpId()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
                                                 <c:if test='${emp.getActive().equals("1")}'>
-                                                    <li class="list-inline-item">
                                                         <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Active" class="px-2 text-success">  <i class="fa-solid fa-circle"> </i>  </a>
-                                                    </li>
                                                 </c:if>
                                                 <c:if test='${!emp.getActive().equals("1")}'>
-                                                    <li class="list-inline-item">
                                                         <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="In-Active" class="px-2 text-danger">  <i class="fa-solid fa-circle"> </i>  </a>
-                                                    </li>
                                                 </c:if>                                           
                                             </ul>
                                         </td>
@@ -160,7 +163,7 @@ a {
                             </tbody>
                         </table>
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
         </div>
         <!-- hide need add from backend -->
@@ -190,3 +193,5 @@ a {
 </body>
 
 </html>
+ 
+
