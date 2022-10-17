@@ -2,6 +2,9 @@ package com.timesheet.repository;
 
 import javax.transaction.Transactional;
 
+//import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -33,4 +36,9 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 	@Query(value = "SELECT emp_email FROM ess_employee where emp_id =:empId", nativeQuery = true)
 	public String getEmailById(@Param("empId") Long empId);
 
+
+	@Query(value="SELECT * FROM ess.ess_employee order by first_name" ,nativeQuery =  true)
+	public Page<Employee> findEmployee(Pageable pageable);
+
+	
 }

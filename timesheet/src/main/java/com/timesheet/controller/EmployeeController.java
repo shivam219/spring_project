@@ -6,6 +6,9 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.timesheet.model.Employee;
@@ -23,14 +27,28 @@ public class EmployeeController {
 	@Autowired
 	EmployeeRepository er;
 
-	@GetMapping(value = "/employee-master")
-	public String getEmployeeMaster(Model m) {
-		List<Employee> empList = (List<Employee>) er.findAll();
-		empList.sort((o1, o2) -> o1.getFirstName().compareTo(o2.getFirstName()));
+//	per page 5[n]
+//	current page 
+
+	@GetMapping("employee-master")
+	public String getEmployeeMaster(@RequestParam(value= "page",required = false ) Integer page, Model m  ) {
+		if(page==null) {
+			page=1;
+		}
+		if(page<=0)
+			page=1;
+		page =page-1;
+		Pageable pageable = PageRequest.of(page, 4);
+		Page<Employee> empListp = (Page<Employee>) er.findEmployee(pageable);
+		List<Employee> empList = empListp.getContent();
+//		empList.sort((o1, o2) -> o1.getFirstName().compareTo(o2.getFirstName()));
 		m.addAttribute("empList", empList);
+		m.addAttribute("empListSize", empListp.getTotalElements());
+		m.addAttribute("currentPage", page+1);
+		m.addAttribute("totalPages", (empListp.getTotalPages())); 
 		return "employee-master";
 	}
-
+	
 	@GetMapping(value = "/employee-add")
 	public String userMasterAdd() {
 		return "employee-add";
@@ -45,19 +63,19 @@ public class EmployeeController {
 	}
 
 	@PostMapping(value = "/employee-edit-process")
-	public ResponseEntity<Object> getEmployeeEditP(@RequestBody Employee emp, HttpServletRequest request) {		
+	public ResponseEntity<Object> getEmployeeEditP(@RequestBody Employee emp, HttpServletRequest request) {
 		Employee empOld = er.findById(emp.getEmpId()).get();
 		emp.setCreatedBy(empOld.getCreatedBy());
 		emp.setCreatedTime(empOld.getCreatedTime());
 		emp.setModifiedBy(request.getSession().getAttribute("empId").toString());
-		er.save(emp);	
+		er.save(emp);
 		er.updateEmployeePassword(emp.getEmpId(), emp.getEmpPassword());
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Employee is updated successfully");
 	}
 
 	@PostMapping(value = "/employee-add-process")
 	public ResponseEntity<Object> addUser(@RequestBody Employee emp, HttpServletRequest request) {
-		emp.setCreatedBy( request.getSession().getAttribute("empId").toString());
+		emp.setCreatedBy(request.getSession().getAttribute("empId").toString());
 		emp = er.save(emp);
 		er.updateEmployeePassword(emp.getEmpId(), emp.getEmpPassword());
 		return ResponseEntity.status(HttpStatus.CREATED).body("User Create successfully");

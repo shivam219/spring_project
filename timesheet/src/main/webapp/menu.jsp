@@ -49,12 +49,14 @@
 
 						</a></li>
 
+						<li class="nav-item  me-2"><a class="nav-link active" aria-current="page" href="home.jsp">Home</a>
+						</li>
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="dropdown-menu" role="button"
 							data-bs-toggle="dropdown" aria-expanded="false">
 							Master </a>
 						<ul class="dropdown-menu" id="dropdown-menu">
 							<li><a class="dropdown-item" href="#">Project</a></li>
-							<li><a class="dropdown-item" href="employee-master">Employee</a></li>
+							<li><a class="dropdown-item" href="employee-master?page=1">Employee</a></li>
 							<li><a class="dropdown-item" href="#">Year Master</a></li>
 							<li><a class="dropdown-item" href="#">Holiday Master</a></li>
 						</ul>
@@ -75,9 +77,9 @@
 							data-bs-toggle="dropdown" aria-expanded="false">
 							Leave Application </a>
 						<ul class="dropdown-menu" id="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Apply Leave</a></li>
-							<li><a class="dropdown-item" href="#">Approve Leave</a></li>
-							<li><a class="dropdown-item" href="#">Cancel Leave</a></li>
+							<li><a class="dropdown-item" href="apply-leave">Apply Leave</a></li>
+							<li><a class="dropdown-item" href="approve-leave">Approve Leave</a></li>
+							<li><a class="dropdown-item" href="cancle-leave">Cancel Leave</a></li>
 						</ul>
 					</li>
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="dropdown-menu" role="button"
@@ -88,6 +90,8 @@
 									Backup</a></li>
 							<li><a class="dropdown-item" href="#">Month Wise Summary
 									Reports</a></li>
+							<li><a class="dropdown-item" href="leave-report">Monthly Leave Reports
+							</a></li>
 							<li><a class="dropdown-item" href="#">Check Approve
 									Status</a></li>
 							<li><a class="dropdown-item" href="#">Project Summary

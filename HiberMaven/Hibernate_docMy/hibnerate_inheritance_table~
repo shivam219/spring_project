@@ -1,0 +1,22 @@
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+		name = "VEHICLE_TYPE",
+		discriminatorType = DiscriminatorType.STRING
+)
+class Vehicle{
+
+	int vehicleId;
+	String vehicleName;
+}
+
+
+@Entity
+@DiscriminatorValue("car")
+class twoWheeler{
+	String SteeringWheel;
+}
+class twoWheeler{
+	String SteeringWheel;
+}
+

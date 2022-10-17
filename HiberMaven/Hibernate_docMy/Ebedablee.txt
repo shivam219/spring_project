@@ -1,0 +1,43 @@
+class user {
+	@Id
+	int id;
+	@Embedd
+	Address addrss;
+	
+}
+
+@Embeddeble
+class Address{
+	String pincode;
+	String city;	
+}
+
+
+Table :
+id pincode city
+
+--want to change name for column
+class user {
+	@Id
+	int id;
+	@Embedded
+	@AttributeOverrides({
+		@AttributeOverride(name = "office", column = @Column(name="office_pincode"))
+		@AttributeOverride(name = "office", column = @Column(name="office_city"))
+	})
+	Address officeAddress;
+	@Embedd
+	@AttributeOverrides({
+		@AttributeOverride(name = "home", column = @Column(name="home_pincode"))
+		@AttributeOverride(name = "home", column = @Column(name="home_city"))
+	})
+	Address homeAddress;
+}
+
+@Embeddeble
+class Address{
+	String pincode;
+	String city;	
+}
+
+

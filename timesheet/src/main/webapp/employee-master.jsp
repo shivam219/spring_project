@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>User Master </title>
+    <title>Employee Details </title>
 </head>
 <style>
 table {
@@ -113,7 +113,7 @@ a {
         <div class="row align-items-center mt-3">
             <div class="col-md-6">
                 <div>
-                    <h5 class="card-title ms-2">Employee List <span class="text-muted fw-normal ms-3">(${empList.size()})</span></h5>
+                    <h5 class="card-title ms-2">Employee List <span class="text-muted fw-normal ms-3">(${empListSize})</span></h5>
                 </div>
             </div>
             <div class="col-md-6">
@@ -167,23 +167,22 @@ a {
             </div>
         </div>
         <!-- hide need add from backend -->
-        <div class="row g-0 align-items-center pb-4 d-none">
+        <!-- align-items-center vertical center -->
+        <div class="row g-0 align-items-center pb-4">
             <div class="col-sm-6">
-                <div><p class="mb-sm-0">Showing 1 to 10 of 57 entries</p></div>
+                <div><p class="mb-sm-0">Showing ${currentPage} to ${totalPages} of (${empListSize}) entries</p></div>
             </div>
             <div class="col-sm-6">
                 <div class="float-sm-end">
                     <ul class="pagination mb-sm-0">
-                        <li class="page-item disabled">
-                            <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+                        <li class="page-item  <c:if test='${currentPage eq 1 }'> disabled</c:if> ">
+                            <a href="employee-master?page=${currentPage-1}" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
                         </li>
-                        <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                        <li class="page-item">
-                            <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+                        <c:forEach var = "i" begin = "1" end = "${totalPages}"> 
+                            <li class="page-item <c:if test='${currentPage eq i }'>active</c:if>" ><a href ="employee-master?page=${i}"  class="page-link">${i}</a></li>
+                         </c:forEach>
+                        <li class="page-item  <c:if test='${currentPage eq totalPages }'> disabled</c:if> ">
+                            <a href="employee-master?page=${currentPage+1}" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
                         </li>
                     </ul>
                 </div>

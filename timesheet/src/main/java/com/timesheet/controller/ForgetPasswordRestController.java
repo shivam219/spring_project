@@ -34,7 +34,6 @@ public class ForgetPasswordRestController {
 		String msg = "OTP : " + otp;
 		String subject = "Forget Password email";
 		workService.sendEmail(to, msg, subject);
-		try {Thread.sleep(1000);} catch (Exception e) {}
 		return otp;
 	}
 

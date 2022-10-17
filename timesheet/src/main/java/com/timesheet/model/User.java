@@ -3,7 +3,6 @@ package com.timesheet.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "ess_user_master")
@@ -13,18 +12,18 @@ public class User {
 	Long empId;
 	String password;
 	String active;
-	String manager;
+	String managerId;
 
 	public User() {
 		super();
 	}
 
-	public User(Long empId, String password, String active, String manager) {
+	public User(Long empId, String password, String active, String managerId) {
 		super();
 		this.empId = empId;
 		this.password = password;
 		this.active = active;
-		this.manager = manager;
+		this.managerId = managerId;
 	}
 
 	public Long getEmpId() {
@@ -51,17 +50,18 @@ public class User {
 		this.active = active;
 	}
 
-	public String getManager() {
-		return manager;
+	public String getManagerId() {
+		return managerId;
 	}
 
-	public void setManager(String manager) {
-		this.manager = manager;
+	public void setManagerId(String managerId) {
+		this.managerId = managerId;
 	}
 
 	@Override
 	public String toString() {
-		return "User [empId=" + empId + ", password=" + password + ", active=" + active + ", manager=" + manager + "]";
+		return "User [empId=" + empId + ", password=" + password + ", active=" + active + ", managerId=" + managerId
+				+ "]";
 	}
 
 }

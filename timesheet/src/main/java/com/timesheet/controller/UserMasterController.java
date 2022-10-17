@@ -23,7 +23,7 @@ import com.timesheet.repository.UserGroupRepository;
 import com.timesheet.repository.UserRepository;
 
 @Controller
-public class UserMaster {
+public class UserMasterController {
 
 	@Autowired
 	EmployeeRepository er;
@@ -32,7 +32,6 @@ public class UserMaster {
 	@Autowired
 	UserRepository uR;
 
-	
 	@GetMapping(value = "/change-password")
 	public String getMethodName() {
 		return "change-password";
@@ -57,39 +56,48 @@ public class UserMaster {
 
 	@GetMapping(value = "/user-master")
 	public String userMaster(Model m) {
-		List<User> userList = (List<User>) uR.findAll(); 
+		List<User> userList = (List<User>) uR.findAll();
 		userList.sort((o1, o2) -> o1.getEmpId().compareTo(o2.getEmpId()));
 		m.addAttribute("userList", userList);
 		return "user-master";
 	}
 
 	@GetMapping(value = "/user-master-edit")
-	public String userMmasterEdit(Model m, @RequestParam("empId") Long empId) {
-		Optional<Employee> em = er.findById(empId);
-		Employee emp = em.get();
-		m.addAttribute("emp", emp);
+	public String getUserMasterEdit(Model m, @RequestParam("empId") Long empId) {
+		Optional<User> em = uR.findById(empId);
+		if (em.isEmpty() ) {
+			List<User> userList = (List<User>) uR.findAll();
+			userList.sort((o1, o2) -> o1.getEmpId().compareTo(o2.getEmpId()));
+			m.addAttribute("userList", userList);
+			return "redirect:user-master";
+		}
+		User emp = em.get();
+		m.addAttribute("empId", empId);
+		m.addAttribute("managerId", emp.getManagerId());
+		m.addAttribute("password", emp.getPassword());
+		m.addAttribute("active", emp.getActive());
+		m.addAttribute("userGroupList", ((List<UserGroup>) uGR.findAll()));
+		m.addAttribute("empList", (List<Employee>) er.findAll());
 		return "user-master-edit";
 	}
 
-	@PostMapping(value = "edit-user-process")
-	public ResponseEntity<Object> loginPost(Model m, @RequestBody Employee emp) {
-		er.updateEmployeePassword(1, emp.getEmpPassword());
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(er.save(emp));
+	@PostMapping(value = "user-master-edit-process")
+	public ResponseEntity<Object> getuserMasterEditProcess(Model m, @RequestBody User user) {
+		uR.save(user);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body("");
 	}
 
 	@GetMapping(value = "/user-master-add")
-	public String userMasterAdd(Model m) {
+	public String getUserMasterAdd(Model m) {
 		m.addAttribute("userGroupList", ((List<UserGroup>) uGR.findAll()));
 		m.addAttribute("empList", (List<Employee>) er.findAll());
 		return "user-master-add";
 	}
 
-//	@PostMapping(value = "/add-user")
-//	public String addUser(@RequestBody Employee emp) {
-//		System.out.println(emp);
-//		  System.out.println(emp = er.save(emp));
-//		er.updateEmployeePassword(emp.getEmpId(), emp.getEmpPassword());
-//		return "user-master-add";
-//	}
+	@PostMapping(value = "/user-master-add-process")
+	public ResponseEntity<Object> addUser(@RequestBody User user) {
+		System.out.println(user);
+		return ResponseEntity.status(HttpStatus.CREATED).body(uR.save(user));
+	}
 
 }

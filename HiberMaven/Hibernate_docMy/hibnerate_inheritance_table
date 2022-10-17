@@ -1,0 +1,31 @@
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+		name = "VEHICLE_TYPE",
+		discriminatorType = DiscriminatorType.STRING
+)
+class Vehicle{
+
+	int vehicleId;
+	String vehicleName;
+}
+
+
+@Entity
+@DiscriminatorValue("car")
+class twoWheeler{
+	String SteeringWheel;
+}
+class twoWheeler{
+	String SteeringWheel;
+}
+
+
+/// here 3 column that one extra column with now data
+
+use this on child enity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
+
+use this on child enity
+@Inheritance(strategy = InheritanceType.JOIN_TABLE)

@@ -274,6 +274,22 @@ body{
         </div>
     </div>
     <script>
+        console.log(document.baseURI);
+        console.log(location.host);//localhost:8080
+        console.log(location.hostname); //hostname
+        console.log(location.href);//http://localhost:8080/employee-edit?empId=10
+        console.log(location.origin);//http://localhost:8080
+        console.log(location.pathname);// /employee-edit
+        console.log(location.port);// 8080
+        console.log(location.protocol);// http
+        console.log(location.search);// ?empId=10
+        console.log(location);// ?empId=10
+        console.log(history);
+        console.log(screen);
+        console.log(document.referrer);
+        console.log(document.referrer.replace(location.origin,''));
+                    
+                     
     function isValid() {
         let flag = true;
         if(!($("#empId").val())){
@@ -380,7 +396,9 @@ body{
                     }).
                     then(function (isOkay) {
                         if (isOkay) {
-                            location.replace('/employee-master');
+                            // console.log(document.referrer.replace(location.origin,''));
+                            // http://localhost:8080/employee-master?page=2
+                            location.replace(document.referrer.replace(location.origin,''));
                         }
                     });
                     console.log(data);
