@@ -1,5 +1,7 @@
 package com.timesheet.repository;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 //import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
@@ -39,6 +41,12 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
 	@Query(value="SELECT * FROM ess.ess_employee order by first_name" ,nativeQuery =  true)
 	public Page<Employee> findEmployee(Pageable pageable);
+
+
+	@Query(value="\n"
+			+ "select * from  ess_employee  where emp_id in  (select emp_id from  ess_user_master where emp_id not in (SELECT emp_id FROM ess.ess_user_group_mapping))" ,nativeQuery =  true)
+	public List<Employee> findEmployeeNotHavingGroup();
+
 
 	
 }

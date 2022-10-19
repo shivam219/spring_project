@@ -27,7 +27,6 @@ public class LoginController {
 
 	@PostMapping("/loginprocess")
 	public ResponseEntity<Object> loginPost(HttpServletRequest request, Model m, @RequestBody Employee emp) {
-
 		if (employeeService.isValidEmployee(emp) != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("empId", emp.getEmpId());
@@ -63,10 +62,5 @@ public class LoginController {
 			return "redirect:login";
 		}
 		return "home";
-	}
-
-	@GetMapping(value = "/error")
-	public String error() {
-		return "login";
 	}
 }

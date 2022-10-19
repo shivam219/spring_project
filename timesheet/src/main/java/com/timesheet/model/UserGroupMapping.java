@@ -1,6 +1,5 @@
 package com.timesheet.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,39 +7,49 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ess_user_group_master")
-public class UserGroup {
+@Table(name = "ess_user_group_mapping")
+public class UserGroupMapping {
 
-//	sequence and auto are same for mysql a
-//	strategy = GenerationType.TABLE will be have particular table id
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	@Column(name = "UGRP_CODE")
+	Integer id;
+	Long empId;
 	int ugrpCode;
-	@Column(name = "UGRP_DESC")
-	String ugrpDesc;
-	@Column(name = "CREATED_BY")
 	String createdBy;
-	@Column(name = "CREATED_TIME")
 	String createdTime;
-	@Column(name = "MODIFIED_BY")
 	String modifiedBy;
-	@Column(name = "MODIFIED_TIME")
 	String modifiedTime;
 
-	public UserGroup() {
+	public UserGroupMapping() {
 		super();
 	}
 
-	public UserGroup(int ugrpCode, String ugrpDesc, String createdBy, String createdTime, String modifiedBy,
-			String modifiedTime) {
+	public UserGroupMapping(Integer id, Long empId, int ugrpCode, String createdBy, String createdTime,
+			String modifiedBy, String modifiedTime) {
 		super();
+		this.id = id;
+		this.empId = empId;
 		this.ugrpCode = ugrpCode;
-		this.ugrpDesc = ugrpDesc;
 		this.createdBy = createdBy;
 		this.createdTime = createdTime;
 		this.modifiedBy = modifiedBy;
 		this.modifiedTime = modifiedTime;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Long getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(Long empId) {
+		this.empId = empId;
 	}
 
 	public int getUgrpCode() {
@@ -49,14 +58,6 @@ public class UserGroup {
 
 	public void setUgrpCode(int ugrpCode) {
 		this.ugrpCode = ugrpCode;
-	}
-
-	public String getUgrpDesc() {
-		return ugrpDesc;
-	}
-
-	public void setUgrpDesc(String ugrpDesc) {
-		this.ugrpDesc = ugrpDesc;
 	}
 
 	public String getCreatedBy() {
@@ -93,7 +94,7 @@ public class UserGroup {
 
 	@Override
 	public String toString() {
-		return "UserGroup [ugrpCode=" + ugrpCode + ", ugrpDesc=" + ugrpDesc + ", createdBy=" + createdBy
+		return "UserGroupMapping [id=" + id + ", empId=" + empId + ", ugrpCode=" + ugrpCode + ", createdBy=" + createdBy
 				+ ", createdTime=" + createdTime + ", modifiedBy=" + modifiedBy + ", modifiedTime=" + modifiedTime
 				+ "]";
 	}

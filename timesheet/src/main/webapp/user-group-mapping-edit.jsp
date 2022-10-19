@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>User Group Create  </title>
+    <title>Edit User Group Mapping  </title>
 </head>
 <style>
 body{
@@ -71,23 +71,36 @@ body{
             <div class="col col-xl-12">
                 <!-- Edit User Details card-->
                 <div class="card mb-4">
-                    <div class="card-header text-center"> User Group Create</div>
+                    <div class="card-header text-center"> User Group Mapping Edit</div>
                     <div class="card-body">
-                        <form method="post" action="EditUser" id="EditUserForm"  >
+                        <form id="MapUserGroup"  >
                             <div class="row gx-3 mb-3 justify-content-center">
                                 <div class="col-md-4">
                                 <table>
                                     <tr>
-                                        <label class="small mb-1" for="groupDesc"> Group Description</label>
-                                        <input class="form-control" id="groupDesc" type="text" placeholder="Enter Group Description" value="">
-                                        <span class="form-text small text-danger ms-2  d-none"  >Specify Group Description</span>     
+                                        <label class="small mb-1" for="empName">Employee Name</label>
+                                        <input class="form-control" id="empName" type="text" value="${empName}" readonly>
+                                    </tr>
+                                    <tr>
+                                        <label class="small mb-1" for="empId">Employee Id</label>
+                                        <input class="form-control" id="empId" type="text" value="${empId}" readonly>
+                                        <input id="id" type="hidden" value="${id}" readonly>
+                                    </tr>
+                                    <tr>
+                                        <label class="small mb-1" for="ugrpCode"> User Designation</label>
+                                        <select name="ugrpCode" id="ugrpCode" class="form-control form-select">
+                                            <option value="" ><-- Select Designation --></option>
+                                                <c:forEach items="${userGroupList}" var="group" varStatus="loop">
+                                                    <option value="${group.getUgrpCode()}"  <c:if test="${group.getUgrpCode() eq empUgrpCode}">selected="selected"</c:if> >${group.getUgrpDesc()}</option>
+                                                </c:forEach>         
+                                        </select>
                                     </tr>
                                 </table>
                             </div>
                             <!-- Save changes button-->
                             <div class="row justify-content-center mt-3 ">
                                 <button class="btn btn-primary px-3 w-auto" type="submit" id="btnSave"  >
-                                    <span id="loadingBtn"> </span> &nbsp; Create Group&nbsp;
+                                    <span id="loadingBtn"> </span> &nbsp; Save Changes &nbsp;
                                 </button>
                             </div>
                         </form>
@@ -96,28 +109,28 @@ body{
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script>
-        function setEmployeeId(){
-            $('#empId').val($('#empName').val());
-        }
     function isValid() {
         let flag = true;
-        if(!($("#groupDesc").val())){
-            $("#groupDesc").addClass("is-invalid");
-            $("#groupDesc").siblings("span").removeClass("d-none");
+        if(!($("#ugrpCode").val())){
+            $("#ugrpCode").addClass("is-invalid");
+            $("#ugrpCode").siblings("span").removeClass("d-none");
             flag = false;
         }
         return flag;
     }
-    $("#EditUserForm").on("submit",function (event) {
+    $("#MapUserGroup").on("submit",function (event) {
         event.preventDefault();
         if(isValid()){     
             $("#loadingBtn").addClass("spinner-border spinner-border-sm"); 
-            let data = {ugrpDesc : $("#groupDesc").val()}
+            let data = {
+                id :$("#id").val() ,
+                empId :$("#empId").val() ,
+                ugrpCode:$("#ugrpCode").val()
+            }
             $.ajax({
                 type: 'POST',
-                url: 'user-group-create',
+                url: 'user-group-mapping-edit-process',
                 data:JSON.stringify(data),
                 contentType :'application/json',
                 success: function (data,msg,xh) {
@@ -125,15 +138,25 @@ body{
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                     swal({
                         title:"Success",
-                        text: "Group Created Successfully",
+                        text: "Employee Group Updated Successfully",
                         icon: "success",
                     }).
                     then(function (isOkay) {
                         if (isOkay) {
-                            location.replace('/user-group-master');
+                            location.replace('user-group-mapping-master');
                         }
                     });
                 },error : function(data,msg,xh){
+                    swal({
+                        title:"Error",
+                        text: "User is already mapped",
+                        icon: "error",
+                    }).
+                    then(function (isOkay) {
+                        if (isOkay) {
+                            // location.replace('/user-master');
+                        }
+                    });
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                 }
             }); 

@@ -37,6 +37,7 @@ public class WorkRestConctroller {
 	@GetMapping("/fetchworkjson")
 	public ResponseEntity<LinkedHashMap<List<String>, List<Work>>> fetchByDate( HttpServletRequest request,	@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) {
 		long empId = (Long) request.getSession().getAttribute("empId");
+//		long empId=1;
 		LinkedHashMap<String, List<Work>> mm = workService.getWorByStartDateEndDate(startDate, endDate, empId);
 		LinkedHashMap<List<String>, List<Work>> mm2 = new LinkedHashMap<>();
 		for (Map.Entry<String, List<Work>> entry : mm.entrySet()) {

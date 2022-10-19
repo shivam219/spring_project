@@ -1,4 +1,6 @@
 <%@ include file="menu.jsp" %>
+
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c-rt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -117,23 +119,19 @@ a {
             <div class="col-md-8 col-lg-6">
                 <div class="d-flex flex-wrap align-items-center justify-content-md-end w-auto mb-2 me-2">    
                     <div>
-                        <a href="user-group-add" data-bs-target=".add-new" onclick="this.blur()" class="btn btn-primary w-auto d-inline "><i class="bx bx-plus me-1"></i> Create Group</a>
-                        <!-- <a href="user-group-mapping" data-bs-target=".add-new" onclick="this.blur()" class="btn btn-primary w-auto d-inline"><i class="bx bx-plus me-1"></i> User Group Mapping</a> -->
+                        <a href="user-group-mapping-add" data-bs-target=".add-new" onclick="this.blur()" class="btn btn-primary w-auto d-inline"><i class="bx bx-plus me-1"></i> User Group Mapping</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <!-- <div class=""> -->
                     <div class="table-responsive">
                         <table class="table project-list-table table-nowrap align-middle table-borderless">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="overflow-auto" >Group ID</th>
-                                    <th scope="col" class="overflow-auto" >Description </th>
-                                    <th scope="col" class="overflow-auto" >Created BY</th>
-                                    <th scope="col" class="overflow-auto"  >Create Time</th>
+                                    <th scope="col" class="overflow-auto" >Employee</th>
+                                    <th scope="col" class="overflow-auto" >Position </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -141,23 +139,17 @@ a {
                                     <tr>
                                         <td  class="overflow-auto">
                                             <ul class="list-inline mb-0">
-                                                <a href="/user-group-edit?ugrpCode=${group.getUgrpCode()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>${group.getUgrpCode()}       
+                                                <a href="/user-group-mapping-edit?id=${group[0]}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>${group[1]}       
                                             </ul>      
                                         </td>
-                                        <td  class="overflow-auto" ><span class="badge badge-soft-success mb-0 fw-bold">${group.getUgrpDesc()}</span></td>
-                                        <td  class="overflow-auto" ><a href="/user-group-edit?ugrpCode=${group.getUgrpCode()}" class="text-body">${group.getCreatedBy()}</a></td>
-                                        <td  class="overflow-auto" >${group.getCreatedTime()} </td>
-                                    </tr>
+                                        <td  class="overflow-auto" ><span class="badge badge-soft-success mb-0 fw-bold">${group[2]}</span></td>
+                                       </tr>
                                    </c:forEach>
-                                   <!-- <td><span class="badge badge-soft-primary mb-0">Backend Developer</span></td> -->
-
                             </tbody>
                         </table>
                     </div>
-                <!-- </div> -->
             </div>
         </div>
-        <!-- hide need add from backend -->
         <div class="row g-0 align-items-center pb-4 d-none">
             <div class="col-sm-6">
                 <div><p class="mb-sm-0">Showing 1 to 10 of 57 entries</p></div>

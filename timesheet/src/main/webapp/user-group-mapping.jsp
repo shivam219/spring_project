@@ -73,7 +73,7 @@ body{
                 <div class="card mb-4">
                     <div class="card-header text-center"> User Group Mapping</div>
                     <div class="card-body">
-                        <form method="post" action="EditUser" id="EditUserForm"  >
+                        <form id="MapUserGroup"  >
                             <div class="row gx-3 mb-3 justify-content-center">
                                 <div class="col-md-4">
                                 <table>
@@ -91,8 +91,8 @@ body{
                                         <input class="form-control" id="empId" type="text" placeholder="Choose Employee Name" value="${emp.getMiddleName()}" readonly>
                                     </tr>
                                     <tr>
-                                        <label class="small mb-1" for="active"> User Designation</label>
-                                        <select name="active" id="active" class="form-control form-select">
+                                        <label class="small mb-1" for="ugrpCode"> User Designation</label>
+                                        <select name="ugrpCode" id="ugrpCode" class="form-control form-select">
                                             <option value="" ><-- Select Designation --></option>
                                                 <c:forEach items="${userGroupList}" var="group" varStatus="loop">
                                                     <option value="${group.getUgrpCode()}">${group.getUgrpDesc()}</option>
@@ -125,89 +125,20 @@ body{
             $("#empId").siblings("span").removeClass("d-none");
             flag = false;
         }
-        if(!($("#empPassword").val())){
-            $("#empPassword").addClass("is-invalid");
-            $("#empPassword").siblings("span").removeClass("d-none");
-            flag = false;
-        }
-        if(!($("#firstName").val())){
-            $("#firstName").addClass("is-invalid");
-            $("#firstName").siblings("span").removeClass("d-none");
-            flag = false;
-        }
-        if(!($("#middleName").val())){
-            $("#middleName").addClass("is-invalid");
-            $("#middleName").siblings("span").removeClass("d-none");
-            flag = false;
-        }
-        if(!($("#lastName").val())){
-            $("#lastName").addClass("is-invalid");
-            $("#lastName").siblings("span").removeClass("d-none");
-            flag = false;
-        }
-        if(!($("#empEmail").val())){
-            $("#empEmail").addClass("is-invalid");
-            $("#empEmail").siblings("span").removeClass("d-none");
-            flag = false;
-        }
-        if(!($("#empPhone").val())){
-            $("#empPhone").addClass("is-invalid");
-            $("#empPhone").siblings("span").removeClass("d-none");
-            flag = false;
-        }
-        if(!($("#birthDate").val())){
-            $("#birthDate").addClass("is-invalid");
-            $("#birthDate").siblings("span").removeClass("d-none");
-            flag = false;
-        }
-        if(!($("#empCity").val())){
-            $("#empCity").addClass("is-invalid");
-            $("#empCity").siblings("span").removeClass("d-none");
-            flag = false;
-        }
-        if(!($("#empPincode").val())){
-            $("#empPincode").addClass("is-invalid");
-            $("#empPincode").siblings("span").removeClass("d-none");
-            flag = false;
-        }
-        if(!($("#empAddress").val())){
-            $("#empAddress").addClass("is-invalid");
-            $("#empAddress").siblings("span").removeClass("d-none");
-            flag = false;
-        }
-        if(!($("#dateOfJoin").val())){
-            $("#dateOfJoin").addClass("is-invalid");
-            $("#dateOfJoin").siblings("span").removeClass("d-none");
-            flag = false;
-        }
+        
         return flag;
     }
-    $("#EditUserForm").on("submit",function (event) {
+    $("#MapUserGroup").on("submit",function (event) {
         event.preventDefault();
         if(isValid()){     
             $("#loadingBtn").addClass("spinner-border spinner-border-sm"); 
             let data = {
-                empId:$("#empId").val(),
-                empPassword:$("#empPassword").val(),
-                firstName:$("#firstName").val(),
-                middleName:$("#middleName").val(),
-                lastName:$("#lastName").val(),
-                empCity:$("#empCity").val(),
-                empPincode:$("#empPincode").val(),
-                empAddress:$("#empAddress").val(),
-                birthDate:$("#birthDate").val(),
-                active:$("#active").val(),
-                empEmail:$("#empEmail").val(),
-                empPhone:$("#empPhone").val(),
-                mangerId:'12323423',
-                state:$("#state").val(),
-                gender:$("#gender").val(),
-                dateOfJoin:$("#dateOfJoin").val(),
-                dateOfResign:$("#dateOfResign").val(),
+                empId :$("#empId").val() ,
+                ugrpCode:$("#ugrpCode").val()
             }
             $.ajax({
-                // type: 'POST',
-                // url: 'add-user',
+                type: 'POST',
+                url: 'user-group-add-process',
                 data:JSON.stringify(data),
                 contentType :'application/json',
                 success: function (data,msg,xh) {
@@ -215,19 +146,25 @@ body{
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                     swal({
                         title:"Success",
-                        text: "Employee Created Successfully",
+                        text: "User Mapped Successfully",
                         icon: "success",
                     }).
                     then(function (isOkay) {
                         if (isOkay) {
-                            location.replace('/user-master');
+                            location.replace('/user-group-mapping-master');
                         }
                     });
                 },error : function(data,msg,xh){
-                    // $("#empId").addClass("is-invalid");
-                    // $("#empPassword").addClass("is-invalid");
-                    // $("#empPassWar").removeClass("d-none");
-                    // $("#empIdWar").  removeClass("d-none");
+                    swal({
+                        title:"Error",
+                        text: "User is already mapped",
+                        icon: "error",
+                    }).
+                    then(function (isOkay) {
+                        if (isOkay) {
+                            // location.replace('/user-master');
+                        }
+                    });
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                 }
             }); 

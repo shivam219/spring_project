@@ -120,6 +120,7 @@
 								<li><a class="dropdown-item" href="change-password">Change Password </a></li>
 								<li><a class="dropdown-item" href="user-master">User Details Master</a></li>
 								<li><a class="dropdown-item" href="user-group-master">User Group Master</a></li>
+								<li><a class="dropdown-item" href="user-group-mapping-master">User Group Mapping</a></li>
 						</ul>
 					</li>
 					<li class="nav-item  me-2"><a class="nav-link active" aria-current="page" href="logout">Logout</a>
