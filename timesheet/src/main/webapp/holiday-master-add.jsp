@@ -70,7 +70,7 @@ body{
         <div class="row px-4 ">
             <div class="col col-xl-12">
                 <div class="card mb-4">
-                    <div class="card-header text-center">Create Holiday</div>
+                    <div class="card-header text-center">Create Holidays</div>
                     <div class="card-body">
                         <form id="EditHolidayForm"  >
                             <div class="row gx-3 mb-3 justify-content-center">

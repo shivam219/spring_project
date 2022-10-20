@@ -29,7 +29,7 @@ table {
 }
 
 body {
-	background-color: #eee;
+	background-color: #e2e2e2;
 	/* background-color:#f2f6fc; */
 }
 

@@ -13,22 +13,21 @@ body {
 .order-card {
 	color: #fff;
 }
-/* 
+
 .bg-c-blue {
-	background: linear-gradient(45deg,  #6699cc,  #6699cc); 
+
 	background: linear-gradient(45deg,  #373b44, #4286f4);
 }
 
 .bg-c-green {
 	 background: linear-gradient(45deg,   #5a2f2f,   #C70D39); 
-	background: linear-gradient(45deg,  #0a504a, #38ef7d);
 }
 
 
 .bg-c-yellow {
 	background: linear-gradient(45deg, #FFB64D, #FFB64D);
-} */
-.bg-c-blue {
+}
+/* .bg-c-blue {
     background: linear-gradient(45deg,#4099ff,#73b4ff);
 }
 
@@ -42,7 +41,7 @@ body {
 
 .bg-c-pink {
 	background: linear-gradient(45deg, #a86008, #ffba56);
-}
+} */
 
 .card {
 	border-radius: 5px;
@@ -92,12 +91,12 @@ body {
 			<div class="col-4 col-xl-4 mt-5">
 				<div class="card bg-c-blue order-card">
 					<div class="card-block" style="height: 350px; ">
-						<h6 class="text-center text-white" style="font-size: 18px;">Current Month Holidays&nbsp;<i class="bi bi-calendar"></i></h6>
+						<h6 class="text-center text-white" style="font-size: 18px;">Current Month Holidays&nbsp;<i class="fa-solid fa-calendar-days"></i></h6>
 
 						<table class=" table text-white m-0 p-0 m-0 p-0 m-0 p-0 mt-4 " style="font-size: 15px;">
 							<thead>
 								<tr>
-									<th scope="col" class="text-center">Holidays</th>
+									<th scope="col" class="text-center">Holiday's</th>
 								</tr>
 							</thead>
 						</table>
@@ -145,12 +144,12 @@ body {
 			<div class="col-4 col-xl-4 mt-5">
 				<div class="card bg-c-blue  order-card">
 					<div class="card-block" style="height: 350px;">
-						<h6 class="text-center text-white" style="font-size: 18px;">Your Leave Balance Details&nbsp;<i class="bi bi-person"></i></h6>
+						<h6 class="text-center text-white" style="font-size: 18px;">Your Leave Balance Details&nbsp;<i class="fa-solid fa-user"></i></h6>
 						<table class="table table-border text-white m-0 p-0 mt-4"
 							style="font-size: 15px;">
 							<thead>
 								<tr>
-								   <th scope="col">&nbsp;</th>
+								   <th scope="col"></th>
 									<th scope="col">Approved</th>
 									<th scope="col">Reject</th>
 									<th scope="col">Cancelled</th>
@@ -159,7 +158,7 @@ body {
 							</thead>
 							<tbody class="text-center">
 								<tr>
-									<td>Oct 2022</td>
+									<td>Oct/2022</td>
 									<td>3</td>
 									<td>2</td>
 									<td>2</td>

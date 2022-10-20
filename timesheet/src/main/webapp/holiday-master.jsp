@@ -118,7 +118,7 @@ a {
             <div class="col-lg-12">
                 <div class="">
                     <div class="table-responsive">
-                        <table class="table project-list-table table-nowrap align-middle table-borderless">
+                        <table class="table project-list-table table-nowrap align-middle table-borderless" id="tableholiday">
                             <thead>
                                 <tr>
                                     <th scope="col" class="overflow-auto">Date</th>
@@ -138,7 +138,7 @@ a {
                                                     <a href="/holiday-master-edit?hCode=${h.gethCode()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
+                                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"  class="px-2 text-danger btnDelete"><i class="bx bx-trash-alt font-size-18"></i></a>
                                                 </li>                                      
                                             </ul>
                                         </td>
@@ -151,6 +151,10 @@ a {
             </div>
         </div>
     </div>
+    <script>
+     $("#tableholiday").on('click', '.btnDelete', function () {
+     $(this).closest('tr').remove();
+    });
+    </script>
 </body>
-
 </html>
