@@ -33,17 +33,21 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 
 	@Modifying
 	@Transactional
-	@Query(value="update leave_master set status = 'Cancelled'  where leave_id = :leaveId", nativeQuery = true)
+	@Query(value = "update leave_master set status = 'Cancelled'  where leave_id = :leaveId", nativeQuery = true)
 	public int updateCancleStatus(@Param("leaveId") String leaveId);
+
+	@Query(value = "select  *  from leave_master where month(start_date) = :month and year(start_date) = :year and status in ('Approved') ", nativeQuery = true)
+	public List<Leave> getLeaveByMonthAndYear(@Param("month") String month, @Param("year") String year);
+
+	@Query(value = "SELECT count(status) FROM ess.leave_master where status='Approved' and month(start_date)=month(now())", nativeQuery = true)
+	public Integer getApprovedCountOfMonth();
+
+	@Query(value = "SELECT count(status) FROM ess.leave_master where status='Cancelled' and month(start_date)=month(now())", nativeQuery = true)
+	public Integer getCancelledCountOfMonth();
 	
-	
-	   @Query(value= "select  *  from leave_master where month(start_date) = :month and year(start_date) = :year and status in ('Approved') " , nativeQuery = true) 
-	   public List<Leave> getLeaveByMonthAndYear(@Param("month") String month, @Param("year")String year); 
-	
-	   
+	@Query(value = "SELECT count(status) FROM ess.leave_master where status='Pending' and month(start_date)=month(now())", nativeQuery = true)
+	public Integer getPendingCountOfMonth();
+
+	@Query(value = "SELECT count(status) FROM ess.leave_master where status='Rejected' and month(start_date)=month(now())", nativeQuery = true)
+	public Integer getRejectedCountOfMonth();
 }
-
-
-
-
-

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.timesheet.repository.EmployeeRepository;
 import com.timesheet.repository.HolidayRepository;
+import com.timesheet.repository.LeaveRepository;
 import com.timesheet.service.HolidayService;
 
 @Controller
@@ -30,6 +31,9 @@ public class HomeController {
 	
 	
 
+	@Autowired
+	LeaveRepository lr;
+
 	@GetMapping(value = "/home")
 	public String homePageGet(HttpServletRequest request, Model m) {
 		
@@ -43,6 +47,10 @@ public class HomeController {
 		
 		m.addAttribute("empList", er.getEmpBirthday(year, month));
 		m.addAttribute("holidayList", hr.getHolidays(year, month));
+		m.addAttribute("ac", lr.getApprovedCountOfMonth());
+		m.addAttribute("rc", lr.getRejectedCountOfMonth());
+		m.addAttribute("cc", lr.getCancelledCountOfMonth());
+		m.addAttribute("pc", lr.getPendingCountOfMonth());
 		return "home";
 	}
 

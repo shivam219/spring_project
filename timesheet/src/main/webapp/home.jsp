@@ -158,11 +158,11 @@ body {
 							</thead>
 							<tbody class="text-center">
 								<tr>
-									<td>Oct/2022</td>
-									<td>3</td>
-									<td>2</td>
-									<td>2</td>
-									<td>5</td>
+									<td id="yearmonth"></td>
+									<td>${ac}</td>
+									<td>${rc}</td>
+									<td>${cc}</td>
+									<td>${pc}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -171,5 +171,11 @@ body {
 			</div>
 		</div>
 	</div>
+	<script>
+
+		const date = new Date();
+		const month = date.toLocaleString('default', { month: 'long' });
+		$("#yearmonth").html(month);
+	</script>
 </body>
 </html>
