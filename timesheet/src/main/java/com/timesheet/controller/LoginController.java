@@ -57,14 +57,6 @@ public class LoginController {
 		return "redirect:/login";
 	}
 
-	@GetMapping(value = "/home")
-	public String homePageGet(HttpServletRequest request) {
-		if (request.getSession().getAttribute("empId") == null) {
-			return "redirect:login";
-		}
-		return "home";
-	}
-
 	@GetMapping(value = "/error")
 	public String error() {
 		return "login";

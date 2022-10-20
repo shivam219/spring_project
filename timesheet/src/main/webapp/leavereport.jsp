@@ -106,7 +106,14 @@ a {
 }
 </style>
 <body>
-	<div class="container mt-3">
+        <div class="row mt-3 ms-5">
+            <div class="col-md-6">
+                <div>
+                    <h5 class="ms-5">Monthly Leave Report<span class="text-muted fw-normal ms-1">()</span></h5>
+                </div>
+            </div>
+		</div>
+	<div class="container mt-2">
 		<div class="row text-center">
 			<div class="col">
                 <div class="form-group row mt-4 justify-content-center">

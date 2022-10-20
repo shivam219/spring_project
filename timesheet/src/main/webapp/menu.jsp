@@ -49,7 +49,7 @@
 
 						</a></li>
 
-						<li class="nav-item  me-2"><a class="nav-link active" aria-current="page" href="home.jsp">Home</a>
+						<li class="nav-item  me-2"><a class="nav-link active" aria-current="page" href="home">Home</a>
 						</li>
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="dropdown-menu" role="button"
 							data-bs-toggle="dropdown" aria-expanded="false">
@@ -57,8 +57,8 @@
 						<ul class="dropdown-menu" id="dropdown-menu">
 							<li><a class="dropdown-item" href="#">Project</a></li>
 							<li><a class="dropdown-item" href="employee-master?page=1">Employee</a></li>
-							<li><a class="dropdown-item" href="#">Year Master</a></li>
-							<li><a class="dropdown-item" href="#">Holiday Master</a></li>
+							<li><a class="dropdown-item" href="year-master">Year Master</a></li>
+							<li><a class="dropdown-item" href="holiday-master">Holiday Master</a></li>
 						</ul>
 					</li>
 
@@ -122,7 +122,7 @@
 								<li><a class="dropdown-item" href="user-group-master">User Group Master</a></li>
 						</ul>
 					</li>
-					<li class="nav-item  me-2"><a class="nav-link active" aria-current="page" href="logout">Logout</a>
+					<li class="nav-item" style="margin-left:360px;"><a class="nav-link active" aria-current="page" href="logout"><i class="fa fa-user-o"></i>&nbsp;Sandeep Kumar Gupta&nbsp;&nbsp;<i class="fa fa-sign-out"></i></a>
 					</li>
 					<li class="nav-item  me-2"><a class="nav-link active" aria-current="page" href="logout"></a></li>
 				</ul>

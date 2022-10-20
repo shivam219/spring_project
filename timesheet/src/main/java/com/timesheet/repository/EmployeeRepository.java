@@ -1,5 +1,7 @@
 package com.timesheet.repository;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 //import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
@@ -39,6 +41,10 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
 	@Query(value="SELECT * FROM ess.ess_employee order by first_name" ,nativeQuery =  true)
 	public Page<Employee> findEmployee(Pageable pageable);
+	
+	@Query(value="SELECT concat(date_format(birth_date,'%D %b' ),', ',concat(first_name,' ',middle_name,' ',last_name)) as Birthdays FROM ess_employee where month(birth_date)=month(now()) order by Birthdays ASC ;" ,nativeQuery =  true)
+	public List<Object> getEmpBirthday(@Param("year") String year, @Param("month") String month);
+	
 
 	
 }

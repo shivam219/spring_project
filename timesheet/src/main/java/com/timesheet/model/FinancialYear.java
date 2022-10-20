@@ -1,0 +1,71 @@
+package com.timesheet.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ess_financial_year")
+public class FinancialYear {
+
+	@Id
+	private int yearCode;
+
+	private String yearDesc;
+
+	private String userId;
+
+	private String date;
+
+	public FinancialYear() {
+		super();
+
+	}
+
+	public FinancialYear(int yearCode, String yearDesc, String userId, String date) {
+		super();
+		this.yearCode = yearCode;
+		this.yearDesc = yearDesc;
+		this.userId = userId;
+		this.date = date;
+	}
+
+	public int getYearCode() {
+		return yearCode;
+	}
+
+	public void setYearCode(int yearCode) {
+		this.yearCode = yearCode;
+	}
+
+	public String getYearDesc() {
+		return yearDesc;
+	}
+
+	public void setYearDesc(String yearDesc) {
+		this.yearDesc = yearDesc;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	@Override
+	public String toString() {
+		return "FinancialYear [yearCode=" + yearCode + ", yearDesc=" + yearDesc + ", userId=" + userId + ", date="
+				+ date + "]";
+	}
+
+}
