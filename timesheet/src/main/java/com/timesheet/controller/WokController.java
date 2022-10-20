@@ -34,20 +34,12 @@ public class WokController {
 
 	@GetMapping("/work")
 	public String work(Model m, HttpServletRequest request) {
-		if (request.getSession().getAttribute("empId") == null) {
-			return "redirect:/login";
-		}
 		return "work";
 	}
 
 	@GetMapping("/work-approve")
 	public String workApprove(Model m, HttpServletRequest request) {
-		if (request.getSession().getAttribute("empId") == null) {
-			return "redirect:/login";
-		}
-		System.out.println(employeeService.getAllEmployee());
 		m.addAttribute("empList", employeeService.getAllEmployee());
-
 		return "work-approve";
 	}
 
@@ -97,7 +89,7 @@ public class WokController {
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(wm.getStatus());
 	}
-
+	
 //	
 //	@GetMapping(value = "/submitWork")
 //	public ResponseEntity<Object> submitWorkReport( HttpServletRequest request, @RequestParam("startDate") String startDate,

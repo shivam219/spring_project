@@ -151,7 +151,10 @@
 			 
              border-radius:20px ;
         }
-         
+        #tbtable thead .tblcolor{
+            border-radius: 3px;
+         }
+         .op{opacity: 0.9;}
     </style>
     
     </head>
@@ -164,7 +167,7 @@
             </div>
             <div class="row align-middle  pt-2 mx-0 tblcolor rounded-top"  >
                 <div class="col fw-bold text-center align-middle">
-                    <span class="align-middle"> Time Period</span>
+                    <span class="align-middle text-gray fw-bold"> Time Period</span>
                 </div>
                 <div class="col d-flex justify-content-between  align-middle">  
                     <button class="rounded btn btn-secondary h-75 px-2 me-2"  onclick="PrevWeekReport()" id="btnPrevWeekReport" >
@@ -186,17 +189,17 @@
             </div>
             <table class="table table-striped table-hover  mb-0 mt-0 rounded " id="tbtable"  >
                 <thead>
-                    <tr class=" tblcolor  "  >
-                        <td class="text-center" >Customer</td>
-                        <td class="text-center" colspan="2">Work Items</td>
-                        <td class="text-center" id="monDate">Mon</td>
-                        <td class="text-center" id="tueDate">Tue</td>
-                        <td class="text-center" id="wedDate">Wed</td>
-                        <td class="text-center" id="thuDate">Thu</td>
-                        <td class="text-center" id="friDate">Fri</td>
-                        <td class="text-center" id="satDate">Sat</td>
-                        <td class="text-center" id="sunDate">Sun</td>
-                        <td class="text-center" id="Date">Total</td>
+                    <tr class="tblcolor"  >
+                        <td > <span class="text-center rounded bg-white text-dark p-2 op">  Customer </span></td>
+                        <td class="text-center" colspan="2"> <span class="text-center rounded bg-white text-dark p-2 px-5 op"> Work Items</span></td>
+                        <td class="" id="monDate"> <span class=" rounded bg-white text-dark p-2  op "> Mon </span> </td>
+                        <td class="" id="tueDate"> <span class=" rounded bg-white text-dark p-2  op "> Tue </span> </td>
+                        <td class="" id="wedDate"> <span class=" rounded bg-white text-dark p-2  op "> Wed </span> </td>
+                        <td class="" id="thuDate"> <span class=" rounded bg-white text-dark p-2  op "> Thu </span> </td>
+                        <td class="" id="friDate"> <span class=" rounded bg-white text-dark p-2  op "> Fri </span> </td>
+                        <td class="" id="satDate"> <span class=" rounded bg-white text-dark p-2  op "> Sat </span> </td>
+                        <td class="" id="sunDate"> <span class=" rounded bg-white text-dark p-2  op "> Sun </span> </td>
+                        <td class="text-center" id="Date">    <span class="text-center rounded bg-white text-dark p-2 op  "> Total</span> </td>
                     </tr> 
                 </thead>
                 <tbody>
@@ -263,25 +266,50 @@
                 ].join('-');
             }
             function setWeekDates() {  
-                $("#monDate").html('Mon  &nbsp; '+ new Date($("#startDate").val()).getDate());
+                let uri = '/get-week-holidays?startDate='+ $("#startDate").val()+'&endDate='+ $("#endDate").val(); 
+                let obj='';
+                $.ajax({
+                    async : false,
+                    type: 'GET',
+                    url: uri,
+                    contentType :'application/json',
+                    success: function (da) {
+                        obj= da;
+                    }
+                });
+                
+                $("#monDate span ").html('Mon &nbsp;'+ (new Date($("#startDate").val()).getDate()));
+                if(obj[0]){$("#monDate span ").removeClass("bg-white text-dark").addClass("bg-success text-white")}
+
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 1);
-                $("#tueDate").html('Tue  &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
+                $("#tueDate span ").html('Tue &nbsp;'+ (new Date((formatDate(sd))).getDate()));
+                if(obj[1]){ $("#tueDate span ").removeClass("bg-white text-dark").addClass("bg-success text-white")}
+                
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 2);
-                $("#wedDate").html('Wed   &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
+                $("#wedDate span ").html('Wed &nbsp;'+(new Date((formatDate(sd))).getDate()));
+                if(obj[2]){ $("#wedDate span ").removeClass("bg-white text-dark").addClass("bg-success text-white")}
+                
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 3);
-                $("#thuDate").html('Thu   &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
+                $("#thuDate span ").html('Thu &nbsp;'+ (new Date((formatDate(sd))).getDate()));
+                if(obj[3]){ $("#thuDate span ").removeClass("bg-white text-dark").addClass("bg-success text-white")}
+                
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 4);
-                $("#friDate").html('Fri  &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
+                $("#friDate span ").html('Fri &nbsp;' +(new Date((formatDate(sd))).getDate()));
+                if(obj[4]){ $("#friDate span ").removeClass("bg-white text-dark").addClass("bg-success text-white")}
+                
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 5);
-                $("#satDate").html('Sat   &nbsp; '+ ( new Date((formatDate(sd))).getDate()));
+                $("#satDate span ").html('Sat &nbsp;'+(new Date((formatDate(sd))).getDate()));
+                if(obj[5]){ $("#satDate span ").removeClass("bg-white text-dark").addClass("bg-success text-white")}
+                
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 6);
-                $("#sunDate").html('Sun  &nbsp;'+ ( new Date((formatDate(sd))).getDate()));
+                $("#sunDate span ").html('Sun &nbsp;'+(new Date((formatDate(sd))).getDate()));
+                if(obj[6]){ $("#sunDate span ").removeClass("bg-white text-dark").addClass("bg-success text-white")}
             }
             function PrevWeekReport(){
                 let sd = new Date($("#startDate").val());
@@ -319,12 +347,10 @@
                     $(ob).closest("tr").find("td:eq(9) input:first ").val('00');
                     $(ob).closest('tr').find('td').each(function(){
                         if(!isNaN(Number(jQuery(this).find("input:first").val()))){
-                            console.log(jQuery(this).find("input:first").val());
                             rsum=rsum+Number(jQuery(this).find("input:first").val());
                         };
                         rsum;
                     });
-                    console.log(rsum);
                     $(ob).closest("tr").find("td:eq(9) input:first ").val(rsum==0?"00":rsum);
                     calculate();
                 }
@@ -546,11 +572,8 @@
                             calRowOnLoad();
                             AddHoverToHourIn();
                             setWeekDates();
-                            /*reset horizontal total when now row found*/
                             let rowCount = $('#tbtable tr').length;
-                            if(rowCount == 2) {
-                                tblRefresh();
-                            }
+                            if(rowCount == 2) { tblRefresh();}
                         }
                     });
                 }
@@ -773,7 +796,7 @@
                 $("#endDate").val(formatDate(ed));
                 fetchwork();
             }
-
+          
             function btnSubmitWorkReport(ref){
                 if(confirm("Do you want to Submit !!!") &&  tblDataSave()!=0){
                
