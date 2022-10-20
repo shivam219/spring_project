@@ -150,7 +150,7 @@ body {
 							style="font-size: 15px;">
 							<thead>
 								<tr>
-								   <th scope="col"></th>
+								   <th scope="col">&nbsp;</th>
 									<th scope="col">Approved</th>
 									<th scope="col">Reject</th>
 									<th scope="col">Cancelled</th>

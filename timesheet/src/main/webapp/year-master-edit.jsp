@@ -79,11 +79,11 @@ body{
                                     <tr>
                                         <label class="small mb-1" for="year">Year Description</label>
                                         <input class="form-control" id="yearCode" type="text" placeholder="Edit Year" value="${year.getYearCode()}">    
+                                        <span class="form-text small text-danger ms-2  d-none">Specify Year Description</span>
                                     </tr>
                                     <tr>
                                 </table>
                             </div>
-                            <!-- Save changes button-->
                             <div class="row justify-content-center mt-3 ">
                                 <button class="btn btn-primary px-3 w-auto" type="submit" id="btnSave"  >
                                     <span id="loadingBtn"> </span> &nbsp; Save &nbsp;
@@ -97,13 +97,21 @@ body{
     </div>
     <script>
     function isValid() {
+        let flag = true;
+        if(!($("#yearCode").val())){
+            $("#yearCode").addClass("is-invalid");
+            $("#yearCode").siblings("span").removeClass("d-none");
+            flag = false;
+        }
+        return flag;
     }
     $("#EditYearForm").on("submit",function (event) {
         event.preventDefault();
         if(isValid()){     
             $("#loadingBtn").addClass("spinner-border spinner-border-sm"); 
             let data = {
-                yearCode:$("#yearCode").val()
+                yearCode:$("#yearCode").val(),
+                yearDesc:$("#yearCode").val()
             }
             $.ajax({
                 type: 'POST',
@@ -115,7 +123,7 @@ body{
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                     swal({
                         title:"Success",
-                        text: "Year Created Successfully",
+                        text: "Year Updated Successfully",
                         icon: "success",
                     }).
                     then(function (isOkay) {

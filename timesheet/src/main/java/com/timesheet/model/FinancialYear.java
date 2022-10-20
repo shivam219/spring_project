@@ -13,7 +13,7 @@ public class FinancialYear {
 
 	private String yearDesc;
 
-	private String userId;
+	private String empName;
 
 	private String date;
 
@@ -22,11 +22,11 @@ public class FinancialYear {
 
 	}
 
-	public FinancialYear(int yearCode, String yearDesc, String userId, String date) {
+	public FinancialYear(int yearCode, String yearDesc, String empName, String date) {
 		super();
 		this.yearCode = yearCode;
 		this.yearDesc = yearDesc;
-		this.userId = userId;
+		this.empName = empName;
 		this.date = date;
 	}
 
@@ -46,12 +46,12 @@ public class FinancialYear {
 		this.yearDesc = yearDesc;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getEmpName() {
+		return empName;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setEmpName(String empName) {
+		this.empName = empName;
 	}
 
 	public String getDate() {
@@ -64,7 +64,7 @@ public class FinancialYear {
 
 	@Override
 	public String toString() {
-		return "FinancialYear [yearCode=" + yearCode + ", yearDesc=" + yearDesc + ", userId=" + userId + ", date="
+		return "FinancialYear [yearCode=" + yearCode + ", yearDesc=" + yearDesc + ", empName=" + empName + ", date="
 				+ date + "]";
 	}
 

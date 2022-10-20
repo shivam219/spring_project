@@ -78,8 +78,8 @@ body{
                                 <div class="col-md-4">
                                 <table>
                                     <tr>
-                                        <label class="small mb-1" for="groupDesc">Year Description</label>
-                                        <input class="form-control" id="groupDesc" type="text" placeholder="Enter Year" value="">
+                                        <label class="small mb-1" for="yearCode">Year Description</label>
+                                        <input class="form-control" id="yearCode" type="text" placeholder="Enter Year" value="">
                                         <span class="form-text small text-danger ms-2  d-none"  >Specify Year Description</span>     
                                     </tr>
                                 </table>
@@ -103,7 +103,8 @@ body{
         event.preventDefault();  
             $("#loadingBtn").addClass("spinner-border spinner-border-sm"); 
             let data = {
-                yearCode:$("#yearCode").val()
+                yearCode:$("#yearCode").val(),
+                yearDesc:$("#yearCode").val()
             }
             $.ajax({
                 type: 'POST',
@@ -115,7 +116,7 @@ body{
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                     swal({
                         title:"Success",
-                        text: "User Created Successfully",
+                        text: "Year Created Successfully",
                         icon: "success",
                     }).
                     then(function (isOkay) {

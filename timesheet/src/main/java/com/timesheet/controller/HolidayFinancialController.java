@@ -1,6 +1,10 @@
 package com.timesheet.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,15 +16,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.timesheet.model.Employee;
 import com.timesheet.model.FinancialYear;
 import com.timesheet.model.Holiday;
-import com.timesheet.model.User;
+import com.timesheet.repository.EmployeeRepository;
 import com.timesheet.repository.FinancialYearRepository;
 import com.timesheet.repository.HolidayRepository;
-import com.timesheet.service.HolidayService;
 
 @Controller
 public class HolidayFinancialController {
+	@Autowired
+	EmployeeRepository er;
 
 	@Autowired
 	public FinancialYearRepository fyr;
@@ -40,6 +46,16 @@ public class HolidayFinancialController {
 		return new String("year-master-add");
 	}
 
+	@PostMapping(value = "/year-master-add-process")
+	public ResponseEntity<Object> addUser(@RequestBody FinancialYear fy, HttpServletRequest request) {
+		String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		fy.setDate(date);
+		Employee emp = er.findById((Long) request.getSession().getAttribute("empId")).get();
+		fy.setEmpName(emp.getFirstName() + " " + emp.getLastName());
+		fyr.save(fy);
+		return ResponseEntity.status(HttpStatus.CREATED).body("Ok");
+	}
+
 	@GetMapping(value = "year-master-edit")
 	public String yearMasterEdit(@RequestParam("yearCode") Integer yearCode, Model m) {
 		m.addAttribute("year", fyr.findById(yearCode).get());
@@ -47,13 +63,14 @@ public class HolidayFinancialController {
 	}
 
 	@PostMapping(value = "year-master-edit-process")
-	public ResponseEntity<Object> earMasterEditProcess(Model m, @RequestBody FinancialYear fy) {
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body("");
-	}
-
-	@PostMapping(value = "/year-master-add-process")
-	public ResponseEntity<Object> addUser(@RequestBody FinancialYear fy) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(fyr.save(fy));
+	public ResponseEntity<Object> earMasterEditProcess(Model m, @RequestBody FinancialYear fy,HttpServletRequest request ) {
+		String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		fy.setDate(date);
+		Employee emp = er.findById((Long) request.getSession().getAttribute("empId")).get();
+		fy.setEmpName(emp.getFirstName() + " " + emp.getLastName());
+		System.out.println(fy);
+		fyr.save(fy);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Updated");
 	}
 
 	@GetMapping(value = "holiday-master")
