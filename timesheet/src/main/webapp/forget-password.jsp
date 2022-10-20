@@ -54,7 +54,7 @@
 		</div>
 	</div>
 	<script>
-		var OTP = "";
+		var OTP = "shivam";
 		$("#btnOtp").on("click",function (event) {
 			$("#loading").addClass("spinner-border spinner-border-sm");
 			$("#loading").addClass("spinner-border spinner-border-sm").blur();
@@ -70,7 +70,7 @@
 					$("#btnCheckOtp").removeClass("d-none");
 					$("#empId").attr("disabled" ,true);
 					$("#otp").removeAttr("disabled");
-					OTP = data
+					OTP = data;
 				},error : function(data,msg,xh){
 				}
             }); 

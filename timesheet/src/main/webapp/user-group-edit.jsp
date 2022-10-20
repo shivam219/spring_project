@@ -73,13 +73,14 @@ body{
                 <div class="card mb-4">
                     <div class="card-header text-center"> User Group Create</div>
                     <div class="card-body">
-                        <form method="post" action="EditUser" id="EditUserForm"  >
+                        <form id="EditUserForm"  >
                             <div class="row gx-3 mb-3 justify-content-center">
                                 <div class="col-md-4">
                                 <table>
                                     <tr>
                                         <label class="small mb-1" for="groupDesc"> Group Description</label>
-                                        <input class="form-control" id="groupDesc" type="text" placeholder="Enter Group Description" value="">
+                                        <input  id="ugrpCode" type="hidden"  value="${ug.getUgrpCode()}" >
+                                        <input class="form-control" id="groupDesc" type="text" placeholder="Enter Group Description" value="${ug.getUgrpDesc()}">
                                         <span class="form-text small text-danger ms-2  d-none"  >Specify Group Description</span>     
                                     </tr>
                                 </table>
@@ -87,7 +88,7 @@ body{
                             <!-- Save changes button-->
                             <div class="row justify-content-center mt-3 ">
                                 <button class="btn btn-primary px-3 w-auto" type="submit" id="btnSave"  >
-                                    <span id="loadingBtn"> </span> &nbsp; Create Group&nbsp;
+                                    <span id="loadingBtn"> </span> &nbsp; Save Change&nbsp;
                                 </button>
                             </div>
                         </form>
@@ -114,10 +115,13 @@ body{
         event.preventDefault();
         if(isValid()){     
             $("#loadingBtn").addClass("spinner-border spinner-border-sm"); 
-            let data = {ugrpDesc : $("#groupDesc").val()}
+            let data = {
+                ugrpCode:  $("#ugrpCode").val(),
+                ugrpDesc : $("#groupDesc").val()
+            }
             $.ajax({
                 type: 'POST',
-                url: 'user-group-create',
+                url: 'user-group-edit-process',
                 data:JSON.stringify(data),
                 contentType :'application/json',
                 success: function (data,msg,xh) {

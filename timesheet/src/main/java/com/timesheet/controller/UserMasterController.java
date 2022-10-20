@@ -100,4 +100,9 @@ public class UserMasterController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(uR.save(user));
 	}
 
+	@GetMapping(value = "/table")
+	public String getTable() {
+		return "table";
+	}
+
 }

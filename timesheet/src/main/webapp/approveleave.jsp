@@ -2,22 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Approve Leave</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css"
-	href="./assets/font-awesome.min.css">
-
-<link rel="stylesheet" type="text/css" href="./assets/animate.css">
-
-<link rel="stylesheet" type="text/css" href="/assets/select2.min.css">
-
-<link rel="stylesheet" type="text/css"
-	href="./assets/perfect-scrollbar.css">
-
-<link rel="stylesheet" type="text/css" href="./assets/util.css">
-<link rel="stylesheet" type="text/css" href="./assets/main.css">
+<link href="./assets/font-awesome.min.c" rel="stylesheet" >
+<link href="./assets/animate.css"   rel="stylesheet" >
+<link href="./assets/select2.min.css"	 rel="stylesheet" >
+<link href="./assets/perfect-scrollbar.css"	 rel="stylesheet" >
+<link href="./assets/util.css"		 rel="stylesheet" >
+<link href="./assets/main.css"		 rel="stylesheet" >
 
 <meta name="robots" content="noindex, follow">
 </head>

@@ -120,6 +120,7 @@
 								<li><a class="dropdown-item" href="change-password">Change Password </a></li>
 								<li><a class="dropdown-item" href="user-master">User Details Master</a></li>
 								<li><a class="dropdown-item" href="user-group-master">User Group Master</a></li>
+								<li><a class="dropdown-item" href="user-group-mapping-master">User Group Mapping</a></li>
 						</ul>
 					</li>
 					<li class="nav-item" style="margin-left:360px;"><a class="nav-link active" aria-current="page" href="logout"><i class="fa fa-user-o"></i>&nbsp;Sandeep Kumar Gupta&nbsp;&nbsp;<i class="fa fa-sign-out"></i></a>

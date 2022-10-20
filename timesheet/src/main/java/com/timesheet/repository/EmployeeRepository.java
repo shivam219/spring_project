@@ -46,5 +46,11 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 	public List<Object> getEmpBirthday(@Param("year") String year, @Param("month") String month);
 	
 
+
+	@Query(value="\n"
+			+ "select * from  ess_employee  where emp_id in  (select emp_id from  ess_user_master where emp_id not in (SELECT emp_id FROM ess.ess_user_group_mapping))" ,nativeQuery =  true)
+	public List<Employee> findEmployeeNotHavingGroup();
+
+
 	
 }
