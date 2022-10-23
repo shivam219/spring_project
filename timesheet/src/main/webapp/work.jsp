@@ -4,6 +4,7 @@
 <%@page import="java.util.Arrays"%> 
 <html lang="en">
 <head> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">	
     <title> Work Report</title>
     <style> 
         body{
@@ -190,16 +191,21 @@
             <table class="table table-striped table-hover  mb-0 mt-0 rounded " id="tbtable"  >
                 <thead>
                     <tr class="tblcolor"  >
-                        <td > <span class="text-center rounded bg-white text-dark p-2 op">  Customer </span></td>
-                        <td class="text-center" colspan="2"> <span class="text-center rounded bg-white text-dark p-2 px-5 op"> Work Items</span></td>
-                        <td class="" id="monDate"> <span class=" rounded bg-white text-dark p-2  op "> Mon </span> </td>
-                        <td class="" id="tueDate"> <span class=" rounded bg-white text-dark p-2  op "> Tue </span> </td>
-                        <td class="" id="wedDate"> <span class=" rounded bg-white text-dark p-2  op "> Wed </span> </td>
-                        <td class="" id="thuDate"> <span class=" rounded bg-white text-dark p-2  op "> Thu </span> </td>
-                        <td class="" id="friDate"> <span class=" rounded bg-white text-dark p-2  op "> Fri </span> </td>
-                        <td class="" id="satDate"> <span class=" rounded bg-white text-dark p-2  op "> Sat </span> </td>
-                        <td class="" id="sunDate"> <span class=" rounded bg-white text-dark p-2  op "> Sun </span> </td>
-                        <td class="text-center" id="Date">    <span class="text-center rounded bg-white text-dark p-2 op  "> Total</span> </td>
+                        <td>               
+                            <span class="text-center rounded bg-white text-dark p-2 op">  Customer </span>
+                        </td>
+                        <td class="text-center op" colspan="2"> 
+                                            <span class=" rounded bg-white text-dark p-2 op px-5"> Work Items</span> </td>
+                        <td  id="monDate" class="op">  <span class=" rounded bg-white text-dark p-2 op  "> Mon </span> </td>
+                        <td  id="tueDate" class="op">  <span class=" rounded bg-white text-dark p-2 op  "> Tue </span> </td>
+                        <td  id="wedDate" class="op">  <span class=" rounded bg-white text-dark p-2 op  "> Wed </span> </td>
+                        <td  id="thuDate" class="op">  <span class=" rounded bg-white text-dark p-2 op  "> Thu </span> </td>
+                        <td  id="friDate" class="op">  <span class=" rounded bg-white text-dark p-2 op  "> Fri </span> </td>
+                        <td  id="satDate" class="op">  <span class=" rounded bg-white text-dark p-2 op  "> Sat </span> </td>
+                        <td  id="sunDate" class="op">  <span class=" rounded bg-white text-dark p-2 op  "> Sun </span> </td>
+                        <td class="text-center" id="Date">    
+                            <span class="text-center rounded bg-white text-dark p-2 op px-3  "> Total</span> 
+                        </td>
                     </tr> 
                 </thead>
                 <tbody>
@@ -278,6 +284,13 @@
                     }
                 });
                 
+                $("#monDate span ").addClass("bg-white text-dark").removeClass("bg-success text-white");
+                $("#tueDate span ").addClass("bg-white text-dark").removeClass("bg-success text-white");
+                $("#wedDate span ").addClass("bg-white text-dark").removeClass("bg-success text-white");
+                $("#thuDate span ").addClass("bg-white text-dark").removeClass("bg-success text-white");
+                $("#friDate span ").addClass("bg-white text-dark").removeClass("bg-success text-white");
+                $("#satDate span ").addClass("bg-white text-dark").removeClass("bg-success text-white");
+                $("#sunDate span ").addClass("bg-white text-dark").removeClass("bg-success text-white");
                 $("#monDate span ").html('Mon &nbsp;'+ (new Date($("#startDate").val()).getDate()));
                 if(obj[0]){$("#monDate span ").removeClass("bg-white text-dark").addClass("bg-success text-white")}
 
@@ -462,6 +475,7 @@
                     uri = '/fetchworkjson?startDate='+sd+'&endDate='+ed; 
                 }
                     $.ajax({
+                        async : false,
                         url: uri,
                         type: 'GET',
                         dataType: 'json',
@@ -469,7 +483,7 @@
                             for (let i = $('#tbtable tr').length -2 ; i > 0; i--) {
                                 $('#tbtable tr').eq(i).remove();
                             }
-                           
+                        
                             var d = Object.entries(obj); 
                             if(workStatus == 'Pending' ||  workStatus == 'Approved' || workStatus == 'Rejected' ){
                                     for (let i = 0; i < d.length; i++) {
@@ -495,7 +509,7 @@
                                             let descr = d[i][1][j]["descr"];    
                                             let   t = ' <td> ' 
                                                 +' <input type="number"  value='+hours+'    name="hours"  readonly  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
-                                                +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"   readonly  >' + ' '+descr +'</textarea>'  
+                                                +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"   readonly  >' +descr +'</textarea>'  
                                                 +'</td>';
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
                                         }  
@@ -558,7 +572,7 @@
                                                 +' <input type="number"  value='+pId+'      name="projectId"                class=" d-inline d-none"  > ' 
                                                 +' <input type="text"    value='+pName+'    name="projectName "             class=" d-inline d-none"  > ' 
                                                 +' <input type="date"  value='+day+'        name="day"                      class=" d-inline d-none" > ' 
-                                                +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"     >' + ' '+descr +'</textarea>'  
+                                                +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"     >' +descr +'</textarea>'  
                                                 +'</td>';
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
                                         }  
@@ -807,6 +821,7 @@
                 }
                let uri =  'submit-work';
 				$.ajax({
+                    async : false,
 					type: 'POST',
 					url: uri,
 					data:JSON.stringify(data),

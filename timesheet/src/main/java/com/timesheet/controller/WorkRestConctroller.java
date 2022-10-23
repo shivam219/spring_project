@@ -60,6 +60,7 @@ public class WorkRestConctroller {
 			@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
 			@RequestParam("empId") Long empId) {
 		LinkedHashMap<String, List<Work>> mm = workService.getSubmittedWork(startDate, endDate, empId);
+		System.out.println(mm);
 		LinkedHashMap<List<String>, List<Work>> mm2 = new LinkedHashMap<>();
 		for (Map.Entry<String, List<Work>> entry : mm.entrySet()) {
 			ArrayList<String> al = new ArrayList<>();
@@ -75,6 +76,7 @@ public class WorkRestConctroller {
 			@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) {
 		long empId = (Long) request.getSession().getAttribute("empId");
 		LinkedHashMap<String, List<Work>> mm = workService.getSubmittedWork(startDate, endDate, empId);
+		System.out.println(mm);
 		LinkedHashMap<List<String>, List<Work>> mm2 = new LinkedHashMap<>();
 		for (Map.Entry<String, List<Work>> entry : mm.entrySet()) {
 			ArrayList<String> al = new ArrayList<>();

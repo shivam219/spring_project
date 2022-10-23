@@ -86,9 +86,12 @@ body{
                                             </c:forEach>
                                         </select>
                                     </tr>
-                                    <tr>
-                                        <label class="small mb-1" for="empId">Employee Id</label>
-                                        <input class="form-control" id="empId" type="text" placeholder="Choose Employee Name" value="${emp.getMiddleName()}" readonly>
+                                    <tr >
+                                        <div class="d-none">
+                                            <label class="small mb-1" for="empId">Employee Id</label>
+                                            <input class="form-control" id="empId" type="text" placeholder="Choose Employee Name" value="${emp.getMiddleName()}" readonly>
+                                            
+                                        </div>
                                     </tr>
                                     <tr>
                                         <label class="small mb-1" for="ugrpCode"> User Designation</label>

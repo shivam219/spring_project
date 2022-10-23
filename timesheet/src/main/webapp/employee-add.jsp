@@ -47,7 +47,7 @@ body{
         border-radius: 0.35rem;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
-    
+
     .nav-borders .nav-link.active {
         color: #0061f2;
         border-bottom-color: #0061f2;
