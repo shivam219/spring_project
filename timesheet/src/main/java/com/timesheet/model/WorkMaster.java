@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class WorkMaster {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "id")
 	Long id;
 	@Column(name = "emp_id")
