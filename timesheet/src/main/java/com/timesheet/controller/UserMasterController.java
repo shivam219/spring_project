@@ -56,26 +56,27 @@ public class UserMasterController {
 
 	@GetMapping(value = "/user-master")
 	public String userMaster(Model m) {
-		List<User> userList = (List<User>) uR.findAll();
-		userList.sort((o1, o2) -> o1.getEmpId().compareTo(o2.getEmpId()));
-		m.addAttribute("userList", userList);
+//		List<User> userList = (List<>) uR.getAllUser();
+		m.addAttribute("userList", (uR.getAllUser()));
+//		userList.sort((o1, o2) -> o1.getEmpId().compareTo(o2.getEmpId()));
+//		m.addAttribute("userList", userList);
 		return "user-master";
 	}
 
 	@GetMapping(value = "/user-master-edit")
-	public String getUserMasterEdit(Model m, @RequestParam("empId") Long empId) {
-		Optional<User> em = uR.findById(empId);
+	public String getUserMasterEdit(Model m, @RequestParam("empId") Employee emp) {
+		Optional<User> em = uR.findById(emp.getEmpId());
 		if (em.isEmpty() ) {
 			List<User> userList = (List<User>) uR.findAll();
 			userList.sort((o1, o2) -> o1.getEmpId().compareTo(o2.getEmpId()));
 			m.addAttribute("userList", userList);
 			return "redirect:user-master";
-		}
-		User emp = em.get();
-		m.addAttribute("empId", empId);
-		m.addAttribute("managerId", emp.getManagerId());
-		m.addAttribute("password", emp.getPassword());
-		m.addAttribute("active", emp.getActive());
+		} 
+		User user = em.get();
+		m.addAttribute("emp", emp);
+		m.addAttribute("managerId", user.getManagerId());
+		m.addAttribute("password", user.getPassword());
+		m.addAttribute("active", user.getActive());
 		m.addAttribute("userGroupList", ((List<UserGroup>) uGR.findAll()));
 		m.addAttribute("empList", (List<Employee>) er.findAll());
 		return "user-master-edit";
@@ -90,7 +91,7 @@ public class UserMasterController {
 	@GetMapping(value = "/user-master-add")
 	public String getUserMasterAdd(Model m) {
 		m.addAttribute("userGroupList", ((List<UserGroup>) uGR.findAll()));
-		m.addAttribute("empList", (List<Employee>) er.findAll());
+		m.addAttribute("empList", (List<Employee>) er.findAllEmployeeNotMapUser());
 		return "user-master-add";
 	}
 

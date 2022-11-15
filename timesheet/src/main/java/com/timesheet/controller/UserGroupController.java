@@ -55,7 +55,6 @@ public class UserGroupController {
 
 	@GetMapping(value = "/user-group-edit")
 	public String getEditUserGroup(Model m, @RequestParam("ugrpCode") UserGroup ug,@RequestParam(value = "ugrpCode", required = false) String ns, HttpServletRequest request) {
-		System.out.println("just give them a primary key value to request param");
 		m.addAttribute("ug", ug);
 		return "user-group-edit";
 	}

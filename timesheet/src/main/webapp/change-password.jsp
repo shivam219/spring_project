@@ -42,7 +42,7 @@
                                         </span>
                                     </div>
                                     <div class="form-group">
-                                        <label for="empPassword2">Verify</label>
+                                        <label for="empPassword2">Confirm password</label>
                                         <input type="password" class="form-control " id="empPassword2"  autocomplete=""  required="">
                                         <span class="form-text small text-muted">
                                             To confirm, type the new password again.

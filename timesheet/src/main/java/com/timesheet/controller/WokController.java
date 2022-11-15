@@ -36,11 +36,21 @@ public class WokController {
 	public String work(Model m, HttpServletRequest request) {
 		return "work";
 	}
+	@GetMapping("/work2")
+	public String work2(Model m, HttpServletRequest request) {
+		return "work2";
+	}
 
 	@GetMapping("/work-approve")
 	public String workApprove(Model m, HttpServletRequest request) {
 		m.addAttribute("empList", employeeService.getAllEmployee());
 		return "work-approve";
+	}
+
+	@GetMapping("/work-approve2")
+	public String workApprove2(Model m, HttpServletRequest request) {
+		m.addAttribute("empList", employeeService.getAllEmployee());
+		return "work-approve2";
 	}
 
 	@PostMapping("/savework")
@@ -64,7 +74,10 @@ public class WokController {
 	@PostMapping(value = "/submit-work")
 	public ResponseEntity<Object> submitWorkReport(HttpServletRequest request, @RequestBody WorkMaster wm) {
 		wm.setEmpId((Long) request.getSession().getAttribute("empId"));
-		workService.submitWork(wm);
+		try {			
+			workService.submitWork(wm);
+		} catch (Exception e) {
+		}
 		return ResponseEntity.status(HttpStatus.OK).body("Data submitted");
 	}
 

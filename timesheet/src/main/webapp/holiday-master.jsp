@@ -3,107 +3,16 @@
 <html lang="en">
 
 <head>
+     <link rel="stylesheet" href="css/form-style.css">
     <title>Holiday Master </title>
 </head>
-<style>
-table {
-    table-layout: fixed;
-}
-  body{
-background-color:#eee;
-/* background-color:#f2f6fc; */
-}
-.project-list-table {
-    border-collapse: separate;
-    /* border-spacing: 0 12px */
-}
-
-.project-list-table tr {
-    background-color: #fff
-}
-
-.table-nowrap td, .table-nowrap th {
-    white-space: nowrap;
-}
-.table-borderless>:not(caption)>*>* {
-    border-bottom-width: 0;
-}
-.table>:not(caption)>*>* {
-    padding: 0.75rem 0.75rem;
-    background-color: var(--bs-table-bg);
-    border-bottom-width: 1px;
-    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
-}
-
-.avatar-sm {
-    height: 2rem;
-    width: 2rem;
-}
-.rounded-circle {
-    border-radius: 50%!important;
-}
-.me-2 {
-    margin-right: 0.5rem!important;
-}
-img, svg {
-    vertical-align: middle;
-}
-
-a {
-    color: #3b76e1;
-    text-decoration: none;
-}
-
-.badge-soft-danger {
-    color: #f56e6e !important;
-    background-color: rgba(245,110,110,.1);
-}
-.badge-soft-success {
-    color: #63ad6f !important;
-    background-color: rgba(99,173,111,.1);
-}
-
-.badge-soft-primary {
-    color: #3b76e1 !important;
-    background-color: rgba(59,118,225,.1);
-}
-
-.badge-soft-info {
-    color: #57c9eb !important;
-    background-color: rgba(87,201,235,.1);
-}
-
-.avatar-title {
-    align-items: center;
-    background-color: #3b76e1;
-    color: #fff;
-    display: flex;
-    font-weight: 500;
-    height: 100%;
-    justify-content: center;
-    width: 100%;
-}
-.bg-soft-primary {
-    background-color: rgba(59,118,225,.25)!important;
-}
-@media only screen and (max-width: 600px) {
-    td {
-        font-size:  x-small;
-    }
-}
- 
-</style>
-
 <body>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css" integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
-    
     <div class="container">
+        <h1 class="text-secondary h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Holiday Dashboard </h1>
         <div class="row align-items-center mt-3">
             <div class="col-md-6">
                 <div>
-                    <h5 class="card-title ms-2">Holidays<span class="text-muted fw-normal ms-1">()</span></h5>
+                    <h6 class=" badge-soft-success d-inline px-3 py-2 rounded"> Holidays <span class="text-muted fw-normal ms-1">(${listholiday.size()})</span></h6>
                 </div>
             </div>
             <div class="col-md-6">
@@ -129,17 +38,14 @@ a {
                             <tbody>
                                 <c:forEach items="${listholiday}" var="h" varStatus="loop">
                                     <tr>
-                                        <td class="overflow-auto"><a href="/holiday-master-edit?hCode=${h.gethDate()}" class="text-body overflow-auto">${h.gethDate()} </a></td>
-                                         <td class="overflow-auto"><a href="/holiday-master-edit?hCode=${h.getDescription()}" class="text-body overflow-auto">${h.getDescription()} </a></td>
+                                        <td class="overflow-auto"> ${h.gethDate()} </td>
+                                         <td class="overflow-auto">${h.getDescription()}</td>
    
                                         <td class="overflow-auto">
                                             <ul class="list-inline mb-0">
                                                 <li class="list-inline-item">
                                                     <a href="/holiday-master-edit?hCode=${h.gethCode()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"  class="px-2 text-danger btnDelete"><i class="bx bx-trash-alt font-size-18"></i></a>
-                                                </li>                                      
+                                                </li>                                  
                                             </ul>
                                         </td>
                                     </tr>
@@ -151,10 +57,5 @@ a {
             </div>
         </div>
     </div>
-    <script>
-     $("#tableholiday").on('click', '.btnDelete', function () {
-     $(this).closest('tr').remove();
-    });
-    </script>
 </body>
 </html>

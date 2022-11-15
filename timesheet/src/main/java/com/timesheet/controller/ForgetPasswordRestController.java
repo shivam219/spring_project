@@ -26,15 +26,23 @@ public class ForgetPasswordRestController {
 	EmployeeService employeeService;
 	@Autowired
 	EmployeeRepository er;
-	
+
 	@GetMapping(value = "/get-otp")
-	public String getOtp(@RequestParam("empId") Long empId) {
+	public ResponseEntity<Object>  getOtp(@RequestParam("empId") Long empId) {
+		if(!er.existsByEmpId(empId)) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("rrrr");
+		}
 		String to = employeeService.getEmailById(empId);
 		String otp = String.valueOf(OTP(6));
 		String msg = "OTP : " + otp;
 		String subject = "Forget Password email";
-		workService.sendEmail(to, msg, subject);
-		return otp;
+		try {
+			workService.sendEmail(to, msg, subject);				
+		} catch (Exception e) {			
+			System.out.println("error");
+			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(otp)  ;
 	}
 
 	static char[] OTP(int len) {
@@ -46,11 +54,15 @@ public class ForgetPasswordRestController {
 		}
 		return otp;
 	}
+
 	@PostMapping(value = "reset-password")
 	public ResponseEntity<Object> resetPassword(Model m, @RequestBody Employee emp) {
 		er.updateEmployeePassword(emp.getEmpId(), emp.getEmpPassword());
-		try {Thread.sleep(1000);} catch (Exception e) {}
+		try {
+			Thread.sleep(1000);
+		} catch (Exception e) {
+		}
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("update password");
 	}
-	
+
 }

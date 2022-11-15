@@ -70,7 +70,6 @@ public class HolidayFinancialController {
 		fy.setDate(date);
 		Employee emp = er.findById((Long) request.getSession().getAttribute("empId")).get();
 		fy.setEmpName(emp.getFirstName() + " " + emp.getLastName());
-		System.out.println(fy);
 		fyr.save(fy);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Updated");
 	}
@@ -105,7 +104,6 @@ public class HolidayFinancialController {
 
 	@PostMapping(value = "holiday-master-edit-process")
 	public ResponseEntity<Object> holidayMasterEditProcess(Model m, @RequestBody Holiday h) {
-		System.out.println(h);
 		hr.save(h);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("");
 	}

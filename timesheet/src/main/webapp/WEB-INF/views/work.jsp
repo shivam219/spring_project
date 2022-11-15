@@ -6,45 +6,17 @@
 <head> 
     <title> Work Report</title>
     <style> 
-        body{
-            background: #e1edf9;
-            scroll-behavior: smooth;
-        }
+      
         table {
             table-layout: fixed;
         }
-         /* Chrome, Safari, Edge, Opera */
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
+        webapp/WEB-INF/views/work.jsp
         /* Firefox */
         input[type=number] {
             -moz-appearance: textfield;
         }
 
-        /* width */
-        ::-webkit-scrollbar {
-           width: 0px;
-        }
-
-        /* Track */
-        ::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 5px grey; 
-            border-radius: 10px;
-        }
          
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-            background: rgb(241, 216, 216); 
-            border-radius: 10px;
-        }
-
-        /* Handle on hover */
-        ::-webkit-scrollbar-thumb:hover {
-            background: #00ff40; 
-        }    
         .h-n{  
             color: rgb(52, 52, 52);
             width: 8px;
@@ -197,21 +169,21 @@
                         <td class="text-center" id="satDate">Sat</td>
                         <td class="text-center" id="sunDate">Sun</td>
                         <td class="text-center" id="Date">Total</td>
-                    </tr> 
+                    </tr>  
                 </thead>
                 <tbody>
                     
                 </tbody>
                 <tfoot >
                     <td colspan="3" class="text-center"> </td>
-                    <td id="mov_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="tue_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="web_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="thu_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="fri_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="sat_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="sun_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="htotal" ><input  type="number"   readonly    class="d-inline form-control  w-75 ms-2"      placeholder="HH"  > </input> </td>
+                    <td id="mov_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder=""  > </input> </td>
+                    <td id="tue_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder=""  > </input> </td>
+                    <td id="web_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder=""  > </input> </td>
+                    <td id="thu_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder=""  > </input> </td>
+                    <td id="fri_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder=""  > </input> </td>
+                    <td id="sat_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder=""  > </input> </td>
+                    <td id="sun_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder=""  > </input> </td>
+                    <td id="htotal" ><input  type="number"   readonly    class="d-inline form-control  w-75 ms-2"      placeholder=""  > </input> </td>
                 </tfoot>
             </table>
         </div>
@@ -459,7 +431,7 @@
                                             let hours = d[i][1][j]["hours"]; 
                                             let descr = d[i][1][j]["descr"];   
                                             let t =  ' <td>'
-                                                +' <input type="number"    name="hours"     readonly    class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
+                                                +' <input type="number"    name="hours"     readonly    class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder=""> ' 
                                                 +' <textarea class="h-n h-n-blank"   name="descr"   readonly    ></textarea>' 
                                                 +' </td>';
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
@@ -468,7 +440,7 @@
                                             let hours = d[i][1][j]["hours"]; 
                                             let descr = d[i][1][j]["descr"];    
                                             let   t = ' <td> ' 
-                                                +' <input type="number"  value='+hours+'    name="hours"  readonly  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
+                                                +' <input type="number"  value='+hours+'    name="hours"  readonly  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="">' 
                                                 +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"   readonly  >' + ' '+descr +'</textarea>'  
                                                 +'</td>';
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
@@ -507,7 +479,7 @@
                                             let day = d[i][1][j]["day"];   
                                             let status = d[i][1][j]["status"];   
                                             let t =  ' <td>'
-                                                +' <input type="number"    name="hours"          min="1" max="24" class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
+                                                +' <input type="number"    name="hours"          min="1" max="24" class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder=""> ' 
                                                 +' <input type="number"  value='+eId+'      name="empId"          class="d-inline d-none"  > ' 
                                                 +' <input type="number"  value='+pId+'      name="projectId"      class="d-inline d-none"  > ' 
                                                 +' <input type="text"    value='+pName+'    name="projectName"    class="d-inline d-none"  > ' 
@@ -526,7 +498,7 @@
                                             let day = d[i][1][j]["day"];   
                                             let status = d[i][1][j]["status"];   
                                             let   t = ' <td> ' 
-                                                +' <input type="number"  value='+hours+'    name="hours" min="1"  max="24"  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
+                                                +' <input type="number"  value='+hours+'    name="hours" min="1"  max="24"  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="">' 
                                                 +' <input type="number"  value='+id+'       name="id"                       class=" d-inline d-none"  > ' 
                                                 +' <input type="number"  value='+eId+'      name="empId"                    class=" d-inline d-none"  > ' 
                                                 +' <input type="number"  value='+pId+'      name="projectId"                class=" d-inline d-none"  > ' 

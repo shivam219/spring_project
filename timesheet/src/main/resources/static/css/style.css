@@ -1,27 +1,126 @@
 /* Ess Menu */
 .bg-nav-foot {
-	background-color: #333;
+	background-color: #333; 
 }
-
 
 .dropdown:hover .dropdown-menu {
 	display: block; 
 }
-
-.navbar-nav li, .navbar-nav li a, .navbar-nav li a:hover {
-	color: #e9e7e7;
-}
-
-.dropdown-menu li a {
-	color: #444141;
-} 
-
-.dropdown-item:focus, .dropdown-item:hover {
-	background-color: #595959;
-     
-}
+ul li{
+	font-family:Verdana, Geneva, Tahoma, sans-serif;
+	font-weight: 500;
+}   
 .select2-dropdown{
 	z-index: 1;
 }
 
 /* End Ess Menu */
+table tr td ,  table tr th{
+	overflow: auto;
+}
+body{
+background-color:#e6f2ff;
+}
+.project-list-table {
+border-collapse: collapse;
+}
+
+.project-list-table tr {
+background-color: #fff
+}
+
+.table-nowrap td, .table-nowrap th {
+white-space: nowrap;
+}
+.table-borderless>:not(caption)>*>* {
+border-bottom-width: 0;
+}
+.table>:not(caption)>*>* {
+padding: 0.75rem 0.75rem;
+background-color: var(--bs-table-bg);
+border-bottom-width: 1px;
+box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}
+
+.avatar-sm {
+height: 2rem;
+width: 2rem;
+}
+.rounded-circle {
+border-radius: 50%!important;
+}
+.me-2 {
+margin-right: 0.5rem!important;
+}
+img, svg {
+vertical-align: middle;
+}
+
+.badge-soft-danger {
+color: #f56e6e !important;
+background-color: rgba(245,110,110,.1);
+}
+.badge-soft-success {
+color: #63ad6f !important;
+background-color: rgba(99,173,111,.1);
+}
+
+.badge-soft-success-button {
+	color: #63ad6f !important;
+	background-color: rgba(99,173,111,.1); 
+}
+
+.badge-soft-primary {
+color: #3b76e1 !important;
+background-color: rgba(59,118,225,.1);
+}
+
+.badge-soft-info {
+color: #57c9eb !important;
+background-color: rgba(87,201,235,.1);
+}
+
+.avatar-title {
+align-items: center;
+background-color: #3b76e1;
+color: #fff;
+display: flex;
+font-weight: 500;
+height: 100%;
+justify-content: center;
+width: 100%;
+}
+.bg-soft-primary {
+background-color: rgba(59,118,225,.25)!important;
+}
+
+@media only screen and (max-width: 600px) {
+td {
+font-size:  x-small;
+}
+}
+
+@media only screen and (max-width: 900px) {
+td {
+font-size:  x-small;
+}
+} 
+tbody, td, td a tfoot, th, thead, tr { 
+	font-family: Verdana; 
+	border-bottom: none !important;
+	/* border-bottom: 1px solid #ff000d; */
+	border-width: 1px; 
+	border-collapse: collapse;
+	font-style: normal;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	color: rgb(83, 83, 82);
+}   
+table tfoot tr:last-child td:first-child {
+	border-bottom-left-radius: 5px;
+}
+
+table tfoot tr:last-child td:last-child {
+	border-bottom-right-radius: 5px;
+}
+.dashboard-headling {background-image: linear-gradient(108.1deg, rgba(167, 220, 225, 1) 11.2%,rgb(174, 221, 228) 88.9%);border-radius:7px;text-align: center;}
+

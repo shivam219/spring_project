@@ -13,8 +13,8 @@
 <link rel='icon' type='image/ico' href='images/esslogo.jpg' />
 <script src="css/sweetalert.min.js"></script>
 <!-- <title>Timesheet Login</title> -->
-<link rel='icon' type='image/ico' href='ESSLogo.png' />
-<style>
+<link rel='icon' type='image/ico' href='images/esslogo.png' />
+	<style>
 .bg-nav-foot {
 	background-color: #333;
 }
@@ -26,7 +26,7 @@
 		<div class="container-fluid">
 			<!-- Nav -->
 			<div class="row bg-nav-foot ">
-				<span class="text-center text-white py-3 h3  "> ESS Organization Management</span>
+				<span class="text-center text-white py-3 h3  "> ESS Timesheet Portal</span>
 			</div>
 		</div>
 	</div>

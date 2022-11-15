@@ -16,12 +16,12 @@
 					<div class="card p-3">
 						<div class="card-header mb-1"> 	<h2 class="text-center text-secondary">Login</h2></div>
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control input-sm" id="empId" name="empId" placeholder="Emp Id"> 
+							<input type="text" class="form-control input-sm" id="empId" name="empId"  autocomplete="new-password" placeholder="Emp Id"> 
 							<label for="floatingInput">User ID</label>
 							<span class="form-text  small text-muted  d-none text-danger " id="empIdWar">Specified Employee Id doesn't meet </span>
 						</div>
 						<div class="form-floating">
-							<input type="password" class="form-control input-sm" id="empPassword" name="empPassword" placeholder="Password"> 
+							<input type="password" class="form-control input-sm" id="empPassword" name="empPassword"   autocomplete="new-password" placeholder="Password"> 
 							<label for="empPassword">Password</label>
 							<span class="form-text  small text-muted d-none text-danger " id="empPassWar">Specified Employee Password doesn't meet </span>
 						</div>

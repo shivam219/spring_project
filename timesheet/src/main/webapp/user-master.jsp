@@ -6,91 +6,6 @@
     <title>User Master </title>
 </head>
 <style>
-table {
-    table-layout: fixed;
-}
-  body{
-background-color:#eee;
-/* background-color:#f2f6fc; */
-}
-.project-list-table {
-    border-collapse: separate;
-    /* border-spacing: 0 12px */
-}
-
-.project-list-table tr {
-    background-color: #fff
-}
-
-.table-nowrap td, .table-nowrap th {
-    white-space: nowrap;
-}
-.table-borderless>:not(caption)>*>* {
-    border-bottom-width: 0;
-}
-.table>:not(caption)>*>* {
-    padding: 0.75rem 0.75rem;
-    background-color: var(--bs-table-bg);
-    border-bottom-width: 1px;
-    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
-}
-
-.avatar-sm {
-    height: 2rem;
-    width: 2rem;
-}
-.rounded-circle {
-    border-radius: 50%!important;
-}
-.me-2 {
-    margin-right: 0.5rem!important;
-}
-img, svg {
-    vertical-align: middle;
-}
-
-a {
-    color: #3b76e1;
-    text-decoration: none;
-}
-
-.badge-soft-danger {
-    color: #f56e6e !important;
-    background-color: rgba(245,110,110,.1);
-}
-.badge-soft-success {
-    color: #63ad6f !important;
-    background-color: rgba(99,173,111,.1);
-}
-
-.badge-soft-primary {
-    color: #3b76e1 !important;
-    background-color: rgba(59,118,225,.1);
-}
-
-.badge-soft-info {
-    color: #57c9eb !important;
-    background-color: rgba(87,201,235,.1);
-}
-
-.avatar-title {
-    align-items: center;
-    background-color: #3b76e1;
-    color: #fff;
-    display: flex;
-    font-weight: 500;
-    height: 100%;
-    justify-content: center;
-    width: 100%;
-}
-.bg-soft-primary {
-    background-color: rgba(59,118,225,.25)!important;
-}
-@media only screen and (max-width: 600px) {
-    td {
-        font-size:  x-small;
-    }
-}
  
 </style>
 
@@ -100,16 +15,19 @@ a {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
     
     <div class="container">
+        <h1 class="text-secondary h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">User Dashboard </h1>
         <div class="row align-items-center mt-3">
-            <div class="col-md-6">
+            <div class="col-md-6 mb-2">
                 <div>
-                    <h5 class="card-title ms-2">No of User <span class="text-muted fw-normal ms-1">(${userList.size()})</span></h5>
+                    <h6 class="badge-soft-success d-inline px-3 py-2 rounded"> No of User <span class="text-muted fw-normal ms-1">(${userList.size()})</span></h6>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 me-2 mb-1 ">    
                     <div>
-                        <a href="user-master-add" data-bs-target=".add-new" onclick="this.blur()" class="btn btn-primary"><i class="bx bx-plus me-1"></i> Create User</a>
+                        <a href="user-group-mapping-add"  onclick="this.blur()" class="btn btn-primary"><i class="bx bx-plus me-1"></i> User Group Mapping</a>
+                        <a href="user-group-mapping-master"  onclick="this.blur()" class="btn btn-primary"><i class="bx bx-pencil me-1"></i> Edit User Group</a>
+                        <a href="user-master-add"  onclick="this.blur()" class="btn btn-primary"><i class="bx bx-plus me-1"></i> Create User</a>
                     </div>
                 </div>
             </div>
@@ -130,23 +48,23 @@ a {
                             <tbody>
                                 <c:forEach items="${userList}" var="emp" varStatus="loop">
                                     <tr>
-                                        <td class="overflow-auto"><a href="/user-master-edit?empId=${emp.getEmpId()}" class="text-body overflow-auto">${emp.getEmpId()} </a></td>
-                                        <td class="overflow-auto"><span class="badge badge-soft-success mb-0">Full Stack Developer</span></td>
+                                        <td class="overflow-auto"><a href="/user-master-edit?empId=${emp[0]}" class="text-body overflow-auto">${emp[1]} </a></td>
+                                        <td class="overflow-auto"><span class="badge badge-soft-success mb-0">${emp[2]}</span></td>
                                         <td class="overflow-auto">Vigneswari Mam</td>
                                         <td class="overflow-auto">
                                             <ul class="list-inline mb-0">
                                                 <li class="list-inline-item">
-                                                    <a href="/user-master-edit?empId=${emp.getEmpId()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
+                                                    <a href="/user-master-edit?empId=${emp[0]}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
+                                                    <!-- <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a> -->
                                                 </li>  
-                                                <c:if test='${emp.getActive().equals("1")}'>
+                                                <c:if test='${emp[3].equals("1")}'>
                                                     <li class="list-inline-item">
                                                         <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Active" class="px-2 text-success">  <i class="fa-solid fa-circle"> </i>  </a>
                                                     </li>
                                                 </c:if>
-                                                <c:if test='${!emp.getActive().equals("1")}'>
+                                                <c:if test='${!emp[3].equals("1")}'>
                                                     <li class="list-inline-item">
                                                         <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="In-Active" class="px-2 text-danger">  <i class="fa-solid fa-circle"> </i>  </a>
                                                     </li>

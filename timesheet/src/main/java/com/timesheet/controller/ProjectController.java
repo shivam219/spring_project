@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.timesheet.model.EmployeeProject;
@@ -72,7 +74,7 @@ public class ProjectController {
 	@GetMapping(value = "add-project")
 	public String getAddProject(Model m) {
 		m.addAttribute("customerList", customerService.getAllcustomer());
-		return "add-project";
+		return "project-add";
 	}
 
 	@PostMapping("/project-process")
@@ -80,11 +82,22 @@ public class ProjectController {
 		projectService.save(project);
 		return "redirect:/project-dashboard";
 	}
+	@PostMapping("/project-add-process")
+	public String projectAdddProcess(Model model, @RequestBody Project project) {
+		projectService.save(project);
+		return "redirect:/project-dashboard";
+	}
 
-	@GetMapping("/project-dashboard")
+	@RequestMapping("/project-dashboard")
 	public String dashboard(Model m) {
 		m.addAttribute("projectList", projectService.getAllProject());
 		return "project-dashboard";
+	}
+
+	@RequestMapping({"/project-master"})
+	public String projectMaster(Model m) {
+		m.addAttribute("projectList", projectService.getAllProject());
+		return "project-master";
 	}
 
 	@GetMapping("delete-project-by-id")

@@ -71,7 +71,8 @@
 
        /* h-n-blank  */
        .h-n-blank{
-            background-color: rgb(233, 233, 73);
+        background-color: inherit;
+            /* background-color: rgb(233, 233, 73); */
         }
         .h-n-empty{
             background-color: rgb(250, 162, 104);
@@ -91,7 +92,7 @@
             background-color: #e8eae6;
             box-sizing: border-box;
             padding: 20px;
-            z-index: 1000;
+            z-index: 10;
             display: none; 
             position: absolute;
             border-radius: 8px 0px; 
@@ -126,7 +127,7 @@
             background-color: rgb(255, 246, 246);
         }
          .container{
-            z-index: 100;
+            z-index: 1;
          }
         table tfoot tr:last-child td:first-child {
             border-bottom-left-radius: 5px;
@@ -143,10 +144,23 @@
 			 
              border-radius:20px ;
         }
-        #tbtable thead .tblcolor{
-            border-radius: 3px;
+        #tbtable thead .tblcolor{ 
+            border-radius: 3px;  
          }
          .op{opacity: 0.9;}
+         tbody, td, tfoot, th, thead, tr {
+            border-bottom: none !important;
+            border-width: 1px; 
+            border-collapse: separate;
+            font-style: normal;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: rgb(100, 99, 98);
+        }
+        tr td input{
+            border: none !important;
+            outline: none;
+            box-shadow: none;
+        }
     </style>
     
     </head>
@@ -155,12 +169,12 @@
       
         <div class="container" >
             <div class="row rounded m-0 p-0 ">
-                <br><br><br>
-                <!-- <h5 class="text-center text-secondary h3 my-3 py-2 ">Work Report</h5> -->
+                <!-- <br><br><br> -->
+                <h5 class="text-center text-secondary h3 my-3 py-2 ">Weekly Updates</h5>
             </div>
             <div class="row align-middle  pt-2 mx-0 tblcolor rounded-top"  >
                 <div class="col fw-bold text-center align-middle">
-                    <span class="align-middle text-gray fw-bolder"> Time Period</span>
+                    <span class="align-middle text-gray fw-light h5 "> Time Period</span>
                 </div>
                 <div class="col d-flex justify-content-between  align-middle">  
                     <button class="rounded btn btn-secondary h-75 px-2 me-2"  onclick="PrevWeekReport()" id="btnPrevWeekReport" >
@@ -187,7 +201,7 @@
                             <span class="text-center rounded bg-white text-dark p-2 op">  Customer </span>
                         </td>
                         <td class="text-center op" colspan="2"> 
-                                            <span class=" rounded bg-white text-dark p-2 op px-5"> Work Items</span> </td>
+                                            <span class=" rounded bg-white text-dark p-2 op px-5">Projects</span> </td>
                         <td  id="monDate" class="op">  <span class=" rounded bg-white text-dark p-2 op  "> Mon </span> </td>
                         <td  id="tueDate" class="op">  <span class=" rounded bg-white text-dark p-2 op  "> Tue </span> </td>
                         <td  id="wedDate" class="op">  <span class=" rounded bg-white text-dark p-2 op  "> Wed </span> </td>
@@ -205,14 +219,14 @@
                 </tbody>
                 <tfoot >
                     <td colspan="3" class="text-center"> </td>
-                    <td id="mov_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="tue_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="web_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="thu_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="fri_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="sat_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="sun_v_t"><input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="htotal" ><input  type="number"   readonly    class="d-inline form-control  w-75 ms-2"      placeholder="HH"  > </input> </td>
+                    <td id="mov_v_t" class="text-center"></td>
+                    <td id="tue_v_t" class="text-center"></td>
+                    <td id="web_v_t" class="text-center"></td>
+                    <td id="thu_v_t" class="text-center"></td>
+                    <td id="fri_v_t" class="text-center"></td>
+                    <td id="sat_v_t" class="text-center"></td>
+                    <td id="sun_v_t" class="text-center"></td>
+                    <td id="htotal"  class="text-center"></td>
                 </tfoot>
             </table>
         </div>
@@ -351,14 +365,14 @@
                 }
                 else if($(ob).val()=="" || $(ob).val()>0){
                     let rsum=0;   
-                    $(ob).closest("tr").find("td:eq(9) input:first ").val('00');
+                    $(ob).closest("tr").find("td:eq(9) ").html('');
                     $(ob).closest('tr').find('td').each(function(){
                         if(!isNaN(Number(jQuery(this).find("input:first").val()))){
                             rsum=rsum+Number(jQuery(this).find("input:first").val());
                         };
                         rsum;
                     });
-                    $(ob).closest("tr").find("td:eq(9) input:first ").val(rsum==0?"00":rsum);
+                    $(ob).closest("tr").find("td:eq(9) ").html(rsum==0?"":rsum);
                     calculate();
                 } 
                 // if($(ob).val()>0){
@@ -380,7 +394,7 @@
                     }) 
                 });
               
-                $("#mov_v_t input:first").val(mon==0?"00":mon);
+                $("#mov_v_t ").html(mon==0?"":mon);
                 let tue = 0;
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(3).each(function(){
@@ -389,7 +403,7 @@
                         };
                     }) 
                 });
-                $("#tue_v_t   input:first").val(tue==0?"00":tue);
+                $("#tue_v_t   ").html(tue==0?"":tue);
                 let wed = 0; 
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(4).each(function(){
@@ -398,7 +412,7 @@
                         };
                     }) 
                 });
-                $("#web_v_t input:first").val(wed==0?"00":wed);
+                $("#web_v_t ").html(wed==0?"":wed);
                 let thu = 0; 
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(5).each(function(){
@@ -407,7 +421,7 @@
                         };
                     }) 
                 }); 
-                $("#thu_v_t input:first").val(thu==0?"00":thu);
+                $("#thu_v_t ").html(thu==0?"":thu);
 
                 let fri = 0; 
                 $('#tbtable tr' ).each( function () {
@@ -417,7 +431,7 @@
                         };
                     }) 
                 }); 
-                $("#fri_v_t input:first").val(fri==0?"00":fri);
+                $("#fri_v_t ").html(fri==0?"":fri);
  
                 let sat = 0; 
                 $('#tbtable tr' ).each( function () {
@@ -427,7 +441,7 @@
                         };
                     }) 
                 });  
-                $("#sat_v_t input:first ").val(sat==0?"00":sat);
+                $("#sat_v_t input:first ").val(sat==0?"":sat);
 
                 let sun = 0;  
                 $('#tbtable tr' ).each( function () {
@@ -437,7 +451,7 @@
                         };
                     }) 
                 });  
-                $("#sun_v_t input:first").val(sun==0?"00":sun);
+                $("#sun_v_t ").html(sun==0?"":sun);
                 let total = 0;  
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(9).each(function(){
@@ -446,7 +460,7 @@
                         };
                     }); 
                 });  
-                $("#htotal input:first").val(total==0?"00":total); 
+                $("#htotal ").html(total==0?"":total); 
             };
 
       
@@ -481,6 +495,7 @@
                         type: 'GET',
                         dataType: 'json',
                         success: function(obj, success,event){
+                            console.log(obj);
                             for (let i = $('#tbtable tr').length -2 ; i > 0; i--) {
                                 $('#tbtable tr').eq(i).remove();
                             }
@@ -500,7 +515,7 @@
                                             let hours = d[i][1][j]["hours"]; 
                                             let descr = d[i][1][j]["descr"];   
                                             let t =  ' <td>'
-                                                +' <input type="number"    name="hours"     readonly    class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
+                                                +' <input type="number"    name="hours"     readonly    class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder=""> ' 
                                                 +' <textarea class="h-n h-n-blank d-none"   name="descr"   readonly    ></textarea>' 
                                                 +' </td>';
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
@@ -509,7 +524,7 @@
                                             let hours = d[i][1][j]["hours"]; 
                                             let descr = d[i][1][j]["descr"];    
                                             let   t = ' <td> ' 
-                                                +' <input type="number"  value='+hours+'    name="hours"  readonly  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
+                                                +' <input type="number"  value='+hours+'    name="hours"  readonly  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="">' 
                                                 +' <textarea class="h-n    '+ (descr==""?" h-n-empty":"")+'"  name="descr"   readonly  >' +' ' +descr +'</textarea>'  
                                                 +'</td>';
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
@@ -535,8 +550,8 @@
                                     let spn = d[i][0];
                                     let cstr = spn.replace("[",'').replace("]",'').replace(",",'');
                                     let arr = cstr.split(' ');
-                                    let sl = '<td><p class="text-center border rounded p-1 mt-1 bg-white" >'+arr[0] +' </p></td>' 
-                                            + '<td  colspan="2"> <p class="text-center border rounded bg-white p-1 mt-1" > '+arr[1] +' </p> </td> ' ;
+                                    let sl = '<td><p class="text-center   p-1 mt-1 " >'+arr[0] +' </p></td>' 
+                                            + '<td  colspan="2"> <p class="text-center  bg-white p-1 mt-1" > '+arr[1] +' </p> </td> ' ;
                                         
                                     for (let j = 0; j <d[i][1].length; j++) {
                                         if( d[i][1][j]["id"] == 0){
@@ -545,10 +560,9 @@
                                             let pName = d[i][1][j]["projectName"];
                                             let hours = d[i][1][j]["hours"]; 
                                             let descr = d[i][1][j]["descr"];   
-                                            let day = d[i][1][j]["day"];   
-                                            let status = d[i][1][j]["status"];   
+                                            let day = d[i][1][j]["day"];    
                                             let t =  ' <td>'
-                                                +' <input type="number"    name="hours"          min="1" max="24" class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH"> ' 
+                                                +' <input type="number"    name="hours"          min="1" max="24" class="d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder=""> ' 
                                                 +' <input type="number"  value='+eId+'      name="empId"          class="d-inline d-none"  > ' 
                                                 +' <input type="number"  value='+pId+'      name="projectId"      class="d-inline d-none"  > ' 
                                                 +' <input type="text"    value='+pName+'    name="projectName"    class="d-inline d-none"  > ' 
@@ -564,10 +578,9 @@
                                             let pName = d[i][1][j]["projectName"];
                                             let hours = d[i][1][j]["hours"]; 
                                             let descr = d[i][1][j]["descr"];    
-                                            let day = d[i][1][j]["day"];   
-                                            let status = d[i][1][j]["status"];   
+                                            let day = d[i][1][j]["day"];      
                                             let   t = ' <td> ' 
-                                                +' <input type="number"  value='+hours+'    name="hours" min="1"  max="24"  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="HH">' 
+                                                +' <input type="number"  value='+hours+'    name="hours" min="1"  max="24"  class=" d-inline form-control input-sm w-75 " oninput="cal(this)" onchange="cal(this)"  placeholder="">' 
                                                 +' <input type="number"  value='+id+'       name="id"                       class=" d-inline d-none"  > ' 
                                                 +' <input type="number"  value='+eId+'      name="empId"                    class=" d-inline d-none"  > ' 
                                                 +' <input type="number"  value='+pId+'      name="projectId"                class=" d-inline d-none"  > ' 
@@ -593,14 +606,14 @@
                     });
                 }
                 function tblRefresh(){
-                    $("#tue_v_t input:first ").val('00');
-                    $("#mov_v_t input:first ").val('00');
-                    $("#web_v_t input:first ").val('00');
-                    $("#thu_v_t input:first ").val('00');
-                    $("#fri_v_t input:first ").val('00');
-                    $("#sat_v_t input:first ").val('00');
-                    $("#sun_v_t input:first ").val('00');
-                    $("#htotal  input:first ").val('00'); 
+                    $("#tue_v_t input:first ").val('');
+                    $("#mov_v_t input:first ").val('');
+                    $("#web_v_t input:first ").val('');
+                    $("#thu_v_t input:first ").val('');
+                    $("#fri_v_t input:first ").val('');
+                    $("#sat_v_t input:first ").val('');
+                    $("#sun_v_t input:first ").val('');
+                    $("#htotal  input:first ").val(''); 
                 }
                 function calRowOnLoad() { 
                     let rowCount = $('#tbtable tr').length;

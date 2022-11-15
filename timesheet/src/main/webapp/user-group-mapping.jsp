@@ -106,7 +106,8 @@ body{
                             </div>
                             <!-- Save changes button-->
                             <div class="row justify-content-center mt-3 ">
-                                <button class="btn btn-primary px-3 w-auto" type="submit" id="btnSave"  >
+                                <button class="btn btn-secondary btn-sm px-3 w-auto " onclick="history.back()" > Back </button>
+                                <button class="btn btn-primary px-3 w-auto ms-2" type="submit" id="btnSave">
                                     <span id="loadingBtn"> </span> &nbsp; Assign Designation &nbsp;
                                 </button>
                             </div>
@@ -154,7 +155,7 @@ body{
                     }).
                     then(function (isOkay) {
                         if (isOkay) {
-                            location.replace('/user-group-mapping-master');
+                            location.replace('/user-master');
                         }
                     });
                 },error : function(data,msg,xh){

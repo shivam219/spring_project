@@ -19,6 +19,8 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
 	public Boolean existsByEmpIdAndEmpPassword(Long empId, String empPassword);
 
+	public Boolean existsByEmpId(Long empId);
+
 	@Modifying
 	@Query(value = "insert into ess_employee (emp_id , emp_name, emp_email, emp_password,emp_password_encrypt, emp_city ,emp_address,emp_phone,emp_pincode) "
 			+ "values (:id, :name ,  :email , :pass ,  sha1(:pass) , :city , :address , :phone , :pincode );", nativeQuery = true)
@@ -51,6 +53,7 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 			+ "select * from  ess_employee  where emp_id in  (select emp_id from  ess_user_master where emp_id not in (SELECT emp_id FROM ess.ess_user_group_mapping))" ,nativeQuery =  true)
 	public List<Employee> findEmployeeNotHavingGroup();
 
-
+	@Query(value="SELECT * FROM ess.ess_employee where emp_id not in ( SELECT emp_id FROM ess.ess_user_master)" ,nativeQuery = true)
+	public List<Employee> findAllEmployeeNotMapUser();
 	
 }

@@ -79,7 +79,7 @@ body{
                                 <table>
                                     <tr>
                                         <label class="small mb-1" for="empName">Employee Name</label>
-                                        <input class="form-control" id="empId" type="text" placeholder="Choose Employee Name" value="${empId}" readonly>    
+                                        <h6>${emp.getFirstName()} ${emp.getLastName()}</h6>
                                     </tr>
                                     <tr>
                                         <div>
@@ -118,6 +118,7 @@ body{
                             </div>
                             <!-- Save changes button-->
                             <div class="row justify-content-center mt-3 ">
+                                <button class="btn btn-secondary px-5  mt-2 mt-sm-0 me-2 w-auto " type="button" onclick="history.back()" > Back  </button> 
                                 <button class="btn btn-primary px-3 w-auto" type="submit" id="btnSave"  >
                                     <span id="loadingBtn"> </span> &nbsp; Save Changes &nbsp;
                                 </button>

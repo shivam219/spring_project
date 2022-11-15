@@ -6,10 +6,9 @@
 <head> 
     <title>Approve Work Report</title>
     <style> 
-        body{
-            background: #e1edf9;
-            scroll-behavior: smooth;
-        }
+      table tr td ,  table tr th{
+		overflow: hidden;
+	    }
         table {
             table-layout: fixed;
         }
@@ -28,69 +27,12 @@
         ::-webkit-scrollbar {
            width: 0px;
         }
+        .h-n{
+            cursor:grab;
+            border-top: 12px solid transparent;
+            border-right: 12px solid transparent; 
 
-        /* Track */
-        ::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 5px grey; 
-            border-radius: 10px;
         }
-        
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-            background: rgb(241, 216, 216); 
-            border-radius: 10px;
-        }
-
-        /* Handle on hover */
-        ::-webkit-scrollbar-thumb:hover {
-            background: #00ff40; 
-        }    
-        .h-n{  
-            color: rgb(52, 52, 52);
-            width: 8px;
-            height: 8px;
-            resize: none;
-            overflow-y: auto;
-            visibility: visible;
-            position: absolute;  /* fixed that to contain*/
-            overflow: hidden;
-            font-family: Verdana;
-            text-align: center;
-            letter-spacing: 0; 
-            
-            transition: all 0.2s ease-in-out;
-            /* box-shadow: 4px 4px 4px rgb(0 0 0 / 25%); */
-            border-radius:3px ;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            background-color: rgb(203, 238, 233);  
-            margin-left: 2px;
-        }
-       
-        /* .h-n:: */
-       .tblcolor{
-            background-color: rgb(168, 174, 193);
-       }
-       table tr td p {
-            overflow: hidden;
-       }
-        /* h-n-blank  */
-        .h-n-blank{
-            background-color: rgb(233, 233, 73);
-        }
-        .h-n-empty{
-            background-color: rgb(250, 162, 104);
-        }
-        .h-n-fill{
-            background-color: rgb(203, 238, 233); 
-        }
-        td ::-moz-selection { /* Code for Firefox */
-            color: red;
-            background: yellow;
-        }
-
-      
         .acti_desc {
             right: 0px;
             height: 100vh;
@@ -99,7 +41,7 @@
             background-color: #e8eae6;
             box-sizing: border-box;
             padding: 20px;
-            z-index: 1000;
+            z-index: 10;
             display: none; 
             position: absolute;
             border-radius: 8px 0px; 
@@ -134,7 +76,7 @@
             background-color: rgb(255, 246, 246);
         }
          .container{
-            z-index: 100;
+            z-index: 1;
          }
         table tfoot tr:last-child td:first-child {
             border-bottom-left-radius: 5px;
@@ -143,14 +85,50 @@
         table tfoot tr:last-child td:last-child {
             border-bottom-right-radius: 5px;
         }
-        table , .row{
-            user-select: none;
-        }
-         
         h5{
-            background-image: linear-gradient(108.1deg, rgba(167, 220, 225, 1) 11.2%,rgb(174, 221, 228) 88.9%);
-
-             border-radius:20px ;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            background-image: linear-gradient(108.1deg, rgba(167, 220, 225, 1) 11.2%,rgb(174, 221, 228) 88.9%); 
+            border-radius:20px ;
+        }
+        #tbtable thead { 
+            border-radius: 3px;  
+         }
+         .op{opacity: 0.9;}
+         tbody, td, tfoot, th, thead, tr { 
+            border-bottom: none !important;
+            border-width: 1px; 
+            border-collapse: separate;
+            font-style: normal;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-align: center;
+            color: rgb(70, 69, 67);
+        } 
+        tr td input{
+            text-align: center;
+            color: rgb(70, 69, 67);
+            border: none !important;
+            outline: none;
+            box-shadow: none; 
+            width: 100%;
+        }
+        table tr,.row-color {
+            background-color: #fff
+        }   
+ 
+        .table>:not(caption)>*>* {
+            padding: 0.50rem 0.75rem;
+        }
+        p, h1,h2,h3,h4,h5,h6{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        ul li{
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: 500;
+            color: rgb(131, 130, 130); 
+        }   
+        .holiday-leave-card{
+            height: 130px;
+            overflow-y: auto;
         }
     </style>
     
@@ -160,12 +138,13 @@
     <body > 
       
         <div class="container" >
-            <div class="row rounded m-0 p-0 ">
-                <h5 class="text-center text-secondary h3 my-3 py-2 ">Approve Work Report</h5>
+            <div class="row rounded m-0 p-0  ">
+                <br><br> 
+                <!-- <h5 class="text-center text-secondary h3 my-3 py-2 ">Approve Work Report</h5> -->
             </div>
-            <div class="row align-middle  pt-2 mx-0 tblcolor rounded-top"  >
-                <div class="col fw-bold text-center align-middle">
-                    <select name="empList" id="empList" class="form-control sl-emp h-100" onchange="fetchEmpWork()" style="outline: none;"> 
+            <div class="row align-middle bg-white pt-2 mx-0  rounded-top"  >
+                <div class="col align-middle">
+                    <select name="empList" id="empList" class="w-100" onchange="fetchEmpWork()" style="outline: none;"> 
                         <option ></option>
                         <c:forEach items="${empList}" var="emp" varStatus="loop">
                             <option value="${emp.getEmpId()}">${emp.getFirstName()} ${emp.getLastName()}
@@ -191,9 +170,9 @@
                 </div>
                 
             </div>
-            <table class="table table-striped table-hover  mb-0 mt-0 rounded " id="tbtable"  >
+            <table class="table mb-0 mt-0 rounded " id="tbtable"  >
                 <thead>
-                    <tr class=" tblcolor  "  >
+                    <tr class="   "  >
                         <td class="text-center" >Customer</td>
                         <td class="text-center" colspan="2">Work Items</td>
                         <td class="text-center" id="monDate">Mon</td>
@@ -207,18 +186,18 @@
                     </tr> 
                 </thead>
                 <tbody>
-                    <td colspan='11' style=' background-color: rgb(168, 174, 193);'> <p class='text-center text-dark p-0 m-0'>No Data available</p></td>
+                    <td colspan='11' >No Data available</td>
                 </tbody>
-                <tfoot class="tblcolor" >
+                <tfoot class="" >
                     <td colspan="3" class="text-center"> </td>
-                    <td id="mov_v_t"> <input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="tue_v_t"> <input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="web_v_t"> <input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="thu_v_t"> <input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="fri_v_t"> <input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="sat_v_t"> <input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="sun_v_t"> <input  type="number"   readonly    class="d-inline form-control input-sm w-75 "  placeholder="HH"  > </input> </td>
-                    <td id="htotal" > <input  type="number"   readonly    class="d-inline form-control  w-75 ms-2"      placeholder="HH"  > </input> </td>
+                    <td id="mov_v_t"> </td>
+                    <td id="tue_v_t"> </td>
+                    <td id="web_v_t"> </td>
+                    <td id="thu_v_t"> </td>
+                    <td id="fri_v_t"> </td>
+                    <td id="sat_v_t"> </td>
+                    <td id="sun_v_t"> </td>
+                    <td id="htotal" > </td>
                 </tfoot>
             </table>
         </div>
@@ -252,17 +231,13 @@
             
             function AddHoverToHourIn(){           
                 $(".h-n").click( function (event) {
-                    if( $(this).html() ==""){
-                        console.log($(this).val());  
-                    }
-                    if($(this).siblings("input:first").val() && !($(this).html())){
-                        // prevActivityDesc = $(this);
-                        $(this).blur();
-                        $("#acti_desc").val($(this).val());
+                    if($(this).siblings("input:first").val()){
+                        prevActivityDesc = $(this).siblings("textarea:first"); 
+                        $("#acti_desc").val($(this).siblings("textarea").html());
                         actiDescPopShow();
                     }
                 });
-                $('#tbtable tr').addClass("tblcolor");
+                $('#tbtable tr').addClass("");
             };
             function padTo2Digits(num) {
                 return num.toString().padStart(2, '0');
@@ -335,89 +310,111 @@
                         };
                         rsum;
                     });
-                    $(ob).closest("tr").find("td:eq(9) input:first ").val(rsum==0?"00":rsum);
+                    $(ob).closest("tr").find("td:eq(9) input:first ").val(rsum==0?"":rsum);
                     calculate();
                 }
-            }
+            } 
             /*vertical total*/
             function calculate(){      
                 tblRefresh();
                 let mon = 0;             
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(2).each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").eq(0).val()))){
-                            mon=mon+Number(jQuery(this).find("input").val());
-                        };
-                    }) 
+                        if($(this).find("input").eq(0).val()){
+                            mon=mon+Number($(this).find("input").val());
+                            $(this).find("input").eq(0).siblings("div").eq(0).css({"border-right":"12px solid #555"});
+                        }else{
+                            $(this).find("input").eq(0).siblings("div").eq(0).css({"border-right":"12px solid transparent"});
+                        }
+                     }) 
                 });
               
-                $("#mov_v_t input:first").val(mon==0?"00":mon);
+                $("#mov_v_t ").html(mon==0?"":mon);
                 let tue = 0;
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(3).each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").eq(0).val()))){
+                        if($(this).find("input").eq(0).val()){
                             tue=tue+Number(jQuery(this).find("input").val());
-                        };
+                            $(this).find("input").eq(0).siblings("div").eq(0).css({"border-right":"12px solid #555"});
+                        }else{
+                            $(this).find("input").eq(0).siblings("div").eq(0).css({"border-right":"12px solid transparent"});
+                        }
                     }) 
                 });
-                $("#tue_v_t   input:first").val(tue==0?"00":tue);
+                $("#tue_v_t   ").html(tue==0?"":tue);
                 let wed = 0; 
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(4).each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").eq(0).val()))){
+                        if($(this).find("input").eq(0).val()){
                             wed=wed+Number(jQuery(this).find("input").val());
-                        };
+                            $(this).find("input").eq(0).siblings("div").eq(0).css({"border-right":"12px solid #555"});
+                        }else{
+                            $(this).find("input").eq(0).siblings("div").eq(0).css({"border-right":"12px solid transparent"});
+                        }
                     }) 
                 });
-                $("#web_v_t input:first").val(wed==0?"00":wed);
+                $("#web_v_t ").html(wed==0?"":wed);
                 let thu = 0; 
                 $('#tbtable tr' ).each( function () {
-                    jQuery(this).find('td').eq(5).each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").eq(0).val()))){
+                    jQuery(this).find('td').eq(5).each(function(){ 
+                        if($(this).find("input").eq(0).val()){
                             thu=thu+Number(jQuery(this).find("input").val());
-                        };
+                            $(this).find("input").eq(0).siblings("div").eq(0).css({"border-right":"12px solid #555"});
+                        }else{
+                            $(this).find("input").eq(0).siblings("div").eq(0).css({"border-right":"12px solid transparent"});
+                        }
                     }) 
                 }); 
-                $("#thu_v_t input:first").val(thu==0?"00":thu);
+                $("#thu_v_t ").html(thu==0?"":thu);
 
                 let fri = 0; 
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(6).each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").eq(0).val()))){
+                        if($(this).find("input").eq(0).val()){
                             fri=fri+Number(jQuery(this).find("input").val());
-                        };
+                            $(this).find("input").eq(0).siblings("div").eq(0).css({"border-right":"12px solid #555"});
+                        }else{
+                            $(this).find("input").eq(0).siblings("div").eq(0).css({"border-right":"12px solid transparent"});
+                        }
                     }) 
                 }); 
-                $("#fri_v_t input:first").val(fri==0?"00":fri);
+                $("#fri_v_t ").html(fri==0?"":fri);
  
                 let sat = 0; 
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(7).each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").eq(0).val()))){
+                        if($(this).find("input").eq(0).val()){
                             sat=sat+Number(jQuery(this).find("input").val());
-                        };
+                            $(this).find("input").eq(0).siblings("div").eq(0).css({"border-right":"12px solid #555"});
+                        }else{
+                            $(this).find("input").eq(0).siblings("div").eq(0).css({"border-right":"12px solid transparent"});
+                        }
                     }) 
                 });  
-                $("#sat_v_t input:first ").val(sat==0?"00":sat);
+                $("#sat_v_t  ").html(sat==0?"":sat);
 
                 let sun = 0;  
                 $('#tbtable tr' ).each( function () {
                     jQuery(this).find('td').eq(8).each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input").eq(0).val()))){
+                        if($(this).find("input").eq(0).val()){
                             sun=sun+Number(jQuery(this).find("input").val());
-                        };
+                            $(this).find("input").eq(0).siblings("div").eq(0).css({"border-right":"12px solid #555"});
+                        }else{
+                            $(this).find("input").eq(0).siblings("div").eq(0).css({"border-right":"12px solid transparent"});
+                        }
                     }) 
                 });  
-                $("#sun_v_t input:first").val(sun==0?"00":sun);
+                $("#sun_v_t ").html(sun==0?"":sun);
+                /*vertically calulating last td data*/
                 let total = 0;  
                 $('#tbtable tr' ).each( function () {
-                    jQuery(this).find('td').eq(9).each(function(){
-                        if(!isNaN(Number(jQuery(this).find("input:first").val()))){
-                            total=total+Number(jQuery(this).find("input:first").val());
-                        };
-                    }); 
+                    $(this).find('td').eq(9).each(function(){
+                       if(!(isNaN(new String($(this).html()).trim() ))){
+                        total = total +  Number( $(this).html());
+                       }
+                     }); 
                 });  
-                $("#htotal input:first").val(total==0?"00":total); 
+                $("#htotal").html(total==0?"":total); 
             };
 
       
@@ -469,30 +466,30 @@
                                     let spn = d[i][0];
                                     let cstr = spn.replace("[",'').replace("]",'').replace(",",'');
                                     let arr = cstr.split(' ');
-                                    let sl = '<td><p class="text-center border rounded p-1 mt-1 bg-white" style="opacity: 0.8;" >'+arr[0] +' </p></td>' 
-                                            + '<td  colspan="2"> <p class="text-center border rounded bg-white p-1 mt-1" style="opacity: 0.8;"  > '+arr[1] +' </p> </td> ' ;
-                                        
-                                    for (let j = 0; j <d[i][1].length; j++) {
+                                    let sl = '<td> '+arr[0] +' </td>' 
+                                            + '<td  colspan="2"> '+arr[1] +'  </td> ' ;      
+                                            for (let j = 0; j <d[i][1].length; j++) {
                                         if( d[i][1][j]["id"] == 0){
                                             let hours = d[i][1][j]["hours"]; 
                                             let descr = d[i][1][j]["descr"];   
                                             let t =  ' <td>'
-                                                +' <input type="number"    name="hours"     readonly    class="d-inline form-control input-sm w-75 "  onchange="cal(this)"  placeholder="HH"> ' 
+                                                +' <input type="number"    name="hours"     readonly    oninput="cal(this)" onchange="cal(this)"  placeholder=""> ' 
+                                                +' <textarea class="d-none h-n"          name="descr"          ></textarea>' 
                                                 +' </td>';
-                                                // +' <textarea class="h-n h-n-blank"   name="descr"   readonly    ></textarea>' 
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
                                         }
                                         else{
                                             let hours = d[i][1][j]["hours"]; 
                                             let descr = d[i][1][j]["descr"];    
                                             let   t = ' <td> ' 
-                                                +' <input type="number"  value='+hours+'    name="hours"  readonly  class=" d-inline form-control input-sm w-75 " onchange="cal(this)"  placeholder="HH">' 
-                                                +' <textarea class="h-n '+ (descr==""?" h-n-empty":"")+'"  name="descr"   readonly  >'+ ' '+descr +'</textarea>'  
+                                                +' <input type="number"  value='+hours+'    name="hours"  readonly   oninput="cal(this)" onchange="cal(this)"  placeholder="">' 
+                                                +' <textarea class="d-none" name="descr" >' +descr +'</textarea>'  
+                                                + '<div class="h-n"></div>'
                                                 +'</td>';
                                             row.innerHTML = (( row.innerHTML.toString()) + t);
                                         }  
                                     }   
-                                    row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td class="text-center">  <input input type="number"  readonly  class="d-inline form-control input-sm w-75 " /> </td>' );
+                                    row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td>   <input  type="number"  readonly  />  </td>' );
                                     $("#tbtable").append(row);
                                 }
                                 calRowOnLoad();
@@ -504,7 +501,7 @@
                     let rowCount = $('#tbtable tr').length;
                     if(rowCount == 2) { 
                         let row = document.createElement("tr");
-                        row.innerHTML= "<td colspan='11' style=' background-color: rgb(168, 174, 193);'> <p class='text-center text-dark p-0 m-0'>No Data available</p></td>";
+                        row.innerHTML= "<td colspan='11' > <p class='text-center text-dark p-0 m-0'>No Data available</p></td>";
                         $("#tbtable").append(row);
                         tblRefresh();
                         $("#btnApprove").val("Approve").attr('disabled',true);
@@ -513,14 +510,14 @@
                             
                 }
                 function tblRefresh(){
-                    $("#tue_v_t input:first ").val('00');
-                    $("#mov_v_t input:first ").val('00');
-                    $("#web_v_t input:first ").val('00');
-                    $("#thu_v_t input:first ").val('00');
-                    $("#fri_v_t input:first ").val('00');
-                    $("#sat_v_t input:first ").val('00');
-                    $("#sun_v_t input:first ").val('00');
-                    $("#htotal  input:first ").val('00'); 
+                    $("#tue_v_t").html('');
+                    $("#mov_v_t").html('');
+                    $("#web_v_t").html('');
+                    $("#thu_v_t").html('');
+                    $("#fri_v_t").html('');
+                    $("#sat_v_t").html('');
+                    $("#sun_v_t").html('');
+                    $("#htotal ").html(''); 
                 }
                 function calRowOnLoad() { 
                     let rowCount = $('#tbtable tr').length;
@@ -563,7 +560,7 @@
                         }
                     }); 
                 }else{
-                    alert("No Employee Selected")
+                    // alert("No Employee Selected")
                 }
                 $(ref).blur();
             }
@@ -584,8 +581,6 @@
                           fetchwork();
                         }
                     }); 
-                }else{
-                    alert("No Employee Selected")
                 }
                 $(ref).blur();
 			}
@@ -594,7 +589,13 @@
                 if(empId){
                     fetchwork();
                 }else{
-                    alert("No Employee Selected")
+                    for (let i = $('#tbtable tr').length -2; i > 0; i--) {
+                    $('#tbtable tr').eq(i).remove();
+                }
+                let row = document.createElement("tr");
+                    row.innerHTML= "<td colspan='11' > <p class='text-center text-dark p-0 m-0'>No Data available</p></td>";
+                    $("#tbtable").append(row);
+                    tblRefresh();
                 }
             }
 

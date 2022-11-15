@@ -1,15 +1,11 @@
 <%@ include file="menu.jsp" %>
 <%@page import="java.util.List" %>
 <%@page import="java.util.Arrays" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
-
 <head>
 	<title>Project Mapping</title>
 
 	<link href="css/select@2.4.1.0.min.css" rel="stylesheet" />
-	<!-- <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
 	<style>
 		.btn-util{
 			margin-top: 3px;
@@ -19,18 +15,18 @@
 			display: block;
 			cursor: pointer;
 		}
-	</style>
+		</style>
 </head>
 
 <body>
 	<div class="container">
 		<form action="projectassign" method="POST" id="projectMappingForm">
 			<div class="row justify-content-center">
-				<div class="col-md-6 offest-3">
+				<div class="col-md-8 offest-2">
 					<div class="card-body">
 							<div class="form-group mb-3">
-								<label class="ms-1 fw-bold" >Select Employee</label>
-								<select name="empList" id="empList" class="form-control sl-emp" oninput="myFunction()"  style="outline: none;"> 
+								<label class="ms-1 fw-bold" >Choose Employee</label>
+								<select name="empList" id="empList" class="form-control sl-emp form-select" oninput="myFunction()"  style="outline: none;border:none ;"> 
 									<option value=""></option>
 									<c:forEach items="${empList}" var="empName" varStatus="loop">
 										<option value="${empName.getEmpId()}">${empName.getFirstName()}

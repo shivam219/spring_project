@@ -25,9 +25,9 @@ public class CustomerController {
 		m.addAttribute("customerList", customerService.getAllcustomer());
 	}
 
-	@GetMapping("/add-customer")
+	@GetMapping("/customer-add")
 	public String getCustomerMaster() {
-		return "add-customer";
+		return "customer-add";
 	}
 	
 	@GetMapping("customer-dashboard")
