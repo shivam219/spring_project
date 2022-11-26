@@ -16,6 +16,29 @@ import com.timesheet.model.Leave;
 
 @Service
 public class EmailService {
+
+	public void sendEmail(String to, String msg, String subject) throws Exception {
+		String from = "noreply@ess.net.in";
+		String pwd = "P@ssw0rd";
+		String host = "121.240.21.7";
+		Properties pro = new Properties();
+		pro.put("mail.smtp.host", host);
+		pro.put("mail.smtp.port", "587");
+		pro.put("mail.smtp.tls.enable", "true");
+		pro.put("mail.smtp.auth", "true");
+
+		Session ss = Session.getInstance(pro, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(from, pwd);
+			}
+		});
+			MimeMessage m = new MimeMessage(ss);
+			m.setFrom(new InternetAddress(from));
+			m.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			m.setSubject(subject);
+			m.setContent(msg, "text/html");
+			Transport.send(m);
+	}
 	public void leaveSubmitEmailToEmployee(Leave l, String emailId) {
 		try {
 

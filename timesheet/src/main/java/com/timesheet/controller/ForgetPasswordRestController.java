@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.timesheet.model.Employee;
+import com.timesheet.model.User;
 import com.timesheet.repository.EmployeeRepository;
+import com.timesheet.repository.UserRepository;
+import com.timesheet.service.EmailService;
 import com.timesheet.service.EmployeeService;
 import com.timesheet.service.WorkService;
 
@@ -26,7 +28,13 @@ public class ForgetPasswordRestController {
 	EmployeeService employeeService;
 	@Autowired
 	EmployeeRepository er;
+	@Autowired
+	UserRepository ur;
 
+	@Autowired
+	EmailService emailService;
+	
+	
 	@GetMapping(value = "/get-otp")
 	public ResponseEntity<Object>  getOtp(@RequestParam("empId") Long empId) {
 		if(!er.existsByEmpId(empId)) {
@@ -37,7 +45,7 @@ public class ForgetPasswordRestController {
 		String msg = "OTP : " + otp;
 		String subject = "Forget Password email";
 		try {
-			workService.sendEmail(to, msg, subject);				
+			emailService.sendEmail(to, msg, subject);				
 		} catch (Exception e) {			
 			System.out.println("error");
 			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
@@ -56,8 +64,8 @@ public class ForgetPasswordRestController {
 	}
 
 	@PostMapping(value = "reset-password")
-	public ResponseEntity<Object> resetPassword(Model m, @RequestBody Employee emp) {
-		er.updateEmployeePassword(emp.getEmpId(), emp.getEmpPassword());
+	public ResponseEntity<Object> resetPassword(Model m, @RequestBody User emp) {
+		ur.updateUserPassword(emp.getEmpId(), emp.getPassword());
 		try {
 			Thread.sleep(1000);
 		} catch (Exception e) {

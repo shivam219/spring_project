@@ -1,5 +1,7 @@
 package com.timesheet.controller;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,14 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.timesheet.model.Employee;
+import com.timesheet.model.User;
+import com.timesheet.repository.UserRepository;
 import com.timesheet.service.EmployeeService;
 
 @Controller
@@ -24,17 +24,25 @@ public class LoginController {
 
 	@Autowired
 	EmployeeService employeeService;
+	@Autowired
+	UserRepository ur;
 
 	@PostMapping("/loginprocess")
-	public ResponseEntity<Object> loginPost(HttpServletRequest request, Model m, @RequestBody Employee emp) {
-		if (employeeService.isValidEmployee(emp) != null) {
+	public ResponseEntity<Object> loginPost(HttpServletRequest request, Model m, @RequestBody User emp) {
+		Optional<User> user = ur.findByEmpIdAndPassword(emp.getEmpId(), emp.getPassword());
+//		System.out.println(user.get()); getting error or customer domain
+		if (user.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+		}
+		if (user.get().getActive() == 0) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is inactive");
+		} else {
 			HttpSession session = request.getSession();
-			session.setAttribute("empId", emp.getEmpId());
+			session.setAttribute("empId", user.get().getEmpId());
+			session.setAttribute("empName", user.get().getEmployee().getFullName());
 			m.addAttribute("emp", emp);
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body("Login Successfull");
 		}
-		return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User id and password invalid");
-
 	}
 
 	@RequestMapping(value = "/")
@@ -51,7 +59,7 @@ public class LoginController {
 	}
 
 	@GetMapping(value = "/logout")
-	public String logoutPage(HttpServletRequest request) { 
+	public String logoutPage(HttpServletRequest request) {
 		request.getSession().invalidate();
 		return "redirect:/login";
 	}

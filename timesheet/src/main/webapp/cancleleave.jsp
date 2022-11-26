@@ -5,13 +5,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Cancle Leave</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="./assets/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="./assets/animate.css">
-<link rel="stylesheet" type="text/css" href="/assets/select2.min.css">
-<link rel="stylesheet" type="text/css" href="./assets/perfect-scrollbar.css">
-<link rel="stylesheet" type="text/css" href="./assets/util.css">
-<link rel="stylesheet" type="text/css" href="./assets/main.css">
 
 <meta name="robots" content="noindex, follow">
 </head>

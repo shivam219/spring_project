@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ess_work_master")
+@Table(name = "timesheet_work_master")
 public class WorkMaster {
 
 	@Id

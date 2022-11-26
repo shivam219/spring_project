@@ -33,19 +33,13 @@
                         </thead>
                         <tbody>
                             <c:forEach items="${empList}" var="emp" varStatus="loop"> 
-                                <tr>
+                                <tr> 
                                     <td  class="overflow-auto">${emp.getEmpId()}</td> 
-                                    <td  class="overflow-auto" ><a href="/employee-edit?empId=${emp.getEmpId()}" class="text-body ">${emp.getFirstName()} ${emp.getLastName()}</a></td>
+                                    <td  class="overflow-auto" ><a href="/report-user?empId=${emp.getEmpId()}" class="text-body ">${emp.getFullName()}</a></td>
                                     <td> ${emp.getEmpEmail()}</td>
                                     <td  class="overflow-auto" >
                                         <ul class="list-inline mb-0">
-                                                <a href="/employee-edit?empId=${emp.getEmpId()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
-                                            <c:if test='${emp.getActive().equals("1")}'>
-                                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Active" class="px-2 text-success">  <i class="fa-solid fa-circle"> </i>  </a>
-                                            </c:if>
-                                            <c:if test='${!emp.getActive().equals("1")}'>
-                                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="In-Active" class="px-2 text-danger">  <i class="fa-solid fa-circle"> </i>  </a>
-                                            </c:if>                                           
+                                                <a href="/employee-edit?empId=${emp.getEmpId()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>                                           
                                         </ul>
                                     </td>
                                 </tr>

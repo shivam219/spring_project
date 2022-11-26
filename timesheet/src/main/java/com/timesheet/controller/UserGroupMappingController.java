@@ -34,27 +34,26 @@ public class UserGroupMappingController {
 
 	@Autowired
 	UserGroupMappingRepository ugmr;
+
 	@GetMapping(value = "/user-group-mapping-master")
 	public String getuserGroupMappingMaster(Model m) {
 		m.addAttribute("userGroupList", (ugmr.getAllGroup()));
 		List<String[]> allGroup = ugmr.getAllGroup();
-		for(String[] str  :allGroup ) {
-		System.out.println(str[0]);
-		System.out.println(str[1]);
-		System.out.println(str[2]);
+		for (String[] str : allGroup) {
+			System.out.println(str[0]);
+			System.out.println(str[1]);
+			System.out.println(str[2]);
 		}
 		m.addAttribute("empList", (List<Employee>) er.findAll());
 		return "user-group-mapping-master";
 	}
 
-	
 	@GetMapping(value = "/user-group-mapping-add")
 	public String getuserGroupMapping(Model m) {
 		m.addAttribute("userGroupList", ((List<UserGroup>) uGR.findAll()));
 		m.addAttribute("empList", (List<Employee>) er.findEmployeeNotHavingGroup());
-		return "user-group-mapping";
+		return "user-group-mapping-add";
 	}
-
 
 	@PostMapping(value = "/user-group-add-process")
 	public ResponseEntity<Object> addUserGroupAdd(Model m, @RequestBody UserGroupMapping ugm,
@@ -63,11 +62,12 @@ public class UserGroupMappingController {
 			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Duplicate data");
 		}
 		Employee emp = er.findById((Long) request.getSession().getAttribute("empId")).get();
+//		Employee emp = er.findById(9082205005L).get(); //deployment time
 		ugm.setCreatedBy(emp.getFirstName() + " " + emp.getLastName());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
 		String date = sdf.format(new java.util.Date());
 		ugm.setCreatedTime(date);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body( ugmr.save(ugm));
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(ugmr.save(ugm));
 	}
 
 	@GetMapping(value = "/user-group-mapping-edit")

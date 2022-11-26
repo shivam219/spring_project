@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ess_employee_project")
+@Table(name = "timesheet_employee_project_mapping")
 public class EmployeeProject {
 
 	@Id

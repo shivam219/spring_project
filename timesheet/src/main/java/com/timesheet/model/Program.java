@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "ess_program_master")
+@Table(name = "timesheet_program_master")
 @Entity
 public class Program {
 	@Id

@@ -11,7 +11,7 @@ import com.timesheet.model.EmployeeProject;
 
 public interface EmployeeProjectRepository extends CrudRepository<EmployeeProject, Integer> {
 	@Modifying
-	@Query(value = "insert into ess_employee_project (emp_id, project_id) values(:empId, :projectId)", nativeQuery = true)
+	@Query(value = "insert into timesheet_employee_project_mapping (emp_id, project_id) values(:empId, :projectId)", nativeQuery = true)
 	@Transactional
 	public int assignProject(@Param("empId") long empId, @Param("projectId") int projectId);
 	

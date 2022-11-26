@@ -31,8 +31,8 @@ public class LeaveService {
 	}
 
 	public void EmailOnSubmit(Leave l) {
-		this.emailService.leaveSubmitEmailToEmployee(l, "sandeep.gupta@ess.net.in");
 		this.emailService.leaveSubmitEmailToApprover(l, "sandeep.gupta@ess.net.in");
+		this.emailService.leaveSubmitEmailToEmployee(l, "sandeep.gupta@ess.net.in");
 	}
 
 	public String getLeaveId() {

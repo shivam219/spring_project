@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ess_holiday_master")
+@Table(name = "timesheet_holiday_master")
 public class Holiday {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE )

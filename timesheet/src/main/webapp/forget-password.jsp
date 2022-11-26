@@ -118,7 +118,7 @@
 				$("#btnResetPassword").blur();
 				let data = {
 					empId:$("#empId").val(),
-					empPassword:$("#empPassword").val()
+					password:$("#empPassword").val()
 				}
 				$.ajax({
 					type: 'POST',

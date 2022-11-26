@@ -32,6 +32,9 @@ import com.timesheet.repository.WorkRepository;
 public class WorkService {
 
 	@Autowired
+	EmailService emailService;
+
+	@Autowired
 	WorkRepository repository;
 	@Autowired
 	ProjectRepository prepository;
@@ -249,8 +252,6 @@ public class WorkService {
 
 		return map;
 	}
-	
-	
 	public LinkedHashMap<String, List<Work>> getSubmittedWorkOld(String startDate, String endDate, long empId) {
 		System.out.println("fetchin");
 		List<Work> l = repository.getWorByStartDateEndDate(startDate, endDate, empId);
@@ -452,8 +453,6 @@ public class WorkService {
 		List<Work> l = repository.getWorByStartDateEndDate(startDate, endDate, empId);
 		List<Project> plist = (List<Project>) prepository.getProjectByEmpId(empId);
 		Collections.sort(l, (e1, e2) -> e1.getDay().compareTo(e2.getDay()));
-		System.out.println(l);
-		System.out.println(plist);
 
 		LinkedHashMap<String, List<Work>> map = new LinkedHashMap<String, List<Work>>();
 		for (Work w : l) {
@@ -658,7 +657,7 @@ public class WorkService {
 		+ "<br> To Date: " + wm.getEndDate() 
 		+ "<br><br><b>Note</b>: "
 		+ "<br><br>Regards,<br>Human Resources";
-		sendEmail("shivam.choudhary@ess.net.in", msg, "work report submited");
+		emailService.sendEmail("shivam.choudhary@ess.net.in", msg, "work report submited");
 	}
 	// @formatter:on
 
@@ -672,30 +671,6 @@ public class WorkService {
 
 	public int updateStatusRejected(WorkMaster wm) {
 		return wmrepository.updateStatusRejected(wm.getEmpId(), wm.getStartDate(), wm.getEndDate());
-	}
-
-	public void sendEmail(String to, String msg, String subject) throws Exception {
-
-		String from = "noreply@ess.net.in";
-		String pwd = "P@ssw0rd";
-		String host = "121.240.21.7";
-		Properties properties = new Properties();
-		properties.put("mail.smtp.host", host);
-		properties.put("mail.smtp.port", "587");
-		properties.put("mail.smtp.tls.enable", "true");
-		properties.put("mail.smtp.auth", "true");
-
-		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(from, pwd);
-			}
-		});
-			MimeMessage m = new MimeMessage(session);
-			m.setFrom(new InternetAddress(from));
-			m.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-			m.setSubject(subject);
-			m.setContent(msg, "text/html");
-			Transport.send(m);
 	}
 
 }

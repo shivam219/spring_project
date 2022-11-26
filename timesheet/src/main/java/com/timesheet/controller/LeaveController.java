@@ -18,9 +18,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.timesheet.model.Employee;
 import com.timesheet.model.Leave;
+import com.timesheet.repository.EmployeeRepository;
 import com.timesheet.repository.LeaveRepository;
+import com.timesheet.repository.UserRepository;
 import com.timesheet.service.ApproveService;
 import com.timesheet.service.EmailService;
 import com.timesheet.service.LeaveService;
@@ -39,21 +43,30 @@ public class LeaveController {
 	public EmailService emailService;
 	@Autowired
 	LeaveRepository leaveRepository;
+
+	@Autowired
+	EmployeeRepository er;
+
+	@Autowired
+	UserRepository ur;
+
 	String month = "";
 	String year = "";
 
 	@GetMapping(value = "apply-leave")
-	public String applyLeave(Model m) {
-		m.addAttribute("empName", "Sandeep Gupta");
-		m.addAttribute("empId", "9082202001");
-		m.addAttribute("managerId", "9070100404");
-		m.addAttribute("managerName", "Vigneshwari Mam");
-		return new String("applyleave");
+	public ModelAndView applyLeave(HttpServletRequest request) {
+		ModelAndView m = new ModelAndView("applyleave");
+		Long empId = ((Long) request.getSession().getAttribute("empId"));
+		Employee emp = er.findById(empId).get();
+		m.addObject("emp", emp);
+		m.addObject("manager", er.findById(Long.parseLong(ur.findById(empId).get().getManagerId())).get());
+		return m;
 	}
 
 	@GetMapping(value = "approve-leave")
-	public String approveLeave(Model m) {
-		m.addAttribute("leaveList", approveService.leaveList("9070100404", "Pending"));
+	public String approveLeave(Model m, HttpServletRequest request) {
+		Long empId = ((Long) request.getSession().getAttribute("empId"));
+		m.addAttribute("leaveList", approveService.leaveList("" + empId, "Pending"));
 		return new String("approveleave");
 	}
 
@@ -83,17 +96,9 @@ public class LeaveController {
 
 	@PostMapping(value = "/applyleaveprocess")
 	public String applyleaveprocess(HttpServletRequest request, Model model, @ModelAttribute Leave la) {
-		String empId = ((Long) request.getSession().getAttribute("empId")) + "";
-		la.setEmpId(empId);
-		la.setManagerId("9070100404");
+		System.out.println(la);
 		la.setStatus("Pending");
-		if (la.getEndDate() == null || la.getEndDate().equals("")) {
-			la.setEndDate(la.getStartDate());
-		}
-
-		leaveService.save(la);
-		la.setLeaveId(leaveService.getLeaveId());
-		leaveService.EmailOnSubmit(la);
+		leaveRepository.save(la);
 		return "redirect:/home";
 	}
 
@@ -101,7 +106,6 @@ public class LeaveController {
 	public ResponseEntity<Object> approveleaveprocess(HttpServletRequest request, Model model, @RequestBody Leave la) {
 		approveService.updateApproveStatus(la);
 		System.out.println(la);
-
 		try {
 		} catch (Exception e) {
 			e.printStackTrace();

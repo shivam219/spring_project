@@ -1,0 +1,37 @@
+package com.timesheet.repository;
+
+import java.util.List;
+
+import javax.persistence.Tuple;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+
+import com.timesheet.model.MonthSheet;
+
+public interface MonthSheetRepository extends CrudRepository<MonthSheet, Long> {
+
+	@Query(value = "select * from timesheet_month_sheet where emp_id = :empId and month(month) = :month and year(month) =:year ", nativeQuery = true)
+	public MonthSheet findByEmpId(@Param("empId") Long empId, @Param("month") int month, @Param("year") int year);
+
+	@Query(value = "\n"
+			+ "SELECT  m.month_sheet_id, concat( first_name , ' ' ,last_name ) employee_name , \n"
+			+ "date_format(submit_date,' %D %b' ) as submit_date  , month(m.submit_date)  monthh  , year(m.submit_date)  yearr\n"
+			+ "FROM ess.timesheet_month_sheet m,  timesheet_employee_master e\n"
+			+ "where m.emp_id in  (select emp_id from timesheet_user_master where manager_id = :managerId) and submit ='Y' and approved ='N' and m.emp_id = e.emp_id\n"
+			+ "" , nativeQuery = true)
+	public List<Tuple> findMonthSheetAndSubmit(long managerId);
+	
+	@Query(value = "\n"
+			+ "select p.project_name , date_format( d.date , ' %D %b') , d.descr ,d.hour from timesheet_day_sheet d, timesheet_project_master p\n"
+			+ "where d.project_id = p.project_id and month_id = :monthId  order by date " , nativeQuery = true)
+	public List<Tuple> findMonthSheetDataAndApprove(long monthId);
+
+	@Query(value = "SELECT m.month_sheet_id ,concat(e.first_name , ' ' , e.last_name  ) as employeeName ,  m.submit_date,\n"
+			+ " month(m.month) month, year(m.month) year  FROM timesheet_month_sheet m , timesheet_employee_master e\n"
+			+ "where m.emp_id = e.emp_id and m.month_sheet_id =:monthId"
+			+ "" ,nativeQuery = true)	
+	public List<Tuple> findMonthSheetEmployeeDataByMonthId(long monthId);
+	
+}

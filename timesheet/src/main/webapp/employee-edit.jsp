@@ -81,26 +81,6 @@ body{
                                     <input class="form-control" id="empId" type="text" placeholder="Enter  Code" value="${emp.getEmpId()}" readonly>
                                     <span class="form-text  small  text-danger ms-2 d-none "  >Specified Employee Code</span>
                                 </div>
-                                <!-- Form Group (Password)-->
-                                <div class="col-md-4">
-                                    <label class="small mb-1" for="empPassword">Employee Password </label>
-                                    <input class="form-control" id="empPassword" type="text" placeholder="Enter  Password" value="${emp.getEmpPassword()}" readonly>
-                                    <span class="form-text  small  text-danger ms-2  d-none"  >Specify Employee Password</span>
-                                </div>
-                                 <!-- Form Group (Status)-->
-                                <div class="col-md-4">
-                                    <label class="small mb-1" for="active">Status</label>
-                                    <select name="active" id="active" class="form-control form-select">
-                                        <c:if test='${emp.getActive().equals("1")}'>
-                                            <option value="1" selected>Active</option>
-                                            <option value="0">In-Active</option>
-                                        </c:if>
-                                        <c:if test='${!emp.getActive().equals("1")}'>
-                                            <option value="1">Active</option>
-                                            <option value="0" selected>In-Active</option>
-                                        </c:if>   
-                                    </select>
-                                </div>
                             </div>
                             <!-- Form Row-->
                             <div class="row gx-3 mb-3">
@@ -298,11 +278,6 @@ body{
             $("#empId").siblings("span").removeClass("d-none");
             flag = false;
         }
-        if(!($("#empPassword").val())){
-            $("#empPassword").addClass("is-invalid");
-            $("#empPassword").siblings("span").removeClass("d-none");
-            flag = false;
-        }
         if(!($("#firstName").val())){
             $("#firstName").addClass("is-invalid");
             $("#firstName").siblings("span").removeClass("d-none");
@@ -364,7 +339,6 @@ body{
             let date = getCurrentDate();
             let data = {
                 empId:$("#empId").val(),
-                empPassword:$("#empPassword").val(),
                 firstName:$("#firstName").val(),
                 middleName:$("#middleName").val(),
                 lastName:$("#lastName").val(),
@@ -372,10 +346,8 @@ body{
                 empPincode:$("#empPincode").val(),
                 empAddress:$("#empAddress").val(),
                 birthDate:$("#birthDate").val(),
-                active:$("#active").val(),
                 empEmail:$("#empEmail").val(),
                 empPhone:$("#empPhone").val(),
-                mangerId:'12323423',
                 state:$("#state").val(),
                 gender:$("input[name=gender]:checked").val(),
                 dateOfJoin:$("#dateOfJoin").val(),

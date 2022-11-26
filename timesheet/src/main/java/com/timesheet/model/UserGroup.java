@@ -1,18 +1,23 @@
 package com.timesheet.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ess_user_group_master")
+@Table(name = "timesheet_user_group_master")
 public class UserGroup {
 
-//	sequence and auto are same for mysql a
-//	strategy = GenerationType.TABLE will be have particular table id
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "UGRP_CODE")
@@ -30,6 +35,7 @@ public class UserGroup {
 
 	public UserGroup() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public UserGroup(int ugrpCode, String ugrpDesc, String createdBy, String createdTime, String modifiedBy,
@@ -97,5 +103,10 @@ public class UserGroup {
 				+ ", createdTime=" + createdTime + ", modifiedBy=" + modifiedBy + ", modifiedTime=" + modifiedTime
 				+ "]";
 	}
+
+//	
+//	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@JoinTable(name = "ess_user_group_mapping", joinColumns = @JoinColumn(name = "ugrp_codee"), inverseJoinColumns = @JoinColumn(name = "emp_idd"))
+//	List<User> user;
 
 }

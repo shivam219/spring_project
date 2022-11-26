@@ -21,20 +21,6 @@
                                     <input class="form-control" id="empId" type="text" placeholder="Enter  Code" >
                                     <span class="form-text  small  text-danger ms-2 d-none "  >Specified Employee Code</span>
                                 </div>
-                                <!-- Form Group (Password)-->
-                                <div class="col-md-4">
-                                    <label class="small mb-1" for="empPassword">Employee Password </label>
-                                    <input class="form-control" id="empPassword" type="text" placeholder="Enter  Password" >
-                                    <span class="form-text  small  text-danger ms-2  d-none"  >Specify Employee Password</span>
-                                </div>
-                                 <!-- Form Group (location)-->
-                                <div class="col-md-4">
-                                    <label class="small mb-1" for="active">Status</label>
-                                    <select name="active" id="active" class="form-control form-select">
-                                            <option value="1" >Active</option>
-                                            <option value="0">In-Active</option>
-                                    </select>
-                                </div>
                             </div>
                             <!-- Form Row-->
                             <div class="row gx-3 mb-3">
@@ -275,7 +261,6 @@
             let date =getCurrentDate();
             let data = {
                 empId:$("#empId").val(),
-                empPassword:$("#empPassword").val(),
                 firstName:$("#firstName").val(),
                 middleName:$("#middleName").val(),
                 lastName:$("#lastName").val(),
@@ -283,10 +268,8 @@
                 empPincode:$("#empPincode").val(),
                 empAddress:$("#empAddress").val(),
                 birthDate:$("#birthDate").val(),
-                active:$("#active").val(),
                 empEmail:$("#empEmail").val(),
                 empPhone:$("#empPhone").val(),
-                mangerId:'12323423',
                 state:$("#state").val(),
                 gender:$("input[name=gender]").val(),
                 dateOfJoin:$("#dateOfJoin").val(),

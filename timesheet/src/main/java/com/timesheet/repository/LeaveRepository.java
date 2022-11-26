@@ -50,4 +50,11 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 
 	@Query(value = "SELECT count(status) FROM ess.leave_master where status='Rejected' and month(start_date)=month(now())", nativeQuery = true)
 	public Integer getRejectedCountOfMonth();
+
+	@Query(value ="select concat(date_format(start_date,'%D %b' ), ' to ', date_format(end_date,'%D %b' ),  ', ',concat(leave_type)) as Leaves\n"
+			+ " FROM leave_master where start_date between :startDate and  :endDate  ORDER BY DATE(start_date) ASC ", nativeQuery = true)
+	public List<Object> getWeekLeaves(@Param("startDate") String year, @Param("endDate") String month);
+	
+	
+
 }

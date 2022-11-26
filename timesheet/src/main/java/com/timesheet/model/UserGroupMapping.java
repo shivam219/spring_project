@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ess_user_group_mapping")
+@Table(name = "timesheet_user_group_mapping")
 public class UserGroupMapping {
 
 	@Id
@@ -20,7 +20,7 @@ public class UserGroupMapping {
 	String modifiedBy;
 	String modifiedTime;
 
-	public UserGroupMapping() {
+	public UserGroupMapping() { 
 		super();
 	}
 

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ess_work")
+@Table(name = "timesheet_work")
 public class Work {
 
 	/*
@@ -36,8 +36,7 @@ public class Work {
 	@Column(name = "project_id")
 	private int projectId;
 
-//	@Transient
-	@Column(name = "project_name")
+	@Column(name = "project_name" , updatable = false , insertable =  false )
 	private String projectName;
 
 	@Column(name = "hours")

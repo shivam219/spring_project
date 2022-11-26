@@ -8,7 +8,7 @@
 <style>
 table {
     table-layout: fixed;
-}
+} 
 </style>
 
 <body>

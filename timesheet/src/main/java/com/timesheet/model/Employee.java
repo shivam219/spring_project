@@ -2,20 +2,18 @@ package com.timesheet.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name = "ess_employee")
+@Table(name = "timesheet_employee_master")
 public class Employee {
 	@Id
 	@Column(name = "emp_id")
 	private long empId;
-
-	@Column(name = "emp_password")
-	private String empPassword;
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -44,12 +42,6 @@ public class Employee {
 	@Column(name = "birthDate")
 	private String birthDate;
 
-	@Column(name = "active")
-	private String active;
-
-	@Column(name = "manger_Id")
-	private String mangerId;
-
 	@Column(name = "gender")
 	private String gender;
 
@@ -61,30 +53,33 @@ public class Employee {
 
 	@Column(name = "date_of_resign")
 	private String dateOfResign;
-	
+
 	@Column(name = "created_by")
 	private String createdBy;
-	
+
 	@Column(name = "created_time")
 	private String createdTime;
-	
+
 	@Column(name = "modified_by")
 	private String modifiedBy;
-	
+
 	@Column(name = "modified_time")
 	private String modifiedTime;
+
+	@JsonIgnore
+	@OneToOne(mappedBy = "employee")
+	User user;
 
 	public Employee() {
 		super();
 	}
 
-	public Employee(long empId, String empPassword, String firstName, String middleName, String lastName,
-			String empEmail, String empPhone, String empCity, String empPincode, String empAddress, String birthDate,
-			String active, String mangerId, String gender, String state, String dateOfJoin, String dateOfResign,
-			String createdBy, String createdTime, String modifiedBy, String modifiedTime) {
+	public Employee(long empId, String firstName, String middleName, String lastName, String empEmail, String empPhone,
+			String empCity, String empPincode, String empAddress, String birthDate, String gender, String state,
+			String dateOfJoin, String dateOfResign, String createdBy, String createdTime, String modifiedBy,
+			String modifiedTime, User user) {
 		super();
 		this.empId = empId;
-		this.empPassword = empPassword;
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
@@ -94,8 +89,6 @@ public class Employee {
 		this.empPincode = empPincode;
 		this.empAddress = empAddress;
 		this.birthDate = birthDate;
-		this.active = active;
-		this.mangerId = mangerId;
 		this.gender = gender;
 		this.state = state;
 		this.dateOfJoin = dateOfJoin;
@@ -104,6 +97,7 @@ public class Employee {
 		this.createdTime = createdTime;
 		this.modifiedBy = modifiedBy;
 		this.modifiedTime = modifiedTime;
+		this.user = user;
 	}
 
 	public long getEmpId() {
@@ -112,14 +106,6 @@ public class Employee {
 
 	public void setEmpId(long empId) {
 		this.empId = empId;
-	}
-
-	public String getEmpPassword() {
-		return empPassword;
-	}
-
-	public void setEmpPassword(String empPassword) {
-		this.empPassword = empPassword;
 	}
 
 	public String getFirstName() {
@@ -194,22 +180,6 @@ public class Employee {
 		this.birthDate = birthDate;
 	}
 
-	public String getActive() {
-		return active;
-	}
-
-	public void setActive(String active) {
-		this.active = active;
-	}
-
-	public String getMangerId() {
-		return mangerId;
-	}
-
-	public void setMangerId(String mangerId) {
-		this.mangerId = mangerId;
-	}
-
 	public String getGender() {
 		return gender;
 	}
@@ -274,15 +244,26 @@ public class Employee {
 		this.modifiedTime = modifiedTime;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
+
 	@Override
 	public String toString() {
-		return "Employee [empId=" + empId + ", empPassword=" + empPassword + ", firstName=" + firstName
-				+ ", middleName=" + middleName + ", lastName=" + lastName + ", empEmail=" + empEmail + ", empPhone="
-				+ empPhone + ", empCity=" + empCity + ", empPincode=" + empPincode + ", empAddress=" + empAddress
-				+ ", birthDate=" + birthDate + ", active=" + active + ", mangerId=" + mangerId + ", gender=" + gender
-				+ ", state=" + state + ", dateOfJoin=" + dateOfJoin + ", dateOfResign=" + dateOfResign + ", createdBy="
-				+ createdBy + ", createdTime=" + createdTime + ", modifiedBy=" + modifiedBy + ", modifiedTime="
-				+ modifiedTime + "]";
+		return "Employee [empId=" + empId + ", firstName=" + firstName + ", middleName=" + middleName + ", lastName="
+				+ lastName + ", empEmail=" + empEmail + ", empPhone=" + empPhone + ", empCity=" + empCity
+				+ ", empPincode=" + empPincode + ", empAddress=" + empAddress + ", birthDate=" + birthDate + ", gender="
+				+ gender + ", state=" + state + ", dateOfJoin=" + dateOfJoin + ", dateOfResign=" + dateOfResign
+				+ ", createdBy=" + createdBy + ", createdTime=" + createdTime + ", modifiedBy=" + modifiedBy
+				+ ", modifiedTime=" + modifiedTime + ", user=nestedcallederroe]";
 	}
 
 }

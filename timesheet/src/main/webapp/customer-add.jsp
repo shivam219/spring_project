@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Add Customer  </title>
+    <title>Add Customer </title>
     <link rel="stylesheet" href="css/form-style.css">
 </head>
 <body>
@@ -25,23 +25,30 @@
                                     </tr>
                                     <tr>
                                         <div>
-                                            <label class="small mb-1" for="Name"> Customer Name</label>
-                                            <input class="form-control" id="Name" type="text" placeholder="Enter name" value="">
+                                            <label class="small mb-1" for="customerName"> Customer Name</label>
+                                            <input class="form-control" id="customerName" type="text" placeholder="Enter name" value="">
                                             <span class="form-text small text-danger ms-2  d-none"  >Specify Customer Name</span>     
                                         </div>
                                     </tr>
                                     <tr>
                                         <div>
-                                            <label class="small mb-1" for="domain"> Customer Domain</label>
-                                            <input class="form-control" id="domain" type="text" placeholder="Enter domain" value="">
-                                            <span class="form-text small text-danger ms-2  d-none"  >Specify Customer Domain</span>     
+                                            <label class="small mb-1" for="customerType"> Customer Domain</label>
+                                            <select id="customerType" class="form-control form-select">
+                                                <option value="" ><-- choose domain--></option>
+                                                <c:forEach items="${customerDomains}" var="d">
+                                                    <option value="${d.getId()}">${d.getCustomerDomain()} </option>
+                                                </c:forEach>         
+                                            </select>  
                                         </div>
                                     </tr>
                                     <tr>
-                                        <div>
-                                            <label class="small mb-1" for="essRepresentative">ESS IT Representative</label>
-                                            <input class="form-control" id="essRepresentative" type="text" placeholder="Enter representative" value="">
-                                            <span class="form-text small text-danger ms-2  d-none"  >Specify Customer representative</span>     
+                                          <label class="small mb-1" for="empId">ESS IT Representative</label>
+                                            <select id="empId" class="form-control form-select">
+                                                <option value="" ><-- choose representative --></option>
+                                                <c:forEach items="${users}" var="user">
+                                                    <option value="${user.getEmpId()}">${user.getEmployee().getFullName()} </option>
+                                                </c:forEach>         
+                                            </select>
                                         </div>
                                     </tr>
                                     <tr>
@@ -69,24 +76,24 @@
     
     function isValid() {
         let flag = true;
-        if(!($("#projectId").val())){
-            $("#projectId").addClass("is-invalid");
-            $("#projectId").siblings("span").removeClass("d-none");
-            flag = false;
-        }
-        if(!($("#projectName").val())){
-            $("#projectName").addClass("is-invalid");
-            $("#projectName").siblings("span").removeClass("d-none");
-            flag = false;
-        }
-        if(!($("#projectStatus").val())){
-            $("#projectStatus").addClass("is-invalid");
-            $("#projectStatus").siblings("span").removeClass("d-none");
-            flag = false;
-        }
         if(!($("#customerId").val())){
             $("#customerId").addClass("is-invalid");
             $("#customerId").siblings("span").removeClass("d-none");
+            flag = false;
+        }
+        if(!($("#customerType").val())){
+            $("#customerType").addClass("is-invalid");
+            $("#customerType").siblings("span").removeClass("d-none");
+            flag = false;
+        }
+        if(!($("#customerName").val())){
+            $("#customerName").addClass("is-invalid");
+            $("#customerName").siblings("span").removeClass("d-none");
+            flag = false;
+        }
+        if(!($("#empId").val())){
+            $("#empId").addClass("is-invalid");
+            $("#empId").siblings("span").removeClass("d-none");
             flag = false;
         }
         return flag;
@@ -96,14 +103,19 @@
         if(isValid()){     
             $("#loadingBtn").addClass("spinner-border spinner-border-sm"); 
             let data = {
-                projectId:$("#projectId").val(),
-                projectName:$("#projectName").val(),
-                projectStatus:$("#projectStatus").val(),
-                customerId: $("#customerId").val()
+                customerId: $("#customerId").val(),
+                customerName:$("#customerName").val(),
+                customerType:$("#customerType").val(),
+                user:{
+                    empId:$("#empId").val(),
+                },
+                customerDomain:{
+                    id:$("#customerType").val()
+                }
             }
             $.ajax({
                 type: 'POST',
-                url: 'project-add-process',
+                url: 'customer-add-process',
                 data:JSON.stringify(data),
                 contentType :'application/json',
                 success: function (data,msg,xh) {
@@ -111,16 +123,27 @@
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                     swal({
                         title:"Success",
-                        text: "Project Added Successfully",
+                        text: "Customer Added Successfully",
                         icon: "success",
                     }).
                     then(function (isOkay) {
                         if (isOkay) {
-                            location.replace('/project-dashboard');
+                            location.replace('/project-master');
                         }
                     });
                 },error : function(data,msg,xh){
+                    $("#btnSave").blur();
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
+                    swal({
+                        title:"Error",
+                        text: "Unable to add customer",
+                        icon: "error",
+                    }).
+                    then(function (isOkay) {
+                        if (isOkay) {
+                        }
+                    });
+                     					
                 }
             }); 
         }else{

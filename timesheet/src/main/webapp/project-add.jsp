@@ -68,6 +68,7 @@
                                         </div>
                                         <div >
                                             <label class="small mb-1 d-block" for="projectTime"> Curresponding Duration in number</label>
+                                            <input type="hidden" id="projectDay" min="1" >
                                             <input class="form-control form-input form-input-sm w-50   d-inline " id="projectTime" type="number" placeholder="Duration" value="" min="1">
                                             <label class="badge-soft-primary py-2 px-2 fw-normal mb-1 mx-2 d-inline-block   " style="width: 40%;" id="DayCount"> Day :  </label>
                                             <span class="form-text small text-danger ms-2 d-block  d-none"  >Specify Duration </span>     
@@ -76,7 +77,6 @@
                                     </tr>
                                 </table>
                             </div>
-                            <!-- Save changes button-->
                             <div class="row justify-content-center mt-3 ">
                                 <button class="btn btn-secondary px-5  mt-2 mt-sm-0 me-2 w-auto " type="button" onclick="history.back()" > Back  </button> 
                                 <button class="btn btn-primary px-3 w-auto" type="submit" id="btnSave"  >
@@ -95,6 +95,7 @@
         let count = parseInt($("#projectTime").val());
         let durationType = parseInt($("#durationType").val());
         $("#DayCount").html("Days : " + (isNaN(count*durationType)?  " " :count*durationType == 0  ? " ":count*durationType ));
+        $("#projectDay").val( (isNaN(count*durationType)?  " " :count*durationType == 0  ? " ":count*durationType ));
     });
 
     
@@ -130,7 +131,10 @@
                 projectId:$("#projectId").val(),
                 projectName:$("#projectName").val(),
                 projectStatus:$("#projectStatus").val(),
-                customerId: $("#customerId").val()
+                projectDay:$("#projectDay").val(),
+                customer:{
+                    customerId: $("#customerId").val()
+                }
             }
             $.ajax({
                 type: 'POST',
@@ -147,7 +151,7 @@
                     }).
                     then(function (isOkay) {
                         if (isOkay) {
-                            location.replace('/project-dashboard');
+                            location.replace('/project-master');
                         }
                     });
                 },error : function(data,msg,xh){

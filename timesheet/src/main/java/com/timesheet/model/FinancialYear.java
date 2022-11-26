@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ess_financial_year")
+@Table(name = "timesheet_financial_year")
 public class FinancialYear {
 
 	@Id

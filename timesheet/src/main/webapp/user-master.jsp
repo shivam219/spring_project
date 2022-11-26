@@ -46,25 +46,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${userList}" var="emp" varStatus="loop">
+                                <c:forEach items="${users}" var="user" varStatus="loop">
                                     <tr>
-                                        <td class="overflow-auto"><a href="/user-master-edit?empId=${emp[0]}" class="text-body overflow-auto">${emp[1]} </a></td>
-                                        <td class="overflow-auto"><span class="badge badge-soft-success mb-0">${emp[2]}</span></td>
-                                        <td class="overflow-auto">Vigneswari Mam</td>
+                                        <td class="overflow-auto"><a href="/user-master-edit?empId=${user.getEmpId()}" class="text-body overflow-auto">${user.getEmployeeName()} </a></td>
+                                        <td class="overflow-auto"><span class="badge badge-soft-success mb-0">${user.getGroupDesc()}</span></td>
+                                        <td class="overflow-auto">${user.getManagerName()}</td>
                                         <td class="overflow-auto">
                                             <ul class="list-inline mb-0">
                                                 <li class="list-inline-item">
-                                                    <a href="/user-master-edit?empId=${emp[0]}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
+                                                    <a href="/user-master-edit?empId=${user.getEmpId()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
                                                 </li>
-                                                <li class="list-inline-item">
-                                                    <!-- <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a> -->
-                                                </li>  
-                                                <c:if test='${emp[3].equals("1")}'>
+                                                <c:if test="${user.getActive() eq 1  }">
                                                     <li class="list-inline-item">
                                                         <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Active" class="px-2 text-success">  <i class="fa-solid fa-circle"> </i>  </a>
                                                     </li>
                                                 </c:if>
-                                                <c:if test='${!emp[3].equals("1")}'>
+                                                <c:if test="${user.getActive() eq 0  }">
                                                     <li class="list-inline-item">
                                                         <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="In-Active" class="px-2 text-danger">  <i class="fa-solid fa-circle"> </i>  </a>
                                                     </li>
@@ -73,14 +70,12 @@
                                         </td>
                                     </tr>
                                    </c:forEach>
-                                   <!-- <td><span class="badge badge-soft-primary mb-0">Backend Developer</span></td> -->
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- hide need add from backend -->
         <div class="row g-0 align-items-center pb-4 d-none">
             <div class="col-sm-6">
                 <div><p class="mb-sm-0">Showing 1 to 10 of 57 entries</p></div>

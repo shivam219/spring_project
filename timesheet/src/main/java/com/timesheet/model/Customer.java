@@ -1,41 +1,73 @@
 package com.timesheet.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.timesheet.controller.CustomerDomain;
+
 @Entity
-@Table
+@Table(name = "timesheet_customer_master")
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "customer_id")
 	private int customerId;
-	@Column(name = "customer_type")
-	private String customerType;
 
 	@Column(name = "customer_name")
 	private String customerName;
 
 	@Column(name = "on_board_date")
 	private String onBoardDate;
+
 	@Column(name = "off_board_date")
 	private String offBoardDate;
+
+	@Column(name = "customer_representative")
+	private String customerRepresentative;
+
+	
+//	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "customer_domain")
+	CustomerDomain customerDomain;
+
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "emp_id")
+	User user;
+//	getting error on orphanRemoval = true while updating data
+	@JsonManagedReference(value="customer-project") 
+	@OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Project.class)
+	List<Project> project;
 
 	public Customer() {
 		super();
 	}
 
-	public Customer(int customerId, String customerType, String customerName, String onBoardDate, String offBoardDate) {
+	public Customer(int customerId, String customerName, String onBoardDate, String offBoardDate,
+			String customerRepresentative, CustomerDomain customerDomain, User user, List<Project> project) {
 		super();
 		this.customerId = customerId;
-		this.customerType = customerType;
 		this.customerName = customerName;
 		this.onBoardDate = onBoardDate;
 		this.offBoardDate = offBoardDate;
+		this.customerRepresentative = customerRepresentative;
+		this.customerDomain = customerDomain;
+		this.user = user;
+		this.project = project;
 	}
 
 	public int getCustomerId() {
@@ -44,14 +76,6 @@ public class Customer {
 
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
-	}
-
-	public String getCustomerType() {
-		return customerType;
-	}
-
-	public void setCustomerType(String customerType) {
-		this.customerType = customerType;
 	}
 
 	public String getCustomerName() {
@@ -78,10 +102,43 @@ public class Customer {
 		this.offBoardDate = offBoardDate;
 	}
 
+	public String getCustomerRepresentative() {
+		return customerRepresentative;
+	}
+
+	public void setCustomerRepresentative(String customerRepresentative) {
+		this.customerRepresentative = customerRepresentative;
+	}
+
+	public CustomerDomain getCustomerDomain() {
+		return customerDomain;
+	}
+
+	public void setCustomerDomain(CustomerDomain customerDomain) {
+		this.customerDomain = customerDomain;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<Project> getProject() {
+		return project;
+	}
+
+	public void setProject(List<Project> project) {
+		this.project = project;
+	}
+
 	@Override
 	public String toString() {
-		return "Customer [customerId=" + customerId + ", customerType=" + customerType + ", customerName="
-				+ customerName + ", onBoardDate=" + onBoardDate + ", offBoardDate=" + offBoardDate + "]";
+		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", onBoardDate=" + onBoardDate
+				+ ", offBoardDate=" + offBoardDate + ", customerRepresentative=" + customerRepresentative
+				+ ", customerDomain=" + customerDomain + ", user=" + "" + ", project=" + "" + "]";
 	}
 
 }

@@ -9,18 +9,16 @@
 <body>
     <div class="container">
         <h1 class="text-secondary h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Holiday Dashboard </h1>
-        <div class="row align-items-center mt-3">
-            <div class="col-md-6">
+        <div class="row align-items-center mt-3 mb-2">
+            <div class="col-md-6 mb-2 mb-md-0">
                 <div>
                     <h6 class=" badge-soft-success d-inline px-3 py-2 rounded"> Holidays <span class="text-muted fw-normal ms-1">(${listholiday.size()})</span></h6>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 me-2 mb-1 ">    
-                    <div>
-                        <a href="holiday-master-add" data-bs-target=".add-new" onclick="this.blur()" class="btn btn-primary"><i class="bx bx-plus me-1"></i> Create Holidays</a>
-                    </div>
-                </div>
+            <div class="col-md-6 "> 
+                <div class="d-flex justify-content-md-end ">                          
+					<a type="button" class="btn btn-primary align-self-center align-items-center" href="project-map">  <i class="bx bx-plus me-1"></i>  Create Holiday</a>
+		        </div>
             </div>
         </div>
         <div class="row">

@@ -33,34 +33,35 @@
 			<div class="row justify-content-center align-items-center h-100 p-0">
 				<div class="col-12 p-0">
 					<div class="card shadow-2-strong p-1 card-registration" style="border: 0px solid;">
-						 <h3 class="ms-5 text-dark p-0 rounded-1" style="font-family: Lato-Regular; font-weight:bold;" >Leave Application!!</h3>
+						 <h3 class="ms-5 text-dark p-0 rounded-1" style="font-family: Lato-Regular; font-weight:bold;" >Leave Application</h3>
 						<div class="card-body p-1 p-md-3" style="background-color: #f6f6f5 ;">
 							<input type="hidden" value='<%="M"%>' id="empGender">
 							<form method="post" action="applyleaveprocess" onsubmit="return validate(this)">
 								<div class="row">
-									<div class="col col-sm-4">
+									<div class="col-sm-4">
 										<div class="input-group ms-1 w-73">
 											<span class="input-group-text" id="basic-addon1">Employee
 												Name</span> <input type="text" class="form-control" 
-												value="${empName}" aria-label="employeeName" name="empName"
+												value="${emp.getFirstName()}" aria-label="employeeName" name="empName"
 												aria-describedby="basic-addon1">
 										</div>
 
 									</div>
-									<div class="col col-sm-4">
+									<div class="col-sm-4">
 										<div class="input-group ms-1 w-73">
 											<span class="input-group-text" id="basic-addon1">Employee
 												ID</span> <input type="text" class="form-control"  
-												value="${empId}" aria-label="employeeId" name="empId"
+												value="${emp.getEmpId()}" aria-label="employeeId" name="empId"
 												aria-describedby="basic-addon1">
 										</div>
 									</div>
 
-									<div class="col col-sm-4">
+									<div class="col-sm-4">
 										<div class="input-group ms-1 w-73">
 											<span class="input-group-text" id="basic-addon1">Manager
-												Name</span> <input type="text" class="form-control"  
-												value="${managerName}" aria-label="managerName" name="managerName"
+												Name</span> <input type="hidden" name="managerId" id="managerId" value="${manager.getEmpId()}">
+												<input type="text" class="form-control"  
+												value="${manager.getFirstName()} ${manager.getLastName()}" aria-label="managerName" name="managerName"
 												aria-describedby="basic-addon1">
 										</div>
 									</div>
@@ -105,7 +106,7 @@
 											<input type="date" class="form-control" onchange="startDateChange()" name="startDate" id="startDate">
 										</div>
 									</div>
-									<div class="col col-sm-5 m-3 endDateHide">
+									<div class="col-sm-4 m-3 endDateHide">
 										<div class="input-group date" style="margin-left:17px;">
 											<span class="input-group-text">End Date <span style="color: red;">&nbsp;*</span></span>
 											<input type="date" class="form-control" name="endDate" id="endDate" onchange="getNumberOfDays()">

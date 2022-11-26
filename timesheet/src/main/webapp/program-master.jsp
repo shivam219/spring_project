@@ -5,12 +5,6 @@
 <head>
     <title>Program master </title>
     <link rel="stylesheet" href="css/form-style.css">
-    <style>
-        table {
-			/* border-collapse: collapse; */
-		border-bottom: 1px solid #ff000d;
-      }
-    </style>
 </head>
 
 <body>

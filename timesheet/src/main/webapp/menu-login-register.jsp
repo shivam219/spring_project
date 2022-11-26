@@ -16,7 +16,8 @@
 <link rel='icon' type='image/ico' href='images/esslogo.png' />
 	<style>
 .bg-nav-foot {
-	background-color: #333;
+	/* background-color: #92cbec"; */
+background-color: #333;
 }
 </style>
 </head>
