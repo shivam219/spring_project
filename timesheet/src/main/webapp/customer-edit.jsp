@@ -48,7 +48,7 @@
                                     <tr>
                                         <div>
                                             <label class="small mb-1" for="cur">Customer Representative</label>
-                                            <input class="form-control" id="cur" type="text" placeholder="Enter representative" value="">
+                                            <input class="form-control" id="cur" type="text" placeholder="Enter representative" value="${customer.getCustomerRepresentative()}">
                                             <span class="form-text small text-danger ms-2  d-none"  >Specify Customer representative</span>     
                                         </div>
                                     </tr>
@@ -57,7 +57,7 @@
                             <div class="row justify-content-center mt-3 ">
                                 <button class="btn btn-secondary px-5  mt-2 mt-sm-0 me-2 w-auto " type="button" onclick="history.back()" > Back  </button> 
                                 <button class="btn btn-primary px-3 w-auto" type="submit" id="btnSave"  >
-                                    <span id="loadingBtn"> </span> &nbsp; Add Customer &nbsp;
+                                    <span id="loadingBtn"> </span> &nbsp;  Save Changes &nbsp;
                                 </button>
                             </div>
                         </form>
@@ -129,7 +129,7 @@
                     }).
                     then(function (isOkay) {
                         if (isOkay) {
-                            // location.replace('/customer-master');
+                            location.replace('/customer-master');
                         }
                     });
                 },error : function(data,msg,xh){
@@ -142,7 +142,7 @@
                     }).
                     then(function (isOkay) {
                         if (isOkay) {
-                            // location.replace('/project-master');
+                            location.replace('/project-master');
                         }
                     });
                      					

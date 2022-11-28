@@ -9,6 +9,7 @@ import javax.persistence.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.timesheet.dto.EmployeeMonthChartDto;
 import com.timesheet.dto.MonthSheetDataDto;
 import com.timesheet.dto.MonthSheetDto;
 import com.timesheet.repository.MonthSheetRepository;
@@ -55,6 +56,17 @@ public class MonthSheetService {
 						m.get(4,BigInteger.class)
 						))
 				.collect(Collectors.toList());		
+		return ud;
+	}
+	public List<EmployeeMonthChartDto> findMonthSheetEmployeeChart(long monthId) {
+		List<Tuple> tu = msr.findMonthSheetEmployeeChart(monthId);
+		List<EmployeeMonthChartDto> ud = tu.stream().
+				map(m->new EmployeeMonthChartDto(
+						m.get(0,BigInteger.class),
+						m.get(1,String.class)
+						 
+						))
+				.collect(Collectors.toList());	 
 		return ud;
 	}
 

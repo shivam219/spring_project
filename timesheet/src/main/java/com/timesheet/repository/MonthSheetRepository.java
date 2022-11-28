@@ -34,4 +34,19 @@ public interface MonthSheetRepository extends CrudRepository<MonthSheet, Long> {
 			+ "" ,nativeQuery = true)	
 	public List<Tuple> findMonthSheetEmployeeDataByMonthId(long monthId);
 	
+	
+	@Query(value = "\n"
+			+ "with project as(\n"
+			+ "	SELECT  project_name , project_id from  timesheet_project_master\n"
+			+ "	where project_id in  (\n"
+			+ "	SELECT distinct(project_id) FROM ess.timesheet_day_sheet where month_id = :monthId) \n"
+			+ ")\n"
+			+ "select count(ds.project_id) , p.project_name from  timesheet_day_sheet ds  , project p \n"
+			+ "where ds.project_id = p.project_id and ds.month_id = :monthId  group by ds.project_id;\n"
+			+ "" ,nativeQuery = true)	
+	public List<Tuple> findMonthSheetEmployeeChart(long monthId);
+	
+	
+	
+	
 }

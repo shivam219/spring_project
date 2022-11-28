@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.util.StringUtils;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -48,6 +50,9 @@ public class Employee {
 	@Column(name = "state")
 	private String state;
 
+	@Column(name = "country")
+	private String country;
+
 	@Column(name = "date_of_join")
 	private String dateOfJoin;
 
@@ -76,8 +81,8 @@ public class Employee {
 
 	public Employee(long empId, String firstName, String middleName, String lastName, String empEmail, String empPhone,
 			String empCity, String empPincode, String empAddress, String birthDate, String gender, String state,
-			String dateOfJoin, String dateOfResign, String createdBy, String createdTime, String modifiedBy,
-			String modifiedTime, User user) {
+			String country, String dateOfJoin, String dateOfResign, String createdBy, String createdTime,
+			String modifiedBy, String modifiedTime, User user) {
 		super();
 		this.empId = empId;
 		this.firstName = firstName;
@@ -91,6 +96,7 @@ public class Employee {
 		this.birthDate = birthDate;
 		this.gender = gender;
 		this.state = state;
+		this.country = country;
 		this.dateOfJoin = dateOfJoin;
 		this.dateOfResign = dateOfResign;
 		this.createdBy = createdBy;
@@ -196,6 +202,14 @@ public class Employee {
 		this.state = state;
 	}
 
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
 	public String getDateOfJoin() {
 		return dateOfJoin;
 	}
@@ -251,9 +265,9 @@ public class Employee {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public String getFullName() {
-		return firstName + " " + lastName;
+		return StringUtils.capitalize(firstName + " " + lastName);
 	}
 
 	@Override
@@ -261,9 +275,9 @@ public class Employee {
 		return "Employee [empId=" + empId + ", firstName=" + firstName + ", middleName=" + middleName + ", lastName="
 				+ lastName + ", empEmail=" + empEmail + ", empPhone=" + empPhone + ", empCity=" + empCity
 				+ ", empPincode=" + empPincode + ", empAddress=" + empAddress + ", birthDate=" + birthDate + ", gender="
-				+ gender + ", state=" + state + ", dateOfJoin=" + dateOfJoin + ", dateOfResign=" + dateOfResign
-				+ ", createdBy=" + createdBy + ", createdTime=" + createdTime + ", modifiedBy=" + modifiedBy
-				+ ", modifiedTime=" + modifiedTime + ", user=nestedcallederroe]";
+				+ gender + ", state=" + state + ", country=" + country + ", dateOfJoin=" + dateOfJoin
+				+ ", dateOfResign=" + dateOfResign + ", createdBy=" + createdBy + ", createdTime=" + createdTime
+				+ ", modifiedBy=" + modifiedBy + ", modifiedTime=" + modifiedTime + ", user=]";
 	}
 
 }

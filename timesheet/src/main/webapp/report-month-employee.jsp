@@ -156,7 +156,7 @@
     //             password:$("#password").val(),
     //             active: $("#active").val(),
     //             managerId:$("#manager").val(),
-    //             leaveReportingManger:$("#leaveManager").val(),
+    //             leaveReportingManager:$("#leaveManager").val(),
     //             leaveManager:$("#leaveApproveManager").val(),
     //         }
     //         $.ajax({

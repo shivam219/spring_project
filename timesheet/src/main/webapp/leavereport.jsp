@@ -1,199 +1,174 @@
-<%@ include file="menu.jsp"%>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Monthly Leave Report</title>
-</head>
-<style>
-.container {
-	box-shadow: 0px 0px 15px rgb(0 0 0/ 49%), inset -2px -2px 3px
-		rgb(0 0 0/ 25%);
-}
+<%@ include file="menu.jsp" %>
+	<html>
 
-.buttons {
-	text-align: center;
-}
+	<head>
+		<meta charset="UTF-8">
+		<title>Monthly Leave Report</title>
+	</head>
+	<style>
+		table {
+			table-layout: auto;
+		}
 
-.h2 {
-	font-family: 'PT Sans', sans-serif;
-	font-size: 25px;
-}
+		.project-list-table {
+			border-collapse: separate;
+			/* border-spacing: 0 12px */
+		}
 
-.starlabel:after {
-	content: " *";
-	color: red;
-}
+		.project-list-table tr {
+			background-color: #fff
+		}
 
-table {
-	table-layout: fixed;
-}
+		.table-nowrap td,
+		.table-nowrap th {
+			white-space: nowrap;
+		}
 
-body {
-	background-color: #e2e2e2;
-	/* background-color:#f2f6fc; */
-}
 
-.project-list-table {
-	border-collapse: separate;
-	border-spacing: 0 12px
-}
+		.table-borderless>:not(caption)>*>* {
+			border-bottom-width: 0;
+		}
 
-.project-list-table tr {
-	background-color: #fff
-}
+		.table>:not(caption)>*>* {
+			padding: 0.75rem 0.75rem;
+			background-color: var(--bs-table-bg);
+			border-bottom-width: 1px;
+			box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+		}
 
-.table-nowrap td, .table-nowrap th {
-	white-space: nowrap;
-}
+		.starlabel:after {
+			content: " *";
+			color: red;
+		}
 
-.table-borderless>:not(caption)>*>* {
-	border-bottom-width: 0;
-}
+		a {
+			color: #3b76e1;
+			text-decoration: none;
+		}
 
-.table>:not(caption)>*>* {
-	padding: 0.75rem 0.75rem;
-	background-color: var(- -bs-table-bg);
-	border-bottom-width: 1px;
-	box-shadow: inset 0 0 0 9999px var(- -bs-table-accent-bg);
-}
+		tbody,
+		td,
+		td a tfoot,
+		th,
+		thead,
+		tr {
+			border-width: 0px;
+		}
+	</style>
 
-.rounded-circle {
-	border-radius: 30% !important;
-}
+	<body>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css"
+			integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q=="
+			crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"
+			integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
 
-.me-2 {
-	margin-right: 0.5rem !important;
-}
-
-a {
-	color: #3b76e1;
-	text-decoration: none;
-}
-
-.badge-soft-danger {
-	color: #f56e6e !important;
-	background-color: rgba(245, 110, 110, .1);
-}
-
-.badge-soft-success {
-	color: #63ad6f !important;
-	background-color: rgba(99, 173, 111, .1);
-}
-
-.badge-soft-primary {
-	color: #3b76e1 !important;
-	background-color: rgba(59, 118, 225, .1);
-}
-
-.badge-soft-info {
-	color: #57c9eb !important;
-	background-color: rgba(87, 201, 235, .1);
-}
-
-.avatar-title {
-	align-items: center;
-	background-color: #3b76e1;
-	color: #fff;
-	display: flex;
-	font-weight: 500;
-	height: 100%;
-	justify-content: center;
-	width: 100%;
-}
-
-.bg-soft-primary {
-	background-color: rgba(59, 118, 225, .25) !important;
-}
-</style>
-<body>
-        <div class="row mt-3 ms-5">
-            <div class="col-md-6">
-                <div>
-                    <h5 class="ms-5">Monthly Leave Report<span class="text-muted fw-normal ms-1">()</span></h5>
-                </div>
-            </div>
-		</div>
-	<div class="container mt-2">
-		<div class="row text-center">
-			<div class="col">
-                <div class="form-group row mt-4 justify-content-center">
-                    <label for="year" class="col-sm-1 col-form-label starlabel">Year</label>
-                    <div class="col-sm-2">
-                 <select class="form-select" aria-label="Default select example" name="Year" id="leaveYearSelect" onchange="getAllLeave()">
-					<option value="">-------select------</option>
-                        <option value="2020">2020</option>
-						<option value="2021">2021</option>
-                        <option value="2022">2022</option>
-                    </select>
-                    </div>
-
-                <label for="month" class="col-sm-1 col-form-label starlabel">Month</label>
-                 <div class="col-sm-2"> 
-                   <select class="form-select" aria-label="Default select example" name="Month" id="leaveMonthSelect" onchange="getAllLeave()">
-                   <option value="">-------select------</option>
-					<option value="01">January</option>
-					<option value="02">February</option>
-					<option value="03">March</option>
-					<option value="04">April</option>
-					<option value="05">May</option>
-					<option value="06">June</option>
-					<option value="07">July</option>
-					<option value="08">August</option>
-					<option value="09">September</option>
-					<option value="10">October</option>
-					<option value="11">November</option>
-					<option value="12">December</option>
-				</select>
-                </div>
-                </div>
-		    <div class="table-responsive mt-2">
-				<table class="table project-list-table table-nowrap align-middle table-borderless">
-					<thead>
-						<tr class="table-dark">
-						<td scope="col">Leave Id</td>
-						<td scope="col">Employee Id</td>
-						<td scope="col">Employee Name</td>
-						<td scope="col">Manager Name</td>
-						<td scope="col">Leave Type</td>
-						<td scope="col">Starting Date</td>
-						<td scope="col">Ending Date</td>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${leaveList}" var="l">
-							<tr>
-								<td>${l.getLeaveId()}</td>
-								<td>${l.getEmpId()}</td>
-								<td>${l.getEmpName()}</td>
-								<td>${l.getManagerName()}</td>
-								<td>${l.getLeaveType()}</td>
-								<td>${l.getStartDate()}</td>
-								<td>${l.getEndDate()}</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+		<div class="container">
+			<div class="row align-items-center mt-5">
+				<div class="col-md-6">
+					<div>
+						<h5 class="card-title ms-2" style="color: #124265;">Approved Leave Report</h5>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="d-flex flex-wrap align-items-center justify-content-end gap-2 me-2 mb-1 ">
+						<div>
+							<label for="year" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Year</label>
+							<select class="form-select" aria-label="Default select example" name="Year"
+								id="leaveYearSelect" onchange="getAllLeave()">
+								<option value="">-------select------</option>
+								<option value="2020">2020</option>
+								<option value="2021">2021</option>
+								<option value="2022">2022</option>
+							</select>
+						</div>
+						<div>
+							<label for="Month" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Month</label>
+							<select class="form-select" aria-label="Default select example" name="Month"
+								id="leaveMonthSelect" onchange="getAllLeave()">
+								<option value="">-------select------</option>
+								<option value="01">January</option>
+								<option value="02">February</option>
+								<option value="03">March</option>
+								<option value="04">April</option>
+								<option value="05">May</option>
+								<option value="06">June</option>
+								<option value="07">July</option>
+								<option value="08">August</option>
+								<option value="09">September</option>
+								<option value="10">October</option>
+								<option value="11">November</option>
+								<option value="12">December</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="">
+						<div class="table-responsive">
+							<table
+								class="table project-list-table table-hover table-nowrap align-middle table-borderless"
+								id="tableholiday">
+								<thead>
+									<tr class="text-white" style="font-size:15px; background-color:#124265;">
+										<td scope="col" class="text-white">Leave Id</td>
+										<td scope="col" class="text-white">Employee Id</td>
+										<td scope="col" class="text-white">Employee Name</td>
+										<td scope="col" class="text-white">Manager Name</td>
+										<td scope="col" class="text-white">Leave Type</td>
+										<td scope="col" class="text-white">Start Date</td>
+										<td scope="col" class="text-white">End Date</td>
+										<td scope="col" class="text-white">Day Mode</td>
+										<td scope="col" class="text-white">Day Count</td>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${leaveList}" var="l" varStatus="i">
+										<tr>
+											<td style="font-size:14px;">${l.getLeaveId()}</td>
+											<td style="font-size:14px;">${l.getEmpId()}</td>
+											<td style="font-size:14px;">${l.getEmpName()}</td>
+											<td style="font-size:14px;">${l.getManagerName()}</td>
+											<td style="font-size:14px;">${l.getLeaveType()}</td>
+											<td style="font-size:14px;">${l.getStartDate()}</td>
+											<td style="font-size:14px;">${l.getEndDate()}</td>
+											<td style="font-size:14px;">${l.getDayMode()}</td>
+											<td style="font-size:14px;">${days[ i.index]}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
- 	</div>
- </div>
-		<div class="buttons mt-2">
-			<a href="/download/leave.xlsx?month=09&year=2022" class="btn btn-primary btn-sm ps-4 pe-4">Export</a>
-			<a href="home"><button type="button" class="btn btn-secondary btn-sm ps-4 pe-4 ">Exit</button> </a>
+		<div class="row align-items-center mt-2">
+			<div class="col">
+				<div class="d-flex flex-wrap align-items-center justify-content-center gap-2 mb-1 ">
+					<div>
+						<a href="/download/leave.xlsx?month=09&year=2022" class="btn btn-primary">Export</a>
+						<a href="home" data-bs-target=".add-new" onclick="this.blur()" class="btn btn-danger">Back</a>
+					</div>
+				</div>
+			</div>
 		</div>
 		<br>
 		<br>
 		<form action="/leave-report" method="post" id="leaveMonthReport">
-			<input type="hidden" name="leaveMonth" id="leaveMonth"> 
+			<input type="hidden" name="leaveMonth" id="leaveMonth">
 			<input type="hidden" name="leaveYear" id="leaveYear">
 		</form>
-        <form action="/leave-report">
+		<form action="/leave-report">
 			<input type="hidden" name="userleaveYear" value="${year}" id="userleaveYear">
 			<input type="hidden" name="userleaveMonth" value="${month}" id="userleaveMonth">
 		</form>
-	
+
 		<script>
-			$(document).ready(function() {
+			$(document).ready(function () {
 				if ($("#userleaveMonth").val() === "no") {
 				} else {
 					$("#leaveYearSelect").val($("#userleaveYear").val());
@@ -203,15 +178,14 @@ a {
 			function getAllLeave() {
 				var ly = $("#leaveYearSelect").val();
 				var lm = $("#leaveMonthSelect").val();
-				if($("#leaveYearSelect").val()&& $("#leaveMonthSelect").val()){
+				if ($("#leaveYearSelect").val() && $("#leaveMonthSelect").val()) {
 					console.log("both has");
-						$("#leaveMonth").val(lm);
-						$("#leaveYear").val(ly);
-						$("#leaveMonthReport").submit();
+					$("#leaveMonth").val(lm);
+					$("#leaveYear").val(ly);
+					$("#leaveMonthReport").submit();
 				}
-				// if (lm != "no" && ly != "no") {
-				// }
 			}
 		</script>
-</body>
-</html>
+	</body>
+
+	</html>

@@ -23,20 +23,29 @@
 				border: 2px solid rgb(219, 218, 218);
 			}
 
+			/* th{
+ background-color: #124265;
+ } */
+
 			table thead tr th {
 				text-align: center;
 				padding: 1rem 1rem;
-				font-weight: 400;
-			}
-
-			table tr td {
-				text-align: center;
-				color: rgb(88, 88, 88);
+				font-weight: 500;
+				font-size: 15px;
 				font-family: Verdana, Geneva, Tahoma, sans-serif;
 			}
 
-			.table>:not(caption)>*>* {
-				padding: 0.25rem 0.25rem;
+			.table thead th {
+				background-color: #124265;
+			}
+
+
+			table tr td {
+				font-size: 14px;
+				text-align: center;
+				color: rgb(88, 88, 88);
+				border-collapse: collapse;
+				font-family: Verdana, Geneva, Tahoma, sans-serif;
 			}
 
 			table {
@@ -55,28 +64,49 @@
 				border-bottom-width: 0px;
 				border-left-width: 0px;
 			}
+
+			.table>:not(caption)>*>* {
+				padding: 0.25rem 0.25rem;
+			}
+
+			.badge-soft-success-button {
+				font-size: 12px;
+				font-weight: 700;
+				color: #63ad6f !important;
+				background-color: rgba(99, 173, 111, .1);
+			}
+
+			.badge-soft-danger {
+				font-size: 12px;
+				font-weight: 700;
+				color: #f56e6e !important;
+				background-color: rgba(245, 110, 110, .1);
+			}
 		</style>
 
 
 	</head>
 
 	<body>
-		<div class="leave-reason-pop  ">
+		<form action="">
+			<input type="hidden" name="LeaveId" id="LeaveId">
+		</form>
+		<div class="leave-reason-pop ">
 			<div class=" d-flex justify-content-between">
-				<label class="badge-soft-primary py-2 px-2 fw-normal  mx-2 d-inline-block " style="width: 40%;"
+				<label class="badge-soft-primary py-2 px-2 fw-normal mx-2 d-inline-block " style="width: 40%;"
 					id="DayCount"> Leave Reason </label>
-				<button onclick="leaveReasonPopHide('')" class="btn   badge-soft-primary text-secondary me-0"><i
+				<button onclick="leaveReasonPopHide('')" class="btn badge-soft-primary text-secondary me-0"><i
 						class="fa fa-duotone fa-circle-xmark"></i></button>
 			</div>
 			<hr>
 			<p id="msgLeaveReason" style="font-family: Lato-Regular; font-size: 16px;"></p>
 		</div>
 
-		<div class="approve-reason-pop  ">
+		<div class="approve-reason-pop ">
 			<div class=" d-flex justify-content-between">
 				<label class="badge-soft-primary py-2 px-2 fw-normal mx-2 d-inline-block " style="width: 40%;"
 					id="DayCount"> Approve Reason </label>
-				<button onclick="approveReasonPopHide()" class="btn   badge-soft-primary text-secondary me-0"><i
+				<button onclick="approveReasonPopHide()" class="btn badge-soft-primary text-secondary me-0"><i
 						class="fa fa-duotone fa-circle-xmark"></i></button>
 			</div>
 			<hr>
@@ -89,12 +119,12 @@
 			</button>
 		</div>
 
-		<div class="reject-reason-pop  ">
+		<div class="reject-reason-pop ">
 
 			<div class=" d-flex justify-content-between">
 				<label class="badge-soft-primary py-2 px-2 fw-normal mx-2 d-inline-block " style="width: 40%;"
 					id="DayCount"> Reject Reason </label>
-				<button onclick="rejectReasonPopHide()" class="btn   badge-soft-danger text-secondary me-0"><i
+				<button onclick="rejectReasonPopHide()" class="btn badge-soft-danger text-secondary me-0"><i
 						class="fa fa-duotone fa-circle-xmark"></i></button>
 			</div>
 
@@ -108,27 +138,27 @@
 			</button>
 
 		</div>
-		<div class="container">
-			<h1 class="text-secondary h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Employee Leaves </h1>
+		<div class="container mt-5">
+			<!-- <h1 class="text-secondary h4 m-0 my-3 py-2 fw-normal dashboard-headling ">Employee Leaves </h1> -->
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="table-responsive" style="border-radius: 8px;">
 						<table class="table table-hover project-list-table table-nowrap align-middle table-borderless">
-							<thead class="table-dark rounded-1">
+							<thead>
 								<tr>
-									<th class="text-white ">LeaveId</th>
-									<th class="text-white ">Employee Name</th>
-									<th class="text-white ">Leave Type</th>
-									<th class="text-white ">Starting Date</th>
-									<th class="text-white ">Ending Date</th>
-									<th class="text-white ">Leave Reason</th>
-									<th class="text-white ">Documents</th>
+									<th class="text-white py-2 fw-normal ">Leave ID</th>
+									<th class="text-white py-2 fw-normal ">Employee Name</th>
+									<th class="text-white py-2 fw-normal ">Leave Type</th>
+									<th class="text-white py-2 fw-normal ">Start Date</th>
+									<th class="text-white py-2 fw-normal ">End Date</th>
+									<th class="text-white py-2 fw-normal ">Leave Reason</th>
+									<th class="text-white py-2 fw-normal ">Documents</th>
 									<th class="text-white btn-leave-approve " colspan="2">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${leaveList}" var="l">
-									<tr class="">
+									<tr class="" id="${l.getLeaveId()}">
 										<td class="">${l.getLeaveId()}</td>
 										<td class="">${l.getEmpName()}</td>
 										<td class="">${l.getLeaveType()}</td>
@@ -136,21 +166,21 @@
 										<td class="">${l.getEndDate()}</td>
 										<td class="text-center ">
 
-											<button class="btn btn-sm badge-soft-primary w-75 py-2" type="button"
+											<button class="btn btn-sm badge-soft-primary w-50 py-1 " type="button"
 												onclick='leaveReasonPopShow(` <c:out value="${l.getLeaveReason()}" /> `);this.blur()'>
 												<i class="fa fa-duotone fa-comments"></i>
 											</button>
 
 										</td>
 										<td class="text-center">
-											<!-- this work when  file will there -->
+											<!-- this work when file will there -->
 											<c:if test='${!l.getAttachment().equals("")}'>
 												<button class="btn btn-sm badge-soft-primary w-75 py-2" type="button"
 													disabled>
 													<i class="fa fa-sharp fa-solid fa-ban"></i>
 												</button>
 											</c:if>
-											<!-- change for check if file attact  -->
+											<!-- change for check if file attact -->
 											<!-- this work when no file will there -->
 											<c:if test='${l.getAttachment().equals("")}'>
 												<a href='${l.getAttachment()}'
@@ -174,120 +204,138 @@
 										</td>
 									</tr>
 								</c:forEach>
+								<c:if test='${leaveList.size()== 0}'>
+									<tr>
+										<td colspan="8" class="bg-white text-center fw-normal h5 p-2 "> No Data</td>
+									</tr>
+								</c:if>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
-
-
-			<script>
-				$(document).ready(function () {
-					$("#btnLeaveReject").on('click',
-						function (event) {
-							event.preventDefault();
-							if (new String($('#msgRejectReason').val()).replace(/\s/g, '').length > 4) {
-								$("#loadingBtnR").addClass("spinner-border spinner-border-sm");
-								$('#btnLeaveReject').attr("disabled", true);
-								let data = {
-									leaveId: $('#LeaveId').val(),
-									rejectReason: $('#msgRejectReason').val()
-								}
-								console.log(data);
-								let uri = 'reject-leave-process'
-								$.ajax({
-									type: 'POST',
-									url: uri,
-									data: JSON.stringify(data),
-									contentType: 'application/json',
-									success: function (data, msg, xh) {
+		</div>
+		<script>
+			$(document).ready(function () {
+				$("#btnLeaveReject").on('click',
+					function (event) {
+						event.preventDefault();
+						if (new String($('#msgRejectReason').val()).replace(/\s/g, '').length > 4) {
+							$("#loadingBtnR").addClass("spinner-border spinner-border-sm");
+							$('#btnLeaveReject').attr("disabled", true);
+							let data = {
+								leaveId: $('#LeaveId').val(),
+								rejectReason: $('#msgRejectReason').val()
+							}
+							console.log(data);
+							let uri = 'reject-leave-process'
+							$.ajax({
+								type: 'POST',
+								url: uri,
+								data: JSON.stringify(data),
+								contentType: 'application/json',
+								success: function (data, msg, xh) {
+									$("#msgRejectReason").val('');
+									$("#loadingBtnR").removeClass("spinner-border spinner-border-sm");
+									$('#btnLeaveReject').attr("disabled", false);
+									rejectReasonPopHide();
+									let trId = '#' + $("#LeaveId").val();
+									$(trId).closest('tr').remove();
+									let rowCount = $('table tr').length;
+									if (rowCount == 1) {
 										location.replace('/home');
-										location.reload();
-										console.log(data);
-									},
-									error: function (data, msg, xh) {
-
 									}
-								});
-							}
-							else if (new String($('#msgRejectReason').val()).replace(/\s/g, '').length == 0) {
-								alert("Please enter reason");
-								$('#msgRejectReason').focus();
-							}
-							else {
-								alert("Please enter valid reason");
-								$('#msgRejectReason').focus();
-							}
-						});
-				});
-				function approveLeave() {
-					if (new String($('#msgApproveReason').val()).replace(/\s/g, '').length >= 0) {
-						$("#loadingBtn").addClass("spinner-border spinner-border-sm");
-						$('#btnLeaveApprove').attr("disabled", true);
-						let data = {
-							leaveId: $('#LeaveId').val(),
-							approveReason: $('#msgApproveReason').val()
+								},
+								error: function (data, msg, xh) {
+
+								}
+							});
 						}
-						console.log(data);
-						let uri = 'approve-leave-process'
-						$.ajax({
-							type: 'POST',
-							url: uri,
-							data: JSON.stringify(data),
-							contentType: 'application/json',
-							success: function (data, msg, xhr) {
+						else if (new String($('#msgRejectReason').val()).replace(/\s/g, '').length == 0) {
+							alert("Please enter reason");
+							$('#msgRejectReason').focus();
+						}
+						else {
+							alert("Please enter valid reason");
+							$('#msgRejectReason').focus();
+						}
+					});
+			});
+			function approveLeave() {
+				if (new String($('#msgApproveReason').val()).replace(/\s/g, '').length >= 0) {
+					$("#loadingBtn").addClass("spinner-border spinner-border-sm");
+					$('#btnLeaveApprove').attr("disabled", true);
+					let data = {
+						leaveId: $('#LeaveId').val(),
+						approveReason: $('#msgApproveReason').val()
+					}
+					console.log(data);
+					let uri = 'approve-leave-process'
+					$.ajax({
+						type: 'POST',
+						url: uri,
+						data: JSON.stringify(data),
+						contentType: 'application/json',
+						success: function (data, msg, xhr) {
+							$("#msgApproveReason").val('');
+							$("#loadingBtn").removeClass("spinner-border spinner-border-sm");
+							$('#btnLeaveApprove').attr("disabled", false);
+							approveReasonPopHide();
+							let trId = '#' + $("#LeaveId").val();
+							$(trId).closest('tr').remove();
+							let rowCount = $('table tr').length;
+							if (rowCount == 1) {
 								location.replace('/home');
-								location.reload();
-
-							},
-							error: function (data, msg, xhr) {
-								console.log(data);
-								console.log(msg);
-								console.log(xhr);
 							}
-						});
-					}
-					else if (new String($('#msgApproveReason').val()).replace(/\s/g, '').length == 0) {
-						alert("Please enter reason");
-						$('#msgApproveReason').focus();
-					}
-					else {
-						alert("Please enter valid reason");
-						$('#msgApproveReason').focus();
-					}
+						},
+						error: function (data, msg, xhr) {
+							console.log(data);
+							console.log(msg);
+							console.log(xhr);
+						}
+					});
 				}
+				else if (new String($('#msgApproveReason').val()).replace(/\s/g, '').length == 0) {
+					alert("Please enter reason");
+					$('#msgApproveReason').focus();
+				}
+				else {
+					alert("Please enter valid reason");
+					$('#msgApproveReason').focus();
+				}
+			}
 
-				function approveReasonPopShow() {
-					$(".approve-reason-pop").show();
-				}
-				function approveReasonPopHide() {
-					$(".approve-reason-pop").hide();
-				}
-				function rejectReasonPopShow() {
-					$(".reject-reason-pop").show();
-				}
-				function rejectReasonPopHide() {
-					$(".reject-reason-pop").hide();
-				}
-				function leaveReasonPopShow(msg) {
-					$("#msgLeaveReason").html(msg);
-					$(".leave-reason-pop").show();
-				}
-				function leaveReasonPopHide(msg) {
-					$("#msgLeaveReason").html(msg);
-					$(".leave-reason-pop").hide();
-				}
-				function rejectLeaveApplication(LeaveId) {
-					$('#LeaveId').val(LeaveId);
-					console.log(LeaveId);
-					rejectReasonPopShow();
-				}
-				function approveLeaveApplication(LeaveId) {
-					$('#LeaveId').val(LeaveId);
-					console.log(LeaveId);
-					approveReasonPopShow();
-				}
-			</script>
+			function approveReasonPopShow() {
+				$(".approve-reason-pop").show();
+			}
+			function approveReasonPopHide() {
+				$(".approve-reason-pop").hide();
+			}
+			function rejectReasonPopShow() {
+				$(".reject-reason-pop").show();
+			}
+			function rejectReasonPopHide() {
+				$(".reject-reason-pop").hide();
+			}
+			function leaveReasonPopShow(msg) {
+				$("#msgLeaveReason").html(msg);
+				$(".leave-reason-pop").show();
+			}
+			function leaveReasonPopHide(msg) {
+				$("#msgLeaveReason").html(msg);
+				$(".leave-reason-pop").hide();
+			}
+			function rejectLeaveApplication(LeaveId) {
+				$('#LeaveId').val(LeaveId);
+				console.log($('#LeaveId').val());
+				rejectReasonPopShow();
+			}
+			function approveLeaveApplication(LeaveId) {
+				$('#LeaveId').val(LeaveId);
+				console.log($('#LeaveId').val());
+				approveReasonPopShow();
+			}
+		</script>
 	</body>
 
 	</html>

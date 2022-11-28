@@ -33,10 +33,9 @@ public class CustomerController {
 	@Autowired
 	UserRepository ur;
 
-	
 	@Autowired
 	CustomerDomainRepository cdr;
-	
+
 	@Autowired
 	CustomerRepository cr;
 
@@ -57,7 +56,6 @@ public class CustomerController {
 	@PostMapping("/customer-add-process")
 	public ResponseEntity<Object> customermasterprocess(Model model, @RequestBody Customer customer) {
 		customer.setOnBoardDate(new SimpleDateFormat("yyyy-mm-dd").format(new Date()));
-		System.out.println(customer);
 		Optional<CustomerDomain> domain = cdr.findById(customer.getCustomerDomain().getId());
 		Optional<User> user = ur.findById(customer.getUser().getEmpId());
 		if (user.isEmpty()) {
@@ -88,7 +86,7 @@ public class CustomerController {
 	@PostMapping("/customer-edit-process")
 	public ResponseEntity<Object> customerEditProcess(@RequestBody Customer customer) {
 		System.out.println(customer);
-		Optional<Customer> c= cr.findById(customer.getCustomerId());
+		Optional<Customer> c = cr.findById(customer.getCustomerId());
 		Optional<CustomerDomain> domain = cdr.findById(customer.getCustomerDomain().getId());
 		Optional<User> user = ur.findById(customer.getUser().getEmpId());
 		if (user.isEmpty()) {

@@ -63,7 +63,7 @@
                                         <select id="leaveManager" class="form-control form-select">
                                             <option value="" ><-- Select Manger --></option>
                                                 <c:forEach items="${managerList}" var="emp">
-                                                    <option value="${emp.getEmpId()}"  <c:if test="${emp.getEmpId() eq user.getLeaveReportingManger()}">selected="selected"</c:if> >${emp.getFirstName()} ${emp.getLastName()} </option>
+                                                    <option value="${emp.getEmpId()}"  <c:if test="${emp.getEmpId() eq user.getLeaveReportingManager()}">selected="selected"</c:if> >${emp.getFirstName()} ${emp.getLastName()} </option>
                                                 </c:forEach>         
                                         </select>
                                         <span class="form-text small text-danger ms-2  d-none"  >Specify Reporting Manager</span>     
@@ -124,7 +124,7 @@
             $("#leaveApproveManager").siblings("span").removeClass("d-none");
             flag = false;
         }
-        return flag;
+        return flag; 
     }
     $("#EditUserForm").on("submit",function (event) {
         event.preventDefault();
@@ -135,7 +135,7 @@
                 password:$("#password").val(),
                 active: $("#active").val(),
                 managerId:$("#manager").val(),
-                leaveReportingManger:$("#leaveManager").val(),
+                leaveReportingManager:$("#leaveManager").val(),
                 leaveManager:$("#leaveApproveManager").val(),
             }
             $.ajax({

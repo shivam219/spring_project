@@ -1,148 +1,118 @@
 <%@ include file="menu.jsp" %>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Apply Leave</title>
-<style>
-.gradient-custom {
-	background:#e2e2e2; 
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	height: 200%;
-}
-
-.body {
-	 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-		"Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; 
-		font-size:18px; 
-}
-
-.box2 {
-	color: white;
-	/* background-color: #6c757d; */
-	
-}
-</style>
+	<title>Apply Leave</title>
 </head>
 
 <body>
-	<section class="h-100  body gradient-custom body">
-		<div class="container py-4 h-10 ">
-			<div class="row justify-content-center align-items-center h-100 p-0">
-				<div class="col-12 p-0">
-					<div class="card shadow-2-strong p-1 card-registration" style="border: 0px solid;">
-						 <h3 class="ms-5 text-dark p-0 rounded-1" style="font-family: Lato-Regular; font-weight:bold;" >Leave Application</h3>
-						<div class="card-body p-1 p-md-3" style="background-color: #f6f6f5 ;">
-							<input type="hidden" value='<%="M"%>' id="empGender">
-							<form method="post" action="applyleaveprocess" onsubmit="return validate(this)">
-								<div class="row">
-									<div class="col-sm-4">
-										<div class="input-group ms-1 w-73">
-											<span class="input-group-text" id="basic-addon1">Employee
-												Name</span> <input type="text" class="form-control" 
-												value="${emp.getFirstName()}" aria-label="employeeName" name="empName"
-												aria-describedby="basic-addon1">
+	<div class="container-xl mt-5"> 
+		<div class="row px-4">
+			<div class="col col-xl-12">
+				<div class="card mb-4">
+					<div class="card-header text-center text-white h6" style="background-color: #124265;">Leave Application</div>
+					<div class="card-body">
+						<input type="hidden" value='<%="M"%>' id="empGender">
+						<form  id="applyLeaveForm">
+							<div class="container">
+								<div class="row justify-content-center">
+									<div class="col-10">
+										<div class="row gx-3 mb-3 justify-content-around">
+											<div class="col-md-6">
+												<label class="mb-1" for="empName">Employee:</label>
+												<span class="h6">${emp.getFirstName()} ${emp.getLastName()}</span>
+											</div>
+											<div class="col-md-6">
+												<label class="mb-1" for="manager">Manager:</label>
+												<span class="h6">${manager.getFirstName()} ${manager.getLastName()}</span>
+											</div>
 										</div>
-
-									</div>
-									<div class="col-sm-4">
-										<div class="input-group ms-1 w-73">
-											<span class="input-group-text" id="basic-addon1">Employee
-												ID</span> <input type="text" class="form-control"  
-												value="${emp.getEmpId()}" aria-label="employeeId" name="empId"
-												aria-describedby="basic-addon1">
+										<div class="row gx-3 mt-4">
+											<div class="col w-75 text-start">
+												<label class="mb-1 py-2 rounded text-white px-2 py-2" style="background-color: #124265">
+													<i class="fa-solid fa-file-lines"></i>&nbsp;&nbsp;Leave Details</label>
+											</div>
+											<div class="col w-75 text-center ">
+												<button type="button" onclick="showSingleDate()" id="btnSingle" class="btn me-1 mb-1 text-white " style="background-color: #124265">
+													<i class="fa-solid fa-calendar-day"></i>&nbsp;&nbsp;Single</button>
+												<button type="button" onclick="showMultipleDate()" id="btnMulti" class="btn me-1 mb-1 text-white " style="background-color: #124265">
+													<i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;Multiple</button>
+											</div>
 										</div>
-									</div>
-
-									<div class="col-sm-4">
-										<div class="input-group ms-1 w-73">
-											<span class="input-group-text" id="basic-addon1">Manager
-												Name</span> <input type="hidden" name="managerId" id="managerId" value="${manager.getEmpId()}">
-												<input type="text" class="form-control"  
-												value="${manager.getFirstName()} ${manager.getLastName()}" aria-label="managerName" name="managerName"
-												aria-describedby="basic-addon1">
+										<div class="row gx-3">
+											<div class="col-md-6">
+												<label class="mb-1" for="leaveType">Leave Type</label>
+												<select name="leaveType" id="selectLeaveType" class="form-control form-select w-75">
+													<option value="sickLeave">Sick Leave</option>
+													<option value="CasualLeave">Casual Leave</option>
+													<option value="PrivilageLeave">Privilage Leave</option>
+												</select>
+											</div>
+											<div class="col-md-6" id="dayModeType">
+												<label class="mb-1" for="dayMode">Day Mode</label><br>
+												<div class="border p-1 rounded w-75 ">
+													<div class="form-check d-inline-flex mt-1">
+														<input class="form-check-input" type="radio"  name="dayMode" id="dayMode1" value="Half Day" checked="">
+														<label class="form-check-label" for="dayMode"> &nbsp;Half Day </label>
+													</div>
+													<div class="form-check d-inline-flex ms-2">
+														<input class="form-check-input" type="radio" name="dayMode" id="dayMode2" value="Full Day">
+														<label class="form-check-label" for="dayMode"> &nbsp;Full Day </label>
+													</div>
+										 		</div>
+											</div>
 										</div>
-									</div>
-								</div>
-								<div class="row mt-3 justify-content-center">
-									<div class="col col-sm-8">
-									<h5 class="m-3 text-white  bg-secondary text-center body rounded-1 py-1" style="font-size:16px;">Leave Details</h5>
-									</div> 
-									<div class="row" style="margin-top: -5px;">
-										<div class="col ms-3 mb-2 mb-md-3 col-sm-4">
-											<button type="button" class="btn  btn-sm" onclick="showSingleDate()" id="btnSingle" style="margin-left: -10px;">Single</button>
-											<button type="button" class="btn btn-sm" onclick="showMultipleDate()" id="btnMulti">Multiple</button>
+										<div class="row gx-3 mb-3">
+											<div class="col-md-6">
+												<label class="mb-1" for="startDate">Start Date</label>
+												<input class="form-control w-75" type="date"  onchange="startDateChange() "name="startDate" id="startDate" placeholder="Enter StartDate">
+												<span class="form-text small text-danger ms-2 d-none">Specify StartDate</span>
+											</div>
+											<div class="col-md-6 endDateHide">
+												<div class="row">
+													<div class="col-md-7">
+														<label class="mb-1" for="endDate">End Date</label>
+														<input class="form-control" type="date" name="endDate" id="endDate" onchange="getNumberOfDays()" placeholder="Enter EndDate">
+													</div>
+													<div class="col-md-5 mt-4">
+														<label class="badge-soft-primary py-2 px-2" id="dayCount"> 	Day : </label>
+													</div>
+												</div>
+											</div>
 										</div>
-									</div>
-								</div>
-								<div class="row"> 
-									
-									<div class="col ms-3 col-sm-4">
-										<div class="input-group m-1 w-73">
-											<span class="input-group-text" id="" style="margin-left:-2px;">Leave Type<span style="color: red;">&nbsp;*</span></span> 
-											<select class="form-select  w-50 d-inline " name="leaveType" id="selectLeaveType" >
-												<option value="Sick Leave">Sick Leave</option>
-												<option value="Casual Leave">Casual Leave</option>
-												<option value="Privilege Leave">Privilege Leave</option>
-											</select>
-									</div>
-									</div>
-									<div class="col-6 " id="dayModeType">
-										<label class="start" style="margin-left:50px;">Day Mode <span style="color: red;">&nbsp;*</span> </label>
-										<div class="form-check form-check-inline">
-											<input class="form-check-input mt-2" type="radio" name="dayMode" id="dayMode1" value="Half Day" checked=""> <span class="input-group-text d-inline" id="basic-addon1">Half Day</span></input>
-										</div>
-										<div class="form-check-inline">
-											<input class="form-check-input mt-2" type="radio" name="dayMode" id="dayMode2" value="Full Day">	<span class="input-group-text d-inline" id="basic-addon1">Full Day</span> 
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-4 m-3">
-										<div class="input-group ">
-											<span class="input-group-text">Start Date <span style="color: red;">&nbsp;*</span></span>
-											<input type="date" class="form-control" onchange="startDateChange()" name="startDate" id="startDate">
-										</div>
-									</div>
-									<div class="col-sm-4 m-3 endDateHide">
-										<div class="input-group date" style="margin-left:17px;">
-											<span class="input-group-text">End Date <span style="color: red;">&nbsp;*</span></span>
-											<input type="date" class="form-control" name="endDate" id="endDate" onchange="getNumberOfDays()">
-											<span id="dayCount">&nbsp;&nbsp;Day Count : </span>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col col-sm-4   ms-3 star">
-										<span class="input-group-text">Supporting Document Only 2MB, PDF  </span> 
-										<input type="file" class="form-control" id="attachment" name="attachment" />
-									</div>
-									<div class="col-6 ms-5">
-										<div class="form-group" style="margin-right:-127px">
-											<label for="leaveReason"  class="input-group-text star">Leave Reason <span style="color: red;">&nbsp;*</span> </label>
-											<textarea class="form-control" id="leaveReason" name="leaveReason" rows="3" placeholder="type leave reason here....."></textarea>
+										<div class="row gx-3 mb-3">
+											<div class="col-md-6">
+												<label class="mb-1" for="attachment">Supporting Document 2MB PDF Only</label>
+												<input class="form-control w-75" type="file" id="attachment" name="attachment" placeholder="Enter attachment">
+												<span class="form-text small text-danger ms-2 d-none">Specify attachment</span>
+											</div>
+											<div class="col-md-6">  
+												<label class="mb-1" for="leaveReason">Leave Reason</label>
+												<textarea class="form-control w-75" id="leaveReason" name="leaveReason" type="text" placeholder="Enter Leave Reason" value=""></textarea>
+												<span class="form-text small text-danger ms-2 d-none">Specify Leave Reason</span>
+											</div>
 										</div>
 									</div>
 								</div>
-								<div class="row m-0 mt-3 mb-3 justify-content-center">
-									<div class="col-sm-6 md-4 pe-5" style="margin-left: 400px;">
-										<button type="submit"id="btnSubmit" class="btn btn-success btn-sm">Submit</button>
-										<button type="reset" class="btn btn-danger px-3  mt-sm-0 mt-2 btn-sm">Reset</button>
-									</div>
-								</div>
-							</form>
-						</div>
+							</div>
+							<div class="row justify-content-center mt-2">
+								<button class="btn btn-primary btn-sm px-3 w-auto" type="submit" id="btnSubmit">
+									<span id="loadingBtn"> </span> &nbsp; Submit &nbsp;
+								</button>
+								<button class="btn btn-danger btn-sm px-3 ms-2 w-auto " type="reset"
+									onclick="this.blur()"> Reset</button>
+								<a href="leave-console" class="btn btn-secondary btn-sm px-3 ms-2 w-auto " type="back"
+									onclick="this.blur()"> Back</a>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
+		</div>
+	</div>
 	<script>
-		$(document).ready(function(){
+		$(document).ready(function () {
 			$(".endDateHide").hide();
 			$('#btnSingle').toggleClass('btn-primary');
 			$('#btnMulti').toggleClass('btn-secondary');
@@ -170,12 +140,12 @@
 			if (optSelect == 1) {
 				if ($("#empGender").val() == "M") {
 					$('#selectLeaveType').append(
-							$('<option>').val('Paternity Leave').text(
-									'Paternity Leave'));
+						$('<option>').val('Paternity Leave').text(
+							'Paternity Leave'));
 				} else {
 					$('#selectLeaveType').append(
-							$('<option>').val('Maternity Leave').text(
-									'Maternity Leave'));
+						$('<option>').val('Maternity Leave').text(
+							'Maternity Leave'));
 				}
 				optSelect = 2;
 				$("input[name='endDate'] ").prop('disabled', false);
@@ -186,7 +156,7 @@
 			$('#endDate').val('');
 			if (optSelect == 2) {
 				if ($("#selectLeaveType").val() == "Maternity Leave"
-						|| $("#selectLeaveType").val() == "Paternity Leave") {
+					|| $("#selectLeaveType").val() == "Paternity Leave") {
 					$("input[name='endDate'] ").prop('disabled', true);
 				} else {
 					$("input[name='endDate'] ").prop('disabled', false);
@@ -220,7 +190,7 @@
 						month = "0" + month.toString();
 					}
 					$("input[name='endDate'] ").val(
-							year + '-' + month + '-' + day);
+						year + '-' + month + '-' + day);
 					$("input[name='endDate'] ").prop('disabled', true);
 
 				} else if ($("#selectLeaveType").val() == "Paternity Leave") {
@@ -245,63 +215,96 @@
 						month = "0" + month.toString();
 					}
 					$("input[name='endDate'] ").val(
-							year + '-' +month + '-' +day);
+						year + '-' + month + '-' + day);
 					$("input[name='endDate'] ").prop('disabled', true);
 				} else {
 					$("input[name='endDate'] ").prop('disabled', false);
 				}
 			}
 		}
-		
+
 		function getNumberOfDays() {
-			if($('#startDate').val() && $('#endDate').val()){
+			if ($('#startDate').val() && $('#endDate').val()) {
 				let start = new Date($('#startDate').val());
-				let end = new Date($('#endDate').val()); 
-				$("#dayCount").html("&nbsp;&nbsp;Day Count : " + ( Math.round( (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24))));
+				let end = new Date($('#endDate').val());
+				$("#dayCount").html("&nbsp;&nbsp;Day Count : " + (parseInt(Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24))) + 1));
 			}
-		}
-		function validate(fm) {
-			if (optSelect == 1) {
-				if (fm.startDate.value == "") {
-					alert("Start date is Empty");
-					fm.startDate.focus();
-					return false;
-				}
-			} else {
-				if (fm.startDate.value == "") {
-					fm.startDate.focus();
-					alert("Start Date is Empty");
-					return false;
-				}
-				if (fm.endDate.value == "") {
-					fm.endDate.focus();
-					alert("End Date is Empty");
-					return false;
-				}
-				if (new Date(fm.startDate.value) > new Date(fm.endDate.value)) {
-					alert("End date is greater then start date");
-					return false;
-				}
-			}
-			if (fm.leaveReason.value.replace(/\s/g, '').length == 0) {
-				alert("please assigned leave reason");
-				fm.leaveReason.focus();
-				return false;
-			}
-			swal({
-            title: "Success",
-            text: "Leave Request Submitted successfully",
-            icon: "success",
-			}).
-			then(function (isOkay) {
-				if (isOkay) {
-					fm.submit();
-				}
-			});
-				return false;
 		}
 
+
+		function isValid() {
+			let flag = true; 
+			if(!($("#dayMode1").val())){
+				$("#dayMode1").addClass("is-invalid");
+				$("#dayMode1").siblings("span").removeClass("d-none");
+				flag = false;
+			}
+			if(!($("#startDate").val())){
+				$("#startDate").addClass("is-invalid");
+				$("#startDate").siblings("span").removeClass("d-none");
+				flag = false;
+			}
+			if(!($("#endDate").val())){
+				$("#endDate").addClass("is-invalid");
+				$("#endDate").siblings("span").removeClass("d-none");
+				flag = false;
+			}
+			if(!($("#leaveReason").val())){
+				$("#leaveReason").addClass("is-invalid");
+				$("#leaveReason").siblings("span").removeClass("d-none");
+				flag = false;
+			}
+			return flag; 
+		}
 		
+		$("#applyLeaveForm").on("submit", function (event) {
+			event.preventDefault();
+			if (isValid()) {
+				$("#loadingBtn").addClass("spinner-border spinner-border-sm");
+				let data = {
+					dayMode: $("input[name=dayMode]:checked").val(),
+					leaveType: $("#selectLeaveType").val(),
+					startDate: $("#startDate").val(),
+					endDate: $("#endDate").val(),
+					managerId: $("#manager").val(),
+					leaveReason: $("#leaveReason").val()
+				}
+				$.ajax({
+					type: 'POST',
+					url: 'apply-leave-process',
+					data: JSON.stringify(data),
+					contentType: 'application/json',
+					success: function (data, msg, xh) {
+						$("#btnSave").blur();
+						$("#loadingBtn").removeClass("spinner-border spinner-border-sm");
+						swal({
+							title: "Success",
+							text: "Leave Applied Successfully",
+							icon: "success",
+						}).
+							then(function (isOkay) {
+								if (isOkay) { 
+									location.replace('/home');
+								}
+							});
+					}, error: function (data, msg, xh) {
+						$("#loadingBtn").removeClass("spinner-border spinner-border-sm");
+					}
+				});
+			} else {
+				$("#btnSave").blur();
+			}
+		}); 
+
+
+    $("input, select , textarea ").on("input",function(){
+        $(this).removeClass("is-invalid");
+        if(!$(this).val()){
+            $(this).siblings("span").removeClass("d-none");
+        }else{
+            $(this).siblings("span").addClass("d-none");
+        }
+    });
 	</script>
 </body>
 

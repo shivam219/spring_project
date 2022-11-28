@@ -32,16 +32,13 @@ public class UserMasterService {
 						 .collect(Collectors.toList());		
 		return ud;
 	}
-	public List<UserDto> findEmpNameManagerNameEmpGroupDescByEmpId() {
-		List<Tuple> tu = ur.findEmpNameManagerNameEmpGroupDescByEmpId();
+	public List<UserDto> findEmpNameManagerNameEmpGroupDescByEmpId(long empId) {
+		List<Tuple> tu = ur.findEmpNameManagerNameEmpGroupDescByEmpId(empId);
 		List<UserDto> ud = tu.stream().
 				map(m->new UserDto(
 						m.get(0,BigInteger.class),
 						m.get(1,String.class),
-						m.get(2,String.class),
-						m.get(3,String.class),
-						m.get(4,String.class),
-						m.get(5,String.class)
+						m.get(2,String.class)
 						))
 				.collect(Collectors.toList());		
 		return ud;

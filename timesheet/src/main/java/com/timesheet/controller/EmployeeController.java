@@ -18,15 +18,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.timesheet.model.Employee;
 import com.timesheet.repository.EmployeeRepository;
+import com.timesheet.repository.GenLocationRepository;
 
 @Controller
 public class EmployeeController {
 	@Autowired
 	EmployeeRepository er;
 
+	@Autowired
+	GenLocationRepository glr;
 //	per page 5[n]
 //	current page 
 
@@ -52,8 +56,11 @@ public class EmployeeController {
 	}
 
 	@GetMapping(value = "/employee-add")
-	public String userMasterAdd() {
-		return "employee-add";
+	public ModelAndView userMasterAdd() {
+		ModelAndView m = new ModelAndView("employee-add");
+		m.addObject("stateList", glr.findAllByState());
+		m.addObject("countryList", glr.findAllByCountry());
+		return m;
 	}
 
 	@GetMapping(value = "/employee-edit")
@@ -61,6 +68,8 @@ public class EmployeeController {
 		Optional<Employee> em = er.findById(empId);
 		Employee emp = em.get();
 		m.addAttribute("emp", emp);
+		m.addAttribute("stateList", glr.findAllByState());
+		m.addAttribute("countryList", glr.findAllByCountry());
 		return "employee-edit";
 	}
 

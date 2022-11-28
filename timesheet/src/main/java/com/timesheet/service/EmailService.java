@@ -32,13 +32,14 @@ public class EmailService {
 				return new PasswordAuthentication(from, pwd);
 			}
 		});
-			MimeMessage m = new MimeMessage(ss);
-			m.setFrom(new InternetAddress(from));
-			m.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-			m.setSubject(subject);
-			m.setContent(msg, "text/html");
-			Transport.send(m);
+		MimeMessage m = new MimeMessage(ss);
+		m.setFrom(new InternetAddress(from));
+		m.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+		m.setSubject(subject);
+		m.setContent(msg, "text/html");
+		Transport.send(m);
 	}
+
 	public void leaveSubmitEmailToEmployee(Leave l, String emailId) {
 		try {
 
@@ -118,38 +119,35 @@ public class EmailService {
 		}
 	}
 
-	public   void cancelRequestToEmployee(Leave l, String emailId ) {
+	public void cancelRequestToEmployee(Leave l, String emailId) {
 		try {
-			
-			String msg = "Hello  " + l.getEmpName() 
-					+ "<br>Your Leave Request No : " + l.getLeaveId() + " has been cancelled.<br><br>"
-					+ "<b>Leave Details</b> <br> "
-					+ "<br>Leave Type: " + l.getLeaveType()
-					+ "<br>From Date: " + l.getStartDate() + "<br> To Date: " + l.getEndDate() 
+
+			String msg = "Hello  " + l.getEmpName() + "<br>Your Leave Request No : " + l.getLeaveId()
+					+ " has been cancelled.<br><br>" + "<b>Leave Details</b> <br> " + "<br>Leave Type: "
+					+ l.getLeaveType() + "<br>From Date: " + l.getStartDate() + "<br> To Date: " + l.getEndDate()
 					+ "<br><br>This is an auto-generated Email. Do not reply to this email."
 					+ "<br><br\"rohit.sawant@ess.net.in\">Regards,<br>Human Resources";
-			Email(emailId,  "Leave Application No: "+ l.getLeaveId()+" Cancelled", msg);
+			Email(emailId, "Leave Application No: " + l.getLeaveId() + " Cancelled", msg);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void cancelRequestToApprover(Leave l,String emailId) {
+
+	public void cancelRequestToApprover(Leave l, String emailId) {
 		try {
-			
-			String msg = "Hello "+l.getManagerName()
-			+ "<br>Leave Request No : " + l.getLeaveId() + " has been cancelled by " +l.getEmpName()
-			+ "<br><br><b>Leave Details</b> <br> Leave Type: " + l.getLeaveType()
-			+ "<br>From Date: " + l.getStartDate() + "<br> To Date: " + l.getEndDate() 
-			+ "<br><br>This is an auto-generated Email. Do not reply to this email."
-			+ "<br><br>Regards,<br>Human Resources";		
-		Email(emailId, "Leave Application No: " + l.getLeaveId() +" Cancelled", msg);
+
+			String msg = "Hello " + l.getManagerName() + "<br>Leave Request No : " + l.getLeaveId()
+					+ " has been cancelled by " + l.getEmpName() + "<br><br><b>Leave Details</b> <br> Leave Type: "
+					+ l.getLeaveType() + "<br>From Date: " + l.getStartDate() + "<br> To Date: " + l.getEndDate()
+					+ "<br><br>This is an auto-generated Email. Do not reply to this email."
+					+ "<br><br>Regards,<br>Human Resources";
+			Email(emailId, "Leave Application No: " + l.getLeaveId() + " Cancelled", msg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void Email(String to, String sub, String msg) {
 		try {
 			String from = "noreply@ess.net.in";
@@ -180,4 +178,23 @@ public class EmailService {
 			e.printStackTrace();
 		}
 	}
+
+	public void rejectEmailToManager(Leave l, String emailId, String managerName, String rejectedBy) {
+		try {
+			String msg = "";
+
+			msg = "Hello " + managerName + "<br> Leave request No : " + l.getLeaveId() + " has been rejected."
+					+ "<br><br><b>Leave Details </b><br> " + "Requester Name: " + l.getEmpName() + "<br> Day Status: "
+					+ l.getDayMode() + "<br> Leave Type: " + l.getLeaveType() + "<br>From Date: " + l.getStartDate()
+					+ "<br> To Date: " + l.getEndDate() + "<br>Reason for Leave: " + l.getLeaveReason()
+					+ "<br>Rejected by: " + rejectedBy + "<br>Reason for Rejection: " + l.getRejectReason()
+					+ "<br><br>This is an auto-generated Email. Do not reply to this email."
+					+ "<br><br>Regards,<br>Human Resources";
+
+			Email(emailId, "Leave Application No: " + l.getLeaveId() + " Rejected", msg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

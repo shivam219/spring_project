@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Value;
-
 @Entity
 @Table(name = "leave_master")
 public class Leave {
@@ -21,7 +19,7 @@ public class Leave {
 	private String leaveId;
 
 	@Column(name = "emp_id")
-	private String empId;
+	private Long empId;
 
 	@Column(name = "emp_name")
 	private String empName;
@@ -30,7 +28,10 @@ public class Leave {
 	private String managerName;
 
 	@Column(name = "manager_id")
-	private String managerId;
+	private Long managerId;
+
+	@Column(name = "leave_manager_id")
+	private Long leaveManagerId;
 
 	@Column(name = "day_mode")
 	private String dayMode;
@@ -52,21 +53,29 @@ public class Leave {
 
 	@Column(name = "attachment")
 	private String attachment;
-    
+
 	@Column(name = "status")
 	private String status;
 
-	@Column(name="approve_reason")
+	@Column(name = "second_status")
+	private String secondStatus;
+
+	@Column(name = "approve_reason")
 	private String approveReason;
+
+	private String secondApproveReason;
+
+	@Column(name = "submitted_date")
+	private String submittedDate;
 
 	public Leave() {
 		super();
-		
 	}
 
-	public Leave(Long leaveCode, String leaveId, String empId, String empName, String managerName, String managerId,
-			String dayMode, String leaveType, String leaveReason, String rejectReason, String startDate, String endDate,
-			String attachment, String status, String approveReason) {
+	public Leave(Long leaveCode, String leaveId, Long empId, String empName, String managerName, Long managerId,
+			Long leaveManagerId, String dayMode, String leaveType, String leaveReason, String rejectReason,
+			String startDate, String endDate, String attachment, String status, String secondStatus,
+			String approveReason, String secondApproveReason, String submittedDate) {
 		super();
 		this.leaveCode = leaveCode;
 		this.leaveId = leaveId;
@@ -74,6 +83,7 @@ public class Leave {
 		this.empName = empName;
 		this.managerName = managerName;
 		this.managerId = managerId;
+		this.leaveManagerId = leaveManagerId;
 		this.dayMode = dayMode;
 		this.leaveType = leaveType;
 		this.leaveReason = leaveReason;
@@ -82,7 +92,10 @@ public class Leave {
 		this.endDate = endDate;
 		this.attachment = attachment;
 		this.status = status;
+		this.secondStatus = secondStatus;
 		this.approveReason = approveReason;
+		this.secondApproveReason = secondApproveReason;
+		this.submittedDate = submittedDate;
 	}
 
 	public Long getLeaveCode() {
@@ -101,11 +114,11 @@ public class Leave {
 		this.leaveId = leaveId;
 	}
 
-	public String getEmpId() {
+	public Long getEmpId() {
 		return empId;
 	}
 
-	public void setEmpId(String empId) {
+	public void setEmpId(Long empId) {
 		this.empId = empId;
 	}
 
@@ -125,12 +138,20 @@ public class Leave {
 		this.managerName = managerName;
 	}
 
-	public String getManagerId() {
+	public Long getManagerId() {
 		return managerId;
 	}
 
-	public void setManagerId(String managerId) {
+	public void setManagerId(Long managerId) {
 		this.managerId = managerId;
+	}
+
+	public Long getLeaveManagerId() {
+		return leaveManagerId;
+	}
+
+	public void setLeaveManagerId(Long leaveManagerId) {
+		this.leaveManagerId = leaveManagerId;
 	}
 
 	public String getDayMode() {
@@ -197,6 +218,14 @@ public class Leave {
 		this.status = status;
 	}
 
+	public String getSecondStatus() {
+		return secondStatus;
+	}
+
+	public void setSecondStatus(String secondStatus) {
+		this.secondStatus = secondStatus;
+	}
+
 	public String getApproveReason() {
 		return approveReason;
 	}
@@ -205,16 +234,31 @@ public class Leave {
 		this.approveReason = approveReason;
 	}
 
+	public String getSecondApproveReason() {
+		return secondApproveReason;
+	}
+
+	public void setSecondApproveReason(String secondApproveReason) {
+		this.secondApproveReason = secondApproveReason;
+	}
+
+	public String getSubmittedDate() {
+		return submittedDate;
+	}
+
+	public void setSubmittedDate(String submittedDate) {
+		this.submittedDate = submittedDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Leave [leaveCode=" + leaveCode + ", leaveId=" + leaveId + ", empId=" + empId + ", empName=" + empName
-				+ ", managerName=" + managerName + ", managerId=" + managerId + ", dayMode=" + dayMode + ", leaveType="
-				+ leaveType + ", leaveReason=" + leaveReason + ", rejectReason=" + rejectReason + ", startDate="
-				+ startDate + ", endDate=" + endDate + ", attachment=" + attachment + ", status=" + status
-				+ ", approveReason=" + approveReason + "]";
+				+ ", managerName=" + managerName + ", managerId=" + managerId + ", leaveManagerId=" + leaveManagerId
+				+ ", dayMode=" + dayMode + ", leaveType=" + leaveType + ", leaveReason=" + leaveReason
+				+ ", rejectReason=" + rejectReason + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", attachment=" + attachment + ", status=" + status + ", secondStatus=" + secondStatus
+				+ ", approveReason=" + approveReason + ", secondApproveReason=" + secondApproveReason
+				+ ", submittedDate=" + submittedDate + "]";
 	}
-	
-	
-	
 
 }

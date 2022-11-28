@@ -76,18 +76,7 @@
          .container{
             z-index: 1;
          }
-        table tfoot tr:last-child td:first-child {
-            border-bottom-left-radius: 5px;
-        }
-    
-        table tfoot tr:last-child td:last-child {
-            border-bottom-right-radius: 5px;
-        }
-        h5{
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            background-image: linear-gradient(108.1deg, rgba(167, 220, 225, 1) 11.2%,rgb(174, 221, 228) 88.9%); 
-            border-radius:20px ;
-        }
+     
         #tbtable thead { 
             border-radius: 3px;  
          }
@@ -112,16 +101,12 @@
         table tr,.row-color {
             background-color: #fff
         }   
- 
+
         .table>:not(caption)>*>* {
             vertical-align: middle;
             padding: 0.2rem 0.2rem;
-
         }
-        p, h1,h2,h3,h4,h5,h6{
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
-
+ 
         .holiday-leave-card{
             height: 130px;
             overflow-y: auto;

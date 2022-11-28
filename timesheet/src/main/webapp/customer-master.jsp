@@ -31,7 +31,7 @@
 					<tbody>
 						<c:forEach items="${customerdata}" var="c" varStatus="loop">
 							<tr id="A001">
-									<td>${c.getCustomerName()}</td>
+									<td> <a  href="report-customer?customerId=${c.getCustomerId()}" class="text-body"> ${c.getCustomerName()}</a> </td>
 								<td>${c.getCustomerDomain().getCustomerDomain()}</td>
 								<td>${c.getOnBoardDate()}</td>
 								<td>

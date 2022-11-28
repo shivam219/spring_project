@@ -32,7 +32,6 @@ public class Project {
 	@Column(name = "project_day")
 	private int projectDay;
 
-	
 	@JsonBackReference(value = "customer-project")
 	@ManyToOne()
 	@JoinColumn(name = "customer_id")
@@ -117,7 +116,7 @@ public class Project {
 	@Override
 	public String toString() {
 		return "Project [projectId=" + projectId + ", projectName=" + projectName + ", projectStatus=" + projectStatus
-				+ ", projectDay=" + projectDay + ", customer=" + "" + ", user=" +""+ "]";
+				+ ", projectDay=" + projectDay + ", customer=" + "" + ", user=" + "" + "]";
 	}
 
 }

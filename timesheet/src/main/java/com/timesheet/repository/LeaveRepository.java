@@ -8,8 +8,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.transaction.event.TransactionalEventListener;
-
 import com.timesheet.model.Leave;
 
 public interface LeaveRepository extends CrudRepository<Leave, Long> {
@@ -18,8 +16,8 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 	@Query(value = "insert into leave_master (emp_id , emp_name, manager_name, manager_id, day_mode, leave_type, leave_reason, start_date, end_date, attachment ,status, reject_reason ,submitted_date) "
 			+ "values (  :empid,  :empname,  :managername, :managerid, :daymode, :leavetype, :leavereason, :startdate, :enddate, :attachment, :status, :rejectreason , now());", nativeQuery = true)
 	@Transactional
-	public int saveLeave(@Param("empid") String empid, @Param("empname") String empname,
-			@Param("managername") String managername, @Param("managerid") String managerid,
+	public int saveLeave(@Param("empid") Long empid, @Param("empname") String empname,
+			@Param("managername") String managername, @Param("managerid") Long  managerid,
 			@Param("daymode") String daymode, @Param("leavetype") String leavetype,
 			@Param("leavereason") String leavereason, @Param("startdate") String startdate,
 			@Param("enddate") String enddate, @Param("attachment") String attachment, @Param("status") String status,
@@ -44,17 +42,24 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 
 	@Query(value = "SELECT count(status) FROM ess.leave_master where status='Cancelled' and month(start_date)=month(now())", nativeQuery = true)
 	public Integer getCancelledCountOfMonth();
-	
+
 	@Query(value = "SELECT count(status) FROM ess.leave_master where status='Pending' and month(start_date)=month(now())", nativeQuery = true)
 	public Integer getPendingCountOfMonth();
 
 	@Query(value = "SELECT count(status) FROM ess.leave_master where status='Rejected' and month(start_date)=month(now())", nativeQuery = true)
 	public Integer getRejectedCountOfMonth();
 
-	@Query(value ="select concat(date_format(start_date,'%D %b' ), ' to ', date_format(end_date,'%D %b' ),  ', ',concat(leave_type)) as Leaves\n"
-			+ " FROM leave_master where start_date between :startDate and  :endDate  ORDER BY DATE(start_date) ASC ", nativeQuery = true)
+	@Query(value = "select leave_type, date_format(start_date,'%D %M %Y' ) as start_date, date_format(end_date,'%D %M %Y' ) as end_date, status, a.*  from leave_master a", nativeQuery = true)
+	public List<Leave> getLeaveStatus();
+
+	@Query(value = "select  *  from leave_master where month(start_date) = :month and year(start_date) = :year and status = :status and emp_id = :empId", nativeQuery = true)
+	public List<Leave> getEmploeeWiseReport(@Param("month") String month, @Param("year") String year,
+			@Param("empId") long empId, @Param("status") String status);
+
+	@Query(value = "select  *  from leave_master where month(start_date) = :month and year(start_date) = :year and status in ('Pending') ", nativeQuery = true)
+	public List<Leave> getPendingLeaveByMonthAndYear(@Param("month") String month, @Param("year") String year);
+
+	@Query(value = "select concat(date_format(start_date,'%D %b' ), ' to ', date_format(end_date,'%D %b' ),  ', ',concat(leave_type)) as Leaves FROM leave_master where start_date between :startDate and  :endDate  ORDER BY DATE(start_date) ASC ", nativeQuery = true)
 	public List<Object> getWeekLeaves(@Param("startDate") String year, @Param("endDate") String month);
-	
-	
 
 }

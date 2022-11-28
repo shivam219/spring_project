@@ -34,8 +34,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	@Modifying
 	@Transactional
-	@Query(value = "update timesheet_user_master set active = :active, manager_id = :managerId, leave_manager = :leaveManager, leave_reporting_manger = :leaveReportingManger where emp_id = :empId", nativeQuery = true)
-	int updateUserDetails(@Param(value = "empId") long empId, @Param(value = "managerId") String managerId, @Param(value = "leaveReportingManger") String leaveReportingManger, @Param(value = "leaveManager") String leaveManager , @Param(value = "active") int active);
+	@Query(value = "update timesheet_user_master set active = :active, manager_id = :managerId, leave_manager = :leaveManager, leave_reporting_manger = :leaveReportingManager where emp_id = :empId", nativeQuery = true)
+	int updateUserDetails(@Param(value = "empId") long empId, @Param(value = "managerId") String managerId, @Param(value = "leaveReportingManager") String leaveReportingManager, @Param(value = "leaveManager") String leaveManager , @Param(value = "active") int active);
 	
 	public Boolean existsByEmpIdAndPassword(Long empId,String password);
 	
@@ -52,15 +52,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 
 	
-	@Query(value ="\n"
-			+ "with manager as(\n"
-			+ "select a.emp_id , concat(a.first_name,' ', a.last_name) as name, b.manager_id, b.active from \n"
-			+ "timesheet_employee_master a, timesheet_user_master b where a.emp_id = b.emp_id \n"
-			+ ")\n"
-			+ "select m.emp_id, m.name, m.manager_id   ,concat(c.first_name,' ', c.last_name)as manager_name, m.active, gm.UGRP_DESC \n"
-			+ "from manager m, timesheet_employee_master c, timesheet_user_group_mapping um,timesheet_user_group_master gm\n"
-			+ " where m.manager_id = c.emp_id and um.ugrp_code = gm.UGRP_CODE and m.emp_id = um.emp_id",nativeQuery = true)
-	public List<Tuple> findEmpNameManagerNameEmpGroupDescByEmpId();
+	@Query(value =" select  b.emp_id,  concat(a.first_name,' ', a.last_name) name  , gm.UGRP_DESC from "
+			+ " timesheet_employee_master a, timesheet_user_master b ,"
+			+ " timesheet_user_group_mapping um,timesheet_user_group_master gm "
+			+ " where a.emp_id = b.emp_id  and  um.emp_id = b.emp_id and gm.UGRP_CODE = um.ugrp_code "
+			+ " and b.emp_id = :empId "
+			+ " ;",nativeQuery = true)
+	public List<Tuple> findEmpNameManagerNameEmpGroupDescByEmpId(@Param(value = "empId") long empId);
 
 	
 }

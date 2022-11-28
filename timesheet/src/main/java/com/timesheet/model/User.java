@@ -2,20 +2,19 @@ package com.timesheet.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "timesheet_user_master")
@@ -33,7 +32,8 @@ public class User {
 
 	int active;
 	String managerId;
-	String leaveReportingManger;
+	@Column(name = "leave_reporting_manager")
+	String leaveReportingManager;
 	String leaveManager;
 
 //	@Transient//s stop create instat
@@ -51,6 +51,21 @@ public class User {
 
 	public User() {
 		super();
+	}
+
+	public User(Long empId, Employee employee, String password, String encryptedPassword, int active, String managerId,
+			String leaveReportingManager, String leaveManager, List<Project> project, List<Customer> customer) {
+		super();
+		this.empId = empId;
+		this.employee = employee;
+		this.password = password;
+		this.encryptedPassword = encryptedPassword;
+		this.active = active;
+		this.managerId = managerId;
+		this.leaveReportingManager = leaveReportingManager;
+		this.leaveManager = leaveManager;
+		this.project = project;
+		this.customer = customer;
 	}
 
 	public Long getEmpId() {
@@ -101,12 +116,12 @@ public class User {
 		this.managerId = managerId;
 	}
 
-	public String getLeaveReportingManger() {
-		return leaveReportingManger;
+	public String getLeaveReportingManager() {
+		return leaveReportingManager;
 	}
 
-	public void setLeaveReportingManger(String leaveReportingManger) {
-		this.leaveReportingManger = leaveReportingManger;
+	public void setLeaveReportingManager(String leaveReportingManager) {
+		this.leaveReportingManager = leaveReportingManager;
 	}
 
 	public String getLeaveManager() {
@@ -136,8 +151,8 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [empId=" + empId + ", employee=" + employee + ", password=" + password + ", encryptedPassword="
-				+ encryptedPassword + ", active=" + active + ", managerId=" + managerId + ", leaveReportingManger="
-				+ leaveReportingManger + ", leaveManager=" + leaveManager + ", project=" + project + ", customer="
+				+ encryptedPassword + ", active=" + active + ", managerId=" + managerId + ", leaveReportingManager="
+				+ leaveReportingManager + ", leaveManager=" + leaveManager + ", project=" + project + ", customer="
 				+ customer + "]";
 	}
 

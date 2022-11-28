@@ -1,6 +1,6 @@
 <%if(session.getAttribute("empId")==null){
 	response.sendRedirect("login");
-}%>
+}%> 
 
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -63,6 +63,7 @@
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle -2" href="dropdown-menu" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Leave Application </a>
 							<ul class="dropdown-menu" id="dropdown-menu">
+								<li><a class="dropdown-item" href="leave-console.jsp">Leave Console</a></li>
 								<li><a class="dropdown-item" href="apply-leave">Apply Leave</a></li>
 								<li><a class="dropdown-item" href="approve-leave">Approve Leave</a></li>
 								<li><a class="dropdown-item" href="cancle-leave">Cancel Leave</a></li>
@@ -73,7 +74,9 @@
 							<ul class="dropdown-menu" id="dropdown-menu">    
 								<li><a class="dropdown-item" href="report-month-employee">Employee Monthly Report</a></li>
 								<li><a class="dropdown-item" href="#">Month Wise Summary Reports</a></li>
-								<li><a class="dropdown-item" href="leave-report">Monthly Leave Reports </a></li>
+								<li><a class="dropdown-item" href="leave-report">Monthly Approve Leave Reports </a></li>
+								<li><a class="dropdown-item" href="leave-report">Employee Wise Leave Reports </a></li>
+								<li><a class="dropdown-item" href="leave-report">Monthly Pending Leave Reports </a></li>
 								<li><a class="dropdown-item" href="#">Check Approve Status</a></li>
 								<li><a class="dropdown-item" href="#">Project Summary Report</a></li>
 								<li><a class="dropdown-item" href="#">Project Overshot Report</a></li>

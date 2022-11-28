@@ -2,6 +2,8 @@ package com.timesheet.dto;
 
 import java.math.BigInteger;
 
+import org.springframework.util.StringUtils;
+
 public class UserDto {
 
 	long empId;
@@ -36,6 +38,13 @@ public class UserDto {
 		this.groupDesc = groupDesc;
 	}
 
+	public UserDto(BigInteger empId, String employeeName, String groupDesc) {
+		super();
+		this.empId = empId.longValue();
+		this.employeeName = employeeName;
+		this.groupDesc = groupDesc;
+	}
+
 	public long getEmpId() {
 		return empId;
 	}
@@ -45,7 +54,7 @@ public class UserDto {
 	}
 
 	public String getEmployeeName() {
-		return employeeName;
+		return StringUtils.capitalize(employeeName);
 	}
 
 	public void setEmployeeName(String employeeName) {
@@ -77,7 +86,7 @@ public class UserDto {
 	}
 
 	public String getGroupDesc() {
-		return groupDesc;
+		return StringUtils.capitalize(groupDesc);
 	}
 
 	public void setGroupDesc(String groupDesc) {

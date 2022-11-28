@@ -16,7 +16,7 @@ public interface DaySheetRepository extends CrudRepository<DaySheet, Integer> {
 	public List<DaySheet> findByStartDateAndEndDateMonthId(@Param("startDate") String startDate,
 			@Param("endDate") String endDate, @Param("monthId") Long monthId);
 	
-	@Query(value = "select * from timesheet_day_sheet where month_id = :monthId or month_id = :monthId2 and date between :startDate  and  :endDate ", nativeQuery = true)
+	@Query(value = "select * from timesheet_day_sheet where month_id  in( :monthId  , :monthId2 )  and date between :startDate  and  :endDate ", nativeQuery = true)
 	public List<DaySheet> findByStartDateAndEndDateMonthId2(@Param("startDate") String startDate,
 			@Param("endDate") String endDate, @Param("monthId") Long monthId , @Param("monthId2") Long monthId2);
 	
