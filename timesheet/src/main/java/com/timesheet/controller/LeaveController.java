@@ -94,7 +94,6 @@ public class LeaveController {
 		leave.setEmpName(emp.getFullName());
 		leave.setManagerId(manager.getEmpId());
 		leave.setManagerName(manager.getFullName());
-		System.out.println(leave);
 		System.out.println(lr.save(leave));
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Apply Leave success");
 	}

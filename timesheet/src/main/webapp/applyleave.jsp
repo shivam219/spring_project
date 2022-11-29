@@ -55,7 +55,7 @@
 														<input class="form-check-input" type="radio"  name="dayMode" id="dayMode1" value="Half Day" checked="">
 														<label class="form-check-label" for="dayMode"> &nbsp;Half Day </label>
 													</div>
-													<div class="form-check d-inline-flex ms-2">
+													<div class="form-check d-inline-flex ms-md-2">
 														<input class="form-check-input" type="radio" name="dayMode" id="dayMode2" value="Full Day">
 														<label class="form-check-label" for="dayMode"> &nbsp;Full Day </label>
 													</div>
@@ -115,11 +115,11 @@
 		$(document).ready(function () {
 			$(".endDateHide").hide();
 			$('#btnSingle').toggleClass('btn-primary');
-			$('#btnMulti').toggleClass('btn-secondary');
+			$('#btnMulti').toggleClass('btn-secondary');  
 		})
 		var optSelect = 1;
 		function showSingleDate() {
-			$("#dayCount").html("&nbsp;&nbsp;Day Count : ");
+			$("#dayCount").html("Days : ");
 			$('#startDate').val('');
 			$('#endDate').val('');
 			$("#dayMode1").prop("checked", true);
@@ -130,7 +130,7 @@
 			optSelect = 1;
 		}
 		function showMultipleDate() {
-			$("#dayCount").html("&nbsp;&nbsp;Day Count : ");
+			$("#dayCount").html("Days : ");
 			$('#startDate').val('');
 			$('#endDate').val('');
 			$("#dayMode2").prop("checked", true);
@@ -219,7 +219,7 @@
 					$("input[name='endDate'] ").prop('disabled', true);
 				} else {
 					$("input[name='endDate'] ").prop('disabled', false);
-				}
+				} 
 			}
 		}
 
@@ -227,7 +227,7 @@
 			if ($('#startDate').val() && $('#endDate').val()) {
 				let start = new Date($('#startDate').val());
 				let end = new Date($('#endDate').val());
-				$("#dayCount").html("&nbsp;&nbsp;Day Count : " + (parseInt(Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24))) + 1));
+				$("#dayCount").html("Days : " + (parseInt(Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24))) + 1));
 			}
 		}
 
