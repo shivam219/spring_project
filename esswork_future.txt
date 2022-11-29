@@ -1,2 +1,0 @@
-update data when save 
-remove record whn hour remove from hour flied 
