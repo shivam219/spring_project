@@ -12,7 +12,6 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<script src="js/bootstrap.bundle.min.js"></script>
 	<script src="js/jquery-3.6.0.min.js"></script>
-	<link rel='icon' type='image/ico' href='images/esslogo.jpg' />
 	<link rel='icon' type='image/ico' href='images/esslogo.png' />
 	<style>
 		.card {
@@ -100,7 +99,7 @@ background-color: #f6f9ff;
 
 										<div class="col-12">
 											<div class="form-check">
-												<input class="form-check-input" type="checkbox" name="remember"
+												<input class="form-check-input" type="checkbox" name="remember" checked
 													value="true" id="rememberMe">
 												<label class="form-check-label" for="rememberMe">Remember me</label>
 
@@ -114,7 +113,7 @@ background-color: #f6f9ff;
 										<div class="col-12">
 											<p class="small mb-0">Don't have account? <a href="register">Create an
 													account</a></p>
-											<p class="small mb-0">Don't remember pass <a href="forget-password">Forget
+											<p class="small mb-0">Don't remember pass <a href="forget-pass">Forget
 													Password</a></p>
 										</div>
 									</form>

@@ -11,18 +11,17 @@
 
     <div class="container-xl px-4 mt-4">
 
-      <div class="row">
-        <div class="col-xl-4">
+      <!-- <div class="row "> -->
+        <div class="row justify-content-center ">
+        <div class="col-md-8">
           <div class="card mb-4 mb-xl-0">
             <div class="card-header">Profile Details</div>
-            <div class="card-body text-center">
+            <div class="card-body text-center ">
               <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                <div class="row">
+                <div class="row gap-2 ">
                   <div class="col text-start">Employee Name</div>
-                  
                   <div class="col">
-                    <span class="badge badge-soft-primary mb-0 fw-bold" style="font-size: 14px;">  ${user.getEmployee().getFullName()}</span>
-                   
+                    <span class="badge badge-soft-primary mb-0 fw-bold" style="font-size: 14px;">  ${user.getFullName()}</span>
                   </div>
                 </div>
 
@@ -40,28 +39,28 @@
 
                 <div class="row">
                   <div class="col text-start">Email</div>
-                  <div class="col">${user.getEmployee().getEmpEmail()}</div>
+                  <div class="col">${user.getEmpEmail()}</div>
                 </div>
 
                 <div class="row">
                   <div class="col text-start">Join : </div>
-                  <div class="col">${user.getEmployee().getDateOfJoin()}</div>
+                  <div class="col">${user.getDateOfJoin()}</div>
                 </div>
 
                 <div class="row">
                   <div class="col text-start">Birth: </div>
-                  <div class="col">${user.getEmployee().getBirthDate()}</div>
+                  <div class="col">${user.getBirthDate()}</div>
                 </div>
 
-                <div class="row">
+                <div class="row justify-content-between">
                   <div class="col-3 text-start">Address</div>
-                  <div class="col-9 ">${user.getEmployee().getEmpCity()}, Pincode :
-                    ${user.getEmployee().getEmpPincode()}, ${user.getEmployee().getEmpAddress()}</div>
-                </div>
+                  <div class="col-6  ">${user.getEmpCity()}, Pincode :
+                    ${user.getEmpPincode()}, ${user.getEmpAddress()}</div>
+                </div> 
 
                 <div class="row">
                   <div class="col text-start">Phone</div>
-                  <div class="col">${user.getEmployee().getEmpPhone()}</div>
+                  <div class="col">${user.getEmpPhone()}</div>
                 </div>
 
                 <div class="row">
@@ -74,7 +73,7 @@
           </div>
         </div>
 
-        <div class="col-xl-8">
+        <div class="col-xl-8 d-none">
           <!-- Account details card-->
           <div class="card mb-4">
             <div class="card-header">Account Details</div>
@@ -94,7 +93,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row d-none ">
         <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
@@ -102,9 +101,6 @@
               <div id="pieChart" style="min-height: 400px;" class="echart"></div>
               <script>
                 // let mymydatadata = [{ value:12 , name:'rohit'}]
-
-
-
                 document.addEventListener("DOMContentLoaded", () => {
                   echarts.init(document.querySelector("#pieChart")).setOption({
                     title: {

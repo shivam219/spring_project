@@ -25,15 +25,21 @@
 	<link rel='icon' type='image/ico' href='images/esslogo.png' />
 	<script src="css/sweetalert.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css" integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<style>
+		.navbar-light .navbar-nav .navbar-link{
+			color: #0f5486;
+		}
+	</style>
 </head>
 
-<body>
+<body> 
 	<div class="container-fluid">
 		<div class="row">
 
 	<!-- <nav class="navbar navbar-expand-lg bg-nav-foot navbar-light bg-light " > -->
-		<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #71a9c9;">
-		<div class="container-fluid">
+		<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #fff;border-bottom: 2px solid #e6f2fb;">
+			<!-- <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #71a9c9;"> -->
+		<div class="container-fluid"> 
 			<a class="navbar-brand" href="home"> <img 
 					src="images/esslogo.png" width="100" height="40" class="d-inline-block align-text-top">
 			</a>

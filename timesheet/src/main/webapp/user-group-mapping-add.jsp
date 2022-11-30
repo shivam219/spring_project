@@ -104,10 +104,9 @@ body{
                                     </tr>
                                 </table>
                             </div>
-                            <!-- Save changes button-->
-                            <div class="row justify-content-center mt-3 ">
-                                <button class="btn btn-secondary btn-sm px-3 w-auto " onclick="history.back()" > Back </button>
-                                <button class="btn btn-primary px-3 w-auto ms-2" type="submit" id="btnSave">
+                            <div class="row justify-content-center mt-3 gap-2 ">
+                                <button class="btn btn-secondary btn-sm px-3 w-auto  order-md-1 order-2 " onclick="history.back()" > Back </button>
+                                <button class="btn btn-primary px-2 w-auto order-md-2 order-1 " type="submit" id="btnSave">
                                     <span id="loadingBtn"> </span> &nbsp; Assign Designation &nbsp;
                                 </button>
                             </div>

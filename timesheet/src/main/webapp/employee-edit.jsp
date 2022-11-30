@@ -248,13 +248,13 @@
                                     </div>
                                 </div>
                                 <!-- Save changes button-->
-                                <div class="row justify-content-center ">
-                                    <button class="btn btn-secondary px-5  mt-2 mt-sm-0 me-3 w-auto " type="button"
+                                <div class="row justify-content-center gap-2 ">
+                                    <button class="btn btn-secondary px-5 w-auto  " type="button"
                                         onclick="history.back()"> Back </button>
-                                    <button class="btn btn-primary px-3 w-auto" type="submit" id="btnSave">
+                                    <button class="btn btn-primary px-3 w-auto " type="submit" id="btnSave">
                                         <span id="loadingBtn"> </span> &nbsp; Save Changes &nbsp;
                                     </button>
-                                    <button class="btn btn-danger px-5  mt-2 mt-sm-0 ms-sm-3 w-auto " type="reset"
+                                    <button class="btn btn-danger px-5   w-auto " type="reset"
                                         onclick="this.blur()"> Reset </button>
                                 </div>
                             </form>
@@ -262,6 +262,8 @@
                     </div>
                 </div>
             </div>
+            <br>
+        <br>
         </div>
         <script>
             console.log(document.baseURI);

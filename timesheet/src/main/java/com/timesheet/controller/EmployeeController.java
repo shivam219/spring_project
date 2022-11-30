@@ -63,6 +63,18 @@ public class EmployeeController {
 		return m;
 	}
 
+	@PostMapping(value = "/employee-add-process")
+	public ResponseEntity<Object> addUser(@RequestBody Employee emp, HttpServletRequest request) {
+		emp.setCreatedBy(request.getSession().getAttribute("empId").toString());
+		System.out.println(emp);
+		if (er.findById(emp.getEmpId()).isEmpty()) {
+//			emp = er.save(emp);
+			return ResponseEntity.status(HttpStatus.CREATED).body("User Employee successfully");
+		}else {			
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Employee Already Exits");
+		}
+	}
+
 	@GetMapping(value = "/employee-edit")
 	public String getEmployeeEdit(Model m, @RequestParam("empId") Long empId) {
 		Optional<Employee> em = er.findById(empId);
@@ -81,13 +93,6 @@ public class EmployeeController {
 		emp.setModifiedBy(request.getSession().getAttribute("empId").toString());
 		er.save(emp);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Employee is updated successfully");
-	}
-
-	@PostMapping(value = "/employee-add-process")
-	public ResponseEntity<Object> addUser(@RequestBody Employee emp, HttpServletRequest request) {
-		emp.setCreatedBy(request.getSession().getAttribute("empId").toString());
-		emp = er.save(emp);
-		return ResponseEntity.status(HttpStatus.CREATED).body("User Create successfully");
 	}
 
 }

@@ -31,7 +31,7 @@
     <div class="container-xl px-4 mt-4">
 
       <div class="row mb-2">
-        <div class="col-xl-5">
+        <div class="col-xl-6">
           <div class="card mb-4 mb-xl-0">
             <div class="card-header">Profile Details</div>
             <div class="card-body text-center">
@@ -67,11 +67,11 @@
           </div>
         </div>
 
-        <div class="col-lg-7">
+        <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Month Chart</h5>
-              <div id="pieChart" style="min-height: 400px;" class="echart"></div>
+              <div id="pieChart" style="min-height: 300px;" class="echart"></div>
             </div>
           </div>
         </div>

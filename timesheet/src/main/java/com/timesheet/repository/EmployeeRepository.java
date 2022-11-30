@@ -22,6 +22,12 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	public Employee findByEmpId(Long empId);
 
 	public Boolean existsByEmpId(Long empId);
+//	public Boolean existsByEmpEmailIgnoreCase(String empEmail);
+	
+	@Query(value = "select emp_id from timesheet_user_master where emp_id in (select emp_id from timesheet_employee_master where lower(emp_email) =  lower(:email))",nativeQuery = true)
+	public Long findByEmpEmailIgnoreCase(@Param("email")String empEmail);
+	
+	
 
 	@Modifying
 	@Query(value = "insert into timesheet_employee_master (emp_id , emp_name, emp_email, emp_password,emp_password_encrypt, emp_city ,emp_address,emp_phone,emp_pincode) "

@@ -155,15 +155,13 @@
                                         <span class="form-text small text-muted ms-2 ">Optional For Now</span>
                                     </div>
                                 </div>
-                                <!-- Save changes button-->
-                                <!-- <div class="row ms-3 "> -->
-                                <div class="row justify-content-center ">
-                                    <button class="btn btn-secondary px-5  mt-2 mt-sm-0 me-2 w-auto " type="button"
-                                        onclick="history.back()"> Back </button>
-                                    <button class="btn btn-primary  px-3  ms-sm-3 w-auto" type="submit" id="btnSave">
+                                <div class="row justify-content-center gap-2">
+                                    <button class="btn btn-secondary px-5  w-auto " type="button"
+                                        onclick="history.back()"> Back </button> 
+                                    <button class="btn btn-primary  px-3 w-auto  " type="submit" id="btnSave">
                                         <span id="loadingBtn"> </span> &nbsp; Save Changes &nbsp;
                                     </button>
-                                    <button class="btn btn-danger px-5  mt-2 mt-sm-0 ms-sm-3 w-auto " type="reset"
+                                    <button class="btn btn-danger px-5 w-auto  " type="reset"
                                         onclick="this.blur()"> Reset </button>
                                 </div>
                             </form>
@@ -182,21 +180,12 @@
                     $("#empId").siblings("span").removeClass("d-none");
                     flag = false;
                 }
-                if (!($("#empPassword").val())) {
-                    $("#empPassword").addClass("is-invalid");
-                    $("#empPassword").siblings("span").removeClass("d-none");
-                    flag = false;
-                }
                 if (!($("#firstName").val())) {
                     $("#firstName").addClass("is-invalid");
                     $("#firstName").siblings("span").removeClass("d-none");
                     flag = false;
                 }
-                if (!($("#middleName").val())) {
-                    $("#middleName").addClass("is-invalid");
-                    $("#middleName").siblings("span").removeClass("d-none");
-                    flag = false;
-                }
+                 
                 if (!($("#lastName").val())) {
                     $("#lastName").addClass("is-invalid");
                     $("#lastName").siblings("span").removeClass("d-none");
@@ -237,6 +226,10 @@
                     $("#dateOfJoin").siblings("span").removeClass("d-none");
                     flag = false;
                 }
+                if($("input[name=gender]:checked").val()){
+                    alert("choose Gender");
+                }
+
                 return flag;
             }
             function getCurrentDate() {
@@ -289,10 +282,11 @@
                                     }
                                 });
                         }, error: function (data, msg, xh) {
-                            // $("#empId").addClass("is-invalid");
-                            // $("#empPassword").addClass("is-invalid");
-                            // $("#empPassWar").removeClass("d-none");
-                            // $("#empIdWar").  removeClass("d-none");
+                            swal({
+                                title: "Error",
+                                text: "Duplicate Employee Id",
+                                icon: "error",
+                            })
                             $("#loadingBtn").removeClass("spinner-border spinner-border-sm");
                         }
                     });

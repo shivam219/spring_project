@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="text-secondary h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Holiday Dashboard </h1>
+        <h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Holiday Dashboard </h1>
         <div class="row align-items-center mt-3 mb-2">
             <div class="col-md-6 mb-2 mb-md-0">
                 <div>
@@ -17,7 +17,7 @@
             </div>
             <div class="col-md-6 "> 
                 <div class="d-flex justify-content-md-end ">                          
-					<a type="button" class="btn btn-primary align-self-center align-items-center" href="project-map">  <i class="bx bx-plus me-1"></i>  Create Holiday</a>
+					<a type="button" class="btn btn-primary align-self-center align-items-center" href="holiday-master-add">  <i class="bx bx-plus me-1"></i>  Create Holiday</a>
 		        </div>
             </div>
         </div>

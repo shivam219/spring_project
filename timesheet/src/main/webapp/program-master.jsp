@@ -63,7 +63,7 @@
                                         <tr>
                                             <th class="overflow-auto">Menu</th>
                                             <th class="overflow-auto">Modify By</th>
-                                            <th class="overflow-auto">Last Modify</th>
+                                            <th class="overflow-auto">Last Modify</th> 
                                             <th class="overflow-auto">Action</th>
                                         </tr>
                                         <c:forEach items="${userGroupList}" var="group" varStatus="loop">

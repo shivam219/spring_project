@@ -7,15 +7,15 @@
 </head>
 <body>
 	<div class="container">  
-	    <h1 class="text-secondary h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Customer Dashboard </h1>
+	    <h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Customer Dashboard </h1>
 		<div class="row align-items-center "> 
             <div class="col-md-6 mb-md-0 mb-2" >                     
 				<h6 class=" badge-soft-success d-inline px-2 py-2 rounded">No of Customer <span class="text-center d-inline-md d-inline-block">(${customerdata.size()})</span></h6>
             </div>
             <div class="col-md-6 ">
-                <div class="d-flex justify-content-md-end  ">                        
-					<a type="button" class="btn btn-primary   px-4  me-2 mb-1" href="customer-domain" style="border-radius: 15px"> <i class="bx bx-plus me-1"></i>  Add New Domain</a>
-					<a type="button" class="btn btn-primary   px-4  me-2 mb-1" href="customer-add" style="border-radius: 15px"> <i class="bx bx-plus me-1"></i>  Add New Customer</a>
+                <div class="d-flex justify-content-md-end gap-1 ">                        
+					<a type="button" class="btn btn-primary   px-4 " href="customer-domain" style="border-radius: 15px"> <i class="bx bx-plus me-1"></i>  Add Domain</a>
+					<a type="button" class="btn btn-primary   px-4 " href="customer-add" style="border-radius: 15px"> <i class="bx bx-plus me-1"></i>  Add Customer</a>
                 </div>
             </div> 
 			<div class="">

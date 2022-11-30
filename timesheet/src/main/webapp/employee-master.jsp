@@ -6,7 +6,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="text-secondary h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Employee Dashboard </h1>
+        <h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Employee Dashboard </h1>
         <div class="row align-items-center mt-3">
             <div class="col-md-6  mb-2 mb-md-0 "> 
                 <h6 class=" badge-soft-success d-inline px-2 py-2 rounded"> No of Employee  <span class="text-muted fw-normal ms-1">(${empListSize})</span></h6>

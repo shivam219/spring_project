@@ -54,7 +54,11 @@ public class LoginController {
 	}
 
 	@GetMapping("login")
-	public String login() {
+	public String login(HttpServletRequest request) {
+		request.getSession().invalidate();
+		request.getSession().removeValue("error");
+		request.getSession().removeAttribute("error");
+		
 		return "login";
 	}
 

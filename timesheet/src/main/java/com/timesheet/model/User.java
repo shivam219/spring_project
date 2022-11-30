@@ -33,7 +33,8 @@ public class User {
 	int active;
 	String managerId;
 	@Column(name = "leave_reporting_manager")
-	String leaveReportingManager;
+	String leaveReportingManager;	
+	@Column(name = "leave_manager_id")
 	String leaveManager;
 
 //	@Transient//s stop create instat

@@ -13,14 +13,14 @@
 </head>
 <body>
 	<div class="container"> 
-		<h1 class="text-secondary h4 m-0 my-3 py-2 fw-normal  dashboard-headling "> Project Dashboard </h1>
+		<h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling "> Project Dashboard </h1>
 		<div class="row align-items-center  ">
             <div class="col-md-6 mb-2 mb-md-0 ">
 				<h6 class=" badge-soft-success d-inline px-3 py-2 rounded"> No of Projects <span class="text-muted fw-normal ">(${projectList.size()})</span></h6>
 		    </div>
             <div class="col-md-6 "> 
                 <div class="d-flex justify-content-md-end ">                         
-					<a type="button" class="btn btn-primary   px-md-4  me-2 mb-1" href="project-map"  style="border-radius: 15px">  Employe Project Map</a>
+					<a type="button" class="btn btn-primary   px-md-4  me-2 mb-1" href="project-map" style="border-radius: 15px">  Employe Project Map</a>
 					<a type="button" class="btn btn-primary   px-md-4  me-2 mb-1" href="add-project" style="border-radius: 15px"> <i class="bx bx-plus me-1"></i>  Add New Project</a>
                 </div>
             </div>

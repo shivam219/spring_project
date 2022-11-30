@@ -180,9 +180,9 @@ public class LeaveController {
 	}
 
 	@PostMapping(value = "/reject-leave-process")
-	public ResponseEntity<Object> rejectleaveprocess(HttpServletRequest request, Model model, @RequestBody Leave la) {
+	public ResponseEntity<Object> rejectleaveprocess(HttpServletRequest request, Model model, @RequestBody Leave leave) {
 		try {
-			approveService.updateRejectStatus(la, request);
+			approveService.updateRejectStatus(leave, request);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

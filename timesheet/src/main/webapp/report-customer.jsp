@@ -91,7 +91,7 @@
             </div>
           </div>
         </div>
-        <div class="col">
+        <div class="col d-none ">
           <div class="card">
             <img class="" src="images/weatherbg.jpg" alt="Card image cap" style="max-height: 105px">
             <div class="card-img-overlay" style="height: 110px">
@@ -129,7 +129,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header bg-white d-flex align-items-center">
-            <h4 class="card-title mb-0">Customer Project Overview</h4>
+            <h4 class="card-title mb-0">Project Overview</h4>
             <div class="card-actions ms-auto">
               **
 
@@ -146,7 +146,7 @@
                     <!-- <th class="border-0">Buget</th> -->
                     <th class="border-0">Date</th>
                     <th class="border-0">Status</th>
-                    <th class="border-0">Actions</th>
+                    <th class="border-0">Days</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -165,20 +165,37 @@
                           </span>
                         </c:if>
                         <c:if test='${l.getProjectStatus() eq 0 }'>
-                          <span class="px-2 py-1 badge badge-soft-danger font-weight-100 ">  
+                          <span class="px-2 py-1 badge badge-soft-danger font-weight-100 ">
                             In-Active
                           </span>
                         </c:if>
                       </td>
                       <td>
-                          ${l.getProjectDay()} Days
+                        ${l.getProjectDay()} Days
                       </td>
                     </tr>
                   </c:forEach>
+                  <c:if test="${customer.getProject().size() eq 0}">
+                    <tr>
+                      <td colspan="6" class="text-center">
+                        No Project
+                      </td>
+                    </tr>
+                  </c:if>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="row mt-2">
+        <div class="col-md-6">
+          <div>
+            <button class="btn btn-secondary btn-sm px-5 py-1" type="button" onclick="history.back()"> Back </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </body>

@@ -13,7 +13,7 @@ table {
 
 <body>
     <div class="container">
-        <h1 class="text-secondary h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Year Dashboard </h1>
+        <h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Year Dashboard </h1>
         <div class="row align-items-center mt-3">
             <div class="col ms-1">
                 <div class="mb-1 ">      

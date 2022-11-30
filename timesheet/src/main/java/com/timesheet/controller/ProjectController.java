@@ -78,7 +78,7 @@ public class ProjectController {
 	@PostMapping("/project-add-process")
 	public ResponseEntity<Object> projectAdddProcess(Model model, @RequestBody Project project) {
 		projectService.save(project);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Project Added");
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Project Edited");
 	}
 
 	@GetMapping(value = "project-edit")

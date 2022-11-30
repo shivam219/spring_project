@@ -8,7 +8,7 @@
 	<body>
 		<input type="hidden" value="${empMonthSheet.getMonthSheetId()}" id="monthSheetId">
 		<div class="container">
-			<h1 class="text-secondary h4 m-0 my-3 py-2 fw-normal  dashboard-headling "> Approve Timesheet </h1>
+			<h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling "> Approve Timesheet </h1>
 			<div class="">
 				<div class="row m-0 p-0 bg-white py-2 my-2 justify-content-center">
 					<div class="col-md text-center">

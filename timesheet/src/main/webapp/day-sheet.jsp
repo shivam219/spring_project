@@ -119,7 +119,7 @@
         <div class="container" >
             <div class="row rounded m-0 p-0 ">
                 <br><br>
-                <h1 class="text-secondary h4 m-0 my-3 py-2 fw-normal  dashboard-headling  d-none">Weekly Updates </h1> 
+                <h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling  d-none">Weekly Updates </h1> 
             </div>
             <div class="row align-middle  pt-2 mx-0  rounded-top row-color "   >
                 <div class="col fw-bold text-center align-middle">

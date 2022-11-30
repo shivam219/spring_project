@@ -15,17 +15,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
     
     <div class="container">
-        <h1 class="text-secondary h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">User Dashboard </h1>
+        <h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">User Dashboard </h1>
         <div class="row align-items-center mt-3">
             <div class="col-md-6 mb-2">
                 <div>
-                    <h6 class="badge-soft-success d-inline px-3 py-2 rounded"> No of User <span class="text-muted fw-normal ms-1">(${userList.size()})</span></h6>
+                    <h6 class="badge-soft-success d-inline px-3 py-2 rounded"> No of User <span class="text-muted fw-normal ms-1">(${users.size()})</span></h6>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 me-2 mb-1 ">    
-                    <div>
-                        <a href="user-group-mapping-add"  onclick="this.blur()" class="btn btn-primary"><i class="bx bx-plus me-1"></i> User Group Mapping</a>
+                    <div>   
+                        <a href="user-group-mapping-add"  onclick="this.blur()" class="btn btn-primary mb-md-0 mb-1 "><i class="bx bx-plus me-1"></i> User Group Mapping</a>
                         <a href="user-group-mapping-master"  onclick="this.blur()" class="btn btn-primary"><i class="bx bx-pencil me-1"></i> Edit User Group</a>
                         <a href="user-master-add"  onclick="this.blur()" class="btn btn-primary"><i class="bx bx-plus me-1"></i> Create User</a>
                     </div>
