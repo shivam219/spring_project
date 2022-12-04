@@ -41,8 +41,13 @@ public class MonthSheetController {
 		}
 		MonthSheet ms = msp.get();
 		m.addAttribute("empMonthSheet", mse.findMonthSheetEmployeeDataByMonthId(monthSheetId).get(0));
-		m.addAttribute("monthSheetDataList", mse.findMonthSheetDataAndApprove(monthSheetId));
+		m.addAttribute("monthSheetDataList", mse.findMonthSheetDataAndApproveajax(monthSheetId));
 		return "month-sheet-approve";
+	}
+
+	@GetMapping("/fetch-month-sheet-employee-approve")
+	public ResponseEntity<Object> fetchMonthTimesheetEmployee(@RequestParam("monthSheetId") Long monthSheetId) {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(mse.findMonthSheetDataAndApproveajax(monthSheetId));
 	}
 
 	@GetMapping("/month-sheet")
@@ -59,11 +64,18 @@ public class MonthSheetController {
 		if (msp.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unable to update timesheet");
 		}
-		MonthSheet ms2 = msp.get();
-		ms2.setApproved(ms.isApproved());
-		
-		msr.save(ms2);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Timesheet Status is updated");
+		if (!ms.isApproved()) {
+			MonthSheet ms2 = msp.get();
+			ms2.setApproved(false);
+			ms2.setSubmit(false);
+			msr.save(ms2);
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body("Timesheet Status is updated");
+		} else {
+			MonthSheet ms2 = msp.get();
+			ms2.setApproved(ms.isApproved());
+			msr.save(ms2);
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body("Timesheet Status is updated");
+		}
 	}
 
 }

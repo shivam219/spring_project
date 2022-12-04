@@ -84,7 +84,6 @@ public class ProjectController {
 	@GetMapping(value = "project-edit")
 	public ModelAndView editProject(@RequestParam("projectId") Project project) {
 		ModelAndView m = new ModelAndView("project-edit");
-		System.out.println(project);
 		m.addObject("project", project);
 		m.addObject("customerList", customerService.getAllcustomer());
 		return m;
@@ -92,7 +91,6 @@ public class ProjectController {
 
 	@PostMapping("/project-edit-process")
 	public ResponseEntity<Object> editProjectProcess(Model model, @RequestBody Project project) {
-		System.out.println(projectService.save(project));
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Project Edit");
 	}
 

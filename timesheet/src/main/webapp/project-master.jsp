@@ -38,7 +38,7 @@
 						<c:forEach items="${projectList}" var="p" varStatus="loop">
 							<tr>
 								<!-- <td>${p.getProjectId()} </td>	 -->
-								<td class=" overflow-auto">${p.getProjectName()}</td>
+								<td> <a  href="report-project?projectId=${p.getProjectId()}" class="text-body"> ${p.getProjectName()}</a> </td>
 								<td>   
 									<div class="sidebyside">
 										<div > 

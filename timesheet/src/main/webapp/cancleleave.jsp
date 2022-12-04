@@ -103,13 +103,15 @@
 					</div>
 				</div>
 			</div>
+			<div class="row">
+                <div class="col-md-6">
+                    <div>
+                        <a class="btn btn-secondary btn-sm px-5 py-1" type="button" href="home" > Back  </a> 
+                    </div>
+                </div>
+            </div>
 		</div>
-
-		<i class="fa fa-thin fa-trash-can-xmark"></i>
-		<i class="fa fa-duotone fa-trash-can-xmark"></i>
 		<script>
-
-
 			function cancelLeaveApplication(LeaveId) {
 				console.log();
 				$('#btnCancel').attr("disabled", true);

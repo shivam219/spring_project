@@ -30,7 +30,6 @@ public class LoginController {
 	@PostMapping("/loginprocess")
 	public ResponseEntity<Object> loginPost(HttpServletRequest request, Model m, @RequestBody User emp) {
 		Optional<User> user = ur.findByEmpIdAndPassword(emp.getEmpId(), emp.getPassword());
-//		System.out.println(user.get()); getting error or customer domain
 		if (user.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
 		}

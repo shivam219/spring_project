@@ -253,13 +253,10 @@ public class WorkService {
 		return map;
 	}
 	public LinkedHashMap<String, List<Work>> getSubmittedWorkOld(String startDate, String endDate, long empId) {
-		System.out.println("fetchin");
 		List<Work> l = repository.getWorByStartDateEndDate(startDate, endDate, empId);
 		List<Project> plist = (List<Project>) prepository.getProjectByEmpId(empId);
 		Collections.sort(l, (e1, e2) -> e1.getDay().compareTo(e2.getDay()));
-		System.out.println(l);
-		System.out.println(plist);
-
+	
 		LinkedHashMap<String, List<Work>> map = new LinkedHashMap<String, List<Work>>();
 		for (Work w : l) {
 			if (map.containsKey(w.getProjectName())) {

@@ -1,5 +1,8 @@
 package com.timesheet.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +16,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -38,20 +48,37 @@ public class Customer {
 	@Column(name = "customer_representative")
 	private String customerRepresentative;
 
-	
 //	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "customer_domain")
 	CustomerDomain customerDomain;
 
 	@JsonBackReference
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "emp_id")
 	User user;
 //	getting error on orphanRemoval = true while updating data
-	@JsonManagedReference(value="customer-project") 
-	@OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Project.class)
+	@JsonManagedReference(value = "customer-project")
+	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Project.class)
 	List<Project> project;
+
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "create_time", updatable = false)
+	private Date createTime;
+
+	@CreatedBy
+	@Column(name = "created_by")
+	String createdBy;
+
+	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "modify_time")
+	private Date modifyTime;
+
+	@LastModifiedBy
+	@Column(name = "modified_by")
+	String modifiedBy;
 
 	public Customer() {
 		super();
@@ -88,6 +115,17 @@ public class Customer {
 
 	public String getOnBoardDate() {
 		return onBoardDate;
+	}
+
+	public String getOnBoardDateFormated() {
+		Date d = null;
+		try {
+			d = new SimpleDateFormat("yyyy-MM-dd").parse(onBoardDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		String mydate = d.getDate() + " " + (d.getMonth() + 1) + " " + d.getYear();
+		return mydate;
 	}
 
 	public void setOnBoardDate(String onBoardDate) {

@@ -33,6 +33,10 @@ public class MonthSheet {
 	@Column(name = "approved")
 	private boolean approved;
 
+//	@Type(type = "yes_no")
+//	@Column(name = "reject")
+//	private boolean reject;
+
 	private String month;
 //	getting error 
 //	@OneToMany(mappedBy = "monthId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -101,7 +105,7 @@ public class MonthSheet {
 
 	@Override
 	public String toString() {
-		return "MonthSheet [monthSheetId=" + monthSheetId + ", user=" + "" + ", submit=" + submit + ", submitDate="
+		return "MonthSheet [monthSheetId=" + monthSheetId + ", user=" + user + ", submit=" + submit + ", submitDate="
 				+ submitDate + ", approved=" + approved + ", month=" + month + "]";
 	}
 

@@ -213,7 +213,14 @@
 						</table>
 					</div>
 				</div>
-			</div>
+			</div> 
+			<div class="row">
+                <div class="col-md-6">
+                    <div>
+						<a class="btn btn-secondary btn-sm px-5 py-1" type="button" href="home" > Back  </a> 
+					</div>
+                </div>
+            </div>
 		</div>
 		<script>
 			$(document).ready(function () {

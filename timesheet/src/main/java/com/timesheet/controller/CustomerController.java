@@ -85,7 +85,6 @@ public class CustomerController {
 
 	@PostMapping("/customer-edit-process")
 	public ResponseEntity<Object> customerEditProcess(@RequestBody Customer customer) {
-		System.out.println(customer);
 		Optional<Customer> c = cr.findById(customer.getCustomerId());
 		Optional<CustomerDomain> domain = cdr.findById(customer.getCustomerDomain().getId());
 		Optional<User> user = ur.findById(customer.getUser().getEmpId());

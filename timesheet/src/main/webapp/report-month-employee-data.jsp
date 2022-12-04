@@ -61,7 +61,6 @@
                       ${emp.getGroupDesc()}</span>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>

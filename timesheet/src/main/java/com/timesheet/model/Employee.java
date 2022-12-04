@@ -2,6 +2,7 @@ package com.timesheet.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -72,7 +73,7 @@ public class Employee {
 	private String modifiedTime;
 
 	@JsonIgnore
-	@OneToOne(mappedBy = "employee")
+	@OneToOne(mappedBy = "employee",fetch = FetchType.LAZY)
 	User user;
 
 	public Employee() {

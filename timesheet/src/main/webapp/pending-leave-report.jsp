@@ -6,60 +6,20 @@
         <title>Monthly Pending Leave Report</title>
     </head>
     <style>
-        table {
-            table-layout: auto;
-        }
-
-        .project-list-table {
-            border-collapse: separate;
-            /* border-spacing: 0 12px */
-        }
-
-        .project-list-table tr {
-            background-color: #fff
-        }
-
-        .table-nowrap td,
-        .table-nowrap th {
-            white-space: nowrap;
-        }
-
-        .table-borderless>:not(caption)>*>* {
-            border-bottom-width: 0;
-        }
-
-        .table>:not(caption)>*>* {
-            padding: 0.75rem 0.75rem;
-            background-color: var(--bs-table-bg);
-            border-bottom-width: 1px;
-            box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
-        }
-
-        .starlabel:after {
-            content: " *";
-            color: red;
-        }
-
-        tbody,
-        td,
-        td a tfoot,
-        th,
-        thead,
-        tr {
-            border-width: 0px;
-        }
+          
+	tbody,
+	td,
+	td a tfoot,
+	th,
+	thead,
+	tr {
+		border-width: 0px;
+		border-collapse: collapse; }
     </style>
 
     <body>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css"
-            integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"
-            integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
-
         <div class="container">
-            <div class="row align-items-center mt-5">
+            <div class="row align-items-center mt-5  ">
                 <div class="col-md-6">
                     <div>
                         <h5 class="card-title ms-2" style="color: #124265;">Pending Leave Report</h5>
@@ -99,14 +59,14 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row">  
                 <div class="col-lg-12">
                     <div class="">
-                        <div class="table-responsive">
-                            <table
+                        <div class="table-responsive" style="border-radius: 8px;">
+                            <table 
                                 class="table project-list-table table-hover table-nowrap align-middle table-borderless"
                                 id="tableholiday">
-                                <thead>
+                                <thead> 
                                     <tr class="text-white" style="font-size:15px; background-color:#124265;">
                                         <td scope="col" class="text-white">Leave Id</td>
                                         <td scope="col" class="text-white">Employee Id</td>

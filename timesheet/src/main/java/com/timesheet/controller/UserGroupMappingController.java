@@ -38,12 +38,12 @@ public class UserGroupMappingController {
 	@GetMapping(value = "/user-group-mapping-master")
 	public String getuserGroupMappingMaster(Model m) {
 		m.addAttribute("userGroupList", (ugmr.getAllGroup()));
-		List<String[]> allGroup = ugmr.getAllGroup();
-		for (String[] str : allGroup) {
-			System.out.println(str[0]);
-			System.out.println(str[1]);
-			System.out.println(str[2]);
-		}
+//		List<String[]> allGroup = ugmr.getAllGroup();
+//		for (String[] str : allGroup) {
+//			System.out.println(str[0]);
+//			System.out.println(str[1]);
+//			System.out.println(str[2]);
+//		}
 		m.addAttribute("empList", (List<Employee>) er.findAll());
 		return "user-group-mapping-master";
 	}

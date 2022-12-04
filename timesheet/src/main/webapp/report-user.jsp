@@ -16,9 +16,9 @@
         <div class="col-md-8">
           <div class="card mb-4 mb-xl-0">
             <div class="card-header">Profile Details</div>
-            <div class="card-body text-center ">
+            <div class="card-body  ">
               <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                <div class="row gap-2 ">
+                <div class="row  ">
                   <div class="col text-start">Employee Name</div>
                   <div class="col">
                     <span class="badge badge-soft-primary mb-0 fw-bold" style="font-size: 14px;">  ${user.getFullName()}</span>
@@ -27,7 +27,9 @@
 
                 <div class="row">
                   <div class="col text-start">Employee Id</div>
-                  <div class="col">${user.getEmpId()}</div>
+                  <div class="col"> 
+                    <span class="badge badge-soft-primary mb-0 fw-bold" style="font-size: 14px;"> ${user.getEmpId()}</span>
+                  </div>
                 </div>
 
                 <div class="row">
@@ -43,20 +45,35 @@
                 </div>
 
                 <div class="row">
-                  <div class="col text-start">Join : </div>
+                  <div class="col text-start">Join </div>
                   <div class="col">${user.getDateOfJoin()}</div>
                 </div>
 
                 <div class="row">
-                  <div class="col text-start">Birth: </div>
+                  <div class="col text-start">Birth </div>
                   <div class="col">${user.getBirthDate()}</div>
                 </div>
 
                 <div class="row justify-content-between">
                   <div class="col-3 text-start">Address</div>
-                  <div class="col-6  ">${user.getEmpCity()}, Pincode :
-                    ${user.getEmpPincode()}, ${user.getEmpAddress()}</div>
+                  <div class="col-6  "> ${user.getEmpAddress()}, ${user.getEmpCity()}.
+                   </div>
                 </div> 
+
+                <div class="row">
+                  <div class="col text-start">Pincode</div>
+                  <div class="col">${user.getEmpPincode()}</div>
+                </div>
+
+                <div class="row">
+                  <div class="col text-start">State</div>
+                  <div class="col">${user.getState()}</div>
+                </div>
+
+                <div class="row">
+                  <div class="col text-start">Country</div>
+                  <div class="col">${user.getCountry()}</div>
+                </div>
 
                 <div class="row">
                   <div class="col text-start">Phone</div>

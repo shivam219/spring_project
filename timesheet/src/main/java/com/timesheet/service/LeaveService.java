@@ -40,21 +40,16 @@ public class LeaveService {
 
 	public List<Leave> getCancleLeave(String l) {
 		return leaveRepository.getCancleLeave(l);
-
 	}
 
 	public int updateCancleStatus(Leave leaveOld) {
 		if (leaveRepository.updateCancleStatus(leaveOld.getLeaveId()) == 1) {
 			Long lc = Long.valueOf(leaveOld.getLeaveId().substring(1));
-			System.out.println(lc);
 			Optional<Leave> l2 = leaveRepository.findById(lc);
 			Leave leaveNew = l2.get();
-
 			emailService.cancelRequestToEmployee(leaveNew, "sandeep.gupta@ess.net.in");
 			emailService.cancelRequestToApprover(leaveNew, getLeaveId());
-
 		}
-
 		return 0;
 	}
 

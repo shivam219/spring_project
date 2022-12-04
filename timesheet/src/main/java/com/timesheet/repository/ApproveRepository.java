@@ -17,21 +17,21 @@ public interface ApproveRepository extends JpaRepository<Leave, Long> {
 
 	public Boolean existsByManagerIdAndStatus(String managerId, String status);
 
-	@Query(value = "select * from leave_master where manager_id = :managerId and status = :status order by leave_id asc", nativeQuery = true)
+	@Query(value = "select * from timesheet_leave_master where manager_id = :managerId and status = :status order by leave_id asc", nativeQuery = true)
 	public List<Leave> findAllFirstManagerList(@Param("managerId") String managerId, @Param("status") String status);
 
-	@Query(value = "select * from leave_master where ifnull((leave_manager_id = :leaveManagerId),(manager_id = :managerId)) and second_status = :secondStatus order by leave_id desc;", nativeQuery = true)
+	@Query(value = "select * from timesheet_leave_master where ifnull((leave_manager_id = :leaveManagerId),(manager_id = :managerId)) and second_status = :secondStatus order by leave_id desc;", nativeQuery = true)
 	public List<Leave> findAllLastManagerList(@Param("leaveManagerId") String leaveManagerId,
 			@Param("managerId") String managerId, @Param("secondStatus") String secondStatus);
 
 //	@Modifying
 //	@Transactional
-//	@Query(value = "Update leave_master set status='Approved' , approve_reason = :approveReason  where leave_id = :leaveId ", nativeQuery = true)
+//	@Query(value = "Update timesheet_leave_master set status='Approved' , approve_reason = :approveReason  where leave_id = :leaveId ", nativeQuery = true)
 //	public int updateApproveStatus(@Param("leaveId") String leaveId ,@Param("approveReason") String approve_reason);
 
 	@Modifying
 	@Transactional
-	@Query(value = "Update leave_master set status='Rejected' , reject_reason = :rejecReason where leave_id = :leaveId ", nativeQuery = true)
+	@Query(value = "Update timesheet_leave_master set status='Rejected' , reject_reason = :rejecReason where leave_id = :leaveId ", nativeQuery = true)
 	public int updateRejectStatus(@Param("leaveId") String leaveId, @Param("rejecReason") String reject_reason);
 
 	@Query(value = "select emp_id, concat(first_name,'',last_name)as emp_name from timesheet_employee_master \n"
@@ -41,7 +41,7 @@ public interface ApproveRepository extends JpaRepository<Leave, Long> {
 
 //	@Modifying
 //	@Transactional
-//	@Query(value = "update leave_master set status =:status ,second_status = :secondStatus,leave_manager_id = :leaveManagerId, approve_reason = :approveReason ,manager_response_date= now() where leave_id = :leaveId", nativeQuery = true)
+//	@Query(value = "update timesheet_leave_master set status =:status ,second_status = :secondStatus,leave_manager_id = :leaveManagerId, approve_reason = :approveReason ,manager_response_date= now() where leave_id = :leaveId", nativeQuery = true)
 //	public int firstApprovedStatus(@Param("leaveId") String leaveId , @Param("status") String status, @Param("secondStatus") String secondStatus, @Param("approveReason") String approve_reason, @Param("leaveManagerId") String leaveManagerId);
 //	
 

@@ -50,7 +50,6 @@ public class ForgetPasswordRestController {
 		try {
 			emailService.sendEmail(to, msg, subject);
 		} catch (Exception e) {
-			System.out.println("error");
 			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(otp);

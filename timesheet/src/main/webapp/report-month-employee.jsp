@@ -53,16 +53,13 @@
                                                 </option>
 
                                             </select>
-                                            <span class="form-text small text-danger ms-2  d-none">Specify
-                                                Month</span>
+                                            <span class="form-text small text-danger ms-2  d-none">Specify Month</span>
                                         </tr>
                                     </table>
-                                </div>
-                                <div class="row justify-content-center mt-3 ">
-                                    <button class="btn btn-secondary px-5  mt-2 mt-sm-0 me-2 w-auto " type="button"
-                                        onclick="history.back()"> Back </button>
-                                    <button class="btn btn-primary px-5  mt-2 mt-sm-0 me-2 w-auto " type="submit">
-                                        Show </button>
+                                </div> 
+                                <div class="row justify-content-center gap-2  mt-3">
+                                    <button class="btn btn-secondary px-5   w-auto  order-md-1 order-2  " type="button" onclick="history.back()"> Back </button>
+                                    <button class="btn btn-primary px-5     w-auto   order-md-2 order-1 " type="submit"> Show </button>
                                 </div>
                         </form>
                     </div>
@@ -71,6 +68,7 @@
         </div>
     </div>
     <script>
+        console.log("hii");
         $("#reportMonthEmloyee").on("submit", function (e) {
             e.preventDefault();
             if ($("#empId").val() && $("#monthSheetId").val()) {

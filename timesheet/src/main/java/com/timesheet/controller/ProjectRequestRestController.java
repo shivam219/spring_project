@@ -87,7 +87,7 @@ public class ProjectRequestRestController {
 			String msgManager = "Hii " +  StringUtils.capitalize(manager.getFirstName()) +" " +  StringUtils.capitalize(manager.getLastName()) 
 			+"<br><br>Employee Id : " + emp.getEmpId()  
 			+"<br>Employee Name : " +  StringUtils.capitalize(emp.getFirstName()) + " " + StringUtils.capitalize(emp.getLastName())  
-			+"<br>Has requested some projects that are "+ pjtReq.getProjectsList().toString().replace("[", "").replace("]", "").toUpperCase() +" ."
+			+"<br>The employee has requested the following projects for their timesheet <br> "+ pjtReq.getProjectsList().toString().replace("[", "").replace("]", "").toUpperCase() +" ."
 			+"<br>So assign that project to them."
 			+"<br><br>This is an auto-generated Email."
 			+ "<br>Do not reply to this email.<br> "

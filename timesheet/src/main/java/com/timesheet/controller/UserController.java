@@ -97,7 +97,6 @@ public class UserController {
 
 	@PostMapping(value = "user-master-edit-process")
 	public ResponseEntity<Object> getuserMasterEditProcess(Model m, @RequestBody User user) {
-		System.out.println(user);
 		ur.updateUserDetails(user.getEmpId(), user.getManagerId(), user.getLeaveReportingManager(),
 				user.getLeaveManager(), user.getActive());
 		ur.updateUserPassword(user.getEmpId(), user.getPassword());

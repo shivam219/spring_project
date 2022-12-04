@@ -1,7 +1,7 @@
 
 <%@ include file="menu.jsp" %>
 <head> 
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=0.5"> -->
     <title> Work Report Day</title>
     <style> 
         table tr td ,  table tr th{
@@ -112,6 +112,9 @@
             overflow-y: auto;
         }
 
+        table tbody tr td{
+            overflow: overlay;
+        }
     </style>     
     </head>
     <body > 
@@ -146,7 +149,7 @@
                 <thead>
                     <tr >
                         <td colspan="2"> Customer </td>
-                        <td colspan="2"> Project </td> 
+                        <td colspan="2.9"> Project </td> 
                         <td  id="monDate" >  Mon </td>
                         <td  id="tueDate" >  Tue </td>
                         <td  id="wedDate" >  Wed </td>
@@ -211,16 +214,12 @@
                 </div>                         
             </div>
             
-            <div class="row">
-                <div class="col-md-6">
-                    <div>
-                        <button class="btn btn-secondary btn-sm px-5 py-1" type="button" onclick="history.back()" > Back  </button> 
-                    </div>
+            <div class="row justify-content-around ">
+                <div class="col">
+                    <button class="btn btn-secondary btn-sm px-5 py-1" type="button" onclick="history.back()" > Back  </button> 
                 </div>
-                <div class="col-md-6 justify-content-end">
-                <div>
-                       <a href="project-request" class="btn btn-sm btn-primary">Request Project</a>
-                    </div>
+                <div class="col">
+                        <a href="project-request" class="btn btn-sm btn-primary">Request Project</a>
                 </div>
             </div>
             
@@ -472,118 +471,113 @@
                         workStatus=  parseInt(da); 
                     }
                 });
-                let uri = ''; 
-                if(workStatus == 1  || workStatus == 2){
-                    uri = '/fetch-day-sheet-week?startDate='+sd+'&endDate='+ed; 
-                }else{
-                    uri = '/fetch-day-sheet-week?startDate='+sd+'&endDate='+ed; 
-                }
-                    $.ajax({
-                        async : false,
-                        url: uri,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(obj, success,event){
-                            console.log(obj);
-                            for (let i = $('#tbtable tr').length -2 ; i > 0; i--) {
-                                $('#tbtable tr').eq(i).remove();
-                            }
-                            // var d = Object.entries(obj); 
-                            if(workStatus == 1  || workStatus == 2 ){
-                                    for (let i = 0; i < obj.length; i++) {
-                                    let row = document.createElement("tr");
-                                    let sl = '<td  colspan="2" > '+ obj[i]['customerName'] +' </td>' 
-                                            + '<td  colspan="2"> '+ obj[i]['projectName'] +'  </td> ';
-                                    for (let j = 0; j <obj[i]['daysheet'].length; j++) {  
-                                        if( obj[i]['daysheet'][j]["daySheetId"] == 0){
-                                            let hour = obj[i]['daysheet'][j]['hour'];
-                                            let descr = obj[i]['daysheet'][j]['descr'];    
-                                            let t = ' <td>'
-                                                +' <input type="number"    name="hour"     readonly    oninput="cal(this)" onchange="cal(this)"  placeholder=""> ' 
-                                                +' <textarea class="d-none h-n"          name="descr"          ></textarea>' 
-                                                +' </td>';
-                                            row.innerHTML = (( row.innerHTML.toString()) + t);
-                                        }
-                                        else{ 
-                                            let hour = obj[i]['daysheet'][j]['hour']; 
-                                            let descr = obj[i]['daysheet'][j]['descr'];    
-                                            let   t = ' <td> ' 
-                                                +' <input type="number"  value='+hour+'  name="hour"  readonly   oninput="cal(this)" onchange="cal(this)"  placeholder="">' 
-                                                +' <textarea class="d-none '+(descr==''?'h-n':'')+' " name="descr" >' +descr +'</textarea>'  
-                                                + '<div class="h-n"></div>'
-                                                +'</td>';
-                                            row.innerHTML = (( row.innerHTML.toString()) + t);
-                                        }  
-                                    }   
-                                    row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td>   <input  type="number"  readonly  />  </td>' );
-                                    $("#tbtable").append(row);
-                                }
-                                $("#btnSubmit").attr('disabled',true);
-                                $("#btnSave").addClass("d-none");
-                                if( workStatus == 2 ){
-                                    $("#btnSubmit").val("Approved");
-                                }
-                                else if (workStatus == 2 ){
-                                    $("#btnSubmit").val("Rejected");
-                                }
-                                else{
-                                    $("#btnSubmit").val("Submitted");
-                                }
-                            }else{
-                                for (let i = 0; i < obj.length; i++) {
-                                    let row = document.createElement("tr");
-                                    let sl = '<td  colspan="2" > '+ obj[i]['customerName'] +' </td>' 
-                                            + '<td  colspan="2"> '+ obj[i]['projectName'] +'  </td> ';
-                                    for (let j = 0; j <obj[i]['daysheet'].length; j++) {     
-                                        if( obj[i]['daysheet'][j]["daySheetId"] == 0){
-                                            let hour = obj[i]['daysheet'][j]['hour']
-                                            let pId =   obj[i]['daysheet'][j]['projectId']
-                                            let dId =   obj[i]['daysheet'][j]['daySheetId']
-                                            let MId = obj[i]['daysheet'][j]['monthId']
-                                            let day =   obj[i]['daysheet'][j]['date']
-                                            let descr = obj[i]['daysheet'][j]['descr'] 
-                                            let t =  ' <td class="h-auto" >'
-                                                +' <input type="number"  name="hour"        min="1" max="24"       class="d-inline  " oninput="cal(this)" onchange="cal(this)"  > ' 
-                                                +' <input type="number"  value='+pId+'      name="projectId"      class="d-inline d-none"  > ' 
-                                                +' <input type="number"  value='+MId+'      name="monthId"    class="d-inline d-none"  > ' 
-                                                +' <input type="date"    value='+day+'      name="date"            class="d-inline d-none"  >'  
-                                                +' <textarea class="d-none h-n"             name="descr"          ></textarea>' 
-                                                + '<div class="h-n"></div>' 
-                                                +' </td>';
-                                                row.innerHTML = (( row.innerHTML.toString()) + t);
-                                        }
-                                        else{
-                                            let hour = obj[i]['daysheet'][j]['hour']
-                                            let pId =   obj[i]['daysheet'][j]['projectId']
-                                            let dId =   obj[i]['daysheet'][j]['daySheetId']
-                                            let MId = obj[i]['daysheet'][j]['monthId']
-                                            let day =   obj[i]['daysheet'][j]['date'] 
-                                            let descr = obj[i]['daysheet'][j]['descr'];      
-                                            let   t = ' <td class="h-auto"> ' 
-                                                +' <input type="number"  value='+hour+'  name="hour"        min="1" max="24"       class="d-inline  " oninput="cal(this)" onchange="cal(this)"  > ' 
-                                                +' <input type="number"  value='+pId+'      name="projectId"      class="d-inline d-none"  > ' 
-                                                +' <input type="number"  value='+dId+'      name="daySheetId"          class="d-inline d-none"  > ' 
-                                                +' <input type="number"  value='+MId+'      name="monthId"    class="d-inline d-none"  > ' 
-                                                +' <input type="date"    value='+day+'      name="date"            class="d-inline d-none"  >' 
-                                                +' <textarea class="d-none" name="descr" >' +descr +'</textarea>'  
-                                                + '<div class="h-n"></div>'
-                                                +'</td>';
-                                            row.innerHTML = (( row.innerHTML.toString()) + t);
-                                        }  
-                                    }   
-                                    row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td> <input  type="number"  readonly  />  </td>' );
-                                    $("#tbtable").append(row);
-                                }
-                                $("#btnSubmit").val("Submit").attr('disabled',false);
-                                $("#btnSave").removeClass("d-none");
-                            }
-                            calRowOnLoad();
-                            AddHoverToHourIn();
-                            setWeekDates();
-                            let rowCount = $('#tbtable tr').length;
-                            if(rowCount == 2) { tblRefresh();}
+                let uri = '/fetch-day-sheet-week?startDate='+sd+'&endDate='+ed; 
+                $.ajax({
+                    async : false,
+                    url: uri,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(obj, success,event){
+                        console.log(obj);
+                        for (let i = $('#tbtable tr').length -2 ; i > 0; i--) {
+                            $('#tbtable tr').eq(i).remove();
                         }
-                    });
+                        if(workStatus == 1  || workStatus == 2 ){
+                                for (let i = 0; i < obj.length; i++) {
+                                let row = document.createElement("tr");
+                                let sl = '<td  colspan="2" > '+ obj[i]['customerName'] +' </td>' 
+                                        + '<td  colspan="2"> '+ obj[i]['projectName'] +'  </td> ';
+                                for (let j = 0; j <obj[i]['daysheet'].length; j++) {  
+                                    if( obj[i]['daysheet'][j]["daySheetId"] == 0){
+                                        let hour = obj[i]['daysheet'][j]['hour'];
+                                        let descr = obj[i]['daysheet'][j]['descr'];    
+                                        let t = ' <td>'
+                                            +' <input type="number"    name="hour"     readonly    oninput="cal(this)" onchange="cal(this)"  placeholder=""> ' 
+                                            +' <textarea class="d-none h-n"             name="descr"          ></textarea>' 
+                                            + '<div class="h-n"></div>' 
+                                            +' </td>'; 
+                                        row.innerHTML = (( row.innerHTML.toString()) + t);
+                                    }
+                                    else{ 
+                                        let hour = obj[i]['daysheet'][j]['hour']; 
+                                        let descr = obj[i]['daysheet'][j]['descr'];    
+                                        let   t = ' <td> ' 
+                                            +' <input type="number"  value='+hour+'  class="d-inline w-50 "  name="hour"  readonly   oninput="cal(this)" onchange="cal(this)"  placeholder="">' 
+                                            +' <textarea class="d-none '+(descr==''?'h-n':'')+' "  name="descr" >' +descr +'</textarea>'  
+                                            + '<div class="h-n class="d-inline w-50"></div>'
+                                            +'</td>';
+                                        row.innerHTML = (( row.innerHTML.toString()) + t);
+                                    }  
+                                }   
+                                row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td>   <input  type="number"  readonly  />  </td>' );
+                                $("#tbtable").append(row);
+                            }
+                            $("#btnSubmit").attr('disabled',true);
+                            $("#btnSave").addClass("d-none");
+                            if( workStatus == 2 ){
+                                $("#btnSubmit").val("Approved");
+                            }
+                            else if (workStatus == 2 ){
+                                $("#btnSubmit").val("Rejected");
+                            }
+                            else{
+                                $("#btnSubmit").val("Submitted");
+                            }
+                        }else{
+                            for (let i = 0; i < obj.length; i++) {
+                                let row = document.createElement("tr");
+                                let sl = '<td  colspan="2" > '+ obj[i]['customerName'] +' </td>' 
+                                        + '<td  colspan="2"> '+ obj[i]['projectName'] +'  </td> ';
+                                for (let j = 0; j <obj[i]['daysheet'].length; j++) {     
+                                    if( obj[i]['daysheet'][j]["daySheetId"] == 0){
+                                        let hour = obj[i]['daysheet'][j]['hour']
+                                        let pId =   obj[i]['daysheet'][j]['projectId']
+                                        let dId =   obj[i]['daysheet'][j]['daySheetId']
+                                        let MId = obj[i]['daysheet'][j]['monthId']
+                                        let day =   obj[i]['daysheet'][j]['date']
+                                        let descr = obj[i]['daysheet'][j]['descr'] 
+                                        let t =  ' <td class="h-auto" >'
+                                            +' <input type="number"  name="hour"        min="1" max="24"       class="d-inline  " oninput="cal(this)" onchange="cal(this)"  > ' 
+                                            +' <input type="number"  value='+pId+'      name="projectId"      class="d-inline d-none"  > ' 
+                                            +' <input type="number"  value='+MId+'      name="monthId"    class="d-inline d-none"  > ' 
+                                            +' <input type="date"    value='+day+'      name="date"            class="d-inline d-none"  >'  
+                                            +' <textarea class="d-none h-n"             name="descr"          ></textarea>' 
+                                            + '<div class="h-n"></div>' 
+                                            +' </td>';
+                                            row.innerHTML = (( row.innerHTML.toString()) + t);
+                                    }
+                                    else{
+                                        let hour = obj[i]['daysheet'][j]['hour']
+                                        let pId =   obj[i]['daysheet'][j]['projectId']
+                                        let dId =   obj[i]['daysheet'][j]['daySheetId']
+                                        let MId = obj[i]['daysheet'][j]['monthId']
+                                        let day =   obj[i]['daysheet'][j]['date'] 
+                                        let descr = obj[i]['daysheet'][j]['descr'];      
+                                        let   t = ' <td class="h-auto"> ' 
+                                            +' <input type="number"  value='+hour+'  name="hour"        min="1" max="24"       class="d-inline  " oninput="cal(this)" onchange="cal(this)"  > ' 
+                                            +' <input type="number"  value='+pId+'      name="projectId"      class="d-inline d-none"  > ' 
+                                            +' <input type="number"  value='+dId+'      name="daySheetId"          class="d-inline d-none"  > ' 
+                                            +' <input type="number"  value='+MId+'      name="monthId"    class="d-inline d-none"  > ' 
+                                            +' <input type="date"    value='+day+'      name="date"            class="d-inline d-none"  >' 
+                                            +' <textarea class="d-none" name="descr" >' +descr +'</textarea>'  
+                                            + '<div class="h-n"></div>'
+                                            +'</td>';
+                                        row.innerHTML = (( row.innerHTML.toString()) + t);
+                                    }  
+                                }   
+                                row.innerHTML =  ( sl +( row.innerHTML.toString()) +'<td> <input  type="number"  readonly  />  </td>' );
+                                $("#tbtable").append(row);
+                            }
+                            $("#btnSubmit").val("Submit").attr('disabled',false);
+                            $("#btnSave").removeClass("d-none");
+                        }
+                        calRowOnLoad();
+                        AddHoverToHourIn();
+                        setWeekDates();
+                        let rowCount = $('#tbtable tr').length;
+                        if(rowCount == 2) { tblRefresh();}
+                    }
+                });
                 }
                 function tblRefresh(){
                     $("#tue_v_t").html('');

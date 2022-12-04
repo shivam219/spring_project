@@ -62,6 +62,7 @@
 			text-decoration: none;
 			padding-left: 6px;
 		}
+
 		tbody,
 		td,
 		td a tfoot,
@@ -70,9 +71,99 @@
 		tr {
 			border-width: 0px;
 		}
+
 		::-webkit-scrollbar {
-           width: 0px;
-        }
+			width: 0px; 
+		}
+
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			margin: 0 0 15px 0;
+			padding: 0;
+			font-family: "Segoe UI", sans-serif;
+			font-weight: 700;
+		}
+
+		.weather__card {
+			padding: 40px 30px;
+			background-color: #EEEEEE;
+			border-radius: 20px;
+			color: #3C4048;
+		}
+
+		.weather__card h2 {
+			font-size: 120px;
+			font-weight: 700;
+			color: #3C4048;
+			line-height: .8;
+		}
+
+		.weather__card h3 {
+			font-size: 40px;
+			font-weight: 600;
+			line-height: .8;
+			color: #3C4048;
+		}
+
+		.weather__card h5 {
+			font-size: 20px;
+			font-weight: 400;
+			line-height: .1;
+			color: #9D9D9D;
+		}
+
+		.weather__card img {
+			width: 120px;
+			height: 120px;
+		}
+
+		.weather__card .weather__description {
+			background-color: #fff;
+			border-radius: 25px;
+			padding: 5px 13px;
+			border: 0;
+			outline: none;
+			color: #7F8487;
+			font-size: .956rem;
+			font-weight: 400;
+		}
+
+		/*--------------------------------------------------------------
+# Weather Status
+--------------------------------------------------------------*/
+		.weather__status img {
+			height: 20px;
+			width: 20px;
+			vertical-align: middle;
+		}
+
+		.weather__status span {
+			font-weight: 500;
+			color: #3C4048;
+			font-size: .9rem;
+			padding-left: .5rem;
+		}
+
+		/*--------------------------------------------------------------
+# Weather Forecast
+--------------------------------------------------------------*/
+		.weather__forecast img {
+			height: 25px;
+			width: 25px;
+			vertical-align: middle;
+		}
+
+		.weather__forecast span {
+			font-weight: 500;
+			color: #3C4048;
+			font-size: 1rem;
+			padding: 5px 10px;
+		}
 	</style>
 
 	<body>
@@ -90,10 +181,10 @@
 							</div>
 						</div>
 						<div class="card-body  overflow-scroll ">
-							<div class="row"> 
+							<div class="row">
 								<div class="col align-self-center">
 									<div class="d-flex">
-										<div class="example"> 
+										<div class="example">
 											<div class="table-responsive">
 												<table class="table text-secondary">
 													<tbody>
@@ -102,6 +193,13 @@
 																<td class="text-center">${l}</td>
 															</tr>
 														</c:forEach>
+
+														
+														<c:if test='${holidayList.size()== 0}'>
+															<tr>
+																<td  class="text-center"> No holiday for this month</td>
+															</tr>
+														</c:if>
 													</tbody>
 												</table>
 											</div>
@@ -155,9 +253,6 @@
 						</div>
 					</div>
 				</div>
-
-
-				<!-- Birthdays -->
 				<div class="col-md-4">
 					<div class="card">
 						<img class="" src="images/weatherbg.jpg" alt="Card image cap" style="max-height: 105px">

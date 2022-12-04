@@ -81,13 +81,12 @@ public class DaySheetController {
 
 		dsr.saveAll(daySheet);
 		if (saveType == 0) {
-			
-		} else if (saveType == 1 ) {
+
+		} else if (saveType == 1) {
 			MonthSheet mss2 = msr.findByEmpId(empId, Integer.parseInt(sd[1]), Integer.parseInt(sd[0]));
 			mss2.setSubmit(true);
 			mss2.setSubmitDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 			msr.save(mss2);
-			System.out.println(saveType);
 		}
 
 		return ResponseEntity.ok().body("");
@@ -118,12 +117,20 @@ public class DaySheetController {
 		Long empId = ((Long) request.getSession().getAttribute("empId"));
 		String sd[] = startDate.split("-");
 		MonthSheet ms = msr.findByEmpId(empId, Integer.parseInt(sd[1]), Integer.parseInt(sd[0]));
-		if(ms!=null) {
-			if (ms.isSubmit()) {
+		if (ms != null) {
+//			1 - reject or un - submitted
+			if ((ms.isSubmit()) && (ms.isApproved())) {
 				return ResponseEntity.status(HttpStatus.OK).body("1");
-			} else if (ms.isApproved()) {
+			}
+//			2 - approve
+			if(ms.isSubmit() && ms.isApproved()) {				
 				return ResponseEntity.status(HttpStatus.OK).body("2");
 			}
+//			3 - pending
+			if(ms.isSubmit() && (!ms.isApproved())) {				
+				return ResponseEntity.status(HttpStatus.OK).body("3");
+			}
+//			
 		}
 		return ResponseEntity.status(HttpStatus.OK).body("0");
 	}

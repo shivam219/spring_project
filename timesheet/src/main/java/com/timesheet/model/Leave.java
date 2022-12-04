@@ -6,13 +6,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
-@Table(name = "leave_master")
+@Table(name = "timesheet_leave_master", uniqueConstraints = @UniqueConstraint(columnNames = { "emp_id", "start_date" }))
 public class Leave {
+	private static final long serialVersionUID = 6832006422622219737L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "leave_code")
+	@GeneratedValue(generator = "MY_SEQ")
+	@GenericGenerator(name = "MY_SEQ", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
+			@Parameter(name = "sequence_name", value = "MY_SEQ"), @Parameter(name = "initial_value", value = "1"),
+			@Parameter(name = "increment_size", value = "10") })
+//	@GeneratedValue(strategy = GenerationType.IDENTITY) //getting error
+	@Column(name = "leave_code", nullable = false)
 	private Long leaveCode;
 
 	@Column(name = "leave_id")

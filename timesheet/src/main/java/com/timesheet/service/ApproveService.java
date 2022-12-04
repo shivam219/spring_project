@@ -63,7 +63,6 @@ public class ApproveService {
 		String empName = (String) request.getSession().getAttribute("empName");
 		if (approveRepository.updateRejectStatus(leaveOld.getLeaveId(), leaveOld.getRejectReason()) == 1) {
 			Long lc = Long.valueOf(leaveOld.getLeaveId().substring(1));
-			System.out.println(lc);
 			Optional<Leave> l2 = approveRepository.findById(lc);
 			Leave leaveNew = l2.get();
 			leaveNew.setRejectReason(leaveOld.getRejectReason());

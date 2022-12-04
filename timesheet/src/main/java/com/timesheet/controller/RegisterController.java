@@ -25,8 +25,6 @@ public class RegisterController {
 
 	@PostMapping(value = "/registerprocess")
 	public String registerProcess(Model model, @ModelAttribute Employee emp) {
-		System.out.println(emp);
-//		employeeService.save(emp);
 		return "login";
 	}
 }

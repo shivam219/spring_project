@@ -33,9 +33,9 @@
 													<i class="fa-solid fa-file-lines"></i>&nbsp;&nbsp;Leave Details</label>
 											</div>
 											<div class="col w-75 text-center ">
-												<button type="button" onclick="showSingleDate()" id="btnSingle" class="btn me-1 mb-1 text-white " style="background-color: #124265">
+												<button type="button" onclick="showSingleDate();this.blur()" id="btnSingle" class="btn me-1 mb-1 text-white " style="background-color: #124265">
 													<i class="fa-solid fa-calendar-day"></i>&nbsp;&nbsp;Single</button>
-												<button type="button" onclick="showMultipleDate()" id="btnMulti" class="btn me-1 mb-1 text-white " style="background-color: #124265">
+												<button type="button" onclick="showMultipleDate();this.blur()" id="btnMulti" class="btn me-1 mb-1 text-white " style="background-color: #124265">
 													<i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;Multiple</button>
 											</div>
 										</div>
@@ -65,7 +65,7 @@
 										<div class="row gx-3 mb-3">
 											<div class="col-md-6">
 												<label class="mb-1" for="startDate">Start Date</label>
-												<input class="form-control w-75" type="date"  onchange="startDateChange() "name="startDate" id="startDate" placeholder="Enter StartDate">
+												<input class="form-control w-75" type="date"  onchange="startDateChange()"name="startDate" id="startDate" placeholder="Enter StartDate">
 												<span class="form-text small text-danger ms-2 d-none">Specify StartDate</span>
 											</div>
 											<div class="col-md-6 endDateHide">
@@ -83,12 +83,12 @@
 										<div class="row gx-3 mb-3">
 											<div class="col-md-6">
 												<label class="mb-1" for="attachment">Supporting Document 2MB PDF Only</label>
-												<input class="form-control w-75" type="file" id="attachment" name="attachment" placeholder="Enter attachment">
+												<input class="form-control w-75" type="file" id="attachment" name="attachment" placeholder="Enter attachment" accept=".pdf">
 												<span class="form-text small text-danger ms-2 d-none">Specify attachment</span>
 											</div>
 											<div class="col-md-6">  
 												<label class="mb-1" for="leaveReason">Leave Reason</label>
-												<textarea class="form-control w-75" id="leaveReason" name="leaveReason" type="text" placeholder="Enter Leave Reason" value=""></textarea>
+												<textarea class="form-control" style="width: 83%;" id="leaveReason" name="leaveReason" type="text" placeholder="Enter Leave Reason" value=""></textarea>
 												<span class="form-text small text-danger ms-2 d-none">Specify Leave Reason</span>
 											</div>
 										</div>
@@ -119,7 +119,7 @@
 		})
 		var optSelect = 1;
 		function showSingleDate() {
-			$("#dayCount").html("Days : ");
+			$("#dayCount").html("Days : &nbsp; &nbsp;  ");
 			$('#startDate').val('');
 			$('#endDate').val('');
 			$("#dayMode1").prop("checked", true);
@@ -130,7 +130,7 @@
 			optSelect = 1;
 		}
 		function showMultipleDate() {
-			$("#dayCount").html("Days : ");
+			$("#dayCount").html("Days : &nbsp; &nbsp; ");
 			$('#startDate').val('');
 			$('#endDate').val('');
 			$("#dayMode2").prop("checked", true);
@@ -289,6 +289,16 @@
 							});
 					}, error: function (data, msg, xh) {
 						$("#loadingBtn").removeClass("spinner-border spinner-border-sm");
+						swal({
+							title: "Unable to apply leave",
+							text: "Unable to apply leave please change start date",
+							icon: "error",
+						}).
+							then(function (isOkay) {
+								if (isOkay) {  
+									// location.replace('/home');
+								}
+							});
 					}
 				});
 			} else {

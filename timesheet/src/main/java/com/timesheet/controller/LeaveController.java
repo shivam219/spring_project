@@ -69,7 +69,7 @@ public class LeaveController {
 
 	@GetMapping(value = "apply-leave")
 	public ModelAndView applyLeave(HttpServletRequest request) {
-		ModelAndView m = new ModelAndView("applyleave");
+		ModelAndView m = new ModelAndView("apply-leave");
 		Long empId = ((Long) request.getSession().getAttribute("empId"));
 		Employee emp = er.findById(empId).get();
 		m.addObject("emp", emp);
@@ -94,8 +94,12 @@ public class LeaveController {
 		leave.setEmpName(emp.getFullName());
 		leave.setManagerId(manager.getEmpId());
 		leave.setManagerName(manager.getFullName());
-		System.out.println(lr.save(leave));
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Apply Leave success");
+		try {
+			lr.save(leave);
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body("Apply Leave success");
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Apply Leave success");
+		}
 	}
 
 //	@PostMapping(value = "/applyleaveprocess")
@@ -129,8 +133,8 @@ public class LeaveController {
 
 	@PostMapping(value = "/approve-leave-process")
 	public ResponseEntity<Object> approveleaveprocess(HttpServletRequest request, Model model, @RequestBody Leave la) {
-		Leave le = lr.findById(Long.parseLong(la.getLeaveId().substring(1, la.getLeaveId().length()))).get();
- 
+//		Leave le = lr.findById(Long.parseLong(la.getLeaveId().substring(1, la.getLeaveId().length()))).get();
+		Leave le = lr.findByLeaveCode(la.getLeaveId());
 		le.setLeaveManagerId(Long.parseLong((ar.getApproveMangerCode(le.getEmpId()).get(0)[0])));
 		try {
 
@@ -180,7 +184,8 @@ public class LeaveController {
 	}
 
 	@PostMapping(value = "/reject-leave-process")
-	public ResponseEntity<Object> rejectleaveprocess(HttpServletRequest request, Model model, @RequestBody Leave leave) {
+	public ResponseEntity<Object> rejectleaveprocess(HttpServletRequest request, Model model,
+			@RequestBody Leave leave) {
 		try {
 			approveService.updateRejectStatus(leave, request);
 		} catch (Exception e) {
@@ -241,14 +246,13 @@ public class LeaveController {
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment; filename=MonthlyLeaveReport.xlsx");
 		ByteArrayInputStream stream = ReportService.contactListToExcelFile(Data());
-		System.out.println(month);
-		System.out.println(year);
+
 		IOUtils.copy(stream, response.getOutputStream());
 	}
 
 	private List<Leave> Data() {
 		List<Leave> leave = lr.getLeaveByMonthAndYear(month, year);
-		System.out.println(leave);
+
 		return leave;
 
 	}
@@ -313,7 +317,7 @@ public class LeaveController {
 
 	private List<Leave> Data3() {
 		List<Leave> leave = lr.getEmploeeWiseReport(month, year, empId, status);
-		System.out.println(leave);
+
 		return leave;
 
 	}
@@ -370,7 +374,7 @@ public class LeaveController {
 
 	private List<Leave> Data2() {
 		List<Leave> leave = lr.getPendingLeaveByMonthAndYear(month, year);
-		System.out.println(leave);
+
 		return leave;
 
 	}

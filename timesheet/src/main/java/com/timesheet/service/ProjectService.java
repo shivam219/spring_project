@@ -1,11 +1,16 @@
 package com.timesheet.service;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.Tuple;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.timesheet.model.Employee;
+import com.timesheet.dto.EmployeeProjectDto;
 import com.timesheet.model.Project;
 import com.timesheet.repository.ProjectRepository;
 
@@ -14,10 +19,6 @@ public class ProjectService {
 
 	@Autowired
 	ProjectRepository repository;
-//
-//	public List<Project> getAllProject() {
-//		return (List<Project>) repository.getAllProject();
-//	}
 
 	public List<Project> getProjectByEmpId(long empId) {
 		return (List<Project>) repository.getProjectByEmpId(empId);
@@ -39,4 +40,24 @@ public class ProjectService {
 	public int deleteProjectByProjectId(long ProjectId) {
 		return repository.deleteProjectByProjectId(ProjectId);
 	}
+
+	public List<EmployeeProjectDto> getProjectEmloyeeDetails(Integer projectId) {
+		List<Tuple> tu = repository.findEmployeeNameAndGroupDesc(projectId);
+
+		List<EmployeeProjectDto> epd = tu.stream()
+				.map(e -> new EmployeeProjectDto(e.get(0, String.class), e.get(1, String.class)))
+				.collect(Collectors.toList());
+		return epd;
+	}
+
+	public List<EmployeeProjectDto> findEmployeeNameAndHourInProject(Integer projectId) {
+		List<Tuple> tu = repository.findEmployeeNameAndHourInProject(projectId);
+
+		List<EmployeeProjectDto> epd = tu.stream()
+				.map(e -> new EmployeeProjectDto(e.get(0, String.class), 
+						e.get(1, BigDecimal.class)))
+				.collect(Collectors.toList());
+		return epd;
+	}
+
 }

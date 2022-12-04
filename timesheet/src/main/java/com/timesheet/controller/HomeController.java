@@ -42,9 +42,7 @@ public class HomeController {
 		
 		SimpleDateFormat sdfm = new SimpleDateFormat("MM");
 		String month = sdfm.format(new Date());
-		
-		/* System.out.println(hr.getHolidays()); */
-		
+	
 		m.addAttribute("empList", er.getEmpBirthday(year, month));
 		m.addAttribute("holidayList", hr.getHolidays(year, month));
 		m.addAttribute("ac", lr.getApprovedCountOfMonth());

@@ -66,7 +66,6 @@ public class EmployeeController {
 	@PostMapping(value = "/employee-add-process")
 	public ResponseEntity<Object> addUser(@RequestBody Employee emp, HttpServletRequest request) {
 		emp.setCreatedBy(request.getSession().getAttribute("empId").toString());
-		System.out.println(emp);
 		if (er.findById(emp.getEmpId()).isEmpty()) {
 //			emp = er.save(emp);
 			return ResponseEntity.status(HttpStatus.CREATED).body("User Employee successfully");

@@ -42,12 +42,12 @@ public class User {
 
 //	@JsonBackReference
 //	@JsonBackReference(value = "user-project")
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "timesheet_user_project_mapping", joinColumns = @JoinColumn(name = "emp_id"), inverseJoinColumns = @JoinColumn(name = "project_id"))
 	List<Project> project;
 
 	@JsonBackReference()
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user" ,fetch = FetchType.LAZY)
 	List<Customer> customer;
 
 	public User() {

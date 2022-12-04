@@ -25,7 +25,7 @@
 					<thead class="thead-dark">
 						<th scope="row">Customer Name</th>
 						<th scope="row">Customer Domain</th>
-						<th scope="row">On Board Date</th>
+						<th scope="row">Joining Date</th>
 						<th scope="row">Actions</th>
 					</thead>
 					<tbody>

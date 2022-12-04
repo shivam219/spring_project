@@ -5,38 +5,9 @@
 		<meta charset="UTF-8">
 		<title>Leave Console</title>
 		<link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
-		<link href="Include/css/dataTables.dateTime.min.css" rel="stylesheet">
+		<link href="css/dataTables.dateTime.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 		<style>
-			table {
-				table-layout: auto;
-			}
-
-			.project-list-table {
-				border-collapse: separate;
-				/* border-spacing: 0 12px */
-			}
-
-			.project-list-table tr {
-				background-color: #fff
-			}
-
-			.table-nowrap td,
-			.table-nowrap th {
-				white-space: nowrap;
-			}
-
-			.table-borderless>:not(caption)>*>* {
-				border-bottom-width: 0;
-			}
-
-			.table>:not(caption)>*>* {
-				padding: 0.75rem 0.75rem;
-				background-color: var(--bs-table-bg);
-				border-bottom-width: 1px;
-				box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
-			}
-
 			.dataTables_info {
 				visibility: hidden;
 			}
@@ -53,13 +24,11 @@
 				background-color: #fff;
 			}
 
-			tbody,
-			td,
-			td a tfoot,
-			th,
-			thead,
-			tr {
-				border-width: 0px;
+			.dataTables_wrapper .dataTables_paginate .paginate_button {
+				box-sizing: border-box;
+				display: inline-block;
+				min-width: 1.5em;
+				padding: .2em 1em;
 			}
 		</style>
 	</head>
@@ -114,8 +83,8 @@
 				<div class="col">
 					<div class="d-flex flex-wrap align-items-center justify-content-start gap-2 ms-1 mb-1 ">
 						<div>
-							<a href="home" data-bs-target=".add-new" onclick="this.blur()" class="btn btn-primary"><i
-									class="bx bx-minus ms-1"></i>Back</a>
+							<a class="btn btn-secondary px-5   w-auto  order-md-1 order-2  " type="button" href="home">
+								Back </a>
 						</div>
 					</div>
 				</div>

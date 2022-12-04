@@ -6,40 +6,6 @@
         <title>Employee Wise Leave Report</title>
     </head>
     <style>
-        table {
-            table-layout: auto;
-        }
-
-        .project-list-table {
-            border-collapse: separate;
-            /* border-spacing: 0 12px */
-        }
-
-        .project-list-table tr {
-            background-color: #fff
-        }
-
-        .table-nowrap td,
-        .table-nowrap th {
-            white-space: nowrap;
-        }
-
-        .table-borderless>:not(caption)>*>* {
-            border-bottom-width: 0;
-        }
-
-        .table>:not(caption)>*>* {
-            padding: 0.75rem 0.75rem;
-            background-color: var(--bs-table-bg);
-            border-bottom-width: 1px;
-            box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
-        }
-
-        .starlabel:after {
-            content: " *";
-            color: red;
-        }
-
         tbody,
         td,
         td a tfoot,
@@ -47,19 +13,13 @@
         thead,
         tr {
             border-width: 0px;
+            border-collapse: collapse;
         }
     </style>
 
     <body>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css"
-            integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"
-            integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
-
-        <div class="container">
-            <div class="row align-items-center mt-5">
+        <div class="container"> 
+            <div class="row align-items-center mt-5 bg-white  ">
                 <div class="col-md-4">
                     <div>
                         <h5 class="card-title ms-2" style="color: #124265;">Employee Wise Leave Report</h5>
@@ -117,39 +77,47 @@
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table project-list-table table-hover table-nowrap align-middle table-borderless mt-1">
-                        <thead>
-                            <tr style="font-size:15px; background-color:#124265;">
-                                <td scope="col" class="text-white">Leave Id</td>
-                                <td scope="col" class="text-white">Employee Id</td>
-                                <td scope="col" class="text-white">Employee Name</td>
-                                <td scope="col" class="text-white">Manager Name</td>
-                                <td scope="col" class="text-white">Leave Type</td>
-                                <td scope="col" class="text-white">Start Date</td>
-                                <td scope="col" class="text-white">End Date</td>
-                                <td scope="col" class="text-white">Day Mode</td>
-                                <td scope="col" class="text-white">Day Count</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${leaveList}" var="l" varStatus="i">
-                                <tr>
-                                    <td style="font-size:14px;">${l.getLeaveId()}</td>
-                                    <td style="font-size:14px;">${l.getEmpId()}</td>
-                                    <td style="font-size:14px;">${l.getEmpName()}</td>
-                                    <td style="font-size:14px;">${l.getManagerName()}</td>
-                                    <td style="font-size:14px;">${l.getLeaveType()}</td>
-                                    <td style="font-size:14px;">${l.getStartDate()}</td>
-                                    <td style="font-size:14px;">${l.getEndDate()}</td>
-                                    <td style="font-size:14px;">${l.getDayMode()}</td>
-                                    <td style="font-size:14px;">${days[i.index]}</td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+            </div>
+            <div class="row"> 
+                <div class="col-lg-12">
+                    <div class="">
+                        <div class="table-responsive" style="border-radius: 8px;">
+                            <table 
+                                class="table project-list-table table-hover table-nowrap align-middle table-borderless mt-1">
+                                <thead>
+                                    <tr class="text-white" style="font-size:15px; background-color:#124265;">
+                                        <td scope="col" class="text-white">Leave Id</td>
+                                        <td scope="col" class="text-white">Employee Id</td>
+                                        <td scope="col" class="text-white">Employee Name</td>
+                                        <td scope="col" class="text-white">Manager Name</td>
+                                        <td scope="col" class="text-white">Leave Type</td>
+                                        <td scope="col" class="text-white">Start Date</td>
+                                        <td scope="col" class="text-white">End Date</td>
+                                        <td scope="col" class="text-white">Day Mode</td>
+                                        <td scope="col" class="text-white">Day Count</td>
+                                    </tr>
+                                </thead> 
+                                <tbody>
+                                    <c:forEach items="${leaveList}" var="l" varStatus="i">
+                                        <tr>
+                                            <td style="font-size:14px;">${l.getLeaveId()}</td>
+                                            <td style="font-size:14px;">${l.getEmpId()}</td>
+                                            <td style="font-size:14px;">${l.getEmpName()}</td>
+                                            <td style="font-size:14px;">${l.getManagerName()}</td>
+                                            <td style="font-size:14px;">${l.getLeaveType()}</td>
+                                            <td style="font-size:14px;">${l.getStartDate()}</td>
+                                            <td style="font-size:14px;">${l.getEndDate()}</td>
+                                            <td style="font-size:14px;">${l.getDayMode()}</td>
+                                            <td style="font-size:14px;">${days[i.index]}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
         </div>
         </div>
         <div class="row align-items-center mt-2">

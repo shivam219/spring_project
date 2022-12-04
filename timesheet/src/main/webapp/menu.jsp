@@ -27,9 +27,9 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css" integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<style>
 		.navbar-light .navbar-nav .navbar-link{
-			color: #0f5486;
-		}
-	</style>
+		color: #02121f;
+		} 
+	</style> 
 </head>
 
 <body> 
@@ -49,7 +49,7 @@
 			<div class="collapse navbar-collapse justify-content-md-end " id="navbarNavDropdown">
 				<div class="justify-content-md-end">
 					<ul class="navbar-nav">
-						<li	li class="nav-item dropdown">
+						<li	 class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="dropdown-menu" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Master </a>
 							<ul class="dropdown-menu" id="dropdown-menu">
 								<li><a class="dropdown-item" href="project-master">Project</a></li>
@@ -68,8 +68,8 @@
 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle -2" href="dropdown-menu" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Leave Application </a>
-							<ul class="dropdown-menu" id="dropdown-menu">
-								<li><a class="dropdown-item" href="leave-console.jsp">Leave Console</a></li>
+							<ul class="dropdown-menu" id="dropdown-menu"> 
+								<li><a class="dropdown-item" href="leave-console">Leave Console</a></li>
 								<li><a class="dropdown-item" href="apply-leave">Apply Leave</a></li>
 								<li><a class="dropdown-item" href="approve-leave">Approve Leave</a></li>
 								<li><a class="dropdown-item" href="cancle-leave">Cancel Leave</a></li>
@@ -81,9 +81,9 @@
 								<li><a class="dropdown-item" href="report-month-employee">Employee Monthly Report</a></li>
 								<li><a class="dropdown-item" href="#">Month Wise Summary Reports</a></li>
 								<li><a class="dropdown-item" href="leave-report">Monthly Approve Leave Reports </a></li>
-								<li><a class="dropdown-item" href="leave-report">Employee Wise Leave Reports </a></li>
-								<li><a class="dropdown-item" href="leave-report">Monthly Pending Leave Reports </a></li>
-								<li><a class="dropdown-item" href="#">Check Approve Status</a></li>
+								<li><a class="dropdown-item" href="employee-wise-report">Employee Wise Leave Reports </a></li>
+								<li><a class="dropdown-item" href="pending-leave-report">Monthly Pending Leave Reports </a></li>
+								<li><a class="dropdown-item" href="report-month-check">Check Approve Status</a></li> 
 								<li><a class="dropdown-item" href="#">Project Summary Report</a></li>
 								<li><a class="dropdown-item" href="#">Project Overshot Report</a></li>
 								<li><a class="dropdown-item" href="#">Project Wish Overshot Report</a></li>
@@ -98,7 +98,7 @@
 								<li><a class="dropdown-item" href="user-master">User Details Master</a></li>
 								<li><a class="dropdown-item" href="user-group-master">User Group Master</a></li>
 							</ul>
-						</li>
+						</li> 
 						<li class="nav-item dropdown justify-content-end">
 							<a class="nav-link dropdown-toggle " href="dropdown-menu" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-circle-user ms-me-1"></i> ${empName} </a>
 							<div class="justify-content-end">
