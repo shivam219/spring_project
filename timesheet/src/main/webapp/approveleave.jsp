@@ -173,17 +173,14 @@
 
 										</td>
 										<td class="text-center">
-											<!-- this work when file will there -->
-											<c:if test='${!l.getAttachment().equals("")}'>
-												<button class="btn btn-sm badge-soft-primary w-75 py-2" type="button"
+											<c:if test='${!(l.getAttachment().trim().length()>0)}'>
+												<button class="btn btn-sm badge-soft-primary w-75 py-1" type="button"
 													disabled>
 													<i class="fa fa-sharp fa-solid fa-ban"></i>
 												</button>
 											</c:if>
-											<!-- change for check if file attact -->
-											<!-- this work when no file will there -->
-											<c:if test='${l.getAttachment().equals("")}'>
-												<a href='${l.getAttachment()}'
+											<c:if test='${l.getAttachment().trim().length()>0}'>
+												<a href='${l.getAttachment()}' onclick="this.blur()"
 													class='btn btn-sm badge-soft-primary px-3 ' target='_blank"}'>
 													<i class="fa fa-duotone fa-eye"></i> view
 												</a>

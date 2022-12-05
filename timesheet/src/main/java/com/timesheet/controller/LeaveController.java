@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.timesheet.model.Employee;
 import com.timesheet.model.Leave;
@@ -57,15 +59,13 @@ public class LeaveController {
 	@Autowired
 	public ApproveRepository ar;
 
+	@Autowired
+	private FileUploaderHelper fileUploaderHelper;
+
 	String month = "";
 	String year = "";
 	long empId = 0;
 	String status = "";
-
-	/*
-	 * accessing apply leave and sending data to current
-	 * page----------------------------------------------------
-	 */
 
 	@GetMapping(value = "apply-leave")
 	public ModelAndView applyLeave(HttpServletRequest request) {
@@ -79,14 +79,33 @@ public class LeaveController {
 
 	@PostMapping(value = "/applyleaveprocess")
 	public String applyleaveprocess(HttpServletRequest request, Model model, @ModelAttribute Leave la) {
+
 		la.setStatus("Pending");
 		lr.save(la);
 		return "redirect:/home";
 	}
 
+//	  @RequestMapping(value = "/fileupload/file", headers = ("content-type=multipart/*"), method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@PostMapping(value = "/apply-leave-process")
-	public ResponseEntity<Object> applyLeaveProcess(HttpServletRequest request, @RequestBody Leave leave) {
+	public ResponseEntity<Object> applyLeaveProcess(HttpServletRequest request, @ModelAttribute Leave leave,
+			@RequestParam MultipartFile file) {
 		Long empId = ((Long) request.getSession().getAttribute("empId"));
+		if (!file.isEmpty()) {
+			if (!file.getContentType().equals("image/jpeg") && !file.getContentType().equals("image/png")) {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("file type not supported");
+			} else {
+				if (fileUploaderHelper.uploadFile(file)) {
+					System.out.println(file.getOriginalFilename());
+					System.err.println(file.getSize());
+					System.err.println(file.getName());
+					System.err.println(file.getContentType());
+					leave.setAttachment("images/"+file.getOriginalFilename());
+					System.out.println(ServletUriComponentsBuilder.fromCurrentContextPath().path("/images/")
+							.path(file.getOriginalFilename()).toUriString());
+					
+				}
+			}
+		}
 		Employee emp = er.findById(empId).get();
 		Employee manager = er.findById(Long.parseLong(ur.findById(empId).get().getLeaveReportingManager())).get();
 		leave.setStatus("Pending");
@@ -125,6 +144,7 @@ public class LeaveController {
 	public String approveLeave(HttpServletRequest request, Model m) {
 		Long empId = (Long) request.getSession().getAttribute("empId");
 		List<Leave> ll = ar.findAllFirstManagerList(String.valueOf(empId), "Pending");
+		System.out.println(ll);
 		ll.addAll(ar.findAllLastManagerList(String.valueOf(empId), String.valueOf(empId), "Pending"));
 		m.addAttribute("leaveList", ll);
 		return "approveleave";

@@ -82,9 +82,10 @@
 										</div>
 										<div class="row gx-3 mb-3">
 											<div class="col-md-6">
-												<label class="mb-1" for="attachment">Supporting Document 2MB PDF Only</label>
-												<input class="form-control w-75" type="file" id="attachment" name="attachment" placeholder="Enter attachment" accept=".pdf">
-												<span class="form-text small text-danger ms-2 d-none">Specify attachment</span>
+												<!-- accept=".pdf" -->
+												<label class="mb-1" for="file">Supporting Document 2MB PDF Only</label>
+												<input class="form-control w-75" type="file" id="file" name="file" placeholder="Enter file" accept="image/*">
+												<span class="form-text small text-danger ms-2 d-none">Specify file</span>
 											</div>
 											<div class="col-md-6">  
 												<label class="mb-1" for="leaveReason">Leave Reason</label>
@@ -257,6 +258,18 @@
 			return flag; 
 		}
 		
+		// 		$( '#formId' )
+		// .submit( function( e ) {
+		// 	$.ajax( {
+		// 	url: 'FormSubmitUrl',
+		// 	type: 'POST',
+		// 	data: new FormData( this ),
+		// 	processData: false,
+		// 	contentType: false
+		// 	} );
+		// 	e.preventDefault();
+		// } );
+
 		$("#applyLeaveForm").on("submit", function (event) {
 			event.preventDefault();
 			if (isValid()) {
@@ -267,13 +280,17 @@
 					startDate: $("#startDate").val(),
 					endDate: $("#endDate").val(),
 					managerId: $("#manager").val(),
-					leaveReason: $("#leaveReason").val()
+					// leaveReason: $("#leaveReason").val()
 				}
 				$.ajax({
 					type: 'POST',
 					url: 'apply-leave-process',
-					data: JSON.stringify(data),
-					contentType: 'application/json',
+					// data: JSON.stringify(data),
+					// contentType: 'application/json',
+					type: 'POST',
+					data: new FormData( this ),
+					processData: false,
+					contentType: false,
 					success: function (data, msg, xh) {
 						$("#btnSave").blur();
 						$("#loadingBtn").removeClass("spinner-border spinner-border-sm");
