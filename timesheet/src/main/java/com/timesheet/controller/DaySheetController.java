@@ -118,19 +118,18 @@ public class DaySheetController {
 		String sd[] = startDate.split("-");
 		MonthSheet ms = msr.findByEmpId(empId, Integer.parseInt(sd[1]), Integer.parseInt(sd[0]));
 		if (ms != null) {
-//			1 - reject or un - submitted
-			if ((ms.isSubmit()) && (ms.isApproved())) {
+//			1 - submit and reject
+			if ((ms.isSubmit() == false) && (ms.isApproved() == false)) {
 				return ResponseEntity.status(HttpStatus.OK).body("1");
 			}
-//			2 - approve
-			if(ms.isSubmit() && ms.isApproved()) {				
+//			3 - pending
+			if ((ms.isSubmit() == true) && (ms.isApproved() == false)) {
 				return ResponseEntity.status(HttpStatus.OK).body("2");
 			}
-//			3 - pending
-			if(ms.isSubmit() && (!ms.isApproved())) {				
+//			2 - approve
+			if ((ms.isSubmit() == true) && (ms.isApproved() == true)) {
 				return ResponseEntity.status(HttpStatus.OK).body("3");
 			}
-//			
 		}
 		return ResponseEntity.status(HttpStatus.OK).body("0");
 	}

@@ -19,7 +19,7 @@ import com.timesheet.repository.ProjectRepository;
 import com.timesheet.service.ProjectService;
 
 @Controller
-public class ReportProject {
+public class ReportProjectController {
 
 	@Autowired
 	ProjectRepository pr;

@@ -64,17 +64,17 @@ public class MonthSheetController {
 		if (msp.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unable to update timesheet");
 		}
-		if (!ms.isApproved()) {
+		if (ms.isApproved()) {
+			MonthSheet ms2 = msp.get();
+			ms2.setApproved(ms.isApproved());
+			msr.save(ms2);
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body("Timesheet Status is Approved");
+		} else {
 			MonthSheet ms2 = msp.get();
 			ms2.setApproved(false);
 			ms2.setSubmit(false);
 			msr.save(ms2);
-			return ResponseEntity.status(HttpStatus.ACCEPTED).body("Timesheet Status is updated");
-		} else {
-			MonthSheet ms2 = msp.get();
-			ms2.setApproved(ms.isApproved());
-			msr.save(ms2);
-			return ResponseEntity.status(HttpStatus.ACCEPTED).body("Timesheet Status is updated");
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body("Timesheet Status is Reject");
 		}
 	}
 

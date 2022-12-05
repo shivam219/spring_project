@@ -41,11 +41,13 @@ public class ProjectService {
 		return repository.deleteProjectByProjectId(ProjectId);
 	}
 
+//	 gm.UGRP_DESC
 	public List<EmployeeProjectDto> getProjectEmloyeeDetails(Integer projectId) {
-		List<Tuple> tu = repository.findEmployeeNameAndGroupDesc(projectId);
-
-		List<EmployeeProjectDto> epd = tu.stream()
-				.map(e -> new EmployeeProjectDto(e.get(0, String.class), e.get(1, String.class)))
+		List<Tuple> tu = repository.findEmployeeNameAndGroupDescAndHour(projectId);
+		List<EmployeeProjectDto> epd = tu.stream().map(
+				e -> new EmployeeProjectDto(e.get(0, String.class), 
+						e.get(1, String.class),
+						e.get(2, BigDecimal.class)))
 				.collect(Collectors.toList());
 		return epd;
 	}
@@ -54,8 +56,7 @@ public class ProjectService {
 		List<Tuple> tu = repository.findEmployeeNameAndHourInProject(projectId);
 
 		List<EmployeeProjectDto> epd = tu.stream()
-				.map(e -> new EmployeeProjectDto(e.get(0, String.class), 
-						e.get(1, BigDecimal.class)))
+				.map(e -> new EmployeeProjectDto(e.get(0, String.class), e.get(1, BigDecimal.class)))
 				.collect(Collectors.toList());
 		return epd;
 	}

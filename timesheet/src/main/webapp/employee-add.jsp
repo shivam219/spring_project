@@ -156,10 +156,10 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-center gap-2">
-                                    <button class="btn btn-secondary px-5  w-auto " type="button"
-                                        onclick="history.back()"> Back </button> 
+                                    <a class="btn btn-secondary px-5  w-auto " type="button"
+                                      href="employee-master"  > Back </a> 
                                     <button class="btn btn-primary  px-3 w-auto  " type="submit" id="btnSave">
-                                        <span id="loadingBtn"> </span> &nbsp; Save Changes &nbsp;
+                                        <span id="loadingBtn"> </span> &nbsp; Add Employee &nbsp;
                                     </button>
                                     <button class="btn btn-danger px-5 w-auto  " type="reset"
                                         onclick="this.blur()"> Reset </button>

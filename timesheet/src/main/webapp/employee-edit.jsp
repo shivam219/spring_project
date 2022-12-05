@@ -250,7 +250,7 @@
                                 <!-- Save changes button-->
                                 <div class="row justify-content-center gap-2 ">
                                     <button class="btn btn-secondary px-5 w-auto  " type="button"
-                                        onclick="history.back()"> Back </button>
+                                    href="employee-master"> Back </button>
                                     <button class="btn btn-primary px-3 w-auto " type="submit" id="btnSave">
                                         <span id="loadingBtn"> </span> &nbsp; Save Changes &nbsp;
                                     </button>
@@ -266,22 +266,6 @@
         <br>
         </div>
         <script>
-            console.log(document.baseURI);
-            console.log(location.host);//localhost:8080
-            console.log(location.hostname); //hostname
-            console.log(location.href);//http://localhost:8080/employee-edit?empId=10
-            console.log(location.origin);//http://localhost:8080
-            console.log(location.pathname);// /employee-edit
-            console.log(location.port);// 8080
-            console.log(location.protocol);// http
-            console.log(location.search);// ?empId=10
-            console.log(location);// ?empId=10
-            console.log(history);
-            console.log(screen);
-            console.log(document.referrer);
-            console.log(document.referrer.replace(location.origin, ''));
-
-
             function isValid() {
                 let flag = true;
                 if (!($("#empId").val())) {

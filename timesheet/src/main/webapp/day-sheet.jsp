@@ -215,8 +215,8 @@
             </div>
             
             <div class="row justify-content-around ">
-                <div class="col">
-                    <button class="btn btn-secondary btn-sm px-5 py-1" type="button" onclick="history.back()" > Back  </button> 
+                <div class="col"> 
+                    <a class="btn btn-secondary btn-sm px-5 py-1" type="button" href="home" > Back  </a> 
                 </div>
                 <div class="col">
                         <a href="project-request" class="btn btn-sm btn-primary">Request Project</a>
@@ -482,7 +482,7 @@
                         for (let i = $('#tbtable tr').length -2 ; i > 0; i--) {
                             $('#tbtable tr').eq(i).remove();
                         }
-                        if(workStatus == 1  || workStatus == 2 ){
+                        if(workStatus == 2  || workStatus == 3 ){
                                 for (let i = 0; i < obj.length; i++) {
                                 let row = document.createElement("tr");
                                 let sl = '<td  colspan="2" > '+ obj[i]['customerName'] +' </td>' 
@@ -514,14 +514,11 @@
                             }
                             $("#btnSubmit").attr('disabled',true);
                             $("#btnSave").addClass("d-none");
-                            if( workStatus == 2 ){
+                            if( workStatus == 3 ){
                                 $("#btnSubmit").val("Approved");
                             }
-                            else if (workStatus == 2 ){
-                                $("#btnSubmit").val("Rejected");
-                            }
                             else{
-                                $("#btnSubmit").val("Submitted");
+                                $("#btnSubmit").val("Pending");
                             }
                         }else{
                             for (let i = 0; i < obj.length; i++) {

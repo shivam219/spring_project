@@ -26,7 +26,7 @@
                                 </table>
                             </div> 
                             <div class="row justify-content-center mt-3 gap-2 ">
-                                <button class="btn btn-secondary px-3   w-auto  order-md-1 order-2" type="button" onclick="history.back()" > Back  </button>                               
+                                <a class="btn btn-secondary px-3   w-auto  order-md-1 order-2" type="button" href="year-master" > Back  </a>                               
                                 <button class="btn btn-primary px-3 w-auto  order-md-2 order-1" type="submit" id="btnSave"  >
                                     <span id="loadingBtn"> </span> &nbsp; Create Year&nbsp;
                                 </button>

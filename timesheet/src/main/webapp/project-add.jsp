@@ -76,11 +76,11 @@
                                         </div>
                                     </tr>
                                 </table>
-                            </div>
+                            </div> 
                             <div class="row justify-content-center gap-2 mt-3">
-                                <button class="btn btn-secondary px-5  w-auto order-md-2 order-2 " type="button" onclick="history.back()" > Back  </button> 
-                                <button class="btn btn-primary px-3 w-auto  order-md-1 order-1" type="submit" id="btnSave"  >
-                                    <span id="loadingBtn"> </span> &nbsp; Save Changes &nbsp;
+                                <button class="btn btn-secondary px-5  w-auto   order-md-1 order-2" type="button" onclick="location='project-master'" > Back  </button> 
+                                <button class="btn btn-primary px-3 w-auto order-md-2 order-1" type="submit" id="btnSave"  >
+                                    <span id="loadingBtn"> </span> &nbsp; Add Project &nbsp;
                                 </button>
                             </div>
                         </form>
