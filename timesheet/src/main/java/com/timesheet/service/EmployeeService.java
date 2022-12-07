@@ -23,7 +23,7 @@ public class EmployeeService {
 	}
 
 	public String getEmailById(Long empId) {
-		return er.getEmailById(empId);
+		return er.findEmpEmailByEmpId(empId);
 	}
 
 	public 	List<EmployeeNameDto> findEmployeeName() {

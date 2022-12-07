@@ -7,7 +7,7 @@
             justify-content: space-around;
         }
 		table thead th , table tr td {
-			text-align: center;
+			/* text-align: center; */
 		}
 </style>
 </head>
@@ -30,14 +30,13 @@
 					<thead >
 						<!-- <th scope="row">Project Id</th> -->
 						<th  >Project Name</th>
-						<th  >Project Timeline</th>
+						<th class="text-center" >Project Timeline</th>
 						<th  >Customer Name</th>
 						<th  >Actions</th>
 					</thead>
 					<tbody>
 						<c:forEach items="${projectList}" var="p" varStatus="loop">
 							<tr>
-								<!-- <td>${p.getProjectId()} </td>	 -->
 								<td> <a  href="report-project?projectId=${p.getProjectId()}" class="text-body"> ${p.getProjectName()}</a> </td>
 								<td>   
 									<div class="sidebyside">

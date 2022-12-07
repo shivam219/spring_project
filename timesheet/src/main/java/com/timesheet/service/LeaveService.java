@@ -7,48 +7,80 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.timesheet.model.Leave;
+import com.timesheet.repository.EmployeeRepository;
 import com.timesheet.repository.LeaveRepository;
 
 @Service
 public class LeaveService {
 
 	@Autowired
-	private LeaveRepository leaveRepository;
+	private LeaveRepository lr;
 
 	@Autowired
-	private EmailService emailService;
-
-	public Leave save(Leave l) {
-		System.out.println(leaveRepository.saveLeave(l.getEmpId(), l.getEmpName(), l.getManagerName(), l.getManagerId(),
-				l.getDayMode(), l.getLeaveType(), l.getLeaveReason(), l.getStartDate(), l.getEndDate(),
-				l.getAttachment(), l.getStatus(), l.getRejectReason()));
-		return l;
-	}
+	public EmployeeRepository er;
+	@Autowired
+	private EmailService es;
 
 	public List<Leave> getAllLeave() {
-		return (List<Leave>) leaveRepository.findAll();
+		return (List<Leave>) lr.findAll();
 	}
 
-	public void EmailOnSubmit(Leave l) {
-		this.emailService.leaveSubmitEmailToEmployee(l, "sandeep.gupta@ess.net.in");
-		this.emailService.leaveSubmitEmailToApprover(l, "sandeep.gupta@ess.net.in");
+	public void sendEmailOnSubmit(Leave l) {
+		this.es.leaveSubmitEmailToEmployee(l, er.findEmpEmailByEmpId(l.getEmpId()));
+		this.es.leaveSubmitEmailToApprover(l, er.findEmpEmailByEmpId(l.getManagerId()));
 	}
 
 	public String getLeaveId() {
-		return leaveRepository.getLeaveId();
+		return lr.getLeaveId();
 	}
 
-	public List<Leave> getCancleLeave(String l) {
-		return leaveRepository.getCancleLeave(l);
+	public List<Leave> getCancleLeave(long l) {
+		return lr.getCancleLeaveByEmpId(l);
 	}
 
-	public int updateCancleStatus(Leave leaveOld) {
-		if (leaveRepository.updateCancleStatus(leaveOld.getLeaveId()) == 1) {
-			Long lc = Long.valueOf(leaveOld.getLeaveId().substring(1));
-			Optional<Leave> l2 = leaveRepository.findById(lc);
-			Leave leaveNew = l2.get();
-			emailService.cancelRequestToEmployee(leaveNew, "sandeep.gupta@ess.net.in");
-			emailService.cancelRequestToApprover(leaveNew, getLeaveId());
+	public int updateCancleStatus(Leave leave) {
+		if (lr.updateCancleStatus(leave.getLeaveId()) == 1) {
+			if (leave.getSecondStatus().equals("Approved")) {
+				es.leaveCancelRequestToEmployee(leave, er.findEmpEmailByEmpId(leave.getEmpId()));
+				es.leaveCancelRequestToServiceDesk(leave, er.findEmpEmailByEmpId(leave.getEmpId()));
+				// need change with services desk
+				if (leave.getManagerId().equals(leave.getLeaveManagerId())) {
+					es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
+							leave.getManagerName());
+				} else {
+					String managerName = er.findEmployeeName(leave.getLeaveManagerId());
+					es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
+							leave.getManagerName());
+					es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getLeaveManagerId()),
+							managerName);
+				}
+			} else if (leave.getSecondStatus().equals("Pending")) {
+				es.leaveCancelRequestToEmployee(leave, er.findEmpEmailByEmpId(leave.getEmpId()));
+				if (leave.getManagerId().equals(leave.getLeaveManagerId())) {
+					es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
+							leave.getManagerName());
+				} else {
+					String managerName = er.findEmployeeName(leave.getLeaveManagerId());
+					es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
+							leave.getManagerName());
+					es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getLeaveManagerId()),
+							managerName);
+				}
+			} else if (leave.getStatus().equals("Pending")) {
+				es.leaveCancelRequestToEmployee(leave, er.findEmpEmailByEmpId(leave.getEmpId()));
+				es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
+						leave.getManagerName());
+
+			}
+
+//			es.leaveCancelRequestToEmployee(leave, er.findEmpEmailByEmpId(leave.getEmpId()));
+//			if (leave.getManagerId() != null && !leave.getManagerId().equals("")) {
+//				es.leaveCancelRequestToEmployee(leave, er.findEmpEmailByEmpId(leave.getManagerId()));
+//			}
+//			if (leave.getLeaveManagerId() != null && !leave.getLeaveManagerId().equals("")) {
+//				es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getLeaveManagerId()));
+//			}
+			return 1;
 		}
 		return 0;
 	}

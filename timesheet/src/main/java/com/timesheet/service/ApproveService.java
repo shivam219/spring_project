@@ -20,20 +20,10 @@ public class ApproveService {
 	public ApproveRepository approveRepository;
 
 	@Autowired
-	public EmailService emailService;
+	public EmailService es;
 
 	@Autowired
 	public EmployeeRepository er;
-
-//	public List<Leave> isValidApprove(Leave le) {
-//		List<Leave> lea = null;
-//		try {
-//			lea = approveRepository.isValidApprove(le.getManagerId(), le.getStatus());
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return lea;
-//	}
 
 	public List<Leave> getAllLeave() {
 		return (List<Leave>) approveRepository.findAll();
@@ -46,32 +36,24 @@ public class ApproveService {
 	public List<Leave> leaveList1(String leaveManagerId, String secondStatus) {
 		return approveRepository.findByManagerIdAndStatus(leaveManagerId, secondStatus);
 	}
-//	public int firstApprovedStatus(Leave leaveOld) {
-//		if (approveRepository.firstApprovedStatus(leaveOld.getLeaveId(),leaveOld.getStatus(), leaveOld.getSecondStatus(),leaveOld.getLeaveManagerId(),leaveOld.getApproveReason())== 1){
-//			Long lc = Long.valueOf(leaveOld.getLeaveId().substring(1));
-//			System.out.println(lc);
+
+	public int updateRejectStatus(Leave l, long empId,String lastManager) {
+//		String empName = (String) request.getSession().getAttribute("empName");
+		if (approveRepository.updateRejectStatus(l.getLeaveId(), l.getRejectReason()) == 1) {
+//			Long lc = Long.valueOf(leave.getLeaveId().substring(1));
 //			Optional<Leave> l2 = approveRepository.findById(lc);
 //			Leave leaveNew = l2.get();
-//			leaveNew.setApproveReason(leaveOld.getApproveReason());
-//			emailService.LeaveApproveToEmployee(leaveNew, "sandeep.gupta@ess.net.in");
-//			emailService.LeaveApproveToServicedesk(leaveNew);
-//		}
-//		return 0;
-//	}
+//			leaveNew.setRejectReason(leave.getRejectReason());
 
-	public int updateRejectStatus(Leave leaveOld, HttpServletRequest request) {
-		String empName = (String) request.getSession().getAttribute("empName");
-		if (approveRepository.updateRejectStatus(leaveOld.getLeaveId(), leaveOld.getRejectReason()) == 1) {
-			Long lc = Long.valueOf(leaveOld.getLeaveId().substring(1));
-			Optional<Leave> l2 = approveRepository.findById(lc);
-			Leave leaveNew = l2.get();
-			leaveNew.setRejectReason(leaveOld.getRejectReason());
-
-			emailService.rejectEmailToEmployee(leaveNew, "sandeep.gupta@ess.net.in");
-			emailService.rejectEmailToManager(leaveNew, "sandeep.gupta@ess.net.in", "sandeep.gupta@ess.net.in",
-					empName);
+			es.leaveRejectEmailToEmployee(l, er.findEmpEmailByEmpId(l.getEmpId()));
+			if (l.getManagerId() == empId) {
+				es.leaveRejectEmailToManager(l, er.findEmpEmailByEmpId(l.getManagerId()), l.getManagerName());
+			} else if (l.getLeaveManagerId() == empId) {
+				es.leaveRejectEmailToManager(l, er.findEmpEmailByEmpId(l.getManagerId()), l.getManagerName());
+				es.leaveRejectEmailToLastManager(l, er.findEmpEmailByEmpId(l.getLeaveManagerId()), lastManager);
+			}
+			return 1;
 		}
-
 		return 0;
 	}
 

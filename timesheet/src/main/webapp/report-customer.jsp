@@ -152,7 +152,7 @@
                 <tbody>
                   <c:forEach items="${customer.getProject()}" var="l">
                     <tr>
-                      <td>${l.getProjectName()}</td>
+                      <td><a  href="report-project?projectId=${l.getProjectId()}" class="text-body"> ${l.getProjectName()}</a></td>
                       <td>
                         Development
                       </td>

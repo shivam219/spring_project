@@ -13,12 +13,10 @@ import com.timesheet.model.Leave;
 
 @Repository
 public interface ApproveRepository extends JpaRepository<Leave, Long> {
+
 	public List<Leave> findByManagerIdAndStatus(String managerId, String status);
 
 	public Boolean existsByManagerIdAndStatus(String managerId, String status);
-
-	@Query(value = "select * from timesheet_leave_master where manager_id = :managerId and status = :status order by leave_id asc", nativeQuery = true)
-	public List<Leave> findAllFirstManagerList(@Param("managerId") String managerId, @Param("status") String status);
 
 	@Query(value = "select * from timesheet_leave_master where ifnull((leave_manager_id = :leaveManagerId),(manager_id = :managerId)) and second_status = :secondStatus order by leave_id desc;", nativeQuery = true)
 	public List<Leave> findAllLastManagerList(@Param("leaveManagerId") String leaveManagerId,
@@ -31,7 +29,7 @@ public interface ApproveRepository extends JpaRepository<Leave, Long> {
 
 	@Modifying
 	@Transactional
-	@Query(value = "Update timesheet_leave_master set status='Rejected' , reject_reason = :rejecReason where leave_id = :leaveId ", nativeQuery = true)
+	@Query(value = "Update timesheet_leave_master set status='Rejected', second_status='Rejected', reject_reason = :rejecReason where leave_id = :leaveId ", nativeQuery = true)
 	public int updateRejectStatus(@Param("leaveId") String leaveId, @Param("rejecReason") String reject_reason);
 
 	@Query(value = "select emp_id, concat(first_name,'',last_name)as emp_name from timesheet_employee_master \n"

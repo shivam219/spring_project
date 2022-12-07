@@ -8,6 +8,10 @@
 <body>
 	<div class="container-xl mt-5"> 
 		<div class="row px-4">
+			<div class="alert alert-danger d-none " role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<strong>Warning!</strong>Cannot Apply Leave on Weekend !
+			</div>
 			<div class="col col-xl-12">
 				<div class="card mb-4">
 					<div class="card-header text-center text-white h6" style="background-color: #124265;">Leave Application</div>
@@ -52,11 +56,11 @@
 												<label class="mb-1" for="dayMode">Day Mode</label><br>
 												<div class="border p-1 rounded w-75 ">
 													<div class="form-check d-inline-flex mt-1">
-														<input class="form-check-input" type="radio"  name="dayMode" id="dayMode1" value="Half Day" checked="">
+														<input class="form-check-input" type="radio"  name="dayMode" id="dayMode1" value="Half Day" >
 														<label class="form-check-label" for="dayMode"> &nbsp;Half Day </label>
 													</div>
 													<div class="form-check d-inline-flex ms-md-2">
-														<input class="form-check-input" type="radio" name="dayMode" id="dayMode2" value="Full Day">
+														<input class="form-check-input" type="radio" name="dayMode" id="dayMode2" value="Full Day" checked="" >
 														<label class="form-check-label" for="dayMode"> &nbsp;Full Day </label>
 													</div>
 										 		</div>
@@ -97,7 +101,7 @@
 								</div>
 							</div>
 							<div class="row justify-content-center mt-2">
-								<button class="btn btn-primary btn-sm px-3 w-auto" type="submit" id="btnSubmit">
+								<button class="btn btn-primary btn-sm px-3 w-auto" type="submit" id="btnSave" onclick="this.blur()" >
 									<span id="loadingBtn"> </span> &nbsp; Submit &nbsp;
 								</button>
 								<button class="btn btn-danger btn-sm px-3 ms-2 w-auto " type="reset"
@@ -113,6 +117,11 @@
 		</div>
 	</div>
 	<script>
+		window.setTimeout(function() {
+			$(".alert").fadeTo(5000, 200).slideUp(5000, function(){
+				$(this).remove(); 
+			});
+		}, 4000);
 		$(document).ready(function () {
 			$(".endDateHide").hide();
 			$('#btnSingle').toggleClass('btn-primary');
@@ -223,7 +232,6 @@
 				} 
 			}
 		}
-
 		function getNumberOfDays() {
 			if ($('#startDate').val() && $('#endDate').val()) {
 				let start = new Date($('#startDate').val());
@@ -231,8 +239,6 @@
 				$("#dayCount").html("Days : " + (parseInt(Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24))) + 1));
 			}
 		}
-
-
 		function isValid() {
 			let flag = true; 
 			if(!($("#dayMode1").val())){
@@ -257,72 +263,49 @@
 			}
 			return flag; 
 		}
-		
-		// 		$( '#formId' )
-		// .submit( function( e ) {
-		// 	$.ajax( {
-		// 	url: 'FormSubmitUrl',
-		// 	type: 'POST',
-		// 	data: new FormData( this ),
-		// 	processData: false,
-		// 	contentType: false
-		// 	} );
-		// 	e.preventDefault();
-		// } );
 
 		$("#applyLeaveForm").on("submit", function (event) {
 			event.preventDefault();
 			if (isValid()) {
+				$("#btnSave").attr("disabled",true);
 				$("#loadingBtn").addClass("spinner-border spinner-border-sm");
-				let data = {
-					dayMode: $("input[name=dayMode]:checked").val(),
-					leaveType: $("#selectLeaveType").val(),
-					startDate: $("#startDate").val(),
-					endDate: $("#endDate").val(),
-					managerId: $("#manager").val(),
-					// leaveReason: $("#leaveReason").val()
-				}
 				$.ajax({
 					type: 'POST',
 					url: 'apply-leave-process',
-					// data: JSON.stringify(data),
-					// contentType: 'application/json',
 					type: 'POST',
 					data: new FormData( this ),
 					processData: false,
 					contentType: false,
 					success: function (data, msg, xh) {
-						$("#btnSave").blur();
 						$("#loadingBtn").removeClass("spinner-border spinner-border-sm");
+						$("#btnSave").attr("disabled",false);
 						swal({
 							title: "Success",
 							text: "Leave Applied Successfully",
 							icon: "success",
 						}).
-							then(function (isOkay) {
-								if (isOkay) { 
-									location.replace('/home');
-								}
-							});
+						then(function (isOkay) {
+							if (isOkay) { 
+								location.replace('/home');
+							}
+						});
 					}, error: function (data, msg, xh) {
+						$("#btnSave").attr("disabled",false);
 						$("#loadingBtn").removeClass("spinner-border spinner-border-sm");
 						swal({
 							title: "Unable to apply leave",
 							text: "Unable to apply leave please change start date",
 							icon: "error",
 						}).
-							then(function (isOkay) {
-								if (isOkay) {  
-									// location.replace('/home');
-								}
-							});
+						then(function (isOkay) {
+							if (isOkay) {  
+								// location.replace('/home');
+							}
+						});
 					}
 				});
-			} else {
-				$("#btnSave").blur();
-			}
+			} 
 		}); 
-
 
     $("input, select , textarea ").on("input",function(){
         $(this).removeClass("is-invalid");
@@ -336,3 +319,4 @@
 </body>
 
 </html>
+

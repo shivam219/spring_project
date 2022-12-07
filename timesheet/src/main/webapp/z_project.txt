@@ -194,3 +194,61 @@ public List<MonthSheetDataDto> findMonthSheetDataAndApprove(long monthId) {
             </div>
           </div>
         </div>
+        ///
+
+	let data = {
+					dayMode: $("input[name=dayMode]:checked").val(),
+					leaveType: $("#selectLeaveType").val(),
+					startDate: $("#startDate").val(),
+					endDate: $("#endDate").val(),
+					managerId: $("#manager").val(),
+					// leaveReason: $("#leaveReason").val()
+				}
+
+        	// data: JSON.stringify(data),
+					// contentType: 'application/json',
+
+
+//	@PostMapping(value = "/applyleaveprocess")
+//	public String applyleaveprocess(HttpServletRequest request, Model model, @ModelAttribute Leave l) {
+//		Long empId = ((Long) request.getSession().getAttribute("empId"));
+//		Employee emp = er.findById(empId).get();
+//		l.setEmpId(String.valueOf(emp.getEmpId()));
+//		l.setEmpName(emp.getFirstName() + " " + emp.getLastName());
+//		Employee manager = er.findById(Long.parseLong(ur.findById(empId).get().getLeaveReportingManager())).get();
+//		l.setManagerId(String.valueOf(manager.getEmpId()));
+//		l.setManagerName(manager.getFirstName() + " " + manager.getLastName());
+//		l.setStatus("Pending");
+//		if (l.getEndDate() == null || l.getEndDate().equals("")) {
+//			l.setEndDate(l.getStartDate());
+//		}
+//		leaveService.save(l);
+//		l.setLeaveId(leaveService.getLeaveId());
+//		leaveService.EmailOnSubmit(l);
+//		return "redirect:/home";
+//	}
+
+        //
+        	public Leave save(Leave l) {
+		System.out.println(lr.saveLeave(l.getEmpId(), l.getEmpName(), l.getManagerName(), l.getManagerId(),
+				l.getDayMode(), l.getLeaveType(), l.getLeaveReason(), l.getStartDate(), l.getEndDate(),
+				l.getAttachment(), l.getStatus(), l.getRejectReason()));
+		return l;
+	}
+
+
+if (le.getSecondStatus() != null && le.getSecondStatus().equals("Pending")) {
+				le.setSecondApproveReason(la.getApproveReason());
+				if (!le.getManagerId().equals(le.getLeaveManagerId())) {
+					le.setSecondStatus("Approved");
+				}
+				
+			} else if (le.getStatus().trim().equals("Pending")) {
+				le.setApproveReason(la.getApproveReason());
+				le.setStatus("Approved");
+				if (le.getManagerId().equals(le.getLeaveManagerId())) {
+					le.setSecondStatus("Approved");
+				} else {
+					le.setSecondStatus("Pending");
+				}
+			}

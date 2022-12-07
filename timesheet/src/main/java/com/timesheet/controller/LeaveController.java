@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -45,7 +48,7 @@ public class LeaveController {
 	public ApproveService approveService;
 
 	@Autowired
-	public EmailService emailService;
+	public EmailService es;
 
 	@Autowired
 	public LeaveRepository lr;
@@ -85,86 +88,72 @@ public class LeaveController {
 		return "redirect:/home";
 	}
 
-//	  @RequestMapping(value = "/fileupload/file", headers = ("content-type=multipart/*"), method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//	@RequestMapping(value = "/apply-leave-process", headers = ("content-type=multipart/*"), method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@PostMapping(value = "/apply-leave-process")
 	public ResponseEntity<Object> applyLeaveProcess(HttpServletRequest request, @ModelAttribute Leave leave,
 			@RequestParam MultipartFile file) {
 		Long empId = ((Long) request.getSession().getAttribute("empId"));
+		if (lr.existsByEmpIdAndStartDate(empId, leave.getStartDate())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Duplicate Leave");
+		}
 		if (!file.isEmpty()) {
 			if (!file.getContentType().equals("image/jpeg") && !file.getContentType().equals("image/png")) {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("file type not supported");
 			} else {
 				if (fileUploaderHelper.uploadFile(file)) {
-					System.out.println(file.getOriginalFilename());
-					System.err.println(file.getSize());
-					System.err.println(file.getName());
-					System.err.println(file.getContentType());
-					leave.setAttachment("images/"+file.getOriginalFilename());
+//					System.out.println(file.getOriginalFilename());
+//					System.err.println(file.getSize());
+//					System.err.println(file.getName());
+//					System.err.println(file.getContentType());
+					leave.setAttachment("images/" + file.getOriginalFilename());
 					System.out.println(ServletUriComponentsBuilder.fromCurrentContextPath().path("/images/")
 							.path(file.getOriginalFilename()).toUriString());
-					
 				}
 			}
 		}
 		Employee emp = er.findById(empId).get();
 		Employee manager = er.findById(Long.parseLong(ur.findById(empId).get().getLeaveReportingManager())).get();
 		leave.setStatus("Pending");
+		leave.setSecondStatus("Pending");
 		leave.setEmpId(empId);
 		leave.setEmpName(emp.getFullName());
 		leave.setManagerId(manager.getEmpId());
 		leave.setManagerName(manager.getFullName());
 		try {
-			lr.save(leave);
+			Leave saveLeave = lr.save(leave);
+			if (saveLeave.getLeaveId() == null || saveLeave.getLeaveId().equals("")) {
+				StringBuilder leaveId = new StringBuilder("L");
+				String ll = saveLeave.getLeaveCode() + "";
+				int len = 9 - ll.length();
+				for (int i = 1; i <= len; i++) {
+					leaveId.append("0");
+				}
+				leaveId.append(saveLeave.getLeaveCode());
+				saveLeave.setLeaveId(leaveId.toString());
+				leaveService.sendEmailOnSubmit(saveLeave);
+			} else {
+				leaveService.sendEmailOnSubmit(saveLeave);
+			}
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body("Apply Leave success");
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Apply Leave success");
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Error while Applying Leave");
 		}
 	}
-
-//	@PostMapping(value = "/applyleaveprocess")
-//	public String applyleaveprocess(HttpServletRequest request, Model model, @ModelAttribute Leave l) {
-//		Long empId = ((Long) request.getSession().getAttribute("empId"));
-//		Employee emp = er.findById(empId).get();
-//		l.setEmpId(String.valueOf(emp.getEmpId()));
-//		l.setEmpName(emp.getFirstName() + " " + emp.getLastName());
-//		Employee manager = er.findById(Long.parseLong(ur.findById(empId).get().getLeaveReportingManager())).get();
-//		l.setManagerId(String.valueOf(manager.getEmpId()));
-//		l.setManagerName(manager.getFirstName() + " " + manager.getLastName());
-//		l.setStatus("Pending");
-//		if (l.getEndDate() == null || l.getEndDate().equals("")) {
-//			l.setEndDate(l.getStartDate());
-//		}
-//		leaveService.save(l);
-//		l.setLeaveId(leaveService.getLeaveId());
-//		leaveService.EmailOnSubmit(l);
-//		return "redirect:/home";
-//	}
 
 	@GetMapping(value = "approve-leave")
 	public String approveLeave(HttpServletRequest request, Model m) {
 		Long empId = (Long) request.getSession().getAttribute("empId");
-		List<Leave> ll = ar.findAllFirstManagerList(String.valueOf(empId), "Pending");
-		System.out.println(ll);
-		ll.addAll(ar.findAllLastManagerList(String.valueOf(empId), String.valueOf(empId), "Pending"));
+		List<Leave> ll = (ar.findAllLastManagerList(String.valueOf(empId), String.valueOf(empId), "Pending"));
 		m.addAttribute("leaveList", ll);
 		return "approveleave";
-
 	}
 
 	@PostMapping(value = "/approve-leave-process")
 	public ResponseEntity<Object> approveleaveprocess(HttpServletRequest request, Model model, @RequestBody Leave la) {
-//		Leave le = lr.findById(Long.parseLong(la.getLeaveId().substring(1, la.getLeaveId().length()))).get();
-		Leave le = lr.findByLeaveCode(la.getLeaveId());
+		Leave le = lr.findByLeaveId(la.getLeaveId());
 		le.setLeaveManagerId(Long.parseLong((ar.getApproveMangerCode(le.getEmpId()).get(0)[0])));
 		try {
-
-			if (le.getSecondStatus() != null && le.getSecondStatus().equals("Pending")) {
-				le.setSecondApproveReason(la.getApproveReason());
-				if (!le.getManagerId().equals(le.getLeaveManagerId())) {
-					le.setSecondStatus("Approved");
-				}
-			}
-
 			if (le.getStatus().trim().equals("Pending")) {
 				le.setApproveReason(la.getApproveReason());
 				le.setStatus("Approved");
@@ -173,13 +162,21 @@ public class LeaveController {
 				} else {
 					le.setSecondStatus("Pending");
 				}
+			} else if (le.getSecondStatus() != null && le.getSecondStatus().equals("Pending")) {
+				le.setSecondApproveReason(la.getApproveReason());
+				if (!le.getManagerId().equals(le.getLeaveManagerId())) {
+					le.setSecondStatus("Approved");
+				}
 			}
 			Leave l = lr.save(le);
 			if (l.getSecondStatus().equals("Approved")) {
-				emailService.LeaveApproveToEmployee(le, "sandeep.gupta@ess.net.in");
-				emailService.LeaveApproveToServicedesk(le);
+				es.LeaveApproveToEmployee(le, er.findEmpEmailByEmpId(l.getEmpId()));
+				es.LeaveApproveToServicedesk(le);
+			} else if (l.getSecondStatus().equals("Pending")) {
+				String secondMangerName = er.findEmployeeName(l.getLeaveManagerId());
+				String secManEmail = er.findEmpEmailByEmpId(l.getLeaveManagerId());
+				es.LeaveApproveToSecondManager(le, secManEmail, secondMangerName);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -188,15 +185,20 @@ public class LeaveController {
 
 	@GetMapping(value = "cancle-leave")
 	public String cancleLeave(Model m, HttpServletRequest request) {
-		String empId = ((Long) request.getSession().getAttribute("empId")) + "";
+		long empId = (Long) request.getSession().getAttribute("empId");
 		m.addAttribute("getAllLeave", leaveService.getCancleLeave(empId));
 		return new String("cancleleave");
 	}
 
 	@PostMapping(value = "/cancle-leave-process")
-	public ResponseEntity<Object> cancleleaveprocess(HttpServletRequest request, Model model, @RequestBody Leave la) {
-		leaveService.updateCancleStatus(la);
+	public ResponseEntity<Object> cancleleaveprocess(HttpServletRequest request, Model model, @RequestBody Leave leav) {
+		Long empId = ((Long) request.getSession().getAttribute("empId"));
+		Leave leave = lr.findByEmpIdAndLeaveId(empId, leav.getLeaveId());
+		if (leave == null) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid Leave Cancallation");
+		}
 		try {
+			leaveService.updateCancleStatus(leave);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -204,10 +206,19 @@ public class LeaveController {
 	}
 
 	@PostMapping(value = "/reject-leave-process")
-	public ResponseEntity<Object> rejectleaveprocess(HttpServletRequest request, Model model,
-			@RequestBody Leave leave) {
+	public ResponseEntity<Object> rejectleaveprocess(HttpServletRequest request, @RequestBody Leave leave) {
+		long empId = ((Long) request.getSession().getAttribute("empId"));
+		String empName =request.getSession().getAttribute("empName").toString();
+		Leave leavt = lr.findByLeaveId(leave.getLeaveId());
+		if (leavt == null) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid Leave Cancallation");
+		}
+		if (leavt.getManagerId() != empId && leavt.getLeaveManagerId() != empId) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid Leave Cancallation");
+		}
 		try {
-			approveService.updateRejectStatus(leave, request);
+			leavt.setRejectReason(leave.getRejectReason());
+			approveService.updateRejectStatus(leavt, empId,empName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

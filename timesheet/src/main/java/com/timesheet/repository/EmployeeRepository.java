@@ -23,11 +23,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 	public Boolean existsByEmpId(Long empId);
 //	public Boolean existsByEmpEmailIgnoreCase(String empEmail);
-	
-	@Query(value = "select emp_id from timesheet_user_master where emp_id in (select emp_id from timesheet_employee_master where lower(emp_email) =  lower(:email))",nativeQuery = true)
-	public Long findByEmpEmailIgnoreCase(@Param("email")String empEmail);
-	
-	
+
+	@Query(value = "select emp_id from timesheet_user_master where emp_id in (select emp_id from timesheet_employee_master where lower(emp_email) =  lower(:email))", nativeQuery = true)
+	public Long findByEmpEmailIgnoreCase(@Param("email") String empEmail);
 
 	@Modifying
 	@Query(value = "insert into timesheet_employee_master (emp_id , emp_name, emp_email, emp_password,emp_password_encrypt, emp_city ,emp_address,emp_phone,emp_pincode) "
@@ -46,7 +44,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	int updateEmployeePassword(@Param(value = "empId") long empId, @Param(value = "empPass") String empPass);
 
 	@Query(value = "SELECT emp_email FROM timesheet_employee_master where emp_id =:empId", nativeQuery = true)
-	public String getEmailById(@Param("empId") Long empId);
+	public String findEmpEmailByEmpId(@Param("empId") Long empId);
 
 //	@Query(value="SELECT * FROM ess.timesheet_employee_master order by first_name" ,nativeQuery =  true)
 	public Page<Employee> findAll(Pageable pageable);
@@ -69,6 +67,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
 	@Query(value = "SELECT e.emp_id , CONCAT(first_name,' ',middle_name,' ',last_name) employeeName FROM timesheet_employee_master e , timesheet_user_master  u where e.emp_id = u.emp_id", nativeQuery = true)
 	List<Tuple> findEmployeeName();
+
+	@Query(value = "SELECT  CONCAT(first_name,' ',middle_name,' ',last_name) employeeName FROM timesheet_employee_master   where emp_id = :empId", nativeQuery = true)
+	public String findEmployeeName(long empId);
 
 	@Query(value = "SELECT year_code FROM timesheet_employee_master , timesheet_financial_year where  year_code >= year(date_of_join) and  emp_id = :empId ", nativeQuery = true)
 	List<String> findEmployeeWorkingYear(Long empId);

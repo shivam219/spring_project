@@ -231,7 +231,6 @@
 								leaveId: $('#LeaveId').val(),
 								rejectReason: $('#msgRejectReason').val()
 							}
-							console.log(data);
 							let uri = 'reject-leave-process'
 							$.ajax({
 								type: 'POST',

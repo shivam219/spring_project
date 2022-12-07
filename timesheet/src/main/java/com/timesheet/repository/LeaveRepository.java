@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+
 import com.timesheet.model.Leave;
 
 public interface LeaveRepository extends CrudRepository<Leave, Long> {
@@ -26,12 +27,12 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 	@Query(value = "select leave_id from timesheet_leave_master order by leave_code desc limit 1 ", nativeQuery = true)
 	public String getLeaveId();
 
-	@Query(value = "select * from timesheet_leave_master where emp_id = :empId and start_date >= curdate() and status in ('Pending','Approved')  order by leave_id asc", nativeQuery = true)
-	public List<Leave> getCancleLeave(@Param("empId") String empId);
+	@Query(value = "select * from timesheet_leave_master where emp_id = :empId and start_date >= curdate() and second_status in ('Pending','Approved')  order by leave_id asc", nativeQuery = true)
+	public List<Leave> getCancleLeaveByEmpId(@Param("empId") long empId);
 
 	@Modifying
 	@Transactional
-	@Query(value = "update timesheet_leave_master set status = 'Cancelled'  where leave_id = :leaveId", nativeQuery = true)
+	@Query(value = "update timesheet_leave_master set status = 'Cancelled' , second_status = 'Cancelled'  where leave_id = :leaveId", nativeQuery = true)
 	public int updateCancleStatus(@Param("leaveId") String leaveId);
 
 	@Query(value = "select  *  from timesheet_leave_master where month(start_date) = :month and year(start_date) = :year and status in ('Approved') ", nativeQuery = true)
@@ -62,7 +63,16 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 	@Query(value = "select concat(date_format(start_date,'%D %b' ), ' to ', date_format(end_date,'%D %b' ),  ', ',concat(leave_type)) as Leaves FROM timesheet_leave_master where start_date between :startDate and  :endDate  ORDER BY DATE(start_date) ASC ", nativeQuery = true)
 	public List<Object> getWeekLeaves(@Param("startDate") String year, @Param("endDate") String month);
 
+	@Query(value = "SELECT leave_code,approve_reason,attachment,day_mode,emp_id,emp_name,end_date,  ifnull(leave_id , concat('L' ,LPAD( (:leaveCode) ,9,'0'))) as leave_id ,leave_manager_id,leave_reason,leave_type,manager_id,manager_name,reject_reason,second_approve_reason,second_status,start_date,status,submitted_date\n"
+			+ "FROM timesheet_leave_master where leave_code = :leaveCode", nativeQuery = true)
+	public Leave findByLeaveCode(@Param("leaveCode") long leaveCode);
+
 	@Query(value = "select * from timesheet_leave_master where leave_id = :leaveId", nativeQuery = true)
-	public Leave findByLeaveCode(@Param("leaveId") String leaveId);
+	public Leave findByLeaveId(@Param("leaveId") String leaveId);
+
+	public boolean existsByEmpIdAndStartDate(Long empId, String startDate);
+	
+	public Leave findByEmpIdAndLeaveId(Long empId, String leaveId);
+	
 
 }

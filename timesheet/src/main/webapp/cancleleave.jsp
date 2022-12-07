@@ -84,11 +84,13 @@
 										<td class="">${l.getDayMode()}</td>
 										<td class="">${l.getStartDate()}</td>
 										<td class="">${l.getEndDate()}</td>
-										<td class="">${l.getStatus()}</td>
+										<td class="">${l.getSecondStatus()}</td>
 										<td class="">
 											<button class="btn btn-sm badge-soft-danger px-3 ms-0" id="btnCancle"
-												onclick="cancelLeaveApplication('${l.getLeaveId()}');this.blur();">
+												onclick="cancelLeaveApplication('${l.getLeaveId()}' , this);this.blur();">
+												<span > </span> &nbsp;
 												<i class="fa fa-duotone fa-trash"></i>&nbsp;&nbsp;Cancel Request
+
 											</button>
 										</td>
 									</tr>
@@ -104,48 +106,43 @@
 				</div>
 			</div>
 			<div class="row">
-                <div class="col-md-6">
-                    <div>
-                        <a class="btn btn-secondary btn-sm px-5 py-1" type="button" href="home" > Back  </a> 
-                    </div>
-                </div>
-            </div>
+				<div class="col-md-6">
+					<div>
+						<a class="btn btn-secondary btn-sm px-5 py-1" type="button" href="home"> Back </a>
+					</div>
+				</div>
+			</div>
 		</div>
 		<script>
-			function cancelLeaveApplication(LeaveId) {
-				console.log();
-				$('#btnCancel').attr("disabled", true);
+			function cancelLeaveApplication(LeaveId ,thi) {
+				$(thi).attr("disabled",true).find("span").addClass("spinner-border spinner-border-sm");
 				let data = { leaveId: LeaveId }
-				console.log(data);
 				$.ajax({
 					type: 'POST',
 					url: 'cancle-leave-process',
 					data: JSON.stringify(data),
 					contentType: 'application/json',
-					success: function (data, msg, xh) {
-						// location.replace('/home');
-						// location.reload();
+					success: function () {
+						$(thi).attr("disabled",false).find("span").removeClass("spinner-border spinner-border-sm");
 						swal({
 							title: "Success",
 							text: "Cancel Leave Request successfully",
 							icon: "success",
-						}).
-							then(function (isOkay) {
-								if (isOkay) {
-									location.reload();
-								}
-							});
-						console.log(data);
+						})
+						location.reload();
 					},
-					error: function (data, msg, xh) {
-
+					error: function () {
+						$(thi).attr("disabled",false).find("span").removeClass("spinner-border spinner-border-sm");
+						swal({
+							title: "Error",
+							text: " Unable to cancel",
+							icon: "error",
+						})
+						location.reload();
 					}
 				});
 			}
 		</script>
-
-		<script src="./assets/main.js"></script>
-
 
 	</body>
 
