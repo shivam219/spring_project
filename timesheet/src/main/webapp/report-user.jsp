@@ -12,7 +12,7 @@
     <div class="container-xl px-4 mt-4">
 
       <!-- <div class="row "> -->
-        <div class="row justify-content-center ">
+      <div class="row justify-content-center ">
         <div class="col-md-8">
           <div class="card mb-4 mb-xl-0">
             <div class="card-header">Profile Details</div>
@@ -21,14 +21,16 @@
                 <div class="row  ">
                   <div class="col text-start">Employee Name</div>
                   <div class="col">
-                    <span class="badge badge-soft-primary mb-0 fw-bold" style="font-size: 14px;">  ${user.getFullName()}</span>
+                    <span class="badge badge-soft-primary mb-0 fw-bold" style="font-size: 14px;">
+                      ${user.getFullName()}</span>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="col text-start">Employee Id</div>
-                  <div class="col"> 
-                    <span class="badge badge-soft-primary mb-0 fw-bold" style="font-size: 14px;"> ${user.getEmpId()}</span>
+                  <div class="col">
+                    <span class="badge badge-soft-primary mb-0 fw-bold" style="font-size: 14px;">
+                      ${user.getEmpId()}</span>
                   </div>
                 </div>
 
@@ -57,8 +59,8 @@
                 <div class="row justify-content-between">
                   <div class="col-3 text-start">Address</div>
                   <div class="col-6  "> ${user.getEmpAddress()}, ${user.getEmpCity()}.
-                   </div>
-                </div> 
+                  </div>
+                </div>
 
                 <div class="row">
                   <div class="col text-start">Pincode</div>
@@ -84,7 +86,13 @@
                   <div class="col text-start">Company</div>
                   <div class="col">Enhanced Software solution.</div>
                 </div>
-
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <div>
+                <a class="btn btn-secondary btn-sm px-5 py-1" type="button" href="home"> Back </a>
               </div>
             </div>
           </div>
@@ -103,7 +111,7 @@
                   <canvas id="myChart2" width="400" height="400"></canvas>
                 </div>
               </div>
-              <div class="row"> 
+              <div class="row">
               </div>
             </div>
           </div>
@@ -131,32 +139,32 @@
                     legend: {
                       orient: 'vertical',
                       left: 'left'
-                    }, 
+                    },
                     series: [{
                       name: 'Access From',
                       type: 'pie',
                       radius: '50%',
                       data: [{
-                          value: 10,
-                          name: 'Timesheet'
-                        },
-                        {
-                          value: 30,
-                          name: 'KOTAK Payment'
-                        },
-                        {
-                          value: 10,
-                          name: 'Leave Application'
-                        },
-                        {
-                          value: 6,
-                          name: 'ON Leave'
-                        },
-                        {
-                          value: 44,
-                          name: 'IBM Transport '
-                        }, 
-                        
+                        value: 10,
+                        name: 'Timesheet'
+                      },
+                      {
+                        value: 30,
+                        name: 'KOTAK Payment'
+                      },
+                      {
+                        value: 10,
+                        name: 'Leave Application'
+                      },
+                      {
+                        value: 6,
+                        name: 'ON Leave'
+                      },
+                      {
+                        value: 44,
+                        name: 'IBM Transport '
+                      },
+
                       ],
                       // data: mymydatadata,
                       emphasis: {
@@ -261,7 +269,7 @@
 
     </script>
     <script>
- 
+
     </script>
 
   </body>

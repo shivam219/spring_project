@@ -1,11 +1,16 @@
 package com.timesheet.service;
 
+import java.math.BigInteger;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.persistence.Tuple;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.timesheet.dto.EmployeeProjectDto;
+import com.timesheet.dto.LeaveDto;
 import com.timesheet.model.Leave;
 import com.timesheet.repository.EmployeeRepository;
 import com.timesheet.repository.LeaveRepository;
@@ -72,17 +77,17 @@ public class LeaveService {
 						leave.getManagerName());
 
 			}
-
-//			es.leaveCancelRequestToEmployee(leave, er.findEmpEmailByEmpId(leave.getEmpId()));
-//			if (leave.getManagerId() != null && !leave.getManagerId().equals("")) {
-//				es.leaveCancelRequestToEmployee(leave, er.findEmpEmailByEmpId(leave.getManagerId()));
-//			}
-//			if (leave.getLeaveManagerId() != null && !leave.getLeaveManagerId().equals("")) {
-//				es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getLeaveManagerId()));
-//			}
 			return 1;
 		}
 		return 0;
+	}
+
+	public List<LeaveDto> findLeaveTypeStartDateEndDateByEmpId(long empId) {
+		List<Tuple> tu = lr.findLeaveTypeStartDateEndDateByEmpId(empId);
+		List<LeaveDto> ld = tu.stream()
+				.map(e -> new LeaveDto(e.get(0, String.class), e.get(1, String.class), e.get(2, String.class),e.get(3, String.class)))
+				.collect(Collectors.toList());
+		return ld;
 	}
 
 }

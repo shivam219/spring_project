@@ -1,6 +1,5 @@
 <%@ include file="menu.jsp" %>
 	<html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title>Leave Console</title>

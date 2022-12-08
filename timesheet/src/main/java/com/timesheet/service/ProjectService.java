@@ -47,7 +47,7 @@ public class ProjectService {
 		List<EmployeeProjectDto> epd = tu.stream().map(
 				e -> new EmployeeProjectDto(e.get(0, String.class), 
 						e.get(1, String.class),
-						e.get(2, BigDecimal.class)))
+						e.get(2, BigInteger .class)))
 				.collect(Collectors.toList());
 		return epd;
 	}

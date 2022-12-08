@@ -8,10 +8,7 @@
 <body>
 	<div class="container-xl mt-5"> 
 		<div class="row px-4">
-			<div class="alert alert-danger d-none " role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<strong>Warning!</strong>Cannot Apply Leave on Weekend !
-			</div>
+			
 			<div class="col col-xl-12">
 				<div class="card mb-4">
 					<div class="card-header text-center text-white h6" style="background-color: #124265;">Leave Application</div>
@@ -20,7 +17,7 @@
 						<form  id="applyLeaveForm">
 							<div class="container">
 								<div class="row justify-content-center">
-									<div class="col-10">
+									<div class="col-sm-10">
 										<div class="row gx-3 mb-3 justify-content-around">
 											<div class="col-md-6">
 												<label class="mb-1" for="empName">Employee:</label>
@@ -38,9 +35,9 @@
 											</div>
 											<div class="col w-75 text-center ">
 												<button type="button" onclick="showSingleDate();this.blur()" id="btnSingle" class="btn me-1 mb-1 text-white " style="background-color: #124265">
-													<i class="fa-solid fa-calendar-day"></i>&nbsp;&nbsp;Single</button>
+													<i class="fa-solid fa-calendar-day"></i>&nbsp;Single</button>
 												<button type="button" onclick="showMultipleDate();this.blur()" id="btnMulti" class="btn me-1 mb-1 text-white " style="background-color: #124265">
-													<i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;Multiple</button>
+													<i class="fa-solid fa-calendar-days"></i>&nbsp;Multiple</button>
 											</div>
 										</div>
 										<div class="row gx-3">
@@ -117,11 +114,6 @@
 		</div>
 	</div>
 	<script>
-		window.setTimeout(function() {
-			$(".alert").fadeTo(5000, 200).slideUp(5000, function(){
-				$(this).remove(); 
-			});
-		}, 4000);
 		$(document).ready(function () {
 			$(".endDateHide").hide();
 			$('#btnSingle').toggleClass('btn-primary');

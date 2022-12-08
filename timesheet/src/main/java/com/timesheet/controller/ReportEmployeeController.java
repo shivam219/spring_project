@@ -19,6 +19,7 @@ import com.timesheet.model.MonthSheet;
 import com.timesheet.repository.EmployeeRepository;
 import com.timesheet.repository.MonthSheetRepository;
 import com.timesheet.service.EmployeeService;
+import com.timesheet.service.LeaveService;
 import com.timesheet.service.MonthSheetService;
 import com.timesheet.service.UserMasterService;
 
@@ -38,6 +39,8 @@ public class ReportEmployeeController {
 
 	@Autowired
 	UserMasterService ums;
+	@Autowired
+	LeaveService ls;
 
 	@GetMapping(value = "/report-month-employee")
 	public String getEmployeeMonthReport(Model m) {
@@ -60,11 +63,12 @@ public class ReportEmployeeController {
 	@PostMapping(value = "/report-month-employee-data")
 	public String getEmployeeMonthData(@ModelAttribute MonthSheet ms, @RequestParam long empId, Model m) {
 		List<UserDto> ud = ums.findEmpNameManagerNameEmpGroupDescByEmpId(empId);
-		m.addAttribute("monthSheetDataList", mse.findMonthSheetDataAndApprove(ms.getMonthSheetId()));
+//		m.addAttribute("monthSheetDataList", mse.findMonthSheetDataAndApprove(ms.getMonthSheetId()));
 		m.addAttribute("emp", ud.get(0));
 		m.addAttribute("monthSheetId", ms.getMonthSheetId());
+		m.addAttribute("leaveList", ls.findLeaveTypeStartDateEndDateByEmpId(empId));
 		return "report-month-employee-data";
-	}   
+	}
 
 	@PostMapping("/fetch-month-sheet-employee")
 	public ResponseEntity<Object> monthSheetEmployee(@RequestParam long monthSheetId) {
@@ -75,13 +79,14 @@ public class ReportEmployeeController {
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body(mse.findMonthSheetDataAndApprove(monthSheetId));
 		}
 	}
+
 	@PostMapping("/fetch-month-sheet-employee-chart")
 	public ResponseEntity<Object> monthSheetEmployeeChart(@RequestParam long monthSheetId) {
 		Optional<MonthSheet> msp = msr.findById(monthSheetId);
 		if (msp.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No data");
 		} else {
-			
+
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body(mse.findMonthSheetEmployeeChart(monthSheetId));
 		}
 	}

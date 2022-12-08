@@ -1,12 +1,13 @@
 package com.timesheet.dto;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 public class EmployeeProjectDto {
 
 	String empName;
 	String groupDes;
-	String hour;
+	String hour="";
 
 	public EmployeeProjectDto() {
 		super();
@@ -24,7 +25,7 @@ public class EmployeeProjectDto {
 		this.hour = hour.toString();
 	}
 
-	public EmployeeProjectDto(String empName, String groupDes, BigDecimal hour) {
+	public EmployeeProjectDto(String empName, String groupDes, BigInteger hour) {
 		super();
 		this.empName = empName;
 		this.groupDes = groupDes;

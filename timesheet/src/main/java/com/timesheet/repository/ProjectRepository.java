@@ -48,14 +48,19 @@ public interface ProjectRepository extends CrudRepository<Project, Integer> {
 			+ "", nativeQuery = true)
 	public List<Tuple> findEmployeeNameAndGroupDesc(Integer projectId);
 
-	@Query(value = "with ees as("
-			+ " select  concat(em.first_name,' ', em.last_name) as name  , um.emp_id ,  ms.month_sheet_id  from timesheet_user_master um , "
-			+ " timesheet_employee_master em  , timesheet_month_sheet ms " + "	where "
-			+ "	um.emp_id in  (select emp_id from timesheet_user_project_mapping where  project_id = :projectId ) "
-			+ "	and um.active = 1 and  um.emp_id =  em.emp_id  and  um.emp_id = ms.emp_id  " + " )"
-			+ "select  e.name ,gm.UGRP_DESC , sum(hour) from timesheet_day_sheet ds , ees e "
-			+ ", timesheet_user_group_master gm , timesheet_user_group_mapping ugm where ds.month_id = e.month_sheet_id and "
-			+ "e.emp_id = ugm.emp_id  and ugm.ugrp_code = gm.UGRP_CODE and ds.project_id = :projectId GROUP BY  e.emp_id , gm.UGRP_DESC;", nativeQuery = true)
+	@Query(value = "\n"
+			+ "with mon as (\n"
+			+ "select  um.emp_id  , concat(em.first_name,' ', em.last_name)  as name , ugm.UGRP_DESC , :projectId as project_id from \n"
+			+ "timesheet_employee_master em  ,\n"
+			+ "timesheet_user_master um , \n"
+			+ "timesheet_user_group_master ugm ,\n"
+			+ "timesheet_user_group_mapping ugmp\n"
+			+ "where \n"
+			+ "em.emp_id = um.emp_id and um.emp_id = ugmp.emp_id and ugmp.ugrp_code = ugm.UGRP_CODE and\n"
+			+ "um.emp_id in (select emp_id from timesheet_user_project_mapping where  project_id = :projectId ) \n"
+			+ "and um.active = 1 \n"
+			+ ") \n"
+			+ "select name , UGRP_DESC , ifnull(getHourByEmpId(emp_id,project_id),0 )  from mon", nativeQuery = true)
 	public List<Tuple> findEmployeeNameAndGroupDescAndHour(Integer projectId);
 
 	@Query(value = "with ees as("

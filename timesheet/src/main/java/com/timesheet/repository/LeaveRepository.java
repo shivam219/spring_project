@@ -2,6 +2,7 @@ package com.timesheet.repository;
 
 import java.util.List;
 
+import javax.persistence.Tuple;
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -38,17 +39,17 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 	@Query(value = "select  *  from timesheet_leave_master where month(start_date) = :month and year(start_date) = :year and status in ('Approved') ", nativeQuery = true)
 	public List<Leave> getLeaveByMonthAndYear(@Param("month") String month, @Param("year") String year);
 
-	@Query(value = "SELECT count(status) FROM ess.timesheet_leave_master where status='Approved' and month(start_date)=month(now())", nativeQuery = true)
-	public Integer getApprovedCountOfMonth();
+	@Query(value = "SELECT count(status) FROM ess.timesheet_leave_master where status='Approved' and month(start_date)=month(now()) and emp_id = :empId", nativeQuery = true)
+	public Integer getApprovedCountOfMonth(long empId);
 
-	@Query(value = "SELECT count(status) FROM ess.timesheet_leave_master where status='Cancelled' and month(start_date)=month(now())", nativeQuery = true)
-	public Integer getCancelledCountOfMonth();
+	@Query(value = "SELECT count(status) FROM ess.timesheet_leave_master where status='Cancelled' and month(start_date)=month(now()) and emp_id = :empId", nativeQuery = true)
+	public Integer getCancelledCountOfMonth(long empId);
 
-	@Query(value = "SELECT count(status) FROM ess.timesheet_leave_master where status='Pending' and month(start_date)=month(now())", nativeQuery = true)
-	public Integer getPendingCountOfMonth();
+	@Query(value = "SELECT count(status) FROM ess.timesheet_leave_master where status='Pending' and month(start_date)=month(now()) and emp_id = :empId", nativeQuery = true)
+	public Integer getPendingCountOfMonth(long empId);
 
-	@Query(value = "SELECT count(status) FROM ess.timesheet_leave_master where status='Rejected' and month(start_date)=month(now())", nativeQuery = true)
-	public Integer getRejectedCountOfMonth();
+	@Query(value = "SELECT count(status) FROM ess.timesheet_leave_master where status='Rejected' and month(start_date)=month(now()) and emp_id = :empId", nativeQuery = true)
+	public Integer getRejectedCountOfMonth(long empId);
 
 	@Query(value = "select leave_type, date_format(start_date,'%D %M %Y' ) as start_date, date_format(end_date,'%D %M %Y' ) as end_date, status, a.*  from timesheet_leave_master a", nativeQuery = true)
 	public List<Leave> getLeaveStatus();
@@ -71,8 +72,14 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 	public Leave findByLeaveId(@Param("leaveId") String leaveId);
 
 	public boolean existsByEmpIdAndStartDate(Long empId, String startDate);
-	
+
 	public Leave findByEmpIdAndLeaveId(Long empId, String leaveId);
-	
+
+	@Query(value = "SELECT leave_type , date_format(start_date,' %D %b' ) as start_date ,\n"
+			+ "date_format(end_date,' %D %b' ) as end_date  , convert((datediff(end_date , start_date)+1),char) as days "
+			+ "FROM ess.timesheet_leave_master where emp_id = :empId and second_status= 'Approved' ;\n"
+			+ "\n"
+			+ "", nativeQuery = true)
+	public List<Tuple> findLeaveTypeStartDateEndDateByEmpId(@Param("empId") long empId);
 
 }

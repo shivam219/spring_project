@@ -20,6 +20,15 @@
         background: #04AA6D;
         width: 0%;
       }
+
+      tbody,
+      td,
+      td a tfoot,
+      th,
+      thead,
+      tr {
+        white-space: normal;
+      }
     </style>
   </head>
 
@@ -38,7 +47,7 @@
               <div class="tab-pane fade show active profile-overview" id="profile-overview">
                 <div class="row">
                   <div class="col text-start">Employee Name</div>
- 
+
                   <div class="col">
                     <span class="badge badge-soft-primary mb-0 fw-bold" style="font-size: 14px;">
                       ${emp.getEmployeeName()}</span>
@@ -64,6 +73,40 @@
               </div>
             </div>
           </div>
+
+
+          <div class="card mb-4 mb-xl-0 mt-2">
+            <div class="card-header">Leave Details</div>
+            <div class="card-body text-center">
+              <div class="row">
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  <table class="table  project-list-table align-middle table-borderless">
+                    <thead class="thead-dark">
+                      <th class="text-center " scope="row">Type</th>
+                      <th class="text-center " scope="row">From</th>
+                      <th class="text-center " scope="row">To</th>
+                      <th class="text-center " scope="row">Days</th>
+                    </thead>
+                    <c:forEach items="${leaveList}" var="l" varStatus="loop">
+                      <tr>
+                        <td class="text-center overflow-auto">${l.getLeaveType()}</td>
+                        <td class="text-center overflow-auto">${l.getStartDate()} </td>
+                        <td class="text-center overflow-auto">${l.getEndDate()} </td>
+                        <td class="text-center overflow-auto">${l.getDyas()} </td>
+                        
+                      </tr>
+                    </c:forEach>
+                    <c:if test='${monthSheetDataList.size() eq 0 }'>
+                      <tr>
+                        <td colspan="4" class="text-center"> No data </td>
+                      </tr>
+                    </c:if>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <div class="col-lg-6">
@@ -79,7 +122,8 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="table-responsive">
-            <table class="table table-fixed project-list-table table-nowrap align-middle table-borderless">
+            <table class="table table-fixed project-list-table table-nowrap align-middle table-borderless"
+              id="monthTable">
               <thead class="thead-dark">
                 <th class="text-center overflow-auto" scope="row">Date</th>
                 <th class="text-center overflow-auto" scope="row">Project Name</th>
@@ -88,19 +132,6 @@
               </thead>
               <tbody>
 
-                <c:forEach items="${monthSheetDataList}" var="md" varStatus="loop">
-                  <tr>
-                    <td class="text-center overflow-auto">${md.getDate()}</td>
-                    <td class="text-center overflow-auto">${md.getProjectName()}</td>
-                    <td class="text-center overflow-auto">${md.getDescr()}</td>
-                    <td class="text-center overflow-auto">${md.getHour()}</td>
-                  </tr>
-                </c:forEach>
-                <c:if test='${monthSheetDataList.size() eq 0 }'>
-                  <tr>
-                    <td colspan="4" class="text-center"> No data </td>
-                  </tr>
-                </c:if>
 
               </tbody>
             </table>
@@ -171,4 +202,80 @@
       }
     </script>
 
+    <script>
+      $(document).ready(function () {
+        $.ajax({
+          type: 'GET',
+          url: 'fetch-month-sheet-employee-approve?monthSheetId=' + $("#monthSheetId").val() + '',
+          contentType: 'application/json',
+          success: function (d, msg, xh) {
+            console.log(d);
+            let d2 = [];
+            let set = new Set();
+            if (d.length > 0) {
+              set.add(d[0]['date']);
+              d2.push(d[0]);
+              for (let i = 1; i < d.length; i++) {
+                if (set.has(d[i]['date'])) {
+                  d2.push(d[i]);
+                } else {
+                  let hour = parseInt(d2[0]['hour']);
+                  let hours = parseInt(d2[0]['hour']);
+                  let tr = '<tr>'
+                    + '<td class="text-center " rowspan= ' + parseInt(d2.length) + ' > ' + d2[0]['date'] + ' </td>'
+                    + '<td class="text-center " > ' + d2[0]['projectName'] + ' </td>'
+                    + '<td  > ' + d2[0]['descr'] + ' </td>'
+                    + '<td class="text-center " > ' + d2[0]['hour'] + ' </td>'
+                    + '</tr> ';
+                  console.log(tr);
+                  $("#monthTable").append(tr);
+                  for (let j = 1; j < d2.length; j++) {
+                    hours = hours + parseInt(d2[j]['hour']);
+                    let tri = '<tr > '
+                      + '<td class="text-center" > ' + d2[j]['projectName'] + ' </td>'
+                      + '<td  > ' + d2[j]['descr'] + ' </td>'
+                      + '<td  class="text-center " > ' + d2[j]['hour'] + ' </td>'
+                      + '</tr> ';
+                    console.log(tri);
+                    $("#monthTable").append(tri);
+                  }
+                  if (hour != hours) {
+                    $("#monthTable").append('<tr><td></td><td></td><td></td><td  class="text-center fw-bold">' + hours + '</td></tr>');
+                  }
+                  set.clear();
+                  set.add(d[i]['date']);
+                  d2 = [];
+                  d2.push(d[i]);
+                }
+                if (i == d.length - 1) {
+                  let hour = parseInt(d2[0]['hour']);
+                  let hours = parseInt(d2[0]['hour']);
+                  let tr = '<tr>'
+                    + '<td class="text-center " rowspan= ' + parseInt(d2.length) + ' > ' + d2[0]['date'] + ' </td>'
+                    + '<td class="text-center " > ' + d2[0]['projectName'] + ' </td>'
+                    + '<td  > ' + d2[0]['descr'] + ' </td>'
+                    + '<td class="text-center " > ' + d2[0]['hour'] + ' </td>'
+                    + '</tr> ';
+                  console.log(tr);
+                  $("#monthTable").append(tr);
+                  for (let j = 1; j < d2.length; j++) {
+                    hours = hours + parseInt(d2[j]['hour']);
+                    let tri = '<tr > '
+                      + '<td class="text-center" > ' + d2[j]['projectName'] + ' </td>'
+                      + '<td  > ' + d2[j]['descr'] + ' </td>'
+                      + '<td  class="text-center " > ' + d2[j]['hour'] + ' </td>'
+                      + '</tr> ';
+                    console.log(tri);
+                    $("#monthTable").append(tri);
+                  }
+                  if (hour != hours) {
+                    $("#monthTable").append('<tr><td></td><td></td><td ></td><td  class="text-center fw-bold">' + hours + '</td></tr>');
+                  }
+                }
+              }
+            }
+          }
+        })
+      });
+    </script>
   </body>

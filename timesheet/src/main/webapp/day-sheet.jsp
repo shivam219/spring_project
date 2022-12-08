@@ -1,6 +1,7 @@
 
 <%@ include file="menu.jsp" %>
 <head> 
+    <script src="css/sweetalert.min.js"></script>
     <!-- <meta name="viewport" content="width=device-width, initial-scale=0.5"> -->
     <title> Work Report Day</title>
     <style> 
@@ -242,13 +243,6 @@
                         actiDescPopShow();
                     } 
                 });
-                // $(".h-n").on("mouseenter", function (event) {
-                //     if($(this).siblings("input:first").val()){
-                //         prevActivityDesc = $(this).siblings("textarea:first"); 
-                //         $("#acti_desc").val($(this).siblings("textarea").html());
-                //         actiDescPopShow();
-                //     }
-                // });
             };
             function padTo2Digits(num) {
                 return num.toString().padStart(2, '0');
@@ -606,7 +600,14 @@
                             success: function () {
                                 fetchwork();
                             }
-                        });     
+                        }); 
+                        swal({
+                            position: 'end',
+                            icon: 'success',
+                            title: 'Your work has been saved',
+                            showConfirmButton: false,
+                            timer: 500
+                        });      
                     }else{
                         alert("Please Enter work report data");
                         return 0;

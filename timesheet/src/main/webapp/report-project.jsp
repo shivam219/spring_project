@@ -111,7 +111,6 @@
                         ${l.getGroupDes()}
                       </span>
                     </td>
-                    <!-- <td>10-7-2022</td> -->
                     <td>${l.getHour()}</td>
                   </tr>
                 </c:forEach>
