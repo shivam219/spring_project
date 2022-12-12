@@ -80,12 +80,10 @@
                         title:"Success",
                         text: "Employee Group Updated Successfully",
                         icon: "success",
-                    }).
-                    then(function (isOkay) {
-                        if (isOkay) {
-                            location.replace('user-group-mapping-master');
-                        }
+                        showConfirmButton: false,
+                        timer: 1000
                     });
+                    location.replace('user-group-mapping-master');
                 },error : function(data,msg,xh){
                     swal({
                         title:"Error",

@@ -11,7 +11,7 @@
 			
 			<div class="col col-xl-12">
 				<div class="card mb-4">
-					<div class="card-header text-center text-white h6" style="background-color: #124265;">Leave Application</div>
+					<div class="card-header text-center text-white h6 table-label"  >Leave Application</div>
 					<div class="card-body">
 						<input type="hidden" value='<%="M"%>' id="empGender">
 						<form  id="applyLeaveForm">
@@ -30,14 +30,14 @@
 										</div>
 										<div class="row gx-3 mt-4">
 											<div class="col w-75 text-start">
-												<label class="mb-1 py-2 rounded text-white px-2 py-2" style="background-color: #124265">
-													<i class="fa-solid fa-file-lines"></i>&nbsp;&nbsp;Leave Details</label>
-											</div>
+												<label class="mb-1 py-2 rounded text-white px-2 py-2 table-label"  >
+													<i class="fa-solid fa-file-lines"></i> <span class="d-sm-inline d-none">&nbsp;Leave Details</span></label>
+											</div> 
 											<div class="col w-75 text-center ">
-												<button type="button" onclick="showSingleDate();this.blur()" id="btnSingle" class="btn me-1 mb-1 text-white " style="background-color: #124265">
-													<i class="fa-solid fa-calendar-day"></i>&nbsp;Single</button>
-												<button type="button" onclick="showMultipleDate();this.blur()" id="btnMulti" class="btn me-1 mb-1 text-white " style="background-color: #124265">
-													<i class="fa-solid fa-calendar-days"></i>&nbsp;Multiple</button>
+												<button type="button" onclick="showSingleDate();this.blur()" id="btnSingle" class="btn me-1 mb-1 text-white  table-label">
+													<i class="fa-solid fa-calendar-day  "></i> <span class="d-sm-inline d-none"> &nbsp; Single</span></button>
+												<button type="button" onclick="showMultipleDate();this.blur()" id="btnMulti" class="btn me-1 mb-1 text-white table-label">
+													<i class="fa-solid fa-calendar-days"></i><span class="d-sm-inline d-none"> &nbsp; Multiple</span></button>
 											</div>
 										</div>
 										<div class="row gx-3">
@@ -90,7 +90,7 @@
 											</div>
 											<div class="col-md-6">  
 												<label class="mb-1" for="leaveReason">Leave Reason</label>
-												<textarea class="form-control" style="width: 83%;" id="leaveReason" name="leaveReason" type="text" placeholder="Enter Leave Reason" value=""></textarea>
+												<textarea class="form-control  w-75" style="width: 83%;" id="leaveReason" name="leaveReason" type="text" placeholder="Enter Leave Reason" value=""></textarea>
 												<span class="form-text small text-danger ms-2 d-none">Specify Leave Reason</span>
 											</div>
 										</div>
@@ -260,6 +260,8 @@
 			event.preventDefault();
 			if (isValid()) {
 				$("#btnSave").attr("disabled",true);
+				$("#endDate").attr("disabled",false);
+				
 				$("#loadingBtn").addClass("spinner-border spinner-border-sm");
 				$.ajax({
 					type: 'POST',
@@ -275,13 +277,11 @@
 							title: "Success",
 							text: "Leave Applied Successfully",
 							icon: "success",
-						}).
-						then(function (isOkay) {
-							if (isOkay) { 
-								location.replace('/home');
-							}
+							showConfirmButton: false,
+                            timer: 1000
 						});
-					}, error: function (data, msg, xh) {
+						location.replace('/home');
+						}, error: function (data, msg, xh) {
 						$("#btnSave").attr("disabled",false);
 						$("#loadingBtn").removeClass("spinner-border spinner-border-sm");
 						swal({

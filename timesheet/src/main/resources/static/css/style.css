@@ -3,10 +3,26 @@
 	background-color: #333;
 }
 
- .dropdown:hover .dropdown-menu {
-	display: block; 
+ .dropdown:hover > .dropdown-menu {
+	display: block;
 }
-
+.dropdown-menu li {
+	position: relative;
+}
+.dropdown-menu .dropdown-submenu {
+	display: none;
+	position: absolute;
+	right: 100%;
+	left: auto; 
+	top:-10px
+}
+.dropdown-menu .dropdown-submenu-left {
+	right: 100%;
+	left: auto;
+}
+.dropdown-menu > li:hover > .dropdown-submenu {
+	display: block;
+}
 
 .dropdown ul li , .navbar-nav a  {
 	font-size: 15px;
@@ -27,6 +43,8 @@ table tr td, table tr th {
 body { 
 	/* background-color: #e6f2ff; */
 	background-color:#f2f6fc;
+	background-color:#f0f2f5;
+	
 }
 
 .project-list-table {
@@ -78,6 +96,9 @@ img, svg {
 	* {
 		font-size: x-small;
 	}
+	.w-75 {
+		width: 100%!important;
+	}
 }
 
 @media only screen and (max-width: 900px) {
@@ -113,4 +134,7 @@ table tfoot tr:last-child td:last-child {
     text-align: center;
     background-color: #71a6f7;
     color: #ffffff;
+}
+.table-label{
+	background-color: #124265
 }

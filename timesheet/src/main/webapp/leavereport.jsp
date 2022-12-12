@@ -16,6 +16,9 @@
 		border-width: 0px;
 		border-collapse: collapse;
 	}
+	td{
+		/* font-size:14px; */
+	}
 </style>
 
 <body>
@@ -68,29 +71,29 @@
 							id="tableholiday">
 							<thead>
 								<tr class="text-white" style="font-size:15px; background-color:#124265;">
-									<td scope="col" class="text-white">Leave Id</td>
-									<td scope="col" class="text-white">Employee Id</td>
-									<td scope="col" class="text-white">Employee Name</td>
-									<td scope="col" class="text-white">Manager Name</td>
-									<td scope="col" class="text-white">Leave Type</td>
-									<td scope="col" class="text-white">Start Date</td>
-									<td scope="col" class="text-white">End Date</td>
-									<td scope="col" class="text-white">Day Mode</td>
-									<td scope="col" class="text-white">Day Count</td>
+									<th scope="col" class="text-white">Leave Id</th>
+									<th scope="col" class="text-white">Employee Id</th>
+									<th scope="col" class="text-white">Employee Name</th>
+									<th scope="col" class="text-white">Manager Name</th>
+									<th scope="col" class="text-white">Leave Type</th>
+									<th scope="col" class="text-white">Start Date</th>
+									<th scope="col" class="text-white">End Date</th>
+									<th scope="col" class="text-white">Day Mode</th>
+									<th scope="col" class="text-white">Day Count</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${leaveList}" var="l" varStatus="i">
 									<tr>
-										<td style="font-size:14px;">${l.getLeaveId()}</td>
-										<td style="font-size:14px;">${l.getEmpId()}</td>
-										<td style="font-size:14px;">${l.getEmpName()}</td>
-										<td style="font-size:14px;">${l.getManagerName()}</td>
-										<td style="font-size:14px;">${l.getLeaveType()}</td>
-										<td style="font-size:14px;">${l.getStartDate()}</td>
-										<td style="font-size:14px;">${l.getEndDate()}</td>
-										<td style="font-size:14px;">${l.getDayMode()}</td>
-										<td style="font-size:14px;">${days[ i.index]}</td>
+										<td >${l.getLeaveId()}</td>
+										<td >${l.getEmpId()}</td>
+										<td >${l.getEmpName()}</td>
+										<td >${l.getManagerName()}</td>
+										<td >${l.getLeaveType()}</td>
+										<td >${l.getStartDate()}</td>
+										<td >${l.getEndDate()}</td>
+										<td >${l.getDayMode()}</td>
+										<td >${l.getDays()}</td>
 									</tr>
 								</c:forEach>
 							</tbody>

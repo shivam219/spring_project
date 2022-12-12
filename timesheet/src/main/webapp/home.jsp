@@ -60,7 +60,7 @@
 		a {
 			color: #6c757d;
 			text-decoration: none;
-			padding-left: 6px;
+			/* padding-left: 6px; */
 		}
 
 		tbody,
@@ -164,6 +164,7 @@
 			font-size: 1rem;
 			padding: 5px 10px;
 		}
+		
 	</style>
 
 	<body>

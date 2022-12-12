@@ -39,6 +39,12 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 	@Query(value = "select  *  from timesheet_leave_master where month(start_date) = :month and year(start_date) = :year and status in ('Approved') ", nativeQuery = true)
 	public List<Leave> getLeaveByMonthAndYear(@Param("month") String month, @Param("year") String year);
 
+	@Query(value = "select   leave_id, emp_id , emp_name , manager_name , leave_type , date_format(start_date,' %D %b %Y' ) as from_date ,\n"
+			+ "date_format(end_date,' %D %b %Y' ) as to_date  , day_mode\n"
+			+ ",  if(regexp_like(day_mode ,'Full Day'),  convert((datediff(end_date , start_date)+1),char) , convert( 0.5 ,char) ) \n"
+			+ "  from timesheet_leave_master  where month(start_date) = :month and year(start_date) = :year and status in ('Approved') ", nativeQuery = true)
+	public List<Tuple> getLeaveByMonthAndYear2(@Param("month") String month, @Param("year") String year);
+
 	@Query(value = "SELECT count(status) FROM ess.timesheet_leave_master where status='Approved' and month(start_date)=month(now()) and emp_id = :empId", nativeQuery = true)
 	public Integer getApprovedCountOfMonth(long empId);
 
@@ -54,12 +60,23 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 	@Query(value = "select leave_type, date_format(start_date,'%D %M %Y' ) as start_date, date_format(end_date,'%D %M %Y' ) as end_date, status, a.*  from timesheet_leave_master a", nativeQuery = true)
 	public List<Leave> getLeaveStatus();
 
-	@Query(value = "select  *  from timesheet_leave_master where month(start_date) = :month and year(start_date) = :year and status = :status and emp_id = :empId", nativeQuery = true)
+	@Query(value = "select  *  from timesheet_leave_master  where month(start_date) = :month and year(start_date) = :year and status = :status and emp_id = :empId", nativeQuery = true)
 	public List<Leave> getEmploeeWiseReport(@Param("month") String month, @Param("year") String year,
+			@Param("empId") long empId, @Param("status") String status);
+
+	@Query(value = "select   leave_id, emp_id , emp_name , manager_name , leave_type , date_format(start_date,' %D %b %Y' ) as from_date ,\n"
+			+ "date_format(end_date,' %D %b %Y' ) as to_date  , day_mode\n"
+			+ ",  if(regexp_like(day_mode ,'Full Day'),  convert((datediff(end_date , start_date)+1),char) , convert( 0.5 ,char) ) from timesheet_leave_master where month(start_date) = :month and year(start_date) = :year and status = :status and emp_id = :empId", nativeQuery = true)
+	public List<Tuple> getEmploeeWiseReport2(@Param("month") String month, @Param("year") String year,
 			@Param("empId") long empId, @Param("status") String status);
 
 	@Query(value = "select  *  from timesheet_leave_master where month(start_date) = :month and year(start_date) = :year and status in ('Pending') ", nativeQuery = true)
 	public List<Leave> getPendingLeaveByMonthAndYear(@Param("month") String month, @Param("year") String year);
+	
+	@Query(value = "select   leave_id, emp_id , emp_name , manager_name , leave_type , date_format(start_date,' %D %b %Y' ) as from_date ,\n"
+			+ "date_format(end_date,' %D %b %Y' ) as to_date  , day_mode\n"
+			+ ",  if(regexp_like(day_mode ,'Full Day'),  convert((datediff(end_date , start_date)+1),char) , convert( 0.5 ,char) )  from timesheet_leave_master where month(start_date) = :month and year(start_date) = :year and status in ('Pending') ", nativeQuery = true)
+	public List<Tuple> getPendingLeaveByMonthAndYear2(@Param("month") String month, @Param("year") String year);
 
 	@Query(value = "select concat(date_format(start_date,'%D %b' ), ' to ', date_format(end_date,'%D %b' ),  ', ',concat(leave_type)) as Leaves FROM timesheet_leave_master where start_date between :startDate and  :endDate  ORDER BY DATE(start_date) ASC ", nativeQuery = true)
 	public List<Object> getWeekLeaves(@Param("startDate") String year, @Param("endDate") String month);
@@ -77,8 +94,7 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 
 	@Query(value = "SELECT leave_type , date_format(start_date,' %D %b' ) as start_date ,\n"
 			+ "date_format(end_date,' %D %b' ) as end_date  , convert((datediff(end_date , start_date)+1),char) as days "
-			+ "FROM ess.timesheet_leave_master where emp_id = :empId and second_status= 'Approved' ;\n"
-			+ "\n"
+			+ "FROM ess.timesheet_leave_master where emp_id = :empId and second_status= 'Approved' ;\n" + "\n"
 			+ "", nativeQuery = true)
 	public List<Tuple> findLeaveTypeStartDateEndDateByEmpId(@Param("empId") long empId);
 

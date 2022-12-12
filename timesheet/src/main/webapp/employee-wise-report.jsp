@@ -108,7 +108,7 @@
                                             <td style="font-size:14px;">${l.getStartDate()}</td>
                                             <td style="font-size:14px;">${l.getEndDate()}</td>
                                             <td style="font-size:14px;">${l.getDayMode()}</td>
-                                            <td style="font-size:14px;">${days[i.index]}</td>
+                                            <td style="font-size:14px;">${l.getDays()}</td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

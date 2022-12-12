@@ -1,5 +1,6 @@
 package com.timesheet.service;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,7 +10,7 @@ import javax.persistence.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.timesheet.dto.EmployeeProjectDto;
+import com.timesheet.dto.LeaveDetailsDto;
 import com.timesheet.dto.LeaveDto;
 import com.timesheet.model.Leave;
 import com.timesheet.repository.EmployeeRepository;
@@ -40,6 +41,10 @@ public class LeaveService {
 	}
 
 	public List<Leave> getCancleLeave(long l) {
+		Long  l1= 10L;
+		long  l2 =10;
+		System.out.println(l1==l2);//false
+		System.out.println(l1.longValue()==l2);//false
 		return lr.getCancleLeaveByEmpId(l);
 	}
 
@@ -84,10 +89,37 @@ public class LeaveService {
 
 	public List<LeaveDto> findLeaveTypeStartDateEndDateByEmpId(long empId) {
 		List<Tuple> tu = lr.findLeaveTypeStartDateEndDateByEmpId(empId);
-		List<LeaveDto> ld = tu.stream()
-				.map(e -> new LeaveDto(e.get(0, String.class), e.get(1, String.class), e.get(2, String.class),e.get(3, String.class)))
+		List<LeaveDto> ld = tu.stream().map(e -> new LeaveDto(e.get(0, String.class), e.get(1, String.class),
+				e.get(2, String.class), e.get(3, String.class))).collect(Collectors.toList());
+		return ld;
+	}
+
+	public List<LeaveDetailsDto> getLeaveByMonthAndYear2(String month, String year) {
+		List<Tuple> tu = lr.getLeaveByMonthAndYear2(month, year);
+		List<LeaveDetailsDto> ld = tu.stream()
+				.map(e -> new LeaveDetailsDto(e.get(0, String.class), e.get(1, BigInteger.class),
+						e.get(2, String.class), e.get(3, String.class), e.get(4, String.class), e.get(5, String.class),
+						e.get(6, String.class), e.get(7, String.class), e.get(8, String.class)))
 				.collect(Collectors.toList());
 		return ld;
 	}
 
+	public List<LeaveDetailsDto> getEmploeeWiseReport(String month, String year, long empId, String status) {
+		List<Tuple> tu = lr.getEmploeeWiseReport2(month, year, empId, status);
+		List<LeaveDetailsDto> ld = tu.stream()
+				.map(e -> new LeaveDetailsDto(e.get(0, String.class), e.get(1, BigInteger.class),
+						e.get(2, String.class), e.get(3, String.class), e.get(4, String.class), e.get(5, String.class),
+						e.get(6, String.class), e.get(7, String.class), e.get(8, String.class)))
+				.collect(Collectors.toList());
+		return ld;
+	}
+	public List<LeaveDetailsDto> getPendingLeaveByMonthAndYear2(String month, String year ) {
+		List<Tuple> tu = lr.getPendingLeaveByMonthAndYear2(month, year);
+		List<LeaveDetailsDto> ld = tu.stream()
+				.map(e -> new LeaveDetailsDto(e.get(0, String.class), e.get(1, BigInteger.class),
+						e.get(2, String.class), e.get(3, String.class), e.get(4, String.class), e.get(5, String.class),
+						e.get(6, String.class), e.get(7, String.class), e.get(8, String.class)))
+				.collect(Collectors.toList());
+		return ld;
+	}
 }

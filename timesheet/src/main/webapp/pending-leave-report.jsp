@@ -90,7 +90,7 @@
                                             <td style="font-size:14px;">${pl.getStartDate()}</td>
                                             <td style="font-size:14px;">${pl.getEndDate()}</td>
                                             <td style="font-size:14px;">${pl.getDayMode()}</td>
-                                            <td style="font-size:14px;">${days[i.index]}</td>
+                                            <td style="font-size:14px;">${pl.getDays()}</td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

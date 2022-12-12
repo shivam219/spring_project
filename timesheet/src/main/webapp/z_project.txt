@@ -252,3 +252,30 @@ if (le.getSecondStatus() != null && le.getSecondStatus().equals("Pending")) {
 					le.setSecondStatus("Pending");
 				}
 			}
+
+
+	@PostMapping("/pending-leave-report")
+	public String pendingLeaveReportFetch(Model m, @RequestParam("leaveMonth") String month,
+			@RequestParam("leaveYear") String year) throws Exception {
+		this.month = month;
+		this.year = year;
+		m.addAttribute("month", month);
+		m.addAttribute("year", year);
+		int i = 0;
+		String[] days = new String[lr.getPendingLeaveByMonthAndYear(month, year).size()];
+		for (Leave l : lr.getPendingLeaveByMonthAndYear(month, year)) {
+			if (l.getDayMode().contains("Half Day")) {
+				days[i] = "0.5";
+			} else {
+
+				days[i] = (Math.abs(TimeUnit.MILLISECONDS
+						.toDays(((new SimpleDateFormat("yyyy-MM-dd").parse(l.getStartDate()).getTime())
+								- (new SimpleDateFormat("yyyy-MM-dd").parse(l.getEndDate()).getTime()))))
+						+ 1) + "";
+			}
+			i++;
+		}
+		m.addAttribute("pendingList", lr.getPendingLeaveByMonthAndYear(month, year));
+		m.addAttribute("days", days);
+		return "pending-leave-report";
+	}

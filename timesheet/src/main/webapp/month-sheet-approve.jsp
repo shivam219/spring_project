@@ -47,12 +47,10 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6 mb-3 mb-md-0 ">
-
+					<span class="  badge-soft-primary px-3 align-self-center pt-1 pb-2 me-2"> Day Sheet (${monthSheetDataList.size()})</span>
 				</div>
 				<div class="col-md-6 ">
 					<div class="d-flex justify-content-md-end  mb-1">
-						<span class="  badge-soft-primary px-3 align-self-center py-1 me-2"> Day Sheet
-							(${monthSheetDataList.size()})</span>
 						<button type="button" class="btn btn-primary  btn-sm px-md-4  me-2 " id="btnApprove">
 							<span id="btnApproveLd"> </span> &nbsp; Approve &nbsp;
 						</button>
@@ -113,7 +111,7 @@
 					url: 'fetch-month-sheet-employee-approve?monthSheetId=' + $("#monthSheetId").val() + '',
 					contentType: 'application/json',
 					success: function (d, msg, xh) {
-						console.log(d);
+
 						let d2 = [];
 						let set = new Set();
 						if(d.length>0){
@@ -131,7 +129,6 @@
 												+'<td  > ' + d2[0]['descr'] + ' </td>'
 												+'<td class="text-center " > ' + d2[0]['hour'] + ' </td>'
 												+'</tr> ';
-											console.log(tr);
 										$("#monthTable").append(tr);
 										for (let j = 1; j < d2.length; j++) {
 											hours = hours+ parseInt(d2[j]['hour']); 
@@ -140,7 +137,6 @@
 														+'<td  > ' + d2[j]['descr'] + ' </td>'
 														+'<td  class="text-center " > ' + d2[j]['hour'] + ' </td>'
 														+'</tr> ';
-											console.log(tri);
 										$("#monthTable").append(tri);
 									}
 									if(hour!=hours){
@@ -160,7 +156,6 @@
 												+'<td  > ' + d2[0]['descr'] + ' </td>'
 												+'<td class="text-center " > ' + d2[0]['hour'] + ' </td>'
 												+'</tr> ';
-											console.log(tr);
 										$("#monthTable").append(tr);
 										for (let j = 1; j < d2.length; j++) {
 											hours = hours+ parseInt(d2[j]['hour']); 
@@ -169,7 +164,6 @@
 														+'<td  > ' + d2[j]['descr'] + ' </td>'
 														+'<td  class="text-center " > ' + d2[j]['hour'] + ' </td>'
 														+'</tr> ';
-											console.log(tri);
 										$("#monthTable").append(tri);
 									}
 									if(hour!=hours){
@@ -213,7 +207,7 @@
 
 
 			$("#btnReject").on("click", function () {
-				console.log("hsivam");
+
 				$("#btnRejectLd").addClass("spinner-border spinner-border-sm");
 				let data = {
 					monthSheetId: $("#monthSheetId").val(),

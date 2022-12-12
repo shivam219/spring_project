@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.timesheet.model.User;
+import com.timesheet.repository.UserGroupMappingRepository;
 import com.timesheet.repository.UserRepository;
 import com.timesheet.service.EmployeeService;
 
@@ -26,7 +27,10 @@ public class LoginController {
 	EmployeeService employeeService;
 	@Autowired
 	UserRepository ur;
-
+	
+	@Autowired
+	UserGroupMappingRepository ugm;	
+	
 	@PostMapping("/loginprocess")
 	public ResponseEntity<Object> loginPost(HttpServletRequest request, Model m, @RequestBody User emp) {
 		Optional<User> user = ur.findByEmpIdAndPassword(emp.getEmpId(), emp.getPassword());
@@ -37,8 +41,10 @@ public class LoginController {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is inactive");
 		} else {
 			HttpSession session = request.getSession();
+			String ugrpCode = ugm.findUgrpCodeByEmpId(emp.getEmpId());
 			session.setAttribute("empId", user.get().getEmpId());
 			session.setAttribute("empName", user.get().getEmployee().getFullName());
+			session.setAttribute("ugrpCode", ugrpCode);
 			m.addAttribute("emp", emp);
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body("Login Successfull");
 		}

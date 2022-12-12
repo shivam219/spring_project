@@ -42,7 +42,7 @@ import com.timesheet.service.ReportService;
 public class LeaveController {
 
 	@Autowired
-	private LeaveService leaveService;
+	private LeaveService ls;
 
 	@Autowired
 	public ApproveService approveService;
@@ -130,9 +130,9 @@ public class LeaveController {
 				}
 				leaveId.append(saveLeave.getLeaveCode());
 				saveLeave.setLeaveId(leaveId.toString());
-				leaveService.sendEmailOnSubmit(saveLeave);
+				ls.sendEmailOnSubmit(saveLeave);
 			} else {
-				leaveService.sendEmailOnSubmit(saveLeave);
+				ls.sendEmailOnSubmit(saveLeave);
 			}
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body("Apply Leave success");
 		} catch (Exception e) {
@@ -186,7 +186,7 @@ public class LeaveController {
 	@GetMapping(value = "cancle-leave")
 	public String cancleLeave(Model m, HttpServletRequest request) {
 		long empId = (Long) request.getSession().getAttribute("empId");
-		m.addAttribute("getAllLeave", leaveService.getCancleLeave(empId));
+		m.addAttribute("getAllLeave", ls.getCancleLeave(empId));
 		return new String("cancleleave");
 	}
 
@@ -198,7 +198,7 @@ public class LeaveController {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid Leave Cancallation");
 		}
 		try {
-			leaveService.updateCancleStatus(leave);
+			ls.updateCancleStatus(leave);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -208,7 +208,7 @@ public class LeaveController {
 	@PostMapping(value = "/reject-leave-process")
 	public ResponseEntity<Object> rejectleaveprocess(HttpServletRequest request, @RequestBody Leave leave) {
 		long empId = ((Long) request.getSession().getAttribute("empId"));
-		String empName =request.getSession().getAttribute("empName").toString();
+		String empName = request.getSession().getAttribute("empName").toString();
 		Leave leavt = lr.findByLeaveId(leave.getLeaveId());
 		if (leavt == null) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid Leave Cancallation");
@@ -218,7 +218,7 @@ public class LeaveController {
 		}
 		try {
 			leavt.setRejectReason(leave.getRejectReason());
-			approveService.updateRejectStatus(leavt, empId,empName);
+			approveService.updateRejectStatus(leavt, empId, empName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -247,45 +247,8 @@ public class LeaveController {
 		this.year = year;
 		m.addAttribute("month", month);
 		m.addAttribute("year", year);
-		int i = 0;
-		String[] days = new String[lr.getLeaveByMonthAndYear(month, year).size()];
-		for (Leave l : lr.getLeaveByMonthAndYear(month, year)) {
-			if (l.getDayMode().contains("Half Day")) {
-				days[i] = "0.5";
-			} else {
-
-				days[i] = (Math.abs(TimeUnit.MILLISECONDS
-						.toDays(((new SimpleDateFormat("yyyy-MM-dd").parse(l.getStartDate()).getTime())
-								- (new SimpleDateFormat("yyyy-MM-dd").parse(l.getEndDate()).getTime()))))
-						+ 1) + "";
-			}
-			i++;
-		}
-		m.addAttribute("leaveList", lr.getLeaveByMonthAndYear(month, year));
-		m.addAttribute("days", days);
-
+		m.addAttribute("leaveList", ls.getLeaveByMonthAndYear2(month, year));
 		return "leavereport";
-	}
-
-	/*
-	 * Approved Leave Status Data Exporting into Excel
-	 * Sheet----------------------------------------------
-	 */
-	@GetMapping("/download/leave.xlsx")
-	public void download(HttpServletResponse response, @RequestParam("month") String month,
-			@RequestParam("year") String year) throws IOException {
-		response.setContentType("application/octet-stream");
-		response.setHeader("Content-Disposition", "attachment; filename=MonthlyLeaveReport.xlsx");
-		ByteArrayInputStream stream = ReportService.contactListToExcelFile(Data());
-
-		IOUtils.copy(stream, response.getOutputStream());
-	}
-
-	private List<Leave> Data() {
-		List<Leave> leave = lr.getLeaveByMonthAndYear(month, year);
-
-		return leave;
-
 	}
 
 	/*
@@ -311,25 +274,48 @@ public class LeaveController {
 		m.addAttribute("year", year);
 		m.addAttribute("empId", empId);
 		m.addAttribute("status", status);
-		int i = 0;
-		String[] days = new String[lr.getEmploeeWiseReport(month, year, empId, status).size()];
-		for (Leave l : lr.getEmploeeWiseReport(month, year, empId, status)) {
-			if (l.getDayMode().contains("Half Day")) {
-				days[i] = "0.5";
-			} else {
-
-				days[i] = (Math.abs(TimeUnit.MILLISECONDS
-						.toDays(((new SimpleDateFormat("yyyy-MM-dd").parse(l.getStartDate()).getTime())
-								- (new SimpleDateFormat("yyyy-MM-dd").parse(l.getEndDate()).getTime()))))
-						+ 1) + "";
-			}
-			i++;
-		}
-		m.addAttribute("leaveList", lr.getEmploeeWiseReport(month, year, empId, status));
+		m.addAttribute("leaveList", ls.getEmploeeWiseReport(month, year, empId, status));
 		m.addAttribute("employeeList", er.findAll());
-		m.addAttribute("days", days);
-
 		return "employee-wise-report";
+	}
+
+	/*
+	 * Pending Leave Report
+	 * Mapping---------------------------------------------------------------------
+	 */
+	@GetMapping("/pending-leave-report")
+	public String pendingLeaveReport(Model m, HttpServletRequest request) {
+		return "pending-leave-report";
+	}
+
+	@PostMapping("/pending-leave-report")
+	public String pendingLeaveReportFetch(Model m, @RequestParam("leaveMonth") String month,
+			@RequestParam("leaveYear") String year) throws Exception {
+		this.month = month;
+		this.year = year;
+		m.addAttribute("month", month);
+		m.addAttribute("year", year);
+		m.addAttribute("pendingList", ls.getPendingLeaveByMonthAndYear2(month, year));
+		return "pending-leave-report";
+	}
+
+	/*
+	 * Approved Leave Status Data Exporting into Excel
+	 * Sheet----------------------------------------------
+	 */
+	@GetMapping("/download/leave.xlsx")
+	public void download(HttpServletResponse response, @RequestParam("month") String month,
+			@RequestParam("year") String year) throws IOException {
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment; filename=MonthlyLeaveReport.xlsx");
+		ByteArrayInputStream stream = ReportService.contactListToExcelFile(Data());
+
+		IOUtils.copy(stream, response.getOutputStream());
+	}
+
+	private List<Leave> Data() {
+		List<Leave> leave = lr.getLeaveByMonthAndYear(month, year);
+		return leave;
 	}
 
 	/*
@@ -351,43 +337,6 @@ public class LeaveController {
 
 		return leave;
 
-	}
-
-	/*
-	 * Pending Leave Report
-	 * Mapping---------------------------------------------------------------------
-	 */
-	@GetMapping("/pending-leave-report")
-	public String pendingLeaveReport(Model m, HttpServletRequest request) {
-		return "pending-leave-report";
-	}
-
-	@PostMapping("/pending-leave-report")
-	public String pendingLeaveReportFetch(Model m, @RequestParam("leaveMonth") String month,
-			@RequestParam("leaveYear") String year) throws Exception {
-		this.month = month;
-		this.year = year;
-		m.addAttribute("month", month);
-		m.addAttribute("year", year);
-		int i = 0;
-		String[] days = new String[lr.getPendingLeaveByMonthAndYear(month, year).size()];
-		for (Leave l : lr.getPendingLeaveByMonthAndYear(month, year)) {
-			if (l.getDayMode().contains("Half Day")) {
-				days[i] = "0.5";
-			} else {
-
-				days[i] = (Math.abs(TimeUnit.MILLISECONDS
-						.toDays(((new SimpleDateFormat("yyyy-MM-dd").parse(l.getStartDate()).getTime())
-								- (new SimpleDateFormat("yyyy-MM-dd").parse(l.getEndDate()).getTime()))))
-						+ 1) + "";
-			}
-			i++;
-		}
-
-		m.addAttribute("pendingList", lr.getPendingLeaveByMonthAndYear(month, year));
-		m.addAttribute("days", days);
-
-		return "pending-leave-report";
 	}
 
 	/*
