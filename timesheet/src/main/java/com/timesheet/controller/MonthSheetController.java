@@ -32,9 +32,29 @@ public class MonthSheetController {
 	@Autowired
 	MonthSheetRepository msr;
 
+	@GetMapping("/month-sheet")
+	public ModelAndView workApprove(HttpServletRequest request) {
+		long empId = (Long) request.getSession().getAttribute("empId");
+		ModelAndView m = new ModelAndView("month-sheet");
+		m.addObject("monthSheetList", mse.findMonthSheetAndSubmit(empId));
+		return m;
+	}
+
 	@GetMapping("/month-sheet-approve")
 	public String workSubmitApprove(Model m, @RequestParam("monthSheetId") Long monthSheetId) {
-
+		Optional<MonthSheet> msp = msr.findById(monthSheetId);
+		if (msp.isEmpty()) {
+			return "redirect:/month-sheet";
+		}
+		MonthSheet ms = msp.get();
+		m.addAttribute("empMonthSheet", mse.findMonthSheetEmployeeDataByMonthId(monthSheetId).get(0));
+		m.addAttribute("monthSheetDataList", mse.findMonthSheetDataAndApproveajax(monthSheetId));
+		m.addAttribute("monthDto", mse.findMonthSheetDataToDto(monthSheetId));
+//		System.out.println();
+		return "month-sheet-approve";
+	}
+	@GetMapping("/month-sheet-approve2")
+	public String workSubmitApprove2(Model m, @RequestParam("monthSheetId") Long monthSheetId) {
 		Optional<MonthSheet> msp = msr.findById(monthSheetId);
 		if (msp.isEmpty()) {
 			return "redirect:/month-sheet";
@@ -48,14 +68,6 @@ public class MonthSheetController {
 	@GetMapping("/fetch-month-sheet-employee-approve")
 	public ResponseEntity<Object> fetchMonthTimesheetEmployee(@RequestParam("monthSheetId") Long monthSheetId) {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(mse.findMonthSheetDataAndApproveajax(monthSheetId));
-	}
-
-	@GetMapping("/month-sheet")
-	public ModelAndView workApprove(HttpServletRequest request) {
-		long empId = (Long) request.getSession().getAttribute("empId");
-		ModelAndView m = new ModelAndView("month-sheet");
-		m.addObject("monthSheetList", mse.findMonthSheetAndSubmit(empId));
-		return m;
 	}
 
 	@PostMapping("/month-sheet-change-status")

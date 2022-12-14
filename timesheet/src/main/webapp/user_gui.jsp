@@ -8,13 +8,6 @@
     <style>
         td span:hover{
             cursor: pointer;
-            content: "**";
-        }
-        .span-color-close{
-            color: black;
-        }
-        .span-color-open{
-            color: red;
         }
         table{
             table-layout: fixed;

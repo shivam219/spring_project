@@ -18,6 +18,7 @@ public class MonthSheetDataDto {
 		this.descr = descr;
 		this.hour = hour;
 	}
+
 	public MonthSheetDataDto(String projectName, String date, String descr, Integer hour) {
 		super();
 		this.projectName = projectName;

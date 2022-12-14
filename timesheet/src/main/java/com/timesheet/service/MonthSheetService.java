@@ -1,12 +1,12 @@
 package com.timesheet.service;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.persistence.Tuple;
 
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.timesheet.dto.EmployeeMonthChartDto;
 import com.timesheet.dto.MonthSheetDataDto;
 import com.timesheet.dto.MonthSheetDto;
+import com.timesheet.dto.MonthsheetDataViewDto;
 import com.timesheet.repository.MonthSheetRepository;
 
 @Component
@@ -76,6 +77,30 @@ public class MonthSheetService {
 			}
 		}
 		return ud2;
+	}
+
+	public List<MonthsheetDataViewDto> findMonthSheetDataToDto(long monthId) {
+		List<Tuple> tu = msr.findMonthSheetDataViewToDto(monthId);
+		List<MonthsheetDataViewDto> l = new ArrayList<>();
+		for (Tuple t : tu) {
+			MonthsheetDataViewDto dto = new MonthsheetDataViewDto();
+			dto.setDate(t.get(0, String.class));
+			dto.setTotalHour(t.get(4, BigDecimal.class));
+			List<MonthSheetDataDto> inDto = new ArrayList<>();
+			String[] pl = t.get(1, String.class).toString().split("@");
+			String[] dl = t.get(2, String.class).toString().split("@");
+			String[] hl = t.get(3, String.class).toString().split("@");
+			for (int i = 0; i < pl.length; i++) {
+				MonthSheetDataDto in = new MonthSheetDataDto();
+				in.setProjectName(pl[i]);
+				in.setDescr(dl[i]);
+				in.setHour(hl[i]);
+				inDto.add(in);
+			}
+			dto.setDataDtos(inDto);
+			l.add(dto);
+		}
+		return l;
 	}
 
 //	ajax data
