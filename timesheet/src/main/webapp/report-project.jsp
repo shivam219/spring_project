@@ -3,6 +3,7 @@
 
 <head>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3/dist/chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <title>Project ${customer.getCustomerName()}</title>
   <link rel="stylesheet" href="css/form-style.css">
   <style>
@@ -41,8 +42,8 @@
 <body>
   <input type="hidden" name="projectId" id="projectId" value="${p.getProjectId()}">
   <div class="container-xl px-4 mt-4 ">
-    <div class="row mb-2">
-      <div class="col-xl-4">
+    <div class="row mb-2 justify-content">
+      <div class="col-md-6"> 
         <div class="card mb-4 mb-xl-0">
           <div class="card-header">Project ${p.getProjectName()}</div>
           <div class="card-body text-center">
@@ -78,8 +79,25 @@
                   </span>
                 </div>
               </div>
+              <div class="row">
+                <div class="col text-start">No of Employee</div>
+                <div class="col">
+                  <span class="badge  text-secondary mb-0 fw-bold" style="font-size: 14px;">
+                    ${empList.size()}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
+          <br>
+        </div> 
+      </div>
+
+      <div class="col-md-6 badge ">
+        <div class="row  justify-content-end me-2 ">
+          <div class="col-md-11 card bg-white rounded "> 
+            <canvas id="myChart"></canvas>  
+          </div>   
         </div>
       </div>
     </div>
@@ -122,13 +140,13 @@
                   </tr>
                 </c:if>
               </tbody>
-            </table>
+            </table> 
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row justify-content-center mt-2">
+    <div class="row justify-content-center mt-2 d-none ">
       <div class="col-xl-12 ">
         <!-- Montyly task-->
         <div class="card mb-4">
@@ -136,7 +154,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-12">
-                <canvas id="myChart"></canvas>
+                <!-- <canvas id="myChart"></canvas>  -->
               </div>
             </div>
           </div>
@@ -200,6 +218,65 @@
         }
       });
     });
+    
   </script>
 
+<!-- <div class="col-md-8 bg-white ">
+  <div id="chart" style="min-height: 200px; max-height:200px ;">
+  </div>  
+</div> -->
+<script>
+  // apexchart on project timeline
+    // var options = {
+    //       series: [
+    //       {
+    //         data: [
+    //           {
+    //             x: 'Code',
+    //             y: [
+    //               new Date('2019-03-02').getTime(),
+    //               new Date('2019-03-04').getTime()
+    //             ]
+    //           },
+    //           {
+    //             x: 'Test',
+    //             y: [
+    //               new Date('2019-03-04').getTime(),
+    //               new Date('2019-03-08').getTime()
+    //             ]
+    //           },
+    //           {
+    //             x: 'Validation',
+    //             y: [
+    //               new Date('2019-03-08').getTime(),
+    //               new Date('2019-03-12').getTime()
+    //             ]
+    //           },
+    //           {
+    //             x: 'Deployment',
+    //             y: [
+    //               new Date('2019-03-12').getTime(),
+    //               new Date('2019-03-18').getTime()
+    //             ]
+    //           }
+    //         ]
+    //       }
+    //     ],
+    //       chart: {
+    //       height: 350,
+    //       type: 'rangeBar'
+    //     },
+    //     plotOptions: {
+    //       bar: {
+    //         horizontal: true
+    //       }
+    //     },
+    //     xaxis: {
+    //       type: 'datetime'
+    //     }
+    //     };
+
+    //     var chart = new ApexCharts(document.querySelector("#chart"), options);
+    //     chart.render();
+</script>
 </body>

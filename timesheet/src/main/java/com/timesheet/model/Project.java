@@ -144,7 +144,10 @@ public class Project {
 	}
 
 	public String getCreateTimeSort() {
-		return createTime.toLocaleString();
+		return createTime.toLocaleString().substring(0,11);
+	}
+	public String getCreateTimeSort2() {
+		return createTime.toLocaleString().substring(0,11);
 	}
 
 	public void setCreateTime(Date createTime) {

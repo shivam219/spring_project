@@ -1,11 +1,10 @@
-<%if(session.getAttribute("empId")==null){
-	response.sendRedirect("login");
-}%> 
-
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>  
+<c:if test="${empId == null}">
+	<c:redirect url="login"/>  
+</c:if>
 <!DOCTYPE html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
-<html>
+<html> 
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,9 +36,7 @@
 	<div class="container-fluid">
 		<div class="row">
 
-	<!-- <nav class="navbar navbar-expand-lg bg-nav-foot navbar-light bg-light " > -->
-		<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #fff;border-bottom: 2px solid #e6f2fb;">
-			<!-- <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #71a9c9;"> -->
+		<nav class="navbar navbar-expand-lg navbar-light d-none" style="background-color: #fff;border-bottom: 2px solid #e6f2fb;">
 		<div class="container-fluid"> 
 			<a class="navbar-brand" href="home"> <img 
 					src="images/esslogo.png" width="100" height="40" class="d-inline-block align-text-top">

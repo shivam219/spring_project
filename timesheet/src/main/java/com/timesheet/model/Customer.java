@@ -116,17 +116,20 @@ public class Customer {
 	public String getOnBoardDate() {
 		return onBoardDate;
 	}
-
-	public String getOnBoardDateFormated() {
-		Date d = null;
-		try {
-			d = new SimpleDateFormat("yyyy-MM-dd").parse(onBoardDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		String mydate = d.getDate() + " " + (d.getMonth() + 1) + " " + d.getYear();
-		return mydate;
+	public String getCreateTimeSort2() {
+		return createTime.toLocaleString().substring(0,11);
 	}
+
+//	public String getOnBoardDateFormated() {
+//		Date d = null;
+//		try {
+//			d = new SimpleDateFormat("yyyy-MM-dd").parse(onBoardDate);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		String mydate = d.getDate() + " " + (d.getMonth() + 1) + " " + d.getYear();
+//		return mydate;
+//	}
 
 	public void setOnBoardDate(String onBoardDate) {
 		this.onBoardDate = onBoardDate;

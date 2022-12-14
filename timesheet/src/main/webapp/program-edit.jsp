@@ -24,7 +24,7 @@
                                 <div class="row gx-3 mb-3 justify-content-center">
                                     <div class="col-md-6">
                                         <div>
-                                            <h5 class=" mb-1 text-center">Group : ${ugrpCode} </h5>
+                                            <h5 class=" mb-1 text-center">Group : ${ugrpDesc} </h5>
                                             <input type="hidden" value="${ugrpCode}" readonly id="ugrpCode">
                                         </div>
                                         <div class="form-check">

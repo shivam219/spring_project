@@ -50,8 +50,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	public Page<Employee> findAll(Pageable pageable);
 //	Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "name");
 
-	@Query(value = "SELECT concat(date_format(birth_date,'%D %b' ),', ',concat(first_name,' ',middle_name,' ',last_name)) as Birthdays FROM timesheet_employee_master where month(birth_date)=month(now()) order by Birthdays ASC ;", nativeQuery = true)
-	public List<Object> getEmpBirthday(@Param("year") String year, @Param("month") String month);
+	@Query(value = "SELECT concat(date_format(birth_date,'%D %b' ),', ',concat(first_name,' ',middle_name,' ',last_name)) as Birthdays FROM timesheet_employee_master where month(birth_date)=month(now()) order by Birthdays ASC", nativeQuery = true)
+	public List<Object> getEmpBirthday();
 
 	@Query(value = "\n"
 			+ "select * from  timesheet_employee_master  where emp_id in  (select emp_id from  timesheet_user_master where emp_id not in (SELECT emp_id FROM timesheet_user_group_mapping))  ", nativeQuery = true)

@@ -33,7 +33,7 @@
 							<tr id="A001">
 									<td> <a  href="report-customer?customerId=${c.getCustomerId()}" class="text-body"> ${c.getCustomerName()}</a> </td>
 								<td>${c.getCustomerDomain().getCustomerDomain()}</td>
-								<td>${c.getOnBoardDate()}</td>
+								<td>${c.getCreateTimeSort2()}</td>
 								<td>
 									<a href="/customer-edit?customerId=${c.getCustomerId()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>                                    
 								</td>

@@ -2,22 +2,14 @@
 	<html>
 
 	<head>
-		<title>Month Sheet </title>
+		<title>Month Sheet</title>
 		<style>
 			tbody,
 			td,
 			td a tfoot,
 			th,
 			thead,
-			tr {
-				/* font-family: Verdana;
-	border-width: 1px;
-	border-collapse: collapse;
-	font-style: normal;
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
-	color: rgb(83, 83, 82); */
-	white-space: normal;
-}
+			tr {white-space: normal;}
 		</style>
 	</head>
 
@@ -64,30 +56,14 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="table-responsive">
-						<!-- <table class=""> -->
 						<table class="table  project-list-table align-middle table-borderless" id="monthTable">
 							<thead class="thead-dark">
-								<th class="text-center " scope="row">Date</th>
-								<th class="text-center " scope="row">Project Name</th>
-								<th class="text-center " scope="row">Description</th>
-								<th class="text-center " scope="row">Hour</th>
+								<th class="text-center" >Date</th>
+								<th class="text-center" >Project Name</th>
+								<th class="text-center" >Hour</th>
+								<th class="text-center" >Description</th>
 							</thead>
 							<tbody>
-
-								<c:forEach items="${monthSheetDataList1}" var="md" varStatus="loop">
-									<tr>
-										<td class="text-center ">${md.getDate()}</td>
-										<td class="text-center ">${md.getProjectName()}</td>
-										<td class="text-center ">${md.getDescr()}</td>
-										<td class="text-center ">${md.getHour()}</td>
-									</tr>
-								</c:forEach>
-								<c:if test='${monthSheetDataList.size() eq 0 }'>
-									<tr>
-										<td colspan="4" class="text-center"> No data </td>
-									</tr>
-								</c:if>
-
 							</tbody>
 						</table>
 					</div>
@@ -126,21 +102,21 @@
 									let tr = 	'<tr>' 
 												+'<td class="text-center " rowspan= '+ parseInt(d2.length)+' > ' + d2[0]['date'] + ' </td>'
 												+'<td class="text-center " > ' + d2[0]['projectName'] + ' </td>'
-												+'<td  > ' + d2[0]['descr'] + ' </td>'
 												+'<td class="text-center " > ' + d2[0]['hour'] + ' </td>'
+												+'<td  > ' + d2[0]['descr'] + ' </td>'
 												+'</tr> ';
 										$("#monthTable").append(tr);
 										for (let j = 1; j < d2.length; j++) {
 											hours = hours+ parseInt(d2[j]['hour']); 
 											let tri = '<tr > '
 														+'<td class="text-center" > ' + d2[j]['projectName'] + ' </td>'
-														+'<td  > ' + d2[j]['descr'] + ' </td>'
 														+'<td  class="text-center " > ' + d2[j]['hour'] + ' </td>'
+														+'<td  > ' + d2[j]['descr'] + ' </td>'
 														+'</tr> ';
 										$("#monthTable").append(tri);
 									}
 									if(hour!=hours){
-										$("#monthTable").append('<tr><td></td><td></td><td></td><td  class="text-center fw-bold">'+hours+'</td></tr>');
+										$("#monthTable").append('<tr><td></td><td></td><td  class="text-center fw-bold">'+hours+'</td><td></td></tr>');
 									}
 									set.clear();
 									set.add(d[i]['date']);
@@ -153,21 +129,21 @@
 									let tr = 	'<tr>' 
 												+'<td class="text-center " rowspan= '+ parseInt(d2.length)+' > ' + d2[0]['date'] + ' </td>'
 												+'<td class="text-center " > ' + d2[0]['projectName'] + ' </td>'
-												+'<td  > ' + d2[0]['descr'] + ' </td>'
 												+'<td class="text-center " > ' + d2[0]['hour'] + ' </td>'
+												+'<td  > ' + d2[0]['descr'] + ' </td>'
 												+'</tr> ';
 										$("#monthTable").append(tr);
 										for (let j = 1; j < d2.length; j++) {
 											hours = hours+ parseInt(d2[j]['hour']); 
 											let tri = '<tr > '
 														+'<td class="text-center" > ' + d2[j]['projectName'] + ' </td>'
-														+'<td  > ' + d2[j]['descr'] + ' </td>'
 														+'<td  class="text-center " > ' + d2[j]['hour'] + ' </td>'
+														+'<td  > ' + d2[j]['descr'] + ' </td>'
 														+'</tr> ';
 										$("#monthTable").append(tri);
 									}
 									if(hour!=hours){
-										$("#monthTable").append('<tr><td></td><td></td><td ></td><td  class="text-center fw-bold">'+hours+'</td></tr>');
+										$("#monthTable").append('<tr><td></td><td></td><td  class="text-center fw-bold">'+hours+'</td><td></td></tr>');
 									}
 								}
 							}

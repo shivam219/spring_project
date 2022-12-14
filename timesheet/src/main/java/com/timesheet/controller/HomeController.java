@@ -1,8 +1,5 @@
 package com.timesheet.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +11,7 @@ import com.timesheet.repository.EmployeeRepository;
 import com.timesheet.repository.HolidayRepository;
 import com.timesheet.repository.LeaveRepository;
 import com.timesheet.service.HolidayService;
+import com.timesheet.service.LeaveService;
 
 @Controller
 public class HomeController {
@@ -29,23 +27,18 @@ public class HomeController {
 
 	@Autowired
 	LeaveRepository lr;
+	@Autowired
+	LeaveService ls;
 
 	@GetMapping(value = "/home")
 	public String homePageGet(HttpServletRequest request, Model m) {
-
+		if (request.getSession().getAttribute("empId") == null) {
+			return "redirect:/login";
+		}
 		long empId = (long) request.getSession().getAttribute("empId");
-		SimpleDateFormat sdfy = new SimpleDateFormat("yyyy");
-		String year = sdfy.format(new Date());
-
-		SimpleDateFormat sdfm = new SimpleDateFormat("MM");
-		String month = sdfm.format(new Date());
-
-		m.addAttribute("empList", er.getEmpBirthday(year, month));
-		m.addAttribute("holidayList", hr.getHolidays(year, month));
-		m.addAttribute("ac", lr.getApprovedCountOfMonth(empId));
-		m.addAttribute("rc", lr.getRejectedCountOfMonth(empId));
-		m.addAttribute("cc", lr.getCancelledCountOfMonth(empId));
-		m.addAttribute("pc", lr.getPendingCountOfMonth(empId));
+		m.addAttribute("empList", er.getEmpBirthday());
+		m.addAttribute("holidayList", hr.getHolidays());
+		m.addAttribute("leaves", ls.findLeaveStatusByEmpId(empId));
 		return "home";
 	}
 

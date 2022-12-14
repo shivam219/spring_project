@@ -1,16 +1,19 @@
 package com.timesheet.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "timesheet_leave_master", uniqueConstraints = @UniqueConstraint(columnNames = { "emp_id", "start_date" }))
@@ -72,8 +75,10 @@ public class Leave {
 
 	private String secondApproveReason;
 
-	@Column(name = "submitted_date")
-	private String submittedDate;
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "submitted_date", updatable = false)
+	private Date submittedDate;
 
 	public Leave() {
 		super();
@@ -82,7 +87,7 @@ public class Leave {
 	public Leave(Long leaveCode, String leaveId, Long empId, String empName, String managerName, Long managerId,
 			Long leaveManagerId, String dayMode, String leaveType, String leaveReason, String rejectReason,
 			String startDate, String endDate, String attachment, String status, String secondStatus,
-			String approveReason, String secondApproveReason, String submittedDate) {
+			String approveReason, String secondApproveReason, Date submittedDate) {
 		super();
 		this.leaveCode = leaveCode;
 		this.leaveId = leaveId;
@@ -249,11 +254,11 @@ public class Leave {
 		this.secondApproveReason = secondApproveReason;
 	}
 
-	public String getSubmittedDate() {
+	public Date getSubmittedDate() {
 		return submittedDate;
 	}
 
-	public void setSubmittedDate(String submittedDate) {
+	public void setSubmittedDate(Date submittedDate) {
 		this.submittedDate = submittedDate;
 	}
 

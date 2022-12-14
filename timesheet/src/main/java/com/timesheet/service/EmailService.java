@@ -204,17 +204,17 @@ public class EmailService {
 
 	public void Email(String to, String sub, String msg) {
 		try {
-//			String from = "shivam.choudhary@ess.net.in";
-//			String pwd = "Zipmail@219";
-			String from = "noreply@ess.net.in";
-			String pwd = "P@ssw0rd";
+			String from = "shivam.choudhary@ess.net.in";
+			String pwd = "Zipmail@219";
+//			String from = "noreply@ess.net.in";
+//			String pwd = "Zipmail#22";
 			String host = "121.240.21.7";
 			Properties pro = new Properties();
 			pro.put("mail.smtp.host", host);
 			pro.put("mail.smtp.port", "587");
 			pro.put("mail.smtp.tls.enable", "true");
 			pro.put("mail.smtp.auth", "true");
-			pro.put("mail.debug", "true");
+//			pro.put("mail.debug", "true");
 //			pro.put("mail.smtp.ssl.enable", "true"); // need to change smtp port
 //			pro.put("mail.smtp.port", "465");
 //			pro.put("mail.smtp.auth", "false");

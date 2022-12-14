@@ -72,7 +72,7 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 
 	@Query(value = "select  *  from timesheet_leave_master where month(start_date) = :month and year(start_date) = :year and status in ('Pending') ", nativeQuery = true)
 	public List<Leave> getPendingLeaveByMonthAndYear(@Param("month") String month, @Param("year") String year);
-	
+
 	@Query(value = "select   leave_id, emp_id , emp_name , manager_name , leave_type , date_format(start_date,' %D %b %Y' ) as from_date ,\n"
 			+ "date_format(end_date,' %D %b %Y' ) as to_date  , day_mode\n"
 			+ ",  if(regexp_like(day_mode ,'Full Day'),  convert((datediff(end_date , start_date)+1),char) , convert( 0.5 ,char) )  from timesheet_leave_master where month(start_date) = :month and year(start_date) = :year and status in ('Pending') ", nativeQuery = true)
@@ -97,5 +97,13 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 			+ "FROM ess.timesheet_leave_master where emp_id = :empId and second_status= 'Approved' ;\n" + "\n"
 			+ "", nativeQuery = true)
 	public List<Tuple> findLeaveTypeStartDateEndDateByEmpId(@Param("empId") long empId);
+
+	@Query(value = "select monthname(start_date),\n"
+			+ "    convert(if(sum(if(second_status='Approved',datediff(end_date,start_date)+1,0))<>0,sum(if(second_status='Approved',datediff(end_date,start_date)+1,0)),'')  ,char) approve,"
+			+ "    convert(if(sum(if(second_status='Rejected',datediff(end_date,start_date)+1,0))<>0,sum(if(second_status='Rejected',datediff(end_date,start_date)+1,0)),''),char) reject ,"
+			+ "    convert(if(sum(if(second_status='Cancelled',datediff(end_date,start_date)+1,0))<>0,sum(if(second_status='Cancelled',datediff(end_date,start_date)+1,0)),''),char) cancel,"
+			+ "    convert(if(sum(if(second_status='Pending',datediff(end_date,start_date)+1,0))<>0,sum(if(second_status='Pending',datediff(end_date,start_date)+1,0)),''),char) pending "
+			+ "from timesheet_leave_master where emp_id =:empId group by monthname(start_date) , month(start_date) order by month(start_date) desc", nativeQuery = true)
+	public List<Tuple> findLeaveStatusByEmpId(@Param("empId") long empId);
 
 }

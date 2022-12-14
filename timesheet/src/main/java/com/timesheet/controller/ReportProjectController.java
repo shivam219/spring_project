@@ -32,7 +32,6 @@ public class ReportProjectController {
 		ModelAndView m = new ModelAndView("report-project");
 		m.addObject("p", p);
 		m.addObject("empList", ps.getProjectEmloyeeDetails(p.getProjectId()));
-
 		return m;
 	}
 

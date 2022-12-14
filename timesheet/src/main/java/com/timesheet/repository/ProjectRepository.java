@@ -64,12 +64,15 @@ public interface ProjectRepository extends CrudRepository<Project, Integer> {
 	public List<Tuple> findEmployeeNameAndGroupDescAndHour(Integer projectId);
 
 	@Query(value = "with ees as("
-			+ " select  concat(em.first_name,' ', em.last_name) as name  , um.emp_id ,  ms.month_sheet_id from timesheet_user_master um , timesheet_employee_master em  , timesheet_month_sheet ms"
+			+ " select  concat(em.first_name) as name  , um.emp_id ,  ms.month_sheet_id from timesheet_user_master um , timesheet_employee_master em  , timesheet_month_sheet ms"
 			+ "	where "
 			+ "	um.emp_id in  (select emp_id from timesheet_user_project_mapping where  project_id = :projectId ) "
 			+ "	and um.active = 1 and  um.emp_id =  em.emp_id  and  um.emp_id = ms.emp_id  " + " )"
 			+ "select  e.name , sum(hour)  from timesheet_day_sheet ds , ees e where ds.month_id = e.month_sheet_id and ds.project_id = :projectId  GROUP BY  e.emp_id;"
 			+ " ", nativeQuery = true)
 	public List<Tuple> findEmployeeNameAndHourInProject(Integer projectId);
+	
+	@Query(value="select  project_name, (datediff(now(),create_time) * 100) / project_day from timesheet_project_master where  customer_id = :customerId",nativeQuery = true)
+	public List<Tuple> findProjectNameAndProjectProgress(Integer customerId);
 
 }

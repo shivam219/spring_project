@@ -1,6 +1,5 @@
 package com.timesheet.service;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.timesheet.dto.LeaveDetailsDto;
 import com.timesheet.dto.LeaveDto;
+import com.timesheet.dto.LeaveStatusDto;
 import com.timesheet.model.Leave;
 import com.timesheet.repository.EmployeeRepository;
 import com.timesheet.repository.LeaveRepository;
@@ -41,10 +41,10 @@ public class LeaveService {
 	}
 
 	public List<Leave> getCancleLeave(long l) {
-		Long  l1= 10L;
-		long  l2 =10;
-		System.out.println(l1==l2);//false
-		System.out.println(l1.longValue()==l2);//false
+		Long l1 = 10L;
+		long l2 = 10;
+		System.out.println(l1 == l2);// false
+		System.out.println(l1.longValue() == l2);// false
 		return lr.getCancleLeaveByEmpId(l);
 	}
 
@@ -113,7 +113,8 @@ public class LeaveService {
 				.collect(Collectors.toList());
 		return ld;
 	}
-	public List<LeaveDetailsDto> getPendingLeaveByMonthAndYear2(String month, String year ) {
+
+	public List<LeaveDetailsDto> getPendingLeaveByMonthAndYear2(String month, String year) {
 		List<Tuple> tu = lr.getPendingLeaveByMonthAndYear2(month, year);
 		List<LeaveDetailsDto> ld = tu.stream()
 				.map(e -> new LeaveDetailsDto(e.get(0, String.class), e.get(1, BigInteger.class),
@@ -122,4 +123,15 @@ public class LeaveService {
 				.collect(Collectors.toList());
 		return ld;
 	}
+
+	public List<LeaveStatusDto> findLeaveStatusByEmpId(long empId) {
+		List<Tuple> tu = lr.findLeaveStatusByEmpId(empId);
+		List<LeaveStatusDto> ld = tu.stream()
+				.map(e -> new LeaveStatusDto(e.get(0, String.class), e.get(1, String.class), e.get(2, String.class),
+						e.get(3, String.class),e.get(4, String.class)))
+				.collect(Collectors.toList());
+		return ld;
+	}
+//	
+
 }

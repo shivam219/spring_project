@@ -55,7 +55,8 @@ public class ProgramController {
 	}
 	@GetMapping(value = "/program-edit")
 	public String programEdit(Model m, @RequestParam(value= "ugrpCode",required = false ) UserGroup ug) {
-		m.addAttribute("ugrpCode", ug.getUgrpDesc());
+		m.addAttribute("ugrpCode", ug.getUgrpCode());
+		m.addAttribute("ugrpDesc", ug.getUgrpDesc());
 		m.addAttribute("programList", pr.findAllProgram());
 		m.addAttribute("allProgramList", pr.findAllProgramLink());
 		return "program-edit";
