@@ -5,9 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        td span:hover{
+            cursor: pointer;
+            content: "**";
+        }
+        .span-color-close{
+            color: black;
+        }
+        .span-color-open{
+            color: red;
+        }
+        table{
+            table-layout: fixed;
+        }
+        tbody, td, td a tfoot, th, thead, tr {
+            white-space: normal;
+        }
+    </style>
 </head>
 <body>
-    <div class="container py-5">
+    <div class="container py-5 d-none">
         <div class="row">
             <div class="col-md-12">
                 <h2 class="text-center mb-5">Bootstrap 4 Forms</h2>
@@ -473,6 +491,50 @@
       
         
     </div>
-    <!--/container-->
+    <div class="container">
+        <div class="row justify-content-around">
+            <div class="col-5" ></div>
+            <table>
+                <thead>
+                    <th>Name</th>
+                    <th>Hour</th> 
+                    <th colspan="6">Description</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>14th Dec</td>
+                        <td>11</td>
+                        <td colspan="6">
+                            <span style='font-size:25px;user-select: none;' >&#9656;</span>
+                            <div style="display: none;"> 
+                                <div class="row  m-0 p-0">
+                                    <div class="col-3">Kotak</div> 
+                                    <div class="col-8"> <p>Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam nisi voluptatum corrupti soluta unde facilis corporis, fugit doloremque in blanditiis labore, explicabo mollitia similique quae totam possimus incidunt. Saepe, magnam. adipisicing elit. Quaer dit, atque ducimus.</p> </div>   
+                                    <div class="col-1">9</div>
+                                </div>
+                                <div class="row m-0 p-0">
+                                    <div class="col-3">IBM </div> 
+                                    <div class="col-8"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaer dit, atque ducimus.</p></div>
+                                    <div class="col-1">2</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr> 
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <script>
+        $("td span").on("click",function(t1){
+            $(this).siblings("div").toggle();
+            if( $(this).siblings("div").css('display') == 'none'){
+                $(this).html("&#9656;");
+                $(this).css("color","#535352");
+            }else{
+                $(this).html("&#9662;"); 
+                $(this).css("color","red");
+            }
+        });
+    </script>
 </body>
 </html>

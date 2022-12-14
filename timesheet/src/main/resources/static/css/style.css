@@ -108,8 +108,8 @@ img, svg {
 }
 
 table {
-	border-bottom: 1px solid #ff000d;
-}
+	/* border-bottom: 1px solid #ff000d; */
+} 
 
 tbody, td, td a tfoot, th, thead, tr {
 	font-family: Verdana;
