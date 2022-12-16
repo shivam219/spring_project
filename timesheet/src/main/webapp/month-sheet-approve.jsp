@@ -19,7 +19,6 @@
         tbody, td, td a tfoot, th, thead, tr {
             white-space: normal;
         }
-
 		</style>
 	</head>
 
@@ -31,16 +30,16 @@
 			<div class="">
 				<div class="row m-0 p-0 bg-white py-2 my-2 justify-content-center">
 					<div class="col-md text-center">
-						<span class="align-middle">
+						<span class="align-middle text-secondary  fw-bold ">
 							Employee Name : ${empMonthSheet.getEmployeeName()}
 						</span>
 					</div>
-					<div class="col-md text-center">
+					<div class="col-md text-center text-secondary  fw-bold">
 						<span class="align-middle">
 							Month : ${empMonthSheet.getMonth()}
 						</span>
 					</div>
-					<div class="col-md text-center">
+					<div class="col-md text-center text-secondary  fw-bold">
 						<span class="align-middle">
 							Year : ${empMonthSheet.getYear()}
 						</span>
@@ -69,22 +68,22 @@
 						<table class="table  project-list-table align-middle table-borderless" id="monthTable">
 							<thead class="thead-dark">
 								<th class="text-center" >Date</th>
-								<th class="text-center" >Project Name</th>
+								<th class="text-center" >Hour</th>
 								<th class="text-center" colspan="6" >Description</th>
 							</thead>
 							<tbody>
 								<c:forEach items="${monthDto}" var="d">
 									<tr>
-										<td>${d.getDate()}</td>
-										<td>${d.getTotalHour()}</td> 
+										<td class="text-center" >${d.getDate()}</td>
+										<td class="text-center" >${d.getTotalHour()}</td> 
  										<td colspan="6">
 											 <span style='font-size:25px;user-select: none;' >&#9656;</span>
 											<c:forEach items="${d.getDataDtos()}" var="dd">
 												<div style="display: none;"> 
-													<div class="row  m-0 p-0">
-														<div class="col-3">${dd.getProjectName()}</div> 
-														<div class="col-8"> <p>${dd.getDescr()}</p> </div>   
-														<div class="col-1">${dd.getHour()}</div>
+													<div class="row  m-0 p-0 ">
+														<div class="col-3 border">${dd.getProjectName()}</div> 
+														<div class="col-8 border"> <p>${dd.getDescr()}</p> </div>   
+														<div class="col-1 border">${dd.getHour()}</div>
 													</div>
 												</div> 
 											</c:forEach>

@@ -10,15 +10,15 @@ import com.timesheet.model.Program;
 
 public interface ProgramRepository extends JpaRepository<Program, Integer> {
 
-
-	@Query(value="select PRG_CODE, PRG_DESC from timesheet_program_master where PRG_PRNT is null order by PRG_DESC asc" ,nativeQuery = true)
+	@Query(value = "select PRG_CODE, PRG_DESC from timesheet_program_master where PRG_NAME = '#' ", nativeQuery = true)
+	public List<String[]> findAllProgram2();
+	@Query(value = "select PRG_CODE, PRG_DESC from timesheet_program_master where PRG_PRNT is null ", nativeQuery = true)
 	public List<String[]> findAllProgram();
 
-	@Query(value="select  PRG_PRNT  , PRG_DESC  FROM timesheet_program_master" ,nativeQuery = true)
+	@Query(value = "select PRG_PRNT, PRG_DESC,  PRG_CODE  FROM timesheet_program_master", nativeQuery = true)
 	public List<String[]> findAllProgramLink();
 
-	@Query(value="SELECT PRG_DESC FROM timesheet.timesheet_program_master where prg_prnt = :prgPrnt" ,nativeQuery = true)
-	public List<String> findAllProgramLinkByPrgPrnt(@Param("prgPrnt")String prgPrnt);
-	
-	
+	@Query(value = "select PRG_CODE, PRG_DESC , PRG_NAME ,PRG_ORDER from timesheet_program_master where  PRG_PRNT = :prgPrnt", nativeQuery = true)
+	public List<String[]> findAllProgramLinkByPrgPrnt(int prgPrnt);
+
 }

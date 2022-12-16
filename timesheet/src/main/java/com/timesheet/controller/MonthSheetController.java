@@ -50,7 +50,6 @@ public class MonthSheetController {
 		m.addAttribute("empMonthSheet", mse.findMonthSheetEmployeeDataByMonthId(monthSheetId).get(0));
 		m.addAttribute("monthSheetDataList", mse.findMonthSheetDataAndApproveajax(monthSheetId));
 		m.addAttribute("monthDto", mse.findMonthSheetDataToDto(monthSheetId));
-//		System.out.println();
 		return "month-sheet-approve";
 	}
 	@GetMapping("/month-sheet-approve2")

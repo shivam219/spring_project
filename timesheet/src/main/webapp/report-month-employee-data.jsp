@@ -33,7 +33,7 @@
   </head>
 
   <body>
-    <div class="progress-container">
+    <div class="progress-container d-none">
       <div class="progress-bar" id="myBar"></div>
     </div>
     <input type="hidden" name="monthSheetId" id="monthSheetId" value="${monthSheetId}">

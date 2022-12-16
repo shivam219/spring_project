@@ -13,21 +13,16 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-@Table(name = "timesheet_program_master")
 @Entity
-public class Program {
+@Table(name = "timesheet_program_groupwise")
+public class ProgramGroup {
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	Integer id;
+	@Column(name = "UGRP_CODE")
+	Integer ugrpCode;
 	@Column(name = "PRG_CODE")
 	Integer prgCode;
-	@Column(name = "PRG_DESC")
-	String prgDesc;
-	@Column(name = "PRG_NAME")
-	String prgName;
-	@Column(name = "PRG_PRNT")
-	String prgPrnt;
-	@Column(name = "PRG_ORDER")
-	Integer prgOrder;
 	@Column(name = "CREATED_BY")
 	String createdBy;
 	@CreationTimestamp
@@ -41,22 +36,36 @@ public class Program {
 	@Column(name = "MODIFIED_TIME")
 	Date modifiedTime;
 
-	public Program() {
+	public ProgramGroup() {
 		super();
 	}
 
-	public Program(Integer prgCode, String prgDesc, String prgName, String prgPrnt, Integer prgOrder, String createdBy,
-			Date createdTime, String modifiedBy, Date modifiedTime) {
+	public ProgramGroup(Integer id, Integer ugrpCode, Integer prgCode, String createdBy, Date createdTime,
+			String modifiedBy, Date modifiedTime) {
 		super();
+		this.id = id;
+		this.ugrpCode = ugrpCode;
 		this.prgCode = prgCode;
-		this.prgDesc = prgDesc;
-		this.prgName = prgName;
-		this.prgPrnt = prgPrnt;
-		this.prgOrder = prgOrder;
 		this.createdBy = createdBy;
 		this.createdTime = createdTime;
 		this.modifiedBy = modifiedBy;
 		this.modifiedTime = modifiedTime;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getUgrpCode() {
+		return ugrpCode;
+	}
+
+	public void setUgrpCode(Integer ugrpCode) {
+		this.ugrpCode = ugrpCode;
 	}
 
 	public Integer getPrgCode() {
@@ -65,38 +74,6 @@ public class Program {
 
 	public void setPrgCode(Integer prgCode) {
 		this.prgCode = prgCode;
-	}
-
-	public String getPrgDesc() {
-		return prgDesc;
-	}
-
-	public void setPrgDesc(String prgDesc) {
-		this.prgDesc = prgDesc;
-	}
-
-	public String getPrgName() {
-		return prgName;
-	}
-
-	public void setPrgName(String prgName) {
-		this.prgName = prgName;
-	}
-
-	public String getPrgPrnt() {
-		return prgPrnt;
-	}
-
-	public void setPrgPrnt(String prgPrnt) {
-		this.prgPrnt = prgPrnt;
-	}
-
-	public Integer getPrgOrder() {
-		return prgOrder;
-	}
-
-	public void setPrgOrder(Integer prgOrder) {
-		this.prgOrder = prgOrder;
 	}
 
 	public String getCreatedBy() {
@@ -133,9 +110,9 @@ public class Program {
 
 	@Override
 	public String toString() {
-		return "Program [prgCode=" + prgCode + ", prgDesc=" + prgDesc + ", prgName=" + prgName + ", prgPrnt=" + prgPrnt
-				+ ", prgOrder=" + prgOrder + ", createdBy=" + createdBy + ", createdTime=" + createdTime
-				+ ", modifiedBy=" + modifiedBy + ", modifiedTime=" + modifiedTime + "]";
+		return "ProgramGroup [id=" + id + ", ugrpCode=" + ugrpCode + ", prgCode=" + prgCode + ", createdBy=" + createdBy
+				+ ", createdTime=" + createdTime + ", modifiedBy=" + modifiedBy + ", modifiedTime=" + modifiedTime
+				+ "]";
 	}
 
 }

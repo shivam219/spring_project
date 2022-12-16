@@ -3,7 +3,7 @@
     <html lang="en">
 
     <head>
-        <title>Program Add </title>
+        <title>Program Edit </title>
         <link rel="stylesheet" href="css/form-style.css">
         <style>
             table {
@@ -28,35 +28,34 @@
                                             <input type="hidden" value="${ugrpCode}" readonly id="ugrpCode">
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" name="ALL" id="ALL" value="Y"
-                                                class="form-check-input" 
-                                                onclick="checkAll('frmGroupmasteredit')">
-                                            <label class="form-check-label" for="ALL">
-                                                Check All
-                                            </label>
+                                            <input type="checkbox" name="ALL" id="ALL" value="Y" class="form-check-input" onclick="checkAll('frmGroupmasteredit')">
+                                            <label class="form-check-label" for="ALL"> Check All</label>
                                         </div>
                                         <c:forEach items="${programList}" var="pl" varStatus="loop">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""   onclick="checkInnerLink(this)"
-                                                    id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    ${pl[1]}
-                                                </label>
-                                            </div>
-                                            <div class="ms-4">
-                                                <c:forEach items="${allProgramList}" var="alp" varStatus="loop">
-                                                    <c:if test="${pl[0] eq alp[0]}">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="flexCheckDefault">
-                                                            <label class="form-check-label" for="flexCheckDefault">
-                                                                ${alp[1]}
-                                                            </label>
+                                            <div>
+                                                <div class="form-check p">
+                                                    <input class="form-check-input" type="checkbox" name="${pl[1]}" value="${pl[0]}" id="${pl[1]}" >
+                                                    <label class="form-check-label" for="${pl[1]}" >${pl[1]}</label>
+                                                </div>
+                                                <c:forEach items="${allProgramList}" var="alp" varStatus="loop"> 
+                                                    <c:if test = "${pl[0] eq alp[0]}">
+                                                        <div class="form-check ms-4 in ">
+                                                            <input class="form-check-input" type="checkbox"  name="${alp[1]}"  value="${alp[2]}"    id="${alp[1]}">
+                                                            <label class="form-check-label" for="${alp[1]}" >  ${alp[1]}</label>
                                                         </div>
+                                                        <c:forEach items="${allProgramList}" var="alp2" varStatus="loop"> 
+                                                            <c:if test = "${alp[2] eq alp2[0]}">
+                                                                <div class="form-check ms-5 in ">
+                                                                    <input class="form-check-input" type="checkbox" name="${alp2[1]}" value="${alp2[2]}"   id="${alp2[1]}">
+                                                                    <label class="form-check-label" for="${alp2[1]}" >  ${alp2[1]}</label>
+                                                                </div>
+                                                            </c:if>
+                                                        </c:forEach>
                                                     </c:if>
                                                 </c:forEach>
                                             </div>
-                                        </c:forEach>
+                                       </c:forEach>      
+                                    
                                     </div>
                                 </div>
                             </form>
@@ -87,7 +86,6 @@
                 }
             }
             function checkInnerLink(thi) {
-
                 console.log("shivam");
                 console.log(thi);
                 console.log( $(thi).closest("div"));
@@ -95,7 +93,6 @@
                 $(thi).closest("div").find('input:checkbox').each(function() {
                     console.log(this);
                     $(this).removeAttr('checked');
-
                 });
                 // checkboxes = thi.getElementsByTagName('input');
                 // for (var i = 0; i < checkboxes.length; i++) {
@@ -114,8 +111,37 @@
                 //     $( thi ).prop( "checked", true );
                 // }
             }
-            
+        </script>
+        <script>
+            $(".p input[type=checkbox]").on("click",function (event) {
+                console.log(this);
+                if($(this).is(":checked")){
+                    $(this) .parent("div"). siblings("div").find(" input[type=checkbox]").each(function (i,e) {
+                        $(e).prop("checked",true);  
+                    });
+                }else{
+                    $(this) .parent("div"). siblings("div").find(" input[type=checkbox]").each(function (i,e) {
+                        $(e).prop("checked",false);    
+                    });
+                }
+            });
+    
+            $(".in input[type=checkbox]").on("click",function(event){ 
+                let isMark = false;
+                if ($(event.target).is(":checked")) {
+                    isMark = true;
+                }
+                $(this).parent("div:first").siblings("div").not(".p").each(function (i,e) {
+                    if($(this).find("input[type=checkbox]").is(":checked")){
+                        isMark = true;
+                    }
+                }); 
+                if(isMark){
+                    $(this).parent("div:first").parent("div").find("div").first().find("input[type=checkbox]").prop('checked',true);
+                }else{ 
+                    $(this).parent("div:first").parent("div").find("div").first().find("input[type=checkbox]").prop('checked',false);
+                } 
+            });
         </script>
     </body>
-
-    </html>
+</html>

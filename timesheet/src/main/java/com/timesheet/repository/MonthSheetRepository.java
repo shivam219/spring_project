@@ -7,9 +7,11 @@ import javax.persistence.Tuple;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.timesheet.model.MonthSheet;
 
+@Repository
 public interface MonthSheetRepository extends CrudRepository<MonthSheet, Long> {
 
 	@Query(value = "select * from timesheet_month_sheet where emp_id = :empId and month(month) = :month and year(month) =:year ", nativeQuery = true)
@@ -28,9 +30,9 @@ public interface MonthSheetRepository extends CrudRepository<MonthSheet, Long> {
 
 	@Query(value = "select\n"
 			+ "    date_format( d.date,' %D %b'),\n"
-			+ "    if(count(date)=1,group_concat(p.project_name), group_concat(p.project_name,' @')),\n"
-			+ "    if(count(date)=1,group_concat(d.descr),group_concat(d.descr,'@')),\n"
-			+ "    if(count(date)=1 ,group_concat(d.hour) ,group_concat(d.hour,'@')) ,\n"
+			+ "    if(count(date)=1,group_concat(p.project_name), group_concat(p.project_name SEPARATOR '@' )),\n"
+			+ "    if(count(date)=1,group_concat(d.descr),group_concat(d.descr SEPARATOR '@')),\n"
+			+ "    if(count(date)=1 ,group_concat(d.hour) ,group_concat(d.hour SEPARATOR '@')) ,\n"
 			+ "    sum(d.hour)\n"
 			+ "from\n"
 			+ "    timesheet_day_sheet d, timesheet_project_master p\n"

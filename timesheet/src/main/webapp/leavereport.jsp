@@ -23,29 +23,59 @@
 
 <body>
 	<div class="container">
-		<div class="row align-items-center mt-5">
-			<div class="col-md-6">
+		<h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Approved Leave Report </h1>
+		<div class="row align-middle  pt-2 mx-0  rounded-top bg-white "   >
+			<div class="col"></div>
+			<div class="col d-flex justify-content-between  align-middle gap-2">   
+				<span class="text-center align-middle mt-1 "> Year</span>
+				<select class="form-control form-select  " name="Year" id="leaveYearSelect" onchange="getAllLeave()">
+					<option value="">Choose</option>
+					<option value="2020">2020</option>
+					<option value="2021">2021</option> 
+					<option value="2022">2022</option>
+				</select>
+				<span class="text-center align-middle mt-1 "> Month</span>
+				<select class="form-control form-select "  name="Month" id="leaveMonthSelect" onchange="getAllLeave()">
+					<option value="">Choose</option>
+					<option value="01">January</option>
+					<option value="02">February</option>
+					<option value="03">March</option>
+					<option value="04">April</option>
+					<option value="05">May</option>
+					<option value="06">June</option>
+					<option value="07">July</option>
+					<option value="08">August</option>
+					<option value="09">September</option>
+					<option value="10">October</option>
+					<option value="11">November</option>
+					<option value="12">December</option>
+				</select>
+			</div>
+			<div class="col"></div>
+		</div>
+		<!-- no need of this -->
+		<div class="row align-items-center mt-2 d-none"> 
+			<!-- <div class="col-md-6">
 				<div>
 					<h5 class="card-title ms-2" style="color: #124265;">Approved Leave Report</h5>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="d-flex flex-wrap align-items-center justify-content-end gap-2 me-2 mb-1 ">
-					<div>
-						<label for="year" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Year</label>
-						<select class="form-select" aria-label="Default select example" name="Year" id="leaveYearSelect"
+				</div>  
+			</div> -->
+			<div class="col  ">
+				<div class="d-flex flex-wrap align-items-center   gap-2  ">
+					<div class="d-flex">
+						<span for="year" class=" badge-soft-primary" >Year</span>
+						<select class="form-control form-select d-flex " aria-label="Default select example" name="Year" id="leaveYearSelect"
 							onchange="getAllLeave()">
-							<option value="">-------select------</option>
+							<option value="">Choose</option>
 							<option value="2020">2020</option>
 							<option value="2021">2021</option>
 							<option value="2022">2022</option>
 						</select>
 					</div>
-					<div>
+					<div class="d-flex">
 						<label for="Month" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Month</label>
-						<select class="form-select" aria-label="Default select example" name="Month"
-							id="leaveMonthSelect" onchange="getAllLeave()">
-							<option value="">-------select------</option>
+						<select class="form-select" aria-label="Default select example" name="Month" id="leaveMonthSelect" onchange="getAllLeave()">
+							<option value="">Choose</option>
 							<option value="01">January</option>
 							<option value="02">February</option>
 							<option value="03">March</option>
@@ -63,7 +93,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row mt-1">
 			<div class="col-lg-12">
 				<div class="">
 					<div class="table-responsive" style="border-radius: 8px;">
@@ -95,7 +125,18 @@
 										<td >${l.getDayMode()}</td>
 										<td >${l.getDays()}</td>
 									</tr>
-								</c:forEach>
+								</c:forEach> 
+								<c:if test='${leaveList.size()== 0}'>   
+									<tr class="border">
+										<td colspan="9" class="bg-white text-center fw-normal h5 p-2 "> No Data</td>
+									</tr>
+								</c:if>
+								<c:if test='${leaveList == null}'>   
+									<tr class="border">
+										<td colspan="9" class="bg-white text-center fw-normal h5 p-2 "> No Data</td>
+									</tr>
+								</c:if>
+								
 							</tbody>
 						</table>
 					</div>
@@ -105,10 +146,12 @@
 
 		<div class="row align-items-center mt-2">
 			<div class="col">
-				<div class="d-flex flex-wrap align-items-center justify-content-center gap-2 mb-1 ">
+				<div class="d-flex flex-wrap align-items-center justify-content-center gap-2">
 					<div>
-						<a href="/download/leave.xlsx?month=09&year=2022" class="btn btn-primary">Export</a>
-						<a href="home" data-bs-target=".add-new" onclick="this.blur()" class="btn btn-danger">Back</a>
+						<a href="/download/leave.xlsx?month=09&year=2022" class="btn px-3 btn-sm btn-primary ">Export</a>
+					</div>
+					<div>
+						<a href="home"  onclick="this.blur()" class="btn px-3 btn-sm btn-secondary">Back</a>
 					</div>
 				</div>
 			</div>

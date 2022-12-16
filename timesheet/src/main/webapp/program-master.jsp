@@ -15,7 +15,7 @@
                 <div class="card mb-4">
                     <div class="card-header text-center">Main menu</div>
                     <div class="card-body">
-                        <div class="row gx-3 mb-3 justify-content-center">
+                        <div class="row gx-3 mb-1 justify-content-center">
                             <div class="col-sm-8 col-md-4">
                                 <table>
                                     <tr>
@@ -29,11 +29,25 @@
                                             </c:forEach>
                                         </select>
                                     </tr>
+                                </table>               
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="table-responsive">
+                                <table class="table  project-list-table align-middle table-borderless" id="monthTable">
+                                    <thead class="thead-dark">
+                                        <th class="text-center" >No</th>
+                                        <th class="text-center" >Display Name</th>
+                                        <th class="text-center" >Link</th>
+                                        <th class="text-center" >Order</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td colspan="4" class="text-center">No Data</td></tr>
+                                    </tbody>
                                 </table>
-                                <div class="card-body  holiday-leave-card">
-                                    <ul class="list-group list-group-flush ms-3" id="weekHoliday">
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -94,26 +108,51 @@
             </div>
         </div>
     </div>
-
-        <script>
-            $("#p_code").on("change", function () {
-                let uri = '/program-link?prgPrnt=' + $("#p_code").val();
-                $.ajax({
-                    async: false,
-                    type: 'GET',
-                    url: uri,
-                    contentType: 'application/json',
-                    success: function (da) {
-                        let str = '';
-                        for (let i = 0; i < da.length; i++) {
-                            let ss = (da[i]);
-                            str = str + '<li>' + ss + '  </li>';
+    
+    <script>
+        // $("#p_code").on("change", function () {
+        //     let uri = '/program-link?prgPrnt=' + $("#p_code").val();
+        //     $.ajax({
+        //         async: false,
+        //         type: 'GET',
+        //         url: uri,
+        //         contentType: 'application/json',
+        //         success: function (da) {
+        //             let str = '';
+        //             for (let i = 0; i < da.length; i++) {
+        //                 let ss = (da[i]);
+        //                 str = str + '<li>' + ss + '  </li>';
+        //             }
+        //             $("#weekHoliday").html(str);
+        //         }
+        //     });
+        // });
+        $("#p_code").on("change", function () {
+            let uri = '/program-link?prgPrnt=' + $("#p_code").val();
+            $.ajax({
+                async: false,
+                type: 'GET',
+                url: uri,
+                contentType: 'application/json',
+                success: function (d2) {
+                    for (let i = $('#monthTable tr').length -1 ; i > 0; i--) {
+                            $('#monthTable tr').eq(i).remove();
                         }
-                        $("#weekHoliday").html(str);
+                    let str = '';
+                    for (let i = 0; i < d2.length; i++) {
+                        let tr ='<tr>' 
+                                +'<td class="text-center"> ' + d2[i][0] + ' </td>'
+                                +'<td class="text-center"> ' + d2[i][1] + ' </td>'
+                                +'<td class="text-center"> ' + d2[i][2] + ' </td>'
+                                +'<td class="text-center"> ' + d2[i][3] + ' </td>'
+                                +'</tr> ';
+                        $("#monthTable").append(tr);									
                     }
-                });
+                }
             });
-        </script>
+        });
+        
+    </script>
 </body>
 
 </html>

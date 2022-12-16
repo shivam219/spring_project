@@ -19,14 +19,11 @@
 
     <body>
         <div class="container"> 
-            <div class="row align-items-center mt-5 bg-white  ">
-                <div class="col-md-4">
-                    <div>
-                        <h5 class="card-title ms-2" style="color: #124265;">Employee Wise Leave Report</h5>
-                    </div>
-                </div>
+            <h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Approved Leave Report </h1>
+            <div class="row align-items-center mt-3 bg-white p-0 m-0 rounded-top  ">
+                <div class="col-2"></div> 
                 <div class="col-md-8">
-                    <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 me-2 mb-1 ">
+                    <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 me-2 mb-1 ">
                         <div>
                             <label for="year" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Year</label>
                             <select class="form-select" aria-label="Default select example" name="Year"
@@ -67,7 +64,7 @@
                             </select>
                         </div>
                         <div>
-                            <label for="statusSelect" class="starlabel">&nbsp;&nbsp;Status</label>
+                            <label for="statusSelect" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Status</label>
                             <select class="form-select" aria-label="Default select example" name="leaveStatus"
                                 id="statusSelect" onchange="getAllLeave()">
                                 <option value="">--------Select-------</option>
@@ -83,7 +80,7 @@
                     <div class="">
                         <div class="table-responsive" style="border-radius: 8px;">
                             <table 
-                                class="table project-list-table table-hover table-nowrap align-middle table-borderless mt-1">
+                                class="table project-list-table table-hover table-nowrap align-middle table-borderless ">
                                 <thead>
                                     <tr class="text-white" style="font-size:15px; background-color:#124265;">
                                         <td scope="col" class="text-white">Leave Id</td>
@@ -109,8 +106,18 @@
                                             <td style="font-size:14px;">${l.getEndDate()}</td>
                                             <td style="font-size:14px;">${l.getDayMode()}</td>
                                             <td style="font-size:14px;">${l.getDays()}</td>
-                                        </tr>
+                                        </tr> 
                                     </c:forEach>
+                                    <c:if test='${leaveList.size()== 0}'>
+                                        <tr class="border">
+                                            <td colspan="9" class="bg-white text-center fw-normal h5 p-2 "> No Data</td>
+                                        </tr>
+                                    </c:if>
+                                    <c:if test='${ leaveList == null}'>
+                                        <tr class="border">
+                                            <td colspan="9" class="bg-white text-center fw-normal h5 p-2 "> No Data</td>
+                                        </tr>
+                                    </c:if>
                                 </tbody>
                             </table>
                         </div>
@@ -124,8 +131,10 @@
             <div class="col">
                 <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 mb-1 ">
                     <div>
-                        <a href="/download2/leave.xlsx?month=09&year=2022" class="btn btn-primary">Export</a>
-                        <a href="home" data-bs-target=".add-new" onclick="this.blur()" class="btn btn-danger">Back</a>
+                        <a href="/download2/leave.xlsx?month=09&year=2022" class="btn px-3 btn-sm btn-primary">Export</a>
+                    </div>
+                    <div>
+                        <a href="home" data-bs-target=".add-new" onclick="this.blur()" class="btn px-3 btn-sm btn-secondary">Back</a>
                     </div>
                 </div>
             </div>

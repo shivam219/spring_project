@@ -19,14 +19,12 @@
 
     <body>
         <div class="container">
-            <div class="row align-items-center mt-5  ">
-                <div class="col-md-6">
-                    <div>
-                        <h5 class="card-title ms-2" style="color: #124265;">Pending Leave Report</h5>
-                    </div>
+            <h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Pending Leave Report </h1>
+            <div class="row align-items-center mt-3 bg-white p-0 m-0 rounded-top  ">
+                <div class="col-3"> 
                 </div>
                 <div class="col-md-6">
-                    <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 me-2 mb-1 ">
+                    <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 me-2 mb-1 ">
                         <div>
                             <label for="year" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Year</label>
                             <select class="form-select" aria-label="Default select example" name="Year"
@@ -93,6 +91,16 @@
                                             <td style="font-size:14px;">${pl.getDays()}</td>
                                         </tr>
                                     </c:forEach>
+                                    <c:if test='${pendingList.size()== 0}'> 
+                                        <tr class="border">
+                                            <td colspan="9" class="bg-white text-center fw-normal h5 p-2 "> No Data</td>
+                                        </tr>
+                                    </c:if> 
+                                    <c:if test='${pendingList == null}'> 
+                                        <tr class="border">
+                                            <td colspan="9" class="bg-white text-center fw-normal h5 p-2 "> No Data</td>
+                                        </tr>
+                                    </c:if>
                                 </tbody>
                             </table>
                         </div>
@@ -104,8 +112,10 @@
             <div class="col">
                 <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 mb-1 ">
                     <div>
-                        <a href="/download1/leave.xlsx?month=09&year=2022" class="btn btn-primary">Export</a>
-                        <a href="home" data-bs-target=".add-new" onclick="this.blur()" class="btn btn-danger">Back</a>
+                        <a href="/download1/leave.xlsx?month=09&year=2022" class="btn px-3 btn-sm btn-primary">Export</a>
+                    </div>
+                    <div>
+                        <a href="home" data-bs-target=".add-new" onclick="this.blur()" class="btn px-3 btn-sm btn-secondary">Back</a>
                     </div>
                 </div>
             </div>

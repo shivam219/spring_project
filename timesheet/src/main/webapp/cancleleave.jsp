@@ -58,8 +58,8 @@
 	</head>
 
 	<body>
-		<div class="container mt-5">
-			<!-- <h1 class=" h4 m-0 my-3 py-2 fw-normal dashboard-headling ">Employee Leaves </h1> -->
+		<div class="container mt-3">
+			<h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Cancel Leave </h1>
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="table-responsive" style="border-radius: 8px;">

@@ -204,10 +204,10 @@ public class EmailService {
 
 	public void Email(String to, String sub, String msg) {
 		try {
-			String from = "shivam.choudhary@ess.net.in";
-			String pwd = "Zipmail@219";
-//			String from = "noreply@ess.net.in";
-//			String pwd = "Zipmail#22";
+//			String from = "shivam.choudhary@ess.net.in";
+//			String pwd = "Zipmail@219";
+			String from = "no-reply@ess.net.in";
+			String pwd = "P@resh@99";
 			String host = "121.240.21.7";
 			Properties pro = new Properties();
 			pro.put("mail.smtp.host", host);
@@ -239,8 +239,8 @@ public class EmailService {
 	}
 
 	public void sendEmail(String to, String msg, String subject) throws Exception {
-		String from = "noreply@ess.net.in";
-		String pwd = "P@ssw0rd";
+		String from = "no-reply@ess.net.in";
+		String pwd = "P@resh@99";
 		String host = "121.240.21.7";
 		Properties pro = new Properties();
 		pro.put("mail.smtp.host", host);

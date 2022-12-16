@@ -152,7 +152,7 @@
 									and b.ugrp_code= ${ugrpCode}
 									order by a.prg_order;
 								</sql:query>  
-								<c:forEach var="table2" items="${rs2.rows}"> 
+								<c:forEach var="table2" items="${rs2.rows}">  
 									<sql:query dataSource="${db}" var="rs3">  
 										SELECT a.prg_code prg_code, a.prg_name prg_name, a.prg_desc prg_desc, a.prg_order
 										from timesheet_program_master a, timesheet_program_groupwise b
@@ -161,6 +161,7 @@
 										and b.ugrp_code= ${ugrpCode}
 										order by a.prg_order;
 									</sql:query>  
+									<!-- work when sub links more then 1  -->
 									<c:if test="${ rs3.getRowCount() > 1 }">
 										<li>
 											<a class="dropdown-item" href="${table2.prg_name}">${table2.prg_desc}&raquo;</a>
@@ -171,6 +172,18 @@
 											</ul>
 										</li>			 
 									</c:if>
+									<!-- work when sub links is 1  -->
+									<c:if test="${rs3.getRowCount() eq 1 }">
+										<li>
+											<a class="dropdown-item" href="${table2.prg_name}">${table2.prg_desc}&raquo;</a>
+											<ul class="dropdown-menu dropdown-submenu">
+												<c:forEach var="table3" items="${rs3.rows}"> 
+													<li> <a class="dropdown-item" href="${table3.prg_name}">${table3.prg_desc}</a>  </li>
+												</c:forEach>	   
+											</ul>
+										</li>		
+									</c:if>
+									<!-- work when sub links is 0 so just print first link  -->
 									<c:if test="${rs3.getRowCount() eq 0 }">
 										<li><a class="dropdown-item" href="${table2.prg_name}">${table2.prg_desc} </a></li>
 									</c:if>
