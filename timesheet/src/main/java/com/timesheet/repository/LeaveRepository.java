@@ -97,7 +97,10 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 			+ "FROM ess.timesheet_leave_master where emp_id = :empId and second_status= 'Approved' ;\n" + "\n"
 			+ "", nativeQuery = true)
 	public List<Tuple> findLeaveTypeStartDateEndDateByEmpId(@Param("empId") long empId);
-
+	
+	@Query(value = "SELECT leave_type , date_format(start_date,' %D %b' ) as start_date , date_format(end_date,' %D %b' ) as end_date  , convert((datediff(end_date , start_date)+1),char) as days FROM timesheet_leave_master where emp_id = :empId and second_status= 'Approved' and 	month(start_date) in (select month(month) from timesheet_month_sheet where month_sheet_id = :monthId)", nativeQuery = true)
+	public List<Tuple> findLeaveTypeStartDateEndDateByEmpIdForMonth(@Param("empId") long empId ,@Param("monthId") long monthId);
+	
 	@Query(value = "select monthname(start_date),\n"
 			+ "    convert(if(sum(if(second_status='Approved',datediff(end_date,start_date)+1,0))<>0,sum(if(second_status='Approved',datediff(end_date,start_date)+1,0)),'')  ,char) approve,"
 			+ "    convert(if(sum(if(second_status='Rejected',datediff(end_date,start_date)+1,0))<>0,sum(if(second_status='Rejected',datediff(end_date,start_date)+1,0)),''),char) reject ,"

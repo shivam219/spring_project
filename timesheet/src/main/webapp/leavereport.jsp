@@ -15,7 +15,8 @@
 	tr {
 		border-width: 0px;
 		border-collapse: collapse;
-	}
+		font-size:14px;
+	} 
 	td{
 		/* font-size:14px; */
 	}

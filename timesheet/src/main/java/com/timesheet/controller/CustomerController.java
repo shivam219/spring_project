@@ -49,10 +49,9 @@ public class CustomerController {
 		ModelAndView m = new ModelAndView("customer-add");
 		m.addObject("users", (List<User>) ur.findAll());
 		m.addObject("customerDomains", (List<CustomerDomain>) cdr.findAll());
-
 		return m;
 	}
-
+	
 	@PostMapping("/customer-add-process")
 	public ResponseEntity<Object> customermasterprocess(Model model, @RequestBody Customer customer) {
 		customer.setOnBoardDate(new SimpleDateFormat("yyyy-mm-dd").format(new Date()));

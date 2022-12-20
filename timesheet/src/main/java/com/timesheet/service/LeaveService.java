@@ -93,6 +93,12 @@ public class LeaveService {
 				e.get(2, String.class), e.get(3, String.class))).collect(Collectors.toList());
 		return ld;
 	}
+	public List<LeaveDto> findLeaveTypeStartDateEndDateByEmpIdForMonth(long empId,long monthSheetId) {
+		List<Tuple> tu = lr.findLeaveTypeStartDateEndDateByEmpIdForMonth(empId,monthSheetId);
+		List<LeaveDto> ld = tu.stream().map(e -> new LeaveDto(e.get(0, String.class), e.get(1, String.class),
+				e.get(2, String.class), e.get(3, String.class))).collect(Collectors.toList());
+		return ld;
+	}
 
 	public List<LeaveDetailsDto> getLeaveByMonthAndYear2(String month, String year) {
 		List<Tuple> tu = lr.getLeaveByMonthAndYear2(month, year);

@@ -14,9 +14,10 @@
         tr {
             border-width: 0px;
             border-collapse: collapse;
+            font-size:14px;
         }
     </style>
-
+ 
     <body>
         <div class="container"> 
             <h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Approved Leave Report </h1>

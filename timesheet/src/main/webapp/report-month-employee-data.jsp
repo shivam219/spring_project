@@ -5,6 +5,7 @@
     <title>Profie ${empName} </title>
     <link rel="stylesheet" href="css/form-style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <style>
       .progress-container {
         top: 0;
@@ -106,7 +107,6 @@
               </div>
             </div>
           </div>
-
         </div>
 
         <div class="col-lg-6">
@@ -116,8 +116,16 @@
               <div id="pieChart" style="min-height: 300px;" class="echart"></div>
             </div>
           </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Day Details</h5>
+              <div id="columnChart"></div>
+            </div>
+          </div>
         </div>
       </div>
+
+      
 
       <div class="row">
         <div class="col-lg-12">
@@ -131,8 +139,6 @@
                 <th class="text-center overflow-auto" scope="row">Hour</th>
               </thead>
               <tbody>
-
-
               </tbody>
             </table>
           </div>
@@ -189,9 +195,75 @@
       });
     </script>
 
+    <script>
+      let data2 = [];
+      $.ajax({
+        async: false,
+        type: 'POST',
+        url: 'fetch-month-sheet-employee-chart?monthSheetId=' + $("#monthSheetId").val() + '',
+        contentType: 'application/json',
+        success: function (d, msg, xh) {
+          for (let i = 0; i < d.length; i++) {
+            data2[i] = { value: d[i]["dayCount"], name: d[i]["task"] }
+          }
+        },
+        error: function (d, msg, xh) {
+        }
+      });
+      document.addEventListener("DOMContentLoaded", () => {
+        new ApexCharts(document.querySelector("#columnChart"), {
+          series: [{
+            name: 'Kotak-Payement Intrigration',
+            data: [4, 5,5, 5, 6, 1, 5, 6, 6, 6, 5, 6, 1, 5, 6, 6, 6]
+          }, {  
+            name: 'BM-Transport Management',
+            data: [7, 5,5, 1, 8, 7, 1, 9, 1, 4, 1, 8, 7, 1, 9, 1, 4]
+          }, {
+            name: 'Wipro - Project Work',
+            data: [3, 1,1, 6, 6, 5, 4, 5, 5, 1, 6, 6, 5, 4, 5, 5, 1]
+          }],
+          chart: {
+            type: 'bar',
+            height: 350
+          },
+          plotOptions: {
+            bar: {
+              horizontal: false,
+              columnWidth: '55%',
+              endingShape: 'rounded'
+            },
+          },
+          dataLabels: {
+            enabled: false
+          },
+          stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+          },
+          xaxis: {
+            categories: ['1', '2', '3', '4', '5', '8', '9', '10', '11',,'14','14','14','14','14','14'],
+          },
+          yaxis: {
+            title: {
+              text: '$ (thousands)'
+            }
+          },
+          fill: {
+            opacity: 1
+          },
+          tooltip: {
+            y: {
+              formatter: function(val) {
+                return "" + val + " Hour "
+              }
+            }
+          }
+        }).render();
+      });
+    </script>
 
     <script>
-      // When the user scrolls the page, execute myFunction 
       window.onscroll = function () { myFunction() };
 
       function myFunction() {
