@@ -16,37 +16,37 @@
 
         <div class="container-xl px-4 mt-4">
             <div class="row px-4 ">
-                <div class="col col-xl-12">
+                <div class="col col-xl-12"> 
                     <div class="card mb-4">
                         <div class="card-header text-center">Edit Program for Group</div>
-                        <div class="card-body">
-                            <form method="post" name="frmGroupmasteredit" class="form" autocomplete="off">
+                        <div class="card-body"> 
+                            <form method="post" name="frmGroupmasteredit" id="frmGroupmasteredit" class="form" autocomplete="off" action="program-group-edit-map">
                                 <div class="row gx-3 mb-3 justify-content-center">
                                     <div class="col-md-6">
                                         <div>
-                                            <h5 class=" mb-1 text-center">Group : ${ugrpDesc} </h5>
+                                            <h5 class=" mb-1  text-primary text-center">Group : ${ugrpDesc} </h5>
                                             <input type="hidden" value="${ugrpCode}" readonly id="ugrpCode">
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="checkbox" name="ALL" id="ALL" value="Y" class="form-check-input" onclick="checkAll('frmGroupmasteredit')">
-                                            <label class="form-check-label" for="ALL"> Check All</label>
+                                        </div> 
+                                        <div class="form-check"> 
+                                            <input type="checkbox" id="ALL" value="Y" class="form-check-input" onclick="checkAll('frmGroupmasteredit')">
+                                            <label class="form-check-label" for="ALL"> Change All</label>
                                         </div>
                                         <c:forEach items="${programList}" var="pl" varStatus="loop">
                                             <div>
                                                 <div class="form-check p">
-                                                    <input class="form-check-input" type="checkbox" name="${pl[1]}" value="${pl[0]}" id="${pl[1]}" >
+                                                    <input class="form-check-input" type="checkbox" name="${pl[1]}" value="${pl[0]}" id="${pl[1]}" ${pl[2]} >
                                                     <label class="form-check-label" for="${pl[1]}" >${pl[1]}</label>
                                                 </div>
                                                 <c:forEach items="${allProgramList}" var="alp" varStatus="loop"> 
                                                     <c:if test = "${pl[0] eq alp[0]}">
                                                         <div class="form-check ms-4 in ">
-                                                            <input class="form-check-input" type="checkbox"  name="${alp[1]}"  value="${alp[2]}"    id="${alp[1]}">
+                                                            <input class="form-check-input" type="checkbox"  name="${alp[1]}"  value="${alp[2]}" id="${alp[1]}" ${alp[3]}>
                                                             <label class="form-check-label" for="${alp[1]}" >  ${alp[1]}</label>
                                                         </div>
                                                         <c:forEach items="${allProgramList}" var="alp2" varStatus="loop"> 
                                                             <c:if test = "${alp[2] eq alp2[0]}">
                                                                 <div class="form-check ms-5 in ">
-                                                                    <input class="form-check-input" type="checkbox" name="${alp2[1]}" value="${alp2[2]}"   id="${alp2[1]}">
+                                                                    <input class="form-check-input" type="checkbox" name="${alp2[1]}" value="${alp2[2]}"   id="${alp2[1]}" ${alp2[3]}>
                                                                     <label class="form-check-label" for="${alp2[1]}" >  ${alp2[1]}</label>
                                                                 </div>
                                                             </c:if>
@@ -55,8 +55,13 @@
                                                 </c:forEach>
                                             </div>
                                        </c:forEach>      
-                                    
                                     </div>
+                                </div>
+                                <div class="row justify-content-center gap-2">
+                                    <a class="btn btn-secondary    btn-sm  px-4 w-auto" type="button" href="program-master" > Back </a> 
+                                    <button class="btn btn-primary btn-sm  px-4 w-auto" type="submit" id="btnSave">
+                                        <span id="loadingBtn"></span>&nbsp;Save &nbsp; 
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -111,6 +116,12 @@
                 //     $( thi ).prop( "checked", true );
                 // }
             }
+            $("#frmGroupmasteredit").on("submit",function(event) {
+                event.preventDefault();
+                let ugrpCode = $("#ugrpCode").val()
+                $("#frmGroupmasteredit").attr("action","program-group-edit-map?"+"ugrpCode="+ugrpCode);
+                document.forms[0].submit(); 
+            });  
         </script>
         <script>
             $(".p input[type=checkbox]").on("click",function (event) {

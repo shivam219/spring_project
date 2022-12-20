@@ -77,7 +77,7 @@
 										<td class="text-center" >${d.getDate()}</td>
 										<td class="text-center" >${d.getTotalHour()}</td> 
  										<td colspan="6">
-											 <span style='font-size:25px;user-select: none;' >&#9656;</span>
+											 <span style='font-size:25px;user-select: all;' >&#9656;</span>
 											<c:forEach items="${d.getDataDtos()}" var="dd">
 												<div style="display: none;"> 
 													<div class="row  m-0 p-0 ">
@@ -116,76 +116,7 @@
                 $(this).css("color","red");
             }
         });
-			// $(document).ready(function () {
-			// 	$.ajax({
-			// 		type: 'GET',
-			// 		url: 'fetch-month-sheet-employee-approve?monthSheetId=' + $("#monthSheetId").val() + '',
-			// 		contentType: 'application/json',
-			// 		success: function (d, msg, xh) {
-
-			// 			let d2 = [];
-			// 			let set = new Set();
-			// 			if(d.length>0){
-			// 				set.add(d[0]['date']);
-			// 				d2.push(d[0]);
-			// 				for (let i = 1; i < d.length; i++) {
-			// 					if(set.has(d[i]['date'])){
-			// 						d2.push(d[i]);
-			// 					}else{
-			// 						let hour = parseInt(d2[0]['hour']);
-			// 						let hours = parseInt(d2[0]['hour']);
-			// 						let tr = 	'<tr>' 
-			// 									+'<td class="text-center " rowspan= '+ parseInt(d2.length)+' > ' + d2[0]['date'] + ' </td>'
-			// 									+'<td class="text-center " > ' + d2[0]['projectName'] + ' </td>'
-			// 									+'<td class="text-center " > ' + d2[0]['hour'] + ' </td>'
-			// 									+'<td  > ' + d2[0]['descr'] + ' </td>'
-			// 									+'</tr> ';
-			// 							$("#monthTable").append(tr);
-			// 							for (let j = 1; j < d2.length; j++) {
-			// 								hours = hours+ parseInt(d2[j]['hour']); 
-			// 								let tri = '<tr > '
-			// 											+'<td class="text-center" > ' + d2[j]['projectName'] + ' </td>'
-			// 											+'<td  class="text-center " > ' + d2[j]['hour'] + ' </td>'
-			// 											+'<td  > ' + d2[j]['descr'] + ' </td>'
-			// 											+'</tr> ';
-			// 							$("#monthTable").append(tri);
-			// 						}
-			// 						if(hour!=hours){
-			// 							$("#monthTable").append('<tr><td></td><td></td><td  class="text-center fw-bold">'+hours+'</td><td></td></tr>');
-			// 						}
-			// 						set.clear();
-			// 						set.add(d[i]['date']);
-			// 						d2=[];
-			// 						d2.push(d[i]);
-			// 					}
-			// 					if(i == d.length-1){
-			// 						let hour = parseInt(d2[0]['hour']);
-			// 						let hours = parseInt(d2[0]['hour']);
-			// 						let tr = 	'<tr>' 
-			// 									+'<td class="text-center " rowspan= '+ parseInt(d2.length)+' > ' + d2[0]['date'] + ' </td>'
-			// 									+'<td class="text-center " > ' + d2[0]['projectName'] + ' </td>'
-			// 									+'<td class="text-center " > ' + d2[0]['hour'] + ' </td>'
-			// 									+'<td  > ' + d2[0]['descr'] + ' </td>'
-			// 									+'</tr> ';
-			// 							$("#monthTable").append(tr);
-			// 							for (let j = 1; j < d2.length; j++) {
-			// 								hours = hours+ parseInt(d2[j]['hour']); 
-			// 								let tri = '<tr > '
-			// 											+'<td class="text-center" > ' + d2[j]['projectName'] + ' </td>'
-			// 											+'<td  class="text-center " > ' + d2[j]['hour'] + ' </td>'
-			// 											+'<td  > ' + d2[j]['descr'] + ' </td>'
-			// 											+'</tr> ';
-			// 							$("#monthTable").append(tri);
-			// 						}
-			// 						if(hour!=hours){
-			// 							$("#monthTable").append('<tr><td></td><td></td><td  class="text-center fw-bold">'+hours+'</td><td></td></tr>');
-			// 						}
-			// 					}
-			// 				}
-			// 			}
-			// 		}
-			// 	})
-			// });
+			
 			$("#btnApprove").on("click", function () {
 				$("#btnApproveLd").addClass("spinner-border spinner-border-sm");
 				let data = {

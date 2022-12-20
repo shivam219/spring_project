@@ -164,7 +164,7 @@
     <div class="row mt-2">
       <div class="col-md-6">
         <div>
-          <button class="btn btn-secondary btn-sm px-5 py-1" type="button" onclick="location='project-master'"> Back </button>
+          <button class="btn btn-secondary btn-sm px-5 py-1" type="button" onclick="history.back()"> Back </button>
         </div>
       </div>
     </div>

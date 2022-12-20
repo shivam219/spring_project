@@ -5,15 +5,18 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.timesheet.model.Program;
 import com.timesheet.model.ProgramGroup;
 import com.timesheet.model.UserGroup;
 import com.timesheet.repository.ProgramGroupRepository;
@@ -32,25 +35,10 @@ public class ProgramController {
 	@Autowired
 	ProgramGroupRepository pgr;
 
-//	@GetMapping("/program-master")
-//	public String assignproject(HttpServletRequest request, Model m) {
-
-//		request.setAttribute("name", 10);
-//		
-//		ArrayList<Integer> a = new ArrayList();
-//		Object c = a;
-//		a.add(12);
-//		request.setAttribute("list1", a);
-//		ArrayList<Integer> b1 = (ArrayList<Integer>) request.getAttribute("list1");
-//		int  b2 = (int) request.getAttribute("name");
-//		System.out.println(b2);
-//		return "program-master";
-//	}
-
 	@GetMapping("/program-master")
 	public ModelAndView programMater() {
 		ModelAndView modelAndView = new ModelAndView("program-master");
-		modelAndView.addObject("programList", pr.findAllProgram2());
+		modelAndView.addObject("programList", pr.findAllProgramIncludeSub());
 		modelAndView.addObject("userGroupList", ugr.findAllMappedGroup());
 		return modelAndView;
 	}
@@ -63,19 +51,9 @@ public class ProgramController {
 		return "program-add";
 	}
 
-	@GetMapping(value = "/program-edit")
-	public String programEdit(Model m, @RequestParam(value = "ugrpCode", required = false) UserGroup ug) {
-		m.addAttribute("ugrpCode", ug.getUgrpCode());
-		m.addAttribute("ugrpDesc", ug.getUgrpDesc());
-		m.addAttribute("programList", pr.findAllProgram2());
-		m.addAttribute("allProgramList", pr.findAllProgramLink());
-		return "program-edit";
-	}
-
 	@PostMapping("/program-group-map")
 	public String projectassign(HttpServletRequest request,
-			@RequestParam(name = "ugrpCode", required = false, defaultValue = "5") int ugrpCode,
-			@RequestParam(name = "projectList", required = false, defaultValue = "") int[] projectList) {
+			@RequestParam(name = "ugrpCode", required = false, defaultValue = "5") int ugrpCode) {
 		ugrpCode = 5;
 		pgr.deleteByUgrpCodeNative(5);
 		String createBy = request.getSession().getAttribute("empName").toString();
@@ -83,7 +61,6 @@ public class ProgramController {
 		for (Iterator iterator = parameterNames.iterator(); iterator.hasNext();) {
 			String prm = (String) iterator.next();
 			Integer val = Integer.parseInt(request.getParameterValues(prm)[0]);
-			System.out.println(val);
 			ProgramGroup m = new ProgramGroup();
 			m.setUgrpCode(ugrpCode);
 			m.setPrgCode(val);
@@ -91,6 +68,51 @@ public class ProgramController {
 			pgr.save(m);
 		}
 		return "redirect:/program-add";
+	}
+
+	@GetMapping(value = "/program-edit")
+	public String programEdit(Model m, @RequestParam(value = "ugrpCode", required = false) UserGroup ug) {
+		m.addAttribute("ugrpCode", ug.getUgrpCode());
+		m.addAttribute("ugrpDesc", ug.getUgrpDesc());
+		m.addAttribute("programList", pr.findAllProgram2(ug.getUgrpCode()));
+		m.addAttribute("allProgramList", pr.findAllProgramLinkEdit(ug.getUgrpCode()));
+		return "program-edit";
+	}
+
+	@PostMapping("/program-group-edit-map")
+	public String projectEditMap(HttpServletRequest request, @RequestParam("ugrpCode") int ugrpCode) {
+		if (ugrpCode == 0) {
+			return "redirect:/program-master";
+		}
+		System.out.println(ugrpCode);
+		pgr.deleteByUgrpCodeNative(ugrpCode);
+		String createBy = request.getSession().getAttribute("empName").toString();
+		List<String> parameterNames = new ArrayList<String>(request.getParameterMap().keySet());
+		for (Iterator iterator = parameterNames.iterator(); iterator.hasNext();) {
+			String prm = (String) iterator.next();
+			Integer val = Integer.parseInt(request.getParameterValues(prm)[0]);
+			ProgramGroup m = new ProgramGroup();
+			m.setUgrpCode(ugrpCode);
+			m.setPrgCode(val);
+			m.setCreatedBy(createBy);
+			pgr.save(m);
+		}
+		return "redirect:/program-master";
+	}
+
+	@PostMapping("/program-menu-add")
+	public String projectEditMap(HttpServletRequest request, @ModelAttribute() Program m) {
+		HttpSession session = request.getSession();
+		if (m.getPrgName() == null || m.getPrgDesc() == null) {
+			return "redirect:/program-master";
+		}
+		Integer[] parr = pr.findLastPrgcodeAndPrgOrder(Integer.parseInt(m.getPrgPrnt())).get(0);
+		m.setPrgCode((parr[0]+1));
+		m.setPrgOrder((parr[1])+1);
+		m.setCreatedBy((String) session.getAttribute("empName"));
+		pr.save(m);
+//		System.out.println(m);
+		return "redirect:/program-master";
 	}
 
 }

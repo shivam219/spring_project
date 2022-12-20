@@ -16,8 +16,9 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name = "timesheet_program_master")
 @Entity
 public class Program {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "PRG_CODE")
 	Integer prgCode;
 	@Column(name = "PRG_DESC")
@@ -57,7 +58,7 @@ public class Program {
 		this.createdTime = createdTime;
 		this.modifiedBy = modifiedBy;
 		this.modifiedTime = modifiedTime;
-	}
+	} 
 
 	public Integer getPrgCode() {
 		return prgCode;

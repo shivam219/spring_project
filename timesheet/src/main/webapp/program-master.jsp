@@ -5,6 +5,9 @@
 <head>
     <title>Program master </title>
     <link rel="stylesheet" href="css/form-style.css">
+    <style>       tr td input{
+        text-align: center;
+    }</style>
 </head>
 
 <body>
@@ -12,46 +15,55 @@
     <div class="container-xl px-4 mt-4">
         <div class="row px-4 ">
             <div class="col col-xl-12">
-                <div class="card mb-4">
-                    <div class="card-header text-center">Main menu</div>
-                    <div class="card-body">
-                        <div class="row gx-3 mb-1 justify-content-center">
-                            <div class="col-sm-8 col-md-4">
-                                <table>
-                                    <tr>
-                                        <label class="small mb-1" for="groupDesc"> Choose menu</label>
-                                        <select id="p_code" class="form-control form-select">
-                                            <option value="">
-                                                Select Program
-                                            </option>
-                                            <c:forEach items="${programList}" var="c" varStatus="loop">
-                                                <option value="${c[0]}">${c[1]}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </tr>
-                                </table>               
-                               
+
+                <form action="program-menu-add" id="programMenuAdd" method="post" onsubmit="return validate(this)" >
+                           
+                    <div class="card mb-4">
+                        <div class="card-header text-center">Main menu</div>
+                        <div class="card-body">
+                            <div class="row gx-3 mb-1 justify-content-center">
+                                <div class="col-sm-8 col-md-4">
+                                    <table>
+                                        <tr>
+                                            <label class="small mb-1" for="groupDesc"> Choose menu</label>
+                                            <select id="p_code" name="prgPrnt" class="form-control form-select"  autocomplete="off"  >
+                                                <option value="-1">
+                                                    Select Program
+                                                </option>
+                                                <c:forEach items="${programList}" var="c" varStatus="loop">
+                                                    <option value="${c[0]}">${c[1]}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </tr>
+                                    </table>               
+                                
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                    <div class="table-responsive">
+                                        <table class="table  project-list-table align-middle table-borderless" id="monthTable">
+                                            <thead class="thead-dark">
+                                                <th class="text-center" >No</th>
+                                                <th class="text-center" >Display Name</th>
+                                                <th class="text-center" >Link</th>
+                                                <th class="text-center" >Order</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td colspan="4" class="text-center">No Data  </td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div> 
+                                    <div class="row justify-content-center gap-2 pb-3  d-none " id="btnForm">
+                                        <button class="btn btn-primary px-3   py-1 w-auto " type="submit" id="btnSave">
+                                            <span id="loadingBtn"> </span> &nbsp; Add Link &nbsp;
+                                        </button>
+                                    </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-8">
-                            <div class="table-responsive">
-                                <table class="table  project-list-table align-middle table-borderless" id="monthTable">
-                                    <thead class="thead-dark">
-                                        <th class="text-center" >No</th>
-                                        <th class="text-center" >Display Name</th>
-                                        <th class="text-center" >Link</th>
-                                        <th class="text-center" >Order</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td colspan="4" class="text-center">No Data</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -110,23 +122,6 @@
     </div>
     
     <script>
-        // $("#p_code").on("change", function () {
-        //     let uri = '/program-link?prgPrnt=' + $("#p_code").val();
-        //     $.ajax({
-        //         async: false,
-        //         type: 'GET',
-        //         url: uri,
-        //         contentType: 'application/json',
-        //         success: function (da) {
-        //             let str = '';
-        //             for (let i = 0; i < da.length; i++) {
-        //                 let ss = (da[i]);
-        //                 str = str + '<li>' + ss + '  </li>';
-        //             }
-        //             $("#weekHoliday").html(str);
-        //         }
-        //     });
-        // });
         $("#p_code").on("change", function () {
             let uri = '/program-link?prgPrnt=' + $("#p_code").val();
             $.ajax({
@@ -138,19 +133,63 @@
                     for (let i = $('#monthTable tr').length -1 ; i > 0; i--) {
                             $('#monthTable tr').eq(i).remove();
                         }
-                    let str = '';
-                    for (let i = 0; i < d2.length; i++) {
-                        let tr ='<tr>' 
+                    let str = ''; 
+                    if(d2.length==0){
+                        $("#monthTable").append("<tr><td colspan='4'class='text-center'>No Data</td><tr>");									                        
+                            $("#btnForm").addClass("d-none");
+                    }else{
+                        for (let i = 0; i < d2.length; i++) {
+                            let tr ='<tr>' 
                                 +'<td class="text-center"> ' + d2[i][0] + ' </td>'
                                 +'<td class="text-center"> ' + d2[i][1] + ' </td>'
                                 +'<td class="text-center"> ' + d2[i][2] + ' </td>'
                                 +'<td class="text-center"> ' + d2[i][3] + ' </td>'
                                 +'</tr> ';
-                        $("#monthTable").append(tr);									
+                            str = str+tr;						
+                        }  
+                        // PRG_CODE, PRG_DESC , PRG_NAME ,PRG_ORDER 
+                        let tr2 ='<tr>'
+                                +'<td class="text-center"> <input type="number" value="" name="prgCode"  class="form-control h-50 d-none w-auto  "> </td>'
+                                +'<td class="text-center"> <input type="text"   value="" name="prgDesc"  class="form-control h-50  "> </td>'
+                                +'<td class="text-center"> <input type="text"   value="" name="prgName"  class="form-control h-50  "> </td>'
+                                +'<td class="text-center"> <input type="number" value="" name="prgOrder" class="form-control h-50 d-none w-auto"> </td>'
+                                +'</tr> ';
+                        str = str+tr2;		
+                        $("#monthTable").append(str);
+                        $("#btnForm").removeClass("d-none");
+                        	
                     }
                 }
             });
         });
+
+
+        function validate(fm) {
+            console.log("hiii");
+            $('#btnSave').attr("disabled", true);
+            if (fm.prgCode.value == "") {
+                fm.startDate.focus();
+                alert("Program Code is Empty");
+                return false;
+            }
+            if (fm.prgDesc.value == "") {
+                fm.prgDesc.focus();
+                alert("Program Description Empty");
+                return false;
+            }
+            if (fm.prgName.value == "") {
+                fm.prgName.focus();
+                alert("Program  Name Empty");
+                return false;
+            }
+            if (fm.prgOrder.value == "") { 
+                fm.prgOrder.focus();
+                alert("Program Order Name Empty");
+                return false;
+            }
+            return true;
+        }
+        
         
     </script>
 </body>
