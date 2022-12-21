@@ -7,6 +7,16 @@
 		<link href="css/dataTables.dateTime.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 		<style>
+			
+			tbody,
+	td,
+	td a tfoot,
+	th,
+	thead,
+	tr {
+		border-width: 0px;
+		border-collapse: collapse;
+	}
 			.dataTables_info {
 				visibility: hidden;
 			}
@@ -16,19 +26,28 @@
 			}
 
 			.dataTables_filter {
-				visibility: hidden;
+				visibility: hidden; 
 			}
 
 			.dataTables_wrapper {
-				background-color: #fff;
+				/* background-color: #fff; */
 			}
 
-			.dataTables_wrapper .dataTables_paginate .paginate_button {
+			/* .dataTables_wrapper .dataTables_paginate .paginate_button {
 				box-sizing: border-box;
 				display: inline-block;
 				min-width: 1.5em;
 				padding: .2em 1em;
+			} */
+
+			.paginate_button{
+				border: 0px ;
 			}
+			.current{
+				border: 0px ;
+
+			}
+			
 		</style>
 	</head>
 
@@ -37,21 +56,18 @@
 		<div class="container">
 			<div class="row align-items-center mt-5">
 				<div class="col d-inline-flex align-items-center justify-content-center mb-2">
-					<label for="min">Start date</label> <input type="text" id="min" name="min" placeholder="select date"
-						class="form-control w-auto mx-2" style="font-size:14px;">
-					<label for="max">End date</label> <input type="text" id="max" name="max" placeholder="select date"
-						class="form-control w-auto mx-2" style="font-size:14px;">
-					<input type="button" value="Reset" class="btn btn-sm btn-danger mx-3 fw-normal w-auto "
-						id="btnReset" onclick="resetStartEndDate()"></td>
+					<label for="min">Start date</label> 
+					<input type="text" id="min" name="min" placeholder="select date" class="form-control w-auto mx-2" style="font-size:14px;">
+					<label for="max">End date</label> <input type="text" id="max" name="max" placeholder="select date" class="form-control w-auto mx-2" style="font-size:14px;">
+					<input type="button" value="Reset" class="btn btn-sm btn-danger mx-3 fw-normal w-auto"id="btnReset" onclick="resetStartEndDate()"></td>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="">
 						<div class="table-responsive">
-							<table class="table project-list-table table-nowrap align-middle table-borderless"
-								id="example">
-								<thead style="font-size:14px;">
+							<table 	id="example">
+								<thead>
 									<tr class="text-white" style="background-color:#124265;">
 										<th scope="col" class="text-white">Leave Type</th>
 										<th scope="col" class="text-white">Start Date</th>
@@ -62,14 +78,10 @@
 								<tbody>
 									<c:forEach items="${list}" var="l" varStatus="loop">
 										<tr>
-											<td class="overflow-auto" style="font-size:13px; border-width: 1px;">
-												${l.getLeaveType()}</td>
-											<td class="overflow-auto" style="font-size:13px; border-width: 1px;">
-												${l.getStartDate()}</td>
-											<td class="overflow-auto" style="font-size:13px; border-width: 1px;">
-												${l.getEndDate()}</td>
-											<td class="overflow-auto" style="font-size:13px; border-width: 1px;">
-												${l.getStatus()}</td>
+											<td class="overflow-auto">${l.getLeaveType()}</td>
+											<td class="overflow-auto">${l.getStartDate()}</td>
+											<td class="overflow-auto">${l.getEndDate()}</td>
+											<td class="overflow-auto">${l.getStatus()}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -82,8 +94,7 @@
 				<div class="col">
 					<div class="d-flex flex-wrap align-items-center justify-content-start gap-2 ms-1 mb-1 ">
 						<div>
-							<a class="btn btn-secondary px-5   w-auto  order-md-1 order-2  " type="button" href="home">
-								Back </a>
+							<a class="btn btn-secondary px-5   w-auto  order-md-1 order-2" type="button" href="home"> Back </a>
 						</div>
 					</div>
 				</div>
@@ -155,7 +166,10 @@
 				});
 
 				// DataTables initialisation
-				var table = $('#example').DataTable();
+				// var table = $('#example').DataTable(); 
+				var table = $('#example').DataTable({
+					order:[[1,'DESC']],
+				});
 
 				// Refilter the table
 				$('#min, #max').on('change', function () {

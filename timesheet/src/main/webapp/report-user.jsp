@@ -35,13 +35,6 @@
                 </div>
 
                 <div class="row">
-                  <div class="col text-start">Designation</div>
-                  <div class="col">
-                    <span class="badge badge-soft-success mb-0 fw-bold" style="font-size: 14px;"> Java Developer</span>
-                  </div>
-                </div>
-
-                <div class="row">
                   <div class="col text-start">Email</div>
                   <div class="col">${user.getEmpEmail()}</div>
                 </div>

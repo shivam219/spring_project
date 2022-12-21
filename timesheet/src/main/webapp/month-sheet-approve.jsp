@@ -77,7 +77,7 @@
 										<td class="text-center" >${d.getDate()}</td>
 										<td class="text-center" >${d.getTotalHour()}</td> 
  										<td colspan="6">
-											 <span style='font-size:25px;user-select: all;' >&#9656;</span>
+											 <span style='font-size:28px;user-select: none;' >&#9656;</span>
 											<c:forEach items="${d.getDataDtos()}" var="dd">
 												<div style="display: none;"> 
 													<div class="row  m-0 p-0 ">

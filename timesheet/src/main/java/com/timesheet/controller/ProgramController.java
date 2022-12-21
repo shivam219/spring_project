@@ -74,7 +74,7 @@ public class ProgramController {
 	public String programEdit(Model m, @RequestParam(value = "ugrpCode", required = false) UserGroup ug) {
 		m.addAttribute("ugrpCode", ug.getUgrpCode());
 		m.addAttribute("ugrpDesc", ug.getUgrpDesc());
-		m.addAttribute("programList", pr.findAllProgram2(ug.getUgrpCode()));
+		m.addAttribute("programList", pr.findAllTopMenu(ug.getUgrpCode()));
 		m.addAttribute("allProgramList", pr.findAllProgramLinkEdit(ug.getUgrpCode()));
 		return "program-edit";
 	}

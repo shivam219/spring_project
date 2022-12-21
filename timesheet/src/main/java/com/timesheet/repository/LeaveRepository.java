@@ -57,8 +57,8 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 	@Query(value = "SELECT count(status) FROM ess.timesheet_leave_master where status='Rejected' and month(start_date)=month(now()) and emp_id = :empId", nativeQuery = true)
 	public Integer getRejectedCountOfMonth(long empId);
 
-	@Query(value = "select leave_type, date_format(start_date,'%D %M %Y' ) as start_date, date_format(end_date,'%D %M %Y' ) as end_date, status, a.*  from timesheet_leave_master a", nativeQuery = true)
-	public List<Leave> getLeaveStatus();
+	@Query(value = "select leave_type, date_format(start_date,'%D %M %Y' ) as start_date, date_format(end_date,'%D %M %Y' ) as end_date, status, a.*  from timesheet_leave_master a where emp_id = :empId", nativeQuery = true)
+	public List<Leave> getLeaveStatus(@Param("empId") long empId);
 
 	@Query(value = "select  *  from timesheet_leave_master  where month(start_date) = :month and year(start_date) = :year and status = :status and emp_id = :empId", nativeQuery = true)
 	public List<Leave> getEmploeeWiseReport(@Param("month") String month, @Param("year") String year,
@@ -78,7 +78,7 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 			+ ",  if(regexp_like(day_mode ,'Full Day'),  convert((datediff(end_date , start_date)+1),char) , convert( 0.5 ,char) )  from timesheet_leave_master where month(start_date) = :month and year(start_date) = :year and status in ('Pending') ", nativeQuery = true)
 	public List<Tuple> getPendingLeaveByMonthAndYear2(@Param("month") String month, @Param("year") String year);
 
-	@Query(value = "select concat(date_format(start_date,'%D %b' ), ' to ', date_format(end_date,'%D %b' ),  ', ',concat(leave_type)) as Leaves FROM timesheet_leave_master where start_date between :startDate and  :endDate  ORDER BY DATE(start_date) ASC ", nativeQuery = true)
+	@Query(value = "select concat(date_format(start_date,'%D %b' ), ' to ', date_format(end_date,'%D %b' ),  ', ',concat(leave_type)) as Leaves FROM timesheet_leave_master where start_date between :startDate and  :endDate and second_status= 'Approved' ORDER BY DATE(start_date) ASC ", nativeQuery = true)
 	public List<Object> getWeekLeaves(@Param("startDate") String year, @Param("endDate") String month);
 
 	@Query(value = "SELECT leave_code,approve_reason,attachment,day_mode,emp_id,emp_name,end_date,  ifnull(leave_id , concat('L' ,LPAD( (:leaveCode) ,9,'0'))) as leave_id ,leave_manager_id,leave_reason,leave_type,manager_id,manager_name,reject_reason,second_approve_reason,second_status,start_date,status,submitted_date\n"

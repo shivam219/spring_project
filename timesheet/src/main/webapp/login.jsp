@@ -120,10 +120,6 @@ background-color: #f6f9ff;
 
 								</div>
 							</div>
-
-							<div class="credits">
-								Designed by <a href="https://www.linkedin.com/in/shivam-choudhary-b58205193/">Shivam</a>
-							</div>
 						</div>
 					</div>
 				</div>

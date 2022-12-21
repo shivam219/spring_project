@@ -249,8 +249,7 @@
                                 </div>
                                 <!-- Save changes button-->
                                 <div class="row justify-content-center gap-2 ">
-                                    <button class="btn btn-secondary px-5 w-auto  " type="button"
-                                    href="employee-master"> Back </button>
+                                    <button class="btn btn-secondary px-5 w-auto"  type="button" onclick="history.back()"> Back </button>
                                     <button class="btn btn-primary px-3 w-auto " type="submit" id="btnSave">
                                         <span id="loadingBtn"> </span> &nbsp; Save Changes &nbsp;
                                     </button>
@@ -357,20 +356,11 @@
                                 title: "Success",
                                 text: "Employee Updated Successfully",
                                 icon: "success",
-                            }).
-                                then(function (isOkay) {
-                                    if (isOkay) {
-                                        // console.log(document.referrer.replace(location.origin,''));
-                                        // http://localhost:8080/employee-master?page=2
-                                        location.replace(document.referrer.replace(location.origin, ''));
-                                    }
-                                });
-                            console.log(data);
-                        }, error: function (data, msg, xh) {
-                            // $("#empId").addClass("is-invalid");
-                            // $("#empPassword").addClass("is-invalid");
-                            // $("#empPassWar").removeClass("d-none");
-                            // $("#empIdWar").  removeClass("d-none");
+                                showConfirmButton: false,
+                                timer: 700
+                            });
+                            location.replace('/employee-master');
+                        }, error: function () {
                             $("#loadingBtn").removeClass("spinner-border spinner-border-sm");
                         }
                     });

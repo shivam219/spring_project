@@ -13,6 +13,10 @@ public interface ProgramRepository extends CrudRepository<Program, Integer> {
 	@Query(value = "select PRG_CODE, PRG_DESC , isGroupExits(PRG_CODE, :ugrpCode)  from timesheet_program_master where PRG_NAME = '#' ", nativeQuery = true)
 	public List<String[]> findAllProgram2(@Param("ugrpCode") int ugrpCode);
 
+	@Query(value = "select PRG_CODE, PRG_DESC , isGroupExits(PRG_CODE, :ugrpCode)  from timesheet_program_master where  PRG_PRNT is null ", nativeQuery = true)
+	public List<String[]> findAllTopMenu(@Param("ugrpCode") int ugrpCode);
+
+	
 	@Query(value = "select PRG_CODE, PRG_DESC from timesheet_program_master where PRG_NAME = '#' ", nativeQuery = true)
 	public List<String[]> findAllProgramIncludeSub();
 

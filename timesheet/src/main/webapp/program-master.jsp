@@ -71,8 +71,8 @@
         <div class="row px-4 ">
             <div class="col col-xl-12">
                 <div class="card mb-4">
-                    <div class="card-header text-center">Edit Program Group</div>
-                    <div class="card-body">
+                    <div class="card-header text-center">Program Group</div>
+                    <div class="card-body"> 
                         <div class="row justify-content-center">
                             <div class="col-md-8"> 
                                 <div class="row justify-content-end mb-1">

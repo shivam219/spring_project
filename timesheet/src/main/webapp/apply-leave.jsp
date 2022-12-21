@@ -13,8 +13,8 @@
 				<div class="card mb-4">
 					<div class="card-header text-center text-white h6 table-label"  >Leave Application</div>
 					<div class="card-body">
-						<input type="hidden" value='<%="M"%>' id="empGender">
-						<form  id="applyLeaveForm">
+						<input type="hidden" value='${emp.getGender()}' id="empGender">
+						<form  id="applyLeaveForm"> 
 							<div class="container">
 								<div class="row justify-content-center">
 									<div class="col-sm-10">
@@ -278,7 +278,7 @@
 							text: "Leave Applied Successfully",
 							icon: "success",
 							showConfirmButton: false,
-                            timer: 1000
+                            timer: 700
 						});
 						location.replace('/home');
 						}, error: function (data, msg, xh) {

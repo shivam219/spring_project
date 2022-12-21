@@ -12,7 +12,32 @@
                 <div class="card mb-4">
                     <div class="card-header text-center">Check Montly Timesheet</div>
                     <div class="card-body">
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center"> 
+                            <div class="col-7 d-flex justify-content-between  align-middle mb-2">
+                                    <label for="year" class="mt-2 fw-bold me-2">Year</label>
+                                    <select id="year" class="form-control form-select  w-75  me-2">
+                                        <option value="2002">Choose</option>             
+                                        <c:forEach items="${years}" var="year">
+                                            <option value="${year}">${year}</option>
+                                        </c:forEach>        
+                                    </select>
+                                    <label for="month"class="mt-2 fw-bold me-2">Month</label>
+                                    <select id="month" class="form-control form-select  w-75   me-2">
+                                        <option value="">Choose</option>             
+                                        <option value="1">January</option>             
+                                        <option value="2">Febuary</option>             
+                                        <option value="3">March</option>             
+                                        <option value="4">April</option>             
+                                        <option value="5">May</option>             
+                                        <option value="6">June</option>             
+                                        <option value="7">July</option>             
+                                        <option value="8">August</option>             
+                                        <option value="9">September</option>             
+                                        <option value="10">October</option>             
+                                        <option value="11">November</option>             
+                                        <option value="12">December</option>             
+                                    </select>
+                               </div>
                             <div class="col-md-12">  
                                 <div class="table-responsive">
                                     <table class="table project-list-table table-nowrap ">
@@ -32,9 +57,12 @@
                                                         <a href="/program-edit?ugrpCode=${group.getUgrpCode()}" data-bs-toggle="tooltip"
                                                             data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
                                                     </ul>
-                                                </td>
+                                                </td> 
                                             </tr>
                                         </c:forEach>
+                                        <tr>
+                                            <td colspan="4" class="text-center">No data</td>
+                                        </tr>
                                     </table>
                                 </div>
                                     <div class="card-body  holiday-leave-card">

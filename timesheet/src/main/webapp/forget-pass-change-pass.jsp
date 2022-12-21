@@ -103,12 +103,7 @@
 											<p class="small mb-0">have account? <a href="login">Login to account</a></p>
 										</div>
 									</form>
-
 								</div>
-							</div>
-
-							<div class="credits">
-								Designed by <a href="https://www.linkedin.com/in/shivam-choudhary-b58205193/">Shivam</a>
 							</div>
 						</div>
 					</div>

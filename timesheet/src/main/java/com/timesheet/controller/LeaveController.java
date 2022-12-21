@@ -226,9 +226,11 @@ public class LeaveController {
 	}
 
 	@GetMapping(value = "leave-console")
-	public String leaveStatus(Model m) {
-		m.addAttribute("list", lr.getLeaveStatus());
-		return new String("leave-console");
+	public ModelAndView leaveStatus(HttpServletRequest request) {
+		Long empId = ((Long) request.getSession().getAttribute("empId"));
+		ModelAndView m = new ModelAndView("leave-console");
+		m.addObject("list", lr.getLeaveStatus(empId));
+		return m;
 	}
 
 	/*

@@ -275,13 +275,11 @@
                                 title: "Success",
                                 text: "Employee Created Successfully",
                                 icon: "success",
-                            }).
-                                then(function (isOkay) {
-                                    if (isOkay) {
-                                        location.replace('/employee-master');
-                                    }
-                                });
-                        }, error: function (data, msg, xh) {
+                                showConfirmButton: false,
+                                timer: 500
+                            });
+                            location.replace('/employee-master');
+                        }, error: function () {
                             swal({
                                 title: "Error",
                                 text: "Duplicate Employee Id",

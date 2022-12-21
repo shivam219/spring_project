@@ -67,7 +67,7 @@ public class EmployeeController {
 	public ResponseEntity<Object> addUser(@RequestBody Employee emp, HttpServletRequest request) {
 		emp.setCreatedBy(request.getSession().getAttribute("empId").toString());
 		if (er.findById(emp.getEmpId()).isEmpty()) {
-//			emp = er.save(emp);
+			emp = er.save(emp);
 			return ResponseEntity.status(HttpStatus.CREATED).body("User Employee successfully");
 		}else {			
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Employee Already Exits");

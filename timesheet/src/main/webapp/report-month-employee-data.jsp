@@ -41,20 +41,18 @@
     <div class="container-xl px-4 mt-4">
 
       <div class="row mb-2">
-        <div class="col-xl-6">
-          <div class="card mb-4 mb-xl-0">
-            <div class="card-header">Profile Details</div>
-            <div class="card-body text-center">
+        <div class="col-md-6"> 
+          <div class="card">  
+            <div class="card-header">Profile Details</div>  
+            <div class="card-body text-center" style="min-height: 131px;">  
               <div class="tab-pane fade show active profile-overview" id="profile-overview">
                 <div class="row">
                   <div class="col text-start">Employee Name</div>
-
                   <div class="col">
                     <span class="badge badge-soft-primary mb-0 fw-bold" style="font-size: 14px;">
                       ${emp.getEmployeeName()}</span>
                   </div>
                 </div>
-
                 <div class="row">
                   <div class="col text-start">Employee Id</div>
                   <div class="col">
@@ -63,7 +61,6 @@
                     </span>
                   </div>
                 </div>
-
                 <div class="row">
                   <div class="col text-start">Designation</div>
                   <div class="col">
@@ -74,15 +71,16 @@
               </div>
             </div>
           </div>
+        </div>
 
-
-          <div class="card mb-4 mb-xl-0 mt-2">
+        <div class="col-xl-6">
+          <div class="card ">
             <div class="card-header">Leave Details</div>
             <div class="card-body text-center">
               <div class="row">
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                   <table class="table  project-list-table align-middle table-borderless">
-                    <thead class="thead-dark">
+                    <thead class="thead-dark"> 
                       <th class="text-center " scope="row">Type</th>
                       <th class="text-center " scope="row">From</th>
                       <th class="text-center " scope="row">To</th>
@@ -94,10 +92,9 @@
                         <td class="text-center overflow-auto">${l.getStartDate()} </td>
                         <td class="text-center overflow-auto">${l.getEndDate()} </td>
                         <td class="text-center overflow-auto">${l.getDyas()} </td>
-                        
                       </tr>
                     </c:forEach>
-                    <c:if test='${monthSheetDataList.size() eq 0 }'>
+                    <c:if test='${leaveList.size() eq 0 }'>
                       <tr>
                         <td colspan="4" class="text-center"> No data </td>
                       </tr>
@@ -108,30 +105,31 @@
             </div>
           </div>
         </div>
-
+      </div>
+      
+      <div class="row d-none">
         <div class="col-lg-6">
-          <div class="card">
+          <div class="card ">
             <div class="card-body">
               <h5 class="card-title">Month Chart</h5>
-              <div id="pieChart" style="min-height: 300px;" class="echart"></div>
-            </div>
-          </div>
-          <div class="card">
+              <div id="pieChart" style="min-height: 250px;" class="echart"></div>
+            </div> 
+          </div>  
+        </div>
+        <div class="col-lg-6">
+          <div class="card "> 
             <div class="card-body">
               <h5 class="card-title">Day Details</h5>
-              <div id="columnChart"></div>
+              <div id="columnChart" ></div>
             </div>
           </div>
-        </div>
-      </div>
-
-      
+        </div> 
+      </div> 
 
       <div class="row">
         <div class="col-lg-12">
           <div class="table-responsive">
-            <table class="table table-fixed project-list-table table-nowrap align-middle table-borderless"
-              id="monthTable">
+            <table class="table table-fixed project-list-table table-nowrap align-middle table-borderless" id="monthTable">
               <thead class="thead-dark">
                 <th class="text-center overflow-auto" scope="row">Date</th>
                 <th class="text-center overflow-auto" scope="row">Project Name</th>
@@ -224,7 +222,7 @@
           }],
           chart: {
             type: 'bar',
-            height: 350
+            height: 235
           },
           plotOptions: {
             bar: {

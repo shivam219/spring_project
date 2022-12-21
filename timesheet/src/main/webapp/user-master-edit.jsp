@@ -49,9 +49,9 @@
                                         </div>
                                     </tr>
                                     <tr>
-                                        <label class="small mb-1" for="manager">Manger</label>
+                                        <label class="small mb-1" for="manager">Manager</label>
                                         <select id="manager" class="form-control form-select">
-                                            <option value="" ><-- Select Manger --></option>
+                                            <option value="" ><-- Select Manager --></option>
                                                 <c:forEach items="${managerList}" var="emp">
                                                     <option value="${emp.getEmpId()}"  <c:if test="${emp.getEmpId() eq user.getManagerId()}">selected="selected"</c:if> >${emp.getFirstName()} ${emp.getLastName()} </option>
                                                 </c:forEach>         
@@ -59,9 +59,9 @@
                                         <span class="form-text small text-danger ms-2  d-none"  >Specify Reporting Manager</span>     
                                     </tr>
                                     <tr>
-                                        <label class="small mb-1" for="leaveManager">Leave Manger</label>
+                                        <label class="small mb-1" for="leaveManager">Leave Manager</label>
                                         <select id="leaveManager" class="form-control form-select">
-                                            <option value="" ><-- Select Manger --></option>
+                                            <option value="" ><-- Select Manager --></option>
                                                 <c:forEach items="${managerList}" var="emp">
                                                     <option value="${emp.getEmpId()}"  <c:if test="${emp.getEmpId() eq user.getLeaveReportingManager()}">selected="selected"</c:if> >${emp.getFirstName()} ${emp.getLastName()} </option>
                                                 </c:forEach>         
@@ -69,14 +69,14 @@
                                         <span class="form-text small text-danger ms-2  d-none"  >Specify Reporting Manager</span>     
                                     </tr>
                                     <tr>
-                                        <label class="small mb-1" for="leaveApproveManager">Leave Approve Manger</label>
+                                        <label class="small mb-1" for="leaveApproveManager">Leave Approve Manager</label>
                                         <select id="leaveApproveManager" class="form-control form-select">
-                                            <option value="" ><-- Select Manger --></option>
+                                            <option value="" ><-- Select Manager --></option>
                                                 <c:forEach items="${managerList}" var="emp">
                                                     <option value="${emp.getEmpId()}"  <c:if test="${emp.getEmpId() eq user.getLeaveManager()}">selected="selected"</c:if> >${emp.getFirstName()} ${emp.getLastName()} </option>
                                                 </c:forEach>         
                                         </select> 
-                                        <span class="form-text small text-danger ms-2  d-none"  >Specify Leave Approve Manger</span>     
+                                        <span class="form-text small text-danger ms-2  d-none"  >Specify Leave Approve Manager</span>     
                                     </tr>
                                 </table>
                             </div>

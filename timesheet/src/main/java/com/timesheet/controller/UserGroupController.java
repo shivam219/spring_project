@@ -1,6 +1,5 @@
 package com.timesheet.controller;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -26,7 +25,6 @@ public class UserGroupController {
 	EmployeeRepository er;
 	@Autowired
 	UserGroupRepository ugr;
-
 	
 	@GetMapping(value = "/user-group-add")
 	public String getuserGroupAdd(Model m) {
