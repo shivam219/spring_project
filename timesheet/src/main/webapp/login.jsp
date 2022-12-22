@@ -111,7 +111,7 @@ background-color: #f6f9ff;
 											</button>
 										</div>
 										<div class="col-12">
-											<p class="small mb-0">Don't have account? <a href="register">Create an
+											<p class="small mb-0 d-none">Don't have account? <a href="register">Create an
 													account</a></p>
 											<p class="small mb-0">Don't remember pass <a href="forget-pass">Forget
 													Password</a></p>
