@@ -1,5 +1,6 @@
 package com.timesheet.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Tuple;
@@ -88,7 +89,7 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 	@Query(value = "select * from timesheet_leave_master where leave_id = :leaveId", nativeQuery = true)
 	public Leave findByLeaveId(@Param("leaveId") String leaveId);
 
-	public boolean existsByEmpIdAndStartDate(Long empId, String startDate);
+	public boolean existsByEmpIdAndStartDate(Long empId, Date startDate);
 
 	public Leave findByEmpIdAndLeaveId(Long empId, String leaveId);
 

@@ -14,6 +14,7 @@ import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "timesheet_leave_master", uniqueConstraints = @UniqueConstraint(columnNames = { "emp_id", "start_date" }))
@@ -21,14 +22,14 @@ import org.hibernate.annotations.DynamicUpdate;
 public class Leave {
 	private static final long serialVersionUID = 6832006422622219737L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //getting error just drop table and create
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // getting error just drop table and create
 	@Column(name = "leave_code", nullable = false)
 	private Long leaveCode;
 
 	@Column(name = "leave_id")
 	private String leaveId;
 
-	@Column(name = "emp_id" )
+	@Column(name = "emp_id")
 	private Long empId;
 
 	@Column(name = "emp_name")
@@ -55,11 +56,15 @@ public class Leave {
 	@Column(name = "reject_reason")
 	private String rejectReason;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
 	@Column(name = "start_date")
-	private String startDate;
+	private Date startDate;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
 	@Column(name = "end_date")
-	private String endDate;
+	private Date endDate;
 
 	@Column(name = "attachment")
 	private String attachment;
@@ -86,8 +91,8 @@ public class Leave {
 
 	public Leave(Long leaveCode, String leaveId, Long empId, String empName, String managerName, Long managerId,
 			Long leaveManagerId, String dayMode, String leaveType, String leaveReason, String rejectReason,
-			String startDate, String endDate, String attachment, String status, String secondStatus,
-			String approveReason, String secondApproveReason, Date submittedDate) {
+			Date startDate, Date endDate, String attachment, String status, String secondStatus, String approveReason,
+			String secondApproveReason, Date submittedDate) {
 		super();
 		this.leaveCode = leaveCode;
 		this.leaveId = leaveId;
@@ -198,19 +203,19 @@ public class Leave {
 		this.rejectReason = rejectReason;
 	}
 
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 

@@ -159,11 +159,11 @@
 		</div>
 		<br>
 		<br>
-		<form action="/leave-report" method="post" id="leaveMonthReport">
+		<form action="/leave-approve-report" method="post" id="leaveMonthReport">
 			<input type="hidden" name="leaveMonth" id="leaveMonth">
 			<input type="hidden" name="leaveYear" id="leaveYear">
 		</form>
-		<form action="/leave-report">
+		<form action="/leave-approve-report">
 			<input type="hidden" name="userleaveYear" value="${year}" id="userleaveYear">
 			<input type="hidden" name="userleaveMonth" value="${month}" id="userleaveMonth">
 		</form>

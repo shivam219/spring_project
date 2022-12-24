@@ -140,13 +140,13 @@
                 </div>
             </div>
         </div>
-        <form action="/employee-wise-report" method="post" id="leaveMonthReport">
+        <form action="/leave-employee-wise-report" method="post" id="leaveMonthReport">
             <input type="hidden" name="leaveEmployee" id="leaveEmployee">
             <input type="hidden" name="leaveStatus" id="leaveStatus">
             <input type="hidden" name="leaveYear" id="leaveYear">
             <input type="hidden" name="leaveMonth" id="leaveMonth">
         </form>
-        <form action="/employee-wise-report">
+        <form action="/leave-employee-wise-report">
             <input type="hidden" name="userleaveEmpId" value="${empId}" id="userleaveEmpId">
             <input type="hidden" name="userleaveStatus" value="${status}" id="userleaveStatus">
             <input type="hidden" name="userleaveYear" value="${year}" id="userleaveYear">
