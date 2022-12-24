@@ -29,7 +29,7 @@
                             <label for="year" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Year</label>
                             <select class="form-select" aria-label="Default select example" name="Year"
                                 id="leaveYearSelect" onchange="getAllLeave()">
-                                <option value="">-------select------</option>
+                                <option value="">Choose</option>
                                 <option value="2020">2020</option>
                                 <option value="2021">2021</option>
                                 <option value="2022">2022</option>
@@ -39,7 +39,7 @@
                             <label for="Month" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Month</label>
                             <select class="form-select" aria-label="Default select example" name="Month"
                                 id="leaveMonthSelect" onchange="getAllLeave()">
-                                <option value="">-------select------</option>
+                                <option value="">Choose</option>
                                 <option value="01">January</option>
                                 <option value="02">February</option>
                                 <option value="03">March</option>
@@ -112,7 +112,7 @@
             <div class="col">
                 <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 mb-1 ">
                     <div>
-                        <a href="/download1/leave.xlsx?month=09&year=2022" class="btn px-3 btn-sm btn-primary">Export</a>
+                        <a href="/pending/leave.xlsx?month=${month}&year=${year}" class="btn px-3 btn-sm btn-primary" onclick="this.blur()">Export</a>
                     </div>
                     <div>
                         <a href="home" data-bs-target=".add-new" onclick="this.blur()" class="btn px-3 btn-sm btn-secondary">Back</a>

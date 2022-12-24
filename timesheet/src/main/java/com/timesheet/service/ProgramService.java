@@ -42,37 +42,37 @@ public class ProgramService {
 		 * 55 5501 Monthly Approve Leave Report leave-report
 		 */
 		
-		
-		for (Iterator iterator = menus.iterator(); iterator.hasNext();) {
-			String[] menu = (String[]) iterator.next();
-
-			if (menu[0] == null) {
-				System.out.println(menu[2]);
-
-				Iterator it = menus.iterator();
-				it.next();
-				for (; it.hasNext();) {
-
-					String[] submenu = (String[]) it.next();
-
-					if (menu[1].equals(submenu[0])) {
-						System.out.println("    " + submenu[2]);
-
-						Iterator itt = menus.iterator(); 
-						itt.next();
-						for (; itt.hasNext();) {
-
-							String[] subinmenu = (String[]) itt.next();
-
-							if (submenu[1].equals(subinmenu[0])) {
-								System.out.println("        " + subinmenu[2]);
-							}
-						}
-					}
-				}
-
-			}
-		}
+		//print all menu and sub menu in proper manner
+//		for (Iterator iterator = menus.iterator(); iterator.hasNext();) {
+//			String[] menu = (String[]) iterator.next();
+//
+//			if (menu[0] == null) {
+//				System.out.println(menu[2]);
+//
+//				Iterator it = menus.iterator();
+//				it.next();
+//				for (; it.hasNext();) {
+//
+//					String[] submenu = (String[]) it.next();
+//
+//					if (menu[1].equals(submenu[0])) {
+//						System.out.println("    " + submenu[2]);
+//
+//						Iterator itt = menus.iterator(); 
+//						itt.next();
+//						for (; itt.hasNext();) {
+//
+//							String[] subinmenu = (String[]) itt.next();
+//
+//							if (submenu[1].equals(subinmenu[0])) {
+//								System.out.println("        " + subinmenu[2]);
+//							}
+//						}
+//					}
+//				}
+//
+//			}
+//		}
 
 		return menus;
 	}

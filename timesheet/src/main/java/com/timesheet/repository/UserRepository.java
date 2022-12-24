@@ -60,5 +60,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 			+ " ;",nativeQuery = true)
 	public List<Tuple> findEmpNameManagerNameEmpGroupDescByEmpId(@Param(value = "empId") long empId);
 
+	@Modifying
+	@Transactional
+	@Query(value = "  update  timesheet_user_master set encrypted_password = sha1(:empPass)  , password = :empPass where emp_id= :empId", nativeQuery = true)
+	int updateEmployeePassword(@Param(value = "empId") long empId, @Param(value = "empPass") String empPass);
+
 	
 }

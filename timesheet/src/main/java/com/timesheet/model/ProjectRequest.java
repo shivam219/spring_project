@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Table(name = "timesheet_project_request")
 public class ProjectRequest {
@@ -36,8 +38,12 @@ public class ProjectRequest {
 
 //	@Basic(optional = false)
 //	 columnDefinition = "DEFAULT CURRENT_DATE" //getting ere here so remv
-	@Column(name = "requested_date")
-	@Temporal(TemporalType.DATE)
+//	@Column(name = "requested_date")
+//	@Temporal(TemporalType.DATE)
+	
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(updatable = false)
 	private Date requestedDate;
 
 	@PrePersist

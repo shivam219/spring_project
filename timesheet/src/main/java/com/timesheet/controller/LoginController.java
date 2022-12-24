@@ -56,9 +56,6 @@ public class LoginController {
 			String ugrpCode = ugm.findUgrpCodeByEmpId(emp.getEmpId());
 			session.setAttribute("empId", user.get().getEmpId());
 			session.setAttribute("empName", user.get().getEmployee().getFullName());
-			session.setAttribute("ugrpCode", ugrpCode);
-//			session.setAttribute("menu", pr.findAllMenuByGroupCode(Integer.parseInt(ugrpCode)));
-//			session.setAttribute("submenu", pr.findAllSubMenuByGroupCode(Integer.parseInt(ugrpCode)));
 			session.setAttribute("menus", ps.findAllMenus(Integer.parseInt(ugrpCode)));
 
 			m.addAttribute("emp", emp);

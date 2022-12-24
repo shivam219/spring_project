@@ -149,7 +149,7 @@
 			<div class="col">
 				<div class="d-flex flex-wrap align-items-center justify-content-center gap-2">
 					<div>
-						<a href="/download/leave.xlsx?month=09&year=2022" class="btn px-3 btn-sm btn-primary ">Export</a>
+						<a href="/approved/leave.xlsx?month=${month}&year=${year}" class="btn px-3 btn-sm btn-primary" onclick="this.blur()">Export</a>
 					</div>
 					<div>
 						<a href="home"  onclick="this.blur()" class="btn px-3 btn-sm btn-secondary">Back</a>

@@ -38,11 +38,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	@Query(value = "SELECT * FROM timesheet_employee_master WHERE emp_password_encrypt = sha1(:pass)  AND emp_id =:id ", nativeQuery = true)
 	public Employee isValidEmployee(@Param("id") long empId, @Param("pass") String empPassword);
 
-	@Modifying
-	@Transactional
-	@Query(value = "  update  timesheet_employee_master set emp_password_encrypt = sha1(:empPass)  , emp_password = :empPass where emp_id= :empId", nativeQuery = true)
-	int updateEmployeePassword(@Param(value = "empId") long empId, @Param(value = "empPass") String empPass);
-
+	
 	@Query(value = "SELECT emp_email FROM timesheet_employee_master where emp_id =:empId", nativeQuery = true)
 	public String findEmpEmailByEmpId(@Param("empId") Long empId);
 

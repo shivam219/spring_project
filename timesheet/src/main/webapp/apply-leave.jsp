@@ -21,11 +21,11 @@
 										<div class="row gx-3 mb-3 justify-content-around">
 											<div class="col-md-6">
 												<label class="mb-1" for="empName">Employee:</label>
-												<span class="h6">${emp.getFirstName()} ${emp.getLastName()}</span>
+												<span class="h6">${emp.getFullName()}</span>
 											</div>
 											<div class="col-md-6">
 												<label class="mb-1" for="manager">Manager:</label>
-												<span class="h6">${manager.getFirstName()} ${manager.getLastName()}</span>
+												<span class="h6">${manager.getFullName()}</span>
 											</div>
 										</div>
 										<div class="row gx-3 mt-4">
@@ -82,10 +82,9 @@
 											</div>
 										</div>
 										<div class="row gx-3 mb-3">
-											<div class="col-md-6">
-												<!-- accept=".pdf" -->
-												<label class="mb-1" for="file">Supporting Document 2MB PDF Only</label>
-												<input class="form-control w-75" type="file" id="file" name="file" placeholder="Enter file" accept="image/*">
+											<div class="col-md-6"> 
+												<label class="mb-1" for="file">Support Document 2MB PDF/Image Only</label>
+												<input class="form-control w-75" type="file" id="file" name="file" placeholder="Enter file"  accept="image/jpeg,image/png,application/pdf" >
 												<span class="form-text small text-danger ms-2 d-none">Specify file</span>
 											</div>
 											<div class="col-md-6">  

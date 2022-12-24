@@ -65,11 +65,6 @@ public class LeaveController {
 	@Autowired
 	private FileUploaderHelper fileUploaderHelper;
 
-	String month = "";
-	String year = "";
-	long empId = 0;
-	String status = "";
-
 	@GetMapping(value = "apply-leave")
 	public ModelAndView applyLeave(HttpServletRequest request) {
 		ModelAndView m = new ModelAndView("apply-leave");
@@ -97,14 +92,17 @@ public class LeaveController {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Duplicate Leave");
 		}
 		if (!file.isEmpty()) {
-			if (!file.getContentType().equals("image/jpeg") && !file.getContentType().equals("image/png")) {
+			if (!file.getContentType().equals("application/pdf") && !file.getContentType().equals("image/jpeg")
+					&& !file.getContentType().equals("image/png")) {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("file type not supported");
 			} else {
 				if (fileUploaderHelper.uploadFile(file)) {
 //					System.out.println(file.getOriginalFilename());
+//					if (!file.getContentType().equals("image/jpeg") && !file.getContentType().equals("image/png"))
 //					System.err.println(file.getSize());
 //					System.err.println(file.getName());
 //					System.err.println(file.getContentType());
+
 					leave.setAttachment("images/" + file.getOriginalFilename());
 					System.out.println(ServletUriComponentsBuilder.fromCurrentContextPath().path("/images/")
 							.path(file.getOriginalFilename()).toUriString());
@@ -234,131 +232,105 @@ public class LeaveController {
 	}
 
 	/*
-	 * Approved Leave Report
-	 * Mapping----------------------------------------------------------------------
+	 * Access Approved Leave Report
 	 */
-	@GetMapping("/leave-report")
-	public String leaveReport(Model m, HttpServletRequest request) {
-		return "leavereport";
-	}
-
-	@PostMapping("/leave-report")
-	public String leaveReportFetch(Model m, @RequestParam("leaveMonth") String month,
-			@RequestParam("leaveYear") String year) throws Exception {
-		this.month = month;
-		this.year = year;
-		m.addAttribute("month", month);
-		m.addAttribute("year", year);
-		m.addAttribute("leaveList", ls.getLeaveByMonthAndYear2(month, year));
-		return "leavereport";
+	@GetMapping("/leave-approve-report")
+	public String leaveReport() {
+		return "leave-approve-report";
 	}
 
 	/*
-	 * Employee Wise Leave Report Mapping to
-	 * Server-------------------------------------------------------
+	 * Access Approved Leave Report
 	 */
-	@GetMapping("/employee-wise-report")
+	@PostMapping("/leave-approve-report")
+	public String leaveReportFetch(Model m, @RequestParam("leaveMonth") String month,
+			@RequestParam("leaveYear") String year) throws Exception {
+		m.addAttribute("month", month);
+		m.addAttribute("year", year);
+		m.addAttribute("leaveList", ls.getLeaveByMonthAndYear2(month, year));
+		return "leave-approve-report";
+	}
+
+	/*
+	 * Approved Leave Status Data Exporting into Excel
+	 */
+	@GetMapping("/approved/leave.xlsx")
+	public void download(HttpServletResponse response, @RequestParam("month") String month,
+			@RequestParam("year") String year) throws IOException {
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment; filename=MonthlyLeaveReport.xlsx");
+		ByteArrayInputStream stream = ReportService.contactListToExcelFile(lr.getLeaveByMonthAndYear(month, year));
+		IOUtils.copy(stream, response.getOutputStream());
+	}
+
+	/*
+	 * Access Pending Leave Report Page
+	 */
+	@GetMapping("/leave-pending-report")
+	public String pendingLeaveReport() {
+		return "leave-pending-report";
+	}
+
+	/*
+	 * Access Pending Leave Report Page
+	 */
+	@PostMapping("/leave-pending-report")
+	public String pendingLeaveReportFetch(Model m, @RequestParam("leaveMonth") String month,
+			@RequestParam("leaveYear") String year) throws Exception {
+		m.addAttribute("month", month);
+		m.addAttribute("year", year);
+		m.addAttribute("pendingList", ls.getPendingLeaveByMonthAndYear2(month, year));
+		return "leave-pending-report";
+	}
+
+	/*
+	 * Pending Leave Status Data Exporting into Excel Sheet
+	 */
+	@GetMapping("/pending/leave.xlsx")
+	public void download1(HttpServletResponse response, @RequestParam("month") String month,
+			@RequestParam("year") String year) throws IOException {
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment; filename=PendingLeaveReoprt.xlsx");
+		ByteArrayInputStream stream = ReportService
+				.contactListToExcelFile(lr.getPendingLeaveByMonthAndYear(month, year));
+		IOUtils.copy(stream, response.getOutputStream());
+	}
+
+	/*
+	 * Employee Wise Leave Report Mapping to Server
+	 */
+	@GetMapping("/leave-employee-wise-report")
 	public String employeeWiseLeaveReport(Model m, HttpServletRequest request) {
 		m.addAttribute("empId", "");
 		m.addAttribute("employeeList", er.findAll());
-		return "employee-wise-report";
+		return "leave-employee-wise-report";
 	}
 
-	@PostMapping("/employee-wise-report")
+	@PostMapping("/leave-employee-wise-report")
 	public String employeeWiseLeaveReportFetch(Model m, @RequestParam("leaveMonth") String month,
 			@RequestParam("leaveYear") String year, @RequestParam("leaveEmployee") long empId,
-			@RequestParam("leaveStatus") String status, String empname) throws Exception {
-		this.month = month;
-		this.year = year;
-		this.empId = empId;
-		this.status = status;
+			@RequestParam("leaveStatus") String status) throws Exception {
 		m.addAttribute("month", month);
 		m.addAttribute("year", year);
 		m.addAttribute("empId", empId);
 		m.addAttribute("status", status);
 		m.addAttribute("leaveList", ls.getEmploeeWiseReport(month, year, empId, status));
 		m.addAttribute("employeeList", er.findAll());
-		return "employee-wise-report";
+		return "leave-employee-wise-report";
 	}
 
 	/*
-	 * Pending Leave Report
-	 * Mapping---------------------------------------------------------------------
+	 * Employee Wise Leave Status Data Exporting into Excel Sheet
 	 */
-	@GetMapping("/pending-leave-report")
-	public String pendingLeaveReport(Model m, HttpServletRequest request) {
-		return "pending-leave-report";
-	}
-
-	@PostMapping("/pending-leave-report")
-	public String pendingLeaveReportFetch(Model m, @RequestParam("leaveMonth") String month,
-			@RequestParam("leaveYear") String year) throws Exception {
-		this.month = month;
-		this.year = year;
-		m.addAttribute("month", month);
-		m.addAttribute("year", year);
-		m.addAttribute("pendingList", ls.getPendingLeaveByMonthAndYear2(month, year));
-		return "pending-leave-report";
-	}
-
-	/*
-	 * Approved Leave Status Data Exporting into Excel
-	 * Sheet----------------------------------------------
-	 */
-	@GetMapping("/download/leave.xlsx")
-	public void download(HttpServletResponse response, @RequestParam("month") String month,
-			@RequestParam("year") String year) throws IOException {
-		response.setContentType("application/octet-stream");
-		response.setHeader("Content-Disposition", "attachment; filename=MonthlyLeaveReport.xlsx");
-		ByteArrayInputStream stream = ReportService.contactListToExcelFile(Data());
-
-		IOUtils.copy(stream, response.getOutputStream());
-	}
-
-	private List<Leave> Data() {
-		List<Leave> leave = lr.getLeaveByMonthAndYear(month, year);
-		return leave;
-	}
-
-	/*
-	 * Employee Wise Leave Status Data Exporting into Excel
-	 * Sheet------------------------------------------------
-	 */
-	@GetMapping("/download2/leave.xlsx")
+	@GetMapping("/employee/leave.xlsx")
 	public void download3(HttpServletResponse response, @RequestParam("month") String month,
-			@RequestParam("year") String year, @RequestParam("leaveEmployee") long empId,
-			@RequestParam("leaveStatus") String status) throws IOException {
+			@RequestParam("year") String year, @RequestParam("empId") long empId, @RequestParam("status") String status)
+			throws IOException {
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment; filename=PendingLeaveReoprt.xlsx");
-		ByteArrayInputStream stream = ReportService.contactListToExcelFile(Data3());
+		ByteArrayInputStream stream = ReportService
+				.contactListToExcelFile(lr.getEmploeeWiseReport(month, year, empId, status));
 		IOUtils.copy(stream, response.getOutputStream());
-	}
-
-	private List<Leave> Data3() {
-		List<Leave> leave = lr.getEmploeeWiseReport(month, year, empId, status);
-
-		return leave;
-
-	}
-
-	/*
-	 * Pending Leave Status Data Exporting into Excel
-	 * Sheet------------------------------------------------
-	 */
-	@GetMapping("/download1/leave.xlsx")
-	public void download1(HttpServletResponse response, @RequestParam("month") String month,
-			@RequestParam("year") String year) throws IOException {
-		response.setContentType("application/octet-stream");
-		response.setHeader("Content-Disposition", "attachment; filename=PendingLeaveReoprt.xlsx");
-		ByteArrayInputStream stream = ReportService.contactListToExcelFile(Data2());
-		IOUtils.copy(stream, response.getOutputStream());
-	}
-
-	private List<Leave> Data2() {
-		List<Leave> leave = lr.getPendingLeaveByMonthAndYear(month, year);
-
-		return leave;
-
 	}
 
 }

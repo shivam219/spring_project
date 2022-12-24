@@ -52,10 +52,9 @@ public class UserController {
 	@PostMapping(value = "/change-password")
 	public ResponseEntity<Object> changePassword(HttpServletRequest request,
 			@RequestParam(value = "oldPass") String oldPass, @RequestParam(value = "newPass") String newPass) {
-		String str = (String) request.getSession().getAttribute("empId").toString();
-		Long empId = Long.valueOf(str);
+		long empId = (long) request.getSession().getAttribute("empId");
 		if (ur.existsByEmpIdAndPassword(empId, oldPass)) {
-			er.updateEmployeePassword(1, newPass);
+			ur.updateEmployeePassword(empId, newPass);
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body("password is updated successfully");
 		}
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Old Password is invalid");
