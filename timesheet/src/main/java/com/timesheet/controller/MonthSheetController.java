@@ -32,6 +32,9 @@ public class MonthSheetController {
 	@Autowired
 	MonthSheetRepository msr;
 
+	/*
+	 * Access Approve timesheet page
+	 */
 	@GetMapping("/month-sheet")
 	public ModelAndView workApprove(HttpServletRequest request) {
 		long empId = (Long) request.getSession().getAttribute("empId");
@@ -40,6 +43,9 @@ public class MonthSheetController {
 		return m;
 	}
 
+	/*
+	 * Access Employee wise timesheet page
+	 */
 	@GetMapping("/month-sheet-approve")
 	public String workSubmitApprove(Model m, @RequestParam("monthSheetId") Long monthSheetId) {
 		Optional<MonthSheet> msp = msr.findById(monthSheetId);
@@ -52,6 +58,10 @@ public class MonthSheetController {
 		m.addAttribute("monthDto", mse.findMonthSheetDataToDto(monthSheetId));
 		return "month-sheet-approve";
 	}
+
+	/*
+	 * Access Employee wise timesheet page second
+	 */
 	@GetMapping("/month-sheet-approve2")
 	public String workSubmitApprove2(Model m, @RequestParam("monthSheetId") Long monthSheetId) {
 		Optional<MonthSheet> msp = msr.findById(monthSheetId);
@@ -64,11 +74,17 @@ public class MonthSheetController {
 		return "month-sheet-approve";
 	}
 
+	/*
+	 * Fetch Employee wise data api
+	 */
 	@GetMapping("/fetch-month-sheet-employee-approve")
 	public ResponseEntity<Object> fetchMonthTimesheetEmployee(@RequestParam("monthSheetId") Long monthSheetId) {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(mse.findMonthSheetDataAndApproveajax(monthSheetId));
 	}
 
+	/*
+	 * Fetch Employee wise data api
+	 */
 	@PostMapping("/month-sheet-change-status")
 	public ResponseEntity<Object> workApprove(@RequestBody MonthSheet ms, HttpServletRequest request) {
 		Optional<MonthSheet> msp = msr.findById(ms.getMonthSheetId());

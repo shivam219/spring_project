@@ -35,6 +35,9 @@ public class HolidayFinancialController {
 	@Autowired
 	public HolidayRepository hr;
 
+	/*
+	 * Access Year master page
+	 */
 	@GetMapping(value = "year-master")
 	public String yearMaster(Model m) {
 		List<FinancialYear> listYear = fyr.findAll();
@@ -42,11 +45,17 @@ public class HolidayFinancialController {
 		return new String("year-master");
 	}
 
+	/*
+	 * Access Add Year master
+	 */
 	@GetMapping(value = "year-master-add")
 	public String yearMasterAdd(Model m) {
 		return new String("year-master-add");
 	}
 
+	/*
+	 * Creating Year
+	 */
 	@PostMapping(value = "/year-master-add-process")
 	public ResponseEntity<Object> addUser(@RequestBody FinancialYear fy, HttpServletRequest request) {
 		String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -57,12 +66,18 @@ public class HolidayFinancialController {
 		return ResponseEntity.status(HttpStatus.CREATED).body("Ok");
 	}
 
+	/*
+	 * Access Edit Year
+	 */
 	@GetMapping(value = "year-master-edit")
 	public String yearMasterEdit(@RequestParam("yearCode") Integer yearCode, Model m) {
 		m.addAttribute("year", fyr.findById(yearCode).get());
 		return new String("year-master-edit");
 	}
 
+	/*
+	 * Editing year
+	 */
 	@PostMapping(value = "year-master-edit-process")
 	public ResponseEntity<Object> earMasterEditProcess(Model m, @RequestBody FinancialYear fy,
 			HttpServletRequest request) {
@@ -74,12 +89,18 @@ public class HolidayFinancialController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Updated");
 	}
 
+	/*
+	 * Access Holiday Master page
+	 */
 	@GetMapping(value = "holiday-master")
 	public String holidayMaster(Model m) {
 		m.addAttribute("listholiday", hr.findAll());
 		return new String("holiday-master");
 	}
 
+	/*
+	 * Access Add Holiday Master
+	 */
 	@GetMapping(value = "holiday-master-add")
 	public String holidayMasterAdd(Model m) {
 		List<FinancialYear> listYear = fyr.findAll();
@@ -87,12 +108,18 @@ public class HolidayFinancialController {
 		return new String("holiday-master-add");
 	}
 
+	/*
+	 * Adding holiday
+	 */
 	@PostMapping(value = "holiday-master-add-process")
 	public String holidayMasterAddProcess(Model m, @RequestBody Holiday h) {
 		hr.save(h);
 		return new String("holiday-master-add");
 	}
 
+	/*
+	 * Access holiday Edit page
+	 */
 	@GetMapping(value = "holiday-master-edit")
 	public String holidayMasterEdit(@RequestParam("hCode") Holiday h, Model m) {
 		List<FinancialYear> listYear = fyr.findAll();
@@ -102,6 +129,9 @@ public class HolidayFinancialController {
 		return new String("holiday-master-edit");
 	}
 
+	/*
+	 * Edit holiday page
+	 */
 	@PostMapping(value = "holiday-master-edit-process")
 	public ResponseEntity<Object> holidayMasterEditProcess(Model m, @RequestBody Holiday h) {
 		hr.save(h);

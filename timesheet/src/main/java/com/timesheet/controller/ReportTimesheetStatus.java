@@ -14,6 +14,9 @@ public class ReportTimesheetStatus {
 	@Autowired
 	EmployeeRepository er;
 
+	/*
+	 * Access employee monthly status timesheet page 
+	 */
 	@GetMapping("/report-month-check")
 	public ModelAndView reportMonthCheck(HttpServletRequest request) {
 		long empId = (Long) request.getSession().getAttribute("empId");

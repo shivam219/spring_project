@@ -17,6 +17,9 @@ public class ProgramRestController {
 	@Autowired
 	ProgramRepository pr;
 
+	/*
+	 * Access Program link page
+	 */
 	@GetMapping(value = "/program-link")
 	public ResponseEntity<List<String[]>> getOtp(@RequestParam("prgPrnt") int prgPrnt) {
 		return ResponseEntity.status(HttpStatus.OK).body(pr.findAllProgramLinkByPrgPrnt(prgPrnt));

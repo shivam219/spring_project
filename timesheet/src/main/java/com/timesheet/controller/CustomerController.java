@@ -44,6 +44,9 @@ public class CustomerController {
 		m.addAttribute("customerList", customerService.getAllcustomer());
 	}
 
+	/*
+	 * Access Add customer page
+	 */
 	@GetMapping("/customer-add")
 	public ModelAndView getCustomerMaster() {
 		ModelAndView m = new ModelAndView("customer-add");
@@ -51,7 +54,10 @@ public class CustomerController {
 		m.addObject("customerDomains", (List<CustomerDomain>) cdr.findAll());
 		return m;
 	}
-	
+
+	/*
+	 * Adding customer
+	 */
 	@PostMapping("/customer-add-process")
 	public ResponseEntity<Object> customermasterprocess(Model model, @RequestBody Customer customer) {
 		customer.setOnBoardDate(new SimpleDateFormat("yyyy-mm-dd").format(new Date()));
@@ -82,6 +88,9 @@ public class CustomerController {
 		return m;
 	}
 
+	/*
+	 * Editing Customer
+	 */
 	@PostMapping("/customer-edit-process")
 	public ResponseEntity<Object> customerEditProcess(@RequestBody Customer customer) {
 		Optional<Customer> c = cr.findById(customer.getCustomerId());
@@ -98,17 +107,26 @@ public class CustomerController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Created Customer");
 	}
 
+	/*
+	 * Editing customer
+	 */
 	@GetMapping("/customer-delete")
 	public ResponseEntity<Object> deleteCustomnerByCustomerId(Model m, @RequestParam("customerId") long CustId) {
 		customerService.deleteCustomnerByCustomerId(CustId);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Deleted");
 	}
 
+	/*
+	 * Access add customer domain
+	 */
 	@GetMapping(value = "/customer-domain")
 	public String getCustomerDomain() {
 		return "customer-domain";
 	}
 
+	/*
+	 * Adding customer domain
+	 */
 	@PostMapping(value = "/customer-domain-create")
 	public ResponseEntity<Object> getCustomerDomainCreate(@RequestBody CustomerDomain customerDomain) {
 		cdr.save(customerDomain);

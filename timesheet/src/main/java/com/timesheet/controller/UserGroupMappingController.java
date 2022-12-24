@@ -35,6 +35,9 @@ public class UserGroupMappingController {
 	@Autowired
 	UserGroupMappingRepository ugmr;
 
+	/*
+	 * Access user group mapping master page
+	 */
 	@GetMapping(value = "/user-group-mapping-master")
 	public String getuserGroupMappingMaster(Model m) {
 		m.addAttribute("userGroupList", (ugmr.getAllGroup()));
@@ -48,6 +51,9 @@ public class UserGroupMappingController {
 		return "user-group-mapping-master";
 	}
 
+	/*
+	 * Access user group mapping add
+	 */
 	@GetMapping(value = "/user-group-mapping-add")
 	public String getuserGroupMapping(Model m) {
 		m.addAttribute("userGroupList", ((List<UserGroup>) uGR.findAll()));
@@ -55,6 +61,9 @@ public class UserGroupMappingController {
 		return "user-group-mapping-add";
 	}
 
+	/*
+	 * Add User Group Mapping post request
+	 */
 	@PostMapping(value = "/user-group-add-process")
 	public ResponseEntity<Object> addUserGroupAdd(Model m, @RequestBody UserGroupMapping ugm,
 			HttpServletRequest request) {
@@ -70,6 +79,9 @@ public class UserGroupMappingController {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(ugmr.save(ugm));
 	}
 
+	/*
+	 * Access Edit User Group Mapping
+	 */
 	@GetMapping(value = "/user-group-mapping-edit")
 	public String getUserGroupEdit(Model m, @RequestParam("id") UserGroupMapping ugm) {
 		m.addAttribute("userGroupList", ((List<UserGroup>) uGR.findAll()));
@@ -80,6 +92,9 @@ public class UserGroupMappingController {
 		return "user-group-mapping-edit";
 	}
 
+	/*
+	 * Edit User Group Mapping post request
+	 */
 	@PostMapping(value = "/user-group-mapping-edit-process")
 	public ResponseEntity<Object> editUserGroupMapping(Model m, @RequestBody UserGroupMapping ugm,
 			HttpServletRequest request) {

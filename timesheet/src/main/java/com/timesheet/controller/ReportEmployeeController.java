@@ -42,6 +42,9 @@ public class ReportEmployeeController {
 	@Autowired
 	LeaveService ls;
 
+	/*
+	 * Access report employee
+	 */
 	@GetMapping(value = "/report-month-employee")
 	public String getEmployeeMonthReport(Model m) {
 		List<EmployeeNameDto> findEmployeeName = es.findEmployeeName();
@@ -49,28 +52,40 @@ public class ReportEmployeeController {
 		return "report-month-employee";
 	}
 
+	/*
+	 * Fetch employee's year api
+	 */
 	@GetMapping(value = "/fetch-employee-year")
 	public ResponseEntity<List<String>> fetchEmployeeYear(@RequestParam long empId) {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(er.findEmployeeWorkingYear(empId));
 	}
 
+	/*
+	 * Fetch employee's month api
+	 */
 	@GetMapping(value = "/fetch-employee-month")
 	public ResponseEntity<List<String[]>> fetchEmployeeMonth(@RequestParam long empId, @RequestParam Integer yearCode) {
 		List<String[]> m = er.findEmployeeWorkingMonth(empId, yearCode);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(er.findEmployeeWorkingMonth(empId, yearCode));
 	}
 
+	/*
+	 * Sending report month employee data
+	 */
 	@PostMapping(value = "/report-month-employee-data")
 	public String getEmployeeMonthData(@ModelAttribute MonthSheet ms, @RequestParam long empId, Model m) {
 		List<UserDto> ud = ums.findEmpNameManagerNameEmpGroupDescByEmpId(empId);
 //		m.addAttribute("monthSheetDataList", mse.findMonthSheetDataAndApprove(ms.getMonthSheetId()));
 		m.addAttribute("emp", ud.get(0));
 		m.addAttribute("monthSheetId", ms.getMonthSheetId());
-		m.addAttribute("leaveList", ls.findLeaveTypeStartDateEndDateByEmpIdForMonth(empId,ms.getMonthSheetId()));
+		m.addAttribute("leaveList", ls.findLeaveTypeStartDateEndDateByEmpIdForMonth(empId, ms.getMonthSheetId()));
 //		m.addAttribute("leaveList", ls.findLeaveTypeStartDateEndDateByEmpId(empId));
 		return "report-month-employee-data";
 	}
 
+	/*
+	 * Fetch Month Sheet (Monthly Timesheet) employee 
+	 */
 	@PostMapping("/fetch-month-sheet-employee")
 	public ResponseEntity<Object> monthSheetEmployee(@RequestParam long monthSheetId) {
 		Optional<MonthSheet> msp = msr.findById(monthSheetId);
@@ -81,6 +96,9 @@ public class ReportEmployeeController {
 		}
 	}
 
+	/*
+	 * Fetch Month Sheet (Monthly Timesheet) chart API
+	 */
 	@PostMapping("/fetch-month-sheet-employee-chart")
 	public ResponseEntity<Object> monthSheetEmployeeChart(@RequestParam long monthSheetId) {
 		Optional<MonthSheet> msp = msr.findById(monthSheetId);

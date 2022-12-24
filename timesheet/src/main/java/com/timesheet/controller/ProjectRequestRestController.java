@@ -37,62 +37,68 @@ public class ProjectRequestRestController {
 
 	@Autowired
 	ProjectRequestRepository prr;
-	
+
 	@Autowired
 	UserRepository ur;
 
 	@Autowired
 	EmailService emailService;
-	
+
 	@Autowired
 	EmployeeRepository er;
 
-
+	/*
+	 * Access customer project details page
+	 */
 	@GetMapping(value = "/customer-projects")
 	public ResponseEntity<List<String>> getOtp(@RequestParam("customerId") String customerId) {
 		return ResponseEntity.of(Optional.of(pr.findProjectNameByCustomerId(customerId)));
 	}
 
+	/*
+	 * Requesting employee project
+	 */
 	@PostMapping("/project-request-process")
-	public ResponseEntity<Object> projectrequestProcess (HttpServletRequest request,
-			@RequestBody ProjectRequest pjtReq) throws Exception {
+	public ResponseEntity<Object> projectrequestProcess(HttpServletRequest request, @RequestBody ProjectRequest pjtReq)
+			throws Exception {
 		pjtReq.setRequestedDate(new Date());
 		Long empId = (Long) request.getSession().getAttribute("empId");
 		pjtReq.setEmpId(empId);
-		pjtReq.setManagerId( ur.findManagerIdByEmpId(empId));
-		List<ProjectRequest> projectRequestData =  prr.findAllByEmpId(empId);
+		pjtReq.setManagerId(ur.findManagerIdByEmpId(empId));
+		List<ProjectRequest> projectRequestData = prr.findAllByEmpId(empId);
 		boolean flag = false;
-		for(ProjectRequest r : projectRequestData) {
+		for (ProjectRequest r : projectRequestData) {
 //			r.setRequestedDate(new SimpleDateFormat("yyyy-mm-dd").parse(new SimpleDateFormat("yyyy-mm-dd").format(r.getRequestedDate())));
-			if(r.equals(pjtReq)) {
+			if (r.equals(pjtReq)) {
 				flag = true;
 			}
 		}
-		if(flag) {
+		if (flag) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("already apply for same request");
-		}else {
+		} else {
 			Employee emp = er.findById(empId).get();
 			Long managerId = Long.parseLong(ur.findById(empId).get().getManagerId());
 			Employee manager = er.findById(managerId).get();
-			
+
 //			+"<br>you will be notify if your manager will assign  "  
-			String msgEmp = "Hii " + StringUtils.capitalize( emp.getFirstName()) +" " + StringUtils.capitalize(emp.getLastName()) 
-			+"<br>Your request for projects "+ pjtReq.getProjectsList().toString().replace("[", "").replace("]", "").toUpperCase() +" ."
-			+" <br> Is sended to manager" 
-			+ "<br><br>This is an auto-generated Email."
-			+ "<br>Do not reply to this email.<br> "
-			;
-			
-			emailService.Email(emp.getEmpEmail(), "Project Request by " + StringUtils.capitalize(emp.getFirstName()) + " " + StringUtils.capitalize(emp.getLastName())  , msgEmp);
-			String msgManager = "Hii " +  StringUtils.capitalize(manager.getFirstName()) +" " +  StringUtils.capitalize(manager.getLastName()) 
-			+"<br><br>Employee Id : " + emp.getEmpId()  
-			+"<br>Employee Name : " +  StringUtils.capitalize(emp.getFirstName()) + " " + StringUtils.capitalize(emp.getLastName())  
-			+"<br>The employee has requested the following projects for their timesheet <br> "+ pjtReq.getProjectsList().toString().replace("[", "").replace("]", "").toUpperCase() +" ."
-			+"<br>So assign that project to them."
-			+"<br><br>This is an auto-generated Email."
-			+ "<br>Do not reply to this email.<br> "
-			;
-			emailService.Email(manager.getEmpEmail(), "Project Request by " + StringUtils.capitalize(emp.getFirstName()) + " " + StringUtils.capitalize(emp.getLastName()) , msgManager);
+			String msgEmp = "Hii " + StringUtils.capitalize(emp.getFirstName()) + " "
+					+ StringUtils.capitalize(emp.getLastName()) + "<br>Your request for projects "
+					+ pjtReq.getProjectsList().toString().replace("[", "").replace("]", "").toUpperCase() + " ."
+					+ " <br> Is sended to manager" + "<br><br>This is an auto-generated Email."
+					+ "<br>Do not reply to this email.<br> ";
+
+			emailService.Email(emp.getEmpEmail(), "Project Request by " + StringUtils.capitalize(emp.getFirstName())
+					+ " " + StringUtils.capitalize(emp.getLastName()), msgEmp);
+			String msgManager = "Hii " + StringUtils.capitalize(manager.getFirstName()) + " "
+					+ StringUtils.capitalize(manager.getLastName()) + "<br><br>Employee Id : " + emp.getEmpId()
+					+ "<br>Employee Name : " + StringUtils.capitalize(emp.getFirstName()) + " "
+					+ StringUtils.capitalize(emp.getLastName())
+					+ "<br>The employee has requested the following projects for their timesheet <br> "
+					+ pjtReq.getProjectsList().toString().replace("[", "").replace("]", "").toUpperCase() + " ."
+					+ "<br>So assign that project to them." + "<br><br>This is an auto-generated Email."
+					+ "<br>Do not reply to this email.<br> ";
+			emailService.Email(manager.getEmpEmail(), "Project Request by " + StringUtils.capitalize(emp.getFirstName())
+					+ " " + StringUtils.capitalize(emp.getLastName()), msgManager);
 			prr.save(pjtReq);
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body("Ok");
 		}

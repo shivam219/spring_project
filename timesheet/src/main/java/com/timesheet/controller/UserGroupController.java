@@ -25,7 +25,10 @@ public class UserGroupController {
 	EmployeeRepository er;
 	@Autowired
 	UserGroupRepository ugr;
-	
+
+	/*
+	 * Access User group add page
+	 */
 	@GetMapping(value = "/user-group-add")
 	public String getuserGroupAdd(Model m) {
 		m.addAttribute("userGroupList", ((List<UserGroup>) ugr.findAll()));
@@ -33,13 +36,18 @@ public class UserGroupController {
 		return "user-group-add";
 	}
 
-	
+	/*
+	 * Access User group master
+	 */
 	@GetMapping(value = "/user-group-master")
 	public String getUserGroupMaster(Model m) {
 		m.addAttribute("userGroupList", ((List<UserGroup>) ugr.findAll()));
 		return "user-group-master";
 	}
 
+	/*
+	 * Create User group post request
+	 */
 	@PostMapping(value = "/user-group-create")
 	public String createUserGroupMaster(@RequestBody UserGroup ug, HttpServletRequest request) {
 		Employee emp = er.findById((Long) request.getSession().getAttribute("empId")).get();
@@ -51,12 +59,19 @@ public class UserGroupController {
 		return "user-group-master";
 	}
 
+	/*
+	 * Access User group
+	 */
 	@GetMapping(value = "/user-group-edit")
-	public String getEditUserGroup(Model m, @RequestParam("ugrpCode") UserGroup ug,@RequestParam(value = "ugrpCode", required = false) String ns, HttpServletRequest request) {
+	public String getEditUserGroup(Model m, @RequestParam("ugrpCode") UserGroup ug,
+			@RequestParam(value = "ugrpCode", required = false) String ns, HttpServletRequest request) {
 		m.addAttribute("ug", ug);
 		return "user-group-edit";
 	}
 
+	/*
+	 * Edit User group post request
+	 */
 	@PostMapping(value = "/user-group-edit-process")
 	public String editUserGroupMaster(@RequestBody UserGroup ug, HttpServletRequest request) {
 		UserGroup tug = ugr.findById(ug.getUgrpCode()).get();

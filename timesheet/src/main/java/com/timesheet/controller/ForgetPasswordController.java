@@ -29,16 +29,25 @@ public class ForgetPasswordController {
 	@Autowired
 	UserRepository ur;
 
+	/*
+	 * Access forget password page
+	 */
 	@GetMapping(value = "/forget-password")
 	public String getForgetPassword() {
 		return "forget-password";
 	}
 
+	/*
+	 * Access forget password page
+	 */
 	@GetMapping(value = "/forget-pass")
 	public String getForgetPassword2() {
 		return "forget-pass";
 	}
 
+	/*
+	 * Forget Password Sending mail on ESS mail Id
+	 */
 	@PostMapping(value = "/forget-pass")
 	public String getForgetPassPost(@RequestParam("email") String email, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -63,6 +72,9 @@ public class ForgetPasswordController {
 		}
 	}
 
+	/*
+	 * Access Verify OTP page
+	 */
 	@GetMapping(value = "/forget-pass-get-otp")
 	public String getForgetPasswordGetOtp(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -73,6 +85,9 @@ public class ForgetPasswordController {
 		}
 	}
 
+	/*
+	 * Forget Password Verify OTP
+	 */
 	@PostMapping(value = "/forget-pass-get-otp")
 	public String getForgetPassPostGetOtp(@RequestParam("otp") String otp, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -93,6 +108,9 @@ public class ForgetPasswordController {
 		}
 	}
 
+	/*
+	 * Access Change password
+	 */
 	@GetMapping(value = "/forget-pass-change-pass")
 	public String getForgetPasswordChagePass(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -104,6 +122,9 @@ public class ForgetPasswordController {
 		}
 	}
 
+	/*
+	 * Change password page
+	 */
 	@PostMapping(value = "/forget-pass-change-pass")
 	public String getForgetPasswordChagePass(@RequestParam("password") String password, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -125,6 +146,9 @@ public class ForgetPasswordController {
 		}
 	}
 
+	/*
+	 * Generate OTP
+	 */
 	static char[] OTP(int len) {
 		String numbers = "0123456789";
 		Random rndm_method = new Random();

@@ -34,5 +34,23 @@ public interface ProgramRepository extends CrudRepository<Program, Integer> {
 
 	@Query(value = "select PRG_CODE , PRG_ORDER from timesheet_program_master where PRG_PRNT = :prgPrnt order by PRG_CODE desc limit  1", nativeQuery = true)
 	public List<Integer[]> findLastPrgcodeAndPrgOrder(int prgPrnt);
+	
+//	fetching top menus on ui
+	@Query(value = "select PRG_CODE, PRG_DESC  from timesheet_program_master where  PRG_PRNT is null and PRG_CODE in "
+			+ "(select PRG_CODE from timesheet_program_groupwise where UGRP_CODE = :ugrpCode )", nativeQuery = true)
+	public List<String[]> findAllMenuByGroupCode(int ugrpCode);
+//	fetching top sub menus on ui
+	@Query(value = "select PRG_PRNT ,PRG_CODE, PRG_DESC , PRG_NAME from timesheet_program_master where  PRG_PRNT is not null and PRG_CODE in "
+			+ "(select PRG_CODE from timesheet_program_groupwise where UGRP_CODE = :ugrpCode) order by PRG_PRNT ", nativeQuery = true)
+	public List<String[]> findAllSubMenuByGroupCode(int ugrpCode);
+	
+//	fetching top all menus and sub menu on ui
+	@Query(value = "select PRG_PRNT ,PRG_CODE, PRG_DESC , PRG_NAME  from timesheet_program_master where  PRG_CODE in "
+			+ " (select PRG_CODE from timesheet_program_groupwise where UGRP_CODE = :ugrpCode) order by PRG_PRNT", nativeQuery = true)
+	public List<String[]> findAllAllMenuByGroupCode(int ugrpCode);
+	
+	
+	
+	
 
 }

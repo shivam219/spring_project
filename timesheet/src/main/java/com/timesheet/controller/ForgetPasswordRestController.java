@@ -38,6 +38,9 @@ public class ForgetPasswordRestController {
 	@Autowired
 	EmailService emailService;
 
+	/*
+	 * Access Get OTP api
+	 */
 	@GetMapping(value = "/get-otp")
 	public ResponseEntity<Object> getOtp(@RequestParam("empId") Long empId) {
 		if (!er.existsByEmpId(empId)) {
@@ -55,6 +58,9 @@ public class ForgetPasswordRestController {
 		return ResponseEntity.status(HttpStatus.OK).body(otp);
 	}
 
+	/*
+	 * Generate OTP
+	 */
 	static char[] OTP(int len) {
 		String numbers = "0123456789";
 		Random rndm_method = new Random();
@@ -65,6 +71,9 @@ public class ForgetPasswordRestController {
 		return otp;
 	}
 
+	/*
+	 * reset Password Page
+	 */
 	@PostMapping(value = "reset-password")
 	public ResponseEntity<Object> resetPassword(Model m, @RequestBody User emp) {
 		ur.updateUserPassword(emp.getEmpId(), emp.getPassword());

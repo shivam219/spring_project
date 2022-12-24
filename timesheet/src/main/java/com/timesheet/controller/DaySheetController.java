@@ -63,6 +63,9 @@ public class DaySheetController {
 		return "day-sheet";
 	}
 
+	/*
+	 * Saving weekly timesheet record to database
+	 */
 	@PostMapping("/day-sheet-save")
 	public ResponseEntity<Object> daySheetSave(@RequestBody List<DaySheet> daySheet,
 			@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
@@ -92,6 +95,9 @@ public class DaySheetController {
 		return ResponseEntity.ok().body("");
 	}
 
+	/*
+	 * Fetching weekly record
+	 */
 	@GetMapping("/fetch-day-sheet-week")
 	public ResponseEntity<List<DaySheetDto>> fetchByDate(HttpServletRequest request,
 			@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) {
@@ -104,6 +110,9 @@ public class DaySheetController {
 		return ResponseEntity.of(Optional.of(ld));
 	}
 
+	/*
+	 * Fetching weekly holidays
+	 */
 	@GetMapping("/week-holidays")
 	public ResponseEntity<List<Object>> weeklyHolidays(@RequestParam("startDate") String startDate,
 			@RequestParam("endDate") String endDate) {
@@ -111,6 +120,9 @@ public class DaySheetController {
 		return ResponseEntity.of(Optional.of(hr.getWeekHoliday(startDate, endDate)));
 	}
 
+	/*
+	 * Fetching status of timesheet
+	 */
 	@PostMapping(value = "/day-sheet-status")
 	public ResponseEntity<Object> workStatus(HttpServletRequest request, @RequestParam("startDate") String startDate,
 			@RequestParam("endDate") String endDate) {
@@ -134,13 +146,19 @@ public class DaySheetController {
 		return ResponseEntity.status(HttpStatus.OK).body("0");
 	}
 
+	/*
+	 * Fetching weekly holidays
+	 */
 	@GetMapping("/week-leaves")
 	public ResponseEntity<List<Object>> getWeekLeaves(@RequestParam("startDate") String startDate,
 			@RequestParam("endDate") String endDate) {
 		return ResponseEntity.of(Optional.of(lr.getWeekLeaves(startDate, endDate)));
 	}
 
-//not use
+	//not use
+	/*
+	 * Fetching weekly holidays
+	 */
 	@GetMapping("/get-week-holidays")
 	public ResponseEntity<String[]> getweekHolidays(@RequestParam("startDate") String startDate,
 			@RequestParam("endDate") String endDate) throws ParseException {

@@ -38,11 +38,17 @@ public class UserController {
 	@Autowired
 	UserMasterService us;
 
+	/*
+	 * Access Change Password Page
+	 */
 	@GetMapping(value = "/change-password")
 	public String getMethodName() {
 		return "change-password";
 	}
 
+	/*
+	 * Changing password post request
+	 */
 	@PostMapping(value = "/change-password")
 	public ResponseEntity<Object> changePassword(HttpServletRequest request,
 			@RequestParam(value = "oldPass") String oldPass, @RequestParam(value = "newPass") String newPass) {
@@ -60,6 +66,9 @@ public class UserController {
 		return "user_gui";
 	}
 
+	/*
+	 * Access user master page
+	 */
 	@GetMapping(value = "/user-master")
 	public ModelAndView userMaster() {
 		ModelAndView m = new ModelAndView("user-master");
@@ -67,6 +76,9 @@ public class UserController {
 		return m;
 	}
 
+	/*
+	 * Access Add user page
+	 */
 	@GetMapping(value = "/user-master-add")
 	public ModelAndView getUserMasterAdd() {
 		ModelAndView m = new ModelAndView("user-master-add");
@@ -75,6 +87,9 @@ public class UserController {
 		return m;
 	}
 
+	/*
+	 * Adding user post request
+	 */
 	@PostMapping(value = "/user-master-add-process")
 	public ResponseEntity<Object> addUser(@RequestBody User user) {
 		ur.save(user);
@@ -82,6 +97,9 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.CREATED).body("");
 	}
 
+	/*
+	 * Access user edit page
+	 */
 	@GetMapping(value = "/user-master-edit")
 	public String getUserMasterEdit(Model m, @RequestParam(name = "empId", defaultValue = "") Employee emp) {
 		if (emp == null) {
@@ -95,6 +113,9 @@ public class UserController {
 		return "user-master-edit";
 	}
 
+	/*
+	 * Edit user post request
+	 */
 	@PostMapping(value = "user-master-edit-process")
 	public ResponseEntity<Object> getuserMasterEditProcess(Model m, @RequestBody User user) {
 		ur.updateUserDetails(user.getEmpId(), user.getManagerId(), user.getLeaveReportingManager(),

@@ -31,9 +31,12 @@ public class EmployeeController {
 
 	@Autowired
 	GenLocationRepository glr;
+
 //	per page 5[n]
 //	current page 
-
+	/*
+	 * Fetching all employee
+	 */
 	@GetMapping("employee-master")
 	public String getEmployeeMaster(@RequestParam(value = "page", required = false) Integer page, Model m) {
 		if (page == null) {
@@ -55,6 +58,9 @@ public class EmployeeController {
 		return "employee-master";
 	}
 
+	/*
+	 * Access Employee add page
+	 */
 	@GetMapping(value = "/employee-add")
 	public ModelAndView userMasterAdd() {
 		ModelAndView m = new ModelAndView("employee-add");
@@ -63,17 +69,23 @@ public class EmployeeController {
 		return m;
 	}
 
+	/*
+	 * Adding Employee
+	 */
 	@PostMapping(value = "/employee-add-process")
 	public ResponseEntity<Object> addUser(@RequestBody Employee emp, HttpServletRequest request) {
 		emp.setCreatedBy(request.getSession().getAttribute("empId").toString());
 		if (er.findById(emp.getEmpId()).isEmpty()) {
 			emp = er.save(emp);
 			return ResponseEntity.status(HttpStatus.CREATED).body("User Employee successfully");
-		}else {			
-		return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Employee Already Exits");
+		} else {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Employee Already Exits");
 		}
 	}
 
+	/*
+	 * Access Employee add page
+	 */
 	@GetMapping(value = "/employee-edit")
 	public String getEmployeeEdit(Model m, @RequestParam("empId") Long empId) {
 		Optional<Employee> em = er.findById(empId);
@@ -84,6 +96,9 @@ public class EmployeeController {
 		return "employee-edit";
 	}
 
+	/*
+	 * Editing Employee
+	 */
 	@PostMapping(value = "/employee-edit-process")
 	public ResponseEntity<Object> getEmployeeEditP(@RequestBody Employee emp, HttpServletRequest request) {
 		Employee empOld = er.findById(emp.getEmpId()).get();

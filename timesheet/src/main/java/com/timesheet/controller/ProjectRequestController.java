@@ -9,10 +9,13 @@ import com.timesheet.repository.CustomerRepository;
 
 @Controller
 public class ProjectRequestController {
-	
+
 	@Autowired
 	CustomerRepository cr;
 
+	/*
+	 * Access Project Request Page
+	 */
 	@GetMapping(value = "project-request")
 	public ModelAndView getMethodName() {
 		ModelAndView m = new ModelAndView("project-request");

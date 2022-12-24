@@ -55,6 +55,9 @@ public class ProjectController {
 //		m.addAttribute("empList", employeeService.getAllEmployee());
 //	}
 
+	/*
+	 * Access Project Master page
+	 */
 	@RequestMapping("/project-master")
 	public ModelAndView dashboard() {
 		ModelAndView m = new ModelAndView("project-master");
@@ -62,6 +65,9 @@ public class ProjectController {
 		return m;
 	}
 
+	/*
+	 * Access Project Map page
+	 */
 	@GetMapping("/project-map")
 	public ModelAndView assignproject() {
 		ModelAndView m = new ModelAndView("project-map");
@@ -69,18 +75,27 @@ public class ProjectController {
 		return m;
 	}
 
+	/*
+	 * Access Add Project page
+	 */
 	@GetMapping(value = "add-project")
 	public String getAddProject(Model m) {
 		m.addAttribute("customerList", customerService.getAllcustomer());
 		return "project-add";
 	}
 
+	/*
+	 * Adding project
+	 */
 	@PostMapping("/project-add-process")
 	public ResponseEntity<Object> projectAdddProcess(Model model, @RequestBody Project project) {
 		projectService.save(project);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Project Edited");
 	}
 
+	/*
+	 * Adding project
+	 */
 	@GetMapping(value = "project-edit")
 	public ModelAndView editProject(@RequestParam("projectId") Project project) {
 		ModelAndView m = new ModelAndView("project-edit");
@@ -89,13 +104,20 @@ public class ProjectController {
 		return m;
 	}
 
+	/*
+	 * Edit project
+	 */
 	@PostMapping("/project-edit-process")
 	public ResponseEntity<Object> editProjectProcess(Model model, @RequestBody Project project) {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Project Edit");
 	}
 
+	/*
+	 * Employee Project Mapping
+	 */
 	@PostMapping("/projectassign")
-	public String projectassign(Model m, @RequestParam("empList") long empId, @RequestParam(name = "projectList" ,required = false ,defaultValue="" ) int[] projectList) {
+	public String projectassign(Model m, @RequestParam("empList") long empId,
+			@RequestParam(name = "projectList", required = false, defaultValue = "") int[] projectList) {
 		User user = ur.findById(empId).get();
 		List<Project> pl = new ArrayList<Project>();
 		for (int p : projectList) {
@@ -104,7 +126,7 @@ public class ProjectController {
 		}
 		user.setProject(pl);
 		ur.save(user);
-		
+
 		projectService.deleteByEmpId(empId);
 		for (int l2 : projectList) {
 			EmployeeProject ep = new EmployeeProject();
@@ -112,10 +134,13 @@ public class ProjectController {
 			ep.setProjectId(l2);
 			EmployeeProjectService.assignProject2(ep);
 		}
-		
+
 		return "redirect:/project-map";
 	}
 
+	/*
+	 * Delete project by
+	 */
 	@GetMapping("delete-project-by-id")
 	public ResponseEntity<Object> deleteProjectByProjectId(Model m, @RequestParam("projectId") long ProjectId) {
 		projectService.deleteProjectByProjectId(ProjectId);

@@ -27,6 +27,9 @@ public class ReportProjectController {
 	@Autowired
 	ProjectService ps;
 
+	/*
+	 * Access report project page
+	 */
 	@GetMapping(value = "/report-project")
 	public ModelAndView getReportCustomre(@RequestParam("projectId") Project p) {
 		ModelAndView m = new ModelAndView("report-project");
@@ -35,6 +38,9 @@ public class ReportProjectController {
 		return m;
 	}
 
+	/*
+	 * Fetch project employee sheet
+	 */
 	@PostMapping("/fetch-project-employee-sheet")
 	public ResponseEntity<Object> monthSheetEmployee(@RequestParam Integer projectId) {
 		List<EmployeeProjectDto> li = ps.findEmployeeNameAndHourInProject(projectId);

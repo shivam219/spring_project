@@ -26,12 +26,18 @@ public class ProjectRestController {
 	@Autowired
 	ProjectConverter pc;
 
+	/*
+	 * Fetch assign project
+	 */
 	@GetMapping("/user-project")
 	public ResponseEntity<List<ProjectDto>> getAssignProjectById(@RequestParam("empId") long empId) {
 		List<ProjectDto> modelToDto = pc.modelToDto(pr.findByEmpId(empId));
 		return ResponseEntity.of(Optional.of(modelToDto));
 	}
 
+	/*
+	 * Fetch non assign project
+	 */
 	@GetMapping("/non-user-project")
 	public ResponseEntity<List<ProjectDto>> getNonAssignProjectByEmpId(@RequestParam("empId") long empId) {
 		List<ProjectDto> modelToDto = pc.modelToDto(pr.findnNonByEmpId(empId));

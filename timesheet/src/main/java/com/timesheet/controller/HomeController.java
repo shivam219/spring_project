@@ -30,6 +30,9 @@ public class HomeController {
 	@Autowired
 	LeaveService ls;
 
+	/*
+	 * Access home page
+	 */
 	@GetMapping(value = "/home")
 	public String homePageGet(HttpServletRequest request, Model m) {
 		if (request.getSession().getAttribute("empId") == null) {

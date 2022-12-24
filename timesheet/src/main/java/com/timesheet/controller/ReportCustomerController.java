@@ -10,6 +10,9 @@ import com.timesheet.model.Customer;
 @Controller
 public class ReportCustomerController {
 
+	/*
+	 * Access report customer page
+	 */
 	@GetMapping(value = "/report-customer")
 	public ModelAndView getReportCustomre(@RequestParam("customerId") Customer c) {
 		ModelAndView m = new ModelAndView("report-customer");

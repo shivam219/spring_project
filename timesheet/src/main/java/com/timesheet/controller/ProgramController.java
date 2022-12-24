@@ -35,6 +35,9 @@ public class ProgramController {
 	@Autowired
 	ProgramGroupRepository pgr;
 
+	/*
+	 * Access Program master page
+	 */
 	@GetMapping("/program-master")
 	public ModelAndView programMater() {
 		ModelAndView modelAndView = new ModelAndView("program-master");
@@ -43,6 +46,9 @@ public class ProgramController {
 		return modelAndView;
 	}
 
+	/*
+	 * Access Add Program master page
+	 */
 	@GetMapping(value = "/program-add")
 	public String programAdd(Model m) {
 		m.addAttribute("userGroupList", ugr.findAllNotMappedGroup());
@@ -51,6 +57,9 @@ public class ProgramController {
 		return "program-add";
 	}
 
+	/*
+	 * Access Program Group Mapping page
+	 */
 	@PostMapping("/program-group-map")
 	public String projectassign(HttpServletRequest request,
 			@RequestParam(name = "ugrpCode", required = false, defaultValue = "5") int ugrpCode) {
@@ -70,6 +79,9 @@ public class ProgramController {
 		return "redirect:/program-add";
 	}
 
+	/*
+	 * Access Edit Program page
+	 */
 	@GetMapping(value = "/program-edit")
 	public String programEdit(Model m, @RequestParam(value = "ugrpCode", required = false) UserGroup ug) {
 		m.addAttribute("ugrpCode", ug.getUgrpCode());
@@ -79,6 +91,9 @@ public class ProgramController {
 		return "program-edit";
 	}
 
+	/*
+	 * Edit Program Mapping page
+	 */
 	@PostMapping("/program-group-edit-map")
 	public String projectEditMap(HttpServletRequest request, @RequestParam("ugrpCode") int ugrpCode) {
 		if (ugrpCode == 0) {
@@ -100,6 +115,9 @@ public class ProgramController {
 		return "redirect:/program-master";
 	}
 
+	/*
+	 * Adding program menu page
+	 */
 	@PostMapping("/program-menu-add")
 	public String projectEditMap(HttpServletRequest request, @ModelAttribute() Program m) {
 		HttpSession session = request.getSession();
@@ -107,8 +125,8 @@ public class ProgramController {
 			return "redirect:/program-master";
 		}
 		Integer[] parr = pr.findLastPrgcodeAndPrgOrder(Integer.parseInt(m.getPrgPrnt())).get(0);
-		m.setPrgCode((parr[0]+1));
-		m.setPrgOrder((parr[1])+1);
+		m.setPrgCode((parr[0] + 1));
+		m.setPrgOrder((parr[1]) + 1);
 		m.setCreatedBy((String) session.getAttribute("empName"));
 		pr.save(m);
 //		System.out.println(m);

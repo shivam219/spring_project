@@ -16,21 +16,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.timesheet.model.User;
+import com.timesheet.repository.ProgramRepository;
 import com.timesheet.repository.UserGroupMappingRepository;
 import com.timesheet.repository.UserRepository;
 import com.timesheet.service.EmployeeService;
+import com.timesheet.service.ProgramService;
 
 @Controller
 public class LoginController {
 
 	@Autowired
 	EmployeeService employeeService;
+
+	@Autowired
+	ProgramService ps;
+
 	@Autowired
 	UserRepository ur;
-	
+
 	@Autowired
-	UserGroupMappingRepository ugm;	
-	
+	UserGroupMappingRepository ugm;
+
+	@Autowired
+	ProgramRepository pr;
+
+	/*
+	 * Login to Timesheet Portal
+	 */
 	@PostMapping("/loginprocess")
 	public ResponseEntity<Object> loginPost(HttpServletRequest request, Model m, @RequestBody User emp) {
 		Optional<User> user = ur.findByEmpIdAndPassword(emp.getEmpId(), emp.getPassword());
@@ -45,6 +57,10 @@ public class LoginController {
 			session.setAttribute("empId", user.get().getEmpId());
 			session.setAttribute("empName", user.get().getEmployee().getFullName());
 			session.setAttribute("ugrpCode", ugrpCode);
+//			session.setAttribute("menu", pr.findAllMenuByGroupCode(Integer.parseInt(ugrpCode)));
+//			session.setAttribute("submenu", pr.findAllSubMenuByGroupCode(Integer.parseInt(ugrpCode)));
+			session.setAttribute("menus", ps.findAllMenus(Integer.parseInt(ugrpCode)));
+
 			m.addAttribute("emp", emp);
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body("Login Successfull");
 		}
@@ -63,7 +79,7 @@ public class LoginController {
 		request.getSession().invalidate();
 		request.getSession().removeValue("error");
 		request.getSession().removeAttribute("error");
-		
+
 		return "login";
 	}
 
