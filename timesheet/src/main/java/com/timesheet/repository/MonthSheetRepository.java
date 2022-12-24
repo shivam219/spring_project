@@ -31,7 +31,7 @@ public interface MonthSheetRepository extends CrudRepository<MonthSheet, Long> {
 	@Query(value = "select\n"
 			+ "    date_format( d.date,' %D %b'),\n"
 			+ "    if(count(date)=1,group_concat(p.project_name), group_concat(p.project_name SEPARATOR '@' )),\n"
-			+ "    if(count(date)=1,group_concat(d.descr),group_concat(d.descr SEPARATOR '@')),\n"
+			+ "    if(count(date)=1, group_concat(if(d.descr='','  ','   ')),        group_concat(if(d.descr='','  ','   ')  SEPARATOR '@')),\n"
 			+ "    if(count(date)=1 ,group_concat(d.hour) ,group_concat(d.hour SEPARATOR '@')) ,\n"
 			+ "    sum(d.hour)\n"
 			+ "from\n"

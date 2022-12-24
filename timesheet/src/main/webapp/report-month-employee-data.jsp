@@ -107,7 +107,7 @@
         </div>
       </div>
       
-      <div class="row d-none">
+      <div class="row mb-2 ">
         <div class="col-lg-6">
           <div class="card ">
             <div class="card-body">
@@ -126,23 +126,29 @@
         </div> 
       </div> 
 
+
       <div class="row">
         <div class="col-lg-12">
-          <div class="table-responsive">
-            <table class="table table-fixed project-list-table table-nowrap align-middle table-borderless" id="monthTable">
-              <thead class="thead-dark">
-                <th class="text-center overflow-auto" scope="row">Date</th>
-                <th class="text-center overflow-auto" scope="row">Project Name</th>
-                <th class="text-center overflow-auto" scope="row">Description</th>
-                <th class="text-center overflow-auto" scope="row">Hour</th>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
+          <div class="card "> 
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-fixed project-list-table table-nowrap align-middle table-borderless" id="monthTable">
+                <thead class="thead-dark">
+                  <th class="text-center overflow-auto" scope="row">Date</th>
+                  <th class="text-center overflow-auto" scope="row">Project Name</th>
+                  <th class="text-center overflow-auto" scope="row">Description</th>
+                  <th class="text-center overflow-auto" scope="row">Hour</th>
+                </thead>
+                <tbody>
+                </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <br>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.3.2/echarts.min.js"
       integrity="sha512-weWXHm0Ws2cZKjjwugRMnnOAx9uCP/wUVf84W7/fXQimwYUK28zPDGPprDozomQLpKv6U99xN9PI9+yLI9qxNw=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -244,9 +250,9 @@
           },
           yaxis: {
             title: {
-              text: '$ (thousands)'
+              text: 'Hour'
             }
-          },
+          }, 
           fill: {
             opacity: 1
           },
