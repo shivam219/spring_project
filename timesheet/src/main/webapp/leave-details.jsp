@@ -93,6 +93,7 @@
                                 <th scope="col">Documents</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Manager</th>
+                                <th scope="col">Days</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -123,6 +124,7 @@
 										</td> 
                                     <td class="overflow-auto">${l.getSecondStatus()}</td>
                                     <td class="overflow-auto">${l.getManagerName()}</td>
+                                    <td class="overflow-auto">${l.getDays()}</td>
                                 </tr>
                             </c:forEach> 
                             <c:if test='${list.size()==0}'>   

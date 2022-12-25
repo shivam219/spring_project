@@ -237,26 +237,6 @@ public class LeaveController {
 		return m;
 	}
 
-//	@GetMapping(value = "leave-details")
-//	public ModelAndView leaveDetails(HttpServletRequest request) {
-//		Long empId = ((Long) request.getSession().getAttribute("empId"));
-//		ModelAndView m = new ModelAndView("leave-details");
-//		m.addObject("list", lr.getLeaveStatus(empId));
-//		return m;
-//	}
-
-//	@GetMapping("leave-details")
-//	public ModelAndView getEmployeeMaster(@RequestParam(value = "page", defaultValue = "1") Integer page) {
-//		ModelAndView m = new ModelAndView("leave-details");
-//		Pageable pageable = PageRequest.of((page - 1), 8, Sort.by("startDate"));
-//		Page<Leave> lp = (Page<Leave>) lr.findAll(pageable);
-//		List<Leave> ll = lp.getContent();
-//		m.addObject("list", ll);
-//		m.addObject("empListSize", lp.getTotalElements());
-//		m.addObject("currentPage", page);
-//		m.addObject("totalPages", (lp.getTotalPages()));
-//		return m;
-//	}
 	@GetMapping("leave-details")
 	public ModelAndView getEmployeeMaster(@RequestParam(value = "page", defaultValue = "1") Integer page,
 			@RequestParam(value = "status", defaultValue = "") String status,
@@ -269,21 +249,19 @@ public class LeaveController {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date startDate2 = sdf.parse(startDate);
 			Date endDate2 = sdf.parse(endDate);
-			System.out.println(startDate);
-			System.out.println(endDate);
 			if (status.trim().isBlank()) {
 				System.out.println("All");
-				lp = (Page<Leave>) lr.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqual(startDate2, endDate2,
+				lp = (Page<Leave>) lr.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualOrderByStartDateDesc(startDate2, endDate2,
 						pageable);
 			} else {
 				System.out.println("choosen");
-				lp = (Page<Leave>) lr.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndSecondStatus(startDate2,
-						endDate2, status, pageable);
+				lp = (Page<Leave>) lr.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndSecondStatusOrderByStartDateDesc(
+						startDate2, endDate2, status, pageable);
 			}
 		} else if (status == null || status.trim().isEmpty()) {
-			lp = (Page<Leave>) lr.findAll(pageable);
+			lp = (Page<Leave>) lr.findAllByOrderByStartDateDesc(pageable);
 		} else {
-			lp = (Page<Leave>) lr.findBySecondStatus(status, pageable);
+			lp = (Page<Leave>) lr.findBySecondStatusOrderByStartDateDesc(status, pageable);
 		}
 		List<Leave> ll = lp.getContent();
 		m.addObject("option", status);
@@ -295,26 +273,6 @@ public class LeaveController {
 		m.addObject("totalPages", (lp.getTotalPages()));
 		return m;
 	}
-
-//	@PostMapping("leave-details")
-//	public ModelAndView getEmployeeMasterP(@RequestParam(value = "page", defaultValue = "1") Integer page,
-//			@RequestParam("status") String status) {
-//		ModelAndView m = new ModelAndView("leave-details");
-//		Pageable pageable = PageRequest.of((page - 1), 8, Sort.by("startDate"));
-//		Page<Leave> lp = null;
-//		if (status == null || status.trim().isEmpty()) {
-//			lp = (Page<Leave>) lr.findAll(pageable);
-//		} else {
-//			lp = (Page<Leave>) lr.findBySecondStatus(status, pageable);
-//		}
-//		List<Leave> ll = lp.getContent();
-//		m.addObject("list", ll);
-//		m.addObject("option", status);
-//		m.addObject("empListSize", lp.getTotalElements());
-//		m.addObject("currentPage", page + 1);
-//		m.addObject("totalPages", (lp.getTotalPages()));
-//		return m;
-//	}
 
 	/*
 	 * Access Approved Leave Report

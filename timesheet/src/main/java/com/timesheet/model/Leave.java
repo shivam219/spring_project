@@ -1,5 +1,6 @@
 package com.timesheet.model;
 
+import java.time.Period;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -219,6 +220,18 @@ public class Leave {
 
 	public void setEndDate2(String endDate2) {
 		this.endDate2 = endDate2;
+	}
+
+	public String getDays() {
+		Date d = startDate;
+		Date e = endDate;
+		long ll = e.getTime() - d.getTime();
+		if (ll == 0L) {
+			return "1";
+		}
+		long l = ll / 1000/60/60/24;
+		return (l+1) + "";
+
 	}
 
 	public String getAttachment() {
