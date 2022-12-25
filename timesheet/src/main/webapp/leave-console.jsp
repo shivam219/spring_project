@@ -65,8 +65,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="">
-						<div class="table-responsive">
-							<table 	id="example">
+						<!-- <div class="table-responsive"> -->
+							<table 	id="example" class="bg-white">
 								<thead>
 									<tr class="text-white" style="background-color:#124265;">
 										<th scope="col" class="text-white">Leave Type</th>
@@ -79,14 +79,14 @@
 									<c:forEach items="${list}" var="l" varStatus="loop">
 										<tr>
 											<td class="overflow-auto">${l.getLeaveType()}</td>
-											<td class="overflow-auto">${l.getStartDate()}</td>
-											<td class="overflow-auto">${l.getEndDate()}</td>
+											<td class="overflow-auto">${l.getStartDate2()}</td>
+											<td class="overflow-auto">${l.getEndDate2()}</td>
 											<td class="overflow-auto">${l.getStatus()}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-						</div>
+						<!-- </div> -->
 					</div>
 				</div>
 			</div>

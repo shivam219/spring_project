@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Tuple;
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -58,7 +60,7 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 	@Query(value = "SELECT count(status) FROM ess.timesheet_leave_master where status='Rejected' and month(start_date)=month(now()) and emp_id = :empId", nativeQuery = true)
 	public Integer getRejectedCountOfMonth(long empId);
 
-	@Query(value = "select leave_type, date_format(start_date,'%D %M %Y' ) as start_date, date_format(end_date,'%D %M %Y' ) as end_date, status, a.*  from timesheet_leave_master a where emp_id = :empId", nativeQuery = true)
+	@Query(value = "select leave_type, date_format(start_date,'%D %M %Y' ) as start_date2, date_format(end_date,'%D %M %Y' ) as end_date2, status, a.*  from timesheet_leave_master a where emp_id = :empId", nativeQuery = true)
 	public List<Leave> getLeaveStatus(@Param("empId") long empId);
 
 	@Query(value = "select  *  from timesheet_leave_master  where month(start_date) = :month and year(start_date) = :year and status = :status and emp_id = :empId", nativeQuery = true)
@@ -98,10 +100,11 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 			+ "FROM ess.timesheet_leave_master where emp_id = :empId and second_status= 'Approved' ;\n" + "\n"
 			+ "", nativeQuery = true)
 	public List<Tuple> findLeaveTypeStartDateEndDateByEmpId(@Param("empId") long empId);
-	
+
 	@Query(value = "SELECT leave_type , date_format(start_date,' %D %b' ) as start_date , date_format(end_date,' %D %b' ) as end_date  , convert((datediff(end_date , start_date)+1),char) as days FROM timesheet_leave_master where emp_id = :empId and second_status= 'Approved' and 	month(start_date) in (select month(month) from timesheet_month_sheet where month_sheet_id = :monthId)", nativeQuery = true)
-	public List<Tuple> findLeaveTypeStartDateEndDateByEmpIdForMonth(@Param("empId") long empId ,@Param("monthId") long monthId);
-	
+	public List<Tuple> findLeaveTypeStartDateEndDateByEmpIdForMonth(@Param("empId") long empId,
+			@Param("monthId") long monthId);
+
 	@Query(value = "select monthname(start_date),\n"
 			+ "    convert(if(sum(if(second_status='Approved',datediff(end_date,start_date)+1,0))<>0,sum(if(second_status='Approved',datediff(end_date,start_date)+1,0)),'')  ,char) approve,"
 			+ "    convert(if(sum(if(second_status='Rejected',datediff(end_date,start_date)+1,0))<>0,sum(if(second_status='Rejected',datediff(end_date,start_date)+1,0)),''),char) reject ,"
@@ -109,5 +112,16 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 			+ "    convert(if(sum(if(second_status='Pending',datediff(end_date,start_date)+1,0))<>0,sum(if(second_status='Pending',datediff(end_date,start_date)+1,0)),''),char) pending "
 			+ "from timesheet_leave_master where emp_id =:empId group by monthname(start_date) , month(start_date) order by month(start_date) desc", nativeQuery = true)
 	public List<Tuple> findLeaveStatusByEmpId(@Param("empId") long empId);
+
+	public Page<Leave> findAll(Pageable pageable);
+
+	public Page<Leave> findBySecondStatus(String secondStatus, Pageable pageable);
+
+	public Page<Leave> findAllByStartDateLessThanEqualAndEndDateLessThanEqual(Date startDate, Date endDate,
+			Pageable pageable);
+
+	public Page<Leave> findAllByStartDateLessThanEqualAndEndDateLessThanEqualAndSecondStatus(Date startDate,
+			Date endDate, String secondStatus, Pageable pageable);
+//	Page<Leave> findByTitleContaining(String title, Pageable pageable);
 
 }

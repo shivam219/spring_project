@@ -174,9 +174,9 @@
 											<tr>
 												<td class="text-center">Month</td>
 												<td class="text-center text-body "><a
-														href="leave-console">Approve</a></td>
+														href="leave-details">Approve</a></td>
 												<td class="text-center text-body "><a
-														href="leave-console">Reject</a></td>
+														href="leave-details">Reject</a></td>
 												<td class="text-center text-body "><a
 														href="leave-console">Cancel</a></td>
 												<td class="text-center text-body "><a

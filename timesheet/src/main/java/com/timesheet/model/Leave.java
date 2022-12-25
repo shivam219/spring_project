@@ -61,10 +61,14 @@ public class Leave {
 	@Column(name = "start_date")
 	private Date startDate;
 
+	private String startDate2;
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	@Column(name = "end_date")
 	private Date endDate;
+
+	private String endDate2;
 
 	@Column(name = "attachment")
 	private String attachment;
@@ -87,32 +91,6 @@ public class Leave {
 
 	public Leave() {
 		super();
-	}
-
-	public Leave(Long leaveCode, String leaveId, Long empId, String empName, String managerName, Long managerId,
-			Long leaveManagerId, String dayMode, String leaveType, String leaveReason, String rejectReason,
-			Date startDate, Date endDate, String attachment, String status, String secondStatus, String approveReason,
-			String secondApproveReason, Date submittedDate) {
-		super();
-		this.leaveCode = leaveCode;
-		this.leaveId = leaveId;
-		this.empId = empId;
-		this.empName = empName;
-		this.managerName = managerName;
-		this.managerId = managerId;
-		this.leaveManagerId = leaveManagerId;
-		this.dayMode = dayMode;
-		this.leaveType = leaveType;
-		this.leaveReason = leaveReason;
-		this.rejectReason = rejectReason;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.attachment = attachment;
-		this.status = status;
-		this.secondStatus = secondStatus;
-		this.approveReason = approveReason;
-		this.secondApproveReason = secondApproveReason;
-		this.submittedDate = submittedDate;
 	}
 
 	public Long getLeaveCode() {
@@ -211,12 +189,28 @@ public class Leave {
 		this.startDate = startDate;
 	}
 
+	public String getStartDate2() {
+		return startDate2;
+	}
+
+	public void setStartDate2(String startDate2) {
+		this.startDate2 = startDate2;
+	}
+
 	public Date getEndDate() {
 		return endDate;
 	}
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public String getEndDate2() {
+		return endDate2;
+	}
+
+	public void setEndDate2(String endDate2) {
+		this.endDate2 = endDate2;
 	}
 
 	public String getAttachment() {
@@ -267,15 +261,8 @@ public class Leave {
 		this.submittedDate = submittedDate;
 	}
 
-	@Override
-	public String toString() {
-		return "Leave [leaveCode=" + leaveCode + ", leaveId=" + leaveId + ", empId=" + empId + ", empName=" + empName
-				+ ", managerName=" + managerName + ", managerId=" + managerId + ", leaveManagerId=" + leaveManagerId
-				+ ", dayMode=" + dayMode + ", leaveType=" + leaveType + ", leaveReason=" + leaveReason
-				+ ", rejectReason=" + rejectReason + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", attachment=" + attachment + ", status=" + status + ", secondStatus=" + secondStatus
-				+ ", approveReason=" + approveReason + ", secondApproveReason=" + secondApproveReason
-				+ ", submittedDate=" + submittedDate + "]";
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

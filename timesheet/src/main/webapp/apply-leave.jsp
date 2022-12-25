@@ -89,7 +89,7 @@
 											</div>
 											<div class="col-md-6">  
 												<label class="mb-1" for="leaveReason">Leave Reason</label>
-												<textarea class="form-control  w-75" style="width: 83%;" id="leaveReason" name="leaveReason" type="text" placeholder="Enter Leave Reason" value=""></textarea>
+												<textarea class="form-control  w-75" style="width: 83%;" id="leaveReason" name="leaveReason" type="text" placeholder="Enter Leave Reason" value="Need Leave"></textarea>
 												<span class="form-text small text-danger ms-2 d-none">Specify Leave Reason</span>
 											</div>
 										</div>

@@ -2,7 +2,9 @@ package com.timesheet.controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -11,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -230,6 +236,84 @@ public class LeaveController {
 		m.addObject("list", lr.getLeaveStatus(empId));
 		return m;
 	}
+
+//	@GetMapping(value = "leave-details")
+//	public ModelAndView leaveDetails(HttpServletRequest request) {
+//		Long empId = ((Long) request.getSession().getAttribute("empId"));
+//		ModelAndView m = new ModelAndView("leave-details");
+//		m.addObject("list", lr.getLeaveStatus(empId));
+//		return m;
+//	}
+
+//	@GetMapping("leave-details")
+//	public ModelAndView getEmployeeMaster(@RequestParam(value = "page", defaultValue = "1") Integer page) {
+//		ModelAndView m = new ModelAndView("leave-details");
+//		Pageable pageable = PageRequest.of((page - 1), 8, Sort.by("startDate"));
+//		Page<Leave> lp = (Page<Leave>) lr.findAll(pageable);
+//		List<Leave> ll = lp.getContent();
+//		m.addObject("list", ll);
+//		m.addObject("empListSize", lp.getTotalElements());
+//		m.addObject("currentPage", page);
+//		m.addObject("totalPages", (lp.getTotalPages()));
+//		return m;
+//	}
+	@GetMapping("leave-details")
+	public ModelAndView getEmployeeMaster(@RequestParam(value = "page", defaultValue = "1") Integer page,
+			@RequestParam(value = "status", defaultValue = "") String status,
+			@RequestParam(value = "startDate", defaultValue = "") String startDate,
+			@RequestParam(value = "endDate", defaultValue = "") String endDate) throws ParseException {
+		ModelAndView m = new ModelAndView("leave-details");
+		Pageable pageable = PageRequest.of((page - 1), 8, Sort.by("startDate"));
+		Page<Leave> lp = null;
+		if (!startDate.equals("") && !endDate.equals("")) {
+			if (status.trim().isEmpty()) {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Date startDate2 = sdf.parse(startDate);
+				Date endDate2 = sdf.parse(endDate);
+				lp = (Page<Leave>) lr.findAllByStartDateLessThanEqualAndEndDateLessThanEqual(startDate2, endDate2,
+						pageable);
+			} else {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Date startDate2 = sdf.parse(startDate);
+				Date endDate2 = sdf.parse(endDate);
+				lp = (Page<Leave>) lr.findAllByStartDateLessThanEqualAndEndDateLessThanEqualAndSecondStatus(startDate2,
+						endDate2, status, pageable);
+			}
+		} else if (status == null || status.trim().isEmpty()) {
+			lp = (Page<Leave>) lr.findAll(pageable);
+		} else {
+			lp = (Page<Leave>) lr.findBySecondStatus(status, pageable);
+		}
+		List<Leave> ll = lp.getContent();
+		m.addObject("option", status);
+		m.addObject("startDate", startDate);
+		m.addObject("endDate", endDate);
+		m.addObject("list", ll);
+		m.addObject("empListSize", lp.getTotalElements());
+		m.addObject("currentPage", page);
+		m.addObject("totalPages", (lp.getTotalPages()));
+		return m;
+	}
+
+//	@PostMapping("leave-details")
+//	public ModelAndView getEmployeeMasterP(@RequestParam(value = "page", defaultValue = "1") Integer page,
+//			@RequestParam("status") String status) {
+//		ModelAndView m = new ModelAndView("leave-details");
+//		Pageable pageable = PageRequest.of((page - 1), 8, Sort.by("startDate"));
+//		Page<Leave> lp = null;
+//		if (status == null || status.trim().isEmpty()) {
+//			lp = (Page<Leave>) lr.findAll(pageable);
+//		} else {
+//			lp = (Page<Leave>) lr.findBySecondStatus(status, pageable);
+//		}
+//		List<Leave> ll = lp.getContent();
+//		m.addObject("list", ll);
+//		m.addObject("option", status);
+//		m.addObject("empListSize", lp.getTotalElements());
+//		m.addObject("currentPage", page + 1);
+//		m.addObject("totalPages", (lp.getTotalPages()));
+//		return m;
+//	}
 
 	/*
 	 * Access Approved Leave Report

@@ -165,7 +165,6 @@
 										<td class="">${l.getStartDate()}</td>
 										<td class="">${l.getEndDate()}</td>
 										<td class="text-center ">
-
 											<button class="btn btn-sm badge-soft-primary w-50 py-1 " type="button"
 												onclick='leaveReasonPopShow(` <c:out value="${l.getLeaveReason()}" /> `);this.blur()'>
 												<i class="fa fa-duotone fa-comments"></i>
