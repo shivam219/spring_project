@@ -266,17 +266,18 @@ public class LeaveController {
 		Pageable pageable = PageRequest.of((page - 1), 8, Sort.by("startDate"));
 		Page<Leave> lp = null;
 		if (!startDate.equals("") && !endDate.equals("")) {
-			if (status.trim().isEmpty()) {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				Date startDate2 = sdf.parse(startDate);
-				Date endDate2 = sdf.parse(endDate);
-				lp = (Page<Leave>) lr.findAllByStartDateLessThanEqualAndEndDateLessThanEqual(startDate2, endDate2,
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date startDate2 = sdf.parse(startDate);
+			Date endDate2 = sdf.parse(endDate);
+			System.out.println(startDate);
+			System.out.println(endDate);
+			if (status.trim().isBlank()) {
+				System.out.println("All");
+				lp = (Page<Leave>) lr.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqual(startDate2, endDate2,
 						pageable);
 			} else {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				Date startDate2 = sdf.parse(startDate);
-				Date endDate2 = sdf.parse(endDate);
-				lp = (Page<Leave>) lr.findAllByStartDateLessThanEqualAndEndDateLessThanEqualAndSecondStatus(startDate2,
+				System.out.println("choosen");
+				lp = (Page<Leave>) lr.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndSecondStatus(startDate2,
 						endDate2, status, pageable);
 			}
 		} else if (status == null || status.trim().isEmpty()) {

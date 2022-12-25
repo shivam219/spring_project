@@ -117,10 +117,10 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 
 	public Page<Leave> findBySecondStatus(String secondStatus, Pageable pageable);
 
-	public Page<Leave> findAllByStartDateLessThanEqualAndEndDateLessThanEqual(Date startDate, Date endDate,
+	public Page<Leave> findAllByStartDateGreaterThanEqualAndEndDateLessThanEqual(Date startDate, Date endDate,
 			Pageable pageable);
 
-	public Page<Leave> findAllByStartDateLessThanEqualAndEndDateLessThanEqualAndSecondStatus(Date startDate,
+	public Page<Leave> findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndSecondStatus(Date startDate,
 			Date endDate, String secondStatus, Pageable pageable);
 //	Page<Leave> findByTitleContaining(String title, Pageable pageable);
 

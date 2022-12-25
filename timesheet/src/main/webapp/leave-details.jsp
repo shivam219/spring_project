@@ -51,7 +51,7 @@
                             <input class="form-control "  type="date"   id="endDate"  name="endDate" value="${endDate}"  onchange="dateChange()">
                             <span class="form-text small text-danger ms-2   d-none">To Date</span>  
                         </div>
-                        <span class="bg-white rounded small mb-1 ps-2 p-2 border mt-1" for="dateOfJoin">Leave Type</span>
+                        <span class="bg-white rounded small mb-1 ps-2 p-2 border mt-1" for="dateOfJoin">Leave Status</span>
                         <div > 
                             <select name="status" class="form-select d-flex" onchange="document.forms[0].submit()" aria-selected="true" id="selectedOption">
                                 <option value="">All</option>
@@ -120,11 +120,16 @@
 													<i class="fa fa-duotone fa-eye"></i> view
 												</a>
 											</c:if>
-										</td>
+										</td> 
                                     <td class="overflow-auto">${l.getSecondStatus()}</td>
                                     <td class="overflow-auto">${l.getManagerName()}</td>
                                 </tr>
-                            </c:forEach>
+                            </c:forEach> 
+                            <c:if test='${list.size()==0}'>   
+									<tr class="border">
+										<td colspan="8" class="bg-white text-center fw-normal h5 p-2 "> No Data</td>
+									</tr>
+								</c:if>
                         </tbody>
                     </table>
                 </div>
