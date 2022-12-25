@@ -20,7 +20,7 @@
  
     <body>
         <div class="container"> 
-            <h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Approved Leave Report </h1>
+            <h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Employee Leave Report </h1>
             <div class="row align-items-center mt-3 bg-white p-0 m-0 rounded-top  ">
                 <div class="col-2"></div> 
                 <div class="col-md-8">

@@ -205,6 +205,14 @@ public class Leave {
 		this.endDate = endDate;
 	}
 
+	public String getStartDateSort() {
+		return startDate.toLocaleString().substring(0, 11);
+	}
+
+	public String getendDateSort() {
+		return endDate.toLocaleString().substring(0, 11);
+	}
+
 	public String getEndDate2() {
 		return endDate2;
 	}

@@ -100,8 +100,8 @@
                                 <tr>
                                     <td class="overflow-auto">${l.getLeaveId()}</td>
                                     <td class="overflow-auto">${l.getLeaveType()}</td>
-                                    <td class="overflow-auto">${l.getStartDate()}</td>
-                                    <td class="overflow-auto">${l.getEndDate()}</td>
+                                    <td class="overflow-auto">${l.getStartDateSort()}</td> 
+                                    <td class="overflow-auto">${l.getendDateSort()}</td>
                                     <td class="text-center ">
                                         <button class="btn btn-sm badge-soft-primary w-50 py-1 " type="button"
                                             onclick='leaveReasonPopShow(` <c:out value="${l.getLeaveReason()}" /> `);this.blur()'>

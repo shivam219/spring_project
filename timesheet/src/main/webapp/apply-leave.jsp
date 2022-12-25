@@ -89,7 +89,7 @@
 											</div>
 											<div class="col-md-6">  
 												<label class="mb-1" for="leaveReason">Leave Reason</label>
-												<textarea class="form-control  w-75" style="width: 83%;" id="leaveReason" name="leaveReason" type="text" placeholder="Enter Leave Reason" value="Need Leave"></textarea>
+												<textarea class="form-control  w-75" style="width: 83%;" id="leaveReason" name="leaveReason" type="text" placeholder="Enter Leave Reason" value=""></textarea>
 												<span class="form-text small text-danger ms-2 d-none">Specify Leave Reason</span>
 											</div>
 										</div>
@@ -102,8 +102,8 @@
 								</button>
 								<button class="btn btn-danger btn-sm px-3 ms-2 w-auto " type="reset"
 									onclick="this.blur()"> Reset</button>
-								<a href="leave-console" class="btn btn-secondary btn-sm px-3 ms-2 w-auto " type="back"
-									onclick="this.blur()"> Back</a>
+								<button class="btn btn-secondary btn-sm px-3 ms-2 w-auto " type="button"
+									onclick="history.back()"> Back</button>
 							</div>
 						</form>
 					</div>
