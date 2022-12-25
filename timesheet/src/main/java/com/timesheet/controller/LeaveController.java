@@ -238,10 +238,12 @@ public class LeaveController {
 	}
 
 	@GetMapping("leave-details")
-	public ModelAndView getEmployeeMaster(@RequestParam(value = "page", defaultValue = "1") Integer page,
+	public ModelAndView getEmployeeMaster(
+			HttpServletRequest request,@RequestParam(value = "page", defaultValue = "1") Integer page,
 			@RequestParam(value = "status", defaultValue = "") String status,
 			@RequestParam(value = "startDate", defaultValue = "") String startDate,
 			@RequestParam(value = "endDate", defaultValue = "") String endDate) throws ParseException {
+		long empId =(long) request.getSession().getAttribute("empId");
 		ModelAndView m = new ModelAndView("leave-details");
 		Pageable pageable = PageRequest.of((page - 1), 8, Sort.by("startDate"));
 		Page<Leave> lp = null;
@@ -251,17 +253,17 @@ public class LeaveController {
 			Date endDate2 = sdf.parse(endDate);
 			if (status.trim().isBlank()) {
 				System.out.println("All");
-				lp = (Page<Leave>) lr.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualOrderByStartDateDesc(startDate2, endDate2,
-						pageable);
+				lp = (Page<Leave>) lr.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndEmpIdOrderByStartDateDesc(startDate2, endDate2,
+						pageable,empId);
 			} else {
 				System.out.println("choosen");
-				lp = (Page<Leave>) lr.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndSecondStatusOrderByStartDateDesc(
-						startDate2, endDate2, status, pageable);
+				lp = (Page<Leave>) lr.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndSecondStatusAndEmpIdOrderByStartDateDesc(
+						startDate2, endDate2, status, pageable,empId);
 			}
 		} else if (status == null || status.trim().isEmpty()) {
-			lp = (Page<Leave>) lr.findAllByOrderByStartDateDesc(pageable);
+			lp = (Page<Leave>) lr.findAllByEmpIdOrderByStartDateDesc(pageable,empId);
 		} else {
-			lp = (Page<Leave>) lr.findBySecondStatusOrderByStartDateDesc(status, pageable);
+			lp = (Page<Leave>) lr.findBySecondStatusAndEmpIdOrderByStartDateDesc(status, pageable,empId);
 		}
 		List<Leave> ll = lp.getContent();
 		m.addObject("option", status);

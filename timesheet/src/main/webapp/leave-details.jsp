@@ -129,8 +129,8 @@
                             </c:forEach> 
                             <c:if test='${list.size()==0}'>   
 									<tr class="border">
-										<td colspan="8" class="bg-white text-center fw-normal h5 p-2 "> No Data</td>
-									</tr>
+										<td colspan="9" class="bg-white text-center fw-normal h5 p-2 "> No Data</td>
+									</tr> 
 								</c:if>
                         </tbody>
                     </table>

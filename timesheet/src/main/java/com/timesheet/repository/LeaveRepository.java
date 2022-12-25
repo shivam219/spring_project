@@ -113,15 +113,15 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 			+ "from timesheet_leave_master where emp_id =:empId group by monthname(start_date) , month(start_date) order by month(start_date) desc", nativeQuery = true)
 	public List<Tuple> findLeaveStatusByEmpId(@Param("empId") long empId);
 
-	public Page<Leave> findAllByOrderByStartDateDesc(Pageable pageable);
+	public Page<Leave> findAllByEmpIdOrderByStartDateDesc(Pageable pageable,long empId);
 
-	public Page<Leave> findBySecondStatusOrderByStartDateDesc(String secondStatus, Pageable pageable);
+	public Page<Leave> findBySecondStatusAndEmpIdOrderByStartDateDesc(String secondStatus, Pageable pageable,long empId);
+	
+	public Page<Leave> findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndEmpIdOrderByStartDateDesc(Date startDate, Date endDate,
+			Pageable pageable,long empId);
 
-	public Page<Leave> findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualOrderByStartDateDesc(Date startDate, Date endDate,
-			Pageable pageable);
-
-	public Page<Leave> findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndSecondStatusOrderByStartDateDesc(Date startDate,
-			Date endDate, String secondStatus, Pageable pageable);
+	public Page<Leave> findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndSecondStatusAndEmpIdOrderByStartDateDesc(Date startDate,
+			Date endDate, String secondStatus, Pageable pageable,long empId);
 //	Page<Leave> findByTitleContaining(String title, Pageable pageable);
 
 }
