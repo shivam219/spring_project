@@ -37,11 +37,11 @@ table {
                             <tbody>
                                 <c:forEach items="${listYear}" var="year" varStatus="loop">
                                     <tr>
-                                        <td class="overflow-auto"><a href="/year-master-edit?yearCode=${year.getYearCode()}" class="text-body overflow-auto">${year.getYearCode()} </a></td>
+                                        <td class="overflow-auto"><a href="year-master-edit?yearCode=${year.getYearCode()}" class="text-body overflow-auto">${year.getYearCode()} </a></td>
                                         <td class="overflow-auto">
                                             <ul class="list-inline mb-0">
                                                 <li class="list-inline-item">
-                                                    <a href="/year-master-edit?yearCode=${year.getYearCode()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
+                                                    <a href="year-master-edit?yearCode=${year.getYearCode()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
                                                 </li>                                   
                                             </ul>
                                         </td>

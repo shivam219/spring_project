@@ -278,7 +278,8 @@
                                 showConfirmButton: false,
                                 timer: 500
                             });
-                            location.replace('/employee-master');
+                            location.replace('employee-master');
+
                         }, error: function () {
                             swal({
                                 title: "Error",

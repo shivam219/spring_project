@@ -151,7 +151,7 @@
                     }).
                     then(function (isOkay) {
                         if (isOkay) {
-                            location.replace('/project-master');
+                            location.replace('project-master');
                         }
                     });
                 },error : function(data,msg,xh){

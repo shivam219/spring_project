@@ -92,7 +92,6 @@
                                 <th scope="col">Reason</th>
                                 <th scope="col">Documents</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Manager</th>
                                 <th scope="col">Days</th>
                             </tr>
                         </thead>
@@ -123,7 +122,6 @@
 											</c:if>
 										</td> 
                                     <td class="overflow-auto">${l.getSecondStatus()}</td>
-                                    <td class="overflow-auto">${l.getManagerName()}</td>
                                     <td class="overflow-auto">${l.getDays()}</td>
                                 </tr>
                             </c:forEach> 
@@ -147,15 +145,15 @@
                 <div class="float-sm-end">
                     <ul class="pagination mb-sm-0">
                         <li class="page-item  <c:if test='${currentPage eq 1 }'> disabled</c:if> "> 
-                            <a class="page-link"  href="leave-details?page=${currentPage-1}&status=${option}" aria-label="Previous">
+                            <a class="page-link"  href="leave-details?page=${currentPage-1}&status=${option}&startDate=${startDate}&endDate=${endDate}" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>   
                         <c:forEach var = "i" begin = "1" end = "${totalPages}"> 
-                            <li class="page-item <c:if test='${currentPage eq i }'>active</c:if>" ><a href ="leave-details?page=${i}&status=${option}"  class="page-link">${i}</a></li>
+                            <li class="page-item <c:if test='${currentPage eq i }'>active</c:if>" ><a href ="leave-details?page=${i}&status=${option}&startDate=${startDate}&endDate=${endDate}"  class="page-link">${i}</a></li>
                          </c:forEach>
                         <li class="page-item  <c:if test='${currentPage eq totalPages }'> disabled</c:if> ">
-                            <a class="page-link" href="leave-details?page=${currentPage+1}&status=${option}" aria-label="Next">
+                            <a class="page-link" href="leave-details?page=${currentPage+1}&status=${option}&startDate=${startDate}&endDate=${endDate}" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                               </a>
                         </li>

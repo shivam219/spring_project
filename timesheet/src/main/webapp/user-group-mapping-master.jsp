@@ -41,7 +41,7 @@ table {
                                     <tr>
                                         <td  class="overflow-auto">
                                             <ul class="list-inline mb-0">
-                                                <a href="/user-group-mapping-edit?id=${group[0]}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>${group[1]}       
+                                                <a href="user-group-mapping-edit?id=${group[0]}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>${group[1]}       
                                             </ul>      
                                         </td>
                                         <td  class="overflow-auto" ><span class="badge badge-soft-success mb-0 fw-bold">${group[2]}</span></td>

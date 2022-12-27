@@ -113,7 +113,7 @@
                     }).
                     then(function (isOkay) {
                         if (isOkay) {
-                            // location.replace('/work2');
+                            // location.replace('work2');
                         }
                     });
                 },error : function(data,msg,xh){

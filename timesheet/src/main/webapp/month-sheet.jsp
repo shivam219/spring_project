@@ -27,7 +27,7 @@
 								<td>${ms.getYear()}</td>
 								<td>${ms.getSubmitDate()}</td>  
 								<td class="ms-md-2">   
-									<a href="/month-sheet-approve?monthSheetId=${ms.getMonthSheetId()}"   class="btn btn-success btn-sm"> <i class="fa fa-duotone fa-check"></i> Approve </a>                                    
+									<a href="month-sheet-approve?monthSheetId=${ms.getMonthSheetId()}"   class="btn btn-success btn-sm"> <i class="fa fa-duotone fa-check"></i> Approve </a>                                    
 								</td>
 							</tr>
 						</c:forEach>

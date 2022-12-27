@@ -116,7 +116,6 @@ public class DaySheetController {
 	@GetMapping("/week-holidays")
 	public ResponseEntity<List<Object>> weeklyHolidays(@RequestParam("startDate") String startDate,
 			@RequestParam("endDate") String endDate) {
-
 		return ResponseEntity.of(Optional.of(hr.getWeekHoliday(startDate, endDate)));
 	}
 
@@ -162,7 +161,6 @@ public class DaySheetController {
 	@GetMapping("/get-week-holidays")
 	public ResponseEntity<String[]> getweekHolidays(@RequestParam("startDate") String startDate,
 			@RequestParam("endDate") String endDate) throws ParseException {
-
 		String[] strAr = new String[7];
 		List<Integer> weekHolidays = hr.getWeekHolidays(startDate, endDate);
 		if (weekHolidays.size() <= 0) {

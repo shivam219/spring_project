@@ -68,7 +68,7 @@
                     }).
                     then(function (isOkay) {
                         if (isOkay) {
-                            location.replace('/customer-master');
+                            location.href='customer-master';
                         }
                     });
                 },error : function(data,msg,xh){

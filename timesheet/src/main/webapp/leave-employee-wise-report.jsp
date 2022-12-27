@@ -132,7 +132,7 @@
             <div class="col">
                 <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 mb-1 ">
                     <div>
-                        <a href="/employee/leave.xlsx?month=${month}&year=${year}&empId=${empId}&status=${status}" class="btn px-3 btn-sm btn-primary" onclick="this.blur()">Export</a>
+                        <a href="employee/leave.xlsx?month=${month}&year=${year}&empId=${empId}&status=${status}" class="btn px-3 btn-sm btn-primary" onclick="this.blur()">Export</a>
                     </div>
                     <div>
                         <a href="home" data-bs-target=".add-new" onclick="this.blur()" class="btn px-3 btn-sm btn-secondary">Back</a>
@@ -140,13 +140,13 @@
                 </div>
             </div>
         </div>
-        <form action="/leave-employee-wise-report" method="post" id="leaveMonthReport">
+        <form action="leave-employee-wise-report" method="post" id="leaveMonthReport">
             <input type="hidden" name="leaveEmployee" id="leaveEmployee">
             <input type="hidden" name="leaveStatus" id="leaveStatus">
             <input type="hidden" name="leaveYear" id="leaveYear">
             <input type="hidden" name="leaveMonth" id="leaveMonth">
         </form>
-        <form action="/leave-employee-wise-report">
+        <form action="leave-employee-wise-report">
             <input type="hidden" name="userleaveEmpId" value="${empId}" id="userleaveEmpId">
             <input type="hidden" name="userleaveStatus" value="${status}" id="userleaveStatus">
             <input type="hidden" name="userleaveYear" value="${year}" id="userleaveYear">

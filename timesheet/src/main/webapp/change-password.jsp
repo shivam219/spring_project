@@ -105,7 +105,7 @@
                         text: "Password Updated Successfully",
                         icon: "success",
                     });
-                    location.replace("home");
+                    location.href="home";
                     
                         $("#loadingBtn").removeClass("spinner-border spinner-border-sm");
                         $("#btnSubmit").addClass("is-valid");

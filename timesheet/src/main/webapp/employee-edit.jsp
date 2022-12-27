@@ -359,7 +359,7 @@
                                 showConfirmButton: false,
                                 timer: 700
                             });
-                            location.replace('/employee-master');
+                            location.replace('employee-master');
                         }, error: function () {
                             $("#loadingBtn").removeClass("spinner-border spinner-border-sm");
                         }

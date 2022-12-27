@@ -136,7 +136,7 @@
 						}).
 						then(function (isOkay) {
 							if (isOkay) {
-								location.replace('/login');
+								location.replace('login');
 							}
 						});
 					},error : function(data,msg,xh){

@@ -75,7 +75,7 @@
                     }).
                     then(function (isOkay) {
                         if (isOkay) {
-                            location.replace('/user-group-master');
+                            location.replace('user-group-master');
                         }
                     });
                 },error : function(data,msg,xh){

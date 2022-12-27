@@ -153,7 +153,7 @@
                     }).
                     then(function (isOkay) {
                         if (isOkay) {
-                            location.replace('/user-master');
+                            location.replace('user-master');
                         }
                     });
                 },error : function(data,msg,xh){

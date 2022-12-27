@@ -148,7 +148,7 @@ background-color: #f6f9ff;
 				data: JSON.stringify(data),
 				contentType: 'application/json',
 				success: function (data, msg, xh) {
-					location.replace('/home');
+					location.replace('home');
 				}, error: function (data, msg, xh) {
 					$("#btnSubmit").blur();
 					$("#empId").addClass("is-invalid");

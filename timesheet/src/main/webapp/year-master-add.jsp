@@ -62,7 +62,7 @@
                     }).
                     then(function (isOkay) {
                         if (isOkay) {
-                            location.replace('/year-master');
+                            location.replace('year-master');
                         }
                     });
                 },error : function(data,msg,xh){

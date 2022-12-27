@@ -51,7 +51,7 @@
 								<td>${p.getCustomer().getCustomerName()}</td>
 								<td>
 									<ul class="list-inline mb-0">
-										<a href="/project-edit?projectId=${p.getProjectId()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
+										<a href="project-edit?projectId=${p.getProjectId()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
 										<c:if test="${p.getProjectStatus()== '1'  }">
 												<a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Active" class="px-2 text-success">  <i class="fa-solid fa-circle"> </i>  </a>
 										</c:if>

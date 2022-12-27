@@ -48,13 +48,13 @@
                             <tbody>
                                 <c:forEach items="${users}" var="user" varStatus="loop">
                                     <tr>
-                                        <td class="overflow-auto"><a href="/user-master-edit?empId=${user.getEmpId()}" class="text-body overflow-auto">${user.getEmployeeName()} </a></td>
+                                        <td class="overflow-auto"><a href="user-master-edit?empId=${user.getEmpId()}" class="text-body overflow-auto">${user.getEmployeeName()} </a></td>
                                         <td class="overflow-auto"><span class="badge badge-soft-success mb-0">${user.getGroupDesc()}</span></td>
                                         <td class="overflow-auto">${user.getManagerName()}</td>
                                         <td class="overflow-auto">
                                             <ul class="list-inline mb-0">
                                                 <li class="list-inline-item">
-                                                    <a href="/user-master-edit?empId=${user.getEmpId()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
+                                                    <a href="user-master-edit?empId=${user.getEmpId()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
                                                 </li>
                                                 <c:if test="${user.getActive() eq 1  }">
                                                     <li class="list-inline-item">

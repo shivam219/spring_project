@@ -112,7 +112,7 @@
             <div class="col">
                 <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 mb-1 ">
                     <div>
-                        <a href="/pending/leave.xlsx?month=${month}&year=${year}" class="btn px-3 btn-sm btn-primary" onclick="this.blur()">Export</a>
+                        <a href="pending/leave.xlsx?month=${month}&year=${year}" class="btn px-3 btn-sm btn-primary" onclick="this.blur()">Export</a>
                     </div>
                     <div>
                         <a href="home" data-bs-target=".add-new" onclick="this.blur()" class="btn px-3 btn-sm btn-secondary">Back</a>
@@ -120,11 +120,11 @@
                 </div>
             </div>
         </div>
-        <form action="/leave-pending-report" method="post" id="leaveMonthReport">
+        <form action="leave-pending-report" method="post" id="leaveMonthReport">
             <input type="hidden" name="leaveMonth" id="leaveMonth">
             <input type="hidden" name="leaveYear" id="leaveYear">
         </form> 
-        <form action="/leave-pending-report">
+        <form action="leave-pending-report">
             <input type="hidden" name="userleaveYear" value="${year}" id="userleaveYear">
             <input type="hidden" name="userleaveMonth" value="${month}" id="userleaveMonth">
         </form>

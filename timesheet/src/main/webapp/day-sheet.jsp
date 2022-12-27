@@ -252,7 +252,7 @@
                     date.getFullYear(),
                     padTo2Digits(date.getMonth() + 1),
                     padTo2Digits(date.getDate()),
-                ].join('-');
+                ].join('-'); 
             }
             function setWeekDates() {  
                 let uri = '/week-holidays?startDate='+ $("#startDate").val()+'&endDate='+ $("#endDate").val(); 
@@ -285,6 +285,7 @@
                         $("#weekLeaves").html(str);
                     }
                 });
+                
                 $("#monDate").html('Mon &nbsp'+ (new Date($("#startDate").val()).getDate()));
                 var sd = new Date($("#startDate").val());
                 sd.setDate(sd.getDate() + 1);
@@ -449,7 +450,7 @@
                        if(!(isNaN(new String($(this).html()).trim() ))){
                         total = total +  Number( $(this).html());
                        }
-                     }); 
+                     }); fetch
                 });  
                 $("#htotal").html(total==0?"":total); 
             };
@@ -465,14 +466,13 @@
                         workStatus=  parseInt(da); 
                     }
                 });
-                let uri = '/fetch-day-sheet-week?startDate='+sd+'&endDate='+ed; 
+                let uri = 'fetch-day-sheet-week?startDate='+sd+'&endDate='+ed; 
                 $.ajax({
                     async : false,
                     url: uri,
                     type: 'GET',
                     dataType: 'json',
                     success: function(obj, success,event){
-                        console.log(obj);
                         for (let i = $('#tbtable tr').length -2 ; i > 0; i--) {
                             $('#tbtable tr').eq(i).remove();
                         }

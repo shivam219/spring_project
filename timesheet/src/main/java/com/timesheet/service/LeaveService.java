@@ -66,7 +66,10 @@ public class LeaveService {
 				}
 			} else if (leave.getSecondStatus().equals("Pending")) {
 				es.leaveCancelRequestToEmployee(leave, er.findEmpEmailByEmpId(leave.getEmpId()));
-				if (leave.getManagerId().equals(leave.getLeaveManagerId())) {
+				if (leave.getLeaveManagerId() == null || leave.getLeaveManagerId() == 0) {
+					es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
+							leave.getManagerName());
+				} else if (leave.getManagerId().equals(leave.getLeaveManagerId())) {
 					es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
 							leave.getManagerName());
 				} else {
@@ -93,8 +96,9 @@ public class LeaveService {
 				e.get(2, String.class), e.get(3, String.class))).collect(Collectors.toList());
 		return ld;
 	}
-	public List<LeaveDto> findLeaveTypeStartDateEndDateByEmpIdForMonth(long empId,long monthSheetId) {
-		List<Tuple> tu = lr.findLeaveTypeStartDateEndDateByEmpIdForMonth(empId,monthSheetId);
+
+	public List<LeaveDto> findLeaveTypeStartDateEndDateByEmpIdForMonth(long empId, long monthSheetId) {
+		List<Tuple> tu = lr.findLeaveTypeStartDateEndDateByEmpIdForMonth(empId, monthSheetId);
 		List<LeaveDto> ld = tu.stream().map(e -> new LeaveDto(e.get(0, String.class), e.get(1, String.class),
 				e.get(2, String.class), e.get(3, String.class))).collect(Collectors.toList());
 		return ld;
@@ -132,9 +136,9 @@ public class LeaveService {
 
 	public List<LeaveStatusDto> findLeaveStatusByEmpId(long empId) {
 		List<Tuple> tu = lr.findLeaveStatusByEmpId(empId);
-		List<LeaveStatusDto> ld = tu.stream()
-				.map(e -> new LeaveStatusDto(e.get(0, String.class), e.get(1, String.class), e.get(2, String.class),
-						e.get(3, String.class),e.get(4, String.class)))
+		List<LeaveStatusDto> ld = tu
+				.stream().map(e -> new LeaveStatusDto(e.get(0, String.class), e.get(1, String.class),
+						e.get(2, String.class), e.get(3, String.class), e.get(4, String.class)))
 				.collect(Collectors.toList());
 		return ld;
 	}

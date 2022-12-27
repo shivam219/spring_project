@@ -279,7 +279,7 @@
 							showConfirmButton: false,
                             timer: 700
 						});
-						location.replace('/home');
+						location.href="home";
 						}, error: function (data, msg, xh) {
 						$("#btnSave").attr("disabled",false);
 						$("#loadingBtn").removeClass("spinner-border spinner-border-sm");
@@ -290,7 +290,7 @@
 						}).
 						then(function (isOkay) {
 							if (isOkay) {  
-								// location.replace('/home');
+								location.href="home";
 							}
 						});
 					}

@@ -138,7 +138,7 @@
 						}).
 							then(function (isOkay) {
 								if (isOkay) {
-									location.replace('/month-sheet');
+									location.replace('month-sheet');
 								}
 							});
 					}, error: function (data, msg, xh) {
@@ -170,7 +170,7 @@
 						}).
 							then(function (isOkay) {
 								if (isOkay) {
-									location.replace('/month-sheet');
+									location.replace('month-sheet');
 								}
 							});
 					}, error: function (data, msg, xh) {

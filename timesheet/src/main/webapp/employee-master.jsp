@@ -35,11 +35,11 @@
                             <c:forEach items="${empList}" var="emp" varStatus="loop"> 
                                 <tr> 
                                     <td  class="overflow-auto">${emp.getEmpId()}</td> 
-                                    <td  class="overflow-auto" ><a href="/report-user?empId=${emp.getEmpId()}" class="text-body ">${emp.getFullName()}</a></td>
+                                    <td  class="overflow-auto" ><a href="report-user?empId=${emp.getEmpId()}" class="text-body ">${emp.getFullName()}</a></td>
                                     <td> ${emp.getEmpEmail()}</td>
                                     <td  class="overflow-auto" >
                                         <ul class="list-inline mb-0">
-                                                <a href="/employee-edit?empId=${emp.getEmpId()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>                                           
+                                                <a href="employee-edit?empId=${emp.getEmpId()}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>                                           
                                         </ul>
                                     </td>
                                 </tr>

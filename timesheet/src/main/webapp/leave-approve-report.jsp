@@ -149,7 +149,7 @@
 			<div class="col">
 				<div class="d-flex flex-wrap align-items-center justify-content-center gap-2">
 					<div>
-						<a href="/approved/leave.xlsx?month=${month}&year=${year}" class="btn px-3 btn-sm btn-primary" onclick="this.blur()">Export</a>
+						<a href="approved/leave.xlsx?month=${month}&year=${year}" class="btn px-3 btn-sm btn-primary" onclick="this.blur()">Export</a>
 					</div>
 					<div>
 						<a href="home"  onclick="this.blur()" class="btn px-3 btn-sm btn-secondary">Back</a>
@@ -159,11 +159,11 @@
 		</div>
 		<br>
 		<br>
-		<form action="/leave-approve-report" method="post" id="leaveMonthReport">
+		<form action="leave-approve-report" method="post" id="leaveMonthReport">
 			<input type="hidden" name="leaveMonth" id="leaveMonth">
 			<input type="hidden" name="leaveYear" id="leaveYear">
 		</form>
-		<form action="/leave-approve-report">
+		<form action="leave-approve-report">
 			<input type="hidden" name="userleaveYear" value="${year}" id="userleaveYear">
 			<input type="hidden" name="userleaveMonth" value="${month}" id="userleaveMonth">
 		</form>

@@ -38,14 +38,14 @@
                         <tbody>
                             <c:forEach items="${userGroupList}" var="group" varStatus="loop">
                                 <tr>
-                                    <td ><a href="/user-group-edit?ugrpCode=${group.getUgrpCode()}"
+                                    <td ><a href="user-group-edit?ugrpCode=${group.getUgrpCode()}"
                                             class="text-body"> <span class="badge badge-soft-success mb-0 fw-bold">
                                                 ${group.getUgrpDesc()}</span></a></td>
                                     <td >${group.getCreatedBy()}</a></td>
                                     <td >${group.getCreatedTime()} </td>
                                     <td >
                                         <ul class="list-inline mb-0">
-                                            <a href="/user-group-edit?ugrpCode=${group.getUgrpCode()}"
+                                            <a href="user-group-edit?ugrpCode=${group.getUgrpCode()}"
                                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
                                                 class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
                                         </ul>

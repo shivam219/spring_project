@@ -44,7 +44,7 @@
                                                 <td class="overflow-auto">${group.getModifiedTime()} </td>
                                                 <td class="overflow-auto">
                                                     <ul class="list-inline mb-0">
-                                                        <a href="/program-edit?ugrpCode=${group.getUgrpCode()}" data-bs-toggle="tooltip"
+                                                        <a href="program-edit?ugrpCode=${group.getUgrpCode()}" data-bs-toggle="tooltip"
                                                             data-bs-placement="top" title="Edit"
                                                             class="px-2 text-primary"><i
                                                                 class="bx bx-pencil font-size-18"></i></a>

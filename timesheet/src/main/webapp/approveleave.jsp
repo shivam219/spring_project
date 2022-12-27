@@ -245,7 +245,7 @@
 									$(trId).closest('tr').remove();
 									let rowCount = $('table tr').length;
 									if (rowCount == 1) {
-										location.replace('/home');
+										location.href="home";
 									}
 								},
 								error: function (data, msg, xh) {
@@ -287,7 +287,7 @@
 							$(trId).closest('tr').remove();
 							let rowCount = $('table tr').length;
 							if (rowCount == 1) {
-								location.replace('/home');
+								location.href="home";
 							}
 						},
 						error: function (data, msg, xhr) {

@@ -92,7 +92,7 @@
                     }).
                     then(function (isOkay) {
                         if (isOkay) {
-                            // location.replace('/user-master');
+                            // location.replace('user-master');
                         }
                     });
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					

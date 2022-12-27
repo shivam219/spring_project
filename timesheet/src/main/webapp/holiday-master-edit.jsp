@@ -165,12 +165,8 @@ body{
                         title:"Success",
                         text: "Holiday Edit Successfully",
                         icon: "success",
-                    }).
-                    then(function (isOkay) {
-                        if (isOkay) {
-                            location.replace('/holiday-master');
-                        }
                     });
+                    location.replace('holiday-master');
                 },error : function(data,msg,xh){
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                 }
