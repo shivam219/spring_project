@@ -45,9 +45,7 @@ public class ProjectService {
 	public List<EmployeeProjectDto> getProjectEmloyeeDetails(Integer projectId) {
 		List<Tuple> tu = repository.findEmployeeNameAndGroupDescAndHour(projectId);
 		List<EmployeeProjectDto> epd = tu.stream().map(
-				e -> new EmployeeProjectDto(e.get(0, String.class), 
-						e.get(1, String.class),
-						e.get(2, BigInteger .class)))
+				e -> new EmployeeProjectDto(e.get(0, String.class), e.get(1, String.class), e.get(2, BigInteger.class)))
 				.collect(Collectors.toList());
 		return epd;
 	}
@@ -58,6 +56,18 @@ public class ProjectService {
 		List<EmployeeProjectDto> epd = tu.stream()
 				.map(e -> new EmployeeProjectDto(e.get(0, String.class), e.get(1, BigDecimal.class)))
 				.collect(Collectors.toList());
+		return epd;
+	}
+
+	public List<EmployeeProjectDto> findEmployeeNameAndGroupDescAndHourByStartDateAndDate(Integer projectId,
+			String startDate, String endDate) {
+		List<Tuple> tu = repository.findEmployeeNameAndGroupDescAndHourByStartDateAndDate(projectId, startDate,
+				endDate);
+
+		List<EmployeeProjectDto> epd = tu.stream().map(e -> new EmployeeProjectDto(
+				e.get(0, String.class),
+				e.get(1, String.class), 
+				e.get(2, BigDecimal.class))).collect(Collectors.toList());
 		return epd;
 	}
 

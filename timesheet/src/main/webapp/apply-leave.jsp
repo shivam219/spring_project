@@ -44,11 +44,11 @@
 											<div class="col-md-6">
 												<label class="mb-1" for="leaveType">Leave Type</label>
 												<select name="leaveType" id="selectLeaveType" class="form-control form-select w-75">
-													<option value="sickLeave">Sick Leave</option>
-													<option value="CasualLeave">Casual Leave</option>
-													<option value="PrivilageLeave">Privilage Leave</option>
+													<c:forEach items="${leaveTypes}" var="type">  
+														<option value="${type}"> ${type}</option>  
+													</c:forEach>
 												</select>
-											</div>
+											</div> 
 											<div class="col-md-6" id="dayModeType">
 												<label class="mb-1" for="dayMode">Day Mode</label><br>
 												<div class="border p-1 rounded w-75 ">

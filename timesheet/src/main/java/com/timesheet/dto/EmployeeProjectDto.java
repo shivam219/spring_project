@@ -7,7 +7,7 @@ public class EmployeeProjectDto {
 
 	String empName;
 	String groupDes;
-	String hour="";
+	String hour = "";
 
 	public EmployeeProjectDto() {
 		super();
@@ -31,7 +31,14 @@ public class EmployeeProjectDto {
 		this.groupDes = groupDes;
 		this.hour = hour.toString();
 	}
-	
+
+	public EmployeeProjectDto(String empName, String groupDes, BigDecimal hour) {
+		super();
+		this.empName = empName;
+		this.groupDes = groupDes;
+		this.hour = hour.toString();
+	}
+
 	public EmployeeProjectDto(String empName, String groupDes, String hour) {
 		super();
 		this.empName = empName;

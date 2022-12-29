@@ -11,7 +11,7 @@
 }
 .dropdown-menu .dropdown-submenu {
 	display: none;
-	position: absolute;
+	position: absolute; 
 	right: 100%;
 	left: auto; 
 	top:-10px
@@ -118,6 +118,7 @@ tbody, td, td a tfoot, th, thead, tr {
 	font-style: normal;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	color: rgb(83, 83, 82);
+	font-size: 14px;
 	white-space: nowrap; 
 }
 
@@ -128,13 +129,20 @@ table tfoot tr:last-child td:first-child {
 table tfoot tr:last-child td:last-child {
 	border-bottom-right-radius: 5px;
 }
-
+select,label{
+	font-size: 14px;
+}
 .dashboard-headling {
 	border-radius: 7px;
-    text-align: center;
+    text-align: center;  
     background-color: #71a6f7;
     color: #ffffff;
 }
 .table-label{
 	background-color: #124265
+}
+.card-header{
+	font-size: 15px;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-weight: 500;
 }

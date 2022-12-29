@@ -50,4 +50,60 @@ public class ReportProjectController {
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body(li);
 		}
 	}
+
+	/*
+	 * Access project report Summary page
+	 */
+	@GetMapping(value = "/report-project-summary")
+	public ModelAndView getProjectReportSummary() {
+		ModelAndView m = new ModelAndView("report-project-summary");
+		m.addObject("pjtList", pr.findAll());
+		return m;
+	}
+
+	/*
+	 * Access project report Summary page
+	 */
+	@PostMapping(value = "/report-project-summary-details")
+	public ModelAndView getProjectReportSummaryDetails(@RequestParam("projectId") Project p,
+			@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) {
+
+		ModelAndView m = new ModelAndView("report-project-summary-details");
+		m.addObject("empList", ps.findEmployeeNameAndGroupDescAndHourByStartDateAndDate(386, startDate, endDate));
+		m.addObject("p", p);
+//		m.addObject("empList", ps.findEmployeeNameAndHourInProjectByStartDateAndDate(386, "2022-12-28", "2022-12-28"));
+		return m;
+	}
+
+	/*
+	 * Access project overshot report page
+	 */
+	@GetMapping(value = "/report-project-overshot")
+	public ModelAndView getProjectOverShotReport() {
+		ModelAndView m = new ModelAndView("report-project-overshot");
+		m.addObject("pjtList", pr.findAll());
+		return m;
+	}
+
+	/*
+	 * Access Project Overshot report page
+	 */
+	@PostMapping(value = "/report-project-overshot-details")
+	public ModelAndView getProjectReportOverShotDetails(@RequestParam("projectId") Project p) {
+		ModelAndView m = new ModelAndView("report-project-overshot-details");
+		m.addObject("p", p);
+		m.addObject("totalHour", pr.findTotalHourByProjectId(p.getProjectId()));
+		return m;
+	}
+
+	/*
+	 * Access project overshot report page
+	 */
+	@GetMapping(value = "/report-project-wise-overshot")
+	public ModelAndView getProjectWiseOverShotReport() {
+		ModelAndView m = new ModelAndView("report-project-wise-overshot");
+		m.addObject("pjtList", pr.findStockAkhirPerProductIn());
+		return m;
+	}
+
 }

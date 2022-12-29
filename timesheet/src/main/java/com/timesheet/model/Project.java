@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,11 +23,26 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.timesheet.dto.ProjectWiseOvershot;
 
+// @formatter:off
+@NamedNativeQuery(
+		name =  "find_project_wise_overshot", 
+		query = "select project_name , sum(hour) p_tol_hour, (project_day*24) p_exp_hour from "+
+				"timesheet_project_master pm , timesheet_day_sheet ds where  pm.project_id = ds.project_id "+
+				"group by  project_name ,project_day", 
+		resultSetMapping = "find_project_wise_overshot_dto")
+@SqlResultSetMapping(name = "find_project_wise_overshot_dto", 
+	classes = @ConstructorResult(targetClass = ProjectWiseOvershot.class, 
+	columns = {
+			@ColumnResult(name = "project_name", type = String.class),
+			@ColumnResult(name = "p_tol_hour", type = Integer.class),
+			@ColumnResult(name = "p_exp_hour", type = Integer.class) 
+		}))
+// @formatter:on
 @Entity
 @Table(name = "timesheet_project_master")
 public class Project {
@@ -144,10 +163,11 @@ public class Project {
 	}
 
 	public String getCreateTimeSort() {
-		return createTime.toLocaleString().substring(0,11);
+		return createTime.toLocaleString().substring(0, 11);
 	}
+
 	public String getCreateTimeSort2() {
-		return createTime.toLocaleString().substring(0,11);
+		return createTime.toLocaleString().substring(0, 11);
 	}
 
 	public void setCreateTime(Date createTime) {

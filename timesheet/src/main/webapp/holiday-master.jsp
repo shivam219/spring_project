@@ -2,8 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-     <link rel="stylesheet" href="css/form-style.css">
+<head> 
     <title>Holiday Master </title>
 </head>
 <body>

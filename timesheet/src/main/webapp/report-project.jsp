@@ -178,6 +178,7 @@
         url: 'fetch-project-employee-sheet?projectId=' + $("#projectId").val() + '',
         contentType: 'application/json',
         success: function (d, msg, xh) {
+          console.log(d);
           let data = [];
           let labels = [];
           for (let i = 0; i < d.length; i++) {

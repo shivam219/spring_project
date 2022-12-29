@@ -16,5 +16,6 @@ public class TimesheetApplication extends SpringBootServletInitializer {
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(TimesheetApplication.class); 
 	}
+	
 
 }

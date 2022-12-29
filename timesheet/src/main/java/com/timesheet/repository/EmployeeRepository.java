@@ -70,6 +70,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	@Query(value = "SELECT year_code FROM timesheet_employee_master , timesheet_financial_year where  year_code >= year(date_of_join) and  emp_id = :empId ", nativeQuery = true)
 	List<String> findEmployeeWorkingYear(Long empId);
 
+	
+	@Query(value = "SELECT month_id, month_name FROM timesheet_month_master", nativeQuery = true)
+	List<String[]> findMonth();
+	
 	@Query(value = "SELECT  m.month_sheet_id,  monthname(month) FROM ess.timesheet_month_sheet m where emp_id = :empId "
 			+ "and  m.approved = 'Y' and year(month) = :yearCode", nativeQuery = true)
 	List<String[]> findEmployeeWorkingMonth(Long empId, Integer yearCode);

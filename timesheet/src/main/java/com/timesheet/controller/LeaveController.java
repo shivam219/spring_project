@@ -76,6 +76,8 @@ public class LeaveController {
 		ModelAndView m = new ModelAndView("apply-leave");
 		Long empId = ((Long) request.getSession().getAttribute("empId"));
 		Employee emp = er.findById(empId).get();
+		
+		m.addObject("leaveTypes", lr.findLeaveType());
 		m.addObject("emp", emp);
 		m.addObject("manager", er.findById(Long.parseLong(ur.findById(empId).get().getLeaveReportingManager())).get());
 		return m;

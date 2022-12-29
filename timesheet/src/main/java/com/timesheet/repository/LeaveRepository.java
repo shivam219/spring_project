@@ -17,6 +17,9 @@ import com.timesheet.model.Leave;
 
 public interface LeaveRepository extends CrudRepository<Leave, Long> {
 
+	@Query(value = "select leave_type from timesheet_leave_type", nativeQuery = true)
+	public List<String> findLeaveType();
+
 	@Modifying
 	@Query(value = "insert into timesheet_leave_master (emp_id , emp_name, manager_name, manager_id, day_mode, leave_type, leave_reason, start_date, end_date, attachment ,status, reject_reason ,submitted_date) "
 			+ "values (  :empid,  :empname,  :managername, :managerid, :daymode, :leavetype, :leavereason, :startdate, :enddate, :attachment, :status, :rejectreason , now());", nativeQuery = true)

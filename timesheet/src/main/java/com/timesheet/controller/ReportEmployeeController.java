@@ -78,6 +78,7 @@ public class ReportEmployeeController {
 //		m.addAttribute("monthSheetDataList", mse.findMonthSheetDataAndApprove(ms.getMonthSheetId()));
 		m.addAttribute("emp", ud.get(0));
 		m.addAttribute("monthSheetId", ms.getMonthSheetId());
+		m.addAttribute("monthDto", mse.findMonthSheetDataToDto(ms.getMonthSheetId()));
 		m.addAttribute("leaveList", ls.findLeaveTypeStartDateEndDateByEmpIdForMonth(empId, ms.getMonthSheetId()));
 //		m.addAttribute("leaveList", ls.findLeaveTypeStartDateEndDateByEmpId(empId));
 		return "report-month-employee-data";
