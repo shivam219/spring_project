@@ -41,10 +41,13 @@ public class DaySheet {
 	@JoinColumn(name = "project_id")
 	private int projectId;
 
+	@Column(name = "emp_id")
+	private long empId;
+
 	public DaySheet() {
 	}
 
-	public DaySheet(Long daySheetId, String date, int hour, String descr, long monthId, int projectId) {
+	public DaySheet(Long daySheetId, String date, int hour, String descr, long monthId, int projectId, long empId) {
 		super();
 		this.daySheetId = daySheetId;
 		this.date = date;
@@ -52,6 +55,7 @@ public class DaySheet {
 		this.descr = descr;
 		this.monthId = monthId;
 		this.projectId = projectId;
+		this.empId = empId;
 	}
 
 	public Long getDaySheetId() {
@@ -107,10 +111,18 @@ public class DaySheet {
 		this.projectId = projectId;
 	}
 
+	public long getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(long empId) {
+		this.empId = empId;
+	}
+
 	@Override
 	public String toString() {
 		return "DaySheet [daySheetId=" + daySheetId + ", date=" + date + ", hour=" + hour + ", descr=" + descr
-				+ ", monthId=" + monthId + ", projectId=" + projectId + "]";
+				+ ", monthId=" + monthId + ", projectId=" + projectId + ", empId=" + empId + "]";
 	}
 
 }

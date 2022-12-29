@@ -30,6 +30,9 @@
       tr {
         white-space: normal;
       }
+      ::-webkit-scrollbar {
+           width: 0px;
+        }
     </style>
   </head>
 
@@ -146,10 +149,10 @@
                            <span style='font-size:28px;user-select: none;' >&#9656;</span>
                           <c:forEach items="${d.getDataDtos()}" var="dd">
                             <div style="display: none;"> 
-                              <div class="row  m-0 p-0 ">
-                                <div class="col-3 border">${dd.getProjectName()}</div> 
-                                <div class="col-8 border"> <p>${dd.getDescr()}</p> </div>   
-                                <div class="col-1 border">${dd.getHour()}</div>
+                              <div class="row  m-0 p-0 d-flex ">
+                                <div class="col-3 border flex-wrap align-items-center justify-content-start" style="white-space: nowrap; padding: 5px; overflow: overlay; " >${dd.getProjectName()}</div> 
+                                <div class="col-8 border flex-wrap align-items-center justify-content-start" style="white-space: nowrap; padding: 5px; overflow: overlay; " > <p>${dd.getDescr()}</p> </div>   
+                                <div class="col-1 border flex-wrap align-items-center justify-content-start" style="white-space: nowrap; padding: 5px; overflow: overlay; " >${dd.getHour()}</div>
                               </div>
                             </div> 
                           </c:forEach>

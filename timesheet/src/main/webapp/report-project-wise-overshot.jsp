@@ -34,6 +34,13 @@
                 </div>
             </div>
         </div>
+
+        <div class="row justify-content-around ">
+            <div class="col">  
+                <a class="btn btn-secondary btn-sm px-4 py-1" type="button" href="home" > Back  </a> 
+            </div>
+        </div>
+        
     </div>
 </body>
 </html>

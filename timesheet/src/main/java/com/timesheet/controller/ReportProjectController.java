@@ -15,6 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.timesheet.dto.EmployeeProjectDto;
 import com.timesheet.model.MonthSheet;
 import com.timesheet.model.Project;
+import com.timesheet.repository.EmployeeRepository;
+import com.timesheet.repository.FinancialYearRepository;
+import com.timesheet.repository.MonthSheetRepository;
 import com.timesheet.repository.ProjectRepository;
 import com.timesheet.service.ProjectService;
 
@@ -26,6 +29,12 @@ public class ReportProjectController {
 
 	@Autowired
 	ProjectService ps;
+
+	@Autowired
+	EmployeeRepository er;
+
+	@Autowired
+	FinancialYearRepository fyr;
 
 	/*
 	 * Access report project page
@@ -103,6 +112,33 @@ public class ReportProjectController {
 	public ModelAndView getProjectWiseOverShotReport() {
 		ModelAndView m = new ModelAndView("report-project-wise-overshot");
 		m.addObject("pjtList", pr.findStockAkhirPerProductIn());
+		return m;
+	}
+
+	/*
+	 * Access project overshot report page
+	 */
+	@GetMapping(value = "/report-project-employee-breakdown")
+	public ModelAndView getProjectEmployeeBreakDown() {
+		ModelAndView m = new ModelAndView("report-project-employee-breakdown");
+		m.addObject("pjtList", pr.findAll());
+		m.addObject("months", er.findMonth());
+		m.addObject("years", fyr.findAll());
+		return m;
+	}
+
+	/*
+	 * Access Project Overshot report page
+	 */
+	@PostMapping(value = "/report-project-employee-breakdown-details")
+	public ModelAndView getProjectEmployeeBreakDown(@RequestParam("projectId") Project p,
+			@RequestParam("month") String month, @RequestParam("year") String year) {
+		ModelAndView m = new ModelAndView("report-project-employee-breakdown-details");
+//		System.out.println(year);
+//		System.out.println(month);
+		System.out.println(p);
+		m.addObject("p", p);
+		m.addObject("totalHour", pr.findTotalHourByProjectId(p.getProjectId()));
 		return m;
 	}
 

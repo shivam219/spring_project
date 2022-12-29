@@ -3,18 +3,18 @@
 <html lang="en">
 
 <head>
-    <title>Project Summary</title>
+    <title>Project Employee Breakdown report</title>
     <link rel="stylesheet" href="css/form-style.css">
 </head>
 
 <body>
     <div class="container-xl px-4 mt-4">
         <div class="row px-4 ">
-            <div class="col col-xl-12">
+            <div class="col col-xl-12"> 
                 <div class="card mb-4">
-                    <div class="card-header text-center">Project Summary Report</div>
+                    <div class="card-header text-center">Project Employee Breakdown</div>
                     <div class="card-body">
-                        <form method="post" action="report-project-summary-details" >
+                        <form method="post" action="report-project-employee-breakdown-details" >
                             <div class="row gx-3 mb-3 justify-content-center">
                                 <div class="col-md-4">
                                     <table> 
@@ -30,17 +30,24 @@
                                                     </option>
                                                 </c:forEach>
                                             </select>
-                                            <span class="form-text small text-danger ms-2  d-none">Employee</span>
+                                           
                                         </tr>
                                         <tr>
-                                            <label class="small mb-1" for="startDate">From Date</label>
-                                            <input class="form-control" id="startDate" name="startDate" type="date" required>
-                                            <span class="form-text small text-danger ms-2  d-none">Specify Start date</span>
+                                            <label class="small mb-1" for="year">Year</label>
+                                            <select id="year" name="year" required class="form-control form-select">
+                                                <c:forEach items="${years}" var="year">
+                                                    <option value="${year.getYearDesc()}" >${year.getYearDesc()}</option>
+                                                </c:forEach>   
+                                            </select>
                                         </tr>  
                                         <tr>
-                                            <label class="small mb-1" for="endDate">To Date</label>
-                                            <input class="form-control" id="endDate" name="endDate" type="date" required>
-                                            <span class="form-text small text-danger ms-2  d-none">Specify End date</span>
+                                              <label class="small mb-1" for="month">Month</label>
+                                            <select id="month" name="month"  required  class="form-control form-select">
+                                                <option value="">choose month </option>
+                                                    <c:forEach items="${months}" var="month">
+                                                        <option value="${month[0]}" >${month[1]}</option>
+                                                    </c:forEach>          
+                                            </select>
                                         </tr> 
                                     </table>
                                 </div> 

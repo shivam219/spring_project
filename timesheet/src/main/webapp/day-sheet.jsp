@@ -146,38 +146,45 @@
                     <input type="button" class="btn btn-success btn-sm h-75 "  onclick="tblDataSubmit();this.blur();"    value="Submit" id="btnSubmit" >
                 </div>
             </div>
-            <table class="table   mb-0 mt-0 " id="tbtable"  >
-                <thead>
-                    <tr >
-                        <td colspan="2"> Customer </td>
-                        <td colspan="2.9"> Project </td> 
-                        <td  id="monDate" >  Mon </td>
-                        <td  id="tueDate" >  Tue </td>
-                        <td  id="wedDate" >  Wed </td>
-                        <td  id="thuDate" >  Thu </td>
-                        <td  id="friDate" >  Fri </td>
-                        <td  id="satDate" >  Sat </td>
-                        <td  id="sunDate" >  Sun </td>
-                        <td class="text-center" id="Date">Total</td>  
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                </tbody>
-                <tfoot >
-                    <td colspan="4" class="text-center"> </td>
-                    <td id="mov_v_t" ></td>
-                    <td id="tue_v_t" ></td>
-                    <td id="web_v_t" ></td>
-                    <td id="thu_v_t" ></td>
-                    <td id="fri_v_t" ></td>
-                    <td id="sat_v_t" ></td>
-                    <td id="sun_v_t" ></td>
-                    <td id="htotal"  ></td>
-                </tfoot>
-            </table>
+            <div class="row ">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table   mb-0 mt-0 " id="tbtable"  >
+                            <thead>
+                                <tr >
+                                    <td colspan="2"> Customer </td>
+                                    <td colspan="2.9"> Project </td> 
+                                    <td  id="monDate" >  Mon </td>
+                                    <td  id="tueDate" >  Tue </td>
+                                    <td  id="wedDate" >  Wed </td>
+                                    <td  id="thuDate" >  Thu </td>
+                                    <td  id="friDate" >  Fri </td>
+                                    <td  id="satDate" >  Sat </td>
+                                    <td  id="sunDate" >  Sun </td>
+                                    <td class="text-center" id="Date">Total</td>  
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                            <tfoot >
+                                <td colspan="4" class="text-center"> </td>
+                                <td id="mov_v_t" ></td>
+                                <td id="tue_v_t" ></td>
+                                <td id="web_v_t" ></td>
+                                <td id="thu_v_t" ></td>
+                                <td id="fri_v_t" ></td>
+                                <td id="sat_v_t" ></td>
+                                <td id="sun_v_t" ></td>
+                                <td id="htotal"  ></td>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>   
+            </div>
+             
         </div>
-       
+        
         <div class="acti_desc" class="rounded-start"  style="  border: 2px solid rgb(206, 204, 204);   float: right;">
             <div class="mt-3 ">
                 <p onmouseenter="newActiDescPopSave()" class="close-btn  ">X</p>

@@ -36,12 +36,15 @@ import com.timesheet.dto.ProjectWiseOvershot;
 				"group by  project_name ,project_day", 
 		resultSetMapping = "find_project_wise_overshot_dto")
 @SqlResultSetMapping(name = "find_project_wise_overshot_dto", 
-	classes = @ConstructorResult(targetClass = ProjectWiseOvershot.class, 
-	columns = {
-			@ColumnResult(name = "project_name", type = String.class),
-			@ColumnResult(name = "p_tol_hour", type = Integer.class),
-			@ColumnResult(name = "p_exp_hour", type = Integer.class) 
-		}))
+	classes = @ConstructorResult(
+			targetClass = ProjectWiseOvershot.class, 
+			columns = {
+					@ColumnResult(name = "project_name", type = String.class),
+					@ColumnResult(name = "p_tol_hour", type = Integer.class),
+					@ColumnResult(name = "p_exp_hour", type = Integer.class) 
+				}
+			)
+	)
 // @formatter:on
 @Entity
 @Table(name = "timesheet_project_master")

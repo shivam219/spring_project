@@ -58,8 +58,8 @@
                                     </table>
                                 </div> 
                                 <div class="row justify-content-center gap-2  mt-3">
-                                    <button class="btn btn-secondary px-5   w-auto  order-md-1 order-2  " type="button" onclick="history.back()"> Back </button>
-                                    <button class="btn btn-primary px-5     w-auto   order-md-2 order-1 " type="submit"> Show </button>
+                                    <button class="btn btn-secondary px-5 btn-sm  w-auto  order-md-1 order-2  " type="button" onclick="history.back()"> Back </button>
+                                    <button class="btn btn-primary px-5   btn-sm  w-auto   order-md-2 order-1 " type="submit"> Show </button>
                                 </div>
                         </form>
                     </div>
