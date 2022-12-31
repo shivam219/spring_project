@@ -11,18 +11,15 @@
         table {
             table-layout: fixed;
         }
-         /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
-        /* Firefox */
         input[type=number] {
             -moz-appearance: textfield;
         }
-
-        /* width */
+ 
         ::-webkit-scrollbar {
            width: 0px;
         }
@@ -36,15 +33,12 @@
             right: 0px;
             height: 100vh;
             width: 350px;
-            text-align: center;
             background-color: #e8eae6;
             box-sizing: border-box;
             padding: 20px;
             z-index: 10;
             display: none; 
             position: absolute;
-            border-radius: 8px 0px; 
-            top: 75px;
             transition: all 0.4s ease-in-out;
             font-weight: bold;
             -webkit-touch-callout: none;
@@ -54,26 +48,7 @@
             -ms-user-select: none;
             user-select: none;
         }
-        
 
-        .close-btn {
-            position: absolute;
-            background-color: rgb(255, 255, 255);
-            color: rgb(0, 0, 0);
-            border-radius: 30%;
-            padding: 4px 16px; 
-            cursor: pointer;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-        .close-btn:hover {
-            background-color: rgb(255, 246, 246);
-        }
          .container{
             z-index: 1;
          }
@@ -120,6 +95,16 @@
     </head>
     <body > 
       
+        <div class="acti_desc" class="rounded-start"  style="  border: 2px solid rgb(206, 204, 204);   ">
+            <label onmouseenter="newActiDescPopSave()"  class=" text-start btn btn-sm btn-secondary me-4 ">close</label>
+            <span class="align-middle text-secondary fw-normal h6">Activity Description </span>
+            <hr>
+            <div class="form-group mt-4 ">
+                <textarea class="form-control" id="acti_desc"  rows="6"  style="resize: none;"
+                    placeholder="Enter description here....."></textarea>
+            </div>
+         </div> 
+
         <div class="container" >
             <div class="row rounded m-0 p-0 ">
                 <br><br>
@@ -181,21 +166,9 @@
                         </table>
                     </div>
                 </div>   
-            </div>
-             
+            </div>             
         </div>
         
-        <div class="acti_desc" class="rounded-start"  style="  border: 2px solid rgb(206, 204, 204);   float: right;">
-            <div class="mt-3 ">
-                <p onmouseenter="newActiDescPopSave()" class="close-btn  ">X</p>
-                <span class="align-middle text-gray fw-normal h5">Activity Description </span>
-            </div>
-            <hr>
-            <div class="form-group mt-4 ">
-                <textarea class="form-control" id="acti_desc"  rows="6"  style="resize: none;"
-                    placeholder="Enter description here....."></textarea>
-            </div>
-         </div> 
         <div class="container">
             <div class="row py-4">
                 <div class="col-md-6">

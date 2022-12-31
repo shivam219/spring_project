@@ -22,7 +22,7 @@
                                     <table>
                                         <tr>
                                             <label class="small mb-1" for="empId">Employee</label>
-                                            <select id="empId" name="empId" name="empId"
+                                            <select id="empId" name="empId" name="empId" required autofocus
                                                 class="form-control form-select">
                                                 <option value="">
                                                     <-- Select Employee -->
@@ -36,7 +36,7 @@
                                         </tr>
                                         <tr>
                                             <label class="small mb-1" for="yearCode">Emplyee Year</label>
-                                            <select id="yearCode" class="form-control form-select">
+                                            <select id="yearCode" class="form-control form-select" required >
                                                 <option value="">
                                                     <-- Choose Year -->
                                                 </option>
@@ -46,8 +46,7 @@
                                         </tr>
                                         <tr>
                                             <label class="small mb-1" for="monthSheetId">Month</label>
-                                            <select id="monthSheetId" name="monthSheetId"
-                                                class="form-control form-select">
+                                            <select id="monthSheetId" name="monthSheetId" required class="form-control form-select">
                                                 <option value="">
                                                     <-- Choose Month -->
                                                 </option>
@@ -58,7 +57,7 @@
                                     </table>
                                 </div> 
                                 <div class="row justify-content-center gap-2  mt-3">
-                                    <button class="btn btn-secondary px-5 btn-sm  w-auto  order-md-1 order-2  " type="button" onclick="history.back()"> Back </button>
+                                    <a class="btn btn-secondary px-5 btn-sm  w-auto" href="home"> Back </a>
                                     <button class="btn btn-primary px-5   btn-sm  w-auto   order-md-2 order-1 " type="submit"> Show </button>
                                 </div>
                         </form>
@@ -83,13 +82,13 @@
                 fetchRes.then(res =>
                     res.json()).then(d => {
                         let str = '<option value=""> <-- Choose Year --> </option>';
-                        for (let i = 0; i < d.length; i++) {
+                        for (let i = 0; i < d.length; i++) { 
                             let ss = (d[i]);
                             str = str + '<option value=' + d[i] + '>' + ss + '  </option>';
                         }
                         $("#yearCode").html(str);
                         $("#monthSheetId").html('<option value=""> <-- Choose Month --> </option>');
-                    })
+                    })  
             }
         });
 

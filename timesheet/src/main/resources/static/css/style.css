@@ -92,25 +92,6 @@ img, svg {
 	background-color: rgba(59, 118, 225, .25) !important;
 }
 
-@media only screen and (max-width: 600px) {
-	* {
-		font-size: x-small;
-	}
-	.w-75 {
-		width: 100%!important;
-	}
-}
-
-@media only screen and (max-width: 900px) {
-	* {
-		font-size: small;
-	}
-}
-
-table {
-	/* border-bottom: 1px solid #ff000d; */
-} 
-
 tbody, td, td a tfoot, th, thead, tr {
 	font-family: Verdana;
 	border-width: 1px;
@@ -136,6 +117,8 @@ select,label{
 	border-radius: 7px;
     text-align: center;  
     background-color: #71a6f7;
+	font-weight: 400;
+	font-size: 16px;
     color: #ffffff;
 }
 .table-label{
@@ -145,4 +128,18 @@ select,label{
 	font-size: 15px;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	font-weight: 500;
+}
+@media only screen and (max-width: 600px) {
+	* {
+		font-size: x-small;
+	}
+	.w-75 {
+		width: 100%!important;
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	* {
+		font-size: small;
+	}
 }
