@@ -27,31 +27,22 @@
                     <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 me-2 mb-1 ">
                         <div>
                             <label for="year" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Year</label>
-                            <select class="form-select" aria-label="Default select example" name="Year"
+                            <select class="form-select" aria-label="Default select example" name="year"
                                 id="leaveYearSelect" onchange="getAllLeave()">
                                 <option value="">Choose</option>
-                                <option value="2020">2020</option>
-                                <option value="2021">2021</option>
-                                <option value="2022">2022</option>
+                                <c:forEach items="${years}" var="y">
+                                    <option value="${y.getYearDesc()}" <c:if test="${y.getYearDesc() eq year }">selected="selected" </c:if>>${y.getYearDesc()}</option>
+                                </c:forEach>    
                             </select>
                         </div>
                         <div>
-                            <label for="Month" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Month</label>
-                            <select class="form-select" aria-label="Default select example" name="Month"
-                                id="leaveMonthSelect" onchange="getAllLeave()">
-                                <option value="">Choose</option>
-                                <option value="01">January</option>
-                                <option value="02">February</option>
-                                <option value="03">March</option>
-                                <option value="04">April</option>
-                                <option value="05">May</option>
-                                <option value="06">June</option>
-                                <option value="07">July</option>
-                                <option value="08">August</option>
-                                <option value="09">September</option>
-                                <option value="10">October</option>
-                                <option value="11">November</option>
-                                <option value="12">December</option>
+                            <label for="month" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Month</label>
+                            <select class="form-select" aria-label="Default select example" name="month"
+                            id="leaveMonthSelect" onchange="getAllLeave()">
+                            <option value="">Choose</option>
+                                <c:forEach items="${months}" var="m">
+                                    <option value="${m[0]}" <c:if test="${m[0] eq month }">selected="selected" </c:if>>${m[1]}</option>
+                                </c:forEach>    
                             </select>
                         </div>
                     </div>
@@ -124,19 +115,7 @@
             <input type="hidden" name="leaveMonth" id="leaveMonth">
             <input type="hidden" name="leaveYear" id="leaveYear">
         </form> 
-        <form action="leave-pending-report">
-            <input type="hidden" name="userleaveYear" value="${year}" id="userleaveYear">
-            <input type="hidden" name="userleaveMonth" value="${month}" id="userleaveMonth">
-        </form>
-
         <script>
-            $(document).ready(function () {
-                if ($("#userleaveMonth").val() === "no") {
-                } else {
-                    $("#leaveYearSelect").val($("#userleaveYear").val());
-                    $("#leaveMonthSelect").val($("#userleaveMonth").val());
-                }
-            })
             function getAllLeave() {
                 var ly = $("#leaveYearSelect").val();
                 var lm = $("#leaveMonthSelect").val();

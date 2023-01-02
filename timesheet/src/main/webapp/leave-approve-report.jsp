@@ -17,9 +17,6 @@
 		border-collapse: collapse;
 		font-size:14px;
 	} 
-	td{
-		/* font-size:14px; */
-	}
 </style>
 
 <body>
@@ -54,13 +51,7 @@
 			</div>
 			<div class="col"></div>
 		</div>
-		<!-- no need of this -->
 		<div class="row align-items-center mt-2 d-none"> 
-			<!-- <div class="col-md-6">
-				<div>
-					<h5 class="card-title ms-2" style="color: #124265;">Approved Leave Report</h5>
-				</div>  
-			</div> -->
 			<div class="col  ">
 				<div class="d-flex flex-wrap align-items-center   gap-2  ">
 					<div class="d-flex">
@@ -68,27 +59,18 @@
 						<select class="form-control form-select d-flex " aria-label="Default select example" name="Year" id="leaveYearSelect"
 							onchange="getAllLeave()">
 							<option value="">Choose</option>
-							<option value="2020">2020</option>
-							<option value="2021">2021</option>
-							<option value="2022">2022</option>
+							<c:forEach items="${years}" var="y">
+								<option value="${y.getYearDesc()}" <c:if test="${y.getYearDesc() eq year }">selected="selected" </c:if>>${y.getYearDesc()}</option>
+							</c:forEach>       
 						</select>
 					</div>
 					<div class="d-flex">
 						<label for="Month" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Month</label>
 						<select class="form-select" aria-label="Default select example" name="Month" id="leaveMonthSelect" onchange="getAllLeave()">
 							<option value="">Choose</option>
-							<option value="01">January</option>
-							<option value="02">February</option>
-							<option value="03">March</option>
-							<option value="04">April</option>
-							<option value="05">May</option>
-							<option value="06">June</option>
-							<option value="07">July</option>
-							<option value="08">August</option>
-							<option value="09">September</option>
-							<option value="10">October</option>
-							<option value="11">November</option>
-							<option value="12">December</option>
+							<c:forEach items="${months}" var="m">
+								<option value="${m[0]}" <c:if test="${m[0] eq month }">selected="selected" </c:if>>${m[1]}</option>
+							</c:forEach>   
 						</select>
 					</div>
 				</div>
@@ -163,24 +145,13 @@
 			<input type="hidden" name="leaveMonth" id="leaveMonth">
 			<input type="hidden" name="leaveYear" id="leaveYear">
 		</form>
-		<form action="leave-approve-report">
-			<input type="hidden" name="userleaveYear" value="${year}" id="userleaveYear">
-			<input type="hidden" name="userleaveMonth" value="${month}" id="userleaveMonth">
-		</form>
 	</div>
 	<script>
-		$(document).ready(function () {
-			if ($("#userleaveMonth").val() === "no") {
-			} else {
-				$("#leaveYearSelect").val($("#userleaveYear").val());
-				$("#leaveMonthSelect").val($("#userleaveMonth").val());
-			}
-		})
+	 
 		function getAllLeave() {
 			var ly = $("#leaveYearSelect").val();
 			var lm = $("#leaveMonthSelect").val();
 			if ($("#leaveYearSelect").val() && $("#leaveMonthSelect").val()) {
-				console.log("both has");
 				$("#leaveMonth").val(lm);
 				$("#leaveYear").val(ly);
 				$("#leaveMonthReport").submit();

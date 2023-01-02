@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +17,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,8 +24,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,6 +33,7 @@ import com.timesheet.model.Employee;
 import com.timesheet.model.Leave;
 import com.timesheet.repository.ApproveRepository;
 import com.timesheet.repository.EmployeeRepository;
+import com.timesheet.repository.FinancialYearRepository;
 import com.timesheet.repository.LeaveRepository;
 import com.timesheet.repository.UserRepository;
 import com.timesheet.service.ApproveService;
@@ -69,6 +66,9 @@ public class LeaveController {
 	public ApproveRepository ar;
 
 	@Autowired
+	public FinancialYearRepository fyr;
+
+	@Autowired
 	private FileUploaderHelper fileUploaderHelper;
 
 	@GetMapping(value = "apply-leave")
@@ -76,7 +76,7 @@ public class LeaveController {
 		ModelAndView m = new ModelAndView("apply-leave");
 		Long empId = ((Long) request.getSession().getAttribute("empId"));
 		Employee emp = er.findById(empId).get();
-		
+
 		m.addObject("leaveTypes", lr.findLeaveType());
 		m.addObject("emp", emp);
 		m.addObject("manager", er.findById(Long.parseLong(ur.findById(empId).get().getLeaveReportingManager())).get());
@@ -240,12 +240,12 @@ public class LeaveController {
 	}
 
 	@GetMapping("leave-details")
-	public ModelAndView getEmployeeMaster(
-			HttpServletRequest request,@RequestParam(value = "page", defaultValue = "1") Integer page,
+	public ModelAndView getEmployeeMaster(HttpServletRequest request,
+			@RequestParam(value = "page", defaultValue = "1") Integer page,
 			@RequestParam(value = "status", defaultValue = "") String status,
 			@RequestParam(value = "startDate", defaultValue = "") String startDate,
 			@RequestParam(value = "endDate", defaultValue = "") String endDate) throws ParseException {
-		long empId =(long) request.getSession().getAttribute("empId");
+		long empId = (long) request.getSession().getAttribute("empId");
 		ModelAndView m = new ModelAndView("leave-details");
 		Pageable pageable = PageRequest.of((page - 1), 8, Sort.by("startDate"));
 		Page<Leave> lp = null;
@@ -255,17 +255,19 @@ public class LeaveController {
 			Date endDate2 = sdf.parse(endDate);
 			if (status.trim().isBlank()) {
 				System.out.println("All");
-				lp = (Page<Leave>) lr.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndEmpIdOrderByStartDateDesc(startDate2, endDate2,
-						pageable,empId);
+				lp = (Page<Leave>) lr
+						.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndEmpIdOrderByStartDateDesc(
+								startDate2, endDate2, pageable, empId);
 			} else {
 				System.out.println("choosen");
-				lp = (Page<Leave>) lr.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndSecondStatusAndEmpIdOrderByStartDateDesc(
-						startDate2, endDate2, status, pageable,empId);
+				lp = (Page<Leave>) lr
+						.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndSecondStatusAndEmpIdOrderByStartDateDesc(
+								startDate2, endDate2, status, pageable, empId);
 			}
 		} else if (status == null || status.trim().isEmpty()) {
-			lp = (Page<Leave>) lr.findAllByEmpIdOrderByStartDateDesc(pageable,empId);
+			lp = (Page<Leave>) lr.findAllByEmpIdOrderByStartDateDesc(pageable, empId);
 		} else {
-			lp = (Page<Leave>) lr.findBySecondStatusAndEmpIdOrderByStartDateDesc(status, pageable,empId);
+			lp = (Page<Leave>) lr.findBySecondStatusAndEmpIdOrderByStartDateDesc(status, pageable, empId);
 		}
 		List<Leave> ll = lp.getContent();
 		m.addObject("option", status);
@@ -282,8 +284,11 @@ public class LeaveController {
 	 * Access Approved Leave Report
 	 */
 	@GetMapping("/leave-approve-report")
-	public String leaveReport() {
-		return "leave-approve-report";
+	public ModelAndView leaveReport() {
+		ModelAndView m = new ModelAndView("leave-approve-report");
+		m.addObject("months", er.findMonth());
+		m.addObject("years", fyr.findYearDesc());
+		return m;
 	}
 
 	/*
@@ -294,6 +299,8 @@ public class LeaveController {
 			@RequestParam("leaveYear") String year) throws Exception {
 		m.addAttribute("month", month);
 		m.addAttribute("year", year);
+		m.addAttribute("months", er.findMonth());
+		m.addAttribute("years", fyr.findYearDesc());
 		m.addAttribute("leaveList", ls.getLeaveByMonthAndYear2(month, year));
 		return "leave-approve-report";
 	}
@@ -314,8 +321,11 @@ public class LeaveController {
 	 * Access Pending Leave Report Page
 	 */
 	@GetMapping("/leave-pending-report")
-	public String pendingLeaveReport() {
-		return "leave-pending-report";
+	public ModelAndView pendingLeaveReport() {
+		ModelAndView m = new ModelAndView("leave-pending-report");
+		m.addObject("months", er.findMonth());
+		m.addObject("years", fyr.findYearDesc());
+		return m;
 	}
 
 	/*
@@ -325,7 +335,9 @@ public class LeaveController {
 	public String pendingLeaveReportFetch(Model m, @RequestParam("leaveMonth") String month,
 			@RequestParam("leaveYear") String year) throws Exception {
 		m.addAttribute("month", month);
+		m.addAttribute("months", er.findMonth());
 		m.addAttribute("year", year);
+		m.addAttribute("years", fyr.findYearDesc());
 		m.addAttribute("pendingList", ls.getPendingLeaveByMonthAndYear2(month, year));
 		return "leave-pending-report";
 	}

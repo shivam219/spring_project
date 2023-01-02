@@ -3,8 +3,12 @@ package com.timesheet.model;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -14,6 +18,22 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 
+import com.timesheet.dto.YearDto;
+
+//@formatter:off
+@NamedNativeQuery(
+		name =  "find_year_desc", 
+		query = "select year_desc from timesheet_financial_year", 
+		resultSetMapping = "year_desc_dto")
+@SqlResultSetMapping(name = "year_desc_dto", 
+	classes = @ConstructorResult(
+			targetClass = YearDto.class, 
+			columns = {
+					@ColumnResult(name = "year_desc", type = String.class),
+					}
+			)
+	)
+//@formatter:on
 @Entity
 @Table(name = "timesheet_financial_year")
 public class FinancialYear {
