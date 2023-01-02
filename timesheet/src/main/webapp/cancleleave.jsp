@@ -97,7 +97,7 @@
 								</c:forEach>
 								<c:if test='${getAllLeave.size()== 0}'>
 									<tr>
-										<td colspan="8" class="bg-white text-center fw-normal h5 p-2 "> No Data</td>
+										<td colspan="8" class="bg-white text-center fw-normal  p-2 "> No Data</td>
 									</tr>
 								</c:if>
 							</tbody>

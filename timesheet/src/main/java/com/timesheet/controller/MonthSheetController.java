@@ -54,7 +54,7 @@ public class MonthSheetController {
 		}
 		MonthSheet ms = msp.get();
 		m.addAttribute("empMonthSheet", mse.findMonthSheetEmployeeDataByMonthId(monthSheetId).get(0));
-		m.addAttribute("monthSheetDataList", mse.findMonthSheetDataAndApproveajax(monthSheetId));
+//		m.addAttribute("monthSheetDataList", mse.findMonthSheetDataAndApproveajax(monthSheetId));
 		m.addAttribute("monthDto", mse.findMonthSheetDataToDto(monthSheetId));
 		return "month-sheet-approve";
 	}

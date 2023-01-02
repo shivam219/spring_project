@@ -11,13 +11,13 @@ public class MonthSheetDataDto {
 		super();
 	}
 
-	public MonthSheetDataDto(String projectName, String date, String descr, String hour) {
-		super();
-		this.projectName = projectName;
-		this.date = date;
-		this.descr = descr;
-		this.hour = hour;
-	}
+//	public MonthSheetDataDto(String projectName, String date, String descr, String hour) {
+//		super();
+//		this.projectName = projectName;
+//		this.date = date;
+//		this.descr = descr;
+//		this.hour = hour;
+//	}
 
 	public MonthSheetDataDto(String projectName, String date, String descr, Integer hour) {
 		super();

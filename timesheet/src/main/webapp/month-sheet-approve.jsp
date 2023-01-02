@@ -19,6 +19,10 @@
         tbody, td, td a tfoot, th, thead, tr {
             white-space: normal;
         }
+		.my-border{
+
+			border-collapse: collapse;
+		}
 		</style>
 	</head>
 
@@ -48,7 +52,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6 mb-3 mb-md-0 ">
-					<span class="  badge-soft-primary px-3 align-self-center pt-1 pb-2 me-2"> Day Sheet (${monthSheetDataList.size()})</span>
+					<span class="  badge-soft-primary px-3 align-self-center pt-1 pb-2 me-2"> Day Sheet (${monthDto.size()})</span>
 				</div>
 				<div class="col-md-6 ">
 					<div class="d-flex justify-content-md-end  mb-1">
@@ -81,9 +85,9 @@
 											<c:forEach items="${d.getDataDtos()}" var="dd">
 												<div style="display: none;"> 
 													<div class="row  m-0 p-0 ">
-														<div class="col-3 border">${dd.getProjectName()}</div> 
-														<div class="col-8 border"> <p>${dd.getDescr()}</p> </div>   
-														<div class="col-1 border">${dd.getHour()}</div>
+														<div class="col-3 border my-border ">${dd.getProjectName()}</div> 
+														<div class="col-8  border my-border "> <p>${dd.getDescr()}</p> </div>   
+														<div class="col-1  border my-border ">${dd.getHour()}</div>
 													</div>
 												</div> 
 											</c:forEach>
@@ -135,12 +139,10 @@
 							title: "Approve",
 							text: "Approve timesheet",
 							icon: "success",
-						}).
-							then(function (isOkay) {
-								if (isOkay) {
-									location.replace('month-sheet');
-								}
-							});
+							button: false, 
+						});
+						// console.log(swal());
+						location.replace('month-sheet');
 					}, error: function (data, msg, xh) {
 						$("#btnApproveLd").removeClass("spinner-border spinner-border-sm");
 					}
@@ -167,12 +169,10 @@
 							title: "Reject",
 							text: "Timeheet Reject",
 							icon: "success",
-						}).
-							then(function (isOkay) {
-								if (isOkay) {
-									location.replace('month-sheet');
-								}
-							});
+							button: false, 
+						})
+
+						location.replace('month-sheet');
 					}, error: function (data, msg, xh) {
 						$("#btnRejectLd").removeClass("spinner-border spinner-border-sm");
 					}

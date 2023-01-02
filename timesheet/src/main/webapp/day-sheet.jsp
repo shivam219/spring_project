@@ -582,11 +582,11 @@
                             }
                         }); 
                         swal({
-                            position: 'end',
-                            icon: 'success',
-                            title: 'Your work has been saved',
-                            showConfirmButton: false,
-                            timer: 500
+                            title: "Success",
+							text: "Timesheet Updated",
+							icon: "success",
+							button: false,
+                            timer: 700,
                         });      
                     }else{
                         alert("Please Enter work report data");
