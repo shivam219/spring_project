@@ -110,8 +110,8 @@ body{
                                  </div>
                             </div>
                             <div class="row justify-content-center mt-3 gap-2 "> 
-                                <a class="btn btn-secondary px-3   w-auto  order-md-1 order-2 " type="button" href="holiday-master" > Back  </a> 
-                                <button class="btn btn-primary px-3 w-auto      order-md-2 order-1" type="submit" id="btnSave"  >
+                                <a class="btn      btn-sm   btn-secondary px-3   w-auto  order-md-1 order-2 " type="button" href="holiday-master" > Back  </a> 
+                                <button class="btn btn-sm btn-primary px-3 w-auto      order-md-2 order-1" type="submit" id="btnSave"  >
                                     <span id="loadingBtn"> </span> &nbsp; Save&nbsp;
                                 </button>
                             </div>

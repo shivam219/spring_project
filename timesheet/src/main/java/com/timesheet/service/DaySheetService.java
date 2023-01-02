@@ -72,7 +72,7 @@ public class DaySheetService {
 		for (DaySheet w : dayList) {
 			if (map2.containsKey(w.getProjectId())) {
 				LocalDate t = LocalDate.parse(w.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-				DaySheet wl = map2.get(w.getProjectId()).get(map2.get(w.getProjectId()).size() - 1);// give last object
+				DaySheet wl = map2.get(w.getProjectId()). get(map2.get(w.getProjectId()).size() - 1);// give last object
 				// tue
 				LocalDate d1 = LocalDate.parse(wl.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 				LocalDate d2 = LocalDate.parse(w.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -81,14 +81,14 @@ public class DaySheetService {
 				ArrayList<DaySheet> al = new ArrayList<DaySheet>();
 				al.addAll(map2.get(w.getProjectId()));
 				for (int i = df; i > 0; i--) {
-					DaySheet ds2 = new DaySheet();
-					ds2.setDaySheetId(0L);
-					ds2.setMonthId(w.getMonthId());
-					ds2.setProjectId(w.getProjectId());
-					ds2.setDate(t.minusDays(i).toString());
-					ds2.setHour(0);
-					ds2.setDescr("");
-					al.add(ds2);
+					DaySheet w2 = new DaySheet();
+					w2.setDaySheetId(0L);
+					w2.setMonthId(w.getMonthId());
+					w2.setProjectId(w.getProjectId());
+					w2.setDate(t.minusDays(i).toString());
+					w2.setHour(0);
+					w2.setDescr("");
+					al.add(w2);
 				}
 				al.add(w);
 				map2.put(w.getProjectId(), al);

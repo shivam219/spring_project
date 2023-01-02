@@ -14,7 +14,7 @@
 					<div class="card-header text-center text-white h6 table-label"  >Leave Application</div>
 					<div class="card-body">
 						<input type="hidden" value='${emp.getGender()}' id="empGender">
-						<form  id="applyLeaveForm"> 
+						<form  id="applyLeaveForm" enctype="multipart/form-data" method="post"> 
 							<div class="container">
 								<div class="row justify-content-center">
 									<div class="col-sm-10">

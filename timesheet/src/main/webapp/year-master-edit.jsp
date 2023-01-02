@@ -13,20 +13,21 @@
                     <div class="card-header text-center">Edit Year</div>
                     <div class="card-body">
                         <form method="post" action="EditYear" id="EditYearForm"  >
+                            <input type="hidden" id="yearDesc" value="${year.getYearCode()}">
                             <div class="row gx-3 mb-3 justify-content-center">
                                 <div class="col-md-4">
                                 <table>
                                     <tr>
                                         <label class="small mb-1" for="year">Year Description</label>
-                                        <input class="form-control" id="yearCode" type="text" placeholder="Edit Year" value="${year.getYearCode()}">    
+                                        <input class="form-control" id="yearCode" type="text" placeholder="Edit Year" value="${year.getYearCode()}" required>    
                                         <span class="form-text small text-danger ms-2  d-none">Specify Year Description</span>
                                     </tr>
                                     <tr>
                                 </table>
                             </div>
                             <div class="row justify-content-center mt-3 gap-2 "> 
-                                <a class="btn btn-secondary px-3   w-auto  order-md-1 order-2" type="button" href="year-master" > Back  </a>                               
-                                <button class="btn btn-primary px-3 w-auto  order-md-2 order-1" type="submit" id="btnSave"  >
+                                <a class="btn      btn-sm  btn-secondary px-3   w-auto  order-md-1 order-2" type="button" href="year-master" > Back  </a>                               
+                                <button class="btn btn-sm btn-primary px-3 w-auto  order-md-2 order-1" type="submit" id="btnSave"  >
                                     <span id="loadingBtn"> </span> &nbsp; Save &nbsp;
                                 </button>
                             </div>
@@ -52,7 +53,7 @@
             $("#loadingBtn").addClass("spinner-border spinner-border-sm"); 
             let data = {
                 yearCode:$("#yearCode").val(),
-                yearDesc:$("#yearCode").val()
+                yearDesc:$("#yearDesc").val()
             }
             $.ajax({
                 type: 'POST',
@@ -66,12 +67,8 @@
                         title:"Success",
                         text: "Year Updated Successfully",
                         icon: "success",
-                    }).
-                    then(function (isOkay) {
-                        if (isOkay) {
-                            location.replace('year-master');
-                        }
                     });
+                    location.replace('year-master');
                 },error : function(data,msg,xh){
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                 }

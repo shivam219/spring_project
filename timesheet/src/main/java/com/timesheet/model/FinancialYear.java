@@ -1,8 +1,18 @@
 package com.timesheet.model;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
 
 @Entity
 @Table(name = "timesheet_financial_year")
@@ -13,21 +23,38 @@ public class FinancialYear {
 
 	private String yearDesc;
 
-	private String empName;
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "create_time", updatable = false)
+	private Date createTime;
 
-	private String date;
+	@CreatedBy
+	@Column(name = "created_by")
+	String createdBy;
+
+	@UpdateTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "modify_time")
+	private Date modifyTime;
+
+	@LastModifiedBy
+	@Column(name = "modified_by")
+	String modifiedBy;
 
 	public FinancialYear() {
 		super();
 
 	}
 
-	public FinancialYear(int yearCode, String yearDesc, String empName, String date) {
+	public FinancialYear(int yearCode, String yearDesc, Date createTime, String createdBy, Date modifyTime,
+			String modifiedBy) {
 		super();
 		this.yearCode = yearCode;
 		this.yearDesc = yearDesc;
-		this.empName = empName;
-		this.date = date;
+		this.createTime = createTime;
+		this.createdBy = createdBy;
+		this.modifyTime = modifyTime;
+		this.modifiedBy = modifiedBy;
 	}
 
 	public int getYearCode() {
@@ -46,26 +73,42 @@ public class FinancialYear {
 		this.yearDesc = yearDesc;
 	}
 
-	public String getEmpName() {
-		return empName;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setEmpName(String empName) {
-		this.empName = empName;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
-	public String getDate() {
-		return date;
+	public String getCreatedBy() {
+		return createdBy;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getModifyTime() {
+		return modifyTime;
+	}
+
+	public void setModifyTime(Date modifyTime) {
+		this.modifyTime = modifyTime;
+	}
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
 	}
 
 	@Override
 	public String toString() {
-		return "FinancialYear [yearCode=" + yearCode + ", yearDesc=" + yearDesc + ", empName=" + empName + ", date="
-				+ date + "]";
+		return "FinancialYear [yearCode=" + yearCode + ", yearDesc=" + yearDesc + ", createTime=" + createTime
+				+ ", createdBy=" + createdBy + ", modifyTime=" + modifyTime + ", modifiedBy=" + modifiedBy + "]";
 	}
 
 }

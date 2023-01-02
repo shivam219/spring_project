@@ -161,4 +161,10 @@ public class UserController {
 		return ResponseEntity.of(er.findById(id));
 	}
 
+	@GetMapping("/get-employee1/{firstname}.{lastname}")
+	public ResponseEntity<Object> getEmployeeCheck(@PathVariable String lastname) {
+		System.out.println();
+		return ResponseEntity.of(Optional.of(lastname));
+	}
+
 }

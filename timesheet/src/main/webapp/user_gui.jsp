@@ -484,7 +484,7 @@
       
         
     </div>
-    <div class="container">
+    <div class="container d-none" >
         <div class="row justify-content-around">
             <div class="col-5" ></div>
             <table>
@@ -517,6 +517,44 @@
             </table>
         </div>
     </div>
+    <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Username</th>
+            </tr>
+          </thead>
+      
+          <tbody>
+      
+            <tr class="success">  <!-- row styling --> 
+      
+              <td >1</td><!-- column 1 -->
+      
+              <!-- column 2 --> 
+      
+              <td >Mark</td><!-- column 3 -->
+      
+               <!-- column 4 --> 
+      
+               <td >Otto</td><!-- column 5 -->
+      
+               <td >@mdo</td><!-- end of row-->  
+      
+            </tr><!-- end of row-->  
+      
+             <!-- row styling-->  
+      
+             <tr class="warning">   <!-- start of row-->                                    <!-- column 1 -->  
+      
+             <td >2</td><!-- column 2 --> 
+      
+             <td >Jacob</td><!-- column 3 --> 
+      
+             <td >Thornton</td></tr></tbody></table></div>
     <script>
         $("td span").on("click",function(t1){
             $(this).siblings("div").toggle();

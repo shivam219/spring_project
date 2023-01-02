@@ -20,14 +20,14 @@
                                 <table>
                                     <tr>
                                         <label class="small mb-1" for="yearCode">Year Description</label>
-                                        <input class="form-control" id="yearCode" type="text" placeholder="Enter Year" value="">
+                                        <input class="form-control" id="yearCode" type="text" placeholder="Enter Year" value="" required>
                                         <span class="form-text small text-danger ms-2  d-none"  >Specify Year Description</span>     
                                     </tr>
                                 </table>
                             </div> 
                             <div class="row justify-content-center mt-3 gap-2 ">
-                                <a class="btn btn-secondary px-3   w-auto  order-md-1 order-2" type="button" href="year-master" > Back  </a>                               
-                                <button class="btn btn-primary px-3 w-auto  order-md-2 order-1" type="submit" id="btnSave"  >
+                                <a class="btn      btn-sm  btn-secondary px-3   w-auto  order-md-1 order-2" type="button" href="year-master" > Back  </a>                               
+                                <button class="btn btn-sm btn-primary px-3 w-auto  order-md-2 order-1" type="submit" id="btnSave"  >
                                     <span id="loadingBtn"> </span> &nbsp; Create Year&nbsp;
                                 </button>
                             </div>
@@ -38,7 +38,6 @@
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script>
     $("#EditYearForm").on("submit",function (event) {
         event.preventDefault();  
@@ -59,12 +58,8 @@
                         title:"Success",
                         text: "Year Created Successfully",
                         icon: "success",
-                    }).
-                    then(function (isOkay) {
-                        if (isOkay) {
-                            location.replace('year-master');
-                        }
                     });
+                    location.replace('year-master');
                 },error : function(data,msg,xh){
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                 }

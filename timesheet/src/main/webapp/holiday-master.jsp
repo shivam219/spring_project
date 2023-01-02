@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-6 "> 
                 <div class="d-flex justify-content-md-end ">                          
-					<a type="button" class="btn btn-primary align-self-center align-items-center" href="holiday-master-add">  <i class="bx bx-plus me-1"></i>  Create Holiday</a>
+					<a type="button" class="btn btn-primary btn-sm align-self-center align-items-center" href="holiday-master-add">  <i class="bx bx-plus me-1"></i>  Create Holiday</a>
 		        </div>
             </div>
         </div>
