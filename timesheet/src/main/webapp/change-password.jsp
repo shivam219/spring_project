@@ -48,7 +48,7 @@
                                             </span>
                                         </div>
                                         <div class="form-group m-3">
-                                            <button type="submit" class="btn btn-primary" id="btnSubmit">
+                                            <button type="submit" class="btn btn-primary btn-sm" id="btnSubmit">
                                                 <span id="loadingBtn"> </span> &nbsp; Update &nbsp;
                                             </button>
                                         </div>

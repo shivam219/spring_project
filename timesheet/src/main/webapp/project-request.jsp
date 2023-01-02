@@ -37,8 +37,8 @@
                             </div>
                         </div>
                         <div class="row justify-content-center mt-3 mb-4">
-                            <button class="btn btn-secondary px-5  mt-2 mt-sm-0 me-2 w-auto " type="button" onclick="history.back()" > Back  </button> 
-                            <button class="btn btn-primary w-auto" id="btnRequestProject"  >
+                            <button class="btn btn-secondary btn-sm px-5  mt-2 mt-sm-0 me-2 w-auto " type="button" onclick="history.back()" > Back  </button> 
+                            <button class="btn btn-primary btn-sm w-auto" id="btnRequestProject"  >
                                 <span id="load"> </span> &nbsp; Reqest Project &nbsp;
                             </button>
                         </div>

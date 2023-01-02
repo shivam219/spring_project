@@ -14,7 +14,7 @@
             <div class="col-md-6">
                 <div class="d-flex flex-wrap align-items-center justify-content-md-end gap-2 ">    
                     <div>
-                        <a href="employee-add" data-bs-target=".add-new" onclick="this.blur()" class="btn btn-primary me-1 mb-1"><i class="bx bx-plus me-1"></i> Add New</a>
+                        <a href="employee-add" data-bs-target=".add-new" onclick="this.blur()" class="btn btn-primary btn-sm btn-sm me-1 mb-1"><i class="bx bx-plus me-1"></i> Add New</a>
                     </div>
                 </div>
             </div>

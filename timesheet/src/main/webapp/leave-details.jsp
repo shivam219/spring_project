@@ -69,11 +69,11 @@
                     <div class="d-flex flex-wrap align-items-center justify-content-md-end gap-2 ">    
                         <div>
                             <a href="apply-leave" data-bs-target=".add-new" onclick="this.blur()"
-                                class="btn btn-primary"><i class="bx bx-plus me-1"></i>Apply leave</a>
+                                class="btn btn-primary btn-sm"><i class="bx bx-plus me-1"></i>Apply leave</a>
                         </div>
                         <div>
                             <a href="cancle-leave" data-bs-target=".add-new" onclick="this.blur()"
-                                class="btn btn-primary"><i class="bx bx-plus me-1"></i>Cancel leave</a>
+                                class="btn btn-primary btn-sm"><i class="bx bx-plus me-1"></i>Cancel leave</a>
                         </div>
                     </div>
                 </div>

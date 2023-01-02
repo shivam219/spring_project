@@ -52,7 +52,7 @@
     
     <div class="row justify-content-around ">
       <div class="col"> 
-        <button class="btn btn-secondary btn-sm px-5 py-1" type="button" onclick="history.back()"  > Back </button>
+        <button class="btn btn-secondary btn-sm btn-sm px-5 py-1" type="button" onclick="history.back()"  > Back </button>
       </div>
     </div>
     

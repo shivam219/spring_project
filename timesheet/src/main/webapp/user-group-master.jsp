@@ -17,7 +17,7 @@
             <div class="col-md-8 col-lg-6">
                 <div class="d-flex flex-wrap align-items-center justify-content-md-end w-auto mb-2 me-2">
                     <div>
-                        <a href="user-group-add" onclick="this.blur()" class="btn btn-primary w-auto d-inline "><i
+                        <a href="user-group-add" onclick="this.blur()" class="btn btn-primary btn-sm w-auto d-inline "><i
                                 class="bx bx-plus me-1"></i> Create Group</a>
                     </div>
                 </div>

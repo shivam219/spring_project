@@ -18,7 +18,7 @@ table {
             <div class="col ms-1">
                 <div class="mb-1 ">      
                     <div>
-                        <a href="year-master-add" class="btn btn-primary btn-sm"><i class="bx bx-plus me-1"></i> Create Year</a>
+                        <a href="year-master-add" class="btn btn-primary btn-sm btn-sm"><i class="bx bx-plus me-1"></i> Create Year</a>
                     </div>
                 </div>
             </div> 

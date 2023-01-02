@@ -43,7 +43,7 @@
 				</div>
 				<div class="col-md-6 ">
 					<div class="d-flex justify-content-md-end  mb-1">
-						<button type="button" class="btn btn-primary  btn-sm px-md-4  me-2 " id="btnApprove">
+						<button type="button" class="btn btn-primary btn-sm  btn-sm px-md-4  me-2 " id="btnApprove">
 							<span id="btnApproveLd"> </span> &nbsp; Approve &nbsp;
 						</button>
 
@@ -72,7 +72,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div>
-						<button class="btn btn-secondary btn-sm px-5 py-1" type="button" onclick="history.back()"> Back
+						<button class="btn btn-secondary btn-sm btn-sm px-5 py-1" type="button" onclick="history.back()"> Back
 						</button>
 					</div>
 				</div>

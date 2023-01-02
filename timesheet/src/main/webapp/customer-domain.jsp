@@ -26,8 +26,8 @@
                                 </table>
                             </div>
                             <div class="row justify-content-center mt-3 gap-2 ">
-                                <button class="btn btn-secondary px-3  w-auto " type="button" onclick="location='customer-master'" > Back  </button> 
-                                <button class="btn btn-primary px-3 w-auto" type="submit" id="btnSave"  >
+                                <button class="btn btn-secondary btn-sm px-3  w-auto " type="button" onclick="location='customer-master'" > Back  </button> 
+                                <button class="btn btn-primary btn-sm px-3 w-auto" type="submit" id="btnSave"  >
                                     <span id="loadingBtn"> </span> &nbsp; Create Domain&nbsp;
                                 </button>
                             </div>

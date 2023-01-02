@@ -97,12 +97,12 @@
 								</div>
 							</div>
 							<div class="row justify-content-center mt-2">
-								<button class="btn btn-primary btn-sm px-3 w-auto" type="submit" id="btnSave" onclick="this.blur()" >
+								<button class="btn btn-primary btn-sm btn-sm px-3 w-auto" type="submit" id="btnSave" onclick="this.blur()" >
 									<span id="loadingBtn"> </span> &nbsp; Submit &nbsp;
 								</button>
 								<button class="btn btn-danger btn-sm px-3 ms-2 w-auto " type="reset"
 									onclick="this.blur()"> Reset</button>
-								<button class="btn btn-secondary btn-sm px-3 ms-2 w-auto " type="button"
+								<button class="btn btn-secondary btn-sm btn-sm px-3 ms-2 w-auto " type="button"
 									onclick="history.back()"> Back</button>
 							</div>
 						</form>

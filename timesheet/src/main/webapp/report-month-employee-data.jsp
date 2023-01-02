@@ -165,7 +165,7 @@
             </div> 
           </div> 
           <div class="row m-1 ">
-            <a class="btn btn-secondary px-5 btn-sm  w-auto" href="report-month-employee"> Back </a>
+            <a class="btn btn-secondary btn-sm px-5 btn-sm  w-auto" href="report-month-employee"> Back </a>
           </div>
       </div>
     </div>

@@ -25,7 +25,7 @@
                                         <h6 class=" badge-soft-success d-inline px-3 py-2 rounded"> Program Group <span class="text-muted fw-normal ms-1">(${userGroupList.size()})</span></h6>
                                     </div>
                                     <div class="col-md-6 text-md-end">
-                                        <a href="program-add" class="btn btn-primary btn-sm "><i class="bx bx-plus me-1"></i> Create Program</a>
+                                        <a href="program-add" class="btn btn-primary btn-sm btn-sm "><i class="bx bx-plus me-1"></i> Create Program</a>
                                     </div>
                                 </div>
                                 <div class="table-responsive">
@@ -110,7 +110,7 @@
                                         </table>
                                     </div> 
                                     <div class="row justify-content-center gap-2 pb-3  d-none " id="btnForm">
-                                        <button class="btn btn-primary px-3   py-1 w-auto " type="submit" id="btnSave">
+                                        <button class="btn btn-primary btn-sm px-3   py-1 w-auto " type="submit" id="btnSave">
                                             <span id="loadingBtn"> </span> &nbsp; Add Link &nbsp;
                                         </button>
                                     </div>

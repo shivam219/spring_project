@@ -20,8 +20,8 @@
 		    </div>
             <div class="col-md-6 "> 
                 <div class="d-flex justify-content-md-end ">                         
-					<a type="button" class="btn btn-primary   px-md-4  me-2 mb-1" href="project-map" style="border-radius: 15px">  Employe Project Map</a>
-					<a type="button" class="btn btn-primary   px-md-4  me-2 mb-1" href="add-project" style="border-radius: 15px"> <i class="bx bx-plus me-1"></i>  Add New Project</a>
+					<a type="button" class="btn btn-primary btn-sm   px-md-4  me-2 mb-1" href="project-map" style="border-radius: 15px">  Employe Project Map</a>
+					<a type="button" class="btn btn-primary btn-sm   px-md-4  me-2 mb-1" href="add-project" style="border-radius: 15px"> <i class="bx bx-plus me-1"></i>  Add New Project</a>
                 </div>
             </div>
 			<div class="">

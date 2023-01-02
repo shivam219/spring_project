@@ -25,9 +25,9 @@
             <div class="col-md-6">
                 <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 me-2 mb-1 ">    
                     <div>   
-                        <a href="user-group-mapping-add"  onclick="this.blur()" class="btn btn-primary mb-md-0 mb-1 "><i class="bx bx-plus me-1"></i> User Group Mapping</a>
-                        <a href="user-group-mapping-master"  onclick="this.blur()" class="btn btn-primary"><i class="bx bx-pencil me-1"></i> Edit User Group</a>
-                        <a href="user-master-add"  onclick="this.blur()" class="btn btn-primary"><i class="bx bx-plus me-1"></i> Create User</a>
+                        <a href="user-group-mapping-add"  onclick="this.blur()" class="btn btn-primary btn-sm mb-md-0 mb-1 "><i class="bx bx-plus me-1"></i> User Group Mapping</a>
+                        <a href="user-group-mapping-master"  onclick="this.blur()" class="btn btn-primary btn-sm"><i class="bx bx-pencil me-1"></i> Edit User Group</a>
+                        <a href="user-master-add"  onclick="this.blur()" class="btn btn-primary btn-sm"><i class="bx bx-plus me-1"></i> Create User</a>
                     </div>
                 </div>
             </div>

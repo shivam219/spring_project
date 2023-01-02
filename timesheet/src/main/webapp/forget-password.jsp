@@ -40,7 +40,7 @@
 							</button>
 						</div>
 						<div class="text-center mt-3">
-							<button class="btn btn-primary px-4 mb-1  d-none" type="button" id="btnResetPassword"  >
+							<button class="btn btn-primary btn-sm px-4 mb-1  d-none" type="button" id="btnResetPassword"  >
 								<span id="loadingBtnResetPwd"> </span> &nbsp; Reset Password &nbsp;
 							</button>
 						</div>

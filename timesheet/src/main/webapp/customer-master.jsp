@@ -14,8 +14,8 @@
             </div>
             <div class="col-md-6 ">
                 <div class="d-flex justify-content-md-end gap-1 ">                        
-					<a type="button" class="btn btn-primary   px-4 " href="customer-domain" style="border-radius: 15px"> <i class="bx bx-plus me-1"></i>  Add Domain</a>
-					<a type="button" class="btn btn-primary   px-4 " href="customer-add" style="border-radius: 15px"> <i class="bx bx-plus me-1"></i>  Add Customer</a>
+					<a type="button" class="btn btn-primary btn-sm   px-4 " href="customer-domain" style="border-radius: 15px"> <i class="bx bx-plus me-1"></i>  Add Domain</a>
+					<a type="button" class="btn btn-primary btn-sm   px-4 " href="customer-add" style="border-radius: 15px"> <i class="bx bx-plus me-1"></i>  Add Customer</a>
                 </div>
             </div> 
 			<div class="">

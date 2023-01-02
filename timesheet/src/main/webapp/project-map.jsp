@@ -65,7 +65,7 @@
 				</div>
 			</div>
 			<div class="row m-0 p-0 d-flex justify-content-center gap-2">
-				<button class="btn btn-secondary my-2 px-3     w-auto" type="button" onclick="location='project-master'">Back </button>
+				<button class="btn btn-secondary btn-sm my-2 px-3     w-auto" type="button" onclick="location='project-master'">Back </button>
 				<button type="button" class="btn btn-success my-2 px-3  w-auto" id="btnSubmit">Assign Project</button>
 			</div>
 		</form>

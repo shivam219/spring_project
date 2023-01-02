@@ -94,7 +94,7 @@
 										</div>
 
 										<div class="col-12">
-											<button class="btn btn-primary w-100" type="submit" id="btnSubmit">
+											<button class="btn btn-primary btn-sm w-100" type="submit" id="btnSubmit">
 												<span id="loadingBtn"> </span> &nbsp; Send OTP &nbsp;
 											</button>
 										</div>

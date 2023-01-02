@@ -72,7 +72,7 @@
 				</div>
 			</div>
 			<div class="text-center mt-3">
-				<input class=" btn btn-primary px-4  " type="submit" value="Register" />
+				<input class=" btn btn-primary btn-sm px-4  " type="submit" value="Register" />
 			</div>
 			
 		</form>

@@ -94,7 +94,7 @@
 				<div class="col">
 					<div class="d-flex flex-wrap align-items-center justify-content-start gap-2 ms-1 mb-1 ">
 						<div>
-							<a class="btn btn-secondary px-5   w-auto  order-md-1 order-2" type="button" href="home"> Back </a>
+							<a class="btn btn-secondary btn-sm px-5   w-auto  order-md-1 order-2" type="button" href="home"> Back </a>
 						</div>
 					</div>
 				</div>
@@ -102,11 +102,11 @@
 					<div class="d-flex flex-wrap align-items-center justify-content-end gap-2 me-2 mb-1 ">
 						<div>
 							<a href="apply-leave" data-bs-target=".add-new" onclick="this.blur()"
-								class="btn btn-primary"><i class="bx bx-plus me-1"></i>Apply leave</a>
+								class="btn btn-primary btn-sm"><i class="bx bx-plus me-1"></i>Apply leave</a>
 						</div>
 						<div>
 							<a href="cancle-leave" data-bs-target=".add-new" onclick="this.blur()"
-								class="btn btn-primary"><i class="bx bx-plus me-1"></i>Cancel leave</a>
+								class="btn btn-primary btn-sm"><i class="bx bx-plus me-1"></i>Cancel leave</a>
 						</div>
 					</div>
 				</div>

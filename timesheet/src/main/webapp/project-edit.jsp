@@ -79,8 +79,8 @@
                                 </table>
                             </div>
                             <div class="row justify-content-center mt-3 gap-2 ">
-                                <button class="btn btn-secondary px-5   w-auto  order-md-1 order-2" type="button" onclick="location='project-master'" > Back  </button> 
-                                <button class="btn btn-primary px-3 w-auto order-md-2 order-1" type="submit" id="btnSave"  >
+                                <button class="btn btn-secondary btn-sm px-5   w-auto  order-md-1 order-2" type="button" onclick="location='project-master'" > Back  </button> 
+                                <button class="btn btn-primary btn-sm px-3 w-auto order-md-2 order-1" type="submit" id="btnSave"  >
                                     <span id="loadingBtn"> </span> &nbsp; Save Changes &nbsp;
                                 </button>
                             </div>

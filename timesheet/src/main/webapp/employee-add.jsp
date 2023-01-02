@@ -156,9 +156,9 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-center gap-2">
-                                    <a class="btn btn-secondary px-5  w-auto " type="button"
+                                    <a class="btn btn-secondary btn-sm px-5  w-auto " type="button"
                                       href="employee-master"  > Back </a> 
-                                    <button class="btn btn-primary  px-3 w-auto  " type="submit" id="btnSave">
+                                    <button class="btn btn-primary btn-sm  px-3 w-auto  " type="submit" id="btnSave">
                                         <span id="loadingBtn"> </span> &nbsp; Add Employee &nbsp;
                                     </button>
                                     <button class="btn btn-danger px-5 w-auto  " type="reset"

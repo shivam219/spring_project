@@ -105,8 +105,8 @@ body{
                                 </table>
                             </div>
                             <div class="row justify-content-center mt-3 gap-2 ">
-                                <button class="btn btn-secondary btn-sm px-3 w-auto  order-md-1 order-2 " onclick="history.back()" > Back </button>
-                                <button class="btn btn-primary px-2 w-auto order-md-2 order-1 " type="submit" id="btnSave">
+                                <button class="btn btn-secondary btn-sm btn-sm px-3 w-auto  order-md-1 order-2 " onclick="history.back()" > Back </button>
+                                <button class="btn btn-primary btn-sm px-2 w-auto order-md-2 order-1 " type="submit" id="btnSave">
                                     <span id="loadingBtn"> </span> &nbsp; Assign Designation &nbsp;
                                 </button>
                             </div>

@@ -58,8 +58,8 @@
                             </div>
                         </div>
                         <div class="row justify-content-center gap-2">
-                            <a class="btn btn-secondary    btn-sm  px-4 w-auto" type="button" href="program-master" > Back </a> 
-                            <button class="btn btn-primary btn-sm  px-4 w-auto" type="submit" id="btnSave">
+                            <a class="btn btn-secondary btn-sm    btn-sm  px-4 w-auto" type="button" href="program-master" > Back </a> 
+                            <button class="btn btn-primary btn-sm btn-sm  px-4 w-auto" type="submit" id="btnSave">
                                 <span id="loadingBtn"></span>&nbsp;Save &nbsp; 
                             </button>
                         </div>

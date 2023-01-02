@@ -106,7 +106,7 @@ background-color: #f6f9ff;
 											</div>
 										</div>
 										<div class="col-12">
-											<button class="btn btn-primary w-100" type="submit" id="btnSubmit" onclick="this.blur()" >
+											<button class="btn btn-primary btn-sm w-100" type="submit" id="btnSubmit" onclick="this.blur()" >
 												<span id="loadingBtn"> </span> &nbsp; Login &nbsp;
 											</button>
 										</div>

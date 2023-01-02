@@ -85,7 +85,7 @@
           <div class="row mt-2">
             <div class="col-md-6">
               <div>
-                <a class="btn btn-secondary btn-sm px-5 py-1" type="button" href="employee-master"> Back </a>
+                <a class="btn btn-secondary btn-sm btn-sm px-5 py-1" type="button" href="employee-master"> Back </a>
               </div>
             </div>
           </div>

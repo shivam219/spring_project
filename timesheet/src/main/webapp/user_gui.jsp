@@ -324,8 +324,8 @@
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label form-control-label"></label>
                                         <div class="col-lg-9">
-                                            <input type="reset" class="btn btn-secondary" value="Cancel">
-                                            <input type="button" class="btn btn-primary" value="Save Changes">
+                                            <input type="reset" class="btn btn-secondary btn-sm" value="Cancel">
+                                            <input type="button" class="btn btn-primary btn-sm" value="Save Changes">
                                         </div>
                                     </div>
                                 </form>
@@ -365,7 +365,7 @@
                                                 <textarea rows="6" name="message2" id="message2" class="form-control" required=""></textarea>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-secondary btn-lg float-right">Send Message</button>
+                                        <button type="submit" class="btn btn-secondary btn-sm btn-lg float-right">Send Message</button>
                                     </fieldset>
                                 </form>
                             </div>

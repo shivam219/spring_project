@@ -115,14 +115,14 @@
                     <span class="align-middle text-gray fw-light h5 "> Time Period</span>
                 </div>
                 <div class="col d-flex justify-content-between  align-middle">  
-                    <button class="rounded btn btn-secondary h-75 px-2 me-2"  onclick="PrevWeekReport()" id="btnPrevWeekReport" >
+                    <button class="rounded btn btn-secondary btn-sm h-75 px-2 me-2"  onclick="PrevWeekReport()" id="btnPrevWeekReport" >
                         <i class="fa-solid fa-caret-left  d-flex"></i> 
                     </button>
                     <input  placeholder="Select date"  type="date" disabled id="startDate"   name="startDate"  class="form-control   w-75  h-75 me-2    ">    
                     <span class=" align-self-start me-2 "> To </span>
                 
                     <input  placeholder="Select date"  type="date" id="endDate" disabled  name="endDate" class="form-control   w-75  h-75 me-2 ">
-                    <button class="rounded btn btn-secondary h-75 px-2 " onclick="nextWeekReport()" id="btnNextWeekReport" >
+                    <button class="rounded btn btn-secondary btn-sm h-75 px-2 " onclick="nextWeekReport()" id="btnNextWeekReport" >
                         <i class="fa-solid fa-caret-right rounded  d-flex "></i>
                     </button> 
                 </div>
@@ -197,7 +197,7 @@
             
             <div class="row justify-content-around ">
                 <div class="col"> 
-                    <a class="btn btn-secondary btn-sm px-5 py-1" type="button" href="home" > Back  </a> 
+                    <a class="btn btn-secondary btn-sm btn-sm px-5 py-1" type="button" href="home" > Back  </a> 
                 </div>
                 <div class="col">
                         <a href="project-request" class="btn btn-sm btn-primary">Request Project</a>
