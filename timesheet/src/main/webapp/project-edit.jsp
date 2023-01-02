@@ -71,7 +71,7 @@
                                             <label class="small mb-1 d-block" for="projectTime"> Curresponding Duration in number</label>
                                             <input class="form-control form-input form-input-sm w-50   d-inline " id="projectTime" type="number" placeholder="Duration" value="${project.getProjectDay()}" min="1">
                                             <input type="hidden" id="projectDay" min="1" >
-                                            <label class="badge-soft-primary py-2 px-2 fw-normal mb-1 mx-2 d-inline-block   " style="width: 40%;" id="DayCount"> Day :  </label>
+                                            <label class="badge-soft-primary py-2 px-2 fw-normal mb-1 mx-2 d-inline-block   " style="width: 40%;" id="DayCount"> Days : ${project.getProjectDay()}  </label>
                                             <span class="form-text small text-danger ms-2 d-block  d-none"  >Specify Duration </span>     
 
                                         </div>

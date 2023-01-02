@@ -10,10 +10,13 @@
 			.reject-reason-pop,
 			.leave-reason-pop {
 				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				width: 455px;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0; 
+				width: 400px;
+				height: max-content;
+				margin: auto;
 				text-align: center;
 				background-color: white;
 				padding: 10px;
@@ -21,29 +24,18 @@
 				display: none;
 				border-radius: 5px;
 				border: 2px solid rgb(219, 218, 218);
+				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 			}
+ 
 
-			/* th{
- background-color: #124265;
- } */
-
-			table thead tr th {
+			table thead tr th , 	.table thead th{
 				text-align: center;
-				padding: 1rem 1rem;
-				font-weight: 500;
-				font-size: 15px;
-				font-family: Verdana, Geneva, Tahoma, sans-serif;
-			}
-
-			.table thead th {
 				background-color: #124265;
+	
 			}
-
 
 			table tr td {
-				font-size: 14px;
 				text-align: center;
-				color: rgb(88, 88, 88);
 				border-collapse: collapse;
 				font-family: Verdana, Geneva, Tahoma, sans-serif;
 			}
@@ -69,19 +61,7 @@
 				padding: 0.25rem 0.25rem;
 			}
 
-			.badge-soft-success-button {
-				font-size: 12px;
-				font-weight: 700;
-				color: #63ad6f !important;
-				background-color: rgba(99, 173, 111, .1);
-			}
-
-			.badge-soft-danger {
-				font-size: 12px;
-				font-weight: 700;
-				color: #f56e6e !important;
-				background-color: rgba(245, 110, 110, .1);
-			}
+			 
 		</style>
 
 

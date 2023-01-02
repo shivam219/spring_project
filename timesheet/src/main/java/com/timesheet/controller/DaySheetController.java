@@ -72,14 +72,14 @@ public class DaySheetController {
 			@RequestParam(name = "saveType", defaultValue = "0") Integer saveType, HttpServletRequest request) {
 		long empId = (Long) request.getSession().getAttribute("empId");
 // save - 0 sub -1 app -2
-		System.out.println(empId);
 
 //		daySheet.stream().map(e -> {
 //			e.setEmpId(empId);
 //			return e;
 //		});
-		daySheet.forEach(e->{e.setEmpId(empId);});
-		System.out.println(daySheet);
+		daySheet.forEach(e -> {
+			e.setEmpId(empId);
+		});
 		String sd[] = startDate.split("-");
 		MonthSheet mss = msr.findByEmpId(empId, Integer.parseInt(sd[1]), Integer.parseInt(sd[0]));
 		dsr.deleteByStartDateAndEndDateMonthId(startDate, endDate, mss.getMonthSheetId());
