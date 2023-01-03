@@ -27,38 +27,27 @@
                     <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 me-2 mb-1 ">
                         <div>
                             <label for="year" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Year</label>
-                            <select class="form-select" aria-label="Default select example" name="Year"
-                                id="leaveYearSelect" onchange="getAllLeave()">
-                                <option value="">-------select------</option>
-                                <option value="2020">2020</option>
-                                <option value="2021">2021</option>
-                                <option value="2022">2022</option>
+                            <select class="form-select" aria-label="Default select example" name="Year" id="leaveYearSelect" onchange="getAllLeave()">
+                                <option value="">Choose</option>
+                                <c:forEach items="${years}" var="y">
+                                    <option value="${y.getYearDesc()}" <c:if test="${y.getYearDesc() eq year }">selected="selected" </c:if>>${y.getYearDesc()}</option>
+                                </c:forEach> 
                             </select>
                         </div>
                         <div>
                             <label for="Month" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Month</label>
-                            <select class="form-select" aria-label="Default select example" name="Month"
-                                id="leaveMonthSelect" onchange="getAllLeave()">
-                                <option value="">-------select------</option>
-                                <option value="01">January</option>
-                                <option value="02">February</option>
-                                <option value="03">March</option>
-                                <option value="04">April</option>
-                                <option value="05">May</option>
-                                <option value="06">June</option>
-                                <option value="07">July</option>
-                                <option value="08">August</option>
-                                <option value="09">September</option>
-                                <option value="10">October</option>
-                                <option value="11">November</option>
-                                <option value="12">December</option>
+                            <select class="form-select" aria-label="Default select example" name="Month" id="leaveMonthSelect" onchange="getAllLeave()">
+                                <option value="">Choose</option>
+                                <c:forEach items="${months}" var="m">
+                                    <option value="${m[0]}" <c:if test="${m[0] eq month }">selected="selected" </c:if>>${m[1]}</option>
+                                </c:forEach>   
                             </select>
                         </div>
                         <div>
                             <label for="empId" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Employee</label>
                             <select class="form-select" aria-label="Default select example" id="empId"
                                 onchange="getAllLeave()">
-                                <option value="">--------Select-------</option>
+                                <option value="">Choose</option>
                                 <c:forEach items="${employeeList}" var="l">
                                     <option value="${l.getEmpId()}">${l.getFirstName()} ${l.getLastName()}</option>
                                 </c:forEach>
@@ -68,7 +57,7 @@
                             <label for="statusSelect" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Status</label>
                             <select class="form-select" aria-label="Default select example" name="leaveStatus"
                                 id="statusSelect" onchange="getAllLeave()">
-                                <option value="">--------Select-------</option>
+                                <option value="">Choose</option>
                                 <option value="Approved">Approved</option>
                                 <option value="Rejected">Rejected</option>
                             </select>
@@ -111,12 +100,12 @@
                                     </c:forEach>
                                     <c:if test='${leaveList.size()== 0}'>
                                         <tr class="border">
-                                            <td colspan="9" class="bg-white text-center fw-normal h5 p-2 "> No Data</td>
+                                            <td colspan="9" class="bg-white text-center  "> No Data</td>
                                         </tr>
                                     </c:if>
                                     <c:if test='${ leaveList == null}'>
                                         <tr class="border">
-                                            <td colspan="9" class="bg-white text-center fw-normal h5 p-2 "> No Data</td>
+                                            <td colspan="9" class="bg-white text-center  "> No Data</td>
                                         </tr>
                                     </c:if>
                                 </tbody>

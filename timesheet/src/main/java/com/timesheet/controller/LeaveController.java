@@ -361,6 +361,8 @@ public class LeaveController {
 	@GetMapping("/leave-employee-wise-report")
 	public String employeeWiseLeaveReport(Model m, HttpServletRequest request) {
 		m.addAttribute("empId", "");
+		m.addAttribute("months", er.findMonth());
+		m.addAttribute("years", fyr.findYearDesc());
 		m.addAttribute("employeeList", er.findAll());
 		return "leave-employee-wise-report";
 	}
@@ -371,8 +373,12 @@ public class LeaveController {
 			@RequestParam("leaveStatus") String status) throws Exception {
 		m.addAttribute("month", month);
 		m.addAttribute("year", year);
+		m.addAttribute("months", er.findMonth());
+		m.addAttribute("years", fyr.findYearDesc());
+	
 		m.addAttribute("empId", empId);
 		m.addAttribute("status", status);
+	
 		m.addAttribute("leaveList", ls.getEmploeeWiseReport(month, year, empId, status));
 		m.addAttribute("employeeList", er.findAll());
 		return "leave-employee-wise-report";
