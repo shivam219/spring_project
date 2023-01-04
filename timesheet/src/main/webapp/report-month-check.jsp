@@ -68,23 +68,6 @@
     </div>
 
         <script>
-            // $("#p_code").on("change", function () {
-            //     let uri = '/program-link?prgPrnt=' + $("#p_code").val();
-            //     $.ajax({
-            //         async: false,
-            //         type: 'GET',
-            //         url: uri,
-            //         contentType: 'application/json',
-            //         success: function (da) {
-            //             let str = '';
-            //             for (let i = 0; i < da.length; i++) {
-            //                 let ss = (da[i]);
-            //                 str = str + '<li>' + ss + '  </li>';
-            //             }
-            //             $("#weekHoliday").html(str);
-            //         }
-            //     });
-            // });  
             function dateChange() {
                 if($("#year").val() && $("#month").val()){
                     document.forms[0].submit();

@@ -20,7 +20,7 @@
                                     <table> 
                                         <tr>
                                             <label class="small mb-1" for="projectId">Project</label>
-                                            <select id="projectId" name="projectId" name="projectId" required
+                                            <select id="projectId" name="projectId" name="projectId" required autofocus
                                                 class="form-control form-select">
                                                 <option value="">
                                                     choose Project 
@@ -35,6 +35,7 @@
                                         <tr>
                                             <label class="small mb-1" for="year">Year</label>
                                             <select id="year" name="year" required class="form-control form-select">
+                                                <option value="">choose year</option>
                                                 <c:forEach items="${years}" var="year">
                                                     <option value="${year.getYearDesc()}" >${year.getYearDesc()}</option>
                                                 </c:forEach>   

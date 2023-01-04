@@ -3,7 +3,6 @@
 
   <head>
     <title>Profie ${empName} </title>
-    <link rel="stylesheet" href="css/form-style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <style>
@@ -21,6 +20,9 @@
         background: #04AA6D;
         width: 0%;
       }
+      body{
+        /* background-color: rgb(255, 255, 255); */
+      }
 
       tbody,
       td,
@@ -33,6 +35,9 @@
       ::-webkit-scrollbar {
            width: 0px;
         }
+        .card{
+          box-shadow: none;
+        } 
     </style>
   </head>
 
@@ -41,22 +46,22 @@
       <div class="progress-bar" id="myBar"></div>
     </div>
     <input type="hidden" name="monthSheetId" id="monthSheetId" value="${monthSheetId}">
-    <div class="container-xl px-4 mt-4">
+    <div class="container-xl px-4 mt-4 ">
 
-      <div class="row mb-2">
+      <div class="row mb-2 bg ">
         <div class="col-md-6"> 
-          <div class="card">  
-            <div class="card-header">Profile Details</div>  
-            <div class="card-body text-center" style="min-height: 131px;">  
-              <div class="tab-pane fade show active profile-overview" id="profile-overview">
+          <div class="card " style="box-shadow: none;">  
+            <div class="card-body text-center" style="min-height: 131px; ">
+              <div class="card-title ">Profile Details</div>
+              <div class="tab-pane fade show active profile-overview Profile Details" id="profile-overview">
                 <div class="row" >  
-                  <div class="col text-start">  Employee Name</div>
+                  <div class="col text-start"> <span> Employee Name</span></div>
                   <div class="col">
                     <span class="badge badge-soft-primary mb-0 fw-bold"> ${emp.getEmployeeName()}</span> 
                   </div>
                 </div>
                 <div class="row"> 
-                  <div class="col text-start">Employee Id</div>
+                  <div class="col text-start"><span>Employee Id</span></div>
                   <div class="col">
                     <span class="badge badge-soft-primary mb-0 fw-bold">
                       ${emp.getEmpId()} 
@@ -64,7 +69,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col text-start">Designation</div>
+                  <div class="col text-start"><span>Designation</span></div>
                   <div class="col">
                     <span class="badge badge-soft-success mb-0 fw-bold">
                       ${emp.getGroupDesc()}</span>
@@ -77,8 +82,8 @@
 
         <div class="col-xl-6">
           <div class="card ">
-            <div class="card-header">Leave Details</div>
-            <div class="card-body text-center">
+            <div class="card-body ">
+              <div class="card-title ">Leave Details</div>
               <div class="row">
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                   <table class="table  project-list-table align-middle table-borderless">
@@ -109,11 +114,11 @@
         </div>
       </div>
       
-      <div class="row mb-2 d-none ">
+      <div class="row mb-2  ">
         <div class="col-lg-6">
           <div class="card ">
             <div class="card-body">
-              <h5 class="card-title">Month Chart</h5>
+              <div class="card-title">Month Chart</div>
               <div id="pieChart" style="min-height: 250px;" class="echart"></div>
             </div> 
           </div>  
@@ -121,7 +126,7 @@
         <div class="col-lg-6">
           <div class="card "> 
             <div class="card-body">
-              <h5 class="card-title">Day Details</h5>
+              <div class="card-title">Day Details</div>
               <div id="columnChart" ></div>
             </div>
           </div>
@@ -133,6 +138,7 @@
         <div class="col-lg-12">
           <div class="card "> 
             <div class="card-body">
+              <div class="card-title">Activity Details</div>
               <div class="table-responsive">
                 <table class="table  project-list-table align-middle table-borderless" id="monthTable">
                   <thead class="thead-dark">
@@ -150,9 +156,9 @@
                           <c:forEach items="${d.getDataDtos()}" var="dd">
                             <div style="display: none;"> 
                               <div class="row  m-0 p-0 d-flex ">
-                                <div class="col-3 border flex-wrap align-items-center justify-content-start" style="white-space: nowrap; padding: 5px; overflow: overlay; " >${dd.getProjectName()}</div> 
-                                <div class="col-8 border flex-wrap align-items-center justify-content-start" style="white-space: nowrap; padding: 5px; overflow: overlay; " > <p>${dd.getDescr()}</p> </div>   
-                                <div class="col-1 border flex-wrap align-items-center justify-content-start" style="white-space: nowrap; padding: 5px; overflow: overlay; " >${dd.getHour()}</div>
+                                <div class="col-3 " style=" padding: 5px; " >${dd.getProjectName()}</div> 
+                                <div class="col-8 " style=" padding: 5px; " > <p>${dd.getDescr()}</p> </div>   
+                                <div class="col-1 " style=" padding: 5px; " >${dd.getHour()}</div>
                               </div>
                             </div> 
                           </c:forEach>

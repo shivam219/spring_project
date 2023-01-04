@@ -31,7 +31,7 @@
         }
         .acti_desc {
             right: 0px;
-            height: 100vh;
+            height: 88vh;
             width: 350px;
             background-color: #e8eae6;
             box-sizing: border-box;

@@ -22,9 +22,9 @@
 <body>
 	<div class="container">
 		<h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Approved Leave Report </h1>
-		<div class="row align-middle  pt-2 mx-0  rounded-top bg-white "   >
-			<div class="col"></div>
-			<div class="col d-flex justify-content-between  align-middle gap-2">   
+		<div class="row align-items-center mt-3 bg-white p-0 m-0 rounded-top  "   >
+			<div class="col-3"></div>
+			<div class="col d-flex justify-content-between  align-middle gap-2 my-1">   
 				<span class="text-center align-middle mt-1 "> Year</span>
 				<select class="form-control form-select  " name="Year" id="leaveYearSelect" onchange="getAllLeave()">
 					<option value="">Choose</option>
@@ -40,7 +40,7 @@
 					</c:forEach>   
 				</select>
 			</div>
-			<div class="col"></div>
+			<div class="col-3"></div>
 		</div>
 		<div class="row mt-1">
 			<div class="col-lg-12">

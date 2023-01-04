@@ -5,11 +5,14 @@
     <title>Leave Details </title>
     <style>
         	.leave-reason-pop {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				width: 455px;
+                position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0; 
+				width: 40vh; 
+				height: max-content;
+				margin: auto;
 				text-align: center;
 				background-color: white;
 				padding: 10px;
@@ -17,8 +20,8 @@
 				display: none;
 				border-radius: 5px;
 				border: 2px solid rgb(219, 218, 218);
+				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 			}
-
     </style>
     
 </head>
@@ -28,9 +31,10 @@
         <div class="leave-reason-pop ">
 			<div class=" d-flex justify-content-between">
 				<label class="badge-soft-primary py-2 px-2 fw-normal mx-2 d-inline-block " style="width: 40%;"
-					id="DayCount"> Leave Reason </label>
-				<button onclick="leaveReasonPopHide('')" class="btn badge-soft-primary text-secondary me-0"><i
-						class="fa fa-duotone fa-circle-xmark"></i></button>
+					id="DayCount"> Reason </label>
+				<button onclick="leaveReasonPopHide('')" class="btn badge-soft-primary text-secondary me-0">
+                    <i class="fa fa-sharp fa-solid fa-xmark"></i>
+                </button>
 			</div>
 			<hr>
 			<p id="msgLeaveReason" style="font-family: Lato-Regular; font-size: 16px;"></p>
@@ -41,28 +45,32 @@
                 <div class="col-md-8  mb-2 mb-md-0 ">   
                     <h6 class=" badge-soft-success d-inline px-2 py-2 rounded d-none"> No of Leave  <span class="text-muted fw-normal ms-1">(${empListSize})</span></h6>
                     <div class="d-flex flex-wrap align-items-center gap-1 "> 
-                        <span class="bg-white rounded small mb-1 ps-2 p-2 pe-1 border mt-1" for="startDate">From  </span>
                         <div>  
+                            <span class="ps-1 " for="startDate">From  </span>
                             <input class="form-control "  type="date"  id="startDate" name="startDate" value="${startDate}" onchange="dateChange()">
-                            <span class="form-text small text-danger ms-2  d-none">From </span>
+                         
                         </div>
-                        <span class="bg-white rounded small mb-1 ps-2 p-2 pe-1 border mt-1" for="endDate">To </span>
                         <div >    
-                            <input class="form-control "  type="date"   id="endDate"  name="endDate" value="${endDate}"  onchange="dateChange()">
-                            <span class="form-text small text-danger ms-2   d-none">To Date</span>  
+                            <span class="ps-1" for="endDate">To </span>
+                            <input class="form-control "  type="date"   id="endDate"  name="endDate" value="${endDate}"  onchange="dateChange()"  >
+                            
                         </div>
-                        <span class="bg-white rounded small mb-1 ps-2 p-2 border mt-1" for="dateOfJoin">Leave Status</span>
                         <div > 
+                            <span class="ps-1" for="dateOfJoin">Leave Status</span>
                             <select name="status" class="form-select d-flex" onchange="document.forms[0].submit()" aria-selected="true" id="selectedOption">
                                 <option value="">All</option>
                                 <option value="Approved">Approved</option>
                                 <option value="Cancelled">Cancelled</option>
                                 <option value="Pending">Pending</option>
                                 <option value="Rejected">Rejected</option>
-                            </select>
-                        </div> 
-                        <button class="btn btn-sm btn-secondary text-white p-1"  type="reset" onclick="clearAll()"> <i class="fa fa-duotone fa-broom"></i></button>
-                    </div> 
+                            </select>    
+                        </div>
+                        <div > 
+                            <span class="ps-1" > </span>
+                            <span class="btn btn-sm  card text-danger   p-2   "  type="reset" onclick="clearAll()"><i class=" fa fa-sharp fa-solid fa-xmark "></i></span>
+                        </div>
+
+                    </div>  
             
                 </div> 
                 <div class="col-md-4"> 
@@ -103,13 +111,13 @@
                                     <td class="overflow-auto">${l.getStartDateSort()}</td> 
                                     <td class="overflow-auto">${l.getendDateSort()}</td>
                                     <td class="text-center ">
-                                        <button class="btn btn-sm badge-soft-primary w-50 py-1 " type="button"
+                                        <button class="btn btn-sm badge-soft-primary  py-1 " type="button"
                                             onclick='leaveReasonPopShow(` <c:out value="${l.getLeaveReason()}" /> `);this.blur()'>
                                             <i class="fa fa-duotone fa-comments"></i>
                                         </button>
                                         <td class="text-center">
 											<c:if test='${!(l.getAttachment().trim().length()>0)}'>
-												<button class="btn btn-sm badge-soft-primary w-75 py-1" type="button"
+												<button class="btn btn-sm badge-soft-primary  py-1" type="button"
 													disabled>
 													<i class="fa fa-sharp fa-solid fa-ban"></i>
 												</button>
@@ -117,7 +125,7 @@
 											<c:if test='${l.getAttachment().trim().length()>0}'>
 												<a href='${l.getAttachment()}' onclick="this.blur()"
 													class='btn btn-sm badge-soft-primary px-3 ' target='_blank'>
-													<i class="fa fa-duotone fa-eye"></i> view
+													<i class="fa fa-duotone fa-eye"></i> 
 												</a>
 											</c:if>
 										</td> 
@@ -127,7 +135,7 @@
                             </c:forEach> 
                             <c:if test='${list.size()==0}'>   
 									<tr class="border">
-										<td colspan="9" class="bg-white text-center fw-normal h5 p-2 "> No Data</td>
+										<td colspan="9" class="bg-white text-center   "> No Data</td>
 									</tr> 
 								</c:if>
                         </tbody>

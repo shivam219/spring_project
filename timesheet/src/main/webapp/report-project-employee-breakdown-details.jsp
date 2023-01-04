@@ -27,13 +27,13 @@
                 <tbody>
                   <c:forEach items="${empList}" var="l">
                     <tr>
-                      <td>${l.getEmpName()}</td>
+                      <td>${l.getName()}</td> 
                       <td>${l.getHour()}</td>
                     </tr>
                   </c:forEach>
                   <c:if test="${empList.size() eq 0}">
                     <tr>
-                      <td colspan="3" class="text-center"> No Data </td>
+                      <td colspan="2" class="text-center"> No Data </td>
                     </tr>
                   </c:if>
                 </tbody>

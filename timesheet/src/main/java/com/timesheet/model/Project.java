@@ -31,9 +31,8 @@ import com.timesheet.dto.ProjectWiseOvershot;
 // @formatter:off
 @NamedNativeQuery(
 		name =  "find_project_wise_overshot", 
-		query = "select project_name , sum(hour) p_tol_hour, (project_day*24) p_exp_hour from "+
-				"timesheet_project_master pm , timesheet_day_sheet ds where  pm.project_id = ds.project_id "+
-				"group by  project_name ,project_day", 
+		query = "select  project_name ,  ifnull(sum(hour),0.0) p_tol_hour, (project_day*24) p_exp_hour\n"
+				+ "from timesheet_project_master tpm  left join timesheet_day_sheet tds on tpm.project_id = tds.project_id group by  project_name ,project_day", 
 		resultSetMapping = "find_project_wise_overshot_dto")
 @SqlResultSetMapping(name = "find_project_wise_overshot_dto", 
 	classes = @ConstructorResult(

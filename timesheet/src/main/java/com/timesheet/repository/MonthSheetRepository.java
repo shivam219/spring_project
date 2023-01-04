@@ -52,13 +52,17 @@ public interface MonthSheetRepository extends CrudRepository<MonthSheet, Long> {
 			+ "", nativeQuery = true)
 	public List<Tuple> findMonthSheetEmployeeChart(long monthId);
 
-	@Query(value = "   with manager as ( "
-					+ "    select concat(first_name,' ',last_name) as manager_name , tem.emp_id emp_id from timesheet_user_master tum "
-					+ "        inner  JOIN timesheet_employee_master tem  on tum.emp_id = tem.emp_id where tum.emp_id = :empId ) "
-					+ "select  concat(first_name,' ',last_name), approved,submit_date ,m.manager_name from "
-					+ "timesheet_month_sheet tms inner join timesheet_employee_master tem on tms.emp_id= tem.emp_id inner join manager m on m.emp_id = tem.emp_id "
-					+ "where tms.emp_id = :empId and month(month) = :month and year(month) = :year and submit = 'Y' "
-					+ "", nativeQuery = true)
+	@Query(value = "SELECT\n"
+			+ "(select concat( first_name,' ', last_name) from timesheet_employee_master tem where tem.emp_id = :empId )  emp_name,\n"
+			+ "CASE\n"
+			+ "    WHEN approved='Y' and  submit= 'Y' THEN 'Approved'\n"
+			+ "    WHEN approved='N' and  submit= 'Y' THEN 'Pending'\n"
+			+ "    WHEN approved='N' and  submit= 'N' THEN 'Not Submitted'\n"
+			+ "    ELSE ''\n"
+			+ "END status , submit_date,\n"
+			+ "(select concat( first_name,' ', last_name) from timesheet_employee_master tem where tem.emp_id in (select manager_id from timesheet_user_master where emp_id = :empId ) )  man_name\n"
+			+ "FROM timesheet_month_sheet  where month_sheet_id in (select month_id from timesheet_day_sheet group by month_id)\n"
+			+ "and month(month) = :month and year(month) = :year and emp_id = :empId", nativeQuery = true)
 	public List<String[]> findAllByEmpIdAndSubmit(@Param("empId") long empId, @Param("month") String month,
 			@Param("year") String year);
 

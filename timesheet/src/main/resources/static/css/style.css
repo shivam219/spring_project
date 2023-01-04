@@ -124,7 +124,7 @@ select,label{
 .table-label{
 	background-color: #124265
 }
-.card-header{
+.card-header, .card-title{
 	font-size: 15px;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	font-weight: 500;
@@ -142,4 +142,15 @@ select,label{
 	* {
 		font-size: small;
 	}
+}
+
+.form-control:focus,.form-select:focus {
+	box-shadow: none;
+
+}
+.form-control,.form-select, label,span{
+	font-size: 13px;
+}
+label.span{
+	color: #124265;
 }

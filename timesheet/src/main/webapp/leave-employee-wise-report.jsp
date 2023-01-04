@@ -49,7 +49,7 @@
                                 onchange="getAllLeave()">
                                 <option value="">Choose</option>
                                 <c:forEach items="${employeeList}" var="l">
-                                    <option value="${l.getEmpId()}">${l.getFirstName()} ${l.getLastName()}</option>
+                                    <option value="${l.getEmpId()}">${l.getFullName()}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -66,65 +66,62 @@
                 </div>
             </div>
             <div class="row"> 
-                <div class="col-lg-12">
-                    <div class="">
-                        <div class="table-responsive" style="border-radius: 8px;">
-                            <table 
-                                class="table project-list-table table-hover table-nowrap align-middle table-borderless ">
-                                <thead>
-                                    <tr class="text-white" style="font-size:15px; background-color:#124265;">
-                                        <td scope="col" class="text-white">Leave Id</td>
-                                        <td scope="col" class="text-white">Employee Id</td>
-                                        <td scope="col" class="text-white">Employee Name</td>
-                                        <td scope="col" class="text-white">Manager Name</td>
-                                        <td scope="col" class="text-white">Leave Type</td>
-                                        <td scope="col" class="text-white">Start Date</td>
-                                        <td scope="col" class="text-white">End Date</td>
-                                        <td scope="col" class="text-white">Day Mode</td>
-                                        <td scope="col" class="text-white">Day Count</td>
+                <div class="col-lg-12"> 
+                    <div class="table-responsive" style="border-radius: 8px;">
+                        <table 
+                            class="table project-list-table table-hover table-nowrap align-middle table-borderless ">
+                            <thead>
+                                <tr class="text-white" style="font-size:15px; background-color:#124265;">
+                                    <td scope="col" class="text-white">Leave Id</td>
+                                    <td scope="col" class="text-white">Employee Id</td>
+                                    <td scope="col" class="text-white">Employee Name</td>
+                                    <td scope="col" class="text-white">Manager Name</td>
+                                    <td scope="col" class="text-white">Leave Type</td>
+                                    <td scope="col" class="text-white">Start Date</td>
+                                    <td scope="col" class="text-white">End Date</td>
+                                    <td scope="col" class="text-white">Day Mode</td>
+                                    <td scope="col" class="text-white">Day Count</td>
+                                </tr>
+                            </thead> 
+                            <tbody>
+                                <c:forEach items="${leaveList}" var="l" varStatus="i">
+                                    <tr>
+                                        <td style="font-size:14px;">${l.getLeaveId()}</td>
+                                        <td style="font-size:14px;">${l.getEmpId()}</td>
+                                        <td style="font-size:14px;">${l.getEmpName()}</td>
+                                        <td style="font-size:14px;">${l.getManagerName()}</td>
+                                        <td style="font-size:14px;">${l.getLeaveType()}</td>
+                                        <td style="font-size:14px;">${l.getStartDate()}</td>
+                                        <td style="font-size:14px;">${l.getEndDate()}</td>
+                                        <td style="font-size:14px;">${l.getDayMode()}</td>
+                                        <td style="font-size:14px;">${l.getDays()}</td>
+                                    </tr> 
+                                </c:forEach>
+                                <c:if test='${leaveList.size()== 0}'>
+                                    <tr class="border">
+                                        <td colspan="9" class="bg-white text-center  "> No Data</td>
                                     </tr>
-                                </thead> 
-                                <tbody>
-                                    <c:forEach items="${leaveList}" var="l" varStatus="i">
-                                        <tr>
-                                            <td style="font-size:14px;">${l.getLeaveId()}</td>
-                                            <td style="font-size:14px;">${l.getEmpId()}</td>
-                                            <td style="font-size:14px;">${l.getEmpName()}</td>
-                                            <td style="font-size:14px;">${l.getManagerName()}</td>
-                                            <td style="font-size:14px;">${l.getLeaveType()}</td>
-                                            <td style="font-size:14px;">${l.getStartDate()}</td>
-                                            <td style="font-size:14px;">${l.getEndDate()}</td>
-                                            <td style="font-size:14px;">${l.getDayMode()}</td>
-                                            <td style="font-size:14px;">${l.getDays()}</td>
-                                        </tr> 
-                                    </c:forEach>
-                                    <c:if test='${leaveList.size()== 0}'>
-                                        <tr class="border">
-                                            <td colspan="9" class="bg-white text-center  "> No Data</td>
-                                        </tr>
-                                    </c:if>
-                                    <c:if test='${ leaveList == null}'>
-                                        <tr class="border">
-                                            <td colspan="9" class="bg-white text-center  "> No Data</td>
-                                        </tr>
-                                    </c:if>
-                                </tbody>
-                            </table>
-                        </div>
+                                </c:if>
+                                <c:if test='${ leaveList == null}'>
+                                    <tr class="border">
+                                        <td colspan="9" class="bg-white text-center  "> No Data</td>
+                                    </tr>
+                                </c:if>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
+               </div>
             </div>
-        </div>
-        </div>
-        </div>
-        <div class="row align-items-center mt-2">
-            <div class="col">
-                <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 mb-1 ">
-                    <div>
-                        <a href="employee/leave.xlsx?month=${month}&year=${year}&empId=${empId}&status=${status}" class="btn px-3 btn-sm btn-primary" onclick="this.blur()">Export</a>
-                    </div>
-                    <div>
-                        <a href="home" data-bs-target=".add-new" onclick="this.blur()" class="btn px-3 btn-sm btn-secondary">Back</a>
+       
+            <div class="row align-items-center mt-2">
+                <div class="col">
+                    <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 mb-1 ">
+                        <div>
+                            <a href="employee/leave.xlsx?month=${month}&year=${year}&empId=${empId}&status=${status}" class="btn px-3 btn-sm btn-primary" onclick="this.blur()">Export</a>
+                        </div>
+                        <div>
+                            <a href="home" data-bs-target=".add-new" onclick="this.blur()" class="btn px-3 btn-sm btn-secondary">Back</a>
+                        </div>
                     </div>
                 </div>
             </div>

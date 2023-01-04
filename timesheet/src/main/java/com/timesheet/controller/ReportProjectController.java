@@ -1,7 +1,6 @@
 package com.timesheet.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.timesheet.dto.EmployeeProjectDto;
-import com.timesheet.model.MonthSheet;
 import com.timesheet.model.Project;
+import com.timesheet.repository.DaySheetRepository;
 import com.timesheet.repository.EmployeeRepository;
 import com.timesheet.repository.FinancialYearRepository;
-import com.timesheet.repository.MonthSheetRepository;
 import com.timesheet.repository.ProjectRepository;
 import com.timesheet.service.ProjectService;
 
@@ -35,6 +33,9 @@ public class ReportProjectController {
 
 	@Autowired
 	FinancialYearRepository fyr;
+
+	@Autowired
+	DaySheetRepository dsr;
 
 	/*
 	 * Access report project page
@@ -134,10 +135,8 @@ public class ReportProjectController {
 	public ModelAndView getProjectEmployeeBreakDown(@RequestParam("projectId") Project p,
 			@RequestParam("month") String month, @RequestParam("year") String year) {
 		ModelAndView m = new ModelAndView("report-project-employee-breakdown-details");
-//		System.out.println(year);
-//		System.out.println(month);
-		System.out.println(p);
 		m.addObject("p", p);
+		m.addObject("empList", dsr.findStockAkhirPerProductIn(p.getProjectId(),Integer.valueOf(year),Integer.valueOf(month)));
 		m.addObject("totalHour", pr.findTotalHourByProjectId(p.getProjectId()));
 		return m;
 	}

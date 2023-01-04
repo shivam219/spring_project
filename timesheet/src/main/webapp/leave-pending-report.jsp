@@ -20,31 +20,25 @@
     <body>
         <div class="container">
             <h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling ">Pending Leave Report </h1>
-            <div class="row align-items-center mt-3 bg-white p-0 m-0 rounded-top  ">
+            <div class="row align-items-center  bg-white   mt-3 pt-1 rounded-top  ">
                 <div class="col-3"> 
-                </div>
+                </div> 
                 <div class="col-md-6">
-                    <div class="d-flex flex-wrap align-items-center justify-content-center gap-2 me-2 mb-1 ">
-                        <div>
-                            <label for="year" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Year</label>
-                            <select class="form-select" aria-label="Default select example" name="year"
-                                id="leaveYearSelect" onchange="getAllLeave()">
+                    <div class="col d-flex justify-content-between  align-middle gap-2 my-1 ">
+                            <span class="text-center align-middle mt-1 "> Year</span>
+                            <select class="form-control form-select" aria-label="Default select example" name="year" id="leaveYearSelect" onchange="getAllLeave()">
                                 <option value="">Choose</option>
                                 <c:forEach items="${years}" var="y">
                                     <option value="${y.getYearDesc()}" <c:if test="${y.getYearDesc() eq year }">selected="selected" </c:if>>${y.getYearDesc()}</option>
                                 </c:forEach>    
                             </select>
-                        </div>
-                        <div>
-                            <label for="month" class="starlabel" style="color: #124265;">&nbsp;&nbsp;Month</label>
-                            <select class="form-select" aria-label="Default select example" name="month"
-                            id="leaveMonthSelect" onchange="getAllLeave()">
+                            <span class="text-center align-middle mt-1 "> Month</span>
+                            <select class="form-select" aria-label="Default select example" name="month" id="leaveMonthSelect" onchange="getAllLeave()">
                             <option value="">Choose</option>
                                 <c:forEach items="${months}" var="m">
                                     <option value="${m[0]}" <c:if test="${m[0] eq month }">selected="selected" </c:if>>${m[1]}</option>
                                 </c:forEach>    
                             </select>
-                        </div>
                     </div>
                 </div>
             </div>

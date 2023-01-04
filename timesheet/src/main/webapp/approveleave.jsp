@@ -14,7 +14,7 @@
 				bottom: 0;
 				left: 0;
 				right: 0; 
-				width: 400px;
+				width: 40vh;
 				height: max-content;
 				margin: auto;
 				text-align: center;
@@ -74,9 +74,10 @@
 		<div class="leave-reason-pop ">
 			<div class=" d-flex justify-content-between">
 				<label class="badge-soft-primary py-2 px-2 fw-normal mx-2 d-inline-block " style="width: 40%;"
-					id="DayCount"> Leave Reason </label>
-				<button onclick="leaveReasonPopHide('')" class="btn badge-soft-primary text-secondary me-0"><i
-						class="fa fa-duotone fa-circle-xmark"></i></button>
+					id="DayCount"> Reason </label>
+				<button onclick="leaveReasonPopHide('')" class="btn badge-soft-primary text-secondary me-0">
+					<i class="fa fa-sharp fa-solid fa-xmark"></i>
+				</button>
 			</div>
 			<hr>
 			<p id="msgLeaveReason" style="font-family: Lato-Regular; font-size: 16px;"></p>
@@ -85,9 +86,10 @@
 		<div class="approve-reason-pop ">
 			<div class=" d-flex justify-content-between">
 				<label class="badge-soft-primary py-2 px-2 fw-normal mx-2 d-inline-block " style="width: 40%;"
-					id="DayCount"> Approve Reason </label>
-				<button onclick="approveReasonPopHide()" class="btn badge-soft-primary text-secondary me-0"><i
-						class="fa fa-duotone fa-circle-xmark"></i></button>
+					id="DayCount">Reason </label>
+				<button onclick="approveReasonPopHide()" class="btn badge-soft-primary text-secondary me-0">
+					<i class="fa fa-sharp fa-solid fa-xmark"></i>
+				</button>
 			</div>
 			<hr>
 			<div class="form-group">
@@ -102,16 +104,15 @@
 		<div class="reject-reason-pop ">
 
 			<div class=" d-flex justify-content-between">
-				<label class="badge-soft-primary py-2 px-2 fw-normal mx-2 d-inline-block " style="width: 40%;"
-					id="DayCount"> Reject Reason </label>
-				<button onclick="rejectReasonPopHide()" class="btn badge-soft-danger text-secondary me-0"><i
-						class="fa fa-duotone fa-circle-xmark"></i></button>
+				<label class="badge-soft-primary py-2 px-2 fw-normal mx-2 d-inline-block " style="width: 40%;" id="DayCount">Reason </label>
+				<button onclick="rejectReasonPopHide()" class="btn badge-soft-primary text-secondary me-0">
+					<i class="fa fa-sharp fa-solid fa-xmark"></i>
+				</button>
 			</div>
 
 			<hr>
 			<div class="form-group">
-				<textarea class="form-control" style="font-family: Lato-Regular; font-size: 16px;" id="msgRejectReason"
-					name="leaveReason" rows="3" placeholder="Reject reason here....." required></textarea>
+				<textarea class="form-control" style="font-family: Lato-Regular; font-size: 16px;" id="msgRejectReason"	name="leaveReason" rows="3" placeholder="Reject reason here....." required></textarea>
 			</div>
 			<button class="btn btn-sm btn-primary mt-2" type="submit" id="btnLeaveReject">
 				<span id="loadingBtnR"> </span> &nbsp; Submit &nbsp;
@@ -161,7 +162,7 @@
 											<c:if test='${l.getAttachment().trim().length()>0}'>
 												<a href='${l.getAttachment()}' onclick="this.blur()"
 													class='btn btn-sm badge-soft-primary px-3 ' target='_blank"}'>
-													<i class="fa fa-duotone fa-eye"></i> view
+													<i class="fa fa-duotone fa-eye"></i> 
 												</a>
 											</c:if>
 

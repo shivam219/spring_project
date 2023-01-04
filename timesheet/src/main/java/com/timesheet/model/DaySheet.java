@@ -2,14 +2,42 @@ package com.timesheet.model;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.timesheet.dto.ProjectEmpHour;
 
+//@formatter:off
+@NamedNativeQuery(
+		name =  "find_project_employee_hour", 
+		query = "select  concat(first_name,' ',last_name) emp_name ,  sum(hour) emp_hour from timesheet_day_sheet tds\n"
+				+ "inner join timesheet_employee_master tem on tds.emp_id = tem.emp_id\n"
+				+ "where  project_id = :projectId and month(date) = :month and year(date) =  :year group by tds.emp_id , concat(first_name,' ',last_name)\n"
+				+ "union select concat( 'Total Efforts for  November month ', :year), ifnull(sum(hour),0)  from timesheet_day_sheet where  project_id = :projectId and month(date) = :month and year(date) =  :year\n"
+				+ "union select concat( 'Total Efforts till November month ', :year), ifnull(sum(hour),0)  from timesheet_day_sheet\n"
+				+ "where  project_id = :projectId and  date <= LAST_DAY( DATE_ADD( MAKEDATE(:year, :month), INTERVAL ( :month - 1 ) month))\n"
+				+ "union select concat( 'Expected Total Efforts: '),  ( project_day*24)  from timesheet_project_master where project_id =  :projectId",	
+		resultSetMapping = "find_project_employee_hour_dto",resultClass =ProjectEmpHour.class )
+@SqlResultSetMapping(name = "find_project_employee_hour_dto", 
+	classes = @ConstructorResult(
+			targetClass = ProjectEmpHour.class, 
+			columns = {
+					@ColumnResult(name = "emp_name", type = String.class),
+					@ColumnResult(name = "emp_hour", type = String.class),
+				}
+			)
+	)
+//@formatter:on
 @Entity
 @Table(name = "timesheet_day_sheet")
 public class DaySheet {
