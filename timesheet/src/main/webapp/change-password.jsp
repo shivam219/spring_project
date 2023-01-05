@@ -104,6 +104,7 @@
                         title:"Success",
                         text: "Password Updated Successfully",
                         icon: "success",
+                        button: false,
                     });
                     location.href="home";
                     

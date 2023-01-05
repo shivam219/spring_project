@@ -150,12 +150,9 @@
                         title:"Success",
                         text: "User Details Updated Successfully",
                         icon: "success",
-                    }).
-                    then(function (isOkay) {
-                        if (isOkay) {
-                            location.replace('user-master');
-                        }
+                        button: false,
                     });
+                    location.replace('user-master');
                 },error : function(data,msg,xh){
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                 }

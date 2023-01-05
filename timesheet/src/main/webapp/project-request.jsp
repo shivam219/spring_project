@@ -110,11 +110,7 @@
                         title:"Success",
                         text: "Request Send Successfully",
                         icon: "success",
-                    }).
-                    then(function (isOkay) {
-                        if (isOkay) {
-                            // location.replace('work2');
-                        }
+                        button: false,
                     });
                 },error : function(data,msg,xh){
                     $("#load").removeClass("spinner-border spinner-border-sm");					

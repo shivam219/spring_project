@@ -276,7 +276,7 @@
 							title: "Success",
 							text: "Leave Applied Successfully",
 							icon: "success",
-							showConfirmButton: false,
+							button: false,
                             timer: 700
 						});
 						location.href="home";
@@ -287,13 +287,10 @@
 							title: "Unable to apply leave",
 							text: "Unable to apply leave please change start date",
 							icon: "error",
-						}).
-						then(function (isOkay) {
-							if (isOkay) {  
-								location.href="home";
-							}
+							button: false,
 						});
-					}
+						location.href="home";
+						}
 				});
 			} 
 		}); 

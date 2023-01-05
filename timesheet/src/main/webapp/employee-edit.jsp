@@ -356,8 +356,8 @@
                                 title: "Success",
                                 text: "Employee Updated Successfully",
                                 icon: "success",
-                                showConfirmButton: false,
-                                timer: 700
+                                button: false,
+                                timer: 500
                             });
                             location.replace('employee-master');
                         }, error: function () {

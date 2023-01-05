@@ -151,6 +151,7 @@ body{
                         title:"Success",
                         text: "User Mapped Successfully",
                         icon: "success",
+                        button: false,
                     }).
                     then(function (isOkay) {
                         if (isOkay) {

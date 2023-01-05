@@ -165,6 +165,7 @@ body{
                         title:"Success",
                         text: "Holiday Edit Successfully",
                         icon: "success",
+                        button: false,
                     });
                     location.replace('holiday-master');
                 },error : function(data,msg,xh){

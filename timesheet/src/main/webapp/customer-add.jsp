@@ -125,12 +125,9 @@
                         title:"Success",
                         text: "Customer Added Successfully",
                         icon: "success",
-                    }).
-                    then(function (isOkay) {
-                        if (isOkay) {
-                            location.href="project-master";
-                        }
+                        button: false,
                     });
+                    location.href="project-master";
                 },error : function(data,msg,xh){
                     $("#btnSave").blur();
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
@@ -138,6 +135,7 @@
                         title:"Error",
                         text: "Unable to add customer",
                         icon: "error",
+                        button: false,
                     }).
                     then(function (isOkay) {
                         if (isOkay) {

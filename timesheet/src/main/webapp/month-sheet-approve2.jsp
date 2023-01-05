@@ -168,6 +168,7 @@
 							title: "Approve",
 							text: "Approve timesheet",
 							icon: "success",
+							button: false,
 						}).
 							then(function (isOkay) {
 								if (isOkay) {
@@ -200,6 +201,7 @@
 							title: "Reject",
 							text: "Timeheet Reject",
 							icon: "success",
+							button: false,
 						}).
 							then(function (isOkay) {
 								if (isOkay) {

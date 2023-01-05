@@ -110,12 +110,9 @@
                         title:"Success",
                         text: "Holiday Created Successfully",
                         icon: "success",
-                    }).
-                    then(function (isOkay) {
-                        if (isOkay) {
-                            location.replace('holiday-master');
-                        }
-                    });
+                        button: false,
+                    })
+                    location.replace('holiday-master');
                 },error : function(data,msg,xh){
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                 }

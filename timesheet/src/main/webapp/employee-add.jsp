@@ -275,8 +275,7 @@
                                 title: "Success",
                                 text: "Employee Created Successfully",
                                 icon: "success",
-                                showConfirmButton: false,
-                                timer: 500
+                                button: false,
                             });
                             location.replace('employee-master');
 
@@ -285,6 +284,7 @@
                                 title: "Error",
                                 text: "Duplicate Employee Id",
                                 icon: "error",
+                                
                             })
                             $("#loadingBtn").removeClass("spinner-border spinner-border-sm");
                         }

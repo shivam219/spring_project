@@ -72,12 +72,9 @@
                                 title: "Success",
                                 text: "Group Created Successfully",
                                 icon: "success",
-                            }).
-                                then(function (isOkay) {
-                                    if (isOkay) {
-                                        location.replace('user-group-master');
-                                    }
-                                });
+                                button: false,
+                            });
+                            location.replace('user-group-master');
                         }, error: function (data, msg, xh) {
                             $("#loadingBtn").removeClass("spinner-border spinner-border-sm");
                         }

@@ -133,12 +133,10 @@
 							title:"Success",
 							text: "Password is Updated Successfully",
 							icon: "success",
-						}).
-						then(function (isOkay) {
-							if (isOkay) {
-								location.replace('login');
-							}
+							button: false,
 						});
+						location.replace('login');
+						
 					},error : function(data,msg,xh){
 					}
 				});

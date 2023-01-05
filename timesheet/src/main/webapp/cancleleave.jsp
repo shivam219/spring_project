@@ -128,6 +128,7 @@
 							title: "Success",
 							text: "Cancel Leave Request successfully",
 							icon: "success",
+							button: false,
 						})
 						location.reload();
 					},
@@ -137,6 +138,7 @@
 							title: "Error",
 							text: " Unable to cancel",
 							icon: "error",
+							button: false,
 						})
 						location.reload();
 					}

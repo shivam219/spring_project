@@ -126,12 +126,10 @@
                         title:"Success",
                         text: "Customer Edited Successfully",
                         icon: "success",
-                    }).
-                    then(function (isOkay) {
-                        if (isOkay) {
-                            location.href='customer-master';
-                          }
+                        button: false,
                     });
+                    location.href='customer-master';
+                    
                 },error : function(data,msg,xh){
                     $("#btnSave").blur();
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
@@ -139,13 +137,8 @@
                         title:"Error",
                         text: "Unable to edit customer",
                         icon: "error",
-                    }).
-                    then(function (isOkay) {
-                        if (isOkay) {
-                            location.href='project-master'
-                        }
                     });
-                     					
+                    location.href='project-master'		
                 }
             }); 
         }else{

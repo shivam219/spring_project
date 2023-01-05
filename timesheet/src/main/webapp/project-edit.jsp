@@ -149,12 +149,9 @@
                         title:"Success",
                         text: "Project Edit Successfully",
                         icon: "success",
-                    }).
-                    then(function (isOkay) {
-                        if (isOkay) {
-                            location.replace('/project-master');
-                        }
+                        button: false,
                     });
+                    location.replace('/project-master');  
                 },error : function(data,msg,xh){
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                 }

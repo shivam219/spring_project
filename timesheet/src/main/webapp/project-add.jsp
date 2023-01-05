@@ -148,12 +148,9 @@
                         title:"Success",
                         text: "Project Added Successfully",
                         icon: "success",
+                        button: false,
                     }).
-                    then(function (isOkay) {
-                        if (isOkay) {
-                            location.replace('project-master');
-                        }
-                    });
+                    location.replace('project-master');
                 },error : function(data,msg,xh){
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                 }
