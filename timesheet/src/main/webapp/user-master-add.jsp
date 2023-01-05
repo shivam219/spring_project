@@ -152,12 +152,9 @@
                         title:"Success",
                         text: "User Created Successfully",
                         icon: "success",
+                        button: false,
                     }).
-                    then(function (isOkay) {
-                        if (isOkay) {
-                            location.replace('user-master');
-                        }
-                    });
+                    location.replace('user-master');
                 },error : function(data,msg,xh){
                     $("#loadingBtn").removeClass("spinner-border spinner-border-sm");					
                 }

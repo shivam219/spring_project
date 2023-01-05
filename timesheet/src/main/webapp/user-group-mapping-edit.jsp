@@ -80,8 +80,7 @@
                         title:"Success",
                         text: "Employee Group Updated Successfully",
                         icon: "success",
-                        showConfirmButton: false,
-                        timer: 1000
+                        button: false,
                     });
                     location.replace('user-group-mapping-master');
                 },error : function(data,msg,xh){

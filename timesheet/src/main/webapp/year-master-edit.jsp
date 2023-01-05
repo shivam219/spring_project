@@ -67,6 +67,7 @@
                         title:"Success",
                         text: "Year Updated Successfully",
                         icon: "success",
+                        button: false,
                     });
                     location.replace('year-master');
                 },error : function(data,msg,xh){

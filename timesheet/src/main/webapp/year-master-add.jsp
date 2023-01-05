@@ -58,6 +58,7 @@
                         title:"Success",
                         text: "Year Created Successfully",
                         icon: "success",
+                        button: false,
                     });
                     location.replace('year-master');
                 },error : function(data,msg,xh){
