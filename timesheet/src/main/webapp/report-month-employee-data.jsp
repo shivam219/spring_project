@@ -103,7 +103,7 @@
         </div>
       </div>
       
-      <div class="row mb-2  ">
+      <div class="row mb-2  d-none ">
         <div class="col">
           <div class="card "> 
             <div class="card-body">

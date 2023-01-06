@@ -54,15 +54,15 @@
 												<div class="border p-1 rounded w-75 ">
 													<div class="form-check d-inline-flex mt-1">
 														<input class="form-check-input" type="radio"  name="dayMode" id="dayMode1" value="Half Day" >
-														<label class="form-check-label" for="dayMode"> &nbsp;Half Day </label>
+														<label class="form-check-label align-self-center  " for="dayMode1"> &nbsp;Half Day </label>
 													</div>
 													<div class="form-check d-inline-flex ms-md-2">
 														<input class="form-check-input" type="radio" name="dayMode" id="dayMode2" value="Full Day" checked="" >
-														<label class="form-check-label" for="dayMode"> &nbsp;Full Day </label>
+														<label class="form-check-label align-self-center" for="dayMode2"> &nbsp;Full Day </label>
 													</div>
 										 		</div>
 											</div>
-										</div>
+										</div> 
 										<div class="row gx-3 mb-3">
 											<div class="col-md-6">
 												<label class="mb-1" for="startDate">Start Date</label>

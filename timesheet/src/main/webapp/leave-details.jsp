@@ -10,7 +10,9 @@
 				bottom: 0;
 				left: 0;
 				right: 0; 
-				width: 40vh; 
+				width: 350px;
+				height:200px;
+                word-break: break-all;
 				height: max-content;
 				margin: auto;
 				text-align: center;
@@ -189,7 +191,14 @@
                 document.forms[0].submit(); 
             }
             function dateChange() {
+
                 if($("#endDate").val() && $("#startDate").val()){
+                    document.forms[0].submit();
+                } 
+                else if($("#startDate").val()){
+                    document.forms[0].submit();
+                }  
+                else if($("#endDate").val()){
                     document.forms[0].submit();
                 }  
             }  

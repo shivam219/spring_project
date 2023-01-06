@@ -97,8 +97,8 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 	@Query(value = "select * from timesheet_leave_master where \n"
 			+ "emp_id=:empId and ((start_date >= :startDate and end_date <= :endDate) or (:startDate between start_date and end_date) ) \n"
 			+ "and ((status='Pending' or status= 'Approved') and (second_status= 'Approved' or second_status= 'Pending') ) ", nativeQuery = true)
-	public Leave existsByEmpIdAndStartDate(long empId,String startDate,String endDate);
-	
+	public Leave existsByEmpIdAndStartDate(long empId, String startDate, String endDate);
+
 	public boolean existsByEmpIdAndStartDate(Long empId, Date startDate);
 
 	public Leave findByEmpIdAndLeaveId(Long empId, String leaveId);
@@ -121,15 +121,22 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 			+ "from timesheet_leave_master where emp_id =:empId group by monthname(start_date) , month(start_date) order by month(start_date) desc", nativeQuery = true)
 	public List<Tuple> findLeaveStatusByEmpId(@Param("empId") long empId);
 
-	public Page<Leave> findAllByEmpIdOrderByStartDateDesc(Pageable pageable,long empId);
+	public Page<Leave> findAllByEmpIdOrderByStartDateDesc(Pageable pageable, long empId);
 
-	public Page<Leave> findBySecondStatusAndEmpIdOrderByStartDateDesc(String secondStatus, Pageable pageable,long empId);
-	
-	public Page<Leave> findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndEmpIdOrderByStartDateDesc(Date startDate, Date endDate,
-			Pageable pageable,long empId);
+	public Page<Leave> findBySecondStatusAndEmpIdOrderByStartDateDesc(String secondStatus, Pageable pageable,
+			long empId);
 
-	public Page<Leave> findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndSecondStatusAndEmpIdOrderByStartDateDesc(Date startDate,
-			Date endDate, String secondStatus, Pageable pageable,long empId);
+	public Page<Leave> findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndEmpIdOrderByStartDateDesc(
+			Date startDate, Date endDate, Pageable pageable, long empId);
+
+	public Page<Leave> findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndSecondStatusAndEmpIdOrderByStartDateDesc(
+			Date startDate, Date endDate, String secondStatus, Pageable pageable, long empId);
 //	Page<Leave> findByTitleContaining(String title, Pageable pageable);
+
+	public Page<Leave> findAllByStartDateGreaterThanEqualAndEmpIdOrderByStartDateDesc(Date startDate, Pageable pageable,
+			long empId);
+
+	public Page<Leave> findAllByStartDateGreaterThanEqualAndEmpIdAndSecondStatusOrderByStartDateDesc(Date startDate,
+			String secondStatus, Pageable pageable, long empId);
 
 }

@@ -276,15 +276,25 @@ public class LeaveController {
 			Date startDate2 = sdf.parse(startDate);
 			Date endDate2 = sdf.parse(endDate);
 			if (status.trim().isBlank()) {
-				System.out.println("All");
 				lp = (Page<Leave>) lr
 						.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndEmpIdOrderByStartDateDesc(
 								startDate2, endDate2, pageable, empId);
 			} else {
-				System.out.println("choosen");
 				lp = (Page<Leave>) lr
 						.findAllByStartDateGreaterThanEqualAndEndDateLessThanEqualAndSecondStatusAndEmpIdOrderByStartDateDesc(
 								startDate2, endDate2, status, pageable, empId);
+			}
+//					    20022	!F  T			 	T	''
+		} else if (!startDate.equals("") && endDate.equals("")) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date startDate2 = sdf.parse(startDate);
+			if (status.trim().isBlank()) {
+				lp = (Page<Leave>) lr.findAllByStartDateGreaterThanEqualAndEmpIdOrderByStartDateDesc(startDate2,
+						pageable, empId);
+			} else {
+				lp = (Page<Leave>) lr
+						.findAllByStartDateGreaterThanEqualAndEmpIdAndSecondStatusOrderByStartDateDesc(
+								startDate2, status, pageable, empId);
 			}
 		} else if (status == null || status.trim().isEmpty()) {
 			lp = (Page<Leave>) lr.findAllByEmpIdOrderByStartDateDesc(pageable, empId);

@@ -45,6 +45,7 @@ public class LoginController {
 	 */
 	@PostMapping("/loginprocess")
 	public ResponseEntity<Object> loginPost(HttpServletRequest request, Model m, @RequestBody User emp) {
+		System.out.println("shivam");
 		Optional<User> user = ur.findByEmpIdAndPassword(emp.getEmpId(), emp.getPassword());
 		if (user.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
@@ -73,10 +74,10 @@ public class LoginController {
 
 	@GetMapping("login")
 	public String login(HttpServletRequest request) {
+		System.out.println("login by simple");
 		request.getSession().invalidate();
 		request.getSession().removeValue("error");
 		request.getSession().removeAttribute("error");
-
 		return "login";
 	}
 

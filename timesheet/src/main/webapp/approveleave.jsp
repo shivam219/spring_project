@@ -14,14 +14,15 @@
 				bottom: 0;
 				left: 0;
 				right: 0; 
-				width: 40vh;
-				height: max-content;
+				width: 400px;
+				height:200px;
 				margin: auto;
 				text-align: center;
 				background-color: white;
 				padding: 10px;
 				z-index: 100;
 				display: none;
+				word-break: break-all;
 				border-radius: 5px;
 				border: 2px solid rgb(219, 218, 218);
 				font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
