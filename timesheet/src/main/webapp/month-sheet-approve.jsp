@@ -32,23 +32,14 @@
 		<div class="container">
 			<h1 class=" h4 m-0 my-3 py-2 fw-normal  dashboard-headling "> Approve Timesheet </h1>
 			<div class="">
-				<div class="row m-0 p-0 bg-white py-2 my-2 justify-content-center">
-					<div class="col-md text-center">
-						<span class="align-middle text-secondary  fw-bold ">
-							Employee Name : ${empMonthSheet.getEmployeeName()}
-						</span>
+				<div class="row py-1 ">
+					<div class="col">   
+						<div class="card d-flex flex-row gap-3 justify-content-center py-1">
+						 <div> <span class="card-title "> Employee Name : ${empMonthSheet.getEmployeeName()}</span></div>
+						 <div> <span class="card-title ">Month : ${empMonthSheet.getMonth()}</span> </div>
+						 <div> <span class="card-title ">	Year : ${empMonthSheet.getYear()}</span></div>
 					</div>
-					<div class="col-md text-center text-secondary  fw-bold">
-						<span class="align-middle">
-							Month : ${empMonthSheet.getMonth()}
-						</span>
-					</div>
-					<div class="col-md text-center text-secondary  fw-bold">
-						<span class="align-middle">
-							Year : ${empMonthSheet.getYear()}
-						</span>
-					</div>
-				</div>
+				</div>  
 			</div>
 			<div class="row">
 				<div class="col-md-6 mb-3 mb-md-0 ">
@@ -85,9 +76,9 @@
 											<c:forEach items="${d.getDataDtos()}" var="dd">
 												<div style="display: none;"> 
 													<div class="row  m-0 p-0 ">
-														<div class="col-3 border my-border ">${dd.getProjectName()}</div> 
-														<div class="col-8  border my-border "> <p>${dd.getDescr()}</p> </div>   
-														<div class="col-1  border my-border ">${dd.getHour()}</div>
+														<div class="col-3 ">${dd.getProjectName()}</div> 
+														<div class="col-8 "> <p>${dd.getDescr()}</p> </div>   
+														<div class="col-1 ">${dd.getHour()}</div>
 													</div>
 												</div> 
 											</c:forEach>

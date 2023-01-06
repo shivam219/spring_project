@@ -94,6 +94,11 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 	@Query(value = "select * from timesheet_leave_master where leave_id = :leaveId", nativeQuery = true)
 	public Leave findByLeaveId(@Param("leaveId") String leaveId);
 
+	@Query(value = "select * from timesheet_leave_master where \n"
+			+ "emp_id=:empId and ((start_date >= :startDate and end_date <= :endDate) or (:startDate between start_date and end_date) ) \n"
+			+ "and ((status='Pending' or status= 'Approved') and (second_status= 'Approved' or second_status= 'Pending') ) ", nativeQuery = true)
+	public Leave existsByEmpIdAndStartDate(long empId,String startDate,String endDate);
+	
 	public boolean existsByEmpIdAndStartDate(Long empId, Date startDate);
 
 	public Leave findByEmpIdAndLeaveId(Long empId, String leaveId);

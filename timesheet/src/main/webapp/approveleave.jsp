@@ -154,7 +154,7 @@
 										</td>
 										<td class="text-center">
 											<c:if test='${!(l.getAttachment().trim().length()>0)}'>
-												<button class="btn btn-sm badge-soft-primary w-75 py-1" type="button"
+												<button class="btn btn-sm badge-soft-primary  py-1" type="button"
 													disabled>
 													<i class="fa fa-sharp fa-solid fa-ban"></i>
 												</button>

@@ -1,6 +1,7 @@
 package com.timesheet.service;
 
 import java.util.Properties;
+
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -10,6 +11,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.timesheet.model.Leave;
@@ -17,12 +20,15 @@ import com.timesheet.model.Leave;
 @Service
 public class EmailService {
 
+	@Autowired
+	private Environment env;
+
 	public void leaveSubmitEmailToEmployee(Leave l, String emailId) {
 		try {
 			String msg = "Hello " + l.getEmpName() + "<br>Your Leave Request No : " + l.getLeaveId()
 					+ " submitted successfully.<br><br>" + "<b>Leave Details</b> <br> " + "Leave Type: "
-					+ l.getLeaveType() + "<br>From Date: " + l.getStartDate() + "<br> To Date: " + l.getEndDate()
-					+ "<br>Reason for Leave: " + l.getLeaveReason()
+					+ l.getLeaveType() + "<br>From Date: " + l.getStartDateSort() + "<br> To Date: "
+					+ l.getendDateSort() + "<br>Reason for Leave: " + l.getLeaveReason()
 					+ "<br><br><b>Note</b>: In case of Sick Leaves and or Casual Leaves are over, these leaves will be deducted from Privilege Leaves."
 					+ "<br>This is an auto-generated Email. Do not reply to this email.<br> In case of any doubts/queries about leave calculations, you can send an email to servicedesk@ess.net.in"
 					+ "<br><br>Regards,<br>Human Resources";
@@ -38,8 +44,8 @@ public class EmailService {
 					+ l.getLeaveId()
 					+ "<br>Please login to Leave Portal on <a href='https://esstools.net.in' target='_blank'> www.esstools.net.in</a> to Approve/Reject this Leave Request.<br><br>"
 					+ "<b>Leave Details</b><br> " + "Requester Name: " + l.getEmpName() + " <br> Leave Type: "
-					+ l.getLeaveType() + "<br>From Date: " + l.getStartDate() + "<br> To Date: " + l.getEndDate()
-					+ "<br>Reason for Leave: " + l.getLeaveReason()
+					+ l.getLeaveType() + "<br>From Date: " + l.getStartDateSort() + "<br> To Date: "
+					+ l.getendDateSort() + "<br>Reason for Leave: " + l.getLeaveReason()
 					+ "<br><br>This is an auto-generated Email. Do not reply to this email."
 					+ "<br><br>Regards,<br>Human Resources";
 			Email(emailId, "Approval for Leave Application No: " + l.getLeaveId(), msg);
@@ -50,11 +56,11 @@ public class EmailService {
 
 	public void LeaveApproveToServicedesk(Leave l) {
 		try {
-			String to = "shivam.choudhary@ess.net.in"; // change service desk email
+			String to = env.getProperty("serviceDeskMailId");
 			String msg = "Hello ServiceDesk" + "<br> Leave Request No : " + l.getLeaveId() + " has been approved.<br>"
 					+ "<br><b>Leave Details</b><br> " + "Requester Name: " + l.getEmpName() + "<br>Leave Type: "
-					+ l.getLeaveType() + "<br>From Date: " + l.getStartDate() + "<br> To Date: " + l.getEndDate()
-					+ "<br>Reason for Leave: " + l.getLeaveReason()
+					+ l.getLeaveType() + "<br>From Date: " + l.getStartDateSort() + "<br> To Date: "
+					+ l.getendDateSort() + "<br>Reason for Leave: " + l.getLeaveReason()
 					+ "<br><br><b>Request you to update necessary details in ERP Portal.</b>"
 					+ "<br><br>This is an auto-generated Email. Do not reply to this email."
 					+ "<br><br>Regards,<br>Human Resources";
@@ -69,9 +75,9 @@ public class EmailService {
 
 			String msg = "Hello  " + l.getEmpName() + "<br>Your Leave Request No : " + l.getLeaveId()
 					+ " has been approved.<br><br>" + "<b>Leave Details</b> <br>Requester Name: " + l.getEmpName()
-					+ "<br>Leave Type: " + l.getLeaveType() + "<br>From Date: " + l.getStartDate() + "<br> To Date: "
-					+ l.getEndDate() + "<br>Reason for Leave: " + l.getLeaveReason() + "<br>Additional comments: "
-					+ (l.getApproveReason() == null ? "" : l.getApproveReason())
+					+ "<br>Leave Type: " + l.getLeaveType() + "<br>From Date: " + l.getStartDateSort()
+					+ "<br> To Date: " + l.getendDateSort() + "<br>Reason for Leave: " + l.getLeaveReason()
+					+ "<br>Additional comments: " + (l.getApproveReason() == null ? "" : l.getApproveReason())
 					+ "<br><br>This is an auto-generated Email. Do not reply to this email."
 					+ "<br><br>Regards,<br>Human Resources";
 			Email(emailId, "Leave Application No: " + l.getLeaveId() + " Approved", msg);
@@ -86,9 +92,9 @@ public class EmailService {
 					+ u.getLeaveId()
 					+ "<br>Please login to Leave Portal on <a href='https://esstools.net.in' target='_blank'> www.esstools.net.in</a> to Approve/Reject this Leave Request.<br><br>"
 					+ "<b>Leave Details</b><br> " + "Requester Name: " + u.getEmpName() + "<br> Day Status: "
-					+ u.getDayMode() + " <br> Leave Type: " + u.getLeaveType() + "<br>From Date: " + u.getStartDate()
-					+ "<br> To Date: " + u.getEndDate() + "<br>Reason for Leave: " + u.getLeaveReason()
-					+ "<br> Initially Approved By: " + u.getManagerName()
+					+ u.getDayMode() + " <br> Leave Type: " + u.getLeaveType() + "<br>From Date: "
+					+ u.getStartDateSort() + "<br> To Date: " + u.getendDateSort() + "<br>Reason for Leave: "
+					+ u.getLeaveReason() + "<br> Initially Approved By: " + u.getManagerName()
 					+ "<br><br>This is an auto-generated Email. Do not reply to this email."
 					+ "<br><br>Regards,<br>Human Resources";
 			Email(emailId, "Leave Application No: " + u.getLeaveId() + " Approved", msg);
@@ -102,7 +108,7 @@ public class EmailService {
 
 			String msg = "Hello " + l.getEmpName() + "<br>Your Leave Request No : " + l.getLeaveId()
 					+ " has been rejected.<br>" + "<br><b>Leave Details </b><br> " + " Leave Type: " + l.getLeaveType()
-					+ "<br>From Date: " + l.getStartDate() + "<br> To Date: " + l.getEndDate()
+					+ "<br>From Date: " + l.getStartDateSort() + "<br> To Date: " + l.getendDateSort()
 					+ "<br>Reason for Leave: " + l.getLeaveReason() + "<br>Reason for Rejection: " + l.getRejectReason()
 					+ "<br><br>This is an auto-generated Email. Do not reply to this email."
 					+ "<br><br>Regards,<br>Human Resources";
@@ -116,8 +122,8 @@ public class EmailService {
 		try {
 			String msg = "Hello  " + l.getEmpName() + "<br>Your Leave Request No : " + l.getLeaveId()
 					+ " has been cancelled.<br><br>" + "<b>Leave Details</b> <br> " + "<br>Leave Type: "
-					+ l.getLeaveType() + "<br>From Date: " + l.getStartDate() + "<br> To Date: " + l.getEndDate()
-					+ "<br><br>This is an auto-generated Email. Do not reply to this email."
+					+ l.getLeaveType() + "<br>From Date: " + l.getStartDateSort() + "<br> To Date: "
+					+ l.getendDateSort() + "<br><br>This is an auto-generated Email. Do not reply to this email."
 					+ "<br><br\"rohit.sawant@ess.net.in\">Regards,<br>Human Resources";
 			Email(emailId, "Leave Application No: " + l.getLeaveId() + " Cancelled", msg);
 		} catch (Exception e) {
@@ -129,7 +135,7 @@ public class EmailService {
 		try {
 			String msg = "Hello " + managerName + "<br>Leave Request No : " + l.getLeaveId() + " has been cancelled by "
 					+ l.getEmpName() + "<br><br><b>Leave Details</b> <br> Leave Type: " + l.getLeaveType()
-					+ "<br>From Date: " + l.getStartDate() + "<br> To Date: " + l.getEndDate()
+					+ "<br>From Date: " + l.getStartDateSort() + "<br> To Date: " + l.getendDateSort()
 					+ "<br><br>This is an auto-generated Email. Do not reply to this email."
 					+ "<br><br>Regards,<br>Human Resources";
 			Email(emailId, "Leave Application No: " + l.getLeaveId() + " Cancelled", msg);
@@ -138,14 +144,15 @@ public class EmailService {
 		}
 	}
 
-	public void leaveCancelRequestToServiceDesk(Leave l, String emailId) {
+	public void leaveCancelRequestToServiceDesk(Leave l) {
 		try {
+			String to = env.getProperty("serviceDeskMailId");
 			String msg = "Hello Service Desk " + "<br>Leave Request No : " + l.getLeaveId() + " has been cancelled by "
 					+ l.getEmpName() + "<br><br><b>Leave Details</b> <br> Leave Type: " + l.getLeaveType()
-					+ "<br>From Date: " + l.getStartDate() + "<br> To Date: " + l.getEndDate()
+					+ "<br>From Date: " + l.getStartDateSort() + "<br> To Date: " + l.getendDateSort()
 					+ "<br><br>This is an auto-generated Email. Do not reply to this email."
 					+ "<br><br>Regards,<br>Human Resources";
-			Email(emailId, "Leave Application No: " + l.getLeaveId() + " Cancelled", msg);
+			Email(to, "Leave Application No: " + l.getLeaveId() + " Cancelled", msg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -156,8 +163,8 @@ public class EmailService {
 			String msg = "";
 			msg = "Hello " + rejectBy + "<br> Leave request No : " + l.getLeaveId() + " has been rejected."
 					+ "<br><br><b>Leave Details </b><br> " + "Requester Name: " + l.getEmpName() + "<br> Day Status: "
-					+ l.getDayMode() + "<br> Leave Type: " + l.getLeaveType() + "<br>From Date: " + l.getStartDate()
-					+ "<br> To Date: " + l.getEndDate() + "<br>Reason for Leave: " + l.getLeaveReason()
+					+ l.getDayMode() + "<br> Leave Type: " + l.getLeaveType() + "<br>From Date: " + l.getStartDateSort()
+					+ "<br> To Date: " + l.getendDateSort() + "<br>Reason for Leave: " + l.getLeaveReason()
 					+ "<br>Rejected by: " + rejectBy + "<br>Reason for Rejection: " + l.getRejectReason()
 					+ "<br><br>This is an auto-generated Email. Do not reply to this email."
 					+ "<br><br>Regards,<br>Human Resources";
@@ -173,8 +180,8 @@ public class EmailService {
 			String msg = "";
 			msg = "Hello " + rejectBy + "<br> Leave request No : " + l.getLeaveId() + " has been rejected."
 					+ "<br><br><b>Leave Details </b><br> " + "Requester Name: " + l.getEmpName() + "<br> Day Status: "
-					+ l.getDayMode() + "<br> Leave Type: " + l.getLeaveType() + "<br>From Date: " + l.getStartDate()
-					+ "<br> To Date: " + l.getEndDate() + "<br>Reason for Leave: " + l.getLeaveReason()
+					+ l.getDayMode() + "<br> Leave Type: " + l.getLeaveType() + "<br>From Date: " + l.getStartDateSort()
+					+ "<br> To Date: " + l.getendDateSort() + "<br>Reason for Leave: " + l.getLeaveReason()
 					+ "<br>Rejected by: " + rejectBy + "<br>Reason for Rejection: " + l.getRejectReason()
 					+ "<br><br>This is an auto-generated Email. Do not reply to this email."
 					+ "<br><br>Regards,<br>Human Resources";
@@ -190,8 +197,8 @@ public class EmailService {
 			String msg = "";
 			msg = "Hello " + managerName + "<br> Leave request No : " + l.getLeaveId() + " has been rejected."
 					+ "<br><br><b>Leave Details </b><br> " + "Requester Name: " + l.getEmpName() + "<br> Day Status: "
-					+ l.getDayMode() + "<br> Leave Type: " + l.getLeaveType() + "<br>From Date: " + l.getStartDate()
-					+ "<br> To Date: " + l.getEndDate() + "<br>Reason for Leave: " + l.getLeaveReason()
+					+ l.getDayMode() + "<br> Leave Type: " + l.getLeaveType() + "<br>From Date: " + l.getStartDateSort()
+					+ "<br> To Date: " + l.getendDateSort() + "<br>Reason for Leave: " + l.getLeaveReason()
 					+ "<br>Rejected by: " + rejectedBy + "<br>Reason for Rejection: " + l.getRejectReason()
 					+ "<br><br>This is an auto-generated Email. Do not reply to this email."
 					+ "<br><br>Regards,<br>Human Resources";

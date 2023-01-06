@@ -119,7 +119,7 @@
 											<c:if test='${!(l.getAttachment().trim().length()>0)}'>
 												<button class="btn btn-sm badge-soft-primary  py-1" type="button"
 													disabled>
-													<i class="fa fa-sharp fa-solid fa-ban"></i>
+													<i class="fa fa-sharp fa-solid fa-ban"></i> 
 												</button>
 											</c:if>
 											<c:if test='${l.getAttachment().trim().length()>0}'>

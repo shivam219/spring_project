@@ -3,6 +3,8 @@ package com.timesheet.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,20 +39,20 @@ public class ApproveService {
 		return approveRepository.findByManagerIdAndStatus(leaveManagerId, secondStatus);
 	}
 
-	public int updateRejectStatus(Leave l, long empId,String lastManager) {
-//		String empName = (String) request.getSession().getAttribute("empName");
+	public int updateRejectStatus(Leave l, long empId, String lastManager) {
 		if (approveRepository.updateRejectStatus(l.getLeaveId(), l.getRejectReason()) == 1) {
-//			Long lc = Long.valueOf(leave.getLeaveId().substring(1));
-//			Optional<Leave> l2 = approveRepository.findById(lc);
-//			Leave leaveNew = l2.get();
-//			leaveNew.setRejectReason(leave.getRejectReason());
-
 			es.leaveRejectEmailToEmployee(l, er.findEmpEmailByEmpId(l.getEmpId()));
 			if (l.getManagerId() == empId) {
-				es.leaveRejectEmailToManager(l, er.findEmpEmailByEmpId(l.getManagerId()), l.getManagerName());
+				ExecutorService executor = Executors.newWorkStealingPool();
+				executor.execute(() -> {
+					es.leaveRejectEmailToManager(l, er.findEmpEmailByEmpId(l.getManagerId()), l.getManagerName());
+				});
 			} else if (l.getLeaveManagerId() == empId) {
-				es.leaveRejectEmailToManager(l, er.findEmpEmailByEmpId(l.getManagerId()), l.getManagerName());
-				es.leaveRejectEmailToLastManager(l, er.findEmpEmailByEmpId(l.getLeaveManagerId()), lastManager);
+				ExecutorService executor = Executors.newWorkStealingPool();
+				executor.execute(() -> {
+					es.leaveRejectEmailToManager(l, er.findEmpEmailByEmpId(l.getManagerId()), l.getManagerName());
+					es.leaveRejectEmailToLastManager(l, er.findEmpEmailByEmpId(l.getLeaveManagerId()), lastManager);
+				});
 			}
 			return 1;
 		}

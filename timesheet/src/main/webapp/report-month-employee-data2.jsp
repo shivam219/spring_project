@@ -20,10 +20,10 @@
         background: #04AA6D;
         width: 0%;
       }
-      
-      html,body{
-        background-color: #f7f7f7;
+      body{
+        /* background-color: rgb(255, 255, 255); */
       }
+
       tbody,
       td,
       td a tfoot,
@@ -38,9 +38,7 @@
         .card{
           box-shadow: none;
         } 
-        /* span{
-         font-size: 14px;  
-        } */
+
     </style>
   </head>
 
@@ -50,23 +48,37 @@
     </div>
     <input type="hidden" name="monthSheetId" id="monthSheetId" value="${monthSheetId}">
     <div class="container-xl px-4 mt-4 ">
-      <div class="row mb-2 bg ">
-        <div class="col">   
-          <div class="card d-flex flex-row gap-3 justify-content-center py-1">
-           <div> <span class="card-title "> Employee Name : ${emp.getEmployeeName()}</span></div>
-           <div> <span class="card-title ">Employee Id : ${emp.getEmpId()}</span> </div>
-           <div> <span class="card-title ">Designation : ${emp.getGroupDesc()}</span></div>
-          </div>
-        </div>
-      </div> 
+
       <div class="row mb-2 bg ">
         <div class="col-md-6"> 
-          <div class="card ">
-            <div class="card-body">
-              <div class="card-title">Month Chart</div>
-              <div id="pieChart" style="height: 240px;" class="echart"></div>
-            </div> 
-          </div>  
+          <div class="card " style="box-shadow: none;">  
+            <div class="card-body text-center" style="min-height: 131px; ">
+              <div class="card-title ">Profile Details</div>
+              <div class="tab-pane fade show active profile-overview Profile Details" id="profile-overview">
+                <div class="row" >  
+                  <div class="col text-start"> <span> Employee Name</span></div>
+                  <div class="col">
+                    <span class="badge badge-soft-primary mb-0 fw-bold"> ${emp.getEmployeeName()}</span> 
+                  </div>
+                </div>
+                <div class="row"> 
+                  <div class="col text-start"><span>Employee Id</span></div>
+                  <div class="col">
+                    <span class="badge badge-soft-primary mb-0 fw-bold">
+                      ${emp.getEmpId()} 
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col text-start"><span>Designation</span></div>
+                  <div class="col">
+                    <span class="badge badge-soft-success mb-0 fw-bold">
+                      ${emp.getGroupDesc()}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="col-xl-6">
@@ -104,7 +116,15 @@
       </div>
       
       <div class="row mb-2  ">
-        <div class="col">
+        <div class="col-lg-6">
+          <div class="card ">
+            <div class="card-body">
+              <div class="card-title">Month Chart</div>
+              <div id="pieChart" style="min-height: 250px;" class="echart"></div>
+            </div> 
+          </div>  
+        </div>
+        <div class="col-lg-6">
           <div class="card "> 
             <div class="card-body">
               <div class="card-title">Day Details</div>

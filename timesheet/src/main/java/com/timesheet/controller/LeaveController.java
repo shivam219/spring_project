@@ -6,12 +6,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -71,6 +75,12 @@ public class LeaveController {
 	@Autowired
 	private FileUploaderHelper fileUploaderHelper;
 
+	@Autowired
+	private TaskExecutor taskExecutor;
+
+	@Autowired
+	private Environment env;
+
 	@GetMapping(value = "apply-leave")
 	public ModelAndView applyLeave(HttpServletRequest request) {
 		ModelAndView m = new ModelAndView("apply-leave");
@@ -94,9 +104,9 @@ public class LeaveController {
 //	@RequestMapping(value = "/apply-leave-process", headers = ("content-type=multipart/*"), method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@PostMapping(value = "/apply-leave-process")
 	public ResponseEntity<Object> applyLeaveProcess(HttpServletRequest request, @ModelAttribute Leave leave,
-			@RequestParam MultipartFile file) {
+			@RequestParam String startDate, @RequestParam String endDate, @RequestParam MultipartFile file) {
 		Long empId = ((Long) request.getSession().getAttribute("empId"));
-		if (lr.existsByEmpIdAndStartDate(empId, leave.getStartDate())) {
+		if (lr.existsByEmpIdAndStartDate(empId, startDate, endDate) != null) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Duplicate Leave");
 		}
 		if (!file.isEmpty()) {
@@ -136,9 +146,15 @@ public class LeaveController {
 				}
 				leaveId.append(saveLeave.getLeaveCode());
 				saveLeave.setLeaveId(leaveId.toString());
-				ls.sendEmailOnSubmit(saveLeave);
+				ExecutorService executor = Executors.newWorkStealingPool();
+				executor.execute(() -> {
+					ls.sendEmailOnSubmit(saveLeave);
+				});
 			} else {
-				ls.sendEmailOnSubmit(saveLeave);
+				ExecutorService executor = Executors.newWorkStealingPool();
+				executor.execute(() -> {
+					ls.sendEmailOnSubmit(saveLeave);
+				});
 			}
 			return ResponseEntity.status(HttpStatus.ACCEPTED).body("Apply Leave success");
 		} catch (Exception e) {
@@ -176,12 +192,18 @@ public class LeaveController {
 			}
 			Leave l = lr.save(le);
 			if (l.getSecondStatus().equals("Approved")) {
-				es.LeaveApproveToEmployee(le, er.findEmpEmailByEmpId(l.getEmpId()));
-				es.LeaveApproveToServicedesk(le);
+				ExecutorService executor = Executors.newWorkStealingPool();
+				executor.execute(() -> {
+					es.LeaveApproveToEmployee(le, er.findEmpEmailByEmpId(l.getEmpId()));
+					es.LeaveApproveToServicedesk(le);
+				});
 			} else if (l.getSecondStatus().equals("Pending")) {
 				String secondMangerName = er.findEmployeeName(l.getLeaveManagerId());
 				String secManEmail = er.findEmpEmailByEmpId(l.getLeaveManagerId());
-				es.LeaveApproveToSecondManager(le, secManEmail, secondMangerName);
+				ExecutorService executor = Executors.newWorkStealingPool();
+				executor.execute(() -> {
+					es.LeaveApproveToSecondManager(le, secManEmail, secondMangerName);
+				});
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -197,9 +219,9 @@ public class LeaveController {
 	}
 
 	@PostMapping(value = "/cancle-leave-process")
-	public ResponseEntity<Object> cancleleaveprocess(HttpServletRequest request, Model model, @RequestBody Leave leav) {
+	public ResponseEntity<Object> cancleleaveprocess(HttpServletRequest request, Model model, @RequestBody Leave l) {
 		Long empId = ((Long) request.getSession().getAttribute("empId"));
-		Leave leave = lr.findByEmpIdAndLeaveId(empId, leav.getLeaveId());
+		Leave leave = lr.findByEmpIdAndLeaveId(empId, l.getLeaveId());
 		if (leave == null) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid Leave Cancallation");
 		}
@@ -375,10 +397,10 @@ public class LeaveController {
 		m.addAttribute("year", year);
 		m.addAttribute("months", er.findMonth());
 		m.addAttribute("years", fyr.findYearDesc());
-	
+
 		m.addAttribute("empId", empId);
 		m.addAttribute("status", status);
-	
+
 		m.addAttribute("leaveList", ls.getEmploeeWiseReport(month, year, empId, status));
 		m.addAttribute("employeeList", er.findAll());
 		return "leave-employee-wise-report";

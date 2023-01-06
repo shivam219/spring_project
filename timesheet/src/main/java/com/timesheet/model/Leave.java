@@ -1,6 +1,5 @@
 package com.timesheet.model;
 
-import java.time.Period;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,14 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "timesheet_leave_master", uniqueConstraints = @UniqueConstraint(columnNames = { "emp_id", "start_date" }))
+//@Table(name = "timesheet_leave_master", uniqueConstraints = @UniqueConstraint(columnNames = { "emp_id", "start_date" }))
+@Table(name = "timesheet_leave_master")
 @DynamicUpdate
 public class Leave {
 	private static final long serialVersionUID = 6832006422622219737L;
@@ -62,6 +62,7 @@ public class Leave {
 	@Column(name = "start_date")
 	private Date startDate;
 
+	@Transient
 	private String startDate2;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -69,6 +70,7 @@ public class Leave {
 	@Column(name = "end_date")
 	private Date endDate;
 
+	@Transient
 	private String endDate2;
 
 	@Column(name = "attachment")
@@ -229,8 +231,8 @@ public class Leave {
 		if (ll == 0L) {
 			return "1";
 		}
-		long l = ll / 1000/60/60/24;
-		return (l+1) + "";
+		long l = ll / 1000 / 60 / 60 / 24;
+		return (l + 1) + "";
 
 	}
 

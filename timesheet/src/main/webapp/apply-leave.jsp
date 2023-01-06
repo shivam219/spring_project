@@ -287,9 +287,8 @@
 							title: "Unable to apply leave",
 							text: "Unable to apply leave please change start date",
 							icon: "error",
-							button: false,
 						});
-						location.href="home";
+						 
 						}
 				});
 			} 

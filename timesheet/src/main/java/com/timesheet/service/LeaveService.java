@@ -2,6 +2,8 @@ package com.timesheet.service;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import javax.persistence.Tuple;
@@ -36,54 +38,69 @@ public class LeaveService {
 		this.es.leaveSubmitEmailToApprover(l, er.findEmpEmailByEmpId(l.getManagerId()));
 	}
 
-	public String getLeaveId() {
-		return lr.getLeaveId();
-	}
-
 	public List<Leave> getCancleLeave(long l) {
-		Long l1 = 10L;
-		long l2 = 10;
-		System.out.println(l1 == l2);// false
-		System.out.println(l1.longValue() == l2);// false
 		return lr.getCancleLeaveByEmpId(l);
 	}
 
 	public int updateCancleStatus(Leave leave) {
 		if (lr.updateCancleStatus(leave.getLeaveId()) == 1) {
 			if (leave.getSecondStatus().equals("Approved")) {
-				es.leaveCancelRequestToEmployee(leave, er.findEmpEmailByEmpId(leave.getEmpId()));
-				es.leaveCancelRequestToServiceDesk(leave, er.findEmpEmailByEmpId(leave.getEmpId()));
-				// need change with services desk
+				ExecutorService executor = Executors.newWorkStealingPool();
+				executor.execute(() -> {
+					es.leaveCancelRequestToEmployee(leave, er.findEmpEmailByEmpId(leave.getEmpId()));
+					es.leaveCancelRequestToServiceDesk(leave);
+				});
 				if (leave.getManagerId().equals(leave.getLeaveManagerId())) {
-					es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
-							leave.getManagerName());
+					ExecutorService e2 = Executors.newWorkStealingPool();
+					e2.execute(() -> {
+						es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
+								leave.getManagerName());
+					});
 				} else {
 					String managerName = er.findEmployeeName(leave.getLeaveManagerId());
-					es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
-							leave.getManagerName());
-					es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getLeaveManagerId()),
-							managerName);
+					ExecutorService e2 = Executors.newWorkStealingPool();
+					e2.execute(() -> {
+						es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
+								leave.getManagerName());
+						es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getLeaveManagerId()),
+								managerName);
+					});
 				}
 			} else if (leave.getSecondStatus().equals("Pending")) {
-				es.leaveCancelRequestToEmployee(leave, er.findEmpEmailByEmpId(leave.getEmpId()));
+				ExecutorService executor = Executors.newWorkStealingPool();
+				executor.execute(() -> {
+					es.leaveCancelRequestToEmployee(leave, er.findEmpEmailByEmpId(leave.getEmpId()));
+				});
 				if (leave.getLeaveManagerId() == null || leave.getLeaveManagerId() == 0) {
-					es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
-							leave.getManagerName());
+					ExecutorService e2 = Executors.newWorkStealingPool();
+					e2.execute(() -> {
+						es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
+								leave.getManagerName());
+					});
 				} else if (leave.getManagerId().equals(leave.getLeaveManagerId())) {
-					es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
-							leave.getManagerName());
+					ExecutorService e2 = Executors.newWorkStealingPool();
+					e2.execute(() -> {
+
+						es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
+								leave.getManagerName());
+					});
 				} else {
 					String managerName = er.findEmployeeName(leave.getLeaveManagerId());
-					es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
-							leave.getManagerName());
-					es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getLeaveManagerId()),
-							managerName);
+					ExecutorService e2 = Executors.newWorkStealingPool();
+					e2.execute(() -> {
+						es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
+								leave.getManagerName());
+						es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getLeaveManagerId()),
+								managerName);
+					});
 				}
 			} else if (leave.getStatus().equals("Pending")) {
-				es.leaveCancelRequestToEmployee(leave, er.findEmpEmailByEmpId(leave.getEmpId()));
-				es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
-						leave.getManagerName());
-
+				ExecutorService executor = Executors.newWorkStealingPool();
+				executor.execute(() -> {
+					es.leaveCancelRequestToEmployee(leave, er.findEmpEmailByEmpId(leave.getEmpId()));
+					es.leaveCancelRequestToApprover(leave, er.findEmpEmailByEmpId(leave.getManagerId()),
+							leave.getManagerName());
+				});
 			}
 			return 1;
 		}
