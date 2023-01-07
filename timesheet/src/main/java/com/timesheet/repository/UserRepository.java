@@ -17,6 +17,8 @@ import com.timesheet.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+	User findByUsername(String username);
+
 	User findByEmpId(String EmpId);
 
 	@Query(value = "select e.emp_id, concat( first_name, ' ', last_name) as name,UGRP_DESC , um.active from timesheet_user_group_mapping m inner join timesheet_employee_master e \n"

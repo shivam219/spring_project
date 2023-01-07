@@ -76,19 +76,25 @@ background-color: #f6f9ff;
 										<h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
 										<p class="text-center small">Enter your username & password to login</p>
 									</div>
- 
-									<form class="row g-3" id="loginForm" action="login" method="post">
+
+									<form class="row g-3" id="loginForm" action="loginprocess">
 										<div class="col-12">
-											<label for="username" class="form-label">Username</label> 
+											<label for="yourUsername" class="form-label">Username</label>
 											<div class="input-group has-validation">
 												<span class="input-group-text" id="inputGroupPrepend">@</span>
-												<input type="text" name="username" class="form-control" id="username" name="username" required autocomplete="current-username">
+												<input type="text" name="empId" class="form-control" id="empId"
+													name="empId" required>
+												<span class="form-text    d-none text-danger " id="empIdWar">Specified
+													Employee Id doesn't meet </span>
 											</div>
 										</div>
 
 										<div class="col-12">
 											<label for="yourPassword" class="form-label">Password</label>
-											<input type="password" name="password" class="form-control" id="password" name="password" required autocomplete="current-password">
+											<input type="password" name="password" class="form-control" id="password"
+												name="password" required>
+											<span class="form-text  d-none text-danger " id="empPassWar">Specified
+												Employee Password doesn't meet </span>
 										</div>
 
 										<div class="col-12">
@@ -96,13 +102,11 @@ background-color: #f6f9ff;
 												<input class="form-check-input" type="checkbox" name="remember" checked
 													value="true" id="rememberMe">
 												<label class="form-check-label" for="rememberMe">Remember me</label>
+
 											</div>
-											<label class="form-text  text-danger" id="invalidEmailWar">
-												${error}
-											</label>
 										</div>
 										<div class="col-12">
-											<button class="btn btn-primary btn-sm w-100" type="submit"  onclick="this.blur()" >
+											<button class="btn btn-primary btn-sm w-100" type="submit" id="btnSubmit" onclick="this.blur()" >
 												<span id="loadingBtn"> </span> &nbsp; Login &nbsp;
 											</button>
 										</div>
@@ -111,7 +115,7 @@ background-color: #f6f9ff;
 													account</a></p>
 											<p class="small mb-0">Don't remember pass <a href="forget-pass">Forget
 													Password</a></p>
-										</div> 
+										</div>
 									</form>
 
 								</div>
@@ -127,15 +131,40 @@ background-color: #f6f9ff;
 
 	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
 			class="bi bi-arrow-up-short"></i></a>
+
 	<script>
-		$("#loginForm").on("submit", function (event) { 
+		$("#loginForm").on("submit", function (event) {
+			event.preventDefault();
 			$("#loadingBtn").addClass("spinner-border spinner-border-sm");
-		}); 
-		$("input").on("input", function () { 
-			$("#invalidEmailWar").addClass("d-none");
+			let data = {
+				empId: $("#empId").val(),
+				password: $("#password").val()
+			}
+			console.log(data);
+			console.log(JSON.stringify(data));
+			$.ajax({
+				type: 'POST',
+				url: 'loginprocess',
+				data: JSON.stringify(data),
+				contentType: 'application/json',
+				success: function (data, msg, xh) {
+					location.replace('home');
+				}, error: function (data, msg, xh) {
+					$("#btnSubmit").blur();
+					$("#empId").addClass("is-invalid");
+					$("#password").addClass("is-invalid");
+					$("#empPassWar").removeClass("d-none");
+					$("#empIdWar").removeClass("d-none");
+					$("#loadingBtn").removeClass("spinner-border spinner-border-sm");
+				}
+			});
+		});
+		$("input").on("input", function () {
+			$(this).removeClass("is-invalid");
+			$("#empPassWar").addClass("d-none");
+			$("#empIdWar").addClass("d-none");
 		});
 	</script>
-		
 </body>
 
 </html>

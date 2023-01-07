@@ -1,8 +1,11 @@
 package com.timesheet.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,11 +36,9 @@ public class HomeController {
 	/*
 	 * Access home page
 	 */
+
 	@GetMapping(value = "/home")
 	public String homePageGet(HttpServletRequest request, Model m) {
-		if (request.getSession().getAttribute("empId") == null) {
-			return "redirect:/login";
-		}
 		long empId = (long) request.getSession().getAttribute("empId");
 		m.addAttribute("empList", er.getEmpBirthday());
 		m.addAttribute("holidayList", hr.getHolidays());

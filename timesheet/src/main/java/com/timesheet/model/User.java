@@ -52,27 +52,14 @@ public class User {
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	List<Customer> customer;
 
+	private String username;
+
 	private String roles = "";
 
 	private String permissions = "";
 
 	public User() {
 		super();
-	}
-
-	public User(Long empId, Employee employee, String password, String encryptedPassword, int active, String managerId,
-			String leaveReportingManager, String leaveManager, List<Project> project, List<Customer> customer) {
-		super();
-		this.empId = empId;
-		this.employee = employee;
-		this.password = password;
-		this.encryptedPassword = encryptedPassword;
-		this.active = active;
-		this.managerId = managerId;
-		this.leaveReportingManager = leaveReportingManager;
-		this.leaveManager = leaveManager;
-		this.project = project;
-		this.customer = customer;
 	}
 
 	public Long getEmpId() {
@@ -155,15 +142,40 @@ public class User {
 		this.customer = customer;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+
+	public String getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(String permissions) {
+		this.permissions = permissions;
+	}
+
 	public List<String> getRoleList() {
-		if (this.roles.length() > 0) {
+//		one of them are false will not go to next
+		if (this.roles!=null && this.roles.length() > 0) {
 			return Arrays.asList(this.roles.split(","));
 		}
 		return new ArrayList<>();
 	}
 
 	public List<String> getPermissionList() {
-		if (this.permissions.length() > 0) {
+		if (this.permissions!=null && this.permissions.length() > 0) {
 			return Arrays.asList(this.permissions.split(","));
 		}
 		return new ArrayList<>();
@@ -171,14 +183,10 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [empId=" + empId + ", employee=" + employee + ", password=" + password + ", encryptedPassword="
-				+ encryptedPassword + ", active=" + active + ", managerId=" + managerId + ", leaveReportingManager="
-				+ leaveReportingManager + ", leaveManager=" + leaveManager + ", project=" + project + ", customer="
-				+ customer + "]";
-	}
-
-	public String getUsername() {
-		return String.valueOf(empId);
+		return "User [empId=" + empId + ", password=" + password + ", encryptedPassword=" + encryptedPassword
+				+ ", active=" + active + ", managerId=" + managerId + ", leaveReportingManager=" + leaveReportingManager
+				+ ", leaveManager=" + leaveManager + ", username=" + username + ", roles=" + roles + ", permissions="
+				+ permissions + "]";
 	}
 
 }
