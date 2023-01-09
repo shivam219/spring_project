@@ -26,5 +26,8 @@ public interface UserGroupMappingRepository extends JpaRepository<UserGroupMappi
 
 	@Query(value = "select ugrp_code from timesheet_user_group_mapping where emp_id = :empId", nativeQuery = true)
 	public String findUgrpCodeByEmpId(long empId);
+	
+//	@Query(value = "select ugrp_code from timesheet_user_group_mapping where emp_id = :empId", nativeQuery = true)
+	public UserGroupMapping findByEmpId(long empId);
 
 }

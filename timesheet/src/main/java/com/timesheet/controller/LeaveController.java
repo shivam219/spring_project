@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,6 +47,7 @@ import com.timesheet.service.LeaveService;
 import com.timesheet.service.ReportService;
 
 @Controller
+//@RequestMapping("/leave/")
 public class LeaveController {
 
 	@Autowired
@@ -215,7 +217,7 @@ public class LeaveController {
 	public String cancleLeave(Model m, HttpServletRequest request) {
 		long empId = (Long) request.getSession().getAttribute("empId");
 		m.addAttribute("getAllLeave", ls.getCancleLeave(empId));
-		return new String("cancleleave");
+		return "cancleleave";
 	}
 
 	@PostMapping(value = "/cancle-leave-process")
@@ -292,9 +294,8 @@ public class LeaveController {
 				lp = (Page<Leave>) lr.findAllByStartDateGreaterThanEqualAndEmpIdOrderByStartDateDesc(startDate2,
 						pageable, empId);
 			} else {
-				lp = (Page<Leave>) lr
-						.findAllByStartDateGreaterThanEqualAndEmpIdAndSecondStatusOrderByStartDateDesc(
-								startDate2, status, pageable, empId);
+				lp = (Page<Leave>) lr.findAllByStartDateGreaterThanEqualAndEmpIdAndSecondStatusOrderByStartDateDesc(
+						startDate2, status, pageable, empId);
 			}
 		} else if (status == null || status.trim().isEmpty()) {
 			lp = (Page<Leave>) lr.findAllByEmpIdOrderByStartDateDesc(pageable, empId);

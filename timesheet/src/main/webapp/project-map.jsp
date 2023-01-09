@@ -43,8 +43,8 @@
 
 					</select>
 				</div>
-				<div class="col-md-2 mt-2">
-					<button type="button" id="undo_redo_undo" class="btn btn-sm btn-primary btn-util mt-4 "
+				<div class="col-md-2 ">
+					<button type="button" id="undo_redo_undo" class="btn btn-sm btn-primary btn-util  mt-4 "
 						style="background-color: #0d6efd;border-color:#0d6efd; ">undo</button>
 					<button type="button" id="undo_redo_rightAll" class="btn btn-sm btn-default btn-util  "><i
 							class="fa-sharp fa-solid fa-forward"></i></button>
@@ -63,10 +63,10 @@
 					<select name="projectList" id="undo_redo_to" class="form-control" size="11"
 						multiple="multiple"></select>
 				</div>
-			</div>
-			<div class="row m-0 p-0 d-flex justify-content-center gap-2">
-				<button class="btn btn-secondary btn-sm my-2 px-3     w-auto" type="button" onclick="location='project-master'">Back </button>
-				<button type="button" class="btn btn-success my-2 px-3  w-auto" id="btnSubmit">Assign Project</button>
+			</div> 
+			<div class="row justify-content-center gap-2 mt-2 ">
+				<button class="btn btn-secondary btn-sm  w-auto "  onclick="location='project-master'" >Back </button>
+				<button class="btn btn-success w-auto" id="btnSubmit">Assign Project</button> 
 			</div>
 		</form>
 	</div>

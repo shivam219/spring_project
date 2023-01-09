@@ -38,10 +38,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	@Modifying
 	@Transactional
-	@Query(value = "update timesheet_user_master set active = :active, manager_id = :managerId, leave_manager_id = :leaveManager, leave_reporting_manager = :leaveReportingManager where emp_id = :empId", nativeQuery = true)
+	@Query(value = "update timesheet_user_master set active = :active, manager_id = :managerId, leave_manager_id = :leaveManager, leave_reporting_manager = :leaveReportingManager , roles =:roles  where emp_id = :empId", nativeQuery = true)
 	int updateUserDetails(@Param(value = "empId") long empId, @Param(value = "managerId") String managerId,
 			@Param(value = "leaveReportingManager") String leaveReportingManager,
-			@Param(value = "leaveManager") String leaveManager, @Param(value = "active") int active);
+			@Param(value = "leaveManager") String leaveManager, @Param(value = "active") int active, String roles);
 
 	public Boolean existsByEmpIdAndPassword(Long empId, String password);
 

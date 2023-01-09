@@ -1,5 +1,6 @@
 package com.timesheet.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.timesheet.model.Employee;
 import com.timesheet.model.User;
+import com.timesheet.model.UserGroup;
+import com.timesheet.model.UserGroupMapping;
 import com.timesheet.repository.EmployeeRepository;
+import com.timesheet.repository.UserGroupMappingRepository;
 import com.timesheet.repository.UserGroupRepository;
 import com.timesheet.repository.UserRepository;
 import com.timesheet.service.EmployeeService;
@@ -33,6 +37,8 @@ public class UserController {
 	EmployeeRepository er;
 	@Autowired
 	UserGroupRepository uGR;
+	@Autowired
+	UserGroupMappingRepository ugmr;
 	@Autowired
 	UserRepository ur;
 
@@ -113,6 +119,8 @@ public class UserController {
 		m.addAttribute("user", user);
 		m.addAttribute("empList", (List<Employee>) er.findAll());
 		m.addAttribute("managerList", (List<Employee>) er.findAllEmployeeMapUser());
+		m.addAttribute("empUgrpCode", ugmr.findUgrpCodeByEmpId(emp.getEmpId()));
+		m.addAttribute("userGroupList", ((List<UserGroup>) uGR.findAll()));
 		return "user-master-edit";
 	}
 
@@ -121,9 +129,21 @@ public class UserController {
 	 */
 	@PostMapping(value = "user-master-edit-process")
 	public ResponseEntity<Object> getuserMasterEditProcess(Model m, @RequestBody User user) {
+		UserGroupMapping ugm = ugmr.findByEmpId(user.getEmpId());
+		UserGroup ug = uGR.findByUgrpCode(Integer.valueOf(user.getRoles()));
+		String r = ug.getUgrpDesc().replace(" ", "_");
+		System.out.println(r);
 		ur.updateUserDetails(user.getEmpId(), user.getManagerId(), user.getLeaveReportingManager(),
-				user.getLeaveManager(), user.getActive());
+				user.getLeaveManager(), user.getActive(), r);
 		ur.updateUserPassword(user.getEmpId(), user.getPassword());
+		ugm.setUgrpCode(ug.getUgrpCode());
+		ugm.setModifiedBy(String.valueOf(user.getEmpId()));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+		String date = sdf.format(new java.util.Date());
+		ugm.setModifiedTime(date);
+		ugm.setCreatedBy(ugm.getCreatedBy());
+		ugm.setCreatedTime(ugm.getCreatedTime());
+		ugmr.save(ugm);
 		return ResponseEntity.ok().body("Ok");
 	}
 

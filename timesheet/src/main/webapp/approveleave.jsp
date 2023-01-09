@@ -15,7 +15,7 @@
 				left: 0;
 				right: 0; 
 				width: 400px;
-				height:200px;
+				height:max-content;
 				margin: auto;
 				text-align: center;
 				background-color: white;

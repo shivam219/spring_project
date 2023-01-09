@@ -93,13 +93,15 @@ background-color: #f6f9ff;
 
 										<div class="col-12">
 											<div class="form-check">
-												<input class="form-check-input" type="checkbox" name="remember" checked
-													value="true" id="rememberMe">
+												<input class="form-check-input" type="checkbox" name="remember-me" checked
+													value="true" id="remember-me">   
 												<label class="form-check-label" for="rememberMe">Remember me</label>
 											</div>
-											<label class="form-text  text-danger" id="invalidEmailWar">
-												${error}
-											</label>
+											<c:if test='${errorMessage}'>
+												<label class="form-text  text-danger" id="invalidEmailWar">
+													${errorMessage}
+												</label>
+											</c:if>
 										</div>
 										<div class="col-12">
 											<button class="btn btn-primary btn-sm w-100" type="submit"  onclick="this.blur()" >

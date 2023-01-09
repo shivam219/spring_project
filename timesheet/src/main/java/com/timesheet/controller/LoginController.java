@@ -6,8 +6,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -89,8 +91,6 @@ public class LoginController {
 	public String login(HttpServletRequest request) {
 		System.out.println("GET login page");
 		request.getSession().invalidate();
-//		request.getSession().removeValue("error");
-//		request.getSession().removeAttribute("error");
 		return "login";
 	}
 
@@ -100,7 +100,7 @@ public class LoginController {
 //		return "redirect:/login";
 //	}
 
-	@RequestMapping("/")
+	@RequestMapping("/login-success")
 	public String index(Model model, HttpServletRequest request) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
@@ -122,4 +122,21 @@ public class LoginController {
 		}
 		return "login";
 	}
+
+	@GetMapping("/login-error")
+	public String login(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession(false);
+		String errorMessage = null;
+		if (session != null) {
+			AuthenticationException ex = (AuthenticationException) session
+					.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+			if (ex != null) {
+				errorMessage = ex.getMessage();
+			}
+		}
+		model.addAttribute("errorMessage", errorMessage);
+//		model.addAttribute("errorMessage", "Bad Credentials");
+		return "login";
+	}
+
 }

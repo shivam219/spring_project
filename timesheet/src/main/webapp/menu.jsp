@@ -1,8 +1,5 @@
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>  
-<c:if test="${empId == null}">
-	<c:redirect url="login"/>  
-</c:if>
 <!DOCTYPE html>
 <html> 
 <head>
@@ -25,19 +22,14 @@
 	<link rel='icon' type='image/ico' href='images/esslogo.png' />
 	<script src="css/sweetalert.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css" integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<style>
-		.navbar-light .navbar-nav .navbar-link{
-		color: #02121f;
-		} 
-	</style> 
 </head>
 
 <body> 
 	<div class="container-fluid">
 		<div class="row">
 	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #fff;border-bottom: 2px solid #e6f2fb;">
-		<div class="container-fluid"> 
-			<a class="navbar-brand" href="home"> <img src="images/esslogo.png" width="100" height="40" class="d-inline-block align-text-top"></a>
+		<div class="container-fluid">  
+			<a class="navbar-brand p-0" href="home"> <img src="images/esslogo.png" width="120" height="50" class="d-inline-block align-text-top"></a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">	 <span class="navbar-toggler-icon">	</span></button> 	
 			<div class="collapse navbar-collapse justify-content-md-end " id="navbarNavDropdown">
 				<div class="justify-content-md-end">

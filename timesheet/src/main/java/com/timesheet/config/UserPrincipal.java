@@ -27,12 +27,10 @@ public class UserPrincipal implements UserDetails {
 		this.user.getPermissionList().forEach(p -> {
 			GrantedAuthority authority = new SimpleGrantedAuthority(p);
 			authorities.add(authority);
-			System.out.println(p);
 		});
 
 		// Extract list of roles (ROLE_name)
 		this.user.getRoleList().forEach(r -> {
-			System.out.println(r);
 			GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + r);
 			authorities.add(authority);
 		});

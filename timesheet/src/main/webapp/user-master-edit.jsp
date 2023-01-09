@@ -78,6 +78,15 @@
                                         </select> 
                                         <span class="form-text small text-danger ms-2  d-none"  >Specify Leave Approve Manager</span>     
                                     </tr>
+                                    <tr>  
+                                        <label class="small mb-1" for="ugrpCode"> User Designation</label>
+                                        <select name="ugrpCode" id="ugrpCode" class="form-control form-select">
+                                            <option value="" ><-- Select Designation --></option>
+                                                <c:forEach items="${userGroupList}" var="group" varStatus="loop">
+                                                    <option value="${group.getUgrpCode()}"  <c:if test="${group.getUgrpCode() eq empUgrpCode}">selected="selected"</c:if> >${group.getUgrpDesc()}</option>
+                                                </c:forEach>         
+                                        </select>
+                                    </tr>
                                 </table>
                             </div>
                             <div class="row justify-content-center mt-3 gap-2 "> 
@@ -135,10 +144,11 @@
                 password:$("#password").val(),
                 active: $("#active").val(),
                 managerId:$("#manager").val(),
+                roles:$("#ugrpCode").val(),
                 leaveReportingManager:$("#leaveManager").val(),
                 leaveManager:$("#leaveApproveManager").val(),
             }
-            $.ajax({
+            $.ajax({ 
                 type: 'POST',
                 url: 'user-master-edit-process',
                 data:JSON.stringify(data),
