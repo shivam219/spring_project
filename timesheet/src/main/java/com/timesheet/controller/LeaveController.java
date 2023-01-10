@@ -295,7 +295,7 @@ public class LeaveController {
 						pageable, empId);
 			} else {
 				lp = (Page<Leave>) lr.findAllByStartDateGreaterThanEqualAndEmpIdAndSecondStatusOrderByStartDateDesc(
-						startDate2, status, pageable, empId);
+						startDate2,empId, status,  pageable);
 			}
 		} else if (status == null || status.trim().isEmpty()) {
 			lp = (Page<Leave>) lr.findAllByEmpIdOrderByStartDateDesc(pageable, empId);

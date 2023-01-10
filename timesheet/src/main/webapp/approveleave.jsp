@@ -144,15 +144,15 @@
 										<td class="">${l.getLeaveId()}</td>
 										<td class="">${l.getEmpName()}</td>
 										<td class="">${l.getLeaveType()}</td>
-										<td class="">${l.getStartDate()}</td>
-										<td class="">${l.getEndDate()}</td>
+										<td class="">${l.getStartDateSort()}</td>
+										<td class="">${l.getendDateSort()}</td>
 										<td class="text-center ">
 											<button class="btn btn-sm badge-soft-primary w-50 py-1 " type="button"
 												onclick='leaveReasonPopShow(` <c:out value="${l.getLeaveReason()}" /> `);this.blur()'>
 												<i class="fa fa-duotone fa-comments"></i>
 											</button>
 
-										</td>
+										</td> 
 										<td class="text-center">
 											<c:if test='${!(l.getAttachment().trim().length()>0)}'>
 												<button class="btn btn-sm badge-soft-primary  py-1" type="button"

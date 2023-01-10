@@ -65,6 +65,10 @@ public class HolidayController {
 		List<FinancialYear> listYear = fyr.findAll();
 		m.addAttribute("listYear", listYear);
 		m.addAttribute("holiday", h);
+		System.err.println(h.getYearCode());
+		m.addAttribute("year", h.getYearCode());
+		m.addAttribute("years", fyr.findYearDesc());
+		System.out.println(fyr.findYearDesc());
 //		m.addAttribute("holiday", hr.findById(hCode).get());
 		return new String("holiday-master-edit");
 	}

@@ -30,7 +30,7 @@ public class Employee {
 	@Column(name = "emp_email")
 	private String empEmail;
 
-	@Column(name = "emp_phone")
+	@Column(name = "emp_phone",unique = true)
 	private String empPhone;
 
 	@Column(name = "emp_city")

@@ -91,6 +91,7 @@ public class UserController {
 	@GetMapping(value = "/user-master-add")
 	public ModelAndView getUserMasterAdd() {
 		ModelAndView m = new ModelAndView("user-master-add");
+		m.addObject("userGroupList", ((List<UserGroup>) uGR.findAll()));
 		m.addObject("empList", (List<Employee>) er.findAllEmployeeNotMapUser());
 		m.addObject("managerList", (List<Employee>) er.findAllEmployeeMapUser());
 		return m;
@@ -101,8 +102,18 @@ public class UserController {
 	 */
 	@PostMapping(value = "/user-master-add-process")
 	public ResponseEntity<Object> addUser(@RequestBody User user) {
+		UserGroupMapping ugm = new UserGroupMapping();
+		UserGroup ug = uGR.findByUgrpCode(Integer.valueOf(user.getRoles()));
+		String r = ug.getUgrpDesc().replace(" ", "_");
+		user.setRoles(r);
+		user.setUsername(String.valueOf(user.getEmpId()));
+		ugm.setUgrpCode(ug.getUgrpCode());
+		ugm.setEmpId(user.getEmpId());
+		ugm.setCreatedTime(new SimpleDateFormat("yyy-MM-dd").format(new java.util.Date()));
+		ugm.setCreatedBy(ugm.getCreatedBy());
 		ur.save(user);
 		ur.updateUserPassword(user.getEmpId(), user.getPassword());
+		ugmr.save(ugm);
 		return ResponseEntity.status(HttpStatus.CREATED).body("");
 	}
 

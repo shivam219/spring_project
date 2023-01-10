@@ -75,11 +75,17 @@ body{
                         <form id="EditHolidayForm"  >
                             <div class="row gx-3 mb-3 justify-content-center">
                                 <div class="col-sm-6">
-                                <label class="small mb-1" for="state">Year</label>
-                                <input type="hidden" id="hCode" value="${holiday.gethCode()}">
-                                 <input class="form-control" id="yearCode" type="text" value="${holiday.getYearCode()}">
-                                 <span class="form-text small text-danger ms-2  d-none" >Specify Year</span>  
-                               
+                                    <label class="small mb-1" for="state">Year</label>
+                                    <input type="hidden" id="hCode" value="${holiday.gethCode()}">
+                                    <!-- <input class="form-control" id="yearCode" type="text" value="${holiday.getYearCode()}"> -->
+                                    <select class="form-control form-select" name="yearCode" id="yearCode"> 
+                                        <option value="">Choose</option>
+                                        <c:forEach items="${years}" var="y">
+                                            <option value="${y.getYearDesc()}" <c:if test="${y.getYearDesc() eq year }">selected="selected" </c:if>>${y.getYearDesc()}</option>
+                                        </c:forEach> 
+                                    </select>
+                                    <span class="form-text small text-danger ms-2  d-none" >Specify Year</span>  
+
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="small mb-1" for="hDate">Date</label>

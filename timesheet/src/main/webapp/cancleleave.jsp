@@ -82,8 +82,8 @@
 										<td class="">${l.getLeaveId()}</td>
 										<td class="">${l.getLeaveType()}</td>
 										<td class="">${l.getDayMode()}</td>
-										<td class="">${l.getStartDate()}</td>
-										<td class="">${l.getEndDate()}</td>
+										<td class="">${l.getStartDateSort()}</td>
+										<td class="">${l.getendDateSort()}</td>
 										<td class="">${l.getSecondStatus()}</td>
 										<td class="">
 											<button class="btn btn-sm badge-soft-danger px-3 ms-0" id="btnCancle"

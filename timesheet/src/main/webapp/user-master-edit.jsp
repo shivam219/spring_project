@@ -149,7 +149,7 @@
                 leaveManager:$("#leaveApproveManager").val(),
             }
             $.ajax({ 
-                type: 'POST',
+                type: 'POST', 
                 url: 'user-master-edit-process',
                 data:JSON.stringify(data),
                 contentType :'application/json',

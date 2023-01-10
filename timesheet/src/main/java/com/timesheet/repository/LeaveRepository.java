@@ -137,6 +137,6 @@ public interface LeaveRepository extends CrudRepository<Leave, Long> {
 			long empId);
 
 	public Page<Leave> findAllByStartDateGreaterThanEqualAndEmpIdAndSecondStatusOrderByStartDateDesc(Date startDate,
-			String secondStatus, Pageable pageable, long empId);
+			long empId, String secondStatus, Pageable pageable);
 
 }
