@@ -28,7 +28,7 @@ public class HolidayController {
 
 	@Autowired
 	public HolidayRepository hr;
- 
+
 	/*
 	 * Access Holiday Master page
 	 */
@@ -44,8 +44,8 @@ public class HolidayController {
 	@GetMapping(value = "holiday-master-add")
 	public String holidayMasterAdd(Model m) {
 		List<FinancialYear> listYear = fyr.findAll();
-		m.addAttribute("listYear", listYear);
-		return new String("holiday-master-add");
+		m.addAttribute("years", fyr.findYearDesc());
+		return new String("holiday-master-add"); 
 	}
 
 	/*
@@ -62,10 +62,7 @@ public class HolidayController {
 	 */
 	@GetMapping(value = "holiday-master-edit")
 	public String holidayMasterEdit(@RequestParam("hCode") Holiday h, Model m) {
-		List<FinancialYear> listYear = fyr.findAll();
-		m.addAttribute("listYear", listYear);
 		m.addAttribute("holiday", h);
-		System.err.println(h.getYearCode());
 		m.addAttribute("year", h.getYearCode());
 		m.addAttribute("years", fyr.findYearDesc());
 		System.out.println(fyr.findYearDesc());

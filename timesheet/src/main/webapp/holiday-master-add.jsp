@@ -13,15 +13,15 @@
                 <div class="card mb-4">
                     <div class="card-header text-center">Create Holidays</div>
                     <div class="card-body">
-                        <form id="EditHolidayForm"  >
+                        <form id="EditHolidayForm">
                             <div class="row gx-3 mb-3 justify-content-center">
                                 <div class="col-sm-6">
                                 <label class="small mb-1" for="state">Year</label>
                                 <select id="yearCode" class="form-control form-select" name="yearCode">
 					                <option value="">&lt;------Select-----&gt;</option>
-                                    <c:forEach items="${listYear}" var="l">
-							            <option value="${l.getYearCode()}">${l.getYearCode()} </option>
-						            </c:forEach> 
+                                    <c:forEach items="${years}" var="y">
+                                        <option value="${y.getYearDesc()}" >${y.getYearDesc()}</option>
+                                    </c:forEach> 
 						            </select>
                                 </div>
                                 <div class="col-sm-6">
@@ -39,13 +39,13 @@
                                     <div class="border p-2 rounded " style="border: 3px;">
                                         <div class="form-check d-inline-flex mt-1 ">
                                             <input class="form-check-input" type="radio" value="Y" id="Yes" name="optional">
-                                            <label class="form-check-label" for="Yes">
+                                            <label class="form-check-label  align-self-center" for="Yes">
                                                 &nbsp;Y       
                                             </label>
                                         </div>
                                         <div class="form-check d-inline-flex ms-2">
                                             <input class="form-check-input" type="radio" value="N" id="No"checked name="optional"  >
-                                            <label class="form-check-label" for="No">
+                                            <label class="form-check-label  align-self-center" for="No">
                                                 &nbsp;N
                                             </label>
                                         </div>

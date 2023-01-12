@@ -1,16 +1,17 @@
 package com.timesheet.dto;
 
-public class ProjectEmpHour {
+import java.math.BigDecimal;
+
+public class ProjectEmpHourInt {
 
 	String name;
-	String hour;
-	String hourPer;
+	BigDecimal hour;
 
-	public ProjectEmpHour() {
+	public ProjectEmpHourInt() {
 		super();
 	}
 
-	public ProjectEmpHour(String name, String hour) {
+	public ProjectEmpHourInt(String name, BigDecimal hour) {
 		super();
 		this.name = name;
 		this.hour = hour;
@@ -24,20 +25,12 @@ public class ProjectEmpHour {
 		this.name = name;
 	}
 
-	public String getHour() {
+	public BigDecimal getHour() {
 		return hour;
 	}
 
-	public void setHour(String hour) {
+	public void setHour(BigDecimal hour) {
 		this.hour = hour;
-	}
-
-	public String getHourPer() {
-		return hourPer;
-	}
-
-	public void setHourPer(String hourPer) {
-		this.hourPer = hourPer;
 	}
 
 	@Override

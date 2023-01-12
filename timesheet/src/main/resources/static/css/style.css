@@ -99,9 +99,9 @@ tbody, td, td a tfoot, th, thead, tr {
 	font-style: normal;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	color: rgb(83, 83, 82);
-	font-size: 14px;
-	white-space: nowrap; 
-}
+	font-size: 1.9vh; 
+	white-space: nowrap;  
+} 
 
 table tfoot tr:last-child td:first-child {
 	border-bottom-left-radius: 5px;
@@ -111,14 +111,14 @@ table tfoot tr:last-child td:last-child {
 	border-bottom-right-radius: 5px;
 }
 select,label{
-	font-size: 14px;
+	font-size: 1.9vh;
 }
 .dashboard-headling {
 	border-radius: 7px;
     text-align: center;  
     background-color: #71a6f7;
 	font-weight: 400;
-	font-size: 16px;
+	font-size: 2vh;
     color: #ffffff;
 }
 .table-label{
@@ -149,7 +149,7 @@ select,label{
 
 }
 .form-control,.form-select, label,span{
-	font-size: 13px;
+	font-size: 1.8;
 }
 label.span{
 	color: #124265;

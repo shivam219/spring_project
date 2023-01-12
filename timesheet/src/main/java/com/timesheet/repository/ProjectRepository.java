@@ -90,6 +90,45 @@ public interface ProjectRepository extends CrudRepository<Project, Integer> {
 	@Query(value = "select project_name , sum(hour) p_tol_hour, (project_day*24) p_exp_hour from timesheet_project_master pm , timesheet_day_sheet ds where  pm.project_id = ds.project_id group by  project_name ,project_day", nativeQuery = true)
 	public List<Tuple> findProjectNameAndWorkingHourAndExpected();
 
+	@Query (value="with ess as (\n"
+			+ "          select distinct xx.emp_id as employee_code, xx.Employee_Name\n"
+			+ "        from(select emp_id,(select first_name from timesheet_employee_master where emp_id= t1.emp_id )Employee_Name from\n"
+			+ "        timesheet_user_master as t1 where manager_id =:empId and t1.active= 1\n"
+			+ "        or exists (select emp_id,(select first_name from timesheet_employee_master where emp_id = t1.emp_id )Employee_Name\n"
+			+ "            from timesheet_user_master as t2  where emp_id = t1.manager_id  and t2.active= 1 and\n"
+			+ "                (\n"
+			+ "                    t1.manager_id =:empId or exists\n"
+			+ "                        ( select emp_id,(select first_name from timesheet_employee_master where emp_id = t3.emp_id) Employee_Name from\n"
+			+ "                        timesheet_user_master as t3 where emp_id = t2.manager_id and t3.active='1'  and manager_id =:empId)\n"
+			+ "                )\n"
+			+ "                )\n"
+			+ "            )xx left outer join\n"
+			+ "        timesheet_day_sheet yy on xx.emp_id=yy.emp_id left outer join timesheet_employee_master e on\n"
+			+ "        yy.emp_id = e.emp_id where yy.date between :fromDate and :toDate)\n"
+			+ " select   ess.employee_code,  ess.Employee_Name  ,  project_name , sum(hour) total ,"
+			+ " FORMAT( sum(hour) * 100 /(  "
+			+ " (select sum(hour) from timesheet_day_sheet where emp_id = ess.employee_code and date between :fromDate and :toDate)) , 2)"
+			+ " from ess, timesheet_project_master tpm , timesheet_day_sheet tds "
+			+ "        where tpm.project_id = tds.project_id and ess.employee_code = tds.emp_id  and tds.date between :fromDate and :toDate  group by ess.Employee_Name  , ess.employee_code,  project_name;\n"
+			+ "",nativeQuery = true)
+	public List<String[]> findEmployeeIdAndFromDateAndToDate(long empId, String fromDate,String toDate);
+	
+	@Query (value="with ess as (select distinct xx.emp_id as employee_code ,xx.Employee_Name "
+			+ "    from (select emp_id,(select first_name from timesheet_employee_master where emp_id= t1.emp_id) Employee_Name  "
+			+ "    from timesheet_user_master as t1 where t1.active='1')xx left outer join timesheet_day_sheet yy  "
+			+ "    on xx.emp_id=yy.emp_id  "
+			+ "    left outer join  timesheet_employee_master e on  "
+			+ "    yy.emp_id=e.emp_id where yy.date between :fromDate and :toDate  "
+			+ "    order by xx.Employee_Name ) "
+			+ " select   ess.employee_code,  ess.Employee_Name  ,  project_name , sum(hour) total ,"
+			+ " FORMAT( sum(hour) * 100 /(  "
+			+ " (select sum(hour) from timesheet_day_sheet where emp_id = ess.employee_code and date between :fromDate and :toDate)) , 2)"
+			+ " from ess, timesheet_project_master tpm , timesheet_day_sheet tds "
+			+ "        where tpm.project_id = tds.project_id and ess.employee_code = tds.emp_id  and tds.date between :fromDate and :toDate  group by ess.Employee_Name  , ess.employee_code,  project_name;\n"
+			+ "",nativeQuery = true)
+	public List<String[]> findEmployeeIdAndFromDateAndToDateByAdmin(String fromDate,String toDate);
+	
+	
 	@Query(name = "find_project_wise_overshot", nativeQuery = true)
 	List<ProjectWiseOvershot> findStockAkhirPerProductIn();
 

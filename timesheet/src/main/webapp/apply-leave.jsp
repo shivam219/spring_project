@@ -55,7 +55,7 @@
 													<div class="form-check d-inline-flex mt-1">
 														<input class="form-check-input" type="radio"  name="dayMode" id="dayMode1" value="Half Day" >
 														<label class="form-check-label align-self-center  " for="dayMode1"> &nbsp;Half Day </label>
-													</div>
+													</div> 
 													<div class="form-check d-inline-flex ms-md-2">
 														<input class="form-check-input" type="radio" name="dayMode" id="dayMode2" value="Full Day" checked="" >
 														<label class="form-check-label align-self-center" for="dayMode2"> &nbsp;Full Day </label>

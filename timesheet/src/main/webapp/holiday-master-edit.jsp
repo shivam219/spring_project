@@ -101,16 +101,16 @@ body{
                                     <label class="small  mt-2 " for="optional">Optional</label><br>
                                     <div class="border p-2 rounded " style="border: 3px;">
                                         <div class="form-check d-inline-flex mt-1 ">
-                                            <input class="form-check-input" type="radio" value="Y" id="Yes" name="optional">
-                                            <label class="form-check-label" for="Yes">
+                                            <input class="form-check-input" type="radio" value="Y" id="Yes" name="optional" <c:if test="${holiday.getOptional() eq 'Y' }">checked</c:if>  > 
+                                            <label class="form-check-label align-self-center " for="Yes">
                                                 &nbsp;Y       
-                                            </label>
+                                            </label> 
                                         </div>
                                         <div class="form-check d-inline-flex ms-2">
-                                            <input class="form-check-input" type="radio" value="N" id="No"checked name="optional"  >
-                                            <label class="form-check-label" for="No">
+                                            <input class="form-check-input" type="radio" value="N" id="No" name="optional" <c:if test="${holiday.getOptional() eq 'N' }">checked</c:if>  >
+                                            <label class="form-check-label align-self-center" for="No">
                                                 &nbsp;N
-                                            </label>
+                                            </label> 
                                         </div>
                                     </div>
                                  </div>

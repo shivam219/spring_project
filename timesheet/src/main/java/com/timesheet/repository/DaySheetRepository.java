@@ -2,6 +2,7 @@ package com.timesheet.repository;
 
 import java.util.List;
 
+import javax.persistence.Tuple;
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -28,5 +29,5 @@ public interface DaySheetRepository extends CrudRepository<DaySheet, Integer> {
 			@Param("endDate") String endDate, @Param("monthId") Long monthId);
 
 	@Query(name = "find_project_employee_hour", nativeQuery = true)
-	List<ProjectEmpHour> findStockAkhirPerProductIn(int projectId,int year,int month);
+	List<ProjectEmpHour> findStockAkhirPerProductIn(int projectId, int year, int month);
 }

@@ -29,5 +29,11 @@ public interface UserGroupMappingRepository extends JpaRepository<UserGroupMappi
 	
 //	@Query(value = "select ugrp_code from timesheet_user_group_mapping where emp_id = :empId", nativeQuery = true)
 	public UserGroupMapping findByEmpId(long empId);
+	
+	
+	@Query(value = "SELECT DISTINCT  tpm.PRG_NAME , GROUP_CONCAT(tugm.UGRP_DESC)  from timesheet_program_master tpm ,  timesheet_program_groupwise tpg ,  timesheet_user_group_master tugm  \n"
+			+ "where  tpm.PRG_CODE = tpg.PRG_CODE  and tpg.UGRP_CODE  = tugm .ugrp_code and tpm.PRG_NAME  <> '#' \n"
+			+ "group by tpm.PRG_NAME", nativeQuery = true)
+	public List<String[]> findGroupSecurty();
 
 }
